@@ -6,8 +6,8 @@
     <link>http://freesql.net/</link>
     <description>FreeSql Documents</description>
     <language>zh-CN</language>
-    <pubDate>Wed, 25 May 2022 15:19:58 GMT</pubDate>
-    <lastBuildDate>Wed, 25 May 2022 15:19:58 GMT</lastBuildDate>
+    <pubDate>Tue, 31 May 2022 14:10:13 GMT</pubDate>
+    <lastBuildDate>Tue, 31 May 2022 14:10:13 GMT</lastBuildDate>
     <generator>vuepress-plugin-feed2</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
     <item>
@@ -641,23 +641,23 @@ fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>Topic<span>></
     <span>FROM</span> <span><span>`</span>tb_topic<span>`</span></span> a
     <span>WHERE</span> <span>(</span><span>(</span>a<span>.</span><span><span>`</span>Title<span>`</span></span><span>)</span> <span>LIKE</span> <span>'%yyy%'</span><span>)</span> <span>)</span> a<span>)</span> ftb
 </code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br><span>10</span><br><span>11</span><br></div></div><h3 id="_2、跨分表查询-astable-相同实体多次操作-等于-union-all-查询" tabindex="-1"> 2、跨分表查询：AsTable 相同实体多次操作，等于 Union ALL 查询</h3>
-<div><pre><code>var sql = fsql.Select&lt;User&gt;()
-    .AsTable((type, oldname) =&gt; &quot;table_1&quot;)a
-    .AsTable((type, oldname) =&gt; &quot;table_2&quot;)
-    .ToSql(a =&gt; a.Id);
+<div><pre><code><span><span>var</span></span> sql <span>=</span> fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>User<span>></span></span></span><span>(</span><span>)</span>
+    <span>.</span><span>AsTable</span><span>(</span><span>(</span>type<span>,</span> oldname<span>)</span> <span>=></span> <span>"table_1"</span><span>)</span>a
+    <span>.</span><span>AsTable</span><span>(</span><span>(</span>type<span>,</span> oldname<span>)</span> <span>=></span> <span>"table_2"</span><span>)</span>
+    <span>.</span><span>ToSql</span><span>(</span>a <span>=></span> a<span>.</span>Id<span>)</span><span>;</span>
 </code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br></div></div><div><pre><code><span>select</span> <span>*</span> <span>from</span> <span>(</span><span>SELECT</span> a<span>.</span><span>"Id"</span> as1 <span>FROM</span> <span>"table_1"</span> a<span>)</span> ftb
 <span>UNION</span> <span>ALL</span>
 <span>select</span> <span>*</span> <span>from</span> <span>(</span><span>SELECT</span> a<span>.</span><span>"Id"</span> as1 <span>FROM</span> <span>"table_2"</span> a<span>)</span> ftb
 </code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br></div></div><h3 id="_3、利用-tosql-拼接新的-sql-使用-iado-执行" tabindex="-1"> 3、利用 ToSql 拼接新的 SQL，使用 IAdo 执行</h3>
-<div><pre><code>var sql1 = fsql.Select&lt;Topic&gt;()
-    .Where(a =&gt; a.Id &gt; 100 &amp;&amp; a.Id &lt; 200)
-    .ToSql(a =&gt; new { a.Id, a.Title }, FieldAliasOptions.AsProperty);
-var sql2 = fsql.Select&lt;Topic&gt;()
-    .Where(a =&gt; a.Id &gt; 1001 &amp;&amp; a.Id &lt; 1200)
-    .ToSql(a =&gt; new { a.Id, a.Title }, FieldAliasOptions.AsProperty);
+<div><pre><code><span><span>var</span></span> sql1 <span>=</span> fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>Topic<span>></span></span></span><span>(</span><span>)</span>
+    <span>.</span><span>Where</span><span>(</span>a <span>=></span> a<span>.</span>Id <span>></span> <span>100</span> <span>&amp;&amp;</span> a<span>.</span>Id <span>&lt;</span> <span>200</span><span>)</span>
+    <span>.</span><span>ToSql</span><span>(</span>a <span>=></span> <span>new</span> <span>{</span> a<span>.</span>Id<span>,</span> a<span>.</span>Title <span>}</span><span>,</span> FieldAliasOptions<span>.</span>AsProperty<span>)</span><span>;</span>
+<span><span>var</span></span> sql2 <span>=</span> fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>Topic<span>></span></span></span><span>(</span><span>)</span>
+    <span>.</span><span>Where</span><span>(</span>a <span>=></span> a<span>.</span>Id <span>></span> <span>1001</span> <span>&amp;&amp;</span> a<span>.</span>Id <span>&lt;</span> <span>1200</span><span>)</span>
+    <span>.</span><span>ToSql</span><span>(</span>a <span>=></span> <span>new</span> <span>{</span> a<span>.</span>Id<span>,</span> a<span>.</span>Title <span>}</span><span>,</span> FieldAliasOptions<span>.</span>AsProperty<span>)</span><span>;</span>
 
-fsql.Ado.CommandFluent($&quot;{sql1} UNION ALL {sql2}&quot;)
-    .ExecuteDataTable();
+fsql<span>.</span>Ado<span>.</span><span>CommandFluent</span><span>(</span><span><span>$"</span><span><span>{</span><span>sql1</span><span>}</span></span><span> UNION ALL </span><span><span>{</span><span>sql2</span><span>}</span></span><span>"</span></span><span>)</span>
+    <span>.</span><span>ExecuteDataTable</span><span>(</span><span>)</span><span>;</span>
 </code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br></div></div><h2 id="分页问题" tabindex="-1"> 分页问题</h2>
 <p>Union All 之后 如果直接 分页会有一个问题。请看具体示例</p>
 <p>多次 WithSql + Page 存在问题：每个 WithSql 内都有一个 Page 分页</p>
@@ -1061,20 +1061,20 @@ fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>Topic<span>></
       <content:encoded><![CDATA[<h1 id="ado" tabindex="-1"> ADO</h1>
 <p>Ado 是 IFreeSql 下重要的对象之一，它包括所有对 SQL 操作的封装，提供 ExecuteReader、ExecuteDataSet、ExecuteDataTable、ExecuteNonQuery、ExecuteScalar 等方法，使用起来和传统 SqlHelper 一样。</p>
 <h2 id="查询-sql-返回实体" tabindex="-1"> 查询 SQL 返回实体</h2>
-<div><pre><code>//返回多条记录
-List&lt;T&gt; list = fsql.Ado.Query&lt;T&gt;(&quot;select * from t1&quot;);
+<div><pre><code><span>//返回多条记录</span>
+<span>List<span>&lt;</span>T<span>></span></span> list <span>=</span> fsql<span>.</span>Ado<span>.</span><span><span>Query</span><span><span>&lt;</span>T<span>></span></span></span><span>(</span><span>"select * from t1"</span><span>)</span><span>;</span>
 
-//返回单条记录
-T item = fsql.Ado.QuerySingle&lt;T&gt;(&quot;select * from t1 where id = @id&quot;, new { id = 1 });
+<span>//返回单条记录</span>
+<span>T</span> item <span>=</span> fsql<span>.</span>Ado<span>.</span><span><span>QuerySingle</span><span><span>&lt;</span>T<span>></span></span></span><span>(</span><span>"select * from t1 where id = @id"</span><span>,</span> <span>new</span> <span>{</span> id <span>=</span> <span>1</span> <span>}</span><span>)</span><span>;</span>
 
-//返回多个结果集
-var result = fsql.Ado.Query&lt;T1, T2&gt;(&quot;select * from t1; select * from t2&quot;);
-List&lt;T1&gt; list1 = result.Item1;
-List&lt;T2&gt; list2 = result.Item2;
+<span>//返回多个结果集</span>
+<span><span>var</span></span> result <span>=</span> fsql<span>.</span>Ado<span>.</span><span><span>Query</span><span><span>&lt;</span>T1<span>,</span> T2<span>></span></span></span><span>(</span><span>"select * from t1; select * from t2"</span><span>)</span><span>;</span>
+<span>List<span>&lt;</span>T1<span>></span></span> list1 <span>=</span> result<span>.</span>Item1<span>;</span>
+<span>List<span>&lt;</span>T2<span>></span></span> list2 <span>=</span> result<span>.</span>Item2<span>;</span>
 
-// like 查询
-string searchText = &quot;abc&quot;;
-List&lt;T&gt; users = _fsql.Ado.Query&lt;T&gt;(&quot;select * from t1 where name like @name&quot;, new { name = &quot;%&quot; + searchText + &quot;%&quot; });
+<span>// like 查询</span>
+<span><span>string</span></span> searchText <span>=</span> <span>"abc"</span><span>;</span>
+<span>List<span>&lt;</span>T<span>></span></span> users <span>=</span> _fsql<span>.</span>Ado<span>.</span><span><span>Query</span><span><span>&lt;</span>T<span>></span></span></span><span>(</span><span>"select * from t1 where name like @name"</span><span>,</span> <span>new</span> <span>{</span> name <span>=</span> <span>"%"</span> <span>+</span> searchText <span>+</span> <span>"%"</span> <span>}</span><span>)</span><span>;</span>
 </code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br><span>10</span><br><span>11</span><br><span>12</span><br><span>13</span><br><span>14</span><br></div></div><h2 id="参数化" tabindex="-1"> 参数化</h2>
 <p>Ado 下面所有参数 object parms 都可以接受匿名对象，或者字典：</p>
 <ul>
@@ -1093,27 +1093,27 @@ List&lt;T&gt; users = _fsql.Ado.Query&lt;T&gt;(&quot;select * from t1 where name
 <blockquote>
 <p>当前仅支持 Array 和 IList 类型绑定</p>
 </blockquote>
-<div><pre><code>var ids = new int[] { 1,2,3 };
-List&lt;T&gt; list = fsql.Ado.Query&lt;T&gt;(&quot;select * from t1 where id in @ids&quot;, new { ids = ids });
+<div><pre><code><span><span>var</span></span> ids <span>=</span> <span>new</span> <span><span>int</span><span>[</span><span>]</span></span> <span>{</span> <span>1</span><span>,</span><span>2</span><span>,</span><span>3</span> <span>}</span><span>;</span>
+<span>List<span>&lt;</span>T<span>></span></span> list <span>=</span> fsql<span>.</span>Ado<span>.</span><span><span>Query</span><span><span>&lt;</span>T<span>></span></span></span><span>(</span><span>"select * from t1 where id in @ids"</span><span>,</span> <span>new</span> <span>{</span> ids <span>=</span> ids <span>}</span><span>)</span><span>;</span>
 </code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br></div></div><h2 id="检测连接" tabindex="-1"> 检测连接</h2>
-<div><pre><code>bool isok = fsql.Ado.ExecuteConnectTest();
+<div><pre><code><span><span>bool</span></span> isok <span>=</span> fsql<span>.</span>Ado<span>.</span><span>ExecuteConnectTest</span><span>(</span><span>)</span><span>;</span>
 </code></pre><div aria-hidden="true"><span>1</span><br></div></div><h2 id="commandfluent" tabindex="-1"> CommandFluent</h2>
 <p>fsql.Ado 重载方法太多的情况下，建议使用 CommandFluent，例如存储过程：</p>
-<div><pre><code>DbParameter p2 = null;
-fsql.Ado.CommandFluent(&quot;dbo.GetICMaxNum&quot;)
-    .CommandType(CommandType.StoredProcedure)
-    .CommandTimeout(60)
+<div><pre><code><span>DbParameter</span> p2 <span>=</span> <span>null</span><span>;</span>
+fsql<span>.</span>Ado<span>.</span><span>CommandFluent</span><span>(</span><span>"dbo.GetICMaxNum"</span><span>)</span>
+    <span>.</span><span>CommandType</span><span>(</span>CommandType<span>.</span>StoredProcedure<span>)</span>
+    <span>.</span><span>CommandTimeout</span><span>(</span><span>60</span><span>)</span>
 
-    .WithParameter(&quot;TableName&quot;, &quot;tb1&quot;)
-    .WithParameter(&quot;FInterID&quot;, null, p =&gt;
-    {
-        p2 = p; //Output 参数
-        p.DbType = DbType.Int32;
-        p.Direction = ParameterDirection.Output;
-    })
-    .ExecuteNonQuery(); //.Query&lt;T&gt;() 或者 .ExecuteDataTable() 或者 ...
+    <span>.</span><span>WithParameter</span><span>(</span><span>"TableName"</span><span>,</span> <span>"tb1"</span><span>)</span>
+    <span>.</span><span>WithParameter</span><span>(</span><span>"FInterID"</span><span>,</span> <span>null</span><span>,</span> p <span>=></span>
+    <span>{</span>
+        p2 <span>=</span> p<span>;</span> <span>//Output 参数</span>
+        p<span>.</span>DbType <span>=</span> DbType<span>.</span>Int32<span>;</span>
+        p<span>.</span>Direction <span>=</span> ParameterDirection<span>.</span>Output<span>;</span>
+    <span>}</span><span>)</span>
+    <span>.</span><span>ExecuteNonQuery</span><span>(</span><span>)</span><span>;</span> <span>//.Query&lt;T>() 或者 .ExecuteDataTable() 或者 ...</span>
 
-Console.WriteLine(p2.Value);
+Console<span>.</span><span>WriteLine</span><span>(</span>p2<span>.</span>Value<span>)</span><span>;</span>
 </code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br><span>10</span><br><span>11</span><br><span>12</span><br><span>13</span><br><span>14</span><br><span>15</span><br></div></div><h2 id="ado-net-扩展方法" tabindex="-1"> Ado.net 扩展方法</h2>
 <p>提供了类似 Dapper 的使用方法，FreeSql 增加了 IDbConnection/IDbTransaction 对象的扩展方法 Select/Insert/Update/Delete 实现 CRUD。</p>
 <div><pre><code><span>using</span> <span>FreeSql</span><span>;</span>
@@ -1849,35 +1849,35 @@ repo<span>.</span><span>Insert</span><span>(</span>type<span>)</span><span>;</sp
 <li>IEntity 类，是实体类所在程序集的一个类即可。</li>
 </ul>
 <p>方法 1：扫描 IEntity 类所在程序集，反射得到类上有特性标签为 TableAttribute 的所有类，该方法需在实体类上指定了 [Table(Name = &quot;xxx&quot;)]特性标签</p>
-<div><pre><code>public static Type[] GetTypesByTableAttribute()
-{
-    List&lt;Type&gt; tableAssembies = new List&lt;Type&gt;();
-    foreach (Type type in Assembly.GetAssembly(typeof(IEntity)).GetExportedTypes())
-        foreach (Attribute attribute in type.GetCustomAttributes())
-            if (attribute is TableAttribute tableAttribute)
-                if (tableAttribute.DisableSyncStructure == false)
-                    tableAssembies.Add(type);
+<div><pre><code><span>public</span> <span>static</span> <span>Type<span>[</span><span>]</span></span> <span>GetTypesByTableAttribute</span><span>(</span><span>)</span>
+<span>{</span>
+    <span>List<span>&lt;</span>Type<span>></span></span> tableAssembies <span>=</span> <span>new</span> <span>List<span>&lt;</span>Type<span>></span></span><span>(</span><span>)</span><span>;</span>
+    <span>foreach</span> <span>(</span><span>Type</span> type <span>in</span> Assembly<span>.</span><span>GetAssembly</span><span>(</span><span>typeof</span><span>(</span><span>IEntity</span><span>)</span><span>)</span><span>.</span><span>GetExportedTypes</span><span>(</span><span>)</span><span>)</span>
+        <span>foreach</span> <span>(</span><span>Attribute</span> attribute <span>in</span> type<span>.</span><span>GetCustomAttributes</span><span>(</span><span>)</span><span>)</span>
+            <span>if</span> <span>(</span>attribute <span>is</span> <span>TableAttribute</span> tableAttribute<span>)</span>
+                <span>if</span> <span>(</span>tableAttribute<span>.</span>DisableSyncStructure <span>==</span> <span>false</span><span>)</span>
+                    tableAssembies<span>.</span><span>Add</span><span>(</span>type<span>)</span><span>;</span>
 
-    return tableAssembies.ToArray();
-}
+    <span>return</span> tableAssembies<span>.</span><span>ToArray</span><span>(</span><span>)</span><span>;</span>
+<span>}</span>
 </code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br><span>10</span><br><span>11</span><br></div></div><p>调用</p>
 <div><pre><code>fsql<span>.</span>CodeFirst<span>.</span><span>SyncStructure</span><span>(</span><span>GetTypesByTableAttribute</span><span>(</span><span>)</span><span>)</span><span>;</span>
 </code></pre><div aria-hidden="true"><span>1</span><br></div></div><p>方法 2：通过命名空间得到所有要创建的实体类.根据需要调整 entitiesFullName 下的命名空间值。比如我们创建一个 Entities 文件夹，用于存放实体类。该方法通过筛选 IEntity 类所在程序集所有的实体类。他们的命名空间都是 LinCms.Entities 开头，内部通过 StartsWith 判断。</p>
-<div><pre><code>public static Type[] GetTypesByNameSpace()
-{
-    List&lt;Type&gt; tableAssembies = new List&lt;Type&gt;();
-    List&lt;string&gt; entitiesFullName = new List&lt;string&gt;()
-    {
-        &quot;LinCms.Entities.Settings&quot;,
-        &quot;LinCms.Entities.Base&quot;,
-    };
-    foreach (Type type in Assembly.GetAssembly(typeof(IEntity)).GetExportedTypes())
-        foreach (var fullname in entitiesFullName)
-            if (type.FullName.StartsWith(fullname) &amp;&amp; type.IsClass)
-                tableAssembies.Add(type);
+<div><pre><code><span>public</span> <span>static</span> <span>Type<span>[</span><span>]</span></span> <span>GetTypesByNameSpace</span><span>(</span><span>)</span>
+<span>{</span>
+    <span>List<span>&lt;</span>Type<span>></span></span> tableAssembies <span>=</span> <span>new</span> <span>List<span>&lt;</span>Type<span>></span></span><span>(</span><span>)</span><span>;</span>
+    <span>List<span>&lt;</span><span>string</span><span>></span></span> entitiesFullName <span>=</span> <span>new</span> <span>List<span>&lt;</span><span>string</span><span>></span></span><span>(</span><span>)</span>
+    <span>{</span>
+        <span>"LinCms.Entities.Settings"</span><span>,</span>
+        <span>"LinCms.Entities.Base"</span><span>,</span>
+    <span>}</span><span>;</span>
+    <span>foreach</span> <span>(</span><span>Type</span> type <span>in</span> Assembly<span>.</span><span>GetAssembly</span><span>(</span><span>typeof</span><span>(</span><span>IEntity</span><span>)</span><span>)</span><span>.</span><span>GetExportedTypes</span><span>(</span><span>)</span><span>)</span>
+        <span>foreach</span> <span>(</span><span><span>var</span></span> fullname <span>in</span> entitiesFullName<span>)</span>
+            <span>if</span> <span>(</span>type<span>.</span>FullName<span>.</span><span>StartsWith</span><span>(</span>fullname<span>)</span> <span>&amp;&amp;</span> type<span>.</span>IsClass<span>)</span>
+                tableAssembies<span>.</span><span>Add</span><span>(</span>type<span>)</span><span>;</span>
 
-    return tableAssembies.ToArray();
-}
+    <span>return</span> tableAssembies<span>.</span><span>ToArray</span><span>(</span><span>)</span><span>;</span>
+<span>}</span>
 </code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br><span>10</span><br><span>11</span><br><span>12</span><br><span>13</span><br><span>14</span><br><span>15</span><br></div></div><p>或通过调用同步所有表结构</p>
 <div><pre><code>fsql<span>.</span>CodeFirst<span>.</span><span>SyncStructure</span><span>(</span><span>GetTypesByNameSpace</span><span>(</span><span>)</span><span>)</span><span>;</span>
 </code></pre><div aria-hidden="true"><span>1</span><br></div></div><h2 id="实体特性" tabindex="-1"> 实体特性</h2>
@@ -2452,80 +2452,80 @@ fsql<span>.</span><span>DeleteDict</span><span>(</span>dic<span>)</span><span>.<
 <blockquote>
 <p>比如 Include/IncludeMany 查询的对象，可以使用此方法级联删除它们。</p>
 </blockquote>
-<div><pre><code>var repo = fsql.GetRepository&lt;Group&gt;();
-repo.DbContextOptions.EnableCascadeSave = true; //关键设置
-repo.Insert(new UserGroup
-{
-    GroupName = &quot;group01&quot;,
-    Users = new List&lt;User&gt;
-    {
-        new User { Username = &quot;admin01&quot;, Password = &quot;pwd01&quot;, UserExt = new UserExt { Remark = &quot;用户备注01&quot; } },
-        new User { Username = &quot;admin02&quot;, Password = &quot;pwd02&quot;, UserExt = new UserExt { Remark = &quot;用户备注02&quot; } },
-        new User { Username = &quot;admin03&quot;, Password = &quot;pwd03&quot;, UserExt = new UserExt { Remark = &quot;用户备注03&quot; } },
-    }
-}); //级联添加测试数据
-//INSERT INTO &quot;usergroup&quot;(&quot;groupname&quot;) VALUES('group01') RETURNING &quot;id&quot;
-//INSERT INTO &quot;user&quot;(&quot;username&quot;, &quot;password&quot;, &quot;groupid&quot;) VALUES('admin01', 'pwd01', 1), ('admin02', 'pwd02', 1), ('admin03', 'pwd03', 1) RETURNING &quot;id&quot; as &quot;Id&quot;, &quot;username&quot; as &quot;Username&quot;, &quot;password&quot; as &quot;Password&quot;, &quot;groupid&quot; as &quot;GroupId&quot;
-//INSERT INTO &quot;userext&quot;(&quot;userid&quot;, &quot;remark&quot;) VALUES(3, '用户备注01'), (4, '用户备注02'), (5, '用户备注03')
+<div><pre><code><span><span>var</span></span> repo <span>=</span> fsql<span>.</span><span><span>GetRepository</span><span><span>&lt;</span>Group<span>></span></span></span><span>(</span><span>)</span><span>;</span>
+repo<span>.</span>DbContextOptions<span>.</span>EnableCascadeSave <span>=</span> <span>true</span><span>;</span> <span>//关键设置</span>
+repo<span>.</span><span>Insert</span><span>(</span><span>new</span> <span>UserGroup</span>
+<span>{</span>
+    GroupName <span>=</span> <span>"group01"</span><span>,</span>
+    Users <span>=</span> <span>new</span> <span>List<span>&lt;</span>User<span>></span></span>
+    <span>{</span>
+        <span>new</span> <span>User</span> <span>{</span> Username <span>=</span> <span>"admin01"</span><span>,</span> Password <span>=</span> <span>"pwd01"</span><span>,</span> UserExt <span>=</span> <span>new</span> <span>UserExt</span> <span>{</span> Remark <span>=</span> <span>"用户备注01"</span> <span>}</span> <span>}</span><span>,</span>
+        <span>new</span> <span>User</span> <span>{</span> Username <span>=</span> <span>"admin02"</span><span>,</span> Password <span>=</span> <span>"pwd02"</span><span>,</span> UserExt <span>=</span> <span>new</span> <span>UserExt</span> <span>{</span> Remark <span>=</span> <span>"用户备注02"</span> <span>}</span> <span>}</span><span>,</span>
+        <span>new</span> <span>User</span> <span>{</span> Username <span>=</span> <span>"admin03"</span><span>,</span> Password <span>=</span> <span>"pwd03"</span><span>,</span> UserExt <span>=</span> <span>new</span> <span>UserExt</span> <span>{</span> Remark <span>=</span> <span>"用户备注03"</span> <span>}</span> <span>}</span><span>,</span>
+    <span>}</span>
+<span>}</span><span>)</span><span>;</span> <span>//级联添加测试数据</span>
+<span>//INSERT INTO "usergroup"("groupname") VALUES('group01') RETURNING "id"</span>
+<span>//INSERT INTO "user"("username", "password", "groupid") VALUES('admin01', 'pwd01', 1), ('admin02', 'pwd02', 1), ('admin03', 'pwd03', 1) RETURNING "id" as "Id", "username" as "Username", "password" as "Password", "groupid" as "GroupId"</span>
+<span>//INSERT INTO "userext"("userid", "remark") VALUES(3, '用户备注01'), (4, '用户备注02'), (5, '用户备注03')</span>
 
-var groups = repo.Select
-    .IncludeMany(a =&gt; a.Users,
-        then =&gt; then.Include(b =&gt; b.UserExt))
-    .ToList();
-repo.Delete(groups); //级联删除，递归向下遍历 group OneToOne/OneToMany/ManyToMany 导航属性
-//DELETE FROM &quot;userext&quot; WHERE (&quot;userid&quot; IN (3,4,5))
-//DELETE FROM &quot;user&quot; WHERE (&quot;id&quot; IN (3,4,5))
-//DELETE FROM &quot;usergroup&quot; WHERE (&quot;id&quot; = 1)
+<span><span>var</span></span> groups <span>=</span> repo<span>.</span>Select
+    <span>.</span><span>IncludeMany</span><span>(</span>a <span>=></span> a<span>.</span>Users<span>,</span>
+        then <span>=></span> then<span>.</span><span>Include</span><span>(</span>b <span>=></span> b<span>.</span>UserExt<span>)</span><span>)</span>
+    <span>.</span><span>ToList</span><span>(</span><span>)</span><span>;</span>
+repo<span>.</span><span>Delete</span><span>(</span>groups<span>)</span><span>;</span> <span>//级联删除，递归向下遍历 group OneToOne/OneToMany/ManyToMany 导航属性</span>
+<span>//DELETE FROM "userext" WHERE ("userid" IN (3,4,5))</span>
+<span>//DELETE FROM "user" WHERE ("id" IN (3,4,5))</span>
+<span>//DELETE FROM "usergroup" WHERE ("id" = 1)</span>
 </code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br><span>10</span><br><span>11</span><br><span>12</span><br><span>13</span><br><span>14</span><br><span>15</span><br><span>16</span><br><span>17</span><br><span>18</span><br><span>19</span><br><span>20</span><br><span>21</span><br><span>22</span><br><span>23</span><br><span>24</span><br></div></div><p>2、第二种：基于【数据库】级联删除</p>
 <blockquote>
 <p>根据设置的导航属性，递归删除 OneToOne/OneToMany/ManyToMany 对应数据，并返回已删除的数据。此功能不依赖数据库外键</p>
 </blockquote>
-<div><pre><code>var repo = fsql.GetRepository&lt;Group&gt;();
-var ret = repo.DeleteCascadeByDatabase(a =&gt; a.Id == 1);
-//SELECT a.&quot;id&quot;, a.&quot;username&quot;, a.&quot;password&quot;, a.&quot;groupid&quot; FROM &quot;user&quot; a WHERE (a.&quot;groupid&quot; = 1)
-//SELECT a.&quot;userid&quot;, a.&quot;remark&quot; FROM &quot;userext&quot; a WHERE (a.&quot;userid&quot; IN (3,4,5))
-//DELETE FROM &quot;userext&quot; WHERE (&quot;userid&quot; IN (3,4,5))
-//DELETE FROM &quot;user&quot; WHERE (&quot;id&quot; IN (3,4,5))
-//DELETE FROM &quot;usergroup&quot; WHERE (&quot;id&quot; = 1)
+<div><pre><code><span><span>var</span></span> repo <span>=</span> fsql<span>.</span><span><span>GetRepository</span><span><span>&lt;</span>Group<span>></span></span></span><span>(</span><span>)</span><span>;</span>
+<span><span>var</span></span> ret <span>=</span> repo<span>.</span><span>DeleteCascadeByDatabase</span><span>(</span>a <span>=></span> a<span>.</span>Id <span>==</span> <span>1</span><span>)</span><span>;</span>
+<span>//SELECT a."id", a."username", a."password", a."groupid" FROM "user" a WHERE (a."groupid" = 1)</span>
+<span>//SELECT a."userid", a."remark" FROM "userext" a WHERE (a."userid" IN (3,4,5))</span>
+<span>//DELETE FROM "userext" WHERE ("userid" IN (3,4,5))</span>
+<span>//DELETE FROM "user" WHERE ("id" IN (3,4,5))</span>
+<span>//DELETE FROM "usergroup" WHERE ("id" = 1)</span>
 
-//ret   Count = 7	System.Collections.Generic.List&lt;object&gt;
-//  [0]	{UserExt}	object {UserExt}
-//  [1]	{UserExt}	object {UserExt}
-//  [2]	{UserExt}	object {UserExt}
-//  [3]	{User}	    object {User}
-//  [4]	{User}	    object {User}
-//  [5]	{User}  	object {User}
-//  [6]	{UserGroup}	object {UserGroup}
+<span>//ret   Count = 7	System.Collections.Generic.List&lt;object></span>
+<span>//  [0]	{UserExt}	object {UserExt}</span>
+<span>//  [1]	{UserExt}	object {UserExt}</span>
+<span>//  [2]	{UserExt}	object {UserExt}</span>
+<span>//  [3]	{User}	    object {User}</span>
+<span>//  [4]	{User}	    object {User}</span>
+<span>//  [5]	{User}  	object {User}</span>
+<span>//  [6]	{UserGroup}	object {UserGroup}</span>
 
-public class Group
-{
-    [Column(IsIdentity = true)]
-    public int Id { get; set; }
-    public string GroupName { get; set; }
+<span>public</span> <span>class</span> <span>Group</span>
+<span>{</span>
+    <span>[</span><span><span>Column</span><span><span>(</span>IsIdentity <span>=</span> <span>true</span><span>)</span></span></span><span>]</span>
+    <span>public</span> <span><span>int</span></span> Id <span>{</span> <span>get</span><span>;</span> <span>set</span><span>;</span> <span>}</span>
+    <span>public</span> <span><span>string</span></span> GroupName <span>{</span> <span>get</span><span>;</span> <span>set</span><span>;</span> <span>}</span>
 
-    [Navigate(nameof(User.GroupId))]
-    public List&lt;User&gt; Users { get; set; }
-}
-public class User
-{
-    [Column(IsIdentity = true)]
-    public int Id { get; set; }
-    public string Username { get; set; }
-    public string Password { get; set; }
-    public int GroupId { get; set; }
+    <span>[</span><span><span>Navigate</span><span><span>(</span><span>nameof</span><span>(</span>User<span>.</span>GroupId<span>)</span><span>)</span></span></span><span>]</span>
+    <span>public</span> <span>List<span>&lt;</span>User<span>></span></span> Users <span>{</span> <span>get</span><span>;</span> <span>set</span><span>;</span> <span>}</span>
+<span>}</span>
+<span>public</span> <span>class</span> <span>User</span>
+<span>{</span>
+    <span>[</span><span><span>Column</span><span><span>(</span>IsIdentity <span>=</span> <span>true</span><span>)</span></span></span><span>]</span>
+    <span>public</span> <span><span>int</span></span> Id <span>{</span> <span>get</span><span>;</span> <span>set</span><span>;</span> <span>}</span>
+    <span>public</span> <span><span>string</span></span> Username <span>{</span> <span>get</span><span>;</span> <span>set</span><span>;</span> <span>}</span>
+    <span>public</span> <span><span>string</span></span> Password <span>{</span> <span>get</span><span>;</span> <span>set</span><span>;</span> <span>}</span>
+    <span>public</span> <span><span>int</span></span> GroupId <span>{</span> <span>get</span><span>;</span> <span>set</span><span>;</span> <span>}</span>
 
-    [Navigate(nameof(Id))]
-    public UserExt UserExt { get; set; }
-}
-public class UserExt
-{
-    [Column(IsPrimary = true)]
-    public int UserId { get; set; }
-    public string Remark { get; set; }
+    <span>[</span><span><span>Navigate</span><span><span>(</span><span>nameof</span><span>(</span>Id<span>)</span><span>)</span></span></span><span>]</span>
+    <span>public</span> <span>UserExt</span> UserExt <span>{</span> <span>get</span><span>;</span> <span>set</span><span>;</span> <span>}</span>
+<span>}</span>
+<span>public</span> <span>class</span> <span>UserExt</span>
+<span>{</span>
+    <span>[</span><span><span>Column</span><span><span>(</span>IsPrimary <span>=</span> <span>true</span><span>)</span></span></span><span>]</span>
+    <span>public</span> <span><span>int</span></span> UserId <span>{</span> <span>get</span><span>;</span> <span>set</span><span>;</span> <span>}</span>
+    <span>public</span> <span><span>string</span></span> Remark <span>{</span> <span>get</span><span>;</span> <span>set</span><span>;</span> <span>}</span>
 
-    [Navigate(nameof(UserId))]
-    public User User { get; set; }
-}
+    <span>[</span><span><span>Navigate</span><span><span>(</span><span>nameof</span><span>(</span>UserId<span>)</span><span>)</span></span></span><span>]</span>
+    <span>public</span> <span>User</span> User <span>{</span> <span>get</span><span>;</span> <span>set</span><span>;</span> <span>}</span>
+<span>}</span>
 </code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br><span>10</span><br><span>11</span><br><span>12</span><br><span>13</span><br><span>14</span><br><span>15</span><br><span>16</span><br><span>17</span><br><span>18</span><br><span>19</span><br><span>20</span><br><span>21</span><br><span>22</span><br><span>23</span><br><span>24</span><br><span>25</span><br><span>26</span><br><span>27</span><br><span>28</span><br><span>29</span><br><span>30</span><br><span>31</span><br><span>32</span><br><span>33</span><br><span>34</span><br><span>35</span><br><span>36</span><br><span>37</span><br><span>38</span><br><span>39</span><br><span>40</span><br><span>41</span><br><span>42</span><br><span>43</span><br><span>44</span><br><span>45</span><br><span>46</span><br></div></div><h2 id="api" tabindex="-1"> API</h2>
 <table>
 <thead>
@@ -2603,6 +2603,25 @@ public class UserExt
       <pubDate>Thu, 04 Feb 2021 16:03:18 GMT</pubDate>
       <content:encoded><![CDATA[<h1 id="实体特性✨" tabindex="-1"> 实体特性✨</h1>
 <p>v1.4.0+ 已自动识别 EFCore 实体特性 Key/Required/NotMapped/MaxLength/StringLength/DatabaseGenerated/Table/Column</p>
+<h2 id="名称" tabindex="-1"> 名称</h2>
+<div><pre><code><span>[</span><span><span>Table</span><span><span>(</span>Name <span>=</span> <span>"tb_topic"</span><span>)</span></span></span><span>]</span>
+<span>class</span> <span>Topic</span> <span>{</span> <span>}</span>
+</code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br></div></div><p>架构：[Table(Name = &quot;dbo.tb_topic&quot;)]</p>
+<p>注意：带点的表名，使用 [Table(Name = &quot;`sys.config`&quot;)] 解决</p>
+<blockquote>
+<p>指定表名的几种方法，优先级从小到大：</p>
+</blockquote>
+<ul>
+<li>1、实体类名</li>
+<li>2、Aop fsql.Aop.ConfigEntity += (_, e) =&gt; e.ModifyResult.Name = &quot;public.tabname&quot;</li>
+<li>3、FluentApi fsql.CodeFirst.ConfigEntity(a =&gt; a.Name(&quot;public.tabname&quot;))</li>
+<li>4、[Table(Name = &quot;public.tabname&quot;)]</li>
+<li>5、AsTable fsql.Select&lt;T&gt;().AsTable((_, old) =&gt; &quot;public.tabname&quot;).ToList()</li>
+</ul>
+<p>改名：须指定旧的表名：[Table(OldName = &quot;Topic&quot;)]</p>
+<blockquote>
+<p>属性名称：[Column(Name = &quot;xxx&quot;)]</p>
+</blockquote>
 <h2 id="主键-primary-key" tabindex="-1"> 主键(Primary Key)</h2>
 <div><pre><code><span>class</span> <span>Topic</span> <span>{</span>
     <span>[</span><span><span>Column</span><span><span>(</span>IsPrimary <span>=</span> <span>true</span><span>)</span></span></span><span>]</span>
@@ -2656,6 +2675,8 @@ public class UserExt
 <blockquote>
 <p>string 指定长度 [Column(DbType = &quot;varchar(128)&quot;)] 或者 [MaxLength(128)] 或者 [Column(StringLength = 128)]，当长度 -1 时产生的映射如下：</p>
 </blockquote>
+<h2 id="text类型-column-stringlength-1" tabindex="-1"> Text类型 [Column(StringLength =-1)]</h2>
+<p>当长度 -1 时产生的映射如下：</p>
 <table>
 <thead>
 <tr>
@@ -2669,17 +2690,19 @@ public class UserExt
 <th>达梦</th>
 <th>金仓</th>
 <th>神通</th>
+<th>南通</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>text</td>
 <td>text</td>
-<td>varchar(max)</td>
+<td>nvarchar(max)</td>
 <td>nclob</td>
 <td>text</td>
 <td>blob sub_type 1</td>
 <td>longtext</td>
+<td>text</td>
 <td>text</td>
 <td>text</td>
 <td>text</td>
@@ -2798,25 +2821,21 @@ public class UserExt
 
 fsql<span>.</span><span>Insert</span><span>(</span><span>new</span> <span>Type</span><span>(</span><span>)</span><span>)</span><span>.</span><span>ExecuteAffrows</span><span>(</span><span>)</span><span>;</span>
 <span>//INSERT INTO `type`(`Name`) VALUES('xxx')</span>
-</code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br></div></div><h2 id="名称" tabindex="-1"> 名称</h2>
-<p>FreeSql 默认使用实体的类名，或属性名与数据库映射，也可以指定映射的名称；</p>
-<p>指定实体的表名，指定 Name 后，实体类名变化不影响数据库对应的表。FreeSql尽量支持了对多数据库或schema支持，不防试试指定表名为：其他数据库.表名，不同数据库的指定方式有差异，这一点以后深入解答。</p>
-<div><pre><code><span>[</span><span><span>Table</span><span><span>(</span>Name <span>=</span> <span>"db2.tb_topic111"</span><span>)</span></span></span><span>]</span>
-<span>class</span> <span>Topic</span> <span>{</span>
-  <span>//...</span>
-<span>}</span>
-</code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br></div></div><blockquote>
-<p>注意：尽量不要使用带点的表名，只有 MySql/Sqlite 对此类表名支持 CodeFirst。但是它不影响 CRUD 功能，使用 [Table(Name = &quot;`sys.config`&quot;)] 解决</p>
-</blockquote>
-<p>指定实体的表名，修改为实体类名。指定数据库旧的表名，修改实体命名时，同时设置此参数为修改之前的值，CodeFirst才可以正确修改数据库表；否则将视为【创建新表】。</p>
-<div><pre><code><span>[</span><span><span>Table</span><span><span>(</span>OldName <span>=</span> <span>"Topic"</span><span>)</span></span></span><span>]</span>
-<span>class</span> <span>Topic2</span> <span>{</span>
-  <span>//...</span>
-<span>}</span>
-</code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br></div></div><blockquote>
-<p>实体的属性也有相同的功能，[Column(Name = &quot;xxx&quot;)]</p>
-</blockquote>
-<h2 id="禁用迁移" tabindex="-1"> 禁用迁移</h2>
+</code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br></div></div><h2 id="自定义重写-rewritesql-、重读-rereadsql" tabindex="-1"> 自定义重写(RewriteSql)、重读(RereadSql)</h2>
+<p>写入时重写 SQL、读取时重写 SQL，适合 geography 类型的读写场景。</p>
+<div><pre><code><span>[</span><span><span>Column</span><span><span>(</span>
+    DbType <span>=</span> <span>"geography"</span><span>,</span> 
+    RewriteSql <span>=</span> <span>"geography::STGeomFromText({0}, 4236)"</span><span>,</span> 
+    RereadSql <span>=</span> <span>"{0}.STAsText()"</span>
+<span>)</span></span></span><span>]</span>
+<span>public</span> <span><span>string</span></span> geo <span>{</span> <span>get</span><span>;</span> <span>set</span><span>;</span> <span>}</span>
+
+<span>//插入：INSERT INTO [ts_geocrud01]([id], [geo]) VALUES(@id_0, geography::STGeomFromText(@geo_0, 4236))</span>
+
+<span>//查询：SELECT TOP 1 a.[id], a.[geo].STAsText() </span>
+<span>//FROM [ts_geocrud01] a </span>
+<span>//WHERE (a.[id] = 'c7227d5e-0bcf-4b71-8f0f-d69a552fe84e')</span>
+</code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br><span>10</span><br><span>11</span><br><span>12</span><br></div></div><h2 id="禁用迁移" tabindex="-1"> 禁用迁移</h2>
 <p>IFreeSql.CodeFirst.IsAutoSyncStructure 可设置全局【自动迁移结构】功能，也可通过 FreeSqlBuilder.UseAutoSyncStructure(true) 创建 IFreeSql 的时候设置功能。</p>
 <p>当【实体类】对应的是数据库【视图】或者其他时，可通过 [Table(DisableSyncStructure = true)] 禁用指定的实体迁移操作。</p>
 <div><pre><code><span>[</span><span><span>Table</span><span><span>(</span>DisableSyncStructure <span>=</span> <span>true</span><span>)</span></span></span><span>]</span>
@@ -2945,37 +2964,37 @@ fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>T<span>></span
 <p>v1.6.0 利用自定义解析功能，增加 SqlExt.Rank().Over().PartitionBy(...)、MySql group_concat 常用函数，欢迎 PR 补充</p>
 </blockquote>
 <h2 id="子表exists" tabindex="-1"> 子表Exists</h2>
-<div><pre><code>fsql.Select&lt;Topic&gt;()
-  .Where(a =&gt; fsql.Select&lt;Topic&gt;().As(&quot;b&quot;).Where(b =&gt; b.Id == a.Id).Any())
-  .ToList();
-//SELECT a.`Id`, a.`Title`, a.`Clicks`, a.`CreateTime`, a.`CategoryId`
-//FROM `Topic` a
-//WHERE (exists(SELECT 1
-//    FROM `Topic` b
-//    WHERE (b.`Id` = a.`Id`)
-//    limit 0,1))
+<div><pre><code>fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>Topic<span>></span></span></span><span>(</span><span>)</span>
+  <span>.</span><span>Where</span><span>(</span>a <span>=></span> fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>Topic<span>></span></span></span><span>(</span><span>)</span><span>.</span><span>As</span><span>(</span><span>"b"</span><span>)</span><span>.</span><span>Where</span><span>(</span>b <span>=></span> b<span>.</span>Id <span>==</span> a<span>.</span>Id<span>)</span><span>.</span><span>Any</span><span>(</span><span>)</span><span>)</span>
+  <span>.</span><span>ToList</span><span>(</span><span>)</span><span>;</span>
+<span>//SELECT a.`Id`, a.`Title`, a.`Clicks`, a.`CreateTime`, a.`CategoryId`</span>
+<span>//FROM `Topic` a</span>
+<span>//WHERE (exists(SELECT 1</span>
+<span>//    FROM `Topic` b</span>
+<span>//    WHERE (b.`Id` = a.`Id`)</span>
+<span>//    limit 0,1))</span>
 </code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br></div></div><blockquote>
 <p>提示：由于子查询的实体类与上层相同，使用 As(&quot;b&quot;) 指明别名，以便区分</p>
 </blockquote>
 <h2 id="子表in" tabindex="-1"> 子表In</h2>
-<div><pre><code>fsql.Select&lt;Topic&gt;()
-  .Where(a =&gt; fsql.Select&lt;Topic&gt;().As(&quot;b&quot;).ToList(b =&gt; b.Id).Contains(a.Id))
-  .ToList();
-//SELECT a.`Id`, a.`Title`, a.`Clicks`, a.`CreateTime`, a.`CategoryId`
-//FROM `Topic` a
-//WHERE (((a.`Id`) in (SELECT b.`Id`
-//    FROM `Topic` b)))
+<div><pre><code>fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>Topic<span>></span></span></span><span>(</span><span>)</span>
+  <span>.</span><span>Where</span><span>(</span>a <span>=></span> fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>Topic<span>></span></span></span><span>(</span><span>)</span><span>.</span><span>As</span><span>(</span><span>"b"</span><span>)</span><span>.</span><span>ToList</span><span>(</span>b <span>=></span> b<span>.</span>Id<span>)</span><span>.</span><span>Contains</span><span>(</span>a<span>.</span>Id<span>)</span><span>)</span>
+  <span>.</span><span>ToList</span><span>(</span><span>)</span><span>;</span>
+<span>//SELECT a.`Id`, a.`Title`, a.`Clicks`, a.`CreateTime`, a.`CategoryId`</span>
+<span>//FROM `Topic` a</span>
+<span>//WHERE (((a.`Id`) in (SELECT b.`Id`</span>
+<span>//    FROM `Topic` b)))</span>
 </code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br></div></div><h2 id="子表join" tabindex="-1"> 子表Join</h2>
 <blockquote>
 <p>v1.8.0+ string.Join + ToList 实现将子查询的多行结果，拼接为一个字符串，如：&quot;1,2,3,4&quot;</p>
 </blockquote>
-<div><pre><code>fsql.Select&lt;Topic&gt;().ToList(a =&gt; new {
-  id = a.Id,
-  concat = string.Join(&quot;,&quot;, fsql.Select&lt;StringJoin01&gt;().ToList(b =&gt; b.Id))
-});
-//SELECT a.`Id`, (SELECT group_concat(b.`Id` separator ',') 
-//    FROM `StringJoin01` b) 
-//FROM `Topic` a
+<div><pre><code>fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>Topic<span>></span></span></span><span>(</span><span>)</span><span>.</span><span>ToList</span><span>(</span>a <span>=></span> <span>new</span> <span>{</span>
+  id <span>=</span> a<span>.</span>Id<span>,</span>
+  concat <span>=</span> <span>string</span><span>.</span><span>Join</span><span>(</span><span>","</span><span>,</span> fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>StringJoin01<span>></span></span></span><span>(</span><span>)</span><span>.</span><span>ToList</span><span>(</span>b <span>=></span> b<span>.</span>Id<span>)</span><span>)</span>
+<span>}</span><span>)</span><span>;</span>
+<span>//SELECT a.`Id`, (SELECT group_concat(b.`Id` separator ',') </span>
+<span>//    FROM `StringJoin01` b) </span>
+<span>//FROM `Topic` a</span>
 </code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br></div></div><blockquote>
 <p>提示：子查询 string.Join + ToList 适配了 sqlserver/pgsql/oracle/mysql/sqlite/firebird/达梦/金仓/南大/翰高 <a href="https://github.com/dotnetcore/FreeSql/issues/405" target="_blank" rel="noopener noreferrer">#405</a></p>
 </blockquote>
@@ -4668,18 +4687,18 @@ Startup.cs</li>
 <span>}</span>
 </code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br></div></div><p><code>IFreeSql</code> 是 <code>ORM</code> 最顶级对象，所有操作都是使用它的方法或者属性：</p>
 <div><pre><code>
-fsql.Select&lt;T&gt;(); //查询
-fsql.Insert&lt;T&gt;(); //插入
-fsql.Update&lt;T&gt;(); //更新
-fsql.Delete&lt;T&gt;(); //删除
-fsql.InsertOrUpdate&lt;T&gt;()// 插入或更新
-fsql.Transaction(..); //事务
+fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>T<span>></span></span></span><span>(</span><span>)</span><span>;</span> <span>//查询</span>
+fsql<span>.</span><span><span>Insert</span><span><span>&lt;</span>T<span>></span></span></span><span>(</span><span>)</span><span>;</span> <span>//插入</span>
+fsql<span>.</span><span><span>Update</span><span><span>&lt;</span>T<span>></span></span></span><span>(</span><span>)</span><span>;</span> <span>//更新</span>
+fsql<span>.</span><span><span>Delete</span><span><span>&lt;</span>T<span>></span></span></span><span>(</span><span>)</span><span>;</span> <span>//删除</span>
+fsql<span>.</span><span><span>InsertOrUpdate</span><span><span>&lt;</span>T<span>></span></span></span><span>(</span><span>)</span><span>// 插入或更新</span>
+fsql<span>.</span><span>Transaction</span><span>(</span><span>..</span><span>)</span><span>;</span> <span>//事务</span>
 
-fsql.CodeFirst; //CodeFirst 对象
-fsql.DbFirst; //DbFirst 对象
-fsql.Ado; //Ado 对象
-fsql.Aop; //Aop 对象
-fsql.GlobalFilter; //全局过滤器对象
+fsql<span>.</span>CodeFirst<span>;</span> <span>//CodeFirst 对象</span>
+fsql<span>.</span>DbFirst<span>;</span> <span>//DbFirst 对象</span>
+fsql<span>.</span>Ado<span>;</span> <span>//Ado 对象</span>
+fsql<span>.</span>Aop<span>;</span> <span>//Aop 对象</span>
+fsql<span>.</span>GlobalFilter<span>;</span> <span>//全局过滤器对象</span>
 </code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br><span>10</span><br><span>11</span><br><span>12</span><br><span>13</span><br></div></div><h2 id="迁移" tabindex="-1"> 迁移</h2>
 <p>程序运行中<code>FreeSql</code>会检查<code>AutoSyncStructure</code>参数，以此条件判断是否对比实体与数据库结构之间的变化，达到自动迁移的目的,更多请查看<a href="/guide/code-first.html">CodeFirst</a>文档，</p>
 <blockquote>
@@ -5844,69 +5863,94 @@ repo<span>.</span><span>InsertOrUpdate</span><span>(</span>实体<span>)</span><
 <p>更多内容可参阅：<a href="/guide/insert-or-update.html">添加或修改</a></p>
 </blockquote>
 <hr>
-<h2 id="_4、withsql" tabindex="-1"> 4、WithSql</h2>
+<h1 id="_4、弱类型-curd" tabindex="-1"> 4、弱类型 CURD</h1>
+<div><pre><code>fsql<span>.</span><span><span>Insert</span><span><span>&lt;</span><span>object</span><span>></span></span></span><span>(</span><span>)</span><span>.</span><span>AsType</span><span>(</span>实体类型<span>)</span>
+  <span>.</span><span>AppendData</span><span>(</span>data<span>)</span>
+  <span>.</span><span>ExecuteAffrows</span><span>(</span><span>)</span><span>;</span>
+
+fsql<span>.</span><span><span>Update</span><span><span>&lt;</span><span>object</span><span>></span></span></span><span>(</span><span>)</span><span>.</span><span>AsType</span><span>(</span>实体类型<span>)</span>
+  <span>.</span><span>SetSource</span><span>(</span>data<span>)</span>
+  <span>.</span><span>ExecuteAffrows</span><span>(</span><span>)</span><span>;</span>
+
+fsql<span>.</span><span><span>Select</span><span><span>&lt;</span><span>object</span><span>></span></span></span><span>(</span><span>)</span><span>.</span><span>AsType</span><span>(</span>实体类型<span>)</span>
+  <span>.</span><span>Where</span><span>(</span>a <span>=></span> <span>(</span>a <span>as</span> <span>BaseEntity</span><span>)</span><span>.</span>Id <span>==</span> <span>1</span><span>)</span>
+  <span>.</span><span>ExecuteAffrows</span><span>(</span><span>)</span><span>;</span>
+
+<span>//或者仓储</span>
+<span><span>var</span></span> repo <span>=</span> fsql<span>.</span><span><span>GetRepository</span><span><span>&lt;</span><span>object</span><span>></span></span></span><span>(</span><span>)</span><span>;</span>
+repo<span>.</span><span>AsType</span><span>(</span>实体类型<span>)</span><span>;</span>
+
+repo<span>.</span><span>Insert</span><span>(</span><span>..</span><span>)</span><span>;</span>
+repo<span>.</span><span>Update</span><span>(</span><span>..</span><span>)</span><span>;</span>
+repo<span>.</span><span>Delete</span><span>(</span><span>..</span><span>)</span><span>;</span>
+</code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br><span>10</span><br><span>11</span><br><span>12</span><br><span>13</span><br><span>14</span><br><span>15</span><br><span>16</span><br><span>17</span><br><span>18</span><br><span>19</span><br></div></div><hr>
+<h2 id="_5、withsql" tabindex="-1"> 5、WithSql</h2>
 <div><pre><code>fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>Topic<span>></span></span></span><span>(</span><span>)</span>
-  <span>.</span><span>WithSql</span><span>(</span><span>"select * from Topic where clicks > ?val"</span><span>,</span> <span>new</span> <span>{</span> val <span>=</span> <span>10</span> <span>}</span><span>)</span>
+  <span>.</span><span>WithSql</span><span>(</span><span>"select * from Topic where clicks > @val"</span><span>,</span> <span>new</span> <span>{</span> val <span>=</span> <span>10</span> <span>}</span><span>)</span>
   <span>.</span><span>Page</span><span>(</span><span>1</span><span>,</span> <span>10</span><span>)</span>
   <span>.</span><span>ToList</span><span>(</span><span>)</span>
-<span>//SELECT a.`Id`, a.`Clicks`, a.`CategoryId`, a.`Title`, a.`CreateTime`</span>
-<span>//FROM (select * from Topic where clicks > ?val) a</span>
+<span>//SELECT a.`Id`, a.`Clicks`, a.`CategoryId`, a.`Title`, a.`CreateTime` </span>
+<span>//FROM (select * from Topic where clicks > @val) a </span>
 </code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br></div></div><blockquote>
 <p>WithSql 使用多次为 UNION ALL 查询</p>
 </blockquote>
 <hr>
-<h2 id="_5、你不知道的-指定字段返回" tabindex="-1"> 5、你不知道的，指定字段返回</h2>
+<h2 id="_6、你不知道的-指定字段返回" tabindex="-1"> 6、你不知道的，指定字段返回</h2>
 <div><pre><code>fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>t1<span>></span></span></span><span>(</span><span>)</span>
-<span>.</span><span>ToList</span><span>(</span>a <span>=></span> <span>new</span> <span>{</span>
-        a<span>.</span>Id<span>,</span>
-        a<span>.</span>Title<span>,</span>
-        cstitle <span>=</span> <span>"substr(a.title, 0, 2)"</span><span>,</span> <span>//将 substr(a.title, 0, 2) 作为查询字段</span>
-        csnow <span>=</span> Convert<span>.</span><span>ToDateTime</span><span>(</span><span>"now()"</span><span>)</span><span>,</span> <span>//将 now() 作为查询字段</span>
-        <span>//奇思妙想：怎么查询开窗函数的结果</span>
+  <span>.</span><span>ToList</span><span>(</span>a <span>=></span> <span>new</span> <span>{</span>
+    a<span>.</span>Id<span>,</span>
+    a<span>.</span>Title<span>,</span>
+    cstitle <span>=</span> <span>"substr(a.title, 0, 2)"</span><span>,</span> <span>//将 substr(a.title, 0, 2) 作为查询字段</span>
+    csnow <span>=</span> Convert<span>.</span><span>ToDateTime</span><span>(</span><span>"now()"</span><span>)</span><span>,</span> <span>//将 now() 作为查询字段</span>
+    <span>//奇思妙想：怎么查询开窗函数的结果</span>
 
-        count <span>=</span> fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>T2<span>></span></span></span><span>(</span><span>)</span><span>.</span><span>Count</span><span>(</span><span>)</span><span>,</span>
-        max <span>=</span> fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>T2<span>></span></span></span><span>(</span><span>)</span><span>.</span><span>Max</span><span>(</span>b <span>=></span> b<span>.</span>Id<span>)</span><span>,</span>
-        min <span>=</span> fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>T2<span>></span></span></span><span>(</span><span>)</span><span>.</span><span>Min</span><span>(</span>b <span>=></span> b<span>.</span>Id<span>)</span><span>,</span>
-        name <span>=</span> fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>T2<span>></span></span></span><span>(</span><span>)</span><span>.</span><span>First</span><span>(</span>b <span>=></span> b<span>.</span>name<span>)</span>
+    count <span>=</span> fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>T2<span>></span></span></span><span>(</span><span>)</span><span>.</span><span>Count</span><span>(</span><span>)</span><span>,</span>
+    max <span>=</span> fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>T2<span>></span></span></span><span>(</span><span>)</span><span>.</span><span>Max</span><span>(</span>b <span>=></span> b<span>.</span>Id<span>)</span><span>,</span>
+    min <span>=</span> fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>T2<span>></span></span></span><span>(</span><span>)</span><span>.</span><span>Min</span><span>(</span>b <span>=></span> b<span>.</span>Id<span>)</span><span>,</span>
+    name <span>=</span> fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>T2<span>></span></span></span><span>(</span><span>)</span><span>.</span><span>First</span><span>(</span>b <span>=></span> b<span>.</span>name<span>)</span><span>,</span>
 
-        <span>//可以直接映射一个导航属性</span>
-    <span>}</span><span>)</span><span>;</span>
-</code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br><span>10</span><br><span>11</span><br><span>12</span><br><span>13</span><br><span>14</span><br><span>15</span><br></div></div><hr>
-<h2 id="_6、dto-映射查询" tabindex="-1"> 6、Dto 映射查询</h2>
+    <span>//导航属性</span>
+    t1Type <span>=</span> a<span>.</span>Type<span>,</span>
+
+    <span>//子查询</span>
+    childs <span>=</span> fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>T2<span>></span></span></span><span>(</span><span>)</span><span>.</span><span>Where</span><span>(</span>b <span>=></span> b<span>.</span>t1_id <span>==</span> a<span>.</span>id<span>)</span><span>.</span><span>ToList</span><span>(</span><span>)</span>
+  <span>}</span><span>)</span><span>;</span>
+</code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br><span>10</span><br><span>11</span><br><span>12</span><br><span>13</span><br><span>14</span><br><span>15</span><br><span>16</span><br><span>17</span><br><span>18</span><br><span>19</span><br></div></div><hr>
+<h2 id="_7、dto-映射查询" tabindex="-1"> 7、Dto 映射查询</h2>
 <p>映射查询支持单表/多表，在查询数据之前映射（不是先查询所有字段再到内存映射）</p>
 <p>规则：查找属性名，会循环内部对象 _tables（多表会增长），以 主表优先查，直到查到相同的字段。</p>
 <p>如：</p>
 <p>A, B, C 都有 id，Dto { id, a1, a2, b1, b2 }，A.id 被映射。也可以指定 id = C.id 映射。</p>
 <div><pre><code>fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>Song<span>></span></span></span><span>(</span><span>)</span><span>.</span><span><span>ToList</span><span><span>&lt;</span>Dto<span>></span></span></span><span>(</span><span>)</span><span>;</span>
-<span>//默认的映射查询，Dto 与 Song 属性名相同的被查询</span>
+<span>//情况1：Dto 与 Song 属性名相同的字段被查询，返回 List&lt;Dto></span>
 
-fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>Song<span>></span></span></span><span>(</span><span>)</span><span>.</span><span>ToList</span><span>(</span>a <span>=></span> <span>new</span> <span>DTO</span> <span>{</span> xxx <span>=</span> a<span>.</span>ext <span>}</span><span>)</span>
-<span>//情况1：附加所有映射，再额外映射 ext，返回 List&lt;DTO></span>
+fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>Song<span>></span></span></span><span>(</span><span>)</span><span>.</span><span>ToList</span><span>(</span>a <span>=></span> <span>new</span> <span>Dto</span> <span>{</span> xxx <span>=</span> a<span>.</span>ext <span>}</span><span>)</span> 
+<span>//情况2：Dto 与 Song 属性名相同的字段被查询，纠正映射 ext，返回 List&lt;Dto></span>
 
-fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>Song<span>></span></span></span><span>(</span><span>)</span><span>.</span><span>ToList</span><span>(</span>a <span>=></span> <span>new</span> <span>Song</span> <span>{</span> id <span>=</span> a<span>.</span>id <span>}</span><span>)</span>
-<span>//情况2：只查询 id，返回 List&lt;Song></span>
+fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>Song<span>></span></span></span><span>(</span><span>)</span><span>.</span><span>ToList</span><span>(</span>a <span>=></span> <span>new</span> <span>Song</span> <span>{</span> id <span>=</span> a<span>.</span>id <span>}</span><span>)</span> 
+<span>//情况3：Lambda 与 Song 类型一样，只查询指定字段 id，返回 List&lt;Song></span>
 
-fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>Song<span>></span></span></span><span>(</span><span>)</span><span>.</span><span>ToList</span><span>(</span>a <span>=></span> <span>new</span> <span>{</span> id <span>=</span> a<span>.</span>id <span>}</span><span>)</span>
-<span>//情况3：只查询 id，返回 List&lt;匿名对象></span>
+fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>Song<span>></span></span></span><span>(</span><span>)</span><span>.</span><span>ToList</span><span>(</span>a <span>=></span> <span>new</span> <span>{</span> id <span>=</span> a<span>.</span>id <span>}</span><span>)</span> 
+<span>//情况4：Lambda 匿名类型，只查询指定字段 id，返回 List&lt;匿名对象></span>
 </code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br><span>10</span><br><span>11</span><br></div></div><blockquote>
 <p>请仔细处理区别，请仔细处理区别，请仔细处理区别</p>
 </blockquote>
-<div><pre><code>fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>Song<span>></span></span></span><span>(</span><span>)</span><span>.</span><span>ToList</span><span>(</span>a <span>=></span> <span>new</span> <span>DTO</span><span>(</span>a<span>.</span>id<span>)</span><span>)</span>
-<span>//情况4：只查询 id，返回 List&lt;DTO></span>
+<div><pre><code>fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>Song<span>></span></span></span><span>(</span><span>)</span><span>.</span><span>ToList</span><span>(</span>a <span>=></span> <span>new</span> <span>Dto</span><span>(</span>a<span>.</span>id<span>)</span><span>)</span>
+<span>//情况5：只查询 id，返回 List&lt;Dto></span>
 
-fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>Song<span>></span></span></span><span>(</span><span>)</span><span>.</span><span>ToList</span><span>(</span>a <span>=></span> <span>new</span> <span>DTO</span><span>(</span>a<span>.</span>id<span>)</span> <span>{</span> xxx <span>=</span> a<span>.</span>ext <span>}</span><span>)</span>
-<span>//情况5：查询 id, ext，返回 List&lt;DTO></span>
+fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>Song<span>></span></span></span><span>(</span><span>)</span><span>.</span><span>ToList</span><span>(</span>a <span>=></span> <span>new</span> <span>Dto</span><span>(</span>a<span>.</span>id<span>)</span> <span>{</span> xxx <span>=</span> a<span>.</span>ext <span>}</span><span>)</span>
+<span>//情况6：查询 id, ext，返回 List&lt;Dto></span>
 
 fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>Song<span>></span></span></span><span>(</span><span>)</span><span>.</span><span>ToList</span><span>(</span>a <span>=></span> <span>new</span> <span>Song</span><span>(</span>a<span>.</span>id<span>)</span><span>)</span>
-<span>//情况6：查询 id，返回 List&lt;Song></span>
+<span>//情况7：查询 id，返回 List&lt;Song></span>
 
 fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>Song<span>></span></span></span><span>(</span><span>)</span><span>.</span><span>ToList</span><span>(</span>a <span>=></span> <span>new</span> <span>Song</span><span>(</span>a<span>.</span>id<span>)</span> <span>{</span> xxx <span>=</span> a<span>.</span>ext <span>}</span><span>)</span>
-<span>//情况7：查询 id, ext，返回 List&lt;Song></span>
+<span>//情况8：查询 id, ext，返回 List&lt;Song></span>
 </code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br><span>10</span><br><span>11</span><br></div></div><blockquote>
 <p>GroupBy 所有方法不使用 DTO 映射规则</p>
 </blockquote>
 <hr>
-<h2 id="_7、父子关系表" tabindex="-1"> 7、父子关系表</h2>
+<h2 id="_8、父子关系表" tabindex="-1"> 8、父子关系表</h2>
 <div><pre><code><span>List<span>&lt;</span>Category<span>></span></span> t2 <span>=</span> fsql<span>.</span>Select<span>&lt;</span>Category<span>></span><span>.</span><span>ToTreeList</span><span>(</span><span>)</span><span>;</span>
 <span>List<span>&lt;</span>Category<span>></span></span> t3 <span>=</span> fsql<span>.</span>Select<span>&lt;</span>Category<span>></span><span>.</span><span>Where</span><span>(</span>a <span>=></span> a<span>.</span>Name <span>=</span> <span>"家电"</span><span>)</span><span>.</span><span>AsTreeCte</span><span>(</span><span>)</span><span>.</span><span>ToTreeList</span><span>(</span><span>)</span><span>;</span>
 <span>//v1.6.0 AsTreeCte() 递归CTE查询 家电 下的所有子分类</span>
@@ -5926,7 +5970,7 @@ Assert<span>.</span><span>Equal</span><span>(</span><span>"中国[100000]"</span
 Assert<span>.</span><span>Equal</span><span>(</span><span>"中国[100000] -> 北京[110000]"</span><span>,</span> t4<span>[</span><span>1</span><span>]</span><span>.</span>path<span>)</span><span>;</span>
 Assert<span>.</span><span>Equal</span><span>(</span><span>"中国[100000] -> 北京[110000] -> 北京市[110100]"</span><span>,</span> t4<span>[</span><span>2</span><span>]</span><span>.</span>path<span>)</span><span>;</span>
 Assert<span>.</span><span>Equal</span><span>(</span><span>"中国[100000] -> 北京[110000] -> 东城区[110101]"</span><span>,</span> t4<span>[</span><span>3</span><span>]</span><span>.</span>path<span>)</span><span>;</span>
-</code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br><span>10</span><br><span>11</span><br><span>12</span><br><span>13</span><br><span>14</span><br><span>15</span><br></div></div><h2 id="_8、级联加载" tabindex="-1"> 8、级联加载</h2>
+</code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br><span>10</span><br><span>11</span><br><span>12</span><br><span>13</span><br><span>14</span><br><span>15</span><br></div></div><h2 id="_9、级联加载" tabindex="-1"> 9、级联加载</h2>
 <p>有设置导航属性关系的（支持一对多、多对多）：</p>
 <div><pre><code>fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>Tag<span>></span></span></span><span>(</span><span>)</span><span>.</span><span>IncludeMany</span><span>(</span>a <span>=></span> a<span>.</span>Goods<span>)</span><span>.</span><span>ToList</span><span>(</span><span>)</span><span>;</span>
 </code></pre><div aria-hidden="true"><span>1</span><br></div></div><p>未设置导航属性关系的，临时指定关系（只支持一对多）：</p>
@@ -5949,7 +5993,7 @@ dto<span>.</span><span>IncludeMany</span><span>(</span>d <span>=></span> d<span>
 <div><pre><code>fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>Tag<span>></span></span></span><span>(</span><span>)</span><span>.</span><span>IncludeMany</span><span>(</span>a <span>=></span> a<span>.</span>Goods<span>.</span><span>Select</span><span>(</span>b <span>=></span> <span>new</span> <span>Goods</span> <span>{</span> Id <span>=</span> b<span>.</span>Id<span>,</span> Title <span>=</span> b<span>.</span>Title <span>}</span><span>)</span><span>)</span><span>;</span>
 <span>//只查询 goods 表 id, title 字段，再作填充</span>
 </code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br></div></div><hr>
-<h2 id="_9、wherecascade" tabindex="-1"> 9、WhereCascade</h2>
+<h2 id="_10、wherecascade" tabindex="-1"> 10、WhereCascade</h2>
 <p>多表查询时，像 isdeleted 每个表都给条件，挺麻烦的。WhereCascade 使用后生成 sql 时，所有表都附上这个条件。</p>
 <p>如：</p>
 <div><pre><code>fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>t1<span>></span></span></span><span>(</span><span>)</span>
@@ -5963,7 +6007,7 @@ dto<span>.</span><span>IncludeMany</span><span>(</span>d <span>=></span> d<span>
 <span>WHERE</span> t1<span>.</span>IsDeleted <span>=</span> <span>0</span>
 </code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br></div></div><p>实体可附加表达式时才生效，支持子表查询。单次查询使用的表数目越多收益越大。</p>
 <hr>
-<h2 id="_10、wheredynamicfilter" tabindex="-1"> 10、WhereDynamicFilter</h2>
+<h2 id="_11、wheredynamicfilter" tabindex="-1"> 11、WhereDynamicFilter</h2>
 <p>ISelect.WhereDynamicFilter 方法实现动态过滤条件（与前端交互），支持的操作符：</p>
 <ul>
 <li>Contains/StartsWith/EndsWith/NotContains/NotStartsWith/NotEndsWith：包含/不包含，like '%xx%'，或者 like 'xx%'，或者 like '%xx'</li>
@@ -5973,6 +6017,7 @@ dto<span>.</span><span>IncludeMany</span><span>(</span>d <span>=></span> d<span>
 <li>Range：范围查询</li>
 <li>DateRange：日期范围，有特殊处理 value[1] + 1</li>
 <li>Any/NotAny：是否符合 value 中任何一项（直白的说是 SQL IN）</li>
+<li>Custom：自定义解析</li>
 </ul>
 <div><pre><code><span>DynamicFilterInfo</span> dyfilter <span>=</span> JsonConvert<span>.</span><span><span>DeserializeObject</span><span><span>&lt;</span>DynamicFilterInfo<span>></span></span></span><span>(</span><span>@"
 {
@@ -5980,41 +6025,22 @@ dto<span>.</span><span>IncludeMany</span><span>(</span>d <span>=></span> d<span>
   ""Filters"" :
   [
     {
-      ""Field"" : ""Code"",
-      ""Operator"" : ""NotContains"",
-      ""Value"" : ""val1"",
-      ""Filters"" :
-      [
-        {
-          ""Field"" : ""Name"",
-          ""Operator"" : ""NotStartsWith"",
-          ""Value"" : ""val2"",
-        }
-      ]
+      ""Field"" : ""Code"", ""Operator"" : ""NotContains"", ""Value"" : ""val1"", 
+      ""Filters"" : [{ ""Field"" : ""Name"", ""Operator"" : ""NotStartsWith"", ""Value"" : ""val2"" }]
     },
     {
-      ""Field"" : ""Parent.Code"",
-      ""Operator"" : ""Eq"",
-      ""Value"" : ""val11"",
-      ""Filters"" :
-      [
-        {
-          ""Field"" : ""Parent.Name"",
-          ""Operator"" : ""Contains"",
-          ""Value"" : ""val22"",
-        }
-      ]
+      ""Field"" : ""Parent.Code"", ""Operator"" : ""Equals"", ""Value"" : ""val11"",
+      ""Filters"" : [{ ""Field"" : ""Parent.Name"", ""Operator"" : ""Contains"", ""Value"" : ""val22"" }]
     }
   ]
-}
-"</span><span>)</span><span>;</span>
+}"</span><span>)</span><span>;</span>
 fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>VM_District_Parent<span>></span></span></span><span>(</span><span>)</span><span>.</span><span>WhereDynamicFilter</span><span>(</span>dyfilter<span>)</span><span>.</span><span>ToList</span><span>(</span><span>)</span><span>;</span>
 <span>//SELECT a.""Code"", a.""Name"", a.""ParentCode"", a__Parent.""Code"" as4, a__Parent.""Name"" as5, a__Parent.""ParentCode"" as6</span>
 <span>//FROM ""D_District"" a</span>
 <span>//LEFT JOIN ""D_District"" a__Parent ON a__Parent.""Code"" = a.""ParentCode""</span>
 <span>//WHERE (not((a.""Code"") LIKE '%val1%') AND not((a.""Name"") LIKE 'val2%') OR a__Parent.""Code"" = 'val11' AND (a__Parent.""Name"") LIKE '%val22%')</span>
-</code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br><span>10</span><br><span>11</span><br><span>12</span><br><span>13</span><br><span>14</span><br><span>15</span><br><span>16</span><br><span>17</span><br><span>18</span><br><span>19</span><br><span>20</span><br><span>21</span><br><span>22</span><br><span>23</span><br><span>24</span><br><span>25</span><br><span>26</span><br><span>27</span><br><span>28</span><br><span>29</span><br><span>30</span><br><span>31</span><br><span>32</span><br><span>33</span><br><span>34</span><br><span>35</span><br><span>36</span><br><span>37</span><br><span>38</span><br><span>39</span><br></div></div><hr>
-<h2 id="_11、iselect-todelete、iselect-toupdate" tabindex="-1"> 11、ISelect.ToDelete、ISelect.ToUpdate</h2>
+</code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br><span>10</span><br><span>11</span><br><span>12</span><br><span>13</span><br><span>14</span><br><span>15</span><br><span>16</span><br><span>17</span><br><span>18</span><br><span>19</span><br><span>20</span><br></div></div><hr>
+<h2 id="_12、iselect-todelete、iselect-toupdate" tabindex="-1"> 12、ISelect.ToDelete、ISelect.ToUpdate</h2>
 <p>默认 IDelete 不支持导航对象，多表关联等。ISelect.ToDelete 可将查询转为删除对象，以便支持导航对象或其他查询功能删除数据，如下：</p>
 <div><pre><code>fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>T1<span>></span></span></span><span>(</span><span>)</span><span>.</span><span>Where</span><span>(</span>a <span>=></span> a<span>.</span>Options<span>.</span>xxx <span>==</span> <span>1</span><span>)</span><span>.</span><span>ToDelete</span><span>(</span><span>)</span><span>.</span><span>ExecuteAffrows</span><span>(</span><span>)</span><span>;</span>
 </code></pre><div aria-hidden="true"><span>1</span><br></div></div><p>注意：此方法不是将数据查询到内存循环删除，上面的代码产生如下 SQL 执行：</p>
@@ -6028,14 +6054,14 @@ fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>VM_District_Pa
 <p>ISelect.ToUpdate 操作类似</p>
 </blockquote>
 <hr>
-<h2 id="_12、保存多对多数据-savemany" tabindex="-1"> 12、保存多对多数据 SaveMany</h2>
+<h2 id="_13、保存多对多数据-savemany" tabindex="-1"> 13、保存多对多数据 SaveMany</h2>
 <p>之前：</p>
 <p>FreeSql.DbContext 和 仓储实现，已经实现了联级保存功能，联级保存功能可实现保存对象的时候，将其【OneToMany】、【ManyToMany】导航属性集合也一并保存。</p>
 <p>全局关闭：</p>
-<div><pre><code>fsql<span>.</span><span>SetDbContextOptions</span><span>(</span>opt <span>=></span> opt<span>.</span>EnableAddOrUpdateNavigateList <span>=</span> <span>false</span><span>)</span><span>;</span>
+<div><pre><code>fsql<span>.</span><span>SetDbContextOptions</span><span>(</span>opt <span>=></span> opt<span>.</span>EnableCascadeSave <span>=</span> <span>false</span><span>)</span><span>;</span>
 </code></pre><div aria-hidden="true"><span>1</span><br></div></div><p>局部关闭：</p>
 <div><pre><code><span><span>var</span></span> repo <span>=</span> fsql<span>.</span><span><span>GetRepository</span><span><span>&lt;</span>T<span>></span></span></span><span>(</span><span>)</span><span>;</span>
-repo<span>.</span>DbContextOptions<span>.</span>EnableAddOrUpdateNavigateList <span>=</span> <span>false</span><span>;</span>
+repo<span>.</span>DbContextOptions<span>.</span>EnableCascadeSave <span>=</span> <span>false</span><span>;</span>
 </code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br></div></div><h3 id="本功能" tabindex="-1"> 本功能：</h3>
 <p>保存实体的指定【一对多】、【多对多】导航属性，SaveMany 方法实现在 BaseRepository、DbContext。</p>
 <p>解决问题：当实体类导航数据过于复杂的时候，选择关闭联级保存的功能是明智之选，但是此时【一对多】、【多对多】数据保存功能写起来非常繁琐麻烦（与现有数据对比后保存）。</p>
@@ -6054,7 +6080,7 @@ repo<span>.</span><span>SaveMany</span><span>(</span>song<span>,</span> <span>"T
 <li>属性集合不为空时，与数据库存在的关联数据（中间表）完全对比，计算出应该删除和添加的记录</li>
 </ul>
 <hr>
-<h2 id="_13、自定义表达式函数" tabindex="-1"> 13、自定义表达式函数</h2>
+<h2 id="_14、自定义表达式函数" tabindex="-1"> 14、自定义表达式函数</h2>
 <div><pre><code><span>[</span><span><span>ExpressionCall</span></span><span>]</span>
 <span>public</span> <span>static</span> <span>class</span> <span>DbFunc</span> <span>{</span>
   <span>//必要定义 static + ThreadLocal</span>
@@ -6117,7 +6143,7 @@ repo<span>.</span><span>SaveMany</span><span>(</span>song<span>,</span> <span>"T
 <p>当不想解析指定参数时，使用特性 [RawValue] 标记</p>
 </blockquote>
 <hr>
-<h1 id="_14、自定义实体特性、与其他-orm-共用特性" tabindex="-1"> 14、自定义实体特性、与其他 ORM 共用特性</h1>
+<h1 id="_15、自定义实体特性、与其他-orm-共用特性" tabindex="-1"> 15、自定义实体特性、与其他 ORM 共用特性</h1>
 <p>本功能可实现与其他 ORM 使用一套 Attribute，避免维护两份实体特性的烦恼：</p>
 <blockquote>
 <p>v1.4.0+ 已自动识别 EFCore 实体特性 Key/Required/NotMapped/MaxLength/StringLength/DatabaseGenerated/Table/Column</p>
@@ -6154,7 +6180,7 @@ fsql<span>.</span>Aop<span>.</span>ConfigEntityProperty <span>+=</span> <span>(<
   <span>}</span>
 <span>}</span>
 </code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br><span>10</span><br><span>11</span><br><span>12</span><br><span>13</span><br><span>14</span><br><span>15</span><br><span>16</span><br><span>17</span><br><span>18</span><br><span>19</span><br><span>20</span><br><span>21</span><br><span>22</span><br><span>23</span><br><span>24</span><br><span>25</span><br><span>26</span><br><span>27</span><br><span>28</span><br><span>29</span><br><span>30</span><br><span>31</span><br></div></div><hr>
-<h1 id="_15、审计-curd" tabindex="-1"> 15、审计 CURD</h1>
+<h1 id="_19、审计-curd" tabindex="-1"> 19、审计 CURD</h1>
 <p>如果因为某个 sql 骚操作耗时很高，没有一个相关的审计功能，排查起来可以说无从下手。</p>
 <p>FreeSql 支持简单的类似功能：</p>
 <div><pre><code>fsql<span>.</span>Aop<span>.</span>CurdAfter <span>+=</span> <span>(</span>s<span>,</span> e<span>)</span> <span>=></span> <span>{</span>
@@ -6166,42 +6192,42 @@ fsql<span>.</span>Aop<span>.</span>ConfigEntityProperty <span>+=</span> <span>(<
 </code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br></div></div><p>只需要一个事件，就可以对全局起到作用。</p>
 <p>还有一个 CurdBefore 在执行 sql 之前触发，常用于记录日志或开发调试。</p>
 <hr>
-<h1 id="_16、审计属性值" tabindex="-1"> 16、审计属性值</h1>
+<h1 id="_17、审计属性值" tabindex="-1"> 17、审计属性值</h1>
 <p>实现插入/更新时统一处理某些值，比如某属性的雪花算法值、创建时间值、甚至是业务值。</p>
 <div><pre><code>fsql<span>.</span>Aop<span>.</span>AuditValue <span>+=</span> <span>(</span>s<span>,</span> e<span>)</span> <span>=></span> <span>{</span>
-    <span>if</span> <span>(</span>e<span>.</span>Column<span>.</span>CsType <span>==</span> <span>typeof</span><span>(</span><span><span>long</span></span><span>)</span>
-        <span>&amp;&amp;</span> e<span>.</span>Property<span>.</span><span><span>GetCustomAttribute</span><span><span>&lt;</span>SnowflakeAttribute<span>></span></span></span><span>(</span><span>false</span><span>)</span> <span>!=</span> <span>null</span>
-        <span>&amp;&amp;</span> e<span>.</span>Value<span>?.</span><span>ToString</span><span>(</span><span>)</span> <span>==</span> <span>0</span><span>)</span>
-        e<span>.</span>Value <span>=</span> <span>new</span> <span>Snowflake</span><span>(</span><span>)</span><span>.</span><span>GetId</span><span>(</span><span>)</span><span>;</span>
+  <span>if</span> <span>(</span>e<span>.</span>Column<span>.</span>CsType <span>==</span> <span>typeof</span><span>(</span><span><span>long</span></span><span>)</span> <span>&amp;&amp;</span> 
+    e<span>.</span>Property<span>.</span><span><span>GetCustomAttribute</span><span><span>&lt;</span>SnowflakeAttribute<span>></span></span></span><span>(</span><span>false</span><span>)</span> <span>!=</span> <span>null</span> <span>&amp;&amp;</span> 
+    e<span>.</span>Value<span>?.</span><span>ToString</span><span>(</span><span>)</span> <span>==</span> <span>"0"</span><span>)</span>
+    e<span>.</span>Value <span>=</span> <span>new</span> <span>Snowflake</span><span>(</span><span>)</span><span>.</span><span>GetId</span><span>(</span><span>)</span><span>;</span>
 <span>}</span><span>;</span>
 
 <span>class</span> <span>Order</span> <span>{</span>
-    <span>[</span><span><span>Snowflake</span></span><span>]</span>
-    <span>public</span> <span><span>long</span></span> Id <span>{</span> <span>get</span><span>;</span> <span>set</span><span>;</span> <span>}</span>
-    <span>//...</span>
+  <span>[</span><span><span>Snowflake</span></span><span>]</span>
+  <span>public</span> <span><span>long</span></span> Id <span>{</span> <span>get</span><span>;</span> <span>set</span><span>;</span> <span>}</span>
+  <span>//...</span>
 <span>}</span>
-</code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br><span>10</span><br><span>11</span><br><span>12</span><br></div></div><p>当属性的类型是 long，并且标记了 [Snowflake]，并且当前值是 0，那么在插入/更新时它的值将设置为雪花 id 值。</p>
+</code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br><span>10</span><br><span>11</span><br><span>12</span><br></div></div><p>当属性的类型是 long，并且标记了 [Snowflake]，并且当前值是 0，那么在插入/更新时它的值将设置为雪花id值。</p>
 <p>说明：SnowflakeAttribute 是使用者您来定义，new Snowflake().GetId() 也是由使用者您来实现</p>
 <p>如果命名规范，可以在 aop 里判断，if (e.Property.Name == &quot;createtime&quot;) e.Value = DateTime.Now;</p>
-<h2 id="_17、ado-net-扩展方法" tabindex="-1"> 17、Ado.Net 扩展方法</h2>
+<h1 id="_18、ado-net-扩展方法" tabindex="-1"> 18、Ado.Net 扩展方法</h1>
 <p>提供了类似 Dapper 的使用方法，FreeSql 增加了 IDbConnection/IDbTransaction 对象的扩展方法 Select/Insert/Update/Delete 实现 CRUD。</p>
 <div><pre><code><span>using</span> <span>FreeSql</span><span>;</span>
 
 <span>using</span> <span>(</span><span><span>var</span></span> conn <span>=</span> <span>new</span> <span>SqlConnection</span><span>(</span><span>..</span><span>.</span><span>)</span><span>)</span>
 <span>{</span>
-    <span>IFreeSql</span> fsql <span>=</span> conn<span>.</span><span>GetIFreeSql</span><span>(</span><span>)</span><span>;</span>
-    fsql<span>.</span>CodeFirst<span>.</span>IsNoneCommandParameter <span>=</span> <span>true</span><span>;</span>
-    fsql<span>.</span>CodeFirst<span>.</span>IsSyncStructureToUpper <span>=</span> <span>true</span><span>;</span>
-    fsql<span>.</span>Aop<span>.</span>CommandBefore <span>+=</span> <span>(</span>_<span>,</span> e<span>)</span> <span>=></span> Trace<span>.</span><span>WriteLine</span><span>(</span>e<span>.</span>Command<span>.</span>CommandText<span>)</span><span>;</span>
-    <span>//以上整个程序只需要设置一次</span>
+  <span>IFreeSql</span> fsql <span>=</span> conn<span>.</span><span>GetIFreeSql</span><span>(</span><span>)</span><span>;</span>
+  fsql<span>.</span>CodeFirst<span>.</span>IsNoneCommandParameter <span>=</span> <span>true</span><span>;</span>
+  fsql<span>.</span>CodeFirst<span>.</span>IsSyncStructureToUpper <span>=</span> <span>true</span><span>;</span>
+  fsql<span>.</span>Aop<span>.</span>CommandBefore <span>+=</span> <span>(</span>_<span>,</span> e<span>)</span> <span>=></span> Trace<span>.</span><span>WriteLine</span><span>(</span>e<span>.</span>Command<span>.</span>CommandText<span>)</span><span>;</span>
+  <span>//以上整个程序只需要设置一次</span>
 
-    conn<span>.</span><span><span>Select</span><span><span>&lt;</span>T<span>></span></span></span><span>(</span><span>)</span><span>.</span><span>Where</span><span>(</span><span>..</span><span>.</span><span>)</span><span>.</span><span>ToList</span><span>(</span><span>)</span><span>;</span>
+  conn<span>.</span><span><span>Select</span><span><span>&lt;</span>T<span>></span></span></span><span>(</span><span>)</span><span>.</span><span>Where</span><span>(</span><span>..</span><span>.</span><span>)</span><span>.</span><span>ToList</span><span>(</span><span>)</span><span>;</span>
 
-    conn<span>.</span><span>Insert</span><span>(</span><span>new</span> <span>T</span> <span>{</span><span>}</span><span>)</span><span>.</span><span>ExecuteAffrows</span><span>(</span><span>)</span><span>;</span>
-    conn<span>.</span><span>Update</span><span>(</span><span>)</span><span>.</span><span>SetSource</span><span>(</span><span>new</span> <span>T</span> <span>{</span><span>}</span><span>)</span><span>.</span><span>ExecuteAffrows</span><span>(</span><span>)</span><span>;</span>
-    conn<span>.</span><span>InsertOrUpdate</span><span>(</span><span>)</span><span>.</span><span>SetSource</span><span>(</span><span>new</span> <span>T</span> <span>{</span><span>}</span><span>)</span><span>.</span><span>ExecuteAffrows</span><span>(</span><span>)</span><span>;</span>
+  conn<span>.</span><span>Insert</span><span>(</span><span>new</span> <span>T</span> <span>{</span><span>}</span><span>)</span><span>.</span><span>ExecuteAffrows</span><span>(</span><span>)</span><span>;</span>
+  conn<span>.</span><span>Update</span><span>(</span><span>)</span><span>.</span><span>SetSource</span><span>(</span><span>new</span> <span>T</span> <span>{</span><span>}</span><span>)</span><span>.</span><span>ExecuteAffrows</span><span>(</span><span>)</span><span>;</span>
+  conn<span>.</span><span>InsertOrUpdate</span><span>(</span><span>)</span><span>.</span><span>SetSource</span><span>(</span><span>new</span> <span>T</span> <span>{</span><span>}</span><span>)</span><span>.</span><span>ExecuteAffrows</span><span>(</span><span>)</span><span>;</span>
 
-    conn<span>.</span><span><span>Delete</span><span><span>&lt;</span>T<span>></span></span></span><span>(</span><span>)</span><span>.</span><span>Where</span><span>(</span><span>..</span><span>.</span><span>)</span><span>.</span><span>ExecuteAffrows</span><span>(</span><span>)</span><span>;</span>
+  conn<span>.</span><span><span>Delete</span><span><span>&lt;</span>T<span>></span></span></span><span>(</span><span>)</span><span>.</span><span>Where</span><span>(</span><span>..</span><span>.</span><span>)</span><span>.</span><span>ExecuteAffrows</span><span>(</span><span>)</span><span>;</span>
 <span>}</span>
 </code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br><span>10</span><br><span>11</span><br><span>12</span><br><span>13</span><br><span>14</span><br><span>15</span><br><span>16</span><br><span>17</span><br><span>18</span><br></div></div><ul>
 <li>每个 SqlConnection GetFreeSql() 返回的 IFreeSql 实例相同；</li>
@@ -7628,15 +7654,15 @@ Assert<span>.</span><span>Equal</span><span>(</span><span>"中国[100000] -> 北
 <p>当主数据已存在内存中，子数据怎么加载？所以我们增加了 List&lt;T&gt; 扩展方法，示例如下：</p>
 <div><pre><code><span>new</span> <span>List<span>&lt;</span>Song<span>></span></span><span>(</span><span>new</span><span>[</span><span>]</span> <span>{</span> song1<span>,</span> song2<span>,</span> song3 <span>}</span><span>)</span>
     <span>.</span><span>IncludeMany</span><span>(</span>fsql<span>,</span> a <span>=></span> a<span>.</span>Tags<span>)</span><span>;</span>
-</code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br></div></div><div><pre><code>new List&lt;Song&gt;(new[] { song1, song2, song3 })
-    .IncludeByPropertyName(
-        orm: fsql,
-        property: &quot;Tags&quot;,
-        where: &quot;ParentId=Code&quot;,
-        take: 5,
-        select: &quot;id,name&quot;
-    );
-//v3.2.605+
+</code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br></div></div><div><pre><code><span>new</span> <span>List<span>&lt;</span>Song<span>></span></span><span>(</span><span>new</span><span>[</span><span>]</span> <span>{</span> song1<span>,</span> song2<span>,</span> song3 <span>}</span><span>)</span>
+    <span>.</span><span>IncludeByPropertyName</span><span>(</span>
+        <span>orm</span><span>:</span> fsql<span>,</span>
+        <span>property</span><span>:</span> <span>"Tags"</span><span>,</span>
+        <span>where</span><span>:</span> <span>"ParentId=Code"</span><span>,</span>
+        <span>take</span><span>:</span> <span>5</span><span>,</span>
+        <span>select</span><span>:</span> <span>"id,name"</span>
+    <span>)</span><span>;</span>
+<span>//v3.2.605+</span>
 </code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br></div></div><h2 id="_5、includemany-两种方式对比" tabindex="-1"> 5、IncludeMany 两种方式对比</h2>
 <p>方式一（IncludeMany 扩展方法）：</p>
 <div><pre><code><span><span>var</span></span> list111 <span>=</span> fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>SysModule<span>></span></span></span><span>(</span><span>)</span>
@@ -8740,10 +8766,10 @@ fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>VM_District_Pa
 <p>分库 - 把原本存储于一个库的数据分块存储到多个库上，把原本存储于一个表的数据分块存储到多个表上。数据库中的数据量不一定是可控的，在未进行分表分库的情况下，随着时间和业务的发展，库中的表会越来越多，表中的数据量也会越来越大，相应地，数据操作，增删改查的开销也会越来越大；另外，一台服务器的资源（CPU、磁盘、内存、IO 等）是有限的，最终数据库所能承载的数据量、数据处理能力都将遭遇瓶颈。</p>
 <h2 id="分表-astable" tabindex="-1"> 分表 AsTable</h2>
 <p>FreeSql 原生用法、FreeSql.Repository 仓储用法 都提供了 AsTable 方法对分表进行 CRUD 操作，例如：</p>
-<div><pre><code>var repo = fsql.GetRepository&lt;Log&gt;();
-repo.AsTable(oldname =&gt; $&quot;{oldname}_201903&quot;); //对 Log_201903 表 CRUD
+<div><pre><code><span><span>var</span></span> repo <span>=</span> fsql<span>.</span><span><span>GetRepository</span><span><span>&lt;</span>Log<span>></span></span></span><span>(</span><span>)</span><span>;</span>
+repo<span>.</span><span>AsTable</span><span>(</span>oldname <span>=></span> <span><span>$"</span><span><span>{</span><span>oldname</span><span>}</span></span><span>_201903"</span></span><span>)</span><span>;</span> <span>//对 Log_201903 表 CRUD</span>
 
-repo.Insert(new Log { ... });
+repo<span>.</span><span>Insert</span><span>(</span><span>new</span> <span>Log</span> <span>{</span> <span>..</span><span>.</span> <span>}</span><span>)</span><span>;</span>
 </code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br></div></div><p>跨库，但是在同一个数据库服务器下，也可以使用 AsTable(oldname =&gt; $&quot;db2.dbo.{oldname}&quot;)</p>
 <div><pre><code><span>//跨表查询</span>
 <span><span>var</span></span> sql <span>=</span> fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>User<span>></span></span></span><span>(</span><span>)</span>
@@ -9320,6 +9346,8 @@ fsql<span>.</span><span>Transaction</span><span>(</span><span>(</span><span>)</s
 </tr>
 </tbody>
 </table>
+<h2 id="mysql注意事项" tabindex="-1"> Mysql注意事项</h2>
+<p>如果<code>int、byte</code>类型，指定了 <code>DbType=&quot;tinyint(1)&quot;</code>,请注意，<code>tinyint(1)</code>在ado.net中默认将此值映射为<code>bool</code>类型，可在链接串中指定<code>TreatTinyAsBoolean=false</code>,使映射 <code>tinyint(1) </code>为 <code>SByte</code> 而非 <code>bool</code>。</p>
 <h2 id="postgresql-特别类型映射" tabindex="-1"> PostgreSQL 特别类型映射</h2>
 <table>
 <thead>
@@ -12848,39 +12876,39 @@ GetAsync await 为异步方法获取连接的排队数量
 </code></pre><div aria-hidden="true"><span>1</span><br></div></div><p>or</p>
 <div><pre><code>Install-Package FreeSql.Provider.SqlServer
 </code></pre><div aria-hidden="true"><span>1</span><br></div></div><p>第二步：建立实体类</p>
-<div><pre><code>class TestConnectionExt {
-    public Guid id { get; set; }
-    public string title { get; set; }
-    public DateTime createTime { get; set; } = DateTime.Now;
-}
+<div><pre><code><span>class</span> <span>TestConnectionExt</span> <span>{</span>
+    <span>public</span> <span>Guid</span> id <span>{</span> <span>get</span><span>;</span> <span>set</span><span>;</span> <span>}</span>
+    <span>public</span> <span><span>string</span></span> title <span>{</span> <span>get</span><span>;</span> <span>set</span><span>;</span> <span>}</span>
+    <span>public</span> <span>DateTime</span> createTime <span>{</span> <span>get</span><span>;</span> <span>set</span><span>;</span> <span>}</span> <span>=</span> DateTime<span>.</span>Now<span>;</span>
+<span>}</span>
 </code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br></div></div><p>第三步：开始 CRUD</p>
-<div><pre><code>using (var conn = new SqlConnection(connectString)) {
-    var list = conn.Select&lt;TestConnectionExt&gt;().Where(a =&gt; a.id == item.id).ToList();
-}
+<div><pre><code><span>using</span> <span>(</span><span><span>var</span></span> conn <span>=</span> <span>new</span> <span>SqlConnection</span><span>(</span>connectString<span>)</span><span>)</span> <span>{</span>
+    <span><span>var</span></span> list <span>=</span> conn<span>.</span><span><span>Select</span><span><span>&lt;</span>TestConnectionExt<span>></span></span></span><span>(</span><span>)</span><span>.</span><span>Where</span><span>(</span>a <span>=></span> a<span>.</span>id <span>==</span> item<span>.</span>id<span>)</span><span>.</span><span>ToList</span><span>(</span><span>)</span><span>;</span>
+<span>}</span>
 
-using (var conn = new SqlConnection(connectString)) {
-    var item = new TestConnectionExt { title = &quot;testinsert&quot; };
-    var affrows = conn.Insert(item).ExecuteAffrows();
-}
+<span>using</span> <span>(</span><span><span>var</span></span> conn <span>=</span> <span>new</span> <span>SqlConnection</span><span>(</span>connectString<span>)</span><span>)</span> <span>{</span>
+    <span><span>var</span></span> item <span>=</span> <span>new</span> <span>TestConnectionExt</span> <span>{</span> title <span>=</span> <span>"testinsert"</span> <span>}</span><span>;</span>
+    <span><span>var</span></span> affrows <span>=</span> conn<span>.</span><span>Insert</span><span>(</span>item<span>)</span><span>.</span><span>ExecuteAffrows</span><span>(</span><span>)</span><span>;</span>
+<span>}</span>
 
-using (var conn = new SqlConnection(connectString)) {
-    var affrows = conn.Update&lt;TestConnectionExt&gt;()
-        .Where(a =&gt; a.Id == xxx)
-        .Set(a =&gt; a.title, &quot;testupdated&quot;)
-        .ExecuteAffrows();
-}
+<span>using</span> <span>(</span><span><span>var</span></span> conn <span>=</span> <span>new</span> <span>SqlConnection</span><span>(</span>connectString<span>)</span><span>)</span> <span>{</span>
+    <span><span>var</span></span> affrows <span>=</span> conn<span>.</span><span><span>Update</span><span><span>&lt;</span>TestConnectionExt<span>></span></span></span><span>(</span><span>)</span>
+        <span>.</span><span>Where</span><span>(</span>a <span>=></span> a<span>.</span>Id <span>==</span> xxx<span>)</span>
+        <span>.</span><span>Set</span><span>(</span>a <span>=></span> a<span>.</span>title<span>,</span> <span>"testupdated"</span><span>)</span>
+        <span>.</span><span>ExecuteAffrows</span><span>(</span><span>)</span><span>;</span>
+<span>}</span>
 
-using (var conn = new SqlConnection(connectString)) {
-    var affrows = conn.Delete&lt;TestConnectionExt&gt;()
-        .Where(a =&gt; a.Id == xxx)
-        .ExecuteAffrows();
-}
+<span>using</span> <span>(</span><span><span>var</span></span> conn <span>=</span> <span>new</span> <span>SqlConnection</span><span>(</span>connectString<span>)</span><span>)</span> <span>{</span>
+    <span><span>var</span></span> affrows <span>=</span> conn<span>.</span><span><span>Delete</span><span><span>&lt;</span>TestConnectionExt<span>></span></span></span><span>(</span><span>)</span>
+        <span>.</span><span>Where</span><span>(</span>a <span>=></span> a<span>.</span>Id <span>==</span> xxx<span>)</span>
+        <span>.</span><span>ExecuteAffrows</span><span>(</span><span>)</span><span>;</span>
+<span>}</span>
 </code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br><span>10</span><br><span>11</span><br><span>12</span><br><span>13</span><br><span>14</span><br><span>15</span><br><span>16</span><br><span>17</span><br><span>18</span><br><span>19</span><br><span>20</span><br><span>21</span><br></div></div><p>添加或更新：</p>
-<div><pre><code>using (var conn = new SqlConnection(connectString)) {
-    var affrows = conn.InsertOrUpdate&lt;TestConnectionExt&gt;()
-        .SetSource(item)
-        .ExecuteAffrows();
-}
+<div><pre><code><span>using</span> <span>(</span><span><span>var</span></span> conn <span>=</span> <span>new</span> <span>SqlConnection</span><span>(</span>connectString<span>)</span><span>)</span> <span>{</span>
+    <span><span>var</span></span> affrows <span>=</span> conn<span>.</span><span><span>InsertOrUpdate</span><span><span>&lt;</span>TestConnectionExt<span>></span></span></span><span>(</span><span>)</span>
+        <span>.</span><span>SetSource</span><span>(</span>item<span>)</span>
+        <span>.</span><span>ExecuteAffrows</span><span>(</span><span>)</span><span>;</span>
+<span>}</span>
 </code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br></div></div><p>如上添加、删除、修改、查询，已经支持实体类操作，并且支持批量插入、批量更新、批量删除、多表查询、导航属性查询。</p>
 <p>可以享用 FreeSql 几乎所有功能。</p>
 <p>思考：使用这种 API 貌似可以很轻松的接入到 abp vnext 中？</p>
