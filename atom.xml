@@ -3,7 +3,7 @@
   <id>http://freesql.net/</id>
   <title>FreeSql 官方文档</title>
   <subtitle>FreeSql Documents</subtitle>
-  <updated>2022-05-31T14:10:13.910Z</updated>
+  <updated>2022-06-01T06:27:11.320Z</updated>
   <generator>vuepress-plugin-feed2</generator>
   <link rel="self" href="http://freesql.net/atom.xml"/>
   <link rel="alternate" href="http://freesql.net/"/>
@@ -2594,7 +2594,7 @@ repo<span>.</span><span>Delete</span><span>(</span>groups<span>)</span><span>;</
     <title type="html">实体特性✨</title>
     <id>http://freesql.net/guide/entity-attribute.html</id>
     <link href="http://freesql.net/guide/entity-attribute.html"/>
-    <updated>2022-05-31T14:08:53.000Z</updated>
+    <updated>2022-06-01T06:25:44.000Z</updated>
     <content type="html"><![CDATA[<h1 id="实体特性✨" tabindex="-1"> 实体特性✨</h1>
 <p>v1.4.0+ 已自动识别 EFCore 实体特性 Key/Required/NotMapped/MaxLength/StringLength/DatabaseGenerated/Table/Column</p>
 <h2 id="名称" tabindex="-1"> 名称</h2>
@@ -2612,6 +2612,9 @@ repo<span>.</span><span>Delete</span><span>(</span>groups<span>)</span><span>;</
 <li>4、[Table(Name = &quot;public.tabname&quot;)]</li>
 <li>5、AsTable fsql.Select&lt;T&gt;().AsTable((_, old) =&gt; &quot;public.tabname&quot;).ToList()</li>
 </ul>
+<blockquote>
+<p>v3.2.660 可通过 UseMappingPriority 调整优先级</p>
+</blockquote>
 <p>改名：须指定旧的表名：[Table(OldName = &quot;Topic&quot;)]</p>
 <blockquote>
 <p>属性名称：[Column(Name = &quot;xxx&quot;)]</p>
@@ -4619,7 +4622,7 @@ fsql<span>.</span>CodeFirst<span>.</span><span><span>Entity</span><span><span>&l
     <title type="html">入门</title>
     <id>http://freesql.net/guide/getting-started.html</id>
     <link href="http://freesql.net/guide/getting-started.html"/>
-    <updated>2022-05-31T14:08:53.000Z</updated>
+    <updated>2022-06-01T06:25:44.000Z</updated>
     <content type="html"><![CDATA[<h1 id="入门" tabindex="-1"> 入门</h1>
 <h2 id="模型" tabindex="-1"> 模型</h2>
 <p><code>FreeSql</code> 使用模型执行数据访问，模型由实体类表示数据库表或视图，用于查询和保存数据。</p>
@@ -4775,6 +4778,11 @@ blog<span>.</span>BlogId <span>=</span> <span>(</span><span>int</span><span>)</s
 <td>监视全局 SQL 执行前后</td>
 </tr>
 <tr>
+<td>UseMappingPriority</td>
+<td>this</td>
+<td>指定映射优先级（默认 Aop &lt; FluentApi &lt; Attribute）</td>
+</tr>
+<tr>
 <td>UseNameConvert</td>
 <td>this</td>
 <td>自动转换名称 Entity -&gt; Db</td>
@@ -4837,8 +4845,12 @@ blog<span>.</span>BlogId <span>=</span> <span>(</span><span>int</span><span>)</s
 <td>HOST=192.168.164.10;PORT=2003;DATABASE=OSRDB;USERNAME=SYSDBA;PASSWORD=szoscar55;MAXPOOLSIZE=2</td>
 </tr>
 <tr>
-<td>DataType.KingbaseES(人大金仓)</td>
+<td>DataType.KingbaseES(人大金仓) V008R003</td>
 <td>Server=127.0.0.1;Port=54321;UID=USER2;PWD=123456789;database=TEST;MAXPOOLSIZE=2</td>
+</tr>
+<tr>
+<td>DataType.Gbase(南大通用)</td>
+<td>Driver={GBase ODBC DRIVER (64-Bit)};Host=192.168.164.134;Service=9088;Server=gbase01;Database=testdb;Protocol=onsoctcp;Uid=gbasedbt;Pwd=GBase123;Db_locale=zh_CN.utf8;Client_locale=zh_CN.utf8</td>
 </tr>
 <tr>
 <td>DataType.OdbcMySql</td>
@@ -4861,12 +4873,16 @@ blog<span>.</span>BlogId <span>=</span> <span>(</span><span>int</span><span>)</s
 <td>Driver={DM8 ODBC DRIVER};Server=127.0.0.1:5236; Persist Security Info=False; Trusted_Connection=Yes; UID=USER1;PWD=123456789</td>
 </tr>
 <tr>
-<td>DataType.OdbcKingbaseES (人大金仓)</td>
+<td>DataType.OdbcKingbaseES (人大金仓) V008R003</td>
 <td>Driver={KingbaseES 8.2 ODBC Driver ANSI};Server=127.0.0.1;Port=54321;UID=USER2;PWD=123456789;database=TEST</td>
 </tr>
 <tr>
 <td>DataType.Odbc</td>
 <td>Driver={SQL Server};Server=.;Persist Security Info=False; Trusted_Connection=Yes;Integrated Security=True; DATABASE=freesqlTest_odbc; Pooling=true;Min pool size=1</td>
+</tr>
+<tr>
+<td><a href="https://github.com/2881099/FreeSql/tree/master/Providers/FreeSql.Provider.Custom" target="_blank" rel="noopener noreferrer">DataType.Custom</a></td>
+<td>自定义连接串，访问任何数据库</td>
 </tr>
 </tbody>
 </table>
@@ -11099,12 +11115,22 @@ fsql<span>.</span><span>UpdateDict</span><span>(</span>dic<span>)</span><span>.<
     <title type="html">更新日志</title>
     <id>http://freesql.net/reference/change-log.html</id>
     <link href="http://freesql.net/reference/change-log.html"/>
-    <updated>2022-05-25T15:18:32.000Z</updated>
+    <updated>2022-06-01T06:25:44.000Z</updated>
     <content type="html"><![CDATA[<h1 id="更新日志" tabindex="-1"> 更新日志</h1>
 <p>大约每三个月一次版本号，暂时以修复 bug 为主</p>
 <blockquote>
 <p>preview 预览版 添加 nuget 源：<a href="https://www.myget.org/F/ncc/api/v3/index.json" target="_blank" rel="noopener noreferrer">https://www.myget.org/F/ncc/api/v3/index.json</a></p>
 </blockquote>
+<h2 id="v3-2-660" tabindex="-1"> v3.2.660</h2>
+<ul>
+<li>增加 UseMappingPriority 指定映射优先级；<a href="https://github.com/dotnetcore/FreeSql/issues/387" target="_blank" rel="noopener noreferrer">#387</a> <a href="https://github.com/dotnetcore/FreeSql/issues/69" target="_blank" rel="noopener noreferrer">#69</a> <a href="https://github.com/dotnetcore/FreeSql/issues/99" target="_blank" rel="noopener noreferrer">#99</a></li>
+<li>增加 AuditValueEventArgs Object 参数；<a href="https://github.com/dotnetcore/FreeSql/issues/1128" target="_blank" rel="noopener noreferrer">#1128</a></li>
+<li>修复 pgsql varchar(120) CodeFirst 迁移不修改长度；</li>
+<li>修复 ISelect.InsertInto 未执行自动迁移；</li>
+<li>优化 连接池不可用、定时检查；</li>
+<li>优化 Limit + Sum/Avg/Max/Min 为嵌套查询；</li>
+<li>优化 GroupBy Page 未排序的查询；<a href="https://github.com/dotnetcore/FreeSql/issues/1126" target="_blank" rel="noopener noreferrer">#1126</a></li>
+</ul>
 <h2 id="v3-2-651" tabindex="-1"> v3.2.651</h2>
 <ul>
 <li><strong>增加 DTO 映射非导航属性的子表查询 ToList，可直接返回集合；</strong></li>
