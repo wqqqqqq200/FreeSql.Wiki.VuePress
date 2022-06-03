@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:dc="http://purl.org/dc/elements/1.1/">
   <channel>
-    <atom:link href="http://freesql.net/rss.xml" rel="self" type="application/rss+xml"/>
+    <atom:link href="http://freesql.net/FreeSql.Wiki.VuePress/rss.xml" rel="self" type="application/rss+xml"/>
     <title>FreeSql 官方文档</title>
-    <link>http://freesql.net/</link>
+    <link>http://freesql.net/FreeSql.Wiki.VuePress/</link>
     <description>FreeSql Documents</description>
     <language>zh-CN</language>
-    <pubDate>Wed, 01 Jun 2022 06:27:11 GMT</pubDate>
-    <lastBuildDate>Wed, 01 Jun 2022 06:27:11 GMT</lastBuildDate>
+    <pubDate>Fri, 03 Jun 2022 14:31:26 GMT</pubDate>
+    <lastBuildDate>Fri, 03 Jun 2022 14:31:26 GMT</lastBuildDate>
     <generator>vuepress-plugin-feed2</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
     <item>
       <title>服务支持</title>
-      <link>http://freesql.net/reference/service-support.html</link>
-      <guid>http://freesql.net/reference/service-support.html</guid>
-      <source url="http://freesql.net/rss.xml">服务支持</source>
+      <link>http://freesql.net/FreeSql.Wiki.VuePress/reference/service-support.html</link>
+      <guid>http://freesql.net/FreeSql.Wiki.VuePress/reference/service-support.html</guid>
+      <source url="http://freesql.net/FreeSql.Wiki.VuePress/rss.xml">服务支持</source>
       <pubDate>Wed, 25 May 2022 15:18:32 GMT</pubDate>
       <content:encoded><![CDATA[<h1 id="服务支持" tabindex="-1"> 服务支持</h1>
 <h2 id="💻-开源免费" tabindex="-1"> 💻 开源免费</h2>
@@ -70,9 +70,9 @@
     </item>
     <item>
       <title>FreeSql.Provider.SqliteCore</title>
-      <link>http://freesql.net/guide/freesql-provider-sqlitecore.html</link>
-      <guid>http://freesql.net/guide/freesql-provider-sqlitecore.html</guid>
-      <source url="http://freesql.net/rss.xml">FreeSql.Provider.SqliteCore</source>
+      <link>http://freesql.net/FreeSql.Wiki.VuePress/guide/freesql-provider-sqlitecore.html</link>
+      <guid>http://freesql.net/FreeSql.Wiki.VuePress/guide/freesql-provider-sqlitecore.html</guid>
+      <source url="http://freesql.net/FreeSql.Wiki.VuePress/rss.xml">FreeSql.Provider.SqliteCore</source>
       <pubDate>Fri, 25 Mar 2022 06:41:57 GMT</pubDate>
       <content:encoded><![CDATA[<h1 id="freesql-provider-sqlitecore" tabindex="-1"> FreeSql.Provider.SqliteCore</h1>
 <p>FreeSql.Provider.SqliteCore是<code>FreeSql</code>基于微软提供的最新的<a href="https://docs.microsoft.com/zh-cn/dotnet/standard/data/sqlite/?tabs=netcore-cli" target="_blank" rel="noopener noreferrer"><code>Microsoft.Data.Sqlite.Core</code></a>驱动的实现。
@@ -255,9 +255,9 @@ AppDomain<span>.</span>CurrentDomain<span>.</span><span>SetData</span><span>(</s
     </item>
     <item>
       <title>UnitOfWorkManager 事务</title>
-      <link>http://freesql.net/guide/unitofwork-manager.html</link>
-      <guid>http://freesql.net/guide/unitofwork-manager.html</guid>
-      <source url="http://freesql.net/rss.xml">UnitOfWorkManager 事务</source>
+      <link>http://freesql.net/FreeSql.Wiki.VuePress/guide/unitofwork-manager.html</link>
+      <guid>http://freesql.net/FreeSql.Wiki.VuePress/guide/unitofwork-manager.html</guid>
+      <source url="http://freesql.net/FreeSql.Wiki.VuePress/rss.xml">UnitOfWorkManager 事务</source>
       <pubDate>Sat, 21 Aug 2021 05:59:59 GMT</pubDate>
       <content:encoded><![CDATA[<h1 id="unitofworkmanager-事务" tabindex="-1"> UnitOfWorkManager 事务</h1>
 <h2 id="asp-net-core-下-freesql-的仓储事务" tabindex="-1"> ASP.NET Core 下 FreeSql 的仓储事务</h2>
@@ -428,9 +428,9 @@ dotnet <span>add</span> package FreeSql.Provider.MySqlConnector
     </item>
     <item>
       <title>IFreesql 和 Context</title>
-      <link>http://freesql.net/guide/ifreesql-context.html</link>
-      <guid>http://freesql.net/guide/ifreesql-context.html</guid>
-      <source url="http://freesql.net/rss.xml">IFreesql 和 Context</source>
+      <link>http://freesql.net/FreeSql.Wiki.VuePress/guide/ifreesql-context.html</link>
+      <guid>http://freesql.net/FreeSql.Wiki.VuePress/guide/ifreesql-context.html</guid>
+      <source url="http://freesql.net/FreeSql.Wiki.VuePress/rss.xml">IFreesql 和 Context</source>
       <pubDate>Wed, 14 Jul 2021 05:16:31 GMT</pubDate>
       <content:encoded><![CDATA[<h1 id="ifreesql-和-context" tabindex="-1"> IFreesql 和 Context</h1>
 <h3 id="两者并存" tabindex="-1"> 两者并存</h3>
@@ -529,9 +529,9 @@ update roles <span>set</span> is_deleted<span>=</span><span>1</span> <span>where
     </item>
     <item>
       <title>WithSql</title>
-      <link>http://freesql.net/guide/withsql.html</link>
-      <guid>http://freesql.net/guide/withsql.html</guid>
-      <source url="http://freesql.net/rss.xml">WithSql</source>
+      <link>http://freesql.net/FreeSql.Wiki.VuePress/guide/withsql.html</link>
+      <guid>http://freesql.net/FreeSql.Wiki.VuePress/guide/withsql.html</guid>
+      <source url="http://freesql.net/FreeSql.Wiki.VuePress/rss.xml">WithSql</source>
       <pubDate>Wed, 16 Jun 2021 16:56:09 GMT</pubDate>
       <content:encoded><![CDATA[<h1 id="withsql" tabindex="-1"> WithSql</h1>
 <h2 id="withsql-自定义-sql" tabindex="-1"> WithSql 自定义 SQL</h2>
@@ -723,9 +723,9 @@ fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>Topic<span>></
     </item>
     <item>
       <title>Awesome FreeSql</title>
-      <link>http://freesql.net/reference/awesome-freesql.html</link>
-      <guid>http://freesql.net/reference/awesome-freesql.html</guid>
-      <source url="http://freesql.net/rss.xml">Awesome FreeSql</source>
+      <link>http://freesql.net/FreeSql.Wiki.VuePress/reference/awesome-freesql.html</link>
+      <guid>http://freesql.net/FreeSql.Wiki.VuePress/reference/awesome-freesql.html</guid>
+      <source url="http://freesql.net/FreeSql.Wiki.VuePress/rss.xml">Awesome FreeSql</source>
       <pubDate>Tue, 09 Feb 2021 12:13:50 GMT</pubDate>
       <content:encoded><![CDATA[<h1 id="awesome-freesql" tabindex="-1"> Awesome FreeSql</h1>
 <h2 id="freesql-官方博客" tabindex="-1"> FreeSql 官方博客</h2>
@@ -789,9 +789,9 @@ fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>Topic<span>></
     </item>
     <item>
       <title>特别鸣谢</title>
-      <link>http://freesql.net/reference/donation.html</link>
-      <guid>http://freesql.net/reference/donation.html</guid>
-      <source url="http://freesql.net/rss.xml">特别鸣谢</source>
+      <link>http://freesql.net/FreeSql.Wiki.VuePress/reference/donation.html</link>
+      <guid>http://freesql.net/FreeSql.Wiki.VuePress/reference/donation.html</guid>
+      <source url="http://freesql.net/FreeSql.Wiki.VuePress/rss.xml">特别鸣谢</source>
       <pubDate>Tue, 09 Feb 2021 12:13:50 GMT</pubDate>
       <content:encoded><![CDATA[<h1 id="特别鸣谢" tabindex="-1"> 特别鸣谢</h1>
 <table>
@@ -1054,9 +1054,9 @@ fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>Topic<span>></
     </item>
     <item>
       <title>ADO</title>
-      <link>http://freesql.net/guide/ado.html</link>
-      <guid>http://freesql.net/guide/ado.html</guid>
-      <source url="http://freesql.net/rss.xml">ADO</source>
+      <link>http://freesql.net/FreeSql.Wiki.VuePress/guide/ado.html</link>
+      <guid>http://freesql.net/FreeSql.Wiki.VuePress/guide/ado.html</guid>
+      <source url="http://freesql.net/FreeSql.Wiki.VuePress/rss.xml">ADO</source>
       <pubDate>Sat, 06 Feb 2021 16:18:46 GMT</pubDate>
       <content:encoded><![CDATA[<h1 id="ado" tabindex="-1"> ADO</h1>
 <p>Ado 是 IFreeSql 下重要的对象之一，它包括所有对 SQL 操作的封装，提供 ExecuteReader、ExecuteDataSet、ExecuteDataTable、ExecuteNonQuery、ExecuteScalar 等方法，使用起来和传统 SqlHelper 一样。</p>
@@ -1145,9 +1145,9 @@ Console<span>.</span><span>WriteLine</span><span>(</span>p2<span>.</span>Value<s
     </item>
     <item>
       <title>前言</title>
-      <link>http://freesql.net/guide/BaseEntity.html</link>
-      <guid>http://freesql.net/guide/BaseEntity.html</guid>
-      <source url="http://freesql.net/rss.xml">前言</source>
+      <link>http://freesql.net/FreeSql.Wiki.VuePress/guide/BaseEntity.html</link>
+      <guid>http://freesql.net/FreeSql.Wiki.VuePress/guide/BaseEntity.html</guid>
+      <source url="http://freesql.net/FreeSql.Wiki.VuePress/rss.xml">前言</source>
       <pubDate>Thu, 04 Feb 2021 16:03:18 GMT</pubDate>
       <content:encoded><![CDATA[<h1 id="前言" tabindex="-1"> 前言</h1>
 <p>尝试过 ado.net、dapper、ef，以及 Repository 仓储，甚至自己还写过生成器工具，以便做常规 CRUD 操作。</p>
@@ -1247,9 +1247,9 @@ item<span>.</span><span>Restore</span><span>(</span><span>)</span><span>;</span>
     </item>
     <item>
       <title>指南</title>
-      <link>http://freesql.net/guide/</link>
-      <guid>http://freesql.net/guide/</guid>
-      <source url="http://freesql.net/rss.xml">指南</source>
+      <link>http://freesql.net/FreeSql.Wiki.VuePress/guide/</link>
+      <guid>http://freesql.net/FreeSql.Wiki.VuePress/guide/</guid>
+      <source url="http://freesql.net/FreeSql.Wiki.VuePress/rss.xml">指南</source>
       <pubDate>Thu, 04 Feb 2021 16:03:18 GMT</pubDate>
       <content:encoded><![CDATA[<h1 id="指南" tabindex="-1"> 指南</h1>
 <p><a href="https://github.com/dotnetcore" target="_blank" rel="noopener noreferrer"><img src="https://img.shields.io/badge/member project of-NCC-9e20c9.svg" alt="Member project of .NET Core Community" loading="lazy"></a>
@@ -1323,9 +1323,9 @@ item<span>.</span><span>Restore</span><span>(</span><span>)</span><span>;</span>
     </item>
     <item>
       <title>AOP✨</title>
-      <link>http://freesql.net/guide/aop.html</link>
-      <guid>http://freesql.net/guide/aop.html</guid>
-      <source url="http://freesql.net/rss.xml">AOP✨</source>
+      <link>http://freesql.net/FreeSql.Wiki.VuePress/guide/aop.html</link>
+      <guid>http://freesql.net/FreeSql.Wiki.VuePress/guide/aop.html</guid>
+      <source url="http://freesql.net/FreeSql.Wiki.VuePress/rss.xml">AOP✨</source>
       <pubDate>Thu, 04 Feb 2021 16:03:18 GMT</pubDate>
       <content:encoded><![CDATA[<h1 id="aop✨" tabindex="-1"> AOP✨</h1>
 <p>FreeSql AOP 已有的功能介绍，未来为会根据用户需求不断增强。</p>
@@ -1475,9 +1475,9 @@ fsql<span>.</span>Aop<span>.</span>ConfigEntityProperty <span>+=</span> <span>(<
     </item>
     <item>
       <title>级联保存</title>
-      <link>http://freesql.net/guide/cascade-saving.html</link>
-      <guid>http://freesql.net/guide/cascade-saving.html</guid>
-      <source url="http://freesql.net/rss.xml">级联保存</source>
+      <link>http://freesql.net/FreeSql.Wiki.VuePress/guide/cascade-saving.html</link>
+      <guid>http://freesql.net/FreeSql.Wiki.VuePress/guide/cascade-saving.html</guid>
+      <source url="http://freesql.net/FreeSql.Wiki.VuePress/rss.xml">级联保存</source>
       <pubDate>Thu, 04 Feb 2021 16:03:18 GMT</pubDate>
       <content:encoded><![CDATA[<h1 id="级联保存" tabindex="-1"> 级联保存</h1>
 <p>实践发现，N 对 1 不适合做级联保存。保存 Topic 的时候把 Type 信息也保存？我个人认为自下向上保存的功能太不可控了，FreeSql 目前不支持自下向上保存。因此下面我们只讲 OneToOne/OneToMany/ManyToMany 级联保存。至于 ManyToOne 级联保存使用手工处理，更加安全可控。</p>
@@ -1703,9 +1703,9 @@ repo<span>.</span><span>Insert</span><span>(</span>type<span>)</span><span>;</sp
     </item>
     <item>
       <title>Code First</title>
-      <link>http://freesql.net/guide/code-first.html</link>
-      <guid>http://freesql.net/guide/code-first.html</guid>
-      <source url="http://freesql.net/rss.xml">Code First</source>
+      <link>http://freesql.net/FreeSql.Wiki.VuePress/guide/code-first.html</link>
+      <guid>http://freesql.net/FreeSql.Wiki.VuePress/guide/code-first.html</guid>
+      <source url="http://freesql.net/FreeSql.Wiki.VuePress/rss.xml">Code First</source>
       <pubDate>Thu, 04 Feb 2021 16:03:18 GMT</pubDate>
       <content:encoded><![CDATA[<p><code>FreeSql</code> 支持 <code>CodeFirst</code> 迁移结构至数据库，这应该是(<code>O/RM</code>)必须标配的一个功能。</p>
 <p>与其他(<code>O/RM</code>)不同的是：<code>FreeSql</code>支持更多的数据库特性，而不只是支持基础的数据类型，这既是优点也是缺点，优点是充分利用数据库特性辅助开发，缺点是切换数据库变得困难。不同程序员的理念可能不太一致，<code>FreeSql</code>尽量把功能支持到极致，至于是否使用是项目组技术衡量的另一个问题。</p>
@@ -1907,9 +1907,9 @@ repo<span>.</span><span>Insert</span><span>(</span>type<span>)</span><span>;</sp
     </item>
     <item>
       <title>自定义特性</title>
-      <link>http://freesql.net/guide/custom-attribute.html</link>
-      <guid>http://freesql.net/guide/custom-attribute.html</guid>
-      <source url="http://freesql.net/rss.xml">自定义特性</source>
+      <link>http://freesql.net/FreeSql.Wiki.VuePress/guide/custom-attribute.html</link>
+      <guid>http://freesql.net/FreeSql.Wiki.VuePress/guide/custom-attribute.html</guid>
+      <source url="http://freesql.net/FreeSql.Wiki.VuePress/rss.xml">自定义特性</source>
       <pubDate>Thu, 04 Feb 2021 16:03:18 GMT</pubDate>
       <content:encoded><![CDATA[<h1 id="自定义特性" tabindex="-1"> 自定义特性</h1>
 <p>本功能可实现与其他 ORM 使用一套 Attribute，避免维护两份实体特性的烦恼：</p>
@@ -1953,9 +1953,9 @@ fsql<span>.</span>Aop<span>.</span>ConfigEntityProperty <span>+=</span> <span>(<
     </item>
     <item>
       <title>DbContext</title>
-      <link>http://freesql.net/guide/db-context.html</link>
-      <guid>http://freesql.net/guide/db-context.html</guid>
-      <source url="http://freesql.net/rss.xml">DbContext</source>
+      <link>http://freesql.net/FreeSql.Wiki.VuePress/guide/db-context.html</link>
+      <guid>http://freesql.net/FreeSql.Wiki.VuePress/guide/db-context.html</guid>
+      <source url="http://freesql.net/FreeSql.Wiki.VuePress/rss.xml">DbContext</source>
       <pubDate>Thu, 04 Feb 2021 16:03:18 GMT</pubDate>
       <content:encoded><![CDATA[<h1 id="dbcontext" tabindex="-1"> DbContext</h1>
 <p>FreeSql.DbContext 实现类似 EFCore 使用习惯，跟踪对象状态，最终通过 SaveChanges 方法提交事务。</p>
@@ -2211,9 +2211,9 @@ uow<span>.</span>OnEntityChange <span>=</span> report <span>=></span> <span>{</s
     </item>
     <item>
       <title>DB First</title>
-      <link>http://freesql.net/guide/db-first.html</link>
-      <guid>http://freesql.net/guide/db-first.html</guid>
-      <source url="http://freesql.net/rss.xml">DB First</source>
+      <link>http://freesql.net/FreeSql.Wiki.VuePress/guide/db-first.html</link>
+      <guid>http://freesql.net/FreeSql.Wiki.VuePress/guide/db-first.html</guid>
+      <source url="http://freesql.net/FreeSql.Wiki.VuePress/rss.xml">DB First</source>
       <pubDate>Thu, 04 Feb 2021 16:03:18 GMT</pubDate>
       <content:encoded><![CDATA[<h1 id="db-first" tabindex="-1"> DB First</h1>
 <div><pre><code><span>static</span> <span>IFreeSql</span> fsql <span>=</span> <span>new</span> <span>FreeSql<span>.</span>FreeSqlBuilder</span><span>(</span><span>)</span>
@@ -2373,9 +2373,9 @@ uow<span>.</span>OnEntityChange <span>=</span> report <span>=></span> <span>{</s
     </item>
     <item>
       <title>删除</title>
-      <link>http://freesql.net/guide/delete.html</link>
-      <guid>http://freesql.net/guide/delete.html</guid>
-      <source url="http://freesql.net/rss.xml">删除</source>
+      <link>http://freesql.net/FreeSql.Wiki.VuePress/guide/delete.html</link>
+      <guid>http://freesql.net/FreeSql.Wiki.VuePress/guide/delete.html</guid>
+      <source url="http://freesql.net/FreeSql.Wiki.VuePress/rss.xml">删除</source>
       <pubDate>Thu, 04 Feb 2021 16:03:18 GMT</pubDate>
       <content:encoded><![CDATA[<h1 id="删除" tabindex="-1"> 删除</h1>
 <p>删除是一个非常危险的操作，FreeSql 对删除支持并不强大，默认仅支持单表、且有条件的删除方法。</p>
@@ -2597,9 +2597,9 @@ repo<span>.</span><span>Delete</span><span>(</span>groups<span>)</span><span>;</
     </item>
     <item>
       <title>实体特性✨</title>
-      <link>http://freesql.net/guide/entity-attribute.html</link>
-      <guid>http://freesql.net/guide/entity-attribute.html</guid>
-      <source url="http://freesql.net/rss.xml">实体特性✨</source>
+      <link>http://freesql.net/FreeSql.Wiki.VuePress/guide/entity-attribute.html</link>
+      <guid>http://freesql.net/FreeSql.Wiki.VuePress/guide/entity-attribute.html</guid>
+      <source url="http://freesql.net/FreeSql.Wiki.VuePress/rss.xml">实体特性✨</source>
       <pubDate>Thu, 04 Feb 2021 16:03:18 GMT</pubDate>
       <content:encoded><![CDATA[<h1 id="实体特性✨" tabindex="-1"> 实体特性✨</h1>
 <p>v1.4.0+ 已自动识别 EFCore 实体特性 Key/Required/NotMapped/MaxLength/StringLength/DatabaseGenerated/Table/Column</p>
@@ -2859,9 +2859,9 @@ fsql<span>.</span><span>Insert</span><span>(</span><span>new</span> <span>Type</
     </item>
     <item>
       <title>表达式函数</title>
-      <link>http://freesql.net/guide/expression-function.html</link>
-      <guid>http://freesql.net/guide/expression-function.html</guid>
-      <source url="http://freesql.net/rss.xml">表达式函数</source>
+      <link>http://freesql.net/FreeSql.Wiki.VuePress/guide/expression-function.html</link>
+      <guid>http://freesql.net/FreeSql.Wiki.VuePress/guide/expression-function.html</guid>
+      <source url="http://freesql.net/FreeSql.Wiki.VuePress/rss.xml">表达式函数</source>
       <pubDate>Thu, 04 Feb 2021 16:03:18 GMT</pubDate>
       <content:encoded><![CDATA[<h1 id="表达式函数" tabindex="-1"> 表达式函数</h1>
 <p>这是 <code>FreeSql</code> 非常特色的功能之一，深入细化函数解析，所支持的类型基本都可以使用对应的表达式函数，例如 日期、字符串、<code>IN</code>查询、数组（<code>PostgreSQL</code>的数组）、字典（PostgreSQL HStore)等等。</p>
@@ -4368,9 +4368,9 @@ fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>TestMySqlStrin
     </item>
     <item>
       <title>过滤器</title>
-      <link>http://freesql.net/guide/filters.html</link>
-      <guid>http://freesql.net/guide/filters.html</guid>
-      <source url="http://freesql.net/rss.xml">过滤器</source>
+      <link>http://freesql.net/FreeSql.Wiki.VuePress/guide/filters.html</link>
+      <guid>http://freesql.net/FreeSql.Wiki.VuePress/guide/filters.html</guid>
+      <source url="http://freesql.net/FreeSql.Wiki.VuePress/rss.xml">过滤器</source>
       <pubDate>Thu, 04 Feb 2021 16:03:18 GMT</pubDate>
       <content:encoded><![CDATA[<h1 id="过滤器" tabindex="-1"> 过滤器</h1>
 <p>FreeSql 基础层实现了 Select/Update/Delete 可设置的全局过滤器功能。</p>
@@ -4482,9 +4482,9 @@ repo1.DataFilter.Disable(&quot;test&quot;)</p>
     </item>
     <item>
       <title>流式接口</title>
-      <link>http://freesql.net/guide/fluent-api.html</link>
-      <guid>http://freesql.net/guide/fluent-api.html</guid>
-      <source url="http://freesql.net/rss.xml">流式接口</source>
+      <link>http://freesql.net/FreeSql.Wiki.VuePress/guide/fluent-api.html</link>
+      <guid>http://freesql.net/FreeSql.Wiki.VuePress/guide/fluent-api.html</guid>
+      <source url="http://freesql.net/FreeSql.Wiki.VuePress/rss.xml">流式接口</source>
       <pubDate>Thu, 04 Feb 2021 16:03:18 GMT</pubDate>
       <content:encoded><![CDATA[<h1 id="流式接口" tabindex="-1"> 流式接口</h1>
 <h2 id="支持-fluent-api" tabindex="-1"> 支持 Fluent API</h2>
@@ -4626,9 +4626,9 @@ fsql<span>.</span>CodeFirst<span>.</span><span><span>Entity</span><span><span>&l
     </item>
     <item>
       <title>入门</title>
-      <link>http://freesql.net/guide/getting-started.html</link>
-      <guid>http://freesql.net/guide/getting-started.html</guid>
-      <source url="http://freesql.net/rss.xml">入门</source>
+      <link>http://freesql.net/FreeSql.Wiki.VuePress/guide/getting-started.html</link>
+      <guid>http://freesql.net/FreeSql.Wiki.VuePress/guide/getting-started.html</guid>
+      <source url="http://freesql.net/FreeSql.Wiki.VuePress/rss.xml">入门</source>
       <pubDate>Thu, 04 Feb 2021 16:03:18 GMT</pubDate>
       <content:encoded><![CDATA[<h1 id="入门" tabindex="-1"> 入门</h1>
 <h2 id="模型" tabindex="-1"> 模型</h2>
@@ -4897,9 +4897,9 @@ blog<span>.</span>BlogId <span>=</span> <span>(</span><span>int</span><span>)</s
     </item>
     <item>
       <title>新增和修改</title>
-      <link>http://freesql.net/guide/insert-or-update.html</link>
-      <guid>http://freesql.net/guide/insert-or-update.html</guid>
-      <source url="http://freesql.net/rss.xml">新增和修改</source>
+      <link>http://freesql.net/FreeSql.Wiki.VuePress/guide/insert-or-update.html</link>
+      <guid>http://freesql.net/FreeSql.Wiki.VuePress/guide/insert-or-update.html</guid>
+      <source url="http://freesql.net/FreeSql.Wiki.VuePress/rss.xml">新增和修改</source>
       <pubDate>Thu, 04 Feb 2021 16:03:18 GMT</pubDate>
       <content:encoded><![CDATA[<h1 id="新增和修改" tabindex="-1"> 新增和修改</h1>
 <h2 id="_1、ifreesql-insertorupdate" tabindex="-1"> 1、IFreeSql.InsertOrUpdate</h2>
@@ -5123,9 +5123,9 @@ fsql<span>.</span><span>Insert</span><span>(</span>items<span>)</span>
     </item>
     <item>
       <title>新增</title>
-      <link>http://freesql.net/guide/insert.html</link>
-      <guid>http://freesql.net/guide/insert.html</guid>
-      <source url="http://freesql.net/rss.xml">新增</source>
+      <link>http://freesql.net/FreeSql.Wiki.VuePress/guide/insert.html</link>
+      <guid>http://freesql.net/FreeSql.Wiki.VuePress/guide/insert.html</guid>
+      <source url="http://freesql.net/FreeSql.Wiki.VuePress/rss.xml">新增</source>
       <pubDate>Thu, 04 Feb 2021 16:03:18 GMT</pubDate>
       <content:encoded><![CDATA[<h1 id="新增" tabindex="-1"> 新增</h1>
 <p><code>FreeSql</code> 提供单条和批量插入数据的方法，在特定的数据库执行还可以返回插入后的记录。</p>
@@ -5558,9 +5558,9 @@ fsql<span>.</span><span>InsertDict</span><span>(</span>dic<span>)</span><span>.<
     </item>
     <item>
       <title>安装</title>
-      <link>http://freesql.net/guide/install.html</link>
-      <guid>http://freesql.net/guide/install.html</guid>
-      <source url="http://freesql.net/rss.xml">安装</source>
+      <link>http://freesql.net/FreeSql.Wiki.VuePress/guide/install.html</link>
+      <guid>http://freesql.net/FreeSql.Wiki.VuePress/guide/install.html</guid>
+      <source url="http://freesql.net/FreeSql.Wiki.VuePress/rss.xml">安装</source>
       <pubDate>Thu, 04 Feb 2021 16:03:18 GMT</pubDate>
       <content:encoded><![CDATA[<h1 id="安装" tabindex="-1"> 安装</h1>
 <h2 id="版本" tabindex="-1"> 版本</h2>
@@ -5713,9 +5713,9 @@ fsql<span>.</span><span>InsertDict</span><span>(</span>dic<span>)</span><span>.<
     </item>
     <item>
       <title>LinqToSql</title>
-      <link>http://freesql.net/guide/linq-to-sql.html</link>
-      <guid>http://freesql.net/guide/linq-to-sql.html</guid>
-      <source url="http://freesql.net/rss.xml">LinqToSql</source>
+      <link>http://freesql.net/FreeSql.Wiki.VuePress/guide/linq-to-sql.html</link>
+      <guid>http://freesql.net/FreeSql.Wiki.VuePress/guide/linq-to-sql.html</guid>
+      <source url="http://freesql.net/FreeSql.Wiki.VuePress/rss.xml">LinqToSql</source>
       <pubDate>Thu, 04 Feb 2021 16:03:18 GMT</pubDate>
       <content:encoded><![CDATA[<h1 id="linqtosql" tabindex="-1"> LinqToSql</h1>
 <p>原本不支持 IQueryable 主要出于使用习惯的考虑，编写代码的智能总会提示出现一堆你不想使用的方法（对不起，我有强迫症），IQueryable 自身提供了一堆没法实现的方法，还有外部入侵的扩展方法，严重影响编码体验。如下图：</p>
@@ -5851,9 +5851,9 @@ fsql<span>.</span><span>InsertDict</span><span>(</span>dic<span>)</span><span>.<
     </item>
     <item>
       <title>你不知道的功能 ✨</title>
-      <link>http://freesql.net/guide/more.html</link>
-      <guid>http://freesql.net/guide/more.html</guid>
-      <source url="http://freesql.net/rss.xml">你不知道的功能 ✨</source>
+      <link>http://freesql.net/FreeSql.Wiki.VuePress/guide/more.html</link>
+      <guid>http://freesql.net/FreeSql.Wiki.VuePress/guide/more.html</guid>
+      <source url="http://freesql.net/FreeSql.Wiki.VuePress/rss.xml">你不知道的功能 ✨</source>
       <pubDate>Thu, 04 Feb 2021 16:03:18 GMT</pubDate>
       <content:encoded><![CDATA[<h1 id="你不知道的功能-✨" tabindex="-1"> 你不知道的功能 ✨</h1>
 <h2 id="_1、备注-迁移到数据库" tabindex="-1"> 1、备注 -&gt; 迁移到数据库</h2>
@@ -6256,9 +6256,9 @@ fsql<span>.</span>Aop<span>.</span>ConfigEntityProperty <span>+=</span> <span>(<
     </item>
     <item>
       <title>多租户</title>
-      <link>http://freesql.net/guide/multi-tenancy.html</link>
-      <guid>http://freesql.net/guide/multi-tenancy.html</guid>
-      <source url="http://freesql.net/rss.xml">多租户</source>
+      <link>http://freesql.net/FreeSql.Wiki.VuePress/guide/multi-tenancy.html</link>
+      <guid>http://freesql.net/FreeSql.Wiki.VuePress/guide/multi-tenancy.html</guid>
+      <source url="http://freesql.net/FreeSql.Wiki.VuePress/rss.xml">多租户</source>
       <pubDate>Thu, 04 Feb 2021 16:03:18 GMT</pubDate>
       <content:encoded><![CDATA[<h1 id="多租户" tabindex="-1"> 多租户</h1>
 <h3 id="什么是多租户" tabindex="-1"> 什么是多租户</h3>
@@ -6327,9 +6327,9 @@ fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>Topic<span>></
     </item>
     <item>
       <title>导航属性 ✨</title>
-      <link>http://freesql.net/guide/navigate-attribute.html</link>
-      <guid>http://freesql.net/guide/navigate-attribute.html</guid>
-      <source url="http://freesql.net/rss.xml">导航属性 ✨</source>
+      <link>http://freesql.net/FreeSql.Wiki.VuePress/guide/navigate-attribute.html</link>
+      <guid>http://freesql.net/FreeSql.Wiki.VuePress/guide/navigate-attribute.html</guid>
+      <source url="http://freesql.net/FreeSql.Wiki.VuePress/rss.xml">导航属性 ✨</source>
       <pubDate>Thu, 04 Feb 2021 16:03:18 GMT</pubDate>
       <content:encoded><![CDATA[<h1 id="导航属性-✨" tabindex="-1"> 导航属性 ✨</h1>
 <p>导航属性是 FreeSql 的特色功能之一，可通过约定配置、或自定义配置对象间的关系。</p>
@@ -6462,9 +6462,9 @@ fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>Topic<span>></
     </item>
     <item>
       <title>分页查询</title>
-      <link>http://freesql.net/guide/paging.html</link>
-      <guid>http://freesql.net/guide/paging.html</guid>
-      <source url="http://freesql.net/rss.xml">分页查询</source>
+      <link>http://freesql.net/FreeSql.Wiki.VuePress/guide/paging.html</link>
+      <guid>http://freesql.net/FreeSql.Wiki.VuePress/guide/paging.html</guid>
+      <source url="http://freesql.net/FreeSql.Wiki.VuePress/rss.xml">分页查询</source>
       <pubDate>Thu, 04 Feb 2021 16:03:18 GMT</pubDate>
       <content:encoded><![CDATA[<h1 id="分页查询" tabindex="-1"> 分页查询</h1>
 <div><pre><code><span>static</span> <span>IFreeSql</span> fsql <span>=</span> <span>new</span> <span>FreeSql<span>.</span>FreeSqlBuilder</span><span>(</span><span>)</span>
@@ -6587,9 +6587,9 @@ fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>Topic<span>></
     </item>
     <item>
       <title>性能</title>
-      <link>http://freesql.net/guide/performance.html</link>
-      <guid>http://freesql.net/guide/performance.html</guid>
-      <source url="http://freesql.net/rss.xml">性能</source>
+      <link>http://freesql.net/FreeSql.Wiki.VuePress/guide/performance.html</link>
+      <guid>http://freesql.net/FreeSql.Wiki.VuePress/guide/performance.html</guid>
+      <source url="http://freesql.net/FreeSql.Wiki.VuePress/rss.xml">性能</source>
       <pubDate>Thu, 04 Feb 2021 16:03:18 GMT</pubDate>
       <content:encoded><![CDATA[<h1 id="性能" tabindex="-1"> 性能</h1>
 <p>FreeSql 实现了强大功能的同时，性能没有受到影响，项目中使用反射或耗时的操作都经过了缓存处理。读取数据部分采用了 ExpressionTree，使得 FreeSql 解析实体数据的速度与 Dapper 非常接近。</p>
@@ -6992,9 +6992,9 @@ fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>Topic<span>></
     </item>
     <item>
       <title>读写分离</title>
-      <link>http://freesql.net/guide/read-write-splitting.html</link>
-      <guid>http://freesql.net/guide/read-write-splitting.html</guid>
-      <source url="http://freesql.net/rss.xml">读写分离</source>
+      <link>http://freesql.net/FreeSql.Wiki.VuePress/guide/read-write-splitting.html</link>
+      <guid>http://freesql.net/FreeSql.Wiki.VuePress/guide/read-write-splitting.html</guid>
+      <source url="http://freesql.net/FreeSql.Wiki.VuePress/rss.xml">读写分离</source>
       <pubDate>Thu, 04 Feb 2021 16:03:18 GMT</pubDate>
       <content:encoded><![CDATA[<h1 id="读写分离" tabindex="-1"> 读写分离</h1>
 <p>FreeSql 支持数据库读写分离，本功能是客户端的读写分离行为，数据库服务器该怎么配置仍然那样配置，不受本功能影响，为了方便描术后面讲到的【读写分离】都是指客户端的功能支持。</p>
@@ -7020,9 +7020,9 @@ fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>T<span>></span
     </item>
     <item>
       <title>仓储</title>
-      <link>http://freesql.net/guide/repository.html</link>
-      <guid>http://freesql.net/guide/repository.html</guid>
-      <source url="http://freesql.net/rss.xml">仓储</source>
+      <link>http://freesql.net/FreeSql.Wiki.VuePress/guide/repository.html</link>
+      <guid>http://freesql.net/FreeSql.Wiki.VuePress/guide/repository.html</guid>
+      <source url="http://freesql.net/FreeSql.Wiki.VuePress/rss.xml">仓储</source>
       <pubDate>Thu, 04 Feb 2021 16:03:18 GMT</pubDate>
       <content:encoded><![CDATA[<h1 id="仓储" tabindex="-1"> 仓储</h1>
 <p>FreeSql.Repository 作为扩展，实现了通用仓储层功能。与其他规范标准一样，仓储层也有相应的规范定义。FreeSql.Repository 参考 abp vnext 接口，定义和实现基础的仓储层（CURD），应该算比较通用的方法吧。</p>
@@ -7308,9 +7308,9 @@ repo<span>.</span><span>Update</span><span>(</span>item<span>)</span><span>;</sp
     </item>
     <item>
       <title>树型查询 ✨</title>
-      <link>http://freesql.net/guide/select-as-tree.html</link>
-      <guid>http://freesql.net/guide/select-as-tree.html</guid>
-      <source url="http://freesql.net/rss.xml">树型查询 ✨</source>
+      <link>http://freesql.net/FreeSql.Wiki.VuePress/guide/select-as-tree.html</link>
+      <guid>http://freesql.net/FreeSql.Wiki.VuePress/guide/select-as-tree.html</guid>
+      <source url="http://freesql.net/FreeSql.Wiki.VuePress/rss.xml">树型查询 ✨</source>
       <pubDate>Thu, 04 Feb 2021 16:03:18 GMT</pubDate>
       <content:encoded><![CDATA[<h1 id="树型查询-✨" tabindex="-1"> 树型查询 ✨</h1>
 <p>无限级分类（父子）是一种比较常用的表设计，每种设计方式突出优势的同时也带来缺陷，如：</p>
@@ -7500,9 +7500,9 @@ Assert<span>.</span><span>Equal</span><span>(</span><span>"中国[100000] -> 北
     </item>
     <item>
       <title>分组聚合</title>
-      <link>http://freesql.net/guide/select-group-by.html</link>
-      <guid>http://freesql.net/guide/select-group-by.html</guid>
-      <source url="http://freesql.net/rss.xml">分组聚合</source>
+      <link>http://freesql.net/FreeSql.Wiki.VuePress/guide/select-group-by.html</link>
+      <guid>http://freesql.net/FreeSql.Wiki.VuePress/guide/select-group-by.html</guid>
+      <source url="http://freesql.net/FreeSql.Wiki.VuePress/rss.xml">分组聚合</source>
       <pubDate>Thu, 04 Feb 2021 16:03:18 GMT</pubDate>
       <content:encoded><![CDATA[<h1 id="分组聚合" tabindex="-1"> 分组聚合</h1>
 <div><pre><code><span>static</span> <span>IFreeSql</span> fsql <span>=</span> <span>new</span> <span>FreeSql<span>.</span>FreeSqlBuilder</span><span>(</span><span>)</span>
@@ -7639,9 +7639,9 @@ Assert<span>.</span><span>Equal</span><span>(</span><span>"中国[100000] -> 北
     </item>
     <item>
       <title>贪婪加载 ✨</title>
-      <link>http://freesql.net/guide/select-include.html</link>
-      <guid>http://freesql.net/guide/select-include.html</guid>
-      <source url="http://freesql.net/rss.xml">贪婪加载 ✨</source>
+      <link>http://freesql.net/FreeSql.Wiki.VuePress/guide/select-include.html</link>
+      <guid>http://freesql.net/FreeSql.Wiki.VuePress/guide/select-include.html</guid>
+      <source url="http://freesql.net/FreeSql.Wiki.VuePress/rss.xml">贪婪加载 ✨</source>
       <pubDate>Thu, 04 Feb 2021 16:03:18 GMT</pubDate>
       <content:encoded><![CDATA[<h1 id="贪婪加载-✨" tabindex="-1"> 贪婪加载 ✨</h1>
 <h2 id="_1、导航属性-manytoone" tabindex="-1"> 1、导航属性 ManyToOne</h2>
@@ -7730,9 +7730,9 @@ dto<span>.</span><span>IncludeMany</span><span>(</span>fsql<span>,</span> d <spa
     </item>
     <item>
       <title>延时加载</title>
-      <link>http://freesql.net/guide/select-lazy-loading.html</link>
-      <guid>http://freesql.net/guide/select-lazy-loading.html</guid>
-      <source url="http://freesql.net/rss.xml">延时加载</source>
+      <link>http://freesql.net/FreeSql.Wiki.VuePress/guide/select-lazy-loading.html</link>
+      <guid>http://freesql.net/FreeSql.Wiki.VuePress/guide/select-lazy-loading.html</guid>
+      <source url="http://freesql.net/FreeSql.Wiki.VuePress/rss.xml">延时加载</source>
       <pubDate>Thu, 04 Feb 2021 16:03:18 GMT</pubDate>
       <content:encoded><![CDATA[<h1 id="延时加载" tabindex="-1"> 延时加载</h1>
 <p>FreeSql 支持导航属性延时加载，即当我们需要用到的时候才进行加载（读取），支持 1 对 1、多对 1、1 对多、多对多关系的导航属性。</p>
@@ -7832,9 +7832,9 @@ dto<span>.</span><span>IncludeMany</span><span>(</span>fsql<span>,</span> d <spa
     </item>
     <item>
       <title>多表查询</title>
-      <link>http://freesql.net/guide/select-multi-table.html</link>
-      <guid>http://freesql.net/guide/select-multi-table.html</guid>
-      <source url="http://freesql.net/rss.xml">多表查询</source>
+      <link>http://freesql.net/FreeSql.Wiki.VuePress/guide/select-multi-table.html</link>
+      <guid>http://freesql.net/FreeSql.Wiki.VuePress/guide/select-multi-table.html</guid>
+      <source url="http://freesql.net/FreeSql.Wiki.VuePress/rss.xml">多表查询</source>
       <pubDate>Thu, 04 Feb 2021 16:03:18 GMT</pubDate>
       <content:encoded><![CDATA[<h1 id="多表查询" tabindex="-1"> 多表查询</h1>
 <div><pre><code><span>static</span> <span>IFreeSql</span> fsql <span>=</span> <span>new</span> <span>FreeSql<span>.</span>FreeSqlBuilder</span><span>(</span><span>)</span>
@@ -8017,9 +8017,9 @@ fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>Topic<span>,</
     </item>
     <item>
       <title>返回数据 ✨</title>
-      <link>http://freesql.net/guide/select-return-data.html</link>
-      <guid>http://freesql.net/guide/select-return-data.html</guid>
-      <source url="http://freesql.net/rss.xml">返回数据 ✨</source>
+      <link>http://freesql.net/FreeSql.Wiki.VuePress/guide/select-return-data.html</link>
+      <guid>http://freesql.net/FreeSql.Wiki.VuePress/guide/select-return-data.html</guid>
+      <source url="http://freesql.net/FreeSql.Wiki.VuePress/rss.xml">返回数据 ✨</source>
       <pubDate>Thu, 04 Feb 2021 16:03:18 GMT</pubDate>
       <content:encoded><![CDATA[<h1 id="返回数据-✨" tabindex="-1"> 返回数据 ✨</h1>
 <p>FreeSql 采用 ExpressionTree 优化读取速度，如果懂技术的你一定知道 .NET Core 技术下除了原生代码，最快就是 Emit 和 ExpressionTree。项目在初期使用的反射 + 缓存，虽然 .NET Core 优化了反射性能，但经过与 Dapper 性能测试对比之后，发现仍然有一定差距，改成 ExpresstionTree 后才与 Dapper 性能相当。FreeSql 支持的类型较多，实现 ExpressionTree 的复杂度较大，有兴趣的朋友可以翻阅源代码。</p>
@@ -8240,9 +8240,9 @@ fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>Song<span>></s
     </item>
     <item>
       <title>单表查询</title>
-      <link>http://freesql.net/guide/select-single-table.html</link>
-      <guid>http://freesql.net/guide/select-single-table.html</guid>
-      <source url="http://freesql.net/rss.xml">单表查询</source>
+      <link>http://freesql.net/FreeSql.Wiki.VuePress/guide/select-single-table.html</link>
+      <guid>http://freesql.net/FreeSql.Wiki.VuePress/guide/select-single-table.html</guid>
+      <source url="http://freesql.net/FreeSql.Wiki.VuePress/rss.xml">单表查询</source>
       <pubDate>Thu, 04 Feb 2021 16:03:18 GMT</pubDate>
       <content:encoded><![CDATA[<h1 id="单表查询" tabindex="-1"> 单表查询</h1>
 <div><pre><code><span>static</span> <span>IFreeSql</span> fsql <span>=</span> <span>new</span> <span>FreeSql<span>.</span>FreeSqlBuilder</span><span>(</span><span>)</span>
@@ -8293,9 +8293,9 @@ fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>Topic<span>></
     </item>
     <item>
       <title>查询</title>
-      <link>http://freesql.net/guide/select.html</link>
-      <guid>http://freesql.net/guide/select.html</guid>
-      <source url="http://freesql.net/rss.xml">查询</source>
+      <link>http://freesql.net/FreeSql.Wiki.VuePress/guide/select.html</link>
+      <guid>http://freesql.net/FreeSql.Wiki.VuePress/guide/select.html</guid>
+      <source url="http://freesql.net/FreeSql.Wiki.VuePress/rss.xml">查询</source>
       <pubDate>Thu, 04 Feb 2021 16:03:18 GMT</pubDate>
       <content:encoded><![CDATA[<h1 id="查询" tabindex="-1"> 查询</h1>
 <p>FreeSql 在查询数据下足了功夫，链式查询语法、多表查询、表达式函数支持得非常到位。</p>
@@ -8772,9 +8772,9 @@ fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>VM_District_Pa
     </item>
     <item>
       <title>分表分库</title>
-      <link>http://freesql.net/guide/sharding.html</link>
-      <guid>http://freesql.net/guide/sharding.html</guid>
-      <source url="http://freesql.net/rss.xml">分表分库</source>
+      <link>http://freesql.net/FreeSql.Wiki.VuePress/guide/sharding.html</link>
+      <guid>http://freesql.net/FreeSql.Wiki.VuePress/guide/sharding.html</guid>
+      <source url="http://freesql.net/FreeSql.Wiki.VuePress/rss.xml">分表分库</source>
       <pubDate>Thu, 04 Feb 2021 16:03:18 GMT</pubDate>
       <content:encoded><![CDATA[<h1 id="分表分库" tabindex="-1"> 分表分库</h1>
 <h2 id="理论知识" tabindex="-1"> 理论知识</h2>
@@ -8890,9 +8890,9 @@ ib<span>.</span><span>Get</span><span>(</span><span>"db1"</span><span>)</span><s
     </item>
     <item>
       <title>事务</title>
-      <link>http://freesql.net/guide/transaction.html</link>
-      <guid>http://freesql.net/guide/transaction.html</guid>
-      <source url="http://freesql.net/rss.xml">事务</source>
+      <link>http://freesql.net/FreeSql.Wiki.VuePress/guide/transaction.html</link>
+      <guid>http://freesql.net/FreeSql.Wiki.VuePress/guide/transaction.html</guid>
+      <source url="http://freesql.net/FreeSql.Wiki.VuePress/rss.xml">事务</source>
       <pubDate>Thu, 04 Feb 2021 16:03:18 GMT</pubDate>
       <content:encoded><![CDATA[<h1 id="事务" tabindex="-1"> 事务</h1>
 <p>本文所有内容基于单机数据库事务，分布式数据库 TCC/SAGA 方案请移步：https://github.com/2881099/FreeSql.Cloud</p>
@@ -9041,9 +9041,9 @@ fsql<span>.</span><span>Transaction</span><span>(</span><span>(</span><span>)</s
     </item>
     <item>
       <title>类型映射</title>
-      <link>http://freesql.net/guide/type-mapping.html</link>
-      <guid>http://freesql.net/guide/type-mapping.html</guid>
-      <source url="http://freesql.net/rss.xml">类型映射</source>
+      <link>http://freesql.net/FreeSql.Wiki.VuePress/guide/type-mapping.html</link>
+      <guid>http://freesql.net/FreeSql.Wiki.VuePress/guide/type-mapping.html</guid>
+      <source url="http://freesql.net/FreeSql.Wiki.VuePress/rss.xml">类型映射</source>
       <pubDate>Thu, 04 Feb 2021 16:03:18 GMT</pubDate>
       <content:encoded><![CDATA[<h1 id="类型映射" tabindex="-1"> 类型映射</h1>
 <h2 id="自定义类型映射-maptype" tabindex="-1"> 自定义类型映射(MapType)</h2>
@@ -9493,9 +9493,9 @@ fsql<span>.</span><span>Transaction</span><span>(</span><span>(</span><span>)</s
     </item>
     <item>
       <title>UnitOfWork</title>
-      <link>http://freesql.net/guide/unit-of-work.html</link>
-      <guid>http://freesql.net/guide/unit-of-work.html</guid>
-      <source url="http://freesql.net/rss.xml">UnitOfWork</source>
+      <link>http://freesql.net/FreeSql.Wiki.VuePress/guide/unit-of-work.html</link>
+      <guid>http://freesql.net/FreeSql.Wiki.VuePress/guide/unit-of-work.html</guid>
+      <source url="http://freesql.net/FreeSql.Wiki.VuePress/rss.xml">UnitOfWork</source>
       <pubDate>Thu, 04 Feb 2021 16:03:18 GMT</pubDate>
       <content:encoded><![CDATA[<h1 id="unitofwork" tabindex="-1"> UnitOfWork</h1>
 <p>UnitOfWork 可将多个仓储放在一个单元管理执行，最终通用 Commit 执行所有操作，内部采用了数据库事务；</p>
@@ -9614,9 +9614,9 @@ uow<span>.</span>OnEntityChange <span>=</span> report <span>=></span> <span>{</s
     </item>
     <item>
       <title>修改</title>
-      <link>http://freesql.net/guide/update.html</link>
-      <guid>http://freesql.net/guide/update.html</guid>
-      <source url="http://freesql.net/rss.xml">修改</source>
+      <link>http://freesql.net/FreeSql.Wiki.VuePress/guide/update.html</link>
+      <guid>http://freesql.net/FreeSql.Wiki.VuePress/guide/update.html</guid>
+      <source url="http://freesql.net/FreeSql.Wiki.VuePress/rss.xml">修改</source>
       <pubDate>Thu, 04 Feb 2021 16:03:18 GMT</pubDate>
       <content:encoded><![CDATA[<h1 id="修改" tabindex="-1"> 修改</h1>
 <p><code>FreeSql</code> 提供丰富的数据库更新功能，支持单条或批量更新，在特定的数据库执行还可以返回更新后的记录。</p>
@@ -9926,9 +9926,9 @@ fsql<span>.</span><span>UpdateDict</span><span>(</span>dic<span>)</span><span>.<
     </item>
     <item>
       <title>API 文档</title>
-      <link>http://freesql.net/reference/api.html</link>
-      <guid>http://freesql.net/reference/api.html</guid>
-      <source url="http://freesql.net/rss.xml">API 文档</source>
+      <link>http://freesql.net/FreeSql.Wiki.VuePress/reference/api.html</link>
+      <guid>http://freesql.net/FreeSql.Wiki.VuePress/reference/api.html</guid>
+      <source url="http://freesql.net/FreeSql.Wiki.VuePress/rss.xml">API 文档</source>
       <pubDate>Thu, 04 Feb 2021 16:03:18 GMT</pubDate>
       <content:encoded><![CDATA[<h1 id="api-文档" tabindex="-1"> API 文档</h1>
 <ul>
@@ -11121,9 +11121,9 @@ fsql<span>.</span><span>UpdateDict</span><span>(</span>dic<span>)</span><span>.<
     </item>
     <item>
       <title>更新日志</title>
-      <link>http://freesql.net/reference/change-log.html</link>
-      <guid>http://freesql.net/reference/change-log.html</guid>
-      <source url="http://freesql.net/rss.xml">更新日志</source>
+      <link>http://freesql.net/FreeSql.Wiki.VuePress/reference/change-log.html</link>
+      <guid>http://freesql.net/FreeSql.Wiki.VuePress/reference/change-log.html</guid>
+      <source url="http://freesql.net/FreeSql.Wiki.VuePress/rss.xml">更新日志</source>
       <pubDate>Thu, 04 Feb 2021 16:03:18 GMT</pubDate>
       <content:encoded><![CDATA[<h1 id="更新日志" tabindex="-1"> 更新日志</h1>
 <p>大约每三个月一次版本号，暂时以修复 bug 为主</p>
@@ -11889,7 +11889,7 @@ fsql<span>.</span>CodeFirst<span>.</span><span>SyncStructure</span><span>(</span
 <ul>
 <li>增加 FreeSql.DbContext 实体对象的变化事件；
 <blockquote>
-<p>可参阅 <a href="/db-context">DbConetxt</a></p>
+<p>可参阅 <a href="/db-context" target="_blank" rel="noopener noreferrer">DbConetxt</a></p>
 </blockquote>
 </li>
 <li>补充 Aop.CurdBefore 事件参数 Table 实体类型的元数据；</li>
@@ -12642,9 +12642,9 @@ repos<span>.</span>DataFilter<span>.</span><span>Apply</span><span>(</span><span
     </item>
     <item>
       <title>常见问题</title>
-      <link>http://freesql.net/reference/faq.html</link>
-      <guid>http://freesql.net/reference/faq.html</guid>
-      <source url="http://freesql.net/rss.xml">常见问题</source>
+      <link>http://freesql.net/FreeSql.Wiki.VuePress/reference/faq.html</link>
+      <guid>http://freesql.net/FreeSql.Wiki.VuePress/reference/faq.html</guid>
+      <source url="http://freesql.net/FreeSql.Wiki.VuePress/rss.xml">常见问题</source>
       <pubDate>Thu, 04 Feb 2021 16:03:18 GMT</pubDate>
       <content:encoded><![CDATA[<h1 id="常见问题" tabindex="-1"> 常见问题</h1>
 <h3 id="_1、如何监视-sql" tabindex="-1"> 1、如何监视 SQL？</h3>
@@ -12763,9 +12763,9 @@ GetAsync await 为异步方法获取连接的排队数量
     </item>
     <item>
       <title>与 Dapper 比较</title>
-      <link>http://freesql.net/reference/vs-dapper.html</link>
-      <guid>http://freesql.net/reference/vs-dapper.html</guid>
-      <source url="http://freesql.net/rss.xml">与 Dapper 比较</source>
+      <link>http://freesql.net/FreeSql.Wiki.VuePress/reference/vs-dapper.html</link>
+      <guid>http://freesql.net/FreeSql.Wiki.VuePress/reference/vs-dapper.html</guid>
+      <source url="http://freesql.net/FreeSql.Wiki.VuePress/rss.xml">与 Dapper 比较</source>
       <pubDate>Thu, 04 Feb 2021 16:03:18 GMT</pubDate>
       <content:encoded><![CDATA[<h1 id="与-dapper-比较" tabindex="-1"> 与 Dapper 比较</h1>
 <p>众所周知 Dapper 是 .NET 下最轻最快的 ORM，它是喜欢写 SQL 码农的福音，相对于 SqlHelper 它更加方便，据统计 10 个 .NETer 有 9 个 用过 Dapper。</p>
@@ -12988,9 +12988,9 @@ GetAsync await 为异步方法获取连接的排队数量
     </item>
     <item>
       <title>与 EntityFramework 比较</title>
-      <link>http://freesql.net/reference/vs-entity-framework.html</link>
-      <guid>http://freesql.net/reference/vs-entity-framework.html</guid>
-      <source url="http://freesql.net/rss.xml">与 EntityFramework 比较</source>
+      <link>http://freesql.net/FreeSql.Wiki.VuePress/reference/vs-entity-framework.html</link>
+      <guid>http://freesql.net/FreeSql.Wiki.VuePress/reference/vs-entity-framework.html</guid>
+      <source url="http://freesql.net/FreeSql.Wiki.VuePress/rss.xml">与 EntityFramework 比较</source>
       <pubDate>Thu, 04 Feb 2021 16:03:18 GMT</pubDate>
       <content:encoded><![CDATA[<h1 id="与-entityframework-比较" tabindex="-1"> 与 EntityFramework 比较</h1>
 <p>为什么要写这篇文章？</p>
