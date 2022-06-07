@@ -6,8 +6,8 @@
     <link>http://freesql.net/FreeSql.Wiki.VuePress/</link>
     <description>FreeSql Documents</description>
     <language>zh-CN</language>
-    <pubDate>Fri, 03 Jun 2022 14:31:26 GMT</pubDate>
-    <lastBuildDate>Fri, 03 Jun 2022 14:31:26 GMT</lastBuildDate>
+    <pubDate>Tue, 07 Jun 2022 13:46:51 GMT</pubDate>
+    <lastBuildDate>Tue, 07 Jun 2022 13:46:51 GMT</lastBuildDate>
     <generator>vuepress-plugin-feed2</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
     <item>
@@ -6333,7 +6333,7 @@ fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>Topic<span>></
       <pubDate>Thu, 04 Feb 2021 16:03:18 GMT</pubDate>
       <content:encoded><![CDATA[<h1 id="导航属性-✨" tabindex="-1"> 导航属性 ✨</h1>
 <p>导航属性是 FreeSql 的特色功能之一，可通过约定配置、或自定义配置对象间的关系。</p>
-<p>导航属性有 OneToMany, ManyToOne, ManyToMany, OneToOne, Parent 五种配置关系。</p>
+<p>导航属性有 OneToMany, ManyToOne, ManyToMany, OneToOne, Parent, <a href="https://www.cnblogs.com/FreeSql/p/16351417.html" target="_blank" rel="noopener noreferrer">PgArrayToMany</a> 六种配置关系。</p>
 <p>有了导航属性，多表查询会非常方便，lambda 表达式中直接使用导航对象点点点，舒服！！</p>
 <ul>
 <li>可约定（命名约定），可不约定（需指定 Navigate 特性关联）；</li>
@@ -6369,7 +6369,7 @@ fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>Topic<span>></
 <p>2、Navigate 设置的字符串是 类属性名，不是表 字段名！！！</p>
 <h1 id="检测导航属性" tabindex="-1"> 检测导航属性</h1>
 <p>如何检测一个导航属性是否配置生效：</p>
-<div><pre><code><span><span>var</span></span> tbref <span>=</span> g<span>.</span>sqlite<span>.</span>CodeFirst
+<div><pre><code><span><span>var</span></span> tbref <span>=</span> fsql<span>.</span>CodeFirst
     <span>.</span><span>GetTableByEntity</span><span>(</span><span>typeof</span><span>(</span><span>T</span><span>)</span><span>)</span>
     <span>.</span><span>GetTableRef</span><span>(</span><span>"Children"</span><span>,</span> <span>true</span><span>)</span><span>;</span>
 </code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br></div></div><p>GetTableRef(string propertyName, bool isThrow);</p>
@@ -11130,12 +11130,13 @@ fsql<span>.</span><span>UpdateDict</span><span>(</span>dic<span>)</span><span>.<
 <blockquote>
 <p>preview 预览版 添加 nuget 源：<a href="https://www.myget.org/F/ncc/api/v3/index.json" target="_blank" rel="noopener noreferrer">https://www.myget.org/F/ncc/api/v3/index.json</a></p>
 </blockquote>
-<h2 id="v3-2-660" tabindex="-1"> v3.2.660</h2>
+<h2 id="v3-2-661" tabindex="-1"> v3.2.661</h2>
 <ul>
 <li>增加 UseMappingPriority 指定映射优先级；<a href="https://github.com/dotnetcore/FreeSql/issues/387" target="_blank" rel="noopener noreferrer">#387</a> <a href="https://github.com/dotnetcore/FreeSql/issues/69" target="_blank" rel="noopener noreferrer">#69</a> <a href="https://github.com/dotnetcore/FreeSql/issues/99" target="_blank" rel="noopener noreferrer">#99</a></li>
 <li>增加 AuditValueEventArgs Object 参数；<a href="https://github.com/dotnetcore/FreeSql/issues/1128" target="_blank" rel="noopener noreferrer">#1128</a></li>
 <li>修复 pgsql varchar(120) CodeFirst 迁移不修改长度；</li>
 <li>修复 ISelect.InsertInto 未执行自动迁移；</li>
+<li>修复 UseCommandParameterWithLambda IN 参数化判断 的逻辑 bug；<a href="https://github.com/dotnetcore/FreeSql/issues/1137" target="_blank" rel="noopener noreferrer">#1137</a></li>
 <li>优化 连接池不可用、定时检查；</li>
 <li>优化 Limit + Sum/Avg/Max/Min 为嵌套查询；</li>
 <li>优化 GroupBy Page 未排序的查询；<a href="https://github.com/dotnetcore/FreeSql/issues/1126" target="_blank" rel="noopener noreferrer">#1126</a></li>
