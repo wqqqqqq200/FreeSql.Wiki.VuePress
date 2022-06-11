@@ -6,8 +6,8 @@
     <link>http://freesql.net/FreeSql.Wiki.VuePress/</link>
     <description>FreeSql Documents</description>
     <language>zh-CN</language>
-    <pubDate>Sat, 11 Jun 2022 04:06:17 GMT</pubDate>
-    <lastBuildDate>Sat, 11 Jun 2022 04:06:17 GMT</lastBuildDate>
+    <pubDate>Sat, 11 Jun 2022 16:07:36 GMT</pubDate>
+    <lastBuildDate>Sat, 11 Jun 2022 16:07:36 GMT</lastBuildDate>
     <generator>vuepress-plugin-feed2</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
     <item>
@@ -7679,25 +7679,35 @@ Assert<span>.</span><span>Equal</span><span>(</span><span>"中国[100000] -> 北
         <span>select</span><span>:</span> <span>"id,name"</span>
     <span>)</span><span>;</span>
 <span>//v3.2.605+</span>
-</code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br></div></div><h2 id="_5、includemany-两种方式对比" tabindex="-1"> 5、IncludeMany 两种方式对比</h2>
+</code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br></div></div><h2 id="_5、子查询-tolist" tabindex="-1"> 5、子查询 ToList</h2>
+<blockquote>
+<p>v3.2.650+ 以下最多执行3次 SQL</p>
+</blockquote>
+<div><pre><code>fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>Song<span>></span></span></span><span>(</span><span>)</span><span>.</span><span>ToList</span><span>(</span>a <span>=></span> <span>new</span>
+<span>{</span>
+    all <span>=</span> a<span>,</span>
+    list1 <span>=</span> fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>Tag<span>></span></span></span><span>(</span><span>)</span><span>.</span><span>ToList</span><span>(</span><span>)</span><span>,</span>
+    list2 <span>=</span> fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>SongTag<span>></span></span></span><span>(</span><span>)</span><span>.</span><span>Where</span><span>(</span>b <span>=></span> b<span>.</span>SongId <span>==</span> a<span>.</span>Id<span>)</span><span>.</span><span>ToList</span><span>(</span><span>)</span>
+<span>}</span><span>)</span><span>;</span>
+</code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br></div></div><h2 id="_6、includemany-两种方式对比" tabindex="-1"> 6、IncludeMany 两种方式对比</h2>
 <p>方式一（IncludeMany 扩展方法）：</p>
-<div><pre><code><span><span>var</span></span> list111 <span>=</span> fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>SysModule<span>></span></span></span><span>(</span><span>)</span>
+<div><pre><code><span><span>var</span></span> list <span>=</span> fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>SysModule<span>></span></span></span><span>(</span><span>)</span>
     <span>.</span><span>Page</span><span>(</span><span>1</span><span>,</span> <span>10</span><span>)</span>
     <span>.</span><span>ToList</span><span>(</span>a <span>=></span> <span>new</span> <span>{</span> Id <span>=</span> a<span>.</span>Id <span>}</span><span>)</span> <span>//查询数据 id</span>
     <span>.</span><span>Select</span><span>(</span>a <span>=></span> <span>new</span> <span>SysModule</span> <span>{</span> Id <span>=</span> a<span>.</span>Id <span>}</span><span>)</span><span>.</span><span>ToList</span><span>(</span><span>)</span> <span>//内存操作</span>
     <span>.</span><span>IncludeMany</span><span>(</span>fsql<span>,</span> a <span>=></span> a<span>.</span>Permissions<span>,</span> then <span>=></span> then<span>.</span><span>Include</span><span>(</span>a <span>=></span> a<span>.</span>Button<span>)</span><span>)</span><span>;</span>
-</code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br></div></div><div><pre><code><span>SELECT</span> a<span>.</span><span>"Id"</span> as1
-<span>FROM</span> <span>"SysModule"</span> a
+</code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br></div></div><div><pre><code><span>SELECT</span> a<span>.</span><span>"Id"</span> as1 
+<span>FROM</span> <span>"SysModule"</span> a 
 <span>limit</span> <span>0</span><span>,</span><span>10</span>
 
-<span>SELECT</span> a<span>.</span><span>"Id"</span><span>,</span> a<span>.</span><span>"SysModuleId"</span><span>,</span> a<span>.</span><span>"SysModuleButtonId"</span><span>,</span> a<span>.</span><span>"Status"</span><span>,</span>
-a__Button<span>.</span><span>"Id"</span> as5<span>,</span> a__Button<span>.</span><span>"Name"</span><span>,</span> a__Button<span>.</span><span>"EventName"</span><span>,</span> a__Button<span>.</span><span>"EnCode"</span><span>,</span> a__Button<span>.</span><span>"Icon"</span><span>,</span> a__Button<span>.</span><span>"Sort"</span><span>,</span> a__Button<span>.</span><span>"CreateTime"</span>
-<span>FROM</span> <span>"SysModulePermission"</span> a
-<span>LEFT</span> <span>JOIN</span> <span>"SysModuleButton"</span> a__Button <span>ON</span> a__Button<span>.</span><span>"Id"</span> <span>=</span> a<span>.</span><span>"SysModuleButtonId"</span>
+<span>SELECT</span> a<span>.</span><span>"Id"</span><span>,</span> a<span>.</span><span>"SysModuleId"</span><span>,</span> a<span>.</span><span>"SysModuleButtonId"</span><span>,</span> a<span>.</span><span>"Status"</span><span>,</span> 
+a__Button<span>.</span><span>"Id"</span> as5<span>,</span> a__Button<span>.</span><span>"Name"</span><span>,</span> a__Button<span>.</span><span>"EventName"</span><span>,</span> a__Button<span>.</span><span>"EnCode"</span><span>,</span> a__Button<span>.</span><span>"Icon"</span><span>,</span> a__Button<span>.</span><span>"Sort"</span><span>,</span> a__Button<span>.</span><span>"CreateTime"</span> 
+<span>FROM</span> <span>"SysModulePermission"</span> a 
+<span>LEFT</span> <span>JOIN</span> <span>"SysModuleButton"</span> a__Button <span>ON</span> a__Button<span>.</span><span>"Id"</span> <span>=</span> a<span>.</span><span>"SysModuleButtonId"</span> 
 <span>WHERE</span> <span>(</span><span>(</span>a<span>.</span><span>"SysModuleId"</span><span>)</span> <span>in</span> <span>(</span><span>'menu1'</span><span>,</span><span>'menu2'</span><span>)</span><span>)</span>
 </code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br></div></div><hr>
 <p>方式二（直接 IncludeMany + ToList）：</p>
-<div><pre><code><span><span>var</span></span> list222 <span>=</span> fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>SysModule<span>></span></span></span><span>(</span><span>)</span>
+<div><pre><code><span><span>var</span></span> list <span>=</span> fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>SysModule<span>></span></span></span><span>(</span><span>)</span>
     <span>.</span><span>IncludeMany</span><span>(</span>m <span>=></span> m<span>.</span>Permissions<span>,</span> then <span>=></span> then<span>.</span><span>Include</span><span>(</span>a <span>=></span> a<span>.</span>Button<span>)</span><span>)</span>
     <span>.</span><span>Page</span><span>(</span><span>1</span><span>,</span> <span>10</span><span>)</span>
     <span>.</span><span>ToList</span><span>(</span><span>)</span><span>;</span>
@@ -11128,8 +11138,22 @@ fsql<span>.</span><span>UpdateDict</span><span>(</span>dic<span>)</span><span>.<
       <content:encoded><![CDATA[<h1 id="更新日志" tabindex="-1"> 更新日志</h1>
 <p>大约每三个月一次版本号，暂时以修复 bug 为主</p>
 <blockquote>
-<p>preview 预览版 添加 nuget 源：<a href="https://www.myget.org/F/ncc/api/v3/index.json" target="_blank" rel="noopener noreferrer">https://www.myget.org/F/ncc/api/v3/index.json</a></p>
+<p>preview 预览版 添加 nuget 源：https://www.myget.org/F/ncc/api/v3/index.json</p>
 </blockquote>
+<h2 id="v3-2-662" tabindex="-1"> v3.2.662</h2>
+<ul>
+<li><strong>调整 pgsql10 自增映射使用 GENERATED BY DEFAULT AS IDENTITY，低版本仍然使用 serial；</strong></li>
+<li><strong>增加 PgArrayToMany 专属导航属性；#1145</strong></li>
+<li>增加 ObservableCollection 级联加载和保存；</li>
+<li>优化 FluentApi 继承关系可直接 ConfigEntity&lt;BaseEntity&gt; 生效；#1144</li>
+<li>修复 达梦 min pool size 预热数量匹配 bug；</li>
+<li>修复 v3.2.620 - v3.2.661 子查询 sum/min/max/avg 默认加 isnull 防止为 NULL 情况，日期类型处理错误 #1140 1b84a0069679c92ccaff9aa8c33023e4d34262cd</li>
+<li>修复 AsTable 子查询未传播的问题；#1103</li>
+<li>修复 IncludeByPropertyName fromFirstTable 判断错误；#278</li>
+<li>修复 GroupBy 特殊情况下 AsProperty 无效的 bug；#1141</li>
+<li>修复 MySql CodeFirst OldName + Comment 迁移问题；#1147</li>
+<li>修复 pgsql DbFirst 未正确获取 Position 值；#1154</li>
+</ul>
 <h2 id="v3-2-661" tabindex="-1"> v3.2.661</h2>
 <ul>
 <li>增加 UseMappingPriority 指定映射优先级；<a href="https://github.com/dotnetcore/FreeSql/issues/387" target="_blank" rel="noopener noreferrer">#387</a> <a href="https://github.com/dotnetcore/FreeSql/issues/69" target="_blank" rel="noopener noreferrer">#69</a> <a href="https://github.com/dotnetcore/FreeSql/issues/99" target="_blank" rel="noopener noreferrer">#99</a></li>
