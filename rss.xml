@@ -6,8 +6,8 @@
     <link>http://freesql.net/FreeSql.Wiki.VuePress/</link>
     <description>FreeSql Documents</description>
     <language>zh-CN</language>
-    <pubDate>Tue, 07 Jun 2022 13:46:51 GMT</pubDate>
-    <lastBuildDate>Tue, 07 Jun 2022 13:46:51 GMT</lastBuildDate>
+    <pubDate>Sat, 11 Jun 2022 04:06:17 GMT</pubDate>
+    <lastBuildDate>Sat, 11 Jun 2022 04:06:17 GMT</lastBuildDate>
     <generator>vuepress-plugin-feed2</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
     <item>
@@ -8896,7 +8896,7 @@ ib<span>.</span><span>Get</span><span>(</span><span>"db1"</span><span>)</span><s
       <pubDate>Thu, 04 Feb 2021 16:03:18 GMT</pubDate>
       <content:encoded><![CDATA[<h1 id="事务" tabindex="-1"> 事务</h1>
 <p>本文所有内容基于单机数据库事务，分布式数据库 TCC/SAGA 方案请移步：https://github.com/2881099/FreeSql.Cloud</p>
-<h2 id="_0、asp-net-core-配置-di-使用-unitofworkmanager-此方法更简单" tabindex="-1"> 0、<a href="DI-UnitOfWorkManager%E4%BA%8B%E5%8A%A1">ASP.NET Core 配置 DI 使用 UnitOfWorkManager，此方法更简单</a></h2>
+<h2 id="_0、asp-net-core-配置-di-使用-unitofworkmanager-此方法更简单" tabindex="-1"> 0、<a href="https://github.com/dotnetcore/FreeSql/wiki/DI-UnitOfWorkManager%E4%BA%8B%E5%8A%A1" target="_blank" rel="noopener noreferrer">ASP.NET Core 配置 DI 使用 UnitOfWorkManager，此方法更简单</a></h2>
 <h2 id="_1、unitofwork-事务" tabindex="-1"> 1、UnitOfWork 事务</h2>
 <div><pre><code><span>using</span> <span>(</span><span><span>var</span></span> uow <span>=</span> fsql<span>.</span><span>CreateUnitOfWork</span><span>(</span><span>)</span><span>)</span>
 <span>{</span>
