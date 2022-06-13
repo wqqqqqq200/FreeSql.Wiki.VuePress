@@ -1,2 +1,2 @@
-# Algolia-Crawler-Verif: 05A5435CE0C9BA98
+Algolia-Crawler-Verif: 05A5435CE0C9BA98
 Sitemap: http://freesql.net/FreeSql.Wiki.VuePress/sitemap.xml
