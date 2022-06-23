@@ -3,7 +3,7 @@
   <id>http://freesql.net/FreeSql.Wiki.VuePress/</id>
   <title>FreeSql 官方文档</title>
   <subtitle>FreeSql Documents</subtitle>
-  <updated>2022-06-22T02:28:59.919Z</updated>
+  <updated>2022-06-23T07:11:18.995Z</updated>
   <generator>vuepress-plugin-feed2</generator>
   <link rel="self" href="http://freesql.net/FreeSql.Wiki.VuePress/atom.xml"/>
   <link rel="alternate" href="http://freesql.net/FreeSql.Wiki.VuePress/"/>
@@ -12794,7 +12794,7 @@ GetAsync await 为异步方法获取连接的排队数量
     <title type="html">与 Dapper 比较</title>
     <id>http://freesql.net/FreeSql.Wiki.VuePress/reference/vs-dapper.html</id>
     <link href="http://freesql.net/FreeSql.Wiki.VuePress/reference/vs-dapper.html"/>
-    <updated>2022-05-31T14:08:53.000Z</updated>
+    <updated>2022-06-23T07:10:10.000Z</updated>
     <content type="html"><![CDATA[<h1 id="与-dapper-比较" tabindex="-1"> 与 Dapper 比较</h1>
 <p>众所周知 Dapper 是 .NET 下最轻最快的 ORM，它是喜欢写 SQL 码农的福音，相对于 SqlHelper 它更加方便，据统计 10 个 .NETer 有 9 个 用过 Dapper。</p>
 <p>这篇文章为准备使用 FreeSql 的朋友解惑，对比 Dapper 有何优势，为什么要使用 FreeSql？希望本文内容对大家有所帮助。</p>
@@ -12811,6 +12811,12 @@ GetAsync await 为异步方法获取连接的排队数量
 <li>Dapper 采用 Emit 构造委托并缓存，性能接近原生代码；</li>
 <li>FreeSql 采用 ExpressionTree 构造委托并缓存，为了映射类型更加易用使用了一点装箱操作，性能比 Dapper 略低；</li>
 </ul>
+<p>BenchmarkDotNet=v0.12.1, OS=Windows 10.0.19044
+Intel Core i7-8700K CPU 3.70GHz (Coffee Lake), 1 CPU, 12 logical and 6 physical cores
+.NET Core SDK=6.0.100
+[Host]     : .NET Core 5.0.11 (CoreCLR 5.0.1121.47308, CoreFX 5.0.1121.47308), X64 RyuJIT DEBUG
+Job-LEQVAV : .NET Core 5.0.11 (CoreCLR 5.0.1121.47308, CoreFX 5.0.1121.47308), X64 RyuJIT DEBUG</p>
+<p>BuildConfiguration=Debug  InvocationCount=1  UnrollFactor=1</p>
 <table>
 <thead>
 <tr>
@@ -12827,74 +12833,74 @@ GetAsync await 为异步方法获取连接的排队数量
 <tr>
 <td>FreeSqlSelect</td>
 <td>1</td>
-<td style="text-align:right">512.1 us</td>
-<td style="text-align:right">25.99 us</td>
-<td style="text-align:right">75.82 us</td>
-<td style="text-align:right">519.6 us</td>
-<td style="text-align:right">3</td>
+<td style="text-align:right">271.6 us</td>
+<td style="text-align:right">14.03 us</td>
+<td style="text-align:right">41.16 us</td>
+<td style="text-align:right">272.6 us</td>
+<td style="text-align:right">2</td>
 </tr>
 <tr>
 <td>SqlSugarSelect</td>
 <td>1</td>
-<td style="text-align:right">438.6 us</td>
-<td style="text-align:right">27.87 us</td>
-<td style="text-align:right">81.75 us</td>
-<td style="text-align:right">428.1 us</td>
-<td style="text-align:right">2</td>
+<td style="text-align:right">323.5 us</td>
+<td style="text-align:right">15.75 us</td>
+<td style="text-align:right">45.18 us</td>
+<td style="text-align:right">314.9 us</td>
+<td style="text-align:right">3</td>
 </tr>
 <tr>
 <td>EfCoreSelect</td>
 <td>1</td>
-<td style="text-align:right">594.3 us</td>
-<td style="text-align:right">36.51 us</td>
-<td style="text-align:right">107.08 us</td>
-<td style="text-align:right">593.9 us</td>
+<td style="text-align:right">392.8 us</td>
+<td style="text-align:right">17.61 us</td>
+<td style="text-align:right">49.39 us</td>
+<td style="text-align:right">376.2 us</td>
 <td style="text-align:right">4</td>
 </tr>
 <tr>
 <td>DapperSelete</td>
 <td>1</td>
-<td style="text-align:right">287.5 us</td>
-<td style="text-align:right">22.10 us</td>
-<td style="text-align:right">63.77 us</td>
-<td style="text-align:right">281.7 us</td>
+<td style="text-align:right">215.9 us</td>
+<td style="text-align:right">11.88 us</td>
+<td style="text-align:right">33.52 us</td>
+<td style="text-align:right">213.8 us</td>
 <td style="text-align:right">1</td>
 </tr>
 <tr>
 <td>FreeSqlSelect</td>
 <td>500</td>
-<td style="text-align:right">1,022.0 us</td>
-<td style="text-align:right">72.17 us</td>
-<td style="text-align:right">212.79 us</td>
-<td style="text-align:right">957.0 us</td>
-<td style="text-align:right">6</td>
+<td style="text-align:right">811.8 us</td>
+<td style="text-align:right">18.86 us</td>
+<td style="text-align:right">55.02 us</td>
+<td style="text-align:right">798.5 us</td>
+<td style="text-align:right">5</td>
 </tr>
 <tr>
 <td>SqlSugarSelect</td>
 <td>500</td>
-<td style="text-align:right">1,338.1 us</td>
-<td style="text-align:right">90.51 us</td>
-<td style="text-align:right">261.15 us</td>
-<td style="text-align:right">1,311.5 us</td>
+<td style="text-align:right">1,148.6 us</td>
+<td style="text-align:right">53.94 us</td>
+<td style="text-align:right">157.34 us</td>
+<td style="text-align:right">1,116.3 us</td>
 <td style="text-align:right">7</td>
 </tr>
 <tr>
 <td>EfCoreSelect</td>
 <td>500</td>
-<td style="text-align:right">1,390.0 us</td>
-<td style="text-align:right">101.53 us</td>
-<td style="text-align:right">296.18 us</td>
-<td style="text-align:right">1,319.8 us</td>
-<td style="text-align:right">7</td>
+<td style="text-align:right">1,310.2 us</td>
+<td style="text-align:right">89.90 us</td>
+<td style="text-align:right">262.25 us</td>
+<td style="text-align:right">1,219.3 us</td>
+<td style="text-align:right">8</td>
 </tr>
 <tr>
 <td>DapperSelete</td>
 <td>500</td>
-<td style="text-align:right">919.0 us</td>
-<td style="text-align:right">48.37 us</td>
-<td style="text-align:right">139.55 us</td>
-<td style="text-align:right">891.0 us</td>
-<td style="text-align:right">5</td>
+<td style="text-align:right">942.1 us</td>
+<td style="text-align:right">18.46 us</td>
+<td style="text-align:right">42.05 us</td>
+<td style="text-align:right">931.1 us</td>
+<td style="text-align:right">6</td>
 </tr>
 </tbody>
 </table>
