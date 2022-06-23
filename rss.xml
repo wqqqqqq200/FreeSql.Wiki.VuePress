@@ -6,8 +6,8 @@
     <link>http://freesql.net/FreeSql.Wiki.VuePress/</link>
     <description>FreeSql Documents</description>
     <language>zh-CN</language>
-    <pubDate>Thu, 23 Jun 2022 07:11:18 GMT</pubDate>
-    <lastBuildDate>Thu, 23 Jun 2022 07:11:18 GMT</lastBuildDate>
+    <pubDate>Thu, 23 Jun 2022 07:12:31 GMT</pubDate>
+    <lastBuildDate>Thu, 23 Jun 2022 07:12:31 GMT</lastBuildDate>
     <generator>vuepress-plugin-feed2</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
     <item>
@@ -12820,13 +12820,14 @@ GetAsync await 为异步方法获取连接的排队数量
 <li>Dapper 采用 Emit 构造委托并缓存，性能接近原生代码；</li>
 <li>FreeSql 采用 ExpressionTree 构造委托并缓存，为了映射类型更加易用使用了一点装箱操作，性能比 Dapper 略低；</li>
 </ul>
-<p>BenchmarkDotNet=v0.12.1, OS=Windows 10.0.19044
-Intel Core i7-8700K CPU 3.70GHz (Coffee Lake), 1 CPU, 12 logical and 6 physical cores
-.NET Core SDK=6.0.100
-[Host]     : .NET Core 5.0.11 (CoreCLR 5.0.1121.47308, CoreFX 5.0.1121.47308), X64 RyuJIT DEBUG
-Job-LEQVAV : .NET Core 5.0.11 (CoreCLR 5.0.1121.47308, CoreFX 5.0.1121.47308), X64 RyuJIT DEBUG</p>
-<p>BuildConfiguration=Debug  InvocationCount=1  UnrollFactor=1</p>
-<table>
+<div><pre><code><span>BenchmarkDotNet</span><span>=</span>v0.12.1, <span>OS</span><span>=</span>Windows <span>10.0</span>.19044
+Intel Core i7-8700K CPU <span>3</span>.70GHz <span>(</span>Coffee Lake<span>)</span>, <span>1</span> CPU, <span>12</span> logical and <span>6</span> physical cores
+.NET Core <span>SDK</span><span>=</span><span>6.0</span>.100
+  <span>[</span>Host<span>]</span>     <span>:</span> .NET Core <span>5.0</span>.11 <span>(</span>CoreCLR <span>5.0</span>.1121.47308, CoreFX <span>5.0</span>.1121.47308<span>)</span>, X64 RyuJIT DEBUG
+  Job-LEQVAV <span>:</span> .NET Core <span>5.0</span>.11 <span>(</span>CoreCLR <span>5.0</span>.1121.47308, CoreFX <span>5.0</span>.1121.47308<span>)</span>, X64 RyuJIT DEBUG
+
+<span>BuildConfiguration</span><span>=</span>Debug  <span>InvocationCount</span><span>=</span><span>1</span>  <span>UnrollFactor</span><span>=</span><span>1</span>
+</code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br></div></div><table>
 <thead>
 <tr>
 <th>Method</th>

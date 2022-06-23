@@ -3,7 +3,7 @@
   <id>http://freesql.net/FreeSql.Wiki.VuePress/</id>
   <title>FreeSql 官方文档</title>
   <subtitle>FreeSql Documents</subtitle>
-  <updated>2022-06-23T07:11:18.995Z</updated>
+  <updated>2022-06-23T07:12:31.294Z</updated>
   <generator>vuepress-plugin-feed2</generator>
   <link rel="self" href="http://freesql.net/FreeSql.Wiki.VuePress/atom.xml"/>
   <link rel="alternate" href="http://freesql.net/FreeSql.Wiki.VuePress/"/>
@@ -12794,7 +12794,7 @@ GetAsync await 为异步方法获取连接的排队数量
     <title type="html">与 Dapper 比较</title>
     <id>http://freesql.net/FreeSql.Wiki.VuePress/reference/vs-dapper.html</id>
     <link href="http://freesql.net/FreeSql.Wiki.VuePress/reference/vs-dapper.html"/>
-    <updated>2022-06-23T07:10:10.000Z</updated>
+    <updated>2022-06-23T07:11:19.000Z</updated>
     <content type="html"><![CDATA[<h1 id="与-dapper-比较" tabindex="-1"> 与 Dapper 比较</h1>
 <p>众所周知 Dapper 是 .NET 下最轻最快的 ORM，它是喜欢写 SQL 码农的福音，相对于 SqlHelper 它更加方便，据统计 10 个 .NETer 有 9 个 用过 Dapper。</p>
 <p>这篇文章为准备使用 FreeSql 的朋友解惑，对比 Dapper 有何优势，为什么要使用 FreeSql？希望本文内容对大家有所帮助。</p>
@@ -12811,13 +12811,14 @@ GetAsync await 为异步方法获取连接的排队数量
 <li>Dapper 采用 Emit 构造委托并缓存，性能接近原生代码；</li>
 <li>FreeSql 采用 ExpressionTree 构造委托并缓存，为了映射类型更加易用使用了一点装箱操作，性能比 Dapper 略低；</li>
 </ul>
-<p>BenchmarkDotNet=v0.12.1, OS=Windows 10.0.19044
-Intel Core i7-8700K CPU 3.70GHz (Coffee Lake), 1 CPU, 12 logical and 6 physical cores
-.NET Core SDK=6.0.100
-[Host]     : .NET Core 5.0.11 (CoreCLR 5.0.1121.47308, CoreFX 5.0.1121.47308), X64 RyuJIT DEBUG
-Job-LEQVAV : .NET Core 5.0.11 (CoreCLR 5.0.1121.47308, CoreFX 5.0.1121.47308), X64 RyuJIT DEBUG</p>
-<p>BuildConfiguration=Debug  InvocationCount=1  UnrollFactor=1</p>
-<table>
+<div><pre><code><span>BenchmarkDotNet</span><span>=</span>v0.12.1, <span>OS</span><span>=</span>Windows <span>10.0</span>.19044
+Intel Core i7-8700K CPU <span>3</span>.70GHz <span>(</span>Coffee Lake<span>)</span>, <span>1</span> CPU, <span>12</span> logical and <span>6</span> physical cores
+.NET Core <span>SDK</span><span>=</span><span>6.0</span>.100
+  <span>[</span>Host<span>]</span>     <span>:</span> .NET Core <span>5.0</span>.11 <span>(</span>CoreCLR <span>5.0</span>.1121.47308, CoreFX <span>5.0</span>.1121.47308<span>)</span>, X64 RyuJIT DEBUG
+  Job-LEQVAV <span>:</span> .NET Core <span>5.0</span>.11 <span>(</span>CoreCLR <span>5.0</span>.1121.47308, CoreFX <span>5.0</span>.1121.47308<span>)</span>, X64 RyuJIT DEBUG
+
+<span>BuildConfiguration</span><span>=</span>Debug  <span>InvocationCount</span><span>=</span><span>1</span>  <span>UnrollFactor</span><span>=</span><span>1</span>
+</code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br></div></div><table>
 <thead>
 <tr>
 <th>Method</th>
