@@ -3,10 +3,383 @@
   <id>http://freesql.net/FreeSql.Wiki.VuePress/</id>
   <title>FreeSql 官方文档</title>
   <subtitle>FreeSql Documents</subtitle>
-  <updated>2022-06-23T07:12:31.294Z</updated>
+  <updated>2022-06-23T16:17:42.069Z</updated>
   <generator>vuepress-plugin-feed2</generator>
   <link rel="self" href="http://freesql.net/FreeSql.Wiki.VuePress/atom.xml"/>
   <link rel="alternate" href="http://freesql.net/FreeSql.Wiki.VuePress/"/>
+  <entry>
+    <title type="html">基于FreeSql扩展</title>
+    <id>http://freesql.net/FreeSql.Wiki.VuePress/extra/</id>
+    <link href="http://freesql.net/FreeSql.Wiki.VuePress/extra/"/>
+    <updated>2022-06-23T16:16:24.000Z</updated>
+    <content type="html"><![CDATA[<h1 id="基于freesql扩展" tabindex="-1"> 基于FreeSql扩展</h1>
+<h2 id="该文档是基于freesql扩展的实现文档" tabindex="-1"> 该文档是基于FreeSql扩展的实现文档</h2>
+]]></content>
+    <published>2022-06-23T16:16:24.000Z</published>
+  </entry>
+  <entry>
+    <title type="html">多个 IFreeSql实例，如何注入使用</title>
+    <id>http://freesql.net/FreeSql.Wiki.VuePress/extra/idlebus-freesql.html</id>
+    <link href="http://freesql.net/FreeSql.Wiki.VuePress/extra/idlebus-freesql.html"/>
+    <updated>2022-06-23T16:16:24.000Z</updated>
+    <content type="html"><![CDATA[<h1 id="多个-ifreesql实例-如何注入使用" tabindex="-1"> 多个 IFreeSql实例，如何注入使用</h1>
+<p>多库切换，动态切库</p>
+<h2 id="一、定义多个-ifreesql" tabindex="-1"> 一、定义多个 IFreeSql</h2>
+<p>该方法适用于固定数据库，固定配置项</p>
+<p>1、定义两个标识类：</p>
+<div><pre><code><span>class</span> <span>MySqlFlag</span> <span>{</span><span>}</span>
+<span>class</span> <span>SqlServerFlag</span> <span>{</span><span>}</span>
+</code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br></div></div><p>2、在 Startup.cs 中单例注入</p>
+<div><pre><code><span>public</span> <span><span>void</span></span> <span>ConfigureServices</span><span>(</span><span>IServiceCollection</span> services<span>)</span>
+<span>{</span>
+    <span><span>var</span></span> fsql1 <span>=</span> <span>new</span> <span>FreeSqlBuilder</span><span>(</span><span>)</span><span>.</span><span>UseConnectionString</span><span>(</span>DataType<span>.</span>MySql<span>,</span> <span>"str1"</span><span>)</span>
+        <span>.</span><span><span>Build</span><span><span>&lt;</span>MySqlFlag<span>></span></span></span><span>(</span><span>)</span><span>;</span>
+    <span><span>var</span></span> fsql2 <span>=</span> <span>new</span> <span>FreeSqlBuilder</span><span>(</span><span>)</span><span>.</span><span>UseConnectionString</span><span>(</span>DataType<span>.</span>MySql<span>,</span> <span>"str1"</span><span>)</span>
+        <span>.</span><span><span>Build</span><span><span>&lt;</span>SqlServerFlag<span>></span></span></span><span>(</span><span>)</span><span>;</span>
+
+    services<span>.</span><span><span>AddSingleton</span><span><span>&lt;</span>IFreeSql<span>&lt;</span>MySqlFlag<span>></span><span>></span></span></span><span>(</span>fsql1<span>)</span><span>;</span>
+    services<span>.</span><span><span>AddSingleton</span><span><span>&lt;</span>IFreeSql<span>&lt;</span>SqlServerFlag<span>></span><span>></span></span></span><span>(</span>fsql2<span>)</span><span>;</span>
+<span>}</span>
+</code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br><span>10</span><br></div></div><p>3、在 Controller 中使用</p>
+<div><pre><code><span>[</span><span><span>Route</span><span><span>(</span><span>"api/[controller]"</span><span>)</span></span></span><span>]</span>
+<span>[</span><span><span>ApiController</span></span><span>]</span>
+<span>public</span> <span>class</span> <span>ValuesController</span> <span>:</span> <span><span>ControllerBase</span></span>
+<span>{</span>
+    <span>public</span> <span>ValuesController</span><span>(</span><span>IFreeSql<span>&lt;</span>MySqlFlag<span>></span></span> mysql<span>,</span> <span>IFreeSql<span>&lt;</span>SqlServerFlag<span>></span></span> sqlserver<span>)</span>
+    <span>{</span>
+    <span>}</span>
+<span>}</span>
+</code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br></div></div><h2 id="二、利用-idlebus-重写-ifreesql" tabindex="-1"> 二、利用 IdleBus 重写 IFreeSql</h2>
+<p>在 <a href="http://asp.net" target="_blank" rel="noopener noreferrer">asp.net</a> core 利用 IdleBus 重写 IFreeSql 支持多库操作，支持多库动态配置</p>
+<div><pre><code><span><span><span>&lt;</span>ItemGroup</span><span>></span></span>
+    <span><span><span>&lt;</span>PackageReference</span> <span>Include</span><span><span>=</span><span>"</span>FreeSql<span>"</span></span> <span>Version</span><span><span>=</span><span>"</span>3.2.664<span>"</span></span> <span>/></span></span>
+    <span><span><span>&lt;</span>PackageReference</span> <span>Include</span><span><span>=</span><span>"</span>IdleBus<span>"</span></span> <span>Version</span><span><span>=</span><span>"</span>1.5.2<span>"</span></span> <span>/></span></span>
+    <span><span><span>&lt;</span>PackageReference</span> <span>Include</span><span><span>=</span><span>"</span>FreeSql.Provider.Sqlite<span>"</span></span> <span>Version</span><span><span>=</span><span>"</span>3.2.664<span>"</span></span> <span>/></span></span>
+<span><span><span>&lt;/</span>ItemGroup</span><span>></span></span>
+</code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br></div></div><h3 id="_1、multifreesql-cs-代码定义" tabindex="-1"> 1、MultiFreeSql.cs 代码定义</h3>
+<div><pre><code><span>using</span> <span>System</span><span>;</span>
+<span>using</span> <span>System<span>.</span>Threading</span><span>;</span>
+<span>using</span> <span>FreeSql<span>.</span>Internal</span><span>;</span>
+<span>using</span> <span>FreeSql<span>.</span>Internal<span>.</span>CommonProvider</span><span>;</span>
+
+<span>namespace</span> <span>FreeSql</span>
+<span>{</span>
+    <span>public</span> <span>class</span> <span>MultiFreeSql</span> <span>:</span> <span><span>MultiFreeSql<span>&lt;</span><span>string</span><span>></span></span></span>
+    <span>{</span>
+        <span>public</span> <span>MultiFreeSql</span><span>(</span><span>TimeSpan</span> timeSpan<span>)</span> <span>:</span> <span>base</span><span>(</span>timeSpan<span>)</span>
+        <span>{</span>
+        <span>}</span>
+
+        <span>public</span> <span>MultiFreeSql</span><span>(</span><span>IdleBus<span>&lt;</span><span>string</span><span>,</span> IFreeSql<span>></span></span> idleBus<span>)</span> <span>:</span> <span>base</span><span>(</span>idleBus<span>)</span>
+        <span>{</span>
+        <span>}</span>
+    <span>}</span>
+    <span>public</span> <span>class</span> <span>MultiFreeSql<span>&lt;</span>TDBKey<span>></span></span> <span>:</span> <span><span>BaseDbProvider</span><span>,</span> <span>IFreeSql</span></span>
+    <span>{</span>
+        <span>internal</span> <span>TDBKey</span> _dbkeyMaster<span>;</span>
+        <span>internal</span> <span>AsyncLocal<span>&lt;</span>TDBKey<span>></span></span> _dbkeyCurrent <span>=</span> <span>new</span> <span>AsyncLocal<span>&lt;</span>TDBKey<span>></span></span><span>(</span><span>)</span><span>;</span>
+        <span>BaseDbProvider</span> _ormMaster <span>=></span> _ib<span>.</span><span>Get</span><span>(</span>_dbkeyMaster<span>)</span> <span>as</span> <span>BaseDbProvider</span><span>;</span>
+        <span>BaseDbProvider</span> _ormCurrent <span>=></span> _ib<span>.</span><span>Get</span><span>(</span><span>Equals</span><span>(</span>_dbkeyCurrent<span>.</span>Value<span>,</span> <span>default</span><span>(</span><span>TDBKey</span><span>)</span><span>)</span> <span>?</span> _dbkeyMaster <span>:</span> _dbkeyCurrent<span>.</span>Value<span>)</span> <span>as</span> <span>BaseDbProvider</span><span>;</span>
+        <span>internal</span> <span>IdleBus<span>&lt;</span>TDBKey<span>,</span> IFreeSql<span>></span></span> _ib<span>;</span>
+
+        <span>public</span> <span>MultiFreeSql</span><span>(</span><span>TimeSpan</span> timeSpan<span>)</span>
+        <span>{</span>
+            _ib <span>=</span> <span>new</span> <span>IdleBus<span>&lt;</span>TDBKey<span>,</span> IFreeSql<span>></span></span><span>(</span>timeSpan<span>)</span><span>;</span>
+            _ib<span>.</span>Notice <span>+=</span> <span>(</span>_<span>,</span> __<span>)</span> <span>=></span> <span>{</span> <span>}</span><span>;</span>
+        <span>}</span>
+
+        <span>public</span> <span>MultiFreeSql</span><span>(</span><span>IdleBus<span>&lt;</span>TDBKey<span>,</span> IFreeSql<span>></span></span> idleBus<span>)</span>
+        <span>{</span>
+            _ib <span>=</span> idleBus<span>;</span>
+        <span>}</span>
+
+        <span>public</span> <span>override</span> <span>IAdo</span> Ado <span>=></span> _ormCurrent<span>.</span>Ado<span>;</span>
+        <span>public</span> <span>override</span> <span>IAop</span> Aop <span>=></span> _ormCurrent<span>.</span>Aop<span>;</span>
+        <span>public</span> <span>override</span> <span>ICodeFirst</span> CodeFirst <span>=></span> _ormCurrent<span>.</span>CodeFirst<span>;</span>
+        <span>public</span> <span>override</span> <span>IDbFirst</span> DbFirst <span>=></span> _ormCurrent<span>.</span>DbFirst<span>;</span>
+        <span>public</span> <span>override</span> <span>GlobalFilter</span> GlobalFilter <span>=></span> _ormCurrent<span>.</span>GlobalFilter<span>;</span>
+        <span>public</span> <span>override</span> <span><span>void</span></span> <span>Dispose</span><span>(</span><span>)</span> <span>=></span> _ib<span>.</span><span>Dispose</span><span>(</span><span>)</span><span>;</span>
+
+        <span>public</span> <span>override</span> <span>CommonExpression</span> InternalCommonExpression <span>=></span> _ormCurrent<span>.</span>InternalCommonExpression<span>;</span>
+        <span>public</span> <span>override</span> <span>CommonUtils</span> InternalCommonUtils <span>=></span> _ormCurrent<span>.</span>InternalCommonUtils<span>;</span>
+
+        <span>public</span> <span>override</span> <span>ISelect<span>&lt;</span>T1<span>></span></span> <span><span>CreateSelectProvider</span><span><span>&lt;</span>T1<span>></span></span></span><span>(</span><span><span>object</span></span> dywhere<span>)</span> <span>=></span> _ormCurrent<span>.</span><span><span>CreateSelectProvider</span><span><span>&lt;</span>T1<span>></span></span></span><span>(</span>dywhere<span>)</span><span>;</span>
+        <span>public</span> <span>override</span> <span>IDelete<span>&lt;</span>T1<span>></span></span> <span><span>CreateDeleteProvider</span><span><span>&lt;</span>T1<span>></span></span></span><span>(</span><span><span>object</span></span> dywhere<span>)</span> <span>=></span> _ormCurrent<span>.</span><span><span>CreateDeleteProvider</span><span><span>&lt;</span>T1<span>></span></span></span><span>(</span>dywhere<span>)</span><span>;</span>
+        <span>public</span> <span>override</span> <span>IUpdate<span>&lt;</span>T1<span>></span></span> <span><span>CreateUpdateProvider</span><span><span>&lt;</span>T1<span>></span></span></span><span>(</span><span><span>object</span></span> dywhere<span>)</span> <span>=></span> _ormCurrent<span>.</span><span><span>CreateUpdateProvider</span><span><span>&lt;</span>T1<span>></span></span></span><span>(</span>dywhere<span>)</span><span>;</span>
+        <span>public</span> <span>override</span> <span>IInsert<span>&lt;</span>T1<span>></span></span> <span><span>CreateInsertProvider</span><span><span>&lt;</span>T1<span>></span></span></span><span>(</span><span>)</span> <span>=></span> _ormCurrent<span>.</span><span><span>CreateInsertProvider</span><span><span>&lt;</span>T1<span>></span></span></span><span>(</span><span>)</span><span>;</span>
+        <span>public</span> <span>override</span> <span>IInsertOrUpdate<span>&lt;</span>T1<span>></span></span> <span><span>CreateInsertOrUpdateProvider</span><span><span>&lt;</span>T1<span>></span></span></span><span>(</span><span>)</span> <span>=></span> _ormCurrent<span>.</span><span><span>CreateInsertOrUpdateProvider</span><span><span>&lt;</span>T1<span>></span></span></span><span>(</span><span>)</span><span>;</span>
+    <span>}</span>
+<span>}</span>
+
+</code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br><span>10</span><br><span>11</span><br><span>12</span><br><span>13</span><br><span>14</span><br><span>15</span><br><span>16</span><br><span>17</span><br><span>18</span><br><span>19</span><br><span>20</span><br><span>21</span><br><span>22</span><br><span>23</span><br><span>24</span><br><span>25</span><br><span>26</span><br><span>27</span><br><span>28</span><br><span>29</span><br><span>30</span><br><span>31</span><br><span>32</span><br><span>33</span><br><span>34</span><br><span>35</span><br><span>36</span><br><span>37</span><br><span>38</span><br><span>39</span><br><span>40</span><br><span>41</span><br><span>42</span><br><span>43</span><br><span>44</span><br><span>45</span><br><span>46</span><br><span>47</span><br><span>48</span><br><span>49</span><br><span>50</span><br><span>51</span><br><span>52</span><br><span>53</span><br><span>54</span><br></div></div><p>所以 MultiFreeSql 支持外部定义IdleBus,用于配置 Idlebus的Notice事件</p>
+<div><pre><code> <span>//可传递IdleBus</span>
+    <span>IdleBus</span> idlebus  <span>=</span> <span>new</span> <span>IdleBus<span>&lt;</span><span>string</span><span>,</span> IFreeSql<span>></span></span><span>(</span>TimeSpan<span>.</span><span>FromHours</span><span>(</span><span>2</span><span>)</span><span>)</span><span>;</span>
+    idlebus<span>.</span>Notice <span>+=</span> <span>(</span>_<span>,</span> __<span>)</span> <span>=></span> <span>{</span> <span>}</span><span>;</span>
+    <span>IFreeSql</span> fsql <span>=</span> <span>new</span> <span>MultiFreeSql</span><span>(</span>idlebus<span>)</span><span>;</span>
+</code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br></div></div><h3 id="_2、multifreesqlextensions" tabindex="-1"> 2、MultiFreeSqlExtensions</h3>
+<div><pre><code><span>using</span> <span>System</span><span>;</span>
+
+<span>namespace</span> <span>FreeSql</span>
+<span>{</span>
+    <span>public</span> <span>static</span> <span>class</span> <span>MultiFreeSqlExtensions</span>
+    <span>{</span>
+        <span>public</span> <span>static</span> <span>IFreeSql</span> <span><span>ChangeDatabaseByKey</span><span><span>&lt;</span>TDBKey<span>></span></span></span><span>(</span><span>this</span> <span>IFreeSql</span> fsql<span>,</span> <span>TDBKey</span> dbkey<span>)</span>
+        <span>{</span>
+            <span><span>var</span></span> multiFsql <span>=</span> fsql <span>as</span> <span>MultiFreeSql<span>&lt;</span>TDBKey<span>></span></span><span>;</span>
+            <span>if</span> <span>(</span>multiFsql <span>==</span> <span>null</span><span>)</span> <span>throw</span> <span>new</span> <span>Exception</span><span>(</span><span>"fsql 类型不是 MultiFreeSql&lt;TDBKey>"</span><span>)</span><span>;</span>
+            multiFsql<span>.</span>_dbkeyCurrent<span>.</span>Value <span>=</span> dbkey<span>;</span>
+            <span>return</span> multiFsql<span>;</span>
+        <span>}</span>
+
+        <span>public</span> <span>static</span> <span>IDisposable</span> <span><span>Change</span><span><span>&lt;</span>TDBKey<span>></span></span></span><span>(</span><span>this</span> <span>IFreeSql</span> fsql<span>,</span> <span>TDBKey</span> dbkey<span>)</span>
+        <span>{</span>
+            <span><span>var</span></span> multiFsql <span>=</span> fsql <span>as</span> <span>MultiFreeSql<span>&lt;</span>TDBKey<span>></span></span><span>;</span>
+            <span>if</span> <span>(</span>multiFsql <span>==</span> <span>null</span><span>)</span> <span>throw</span> <span>new</span> <span>Exception</span><span>(</span><span>"fsql 类型不是 MultiFreeSql&lt;TDBKey>"</span><span>)</span><span>;</span>
+            <span><span>var</span></span> olddbkey <span>=</span> multiFsql<span>.</span>_dbkeyCurrent<span>.</span>Value<span>;</span>
+            multiFsql<span>.</span><span>ChangeDatabaseByKey</span><span>(</span>dbkey<span>)</span><span>;</span>
+            <span>return</span> <span>new</span> <span>DBChangeDisposable</span><span>(</span><span>(</span><span>)</span> <span>=></span> multiFsql<span>.</span><span>ChangeDatabaseByKey</span><span>(</span>olddbkey<span>)</span><span>)</span><span>;</span>
+        <span>}</span>
+
+        <span>public</span> <span>static</span> <span>IFreeSql</span> <span><span>Register</span><span><span>&lt;</span>TDBKey<span>></span></span></span><span>(</span><span>this</span> <span>IFreeSql</span> fsql<span>,</span> <span>TDBKey</span> dbkey<span>,</span> <span>Func<span>&lt;</span>IFreeSql<span>></span></span> create<span>)</span>
+        <span>{</span>
+            <span><span>var</span></span> multiFsql <span>=</span> fsql <span>as</span> <span>MultiFreeSql<span>&lt;</span>TDBKey<span>></span></span><span>;</span>
+            <span>if</span> <span>(</span>multiFsql <span>==</span> <span>null</span><span>)</span> <span>throw</span> <span>new</span> <span>Exception</span><span>(</span><span>"fsql 类型不是 MultiFreeSql&lt;TDBKey>"</span><span>)</span><span>;</span>
+            <span>if</span> <span>(</span>multiFsql<span>.</span>_ib<span>.</span><span>TryRegister</span><span>(</span>dbkey<span>,</span> create<span>)</span><span>)</span>
+                <span>if</span> <span>(</span>multiFsql<span>.</span>_ib<span>.</span><span>GetKeys</span><span>(</span><span>)</span><span>.</span>Length <span>==</span> <span>1</span><span>)</span>
+                    multiFsql<span>.</span>_dbkeyMaster <span>=</span> dbkey<span>;</span>
+            <span>return</span> multiFsql<span>;</span>
+        <span>}</span>
+    <span>}</span>
+
+    <span>class</span> <span>DBChangeDisposable</span> <span>:</span> <span><span>IDisposable</span></span>
+    <span>{</span>
+        <span>Action</span> _cancel<span>;</span>
+        <span>public</span> <span>DBChangeDisposable</span><span>(</span><span>Action</span> cancel<span>)</span> <span>=></span> _cancel <span>=</span> cancel<span>;</span>
+        <span>public</span> <span><span>void</span></span> <span>Dispose</span><span>(</span><span>)</span> <span>=></span> _cancel<span>?.</span><span>Invoke</span><span>(</span><span>)</span><span>;</span>
+    <span>}</span>
+<span>}</span>
+</code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br><span>10</span><br><span>11</span><br><span>12</span><br><span>13</span><br><span>14</span><br><span>15</span><br><span>16</span><br><span>17</span><br><span>18</span><br><span>19</span><br><span>20</span><br><span>21</span><br><span>22</span><br><span>23</span><br><span>24</span><br><span>25</span><br><span>26</span><br><span>27</span><br><span>28</span><br><span>29</span><br><span>30</span><br><span>31</span><br><span>32</span><br><span>33</span><br><span>34</span><br><span>35</span><br><span>36</span><br><span>37</span><br><span>38</span><br><span>39</span><br><span>40</span><br><span>41</span><br></div></div><h3 id="_3、定义和注入-其中multifreesql-cs" tabindex="-1"> 3、定义和注入,其中MultiFreeSql.cs</h3>
+<div><pre><code><span>public</span> <span>static</span> <span>IServiceCollection</span> <span>AddMultiFreeSql</span><span>(</span><span>this</span> <span>IServiceCollection</span> services<span>)</span>
+<span>{</span>
+    <span><span>var</span></span> fsql <span>=</span> <span>new</span> <span>MultiFreeSql</span><span>(</span>TimeSpan<span>.</span><span>FromHours</span><span>(</span><span>2</span><span>)</span><span>)</span><span>;</span>
+
+    fsql<span>.</span><span>Register</span><span>(</span><span>"db1"</span><span>,</span> <span>(</span><span>)</span> <span>=></span> 
+    <span>new</span> <span>FreeSqlBuilder</span><span>(</span><span>)</span>
+        <span>.</span><span>UseAutoSyncStructure</span><span>(</span><span>true</span><span>)</span>
+        <span>.</span><span>UseConnectionString</span><span>(</span>DataType<span>.</span>Sqlite<span>,</span> <span>"Data Source=|DataDirectory|\\SampleApp1.db;"</span><span>)</span>
+        <span>.</span><span>Build</span><span>(</span><span>)</span>
+    <span>)</span><span>;</span>
+    fsql<span>.</span><span>Register</span><span>(</span><span>"db2"</span><span>,</span> <span>(</span><span>)</span> <span>=></span> 
+    <span>new</span> <span>FreeSqlBuilder</span><span>(</span><span>)</span>
+        <span>.</span><span>UseAutoSyncStructure</span><span>(</span><span>true</span><span>)</span>
+        <span>.</span><span>UseConnectionString</span><span>(</span>DataType<span>.</span>Sqlite<span>,</span> <span>"Data Source=|DataDirectory|\\SampleApp2.db;"</span><span>)</span>
+        <span>.</span><span>Build</span><span>(</span><span>)</span>
+    <span>)</span><span>;</span>
+
+    services<span>.</span><span><span>AddSingleton</span><span><span>&lt;</span>IFreeSql<span>></span></span></span><span>(</span>fsql<span>)</span><span>;</span>
+<span>}</span>
+</code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br><span>10</span><br><span>11</span><br><span>12</span><br><span>13</span><br><span>14</span><br><span>15</span><br><span>16</span><br><span>17</span><br><span>18</span><br><span>19</span><br></div></div><h3 id="_4、如何使用" tabindex="-1"> 4、如何使用</h3>
+<blockquote>
+<p>额外增加 Register/Change 两个扩展方法，其他跟 IFreeSql 用法几乎一样</p>
+</blockquote>
+<div><pre><code><span>//查db1</span>
+<span><span>var</span></span> db1_list <span>=</span> fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>T<span>></span></span></span><span>(</span><span>)</span><span>.</span><span>ToList</span><span>(</span><span>)</span><span>;</span>
+
+<span>//切换 db2 数据库，一旦切换之后 fsql 操作都是针对 db2</span>
+fsql<span>.</span><span>Change</span><span>(</span><span>"db2"</span><span>)</span><span>;</span>
+<span><span>var</span></span> db2_list <span>=</span> fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>T<span>></span></span></span><span>(</span><span>)</span><span>.</span><span>ToList</span><span>(</span><span>)</span><span>;</span>
+
+<span>using</span> <span>(</span>fsql<span>.</span><span>Change</span><span>(</span><span>"db1"</span><span>)</span><span>)</span>
+<span>{</span>
+    <span>//查询 db1</span>
+    <span><span>var</span></span> b3 <span>=</span> _fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>T<span>></span></span></span><span>(</span><span>)</span><span>.</span><span>ToList</span><span>(</span><span>)</span><span>;</span>
+    <span>//插入到 db1</span>
+    fsql<span>.</span><span>Insert</span><span>(</span><span>new</span> <span>T</span><span>{</span> UserName <span>=</span> <span>"db1"</span> <span>}</span><span>)</span><span>.</span><span>ExecuteAffrows</span><span>(</span><span>)</span><span>;</span>
+<span>}</span>
+<span>//还是查db2</span>
+<span><span>var</span></span> db2 <span>=</span> fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>T<span>></span></span></span><span>(</span><span>)</span><span>.</span><span>ToList</span><span>(</span><span>)</span><span>;</span>
+</code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br><span>10</span><br><span>11</span><br><span>12</span><br><span>13</span><br><span>14</span><br><span>15</span><br><span>16</span><br></div></div><p>示例</p>
+<ul>
+<li>定义SysUser</li>
+</ul>
+<div><pre><code><span>public</span> <span>class</span> <span>SysUser</span>
+<span>{</span>
+    <span>[</span><span><span>Column</span><span><span>(</span>IsPrimary <span>=</span> <span>true</span><span>,</span> IsIdentity <span>=</span> <span>true</span><span>)</span></span></span><span>]</span>
+    <span>public</span> <span><span>int</span></span> Id <span>{</span> <span>get</span><span>;</span> <span>set</span><span>;</span> <span>}</span>
+    <span>public</span> <span><span>string</span></span> UserName <span>{</span> <span>get</span><span>;</span> <span>set</span><span>;</span> <span>}</span>
+<span>}</span>
+</code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br></div></div><ul>
+<li>创建HomeController</li>
+</ul>
+<div><pre><code><span>private</span> <span>readonly</span> <span>IFreeSql</span> _fsql<span>;</span>
+<span>public</span> <span>HomeController</span><span>(</span> <span>IFreeSql</span> fsql<span>)</span>
+<span>{</span>
+    _fsql <span>=</span> fsql<span>;</span>
+<span>}</span>
+</code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br></div></div><p>获取db1,db2的数据库信息，插入db1,db2数据</p>
+<div><pre><code><span>/// <span><span><span>&lt;</span>summary</span><span>></span></span></span>
+<span>/// 获取db1,db2，插入db1,db2</span>
+<span>/// <span><span><span>&lt;/</span>summary</span><span>></span></span></span>
+<span>/// <span><span><span>&lt;</span>returns</span><span>></span></span><span><span><span>&lt;/</span>returns</span><span>></span></span></span>
+<span>[</span><span>HttpGet</span><span>(</span><span>"get1"</span><span>)</span><span>]</span>
+<span>public</span> <span>IEnumerable<span>&lt;</span>SysUser<span>></span></span> <span>Get1</span><span>(</span><span>)</span>
+<span>{</span>
+    <span>//查询 db1</span>
+    <span><span>var</span></span> b0 <span>=</span> _fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>SysUser<span>></span></span></span><span>(</span><span>)</span><span>.</span><span>ToList</span><span>(</span><span>)</span><span>;</span>
+
+    <span><span>var</span></span> b1 <span>=</span> _fsql<span>.</span><span>Change</span><span>(</span><span>"db2"</span><span>)</span><span>;</span>
+    <span>//查询 db2</span>
+    <span><span>var</span></span> b2 <span>=</span> _fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>SysUser<span>></span></span></span><span>(</span><span>)</span><span>.</span><span>ToList</span><span>(</span><span>)</span><span>;</span>
+    <span>//插入到 db2</span>
+    <span><span>var</span></span> c0 <span>=</span> _fsql<span>.</span><span>Insert</span><span>(</span><span>new</span> <span>SysUser</span> <span>{</span> UserName <span>=</span> <span>"db2"</span> <span>}</span><span>)</span><span>.</span><span>ExecuteAffrows</span><span>(</span><span>)</span><span>;</span>
+    <span>using</span> <span>(</span>_fsql<span>.</span><span>Change</span><span>(</span><span>"db1"</span><span>)</span><span>)</span>
+    <span>{</span>
+        <span>//查询 db1</span>
+        <span><span>var</span></span> b3 <span>=</span> _fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>SysUser<span>></span></span></span><span>(</span><span>)</span><span>.</span><span>ToList</span><span>(</span><span>)</span><span>;</span>
+        <span>//插入到 db1</span>
+        _fsql<span>.</span><span>Insert</span><span>(</span><span>new</span> <span>SysUser</span> <span>{</span> UserName <span>=</span> <span>"db1"</span> <span>}</span><span>)</span><span>.</span><span>ExecuteAffrows</span><span>(</span><span>)</span><span>;</span>
+    <span>}</span>
+
+    <span>//查询 db2</span>
+    <span><span>var</span></span> db2 <span>=</span> _fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>SysUser<span>></span></span></span><span>(</span><span>)</span><span>.</span><span>ToList</span><span>(</span><span>)</span><span>;</span>
+    _fsql<span>.</span><span>Change</span><span>(</span><span>"db2"</span><span>)</span><span>;</span>
+    <span>return</span> db2<span>;</span>
+<span>}</span>
+</code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br><span>10</span><br><span>11</span><br><span>12</span><br><span>13</span><br><span>14</span><br><span>15</span><br><span>16</span><br><span>17</span><br><span>18</span><br><span>19</span><br><span>20</span><br><span>21</span><br><span>22</span><br><span>23</span><br><span>24</span><br><span>25</span><br><span>26</span><br><span>27</span><br><span>28</span><br></div></div><ul>
+<li>默认从第一个数据库中获取</li>
+</ul>
+<div><pre><code><span>[</span><span><span>HttpGet</span><span><span>(</span><span>"getdb1"</span><span>)</span></span></span><span>]</span>
+<span>public</span> <span>IEnumerable<span>&lt;</span>SysUser<span>></span></span> <span>GetDB1</span><span>(</span><span>)</span>
+<span>{</span>
+    <span>//查询 db1</span>
+    <span><span>var</span></span> b0 <span>=</span> _fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>SysUser<span>></span></span></span><span>(</span><span>)</span><span>.</span><span>ToList</span><span>(</span><span>)</span><span>;</span>
+    <span>return</span> b0<span>;</span>
+<span>}</span>
+</code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br></div></div><ul>
+<li>注册第3个数据库</li>
+</ul>
+<div><pre><code><span>[</span><span><span>HttpGet</span><span><span>(</span><span>"register"</span><span>)</span></span></span><span>]</span>
+<span>public</span> <span><span>void</span></span> <span>Register</span><span>(</span><span>)</span>
+<span>{</span>
+    _fsql<span>.</span><span>Register</span><span>(</span><span>"db3"</span><span>,</span> <span>(</span><span>)</span> <span>=></span>
+    <span>{</span>
+        <span>return</span> <span>new</span> <span>FreeSqlBuilder</span><span>(</span><span>)</span><span>.</span><span>UseAutoSyncStructure</span><span>(</span><span>true</span><span>)</span>
+        <span>.</span><span>UseMonitorCommand</span><span>(</span>
+        cmd <span>=></span> Trace<span>.</span><span>WriteLine</span><span>(</span><span>"\r\n线程"</span> <span>+</span> Thread<span>.</span>CurrentThread<span>.</span>ManagedThreadId <span>+</span> <span>": "</span> <span>+</span> cmd<span>.</span>CommandText<span>)</span>
+        <span>)</span>
+        <span>.</span><span>UseConnectionString</span><span>(</span>DataType<span>.</span>Sqlite<span>,</span> <span>"Data Source=|DataDirectory|\\SampleApp3.db;"</span><span>)</span>
+        <span>.</span><span>Build</span><span>(</span><span>)</span><span>;</span>
+    <span>}</span><span>)</span><span>;</span>
+<span>}</span>
+</code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br><span>10</span><br><span>11</span><br><span>12</span><br><span>13</span><br></div></div><ul>
+<li>根据dbname change，但只对本次请求有效</li>
+</ul>
+<div><pre><code><span>[</span><span><span>HttpGet</span><span><span>(</span><span>"change"</span><span>)</span></span></span><span>]</span>
+<span>public</span> <span><span>int</span></span> <span>Change</span><span>(</span><span><span>string</span></span> dbname<span>)</span>
+<span>{</span>
+  <span>//仅对本次请求有效</span>
+  _fsql<span>.</span><span>Change</span><span>(</span>dbname<span>)</span><span>;</span>
+  <span>return</span> <span>1</span><span>;</span>
+<span>}</span>
+</code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br></div></div><ul>
+<li>获取DB3，在未注册前，会报错</li>
+</ul>
+<div><pre><code><span>[</span><span><span>HttpGet</span><span><span>(</span><span>"getdb3"</span><span>)</span></span></span><span>]</span>
+<span>public</span> <span>IEnumerable<span>&lt;</span>SysUser<span>></span></span> <span>Get3</span><span>(</span><span>)</span>
+<span>{</span>
+    _fsql<span>.</span><span>Change</span><span>(</span><span>"db3"</span><span>)</span><span>;</span>
+    <span>//查询 db1</span>
+    <span><span>var</span></span> b0 <span>=</span> _fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>SysUser<span>></span></span></span><span>(</span><span>)</span><span>.</span><span>ToList</span><span>(</span><span>)</span><span>;</span>
+    <span>return</span> b0<span>;</span>
+<span>}</span>
+</code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br></div></div><blockquote>
+<p>如果需要分布多事务 TCC/Saga 请移步到：<a href="https://github.com/2881099/FreeSql.Cloud" target="_blank" rel="noopener noreferrer">https://github.com/2881099/FreeSql.Cloud</a></p>
+</blockquote>
+<h2 id="三、静态类管理多数据库" tabindex="-1"> 三、静态类管理多数据库？</h2>
+<p>基于第二种方法 MultiFreeSql 增加静态类如下：</p>
+<div><pre><code><span>using</span> <span>System</span><span>;</span>
+
+<span>namespace</span> <span>FreeSql</span>
+<span>{</span>
+  <span>public</span> <span>class</span> <span>StaticDB</span> <span>:</span> <span><span>StaticDB<span>&lt;</span><span>string</span><span>></span></span></span> <span>{</span> <span>}</span>
+  
+  <span>public</span> <span>abstract</span> <span>class</span> <span>StaticDB<span>&lt;</span>DBKey<span>></span></span>
+  <span>{</span>
+      <span>protected</span> <span>static</span> <span>Lazy<span>&lt;</span>IFreeSql<span>></span></span> multiFreeSql <span>=</span> <span>new</span> <span>Lazy<span>&lt;</span>IFreeSql<span>></span></span><span>(</span><span>(</span><span>)</span> <span>=></span> <span>new</span> <span>MultiFreeSql</span><span>(</span>TimeSpan<span>.</span><span>FromHours</span><span>(</span><span>2</span><span>)</span><span>)</span>
+      <span>)</span><span>;</span>
+      <span>public</span> <span>static</span> <span>IFreeSql</span> Instance <span>=></span> multiFreeSql<span>.</span>Value<span>;</span>
+  <span>}</span>
+<span>}</span>
+</code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br><span>10</span><br><span>11</span><br><span>12</span><br><span>13</span><br></div></div><ul>
+<li>根据静态类</li>
+</ul>
+<div><pre><code><span>#<span>region</span> 1.静态类的注册方式</span>
+<span>IFreeSql</span> db <span>=</span> StaticDB<span>.</span>Instance<span>;</span>
+
+db<span>.</span><span>Register</span><span>(</span><span>"db1"</span><span>,</span> <span>(</span><span>)</span> <span>=></span>
+<span>{</span>
+    <span>return</span> <span>new</span> <span>FreeSqlBuilder</span><span>(</span><span>)</span>
+        <span>.</span><span>UseAutoSyncStructure</span><span>(</span><span>true</span><span>)</span>
+        <span>.</span><span>UseMonitorCommand</span><span>(</span>
+        cmd <span>=></span> Trace<span>.</span><span>WriteLine</span><span>(</span><span>"\r\n线程"</span> <span>+</span> Thread<span>.</span>CurrentThread<span>.</span>ManagedThreadId <span>+</span> <span>": "</span> <span>+</span> cmd<span>.</span>CommandText<span>)</span>
+        <span>)</span>
+        <span>.</span><span>UseConnectionString</span><span>(</span>DataType<span>.</span>Sqlite<span>,</span> <span>"Data Source=|DataDirectory|\\SampleApp1.db;"</span><span>)</span>
+        <span>.</span><span>Build</span><span>(</span><span>)</span><span>;</span>
+<span>}</span><span>)</span><span>;</span>
+db<span>.</span><span>Register</span><span>(</span><span>"db2"</span><span>,</span> <span>(</span><span>)</span> <span>=></span>
+<span>{</span>
+    <span>return</span> <span>new</span> <span>FreeSqlBuilder</span><span>(</span><span>)</span>
+        <span>.</span><span>UseAutoSyncStructure</span><span>(</span><span>true</span><span>)</span>
+        <span>.</span><span>UseMonitorCommand</span><span>(</span>
+        cmd <span>=></span> Trace<span>.</span><span>WriteLine</span><span>(</span><span>"\r\n线程"</span> <span>+</span> Thread<span>.</span>CurrentThread<span>.</span>ManagedThreadId <span>+</span> <span>": "</span> <span>+</span> cmd<span>.</span>CommandText<span>)</span>
+        <span>)</span>
+        <span>.</span><span>UseConnectionString</span><span>(</span>DataType<span>.</span>Sqlite<span>,</span> <span>"Data Source=|DataDirectory|\\SampleApp2.db;"</span><span>)</span>
+        <span>.</span><span>Build</span><span>(</span><span>)</span><span>;</span>
+<span>}</span><span>)</span><span>;</span>
+<span>#<span>endregion</span></span>
+</code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br><span>10</span><br><span>11</span><br><span>12</span><br><span>13</span><br><span>14</span><br><span>15</span><br><span>16</span><br><span>17</span><br><span>18</span><br><span>19</span><br><span>20</span><br><span>21</span><br><span>22</span><br><span>23</span><br><span>24</span><br></div></div><ul>
+<li>创建StaticDBController，可以直接使用静态方法，不使用DI，但使用方式和注入方式相同</li>
+</ul>
+<div><pre><code>   <span>private</span> <span>readonly</span> <span>IFreeSql</span> _fsql <span>=</span> StaticDB<span>.</span>Instance<span>;</span>
+
+    <span>/// <span><span><span>&lt;</span>summary</span><span>></span></span></span>
+    <span>/// 获取db1,db2，插入db1,db2</span>
+    <span>/// <span><span><span>&lt;/</span>summary</span><span>></span></span></span>
+    <span>/// <span><span><span>&lt;</span>returns</span><span>></span></span><span><span><span>&lt;/</span>returns</span><span>></span></span></span>
+    <span>[</span><span>HttpGet</span><span>(</span><span>"get1"</span><span>)</span><span>]</span>
+    <span>public</span> <span>IEnumerable<span>&lt;</span>SysUser<span>></span></span> <span>Get1</span><span>(</span><span>)</span>
+    <span>{</span>
+        <span>//查询 db1</span>
+        <span><span>var</span></span> b0 <span>=</span> _fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>SysUser<span>></span></span></span><span>(</span><span>)</span><span>.</span><span>ToList</span><span>(</span><span>)</span><span>;</span>
+
+        <span><span>var</span></span> b1 <span>=</span> _fsql<span>.</span><span>Change</span><span>(</span><span>"db2"</span><span>)</span><span>;</span>
+        <span>//查询 db2</span>
+        <span><span>var</span></span> b2 <span>=</span> _fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>SysUser<span>></span></span></span><span>(</span><span>)</span><span>.</span><span>ToList</span><span>(</span><span>)</span><span>;</span>
+        <span>//插入到 db2</span>
+        <span><span>var</span></span> c0 <span>=</span> _fsql<span>.</span><span>Insert</span><span>(</span><span>new</span> <span>SysUser</span> <span>{</span> UserName <span>=</span> <span>"db2"</span> <span>}</span><span>)</span><span>.</span><span>ExecuteAffrows</span><span>(</span><span>)</span><span>;</span>
+        <span>using</span> <span>(</span>_fsql<span>.</span><span>Change</span><span>(</span><span>"db1"</span><span>)</span><span>)</span>
+        <span>{</span>
+            <span>//查询 db1</span>
+            <span><span>var</span></span> b3 <span>=</span> _fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>SysUser<span>></span></span></span><span>(</span><span>)</span><span>.</span><span>ToList</span><span>(</span><span>)</span><span>;</span>
+            <span>//插入到 db1</span>
+            _fsql<span>.</span><span>Insert</span><span>(</span><span>new</span> <span>SysUser</span> <span>{</span> UserName <span>=</span> <span>"db1"</span> <span>}</span><span>)</span><span>.</span><span>ExecuteAffrows</span><span>(</span><span>)</span><span>;</span>
+        <span>}</span>
+
+        <span>//查询 db2</span>
+        <span><span>var</span></span> db2 <span>=</span> _fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>SysUser<span>></span></span></span><span>(</span><span>)</span><span>.</span><span>ToList</span><span>(</span><span>)</span><span>;</span>
+        _fsql<span>.</span><span>Change</span><span>(</span><span>"db2"</span><span>)</span><span>;</span>
+        <span>return</span> db2<span>;</span>
+    <span>}</span>
+</code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br><span>10</span><br><span>11</span><br><span>12</span><br><span>13</span><br><span>14</span><br><span>15</span><br><span>16</span><br><span>17</span><br><span>18</span><br><span>19</span><br><span>20</span><br><span>21</span><br><span>22</span><br><span>23</span><br><span>24</span><br><span>25</span><br><span>26</span><br><span>27</span><br><span>28</span><br><span>29</span><br><span>30</span><br></div></div><h2 id="参考" tabindex="-1"> 参考</h2>
+<p><a href="https://github.com/luoyunchong/SampleApp/blob/master/SampleApi/Controllers/HomeController.cs" target="_blank" rel="noopener noreferrer">SampleApp/HomeController.cs at master · luoyunchong/SampleApp (github.com)</a></p>
+<p><a href="https://github.com/luoyunchong/SampleApp/blob/master/SampleCore/MultiFreeSql.cs" target="_blank" rel="noopener noreferrer">SampleApp/MultiFreeSql.cs at master · luoyunchong/SampleApp (github.com)</a></p>
+<p><a href="https://github.com/dotnetcore/FreeSql/issues/44" target="_blank" rel="noopener noreferrer">多个 IFreeSql 实例，如何注入使用？ · Issue #44 · dotnetcore/FreeSql (github.com)</a></p>
+<blockquote>
+<p>与此文章有点区别，增加了一些配置项和静态方法的理解，把<code>Change</code> 下放到<code>MultiFreeSqlExtensions</code>扩展中，从而保持简单，静态方法和DI保持一致的写法</p>
+</blockquote>
+]]></content>
+    <published>2022-06-23T16:16:24.000Z</published>
+  </entry>
   <entry>
     <title type="html">服务支持</title>
     <id>http://freesql.net/FreeSql.Wiki.VuePress/reference/service-support.html</id>
