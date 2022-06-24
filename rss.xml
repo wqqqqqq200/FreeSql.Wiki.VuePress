@@ -6,10 +6,401 @@
     <link>http://freesql.net/FreeSql.Wiki.VuePress/</link>
     <description>FreeSql Documents</description>
     <language>zh-CN</language>
-    <pubDate>Thu, 23 Jun 2022 16:17:42 GMT</pubDate>
-    <lastBuildDate>Thu, 23 Jun 2022 16:17:42 GMT</lastBuildDate>
+    <pubDate>Fri, 24 Jun 2022 16:46:23 GMT</pubDate>
+    <lastBuildDate>Fri, 24 Jun 2022 16:46:23 GMT</lastBuildDate>
     <generator>vuepress-plugin-feed2</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
+    <item>
+      <title>FreeSql 如何实现审计日志</title>
+      <link>http://freesql.net/FreeSql.Wiki.VuePress/extra/freesql-auditlog.html</link>
+      <guid>http://freesql.net/FreeSql.Wiki.VuePress/extra/freesql-auditlog.html</guid>
+      <source url="http://freesql.net/FreeSql.Wiki.VuePress/rss.xml">FreeSql 如何实现审计日志</source>
+      <pubDate>Fri, 24 Jun 2022 16:45:08 GMT</pubDate>
+      <content:encoded><![CDATA[<h1 id="freesql-如何实现审计日志" tabindex="-1"> FreeSql 如何实现审计日志</h1>
+<p>有两种情况，如果都是针对实体操作，确实很好做这个功能。</p>
+<p>IFreeSql 更新/删除，都可以不传实体进行操作，所以这个 old_values, new_values 实现起来比较麻烦（可能需要查询一次？性能？）。另外还有批量操作。</p>
+<h2 id="_1、fsql-aop-crudafter-事件是-crud-之后触发-提供以下参数" tabindex="-1"> 1、fsql.Aop.CrudAfter 事件是 CRUD 之后触发，提供以下参数</h2>
+<div><pre><code><span>/// <span><span><span>&lt;</span>summary</span><span>></span></span></span>
+<span>/// 标识符，可将 CurdBefore 与 CurdAfter 进行匹配</span>
+<span>/// <span><span><span>&lt;/</span>summary</span><span>></span></span></span>
+<span>public</span> <span>Guid</span> Identifier <span>{</span> <span>get</span><span>;</span> <span>protected</span> <span>set</span><span>;</span> <span>}</span>
+<span>protected</span> <span>Stopwatch</span> Stopwatch <span>{</span> <span>get</span><span>;</span> <span>}</span>
+<span>/// <span><span><span>&lt;</span>summary</span><span>></span></span></span>
+<span>/// 操作类型</span>
+<span>/// <span><span><span>&lt;/</span>summary</span><span>></span></span></span>
+<span>public</span> <span>CurdType</span> CurdType <span>{</span> <span>get</span><span>;</span> <span>}</span> <span>//Select, Delete, Update, Insert, InsertOrUpdate</span>
+<span>/// <span><span><span>&lt;</span>summary</span><span>></span></span></span>
+<span>/// 实体类型</span>
+<span>/// <span><span><span>&lt;/</span>summary</span><span>></span></span></span>
+<span>public</span> <span>Type</span> EntityType <span>{</span> <span>get</span><span>;</span> <span>}</span>
+<span>/// <span><span><span>&lt;</span>summary</span><span>></span></span></span>
+<span>/// 实体类型的元数据</span>
+<span>/// <span><span><span>&lt;/</span>summary</span><span>></span></span></span>
+<span>public</span> <span>TableInfo</span> Table <span>{</span> <span>get</span><span>;</span> <span>}</span>
+<span>/// <span><span><span>&lt;</span>summary</span><span>></span></span></span>
+<span>/// 执行的 SQL</span>
+<span>/// <span><span><span>&lt;/</span>summary</span><span>></span></span></span>
+<span>public</span> <span><span>string</span></span> Sql <span>{</span> <span>get</span><span>;</span> <span>}</span>
+<span>/// <span><span><span>&lt;</span>summary</span><span>></span></span></span>
+<span>/// 参数化命令</span>
+<span>/// <span><span><span>&lt;/</span>summary</span><span>></span></span></span>
+<span>public</span> <span>DbParameter<span>[</span><span>]</span></span> DbParms <span>{</span> <span>get</span><span>;</span> <span>}</span>
+
+<span>/// <span><span><span>&lt;</span>summary</span><span>></span></span></span>
+<span>/// 发生的错误</span>
+<span>/// <span><span><span>&lt;/</span>summary</span><span>></span></span></span>
+<span>public</span> <span>Exception</span> Exception <span>{</span> <span>get</span><span>;</span> <span>}</span>
+<span>/// <span><span><span>&lt;</span>summary</span><span>></span></span></span>
+<span>/// 执行SQL命令，返回的结果</span>
+<span>/// <span><span><span>&lt;/</span>summary</span><span>></span></span></span>
+<span>public</span> <span><span>object</span></span> ExecuteResult <span>{</span> <span>get</span><span>;</span> <span>}</span>
+<span>/// <span><span><span>&lt;</span>summary</span><span>></span></span></span>
+<span>/// 耗时（单位：Ticks）</span>
+<span>/// <span><span><span>&lt;/</span>summary</span><span>></span></span></span>
+<span>public</span> <span><span>long</span></span> ElapsedTicks <span>=></span> <span>this</span><span>.</span>Stopwatch<span>.</span>ElapsedTicks<span>;</span>
+<span>/// <span><span><span>&lt;</span>summary</span><span>></span></span></span>
+<span>/// 耗时（单位：毫秒）</span>
+<span>/// <span><span><span>&lt;/</span>summary</span><span>></span></span></span>
+<span>public</span> <span><span>long</span></span> ElapsedMilliseconds <span>=></span> <span>this</span><span>.</span>Stopwatch<span>.</span>ElapsedMilliseconds<span>;</span>
+</code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br><span>10</span><br><span>11</span><br><span>12</span><br><span>13</span><br><span>14</span><br><span>15</span><br><span>16</span><br><span>17</span><br><span>18</span><br><span>19</span><br><span>20</span><br><span>21</span><br><span>22</span><br><span>23</span><br><span>24</span><br><span>25</span><br><span>26</span><br><span>27</span><br><span>28</span><br><span>29</span><br><span>30</span><br><span>31</span><br><span>32</span><br><span>33</span><br><span>34</span><br><span>35</span><br><span>36</span><br><span>37</span><br><span>38</span><br><span>39</span><br><span>40</span><br><span>41</span><br><span>42</span><br></div></div><h2 id="_2、freesql-dbcontext-或者-freesql-unitofwork-提供对象变化跟踪" tabindex="-1"> 2、FreeSql.DbContext 或者 FreeSql.UnitOfWork 提供对象变化跟踪</h2>
+<p>全局设置：</p>
+<div><pre><code>fsql<span>.</span><span>SetDbContextOptions</span><span>(</span>opt <span>=></span> <span>{</span>
+  opt<span>.</span>OnEntityChange <span>=</span> report <span>=></span> <span>{</span>
+    Console<span>.</span><span>WriteLine</span><span>(</span>report<span>)</span><span>;</span>
+  <span>}</span><span>;</span>
+<span>}</span><span>)</span><span>;</span>
+</code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br></div></div><p>单独设置 DbContext 或者 UnitOfWork：</p>
+<div><pre><code><span><span>var</span></span> ctx <span>=</span> fsql<span>.</span><span>CreateDbContext</span><span>(</span><span>)</span><span>;</span>
+ctx<span>.</span>Options<span>.</span>OnEntityChange <span>=</span> report <span>=></span> <span>{</span>
+  Console<span>.</span><span>WriteLine</span><span>(</span>report<span>)</span><span>;</span>
+<span>}</span><span>;</span>
+
+<span><span>var</span></span> uow <span>=</span> fsql<span>.</span><span>CreateUnitOfWork</span><span>(</span><span>)</span><span>;</span>
+uow<span>.</span>OnEntityChange <span>=</span> report <span>=></span> <span>{</span>
+  Console<span>.</span><span>WriteLine</span><span>(</span>report<span>)</span><span>;</span>
+<span>}</span><span>;</span>
+</code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br></div></div><p>参数 report 是一个 List 集合，集合元素的类型定义如下：</p>
+<div><pre><code><span>public</span> <span>class</span> <span>ChangeInfo</span> <span>{</span>
+  <span>public</span> <span><span>object</span></span> Object <span>{</span> <span>get</span><span>;</span> <span>set</span><span>;</span> <span>}</span>
+  <span>public</span> <span>EntityChangeType</span> Type <span>{</span> <span>get</span><span>;</span> <span>set</span><span>;</span> <span>}</span>
+  <span>/// <span><span><span>&lt;</span>summary</span><span>></span></span></span>
+  <span>/// Type = Update 的时候，获取更新之前的对象</span>
+  <span>/// <span><span><span>&lt;/</span>summary</span><span>></span></span></span>
+  <span>public</span> <span><span>object</span></span> BeforeObject <span>{</span> <span>get</span><span>;</span> <span>set</span><span>;</span> <span>}</span>
+<span>}</span>
+<span>public</span> <span>enum</span> <span>EntityChangeType</span> <span>{</span> Insert<span>,</span> Update<span>,</span> Delete<span>,</span> SqlRaw <span>}</span>
+</code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br></div></div><table>
+<thead>
+<tr>
+<th>变化类型</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Insert</td>
+<td>实体对象被插入</td>
+</tr>
+<tr>
+<td>Update</td>
+<td>实体对象被更新</td>
+</tr>
+<tr>
+<td>Delete</td>
+<td>实体对象被删除</td>
+</tr>
+<tr>
+<td>SqlRaw</td>
+<td>执行了SQL语句</td>
+</tr>
+</tbody>
+</table>
+<p>SqlRaw 目前有两处地方比较特殊：</p>
+<ul>
+<li>多对多联级更新导航属性的时候，对中间表的全部删除操作；</li>
+<li>通用仓储类 BaseRepository 有一个 Delete 方法，参数为表达式，而并非实体；</li>
+</ul>
+<div><pre><code><span><span>int</span></span> <span>Delete</span><span>(</span><span>Expression<span>&lt;</span>Func<span>&lt;</span>TEntity<span>,</span> <span>bool</span><span>></span><span>></span></span> predicate<span>)</span><span>;</span>
+</code></pre><div aria-hidden="true"><span>1</span><br></div></div><p>DbContext.SaveChanges，或者 Repository 对实体的 Insert/Update/Delete，或者 UnitOfWork.Commit 操作都会最多触发一次该事件。</p>
+]]></content:encoded>
+    </item>
+    <item>
+      <title>Docker+ FreeSql</title>
+      <link>http://freesql.net/FreeSql.Wiki.VuePress/extra/freesql-docker.html</link>
+      <guid>http://freesql.net/FreeSql.Wiki.VuePress/extra/freesql-docker.html</guid>
+      <source url="http://freesql.net/FreeSql.Wiki.VuePress/rss.xml">Docker+ FreeSql</source>
+      <pubDate>Fri, 24 Jun 2022 16:45:08 GMT</pubDate>
+      <content:encoded><![CDATA[<h1 id="docker-freesql" tabindex="-1"> Docker+ FreeSql</h1>
+<h2 id="net5-docker-encryption-ssl-tls-handshake-failed" tabindex="-1"> .net5+Docker+ Encryption(ssl/tls) handshake failed</h2>
+<p>.net5 网站使用Sqlserver数据库部署在docker容器内运行报主库链接失败</p>
+<h3 id="环境" tabindex="-1"> 环境</h3>
+<p>数据库：Sqlserver2014
+网站程序：.Net5
+Docker版本：Docker version 19.03.13,
+.net5环境镜像源：mcr.microsoft.com/dotnet/aspnet:5.0-buster-slim
+Centos版本：CentOS Linux release 7.9.2009 (Core)</p>
+<h3 id="使用原生方式进行测试" tabindex="-1"> 使用原生方式进行测试</h3>
+<div><pre><code><span>using</span> <span>(</span><span>SqlConnection</span> connection <span>=</span> <span>new</span> <span>SqlConnection</span><span>(</span><span>"Data Source=xxxxx;User Id=sa;Password=xxxxxx;Initial Catalog=xxxxxxxx;Pooling=true;Min Pool Size=1;"</span><span>)</span><span>)</span>
+<span>{</span>
+    connection<span>.</span><span>Open</span><span>(</span><span>)</span><span>;</span>
+    connection<span>.</span><span>Close</span><span>(</span><span>)</span><span>;</span>
+    connection<span>.</span><span>Dispose</span><span>(</span><span>)</span><span>;</span>
+<span>}</span>
+</code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br></div></div><h3 id="报错" tabindex="-1"> 报错</h3>
+<p>A connection was successfully established with the server, but then an error occurred during the pre-login handshake. (provider: SSL Provider, error: 31 - Encryption(ssl/tls) handshake failed)</p>
+<h3 id="最终解决方案" tabindex="-1"> 最终解决方案</h3>
+<p>在dockerfile里面加上这么两句</p>
+<div><pre><code>RUN sed -i 's/MinProtocol = TLSv1.2/MinProtocol = TLSv1/g' /etc/ssl/openssl.cnf
+RUN sed -i 's/MinProtocol = TLSv1.2/MinProtocol = TLSv1/g' /usr/lib/ssl/openssl.cnf
+</code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br></div></div><p><strong>将TLSv1.2设为TLSv1，只能是设为TLSv1而不是设为TLSv1.0</strong></p>
+<h2 id="原文链接" tabindex="-1"> 原文链接</h2>
+<ul>
+<li><a href="https://github.com/dotnetcore/FreeSql/issues/650" target="_blank" rel="noopener noreferrer">.net5 网站使用Sqlserver数据库部署在docker容器内运行报主库链接失败 · Issue #650 · dotnetcore/FreeSql (github.com)</a></li>
+</ul>
+]]></content:encoded>
+    </item>
+    <item>
+      <title>技巧：ISelect 如何拷贝(copy)复用，克隆(clone)</title>
+      <link>http://freesql.net/FreeSql.Wiki.VuePress/extra/iselect-depcopy.html</link>
+      <guid>http://freesql.net/FreeSql.Wiki.VuePress/extra/iselect-depcopy.html</guid>
+      <source url="http://freesql.net/FreeSql.Wiki.VuePress/rss.xml">技巧：ISelect 如何拷贝(copy)复用，克隆(clone)</source>
+      <pubDate>Fri, 24 Jun 2022 16:45:08 GMT</pubDate>
+      <content:encoded><![CDATA[<h1 id="技巧-iselect-如何拷贝-copy-复用-克隆-clone" tabindex="-1"> 技巧：ISelect 如何拷贝(copy)复用，克隆(clone)</h1>
+<p>当一个 ISelect 构造到一定复杂程序之后，比如：</p>
+<div><pre><code><span>public</span> <span><span>void</span></span> <span>Test</span><span>(</span><span>)</span>
+<span>{</span>
+    <span><span>var</span></span> select1 <span>=</span> fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>AdmRoute<span>></span></span></span><span>(</span><span>)</span><span>.</span><span>Include</span><span>(</span>a <span>=></span> a<span>.</span>Parent<span>)</span>
+        <span>.</span><span>WhereIf</span><span>(</span><span>!</span><span>string</span><span>.</span><span>IsNullOrEmpty</span><span>(</span>key<span>)</span><span>,</span> a <span>=></span> a<span>.</span>Name<span>.</span><span>Contains</span><span>(</span>key<span>)</span> <span>||</span> a<span>.</span>Extdata<span>.</span><span>Contains</span><span>(</span>key<span>)</span> <span>||</span> a<span>.</span>Remark<span>.</span><span>Contains</span><span>(</span>key<span>)</span> <span>||</span> a<span>.</span>TenantId<span>.</span><span>Contains</span><span>(</span>key<span>)</span> <span>||</span> a<span>.</span>Parent<span>.</span>Name<span>.</span><span>Contains</span><span>(</span>key<span>)</span> <span>||</span> a<span>.</span>Parent<span>.</span>Extdata<span>.</span><span>Contains</span><span>(</span>key<span>)</span> <span>||</span> a<span>.</span>Parent<span>.</span>Remark<span>.</span><span>Contains</span><span>(</span>key<span>)</span> <span>||</span> a<span>.</span>Parent<span>.</span>TenantId<span>.</span><span>Contains</span><span>(</span>key<span>)</span><span>)</span>
+        <span>.</span><span>WhereIf</span><span>(</span>Parent_Id<span>?.</span><span>Any</span><span>(</span><span>)</span> <span>==</span> <span>true</span><span>,</span> a <span>=></span> Parent_Id<span>.</span><span>Contains</span><span>(</span>a<span>.</span>ParentId<span>)</span><span>)</span>
+        <span>.</span><span>WhereIf</span><span>(</span>mn_Roles_Id<span>?.</span><span>Any</span><span>(</span><span>)</span> <span>==</span> <span>true</span><span>,</span> a <span>=></span> a<span>.</span>Roles<span>.</span><span>AsSelect</span><span>(</span><span>)</span><span>.</span><span>Any</span><span>(</span>b <span>=></span> mn_Roles_Id<span>.</span><span>Contains</span><span>(</span>b<span>.</span>Id<span>)</span><span>)</span><span>)</span><span>;</span>
+
+    <span><span>var</span></span> select2 <span>=</span> select1<span>;</span>
+    select1<span>.</span><span>Where</span><span>(</span>a <span>=></span> a<span>.</span>Status <span>==</span> <span>0</span><span>)</span><span>;</span>
+    <span>//此时 select2 也附加了 a.Status == 0 条件</span>
+<span>}</span>
+</code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br><span>10</span><br><span>11</span><br></div></div><p>利用语法糖解决：</p>
+<div><pre><code><span>public</span> <span><span>void</span></span> <span>Test</span><span>(</span><span>)</span>
+<span>{</span>
+    <span>ISelect<span>&lt;</span>AdmRoute<span>></span></span> <span>GetSelect</span><span>(</span><span>)</span> <span>=></span> fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>AdmRoute<span>></span></span></span><span>(</span><span>)</span><span>.</span><span>Include</span><span>(</span>a <span>=></span> a<span>.</span>Parent<span>)</span>
+        <span>.</span><span>WhereIf</span><span>(</span><span>!</span><span>string</span><span>.</span><span>IsNullOrEmpty</span><span>(</span>key<span>)</span><span>,</span> a <span>=></span> a<span>.</span>Name<span>.</span><span>Contains</span><span>(</span>key<span>)</span> <span>||</span> a<span>.</span>Extdata<span>.</span><span>Contains</span><span>(</span>key<span>)</span> <span>||</span> a<span>.</span>Remark<span>.</span><span>Contains</span><span>(</span>key<span>)</span> <span>||</span> a<span>.</span>TenantId<span>.</span><span>Contains</span><span>(</span>key<span>)</span> <span>||</span> a<span>.</span>Parent<span>.</span>Name<span>.</span><span>Contains</span><span>(</span>key<span>)</span> <span>||</span> a<span>.</span>Parent<span>.</span>Extdata<span>.</span><span>Contains</span><span>(</span>key<span>)</span> <span>||</span> a<span>.</span>Parent<span>.</span>Remark<span>.</span><span>Contains</span><span>(</span>key<span>)</span> <span>||</span> a<span>.</span>Parent<span>.</span>TenantId<span>.</span><span>Contains</span><span>(</span>key<span>)</span><span>)</span>
+        <span>.</span><span>WhereIf</span><span>(</span>Parent_Id<span>?.</span><span>Any</span><span>(</span><span>)</span> <span>==</span> <span>true</span><span>,</span> a <span>=></span> Parent_Id<span>.</span><span>Contains</span><span>(</span>a<span>.</span>ParentId<span>)</span><span>)</span>
+        <span>.</span><span>WhereIf</span><span>(</span>mn_Roles_Id<span>?.</span><span>Any</span><span>(</span><span>)</span> <span>==</span> <span>true</span><span>,</span> a <span>=></span> a<span>.</span>Roles<span>.</span><span>AsSelect</span><span>(</span><span>)</span><span>.</span><span>Any</span><span>(</span>b <span>=></span> mn_Roles_Id<span>.</span><span>Contains</span><span>(</span>b<span>.</span>Id<span>)</span><span>)</span><span>)</span><span>;</span>
+
+    <span><span>var</span></span> select1 <span>=</span> <span>GetSelect</span><span>(</span><span>)</span><span>;</span>
+    <span><span>var</span></span> select2 <span>=</span> <span>GetSelect</span><span>(</span><span>)</span><span>;</span>
+    select1<span>.</span><span>Where</span><span>(</span>a <span>=></span> a<span>.</span>Status <span>==</span> <span>0</span><span>)</span><span>;</span>
+    <span>//此时 select2 不会附加 a.Status == 0 条件</span>
+<span>}</span>
+</code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br><span>10</span><br><span>11</span><br><span>12</span><br></div></div><p>科普：</p>
+<p>csharp 7.0 支持本地函数，<strong>方法内再定义临时方法</strong>，这个特性向大家推荐，在很多时候都非常有效。</p>
+<p>方法内还可以定义方法，那就称它：本地函数/嵌套方法。</p>
+<h2 id="原文链接" tabindex="-1"> 原文链接</h2>
+<ul>
+<li><a href="https://github.com/dotnetcore/FreeSql/issues/644" target="_blank" rel="noopener noreferrer">技巧：ISelect 如何拷贝(copy)复用，克隆(clone) · Issue #644 · dotnetcore/FreeSql (github.com)</a></li>
+</ul>
+]]></content:encoded>
+    </item>
+    <item>
+      <title>技巧：自定义解析表达式树，实现动态聚合列 sum(case when ...)</title>
+      <link>http://freesql.net/FreeSql.Wiki.VuePress/extra/issues-expression-groupbysum.html</link>
+      <guid>http://freesql.net/FreeSql.Wiki.VuePress/extra/issues-expression-groupbysum.html</guid>
+      <source url="http://freesql.net/FreeSql.Wiki.VuePress/rss.xml">技巧：自定义解析表达式树，实现动态聚合列 sum(case when ...)</source>
+      <pubDate>Fri, 24 Jun 2022 16:45:08 GMT</pubDate>
+      <content:encoded><![CDATA[<h1 id="技巧-自定义解析表达式树-实现动态聚合列-sum-case-when" tabindex="-1"> 技巧：自定义解析表达式树，实现动态聚合列 sum(case when ...)</h1>
+<div><pre><code><span>SELECT</span>
+a<span>.</span><span>"Time"</span><span>,</span>
+v1 <span>=</span> <span>sum</span><span>(</span><span>case</span> <span>when</span> a<span>.</span><span>"Id"</span> <span>=</span><span>=</span> <span>1</span> <span>then</span> <span>1</span> <span>else</span> <span>0</span> <span>end</span><span>)</span><span>,</span>
+v2 <span>=</span> <span>sum</span><span>(</span><span>case</span> <span>when</span> a<span>.</span><span>"Id"</span> <span>=</span><span>=</span> <span>2</span> <span>then</span> <span>1</span> <span>else</span> <span>0</span> <span>end</span><span>)</span><span>,</span>
+v3 <span>=</span> <span>sum</span><span>(</span><span>case</span> <span>when</span> a<span>.</span><span>"Id"</span> <span>=</span><span>=</span> <span>3</span> <span>then</span> <span>1</span> <span>else</span> <span>0</span> <span>end</span><span>)</span>
+<span>FROM</span> <span>"table"</span> a
+<span>WHERE</span> a<span>.</span><span>"Id"</span> <span>IN</span> <span>(</span><span>1</span><span>,</span><span>2</span><span>,</span><span>3</span><span>)</span>
+<span>GROUP</span> <span>BY</span> a<span>.</span><span>"Time"</span>
+</code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br></div></div><p>如上 v1,v2,v3 是动态聚合值，如果 where IN (1,2,3,4) 那就会产生 v1-v4</p>
+<p>正常情况下，静态的 lambda 查询没办法处理这种动态列查询。</p>
+<hr>
+<p>变通一下，这样查询：</p>
+<div><pre><code><span>SELECT</span>
+a<span>.</span><span>"Time"</span><span>,</span>
+v <span>=</span> <span>sum</span><span>(</span><span>case</span> <span>when</span> a<span>.</span><span>"Id"</span> <span>=</span><span>=</span> <span>1</span> <span>then</span> <span>1</span> <span>else</span> <span>0</span> <span>end</span><span>)</span> <span>+</span> <span>','</span>
+    <span>sum</span><span>(</span><span>case</span> <span>when</span> a<span>.</span><span>"Id"</span> <span>=</span><span>=</span> <span>2</span> <span>then</span> <span>1</span> <span>else</span> <span>0</span> <span>end</span><span>)</span> <span>+</span> <span>','</span>
+    <span>sum</span><span>(</span><span>case</span> <span>when</span> a<span>.</span><span>"Id"</span> <span>=</span><span>=</span> <span>3</span> <span>then</span> <span>1</span> <span>else</span> <span>0</span> <span>end</span><span>)</span>
+<span>FROM</span> <span>"table"</span> a
+<span>WHERE</span> a<span>.</span><span>"Id"</span> <span>IN</span> <span>(</span><span>1</span><span>,</span><span>2</span><span>,</span><span>3</span><span>)</span>
+<span>GROUP</span> <span>BY</span> a<span>.</span><span>"Time"</span>
+</code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br></div></div><p>如此便可以使用 FreeSql 实现：</p>
+<div><pre><code><span><span>var</span></span> ids <span>=</span> <span>new</span> <span><span>int</span><span>[</span><span>]</span></span> <span>{</span> <span>1</span><span>,</span><span>2</span><span>,</span><span>3</span> <span>}</span><span>;</span>
+fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>table<span>></span></span></span><span>(</span><span>)</span>
+    <span>.</span><span>Where</span><span>(</span>a <span>=></span> ids<span>.</span><span>Contains</span><span>(</span>a<span>.</span>Id<span>)</span><span>)</span>
+    <span>.</span><span>GroupBy</span><span>(</span>a <span>=></span> a<span>.</span>Time<span>)</span>
+    <span>.</span><span>ToList</span><span>(</span>g <span>=></span> <span>new</span> 
+    <span>{</span>
+        Time <span>=</span> g<span>.</span>Key<span>,</span>
+        Values <span>=</span> MyExt<span>.</span><span>SumCase</span><span>(</span>ids<span>,</span> g<span>.</span>Value<span>.</span>Id<span>)</span>
+    <span>}</span><span>)</span><span>;</span>
+</code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br></div></div><p>自定义解析表达式树，实现如下：</p>
+<div><pre><code><span>[</span><span><span>ExpressionCall</span></span><span>]</span>
+<span>public</span> <span>static</span> <span>class</span> <span>MyExt</span>
+<span>{</span>
+    <span>internal</span> <span>static</span> <span>ThreadLocal<span>&lt;</span>ExpressionCallContext<span>></span></span> expContext <span>=</span> <span>new</span> <span>ThreadLocal<span>&lt;</span>ExpressionCallContext<span>></span></span><span>(</span><span>)</span><span>;</span>
+
+    <span>public</span> <span>static</span> <span><span>string</span></span> <span><span>SumCase</span><span><span>&lt;</span>TValue<span>></span></span></span><span>(</span><span>[</span><span><span>RawValue</span></span><span>]</span> <span>TValue<span>[</span><span>]</span></span> values<span>,</span> <span>TValue</span> column<span>)</span>
+    <span>{</span>
+        <span><span>var</span></span> ctx <span>=</span> expContext<span>.</span>Value<span>;</span>
+        ctx<span>.</span>Result <span>=</span> ctx<span>.</span>_commonExp<span>.</span>_common<span>.</span><span>StringConcat</span><span>(</span>
+            values<span>.</span><span>Select</span><span>(</span><span>(</span>val<span>,</span> idx<span>)</span> <span>=></span> 
+                <span>new</span> <span>[</span><span>]</span> <span>{</span>
+                    ctx<span>.</span>_commonExp<span>.</span>_common<span>.</span><span>IsNull</span><span>(</span><span><span>$"SUM(case when </span><span><span>{</span><span>ctx<span>.</span>ParsedContent<span>[</span><span>"column"</span><span>]</span></span><span>}</span></span><span> = </span><span><span>{</span><span>ctx<span>.</span><span>FormatSql</span><span>(</span>val<span>)</span></span><span>}</span></span><span> then 1 else 0 end)"</span></span><span>,</span> <span>0</span><span>)</span><span>,</span>
+                    idx <span>==</span> values<span>.</span>Length <span>-</span> <span>1</span> <span>?</span> <span>"''"</span> <span>:</span> <span>"','"</span>
+                <span>}</span><span>)</span><span>.</span><span>SelectMany</span><span>(</span>a <span>=></span> a<span>)</span><span>.</span><span>ToArray</span><span>(</span><span>)</span><span>,</span> 
+            values<span>.</span><span>Select</span><span>(</span>val <span>=></span> 
+                <span>new</span><span>[</span><span>]</span><span>{</span>
+                    <span>typeof</span><span>(</span><span>TValue</span><span>)</span><span>,</span>
+                    <span>typeof</span><span>(</span><span><span>string</span></span><span>)</span>
+                <span>}</span><span>)</span><span>.</span><span>SelectMany</span><span>(</span>a <span>=></span> a<span>)</span><span>.</span><span>ToArray</span><span>(</span><span>)</span><span>)</span><span>;</span>
+        <span>return</span> <span>default</span><span>;</span>
+    <span>}</span>
+<span>}</span>
+</code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br><span>10</span><br><span>11</span><br><span>12</span><br><span>13</span><br><span>14</span><br><span>15</span><br><span>16</span><br><span>17</span><br><span>18</span><br><span>19</span><br><span>20</span><br><span>21</span><br><span>22</span><br></div></div>]]></content:encoded>
+    </item>
+    <item>
+      <title>In多列查询，表达式自定义实现</title>
+      <link>http://freesql.net/FreeSql.Wiki.VuePress/extra/issues-in-valuetype.html</link>
+      <guid>http://freesql.net/FreeSql.Wiki.VuePress/extra/issues-in-valuetype.html</guid>
+      <source url="http://freesql.net/FreeSql.Wiki.VuePress/rss.xml">In多列查询，表达式自定义实现</source>
+      <pubDate>Fri, 24 Jun 2022 16:45:08 GMT</pubDate>
+      <content:encoded><![CDATA[<h1 id="in多列查询-表达式自定义实现" tabindex="-1"> In多列查询，表达式自定义实现</h1>
+<p>FreeSql 基础库为了不依赖 System.ValueType.dll，所以将以下代码抽离了出来。</p>
+<div><pre><code><span>//元组集合</span>
+<span>vae</span> lst <span>=</span> <span>new</span> <span>List<span>&lt;</span><span>(</span>Guid<span>,</span> DateTime<span>)</span><span>></span></span><span>(</span><span>)</span><span>;</span>
+lst<span>.</span><span>Add</span><span>(</span><span>(</span>Guid<span>.</span><span>NewGuid</span><span>(</span><span>)</span><span>,</span> DateTime<span>.</span>Now<span>)</span><span>)</span><span>;</span>
+lst<span>.</span><span>Add</span><span>(</span><span>(</span>Guid<span>.</span><span>NewGuid</span><span>(</span><span>)</span><span>,</span> DateTime<span>.</span>Now<span>)</span><span>)</span><span>;</span>
+
+<span><span>var</span></span> t2 <span>=</span> fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>T<span>></span></span></span><span>(</span><span>)</span>
+  <span>.</span><span>Where</span><span>(</span>a <span>=></span> lst<span>.</span><span>Contains</span><span>(</span>a<span>.</span>Id<span>,</span> a<span>.</span>ct1<span>)</span><span>)</span>
+  <span>.</span><span>ToList</span><span>(</span><span>)</span><span>;</span>
+<span>//SELECT .. FROM ..</span>
+<span>//WHERE (a."Id" = '685ee1f6-bdf6-4719-a291-c709b8a1378f' AND a."ct1" = '2019-12-07 23:55:27' OR </span>
+<span>//a."Id" = '5ecd838a-06a0-4c81-be43-1e77633b7404' AND a."ct1" = '2019-12-07 23:55:27')</span>
+</code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br><span>10</span><br><span>11</span><br></div></div><p>代码实现：</p>
+<div><pre><code><span>using</span> <span>FreeSql<span>.</span>DataAnnotations</span><span>;</span>
+<span>using</span> <span>System<span>.</span>Collections<span>.</span>Generic</span><span>;</span>
+<span>using</span> <span>System<span>.</span>Linq</span><span>;</span>
+<span>using</span> <span>System<span>.</span>Text</span><span>;</span>
+<span>using</span> <span>System<span>.</span>Threading</span><span>;</span>
+
+<span>[</span><span><span>ExpressionCall</span></span><span>]</span>
+<span>public</span> <span>static</span> <span>class</span> <span>MyFreeSqlExpressionCall</span>
+<span>{</span>
+    <span>public</span> <span>static</span> <span>ThreadLocal<span>&lt;</span>ExpressionCallContext<span>></span></span> expContext <span>=</span> <span>new</span> <span>ThreadLocal<span>&lt;</span>ExpressionCallContext<span>></span></span><span>(</span><span>)</span><span>;</span>
+    <span>/// <span><span><span>&lt;</span>summary</span><span>></span></span></span>
+    <span>/// C#：从元组集合中查找 exp1, exp2 是否存在<span><span><span>&lt;</span>para</span><span>></span></span><span><span><span>&lt;/</span>para</span><span>></span></span></span>
+    <span>/// SQL： <span><span><span>&lt;</span>para</span><span>></span></span><span><span><span>&lt;/</span>para</span><span>></span></span></span>
+    <span>/// exp1 = that[0].Item1 and exp2 = that[0].Item2 OR <span><span><span>&lt;</span>para</span><span>></span></span><span><span><span>&lt;/</span>para</span><span>></span></span></span>
+    <span>/// exp1 = that[1].Item1 and exp2 = that[1].Item2 OR <span><span><span>&lt;</span>para</span><span>></span></span><span><span><span>&lt;/</span>para</span><span>></span></span></span>
+    <span>/// ... <span><span><span>&lt;</span>para</span><span>></span></span><span><span><span>&lt;/</span>para</span><span>></span></span></span>
+    <span>/// 注意：当 that 为 null 或 empty 时，返回 1=0 <span><span><span>&lt;</span>para</span><span>></span></span><span><span><span>&lt;/</span>para</span><span>></span></span></span>
+    <span>/// Oracle： (Id, Name) IN ((1, "name1"), (2, "name2"))</span>
+    <span>/// <span><span><span>&lt;/</span>summary</span><span>></span></span></span>
+    <span>/// <span><span><span>&lt;</span>typeparam</span> <span>name</span><span><span>=</span><span>"</span>T1<span>"</span></span><span>></span></span><span><span><span>&lt;/</span>typeparam</span><span>></span></span></span>
+    <span>/// <span><span><span>&lt;</span>typeparam</span> <span>name</span><span><span>=</span><span>"</span>T2<span>"</span></span><span>></span></span><span><span><span>&lt;/</span>typeparam</span><span>></span></span></span>
+    <span>/// <span><span><span>&lt;</span>param</span> <span>name</span><span><span>=</span><span>"</span>that<span>"</span></span><span>></span></span><span><span><span>&lt;/</span>param</span><span>></span></span></span>
+    <span>/// <span><span><span>&lt;</span>param</span> <span>name</span><span><span>=</span><span>"</span>exp1<span>"</span></span><span>></span></span><span><span><span>&lt;/</span>param</span><span>></span></span></span>
+    <span>/// <span><span><span>&lt;</span>param</span> <span>name</span><span><span>=</span><span>"</span>exp2<span>"</span></span><span>></span></span><span><span><span>&lt;/</span>param</span><span>></span></span></span>
+    <span>/// <span><span><span>&lt;</span>returns</span><span>></span></span><span><span><span>&lt;/</span>returns</span><span>></span></span></span>
+    <span>public</span> <span>static</span> <span><span>bool</span></span> <span><span>Contains</span><span><span>&lt;</span>T1<span>,</span> T2<span>></span></span></span><span>(</span><span>[</span><span><span>RawValue</span></span><span>]</span> <span>this</span> <span>IEnumerable<span>&lt;</span><span>(</span>T1<span>,</span> T2<span>)</span><span>></span></span> that<span>,</span> <span>T1</span> exp1<span>,</span> <span>T2</span> exp2<span>)</span>
+    <span>{</span>
+        <span>if</span> <span>(</span>expContext<span>.</span>IsValueCreated <span>==</span> <span>false</span> <span>||</span> expContext<span>.</span>Value <span>==</span> <span>null</span> <span>||</span> expContext<span>.</span>Value<span>.</span>ParsedContent <span>==</span> <span>null</span><span>)</span>
+            <span>return</span> that<span>?.</span><span>Any</span><span>(</span>a <span>=></span> a<span>.</span>Item1<span>.</span><span>Equals</span><span>(</span>exp1<span>)</span> <span>&amp;&amp;</span> a<span>.</span>Item2<span>.</span><span>Equals</span><span>(</span>exp2<span>)</span><span>)</span> <span>==</span> <span>true</span><span>;</span>
+        <span>if</span> <span>(</span>that<span>?.</span><span>Any</span><span>(</span><span>)</span> <span>!=</span> <span>true</span><span>)</span>
+        <span>{</span>
+            expContext<span>.</span>Value<span>.</span>Result <span>=</span> <span>"1=0"</span><span>;</span>
+            <span>return</span> <span>false</span><span>;</span>
+        <span>}</span>
+        <span><span>var</span></span> sb <span>=</span> <span>new</span> <span>StringBuilder</span><span>(</span><span>)</span><span>;</span>
+        <span><span>var</span></span> idx <span>=</span> <span>0</span><span>;</span>
+
+        <span>switch</span> <span>(</span>expContext<span>.</span>Value<span>.</span>DataType <span>)</span>
+        <span>{</span>
+            <span>case</span> FreeSql<span>.</span>DataType<span>.</span>Oracle<span>:</span>
+            <span>case</span> FreeSql<span>.</span>DataType<span>.</span>OdbcOracle<span>:</span>
+                sb<span>.</span><span>Append</span><span>(</span><span>"("</span><span>)</span>
+                    <span>.</span><span>Append</span><span>(</span>expContext<span>.</span>Value<span>.</span>ParsedContent<span>[</span><span>"exp1"</span><span>]</span><span>)</span><span>.</span><span>Append</span><span>(</span><span>", "</span><span>)</span>
+                    <span>.</span><span>Append</span><span>(</span>expContext<span>.</span>Value<span>.</span>ParsedContent<span>[</span><span>"exp2"</span><span>]</span><span>)</span>
+                    <span>.</span><span>Append</span><span>(</span><span>") IN ("</span><span>)</span><span>;</span>
+                <span>foreach</span> <span>(</span><span><span>var</span></span> item <span>in</span> that<span>)</span>
+                <span>{</span>
+                    <span>if</span> <span>(</span>idx<span>++</span> <span>></span> <span>0</span><span>)</span> sb<span>.</span><span>Append</span><span>(</span><span>", "</span><span>)</span><span>;</span>
+                    sb<span>.</span><span>Append</span><span>(</span><span>"("</span><span>)</span>
+                        <span>.</span><span>Append</span><span>(</span>expContext<span>.</span>Value<span>.</span><span>FormatSql</span><span>(</span>FreeSql<span>.</span>Internal<span>.</span>Utils<span>.</span><span>GetDataReaderValue</span><span>(</span><span>typeof</span><span>(</span><span>T1</span><span>)</span><span>,</span> item<span>.</span>Item1<span>)</span><span>)</span><span>)</span><span>.</span><span>Append</span><span>(</span><span>", "</span><span>)</span>
+                        <span>.</span><span>Append</span><span>(</span>expContext<span>.</span>Value<span>.</span><span>FormatSql</span><span>(</span>FreeSql<span>.</span>Internal<span>.</span>Utils<span>.</span><span>GetDataReaderValue</span><span>(</span><span>typeof</span><span>(</span><span>T2</span><span>)</span><span>,</span> item<span>.</span>Item2<span>)</span><span>)</span><span>)</span>
+                        <span>.</span><span>Append</span><span>(</span><span>")"</span><span>)</span><span>;</span>
+                <span>}</span>
+                sb<span>.</span><span>Append</span><span>(</span><span>")"</span><span>)</span><span>;</span>
+
+                expContext<span>.</span>Value<span>.</span>Result <span>=</span> sb<span>.</span><span>ToString</span><span>(</span><span>)</span><span>;</span>
+                <span>return</span> <span>false</span><span>;</span>
+        <span>}</span>
+        <span>foreach</span> <span>(</span><span><span>var</span></span> item <span>in</span> that<span>)</span>
+        <span>{</span>
+            <span>if</span> <span>(</span>idx<span>++</span> <span>></span> <span>0</span><span>)</span> sb<span>.</span><span>Append</span><span>(</span><span>" OR \r\n"</span><span>)</span><span>;</span>
+            sb
+                <span>.</span><span>Append</span><span>(</span>expContext<span>.</span>Value<span>.</span>ParsedContent<span>[</span><span>"exp1"</span><span>]</span><span>)</span><span>.</span><span>Append</span><span>(</span><span>" = "</span><span>)</span><span>.</span><span>Append</span><span>(</span>expContext<span>.</span>Value<span>.</span><span>FormatSql</span><span>(</span>FreeSql<span>.</span>Internal<span>.</span>Utils<span>.</span><span>GetDataReaderValue</span><span>(</span><span>typeof</span><span>(</span><span>T1</span><span>)</span><span>,</span> item<span>.</span>Item1<span>)</span><span>)</span><span>)</span>
+                <span>.</span><span>Append</span><span>(</span><span>" AND "</span><span>)</span>
+                <span>.</span><span>Append</span><span>(</span>expContext<span>.</span>Value<span>.</span>ParsedContent<span>[</span><span>"exp2"</span><span>]</span><span>)</span><span>.</span><span>Append</span><span>(</span><span>" = "</span><span>)</span><span>.</span><span>Append</span><span>(</span>expContext<span>.</span>Value<span>.</span><span>FormatSql</span><span>(</span>FreeSql<span>.</span>Internal<span>.</span>Utils<span>.</span><span>GetDataReaderValue</span><span>(</span><span>typeof</span><span>(</span><span>T2</span><span>)</span><span>,</span> item<span>.</span>Item2<span>)</span><span>)</span><span>)</span><span>;</span>
+        <span>}</span>
+        expContext<span>.</span>Value<span>.</span>Result <span>=</span> sb<span>.</span><span>ToString</span><span>(</span><span>)</span><span>;</span>
+        <span>return</span> <span>true</span><span>;</span>
+    <span>}</span>
+<span>}</span>
+</code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br><span>10</span><br><span>11</span><br><span>12</span><br><span>13</span><br><span>14</span><br><span>15</span><br><span>16</span><br><span>17</span><br><span>18</span><br><span>19</span><br><span>20</span><br><span>21</span><br><span>22</span><br><span>23</span><br><span>24</span><br><span>25</span><br><span>26</span><br><span>27</span><br><span>28</span><br><span>29</span><br><span>30</span><br><span>31</span><br><span>32</span><br><span>33</span><br><span>34</span><br><span>35</span><br><span>36</span><br><span>37</span><br><span>38</span><br><span>39</span><br><span>40</span><br><span>41</span><br><span>42</span><br><span>43</span><br><span>44</span><br><span>45</span><br><span>46</span><br><span>47</span><br><span>48</span><br><span>49</span><br><span>50</span><br><span>51</span><br><span>52</span><br><span>53</span><br><span>54</span><br><span>55</span><br><span>56</span><br><span>57</span><br><span>58</span><br><span>59</span><br><span>60</span><br><span>61</span><br><span>62</span><br><span>63</span><br><span>64</span><br><span>65</span><br><span>66</span><br><span>67</span><br><span>68</span><br><span>69</span><br><span>70</span><br></div></div>]]></content:encoded>
+    </item>
+    <item>
+      <title>Mysql 5.5 兼容性</title>
+      <link>http://freesql.net/FreeSql.Wiki.VuePress/extra/issues-mysql5_5.html</link>
+      <guid>http://freesql.net/FreeSql.Wiki.VuePress/extra/issues-mysql5_5.html</guid>
+      <source url="http://freesql.net/FreeSql.Wiki.VuePress/rss.xml">Mysql 5.5 兼容性</source>
+      <pubDate>Fri, 24 Jun 2022 16:45:08 GMT</pubDate>
+      <content:encoded><![CDATA[<h1 id="mysql-5-5-兼容性" tabindex="-1"> Mysql 5.5 兼容性</h1>
+<h2 id="mysql-5-5-不支持-datetime-3-导致-codefirst-报错" tabindex="-1"> Mysql 5.5 不支持 datetime(3)，导致 codefirst 报错</h2>
+<p>二种解决办法：</p>
+<p>1、[Column(DbType = &quot;DATETIME&quot;)]</p>
+<p>2、统一处理的话写个AOP</p>
+<div><pre><code>fsql<span>.</span>Aop<span>.</span>ConfigEntityProperty <span>+=</span> <span>(</span>s<span>,</span> e<span>)</span> <span>=></span>
+<span>{</span>
+    <span>if</span> <span>(</span>e<span>.</span>Property<span>.</span>PropertyType <span>==</span> <span>typeof</span><span>(</span><span>DateTime</span><span>)</span> <span>||</span> e<span>.</span>Property<span>.</span>PropertyType <span>==</span> <span>typeof</span><span>(</span><span>DateTime<span>?</span></span><span>)</span><span>)</span>
+         e<span>.</span>ModifyResult<span>.</span>DbType <span>=</span> <span>"DATETIME"</span><span>;</span>
+<span>}</span><span>;</span>
+</code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br></div></div>]]></content:encoded>
+    </item>
+    <item>
+      <title>MySqlConnector</title>
+      <link>http://freesql.net/FreeSql.Wiki.VuePress/guide/freesql-provider-mysqlconnector.html</link>
+      <guid>http://freesql.net/FreeSql.Wiki.VuePress/guide/freesql-provider-mysqlconnector.html</guid>
+      <source url="http://freesql.net/FreeSql.Wiki.VuePress/rss.xml">MySqlConnector</source>
+      <pubDate>Fri, 24 Jun 2022 16:45:08 GMT</pubDate>
+      <content:encoded><![CDATA[
+<p>FreeSql.Provider.MySqlConnector是<code>FreeSql</code>基于社区提供的最新的<a href="https://github.com/mysql-net/MySqlConnector" target="_blank" rel="noopener noreferrer"><code>MySqlConnector</code></a>驱动的实现。</p>
+<h2 id="executemysqlbulkcopy" tabindex="-1"> ExecuteMySqlBulkCopy</h2>
+]]></content:encoded>
+    </item>
+    <item>
+      <title>Oracle</title>
+      <link>http://freesql.net/FreeSql.Wiki.VuePress/guide/freesql-provider-oracle.html</link>
+      <guid>http://freesql.net/FreeSql.Wiki.VuePress/guide/freesql-provider-oracle.html</guid>
+      <source url="http://freesql.net/FreeSql.Wiki.VuePress/rss.xml">Oracle</source>
+      <pubDate>Fri, 24 Jun 2022 16:45:08 GMT</pubDate>
+      <content:encoded><![CDATA[<h1 id="oracle" tabindex="-1"> Oracle</h1>
+]]></content:encoded>
+    </item>
+    <item>
+      <title>PostgreSQL</title>
+      <link>http://freesql.net/FreeSql.Wiki.VuePress/guide/freesql-provider-postgresql.html</link>
+      <guid>http://freesql.net/FreeSql.Wiki.VuePress/guide/freesql-provider-postgresql.html</guid>
+      <source url="http://freesql.net/FreeSql.Wiki.VuePress/rss.xml">PostgreSQL</source>
+      <pubDate>Fri, 24 Jun 2022 16:45:08 GMT</pubDate>
+      <content:encoded><![CDATA[<h1 id="postgresql" tabindex="-1"> PostgreSQL</h1>
+]]></content:encoded>
+    </item>
     <item>
       <title>基于FreeSql扩展</title>
       <link>http://freesql.net/FreeSql.Wiki.VuePress/extra/</link>
@@ -27,7 +418,7 @@
       <source url="http://freesql.net/FreeSql.Wiki.VuePress/rss.xml">多个 IFreeSql实例，如何注入使用</source>
       <pubDate>Thu, 23 Jun 2022 16:16:24 GMT</pubDate>
       <content:encoded><![CDATA[<h1 id="多个-ifreesql实例-如何注入使用" tabindex="-1"> 多个 IFreeSql实例，如何注入使用</h1>
-<p>多库切换，动态切库</p>
+<p>多库切换，动态切库，动态注册数据库</p>
 <h2 id="一、定义多个-ifreesql" tabindex="-1"> 一、定义多个 IFreeSql</h2>
 <p>该方法适用于固定数据库，固定配置项</p>
 <p>1、定义两个标识类：</p>
