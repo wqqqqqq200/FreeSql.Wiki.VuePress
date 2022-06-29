@@ -6,8 +6,8 @@
     <link>http://freesql.net/FreeSql.Wiki.VuePress/</link>
     <description>FreeSql Documents</description>
     <language>zh-CN</language>
-    <pubDate>Wed, 29 Jun 2022 02:25:16 GMT</pubDate>
-    <lastBuildDate>Wed, 29 Jun 2022 02:25:16 GMT</lastBuildDate>
+    <pubDate>Wed, 29 Jun 2022 02:34:40 GMT</pubDate>
+    <lastBuildDate>Wed, 29 Jun 2022 02:34:40 GMT</lastBuildDate>
     <generator>vuepress-plugin-feed2</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
     <item>
@@ -6663,7 +6663,18 @@ repo<span>.</span><span>AsType</span><span>(</span>实体类型<span>)</span><sp
 repo<span>.</span><span>Insert</span><span>(</span><span>..</span><span>)</span><span>;</span>
 repo<span>.</span><span>Update</span><span>(</span><span>..</span><span>)</span><span>;</span>
 repo<span>.</span><span>Delete</span><span>(</span><span>..</span><span>)</span><span>;</span>
-</code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br><span>10</span><br><span>11</span><br><span>12</span><br><span>13</span><br><span>14</span><br><span>15</span><br><span>16</span><br><span>17</span><br><span>18</span><br><span>19</span><br></div></div><hr>
+repo<span>.</span><span>InsertOrUpdate</span><span>(</span><span>..</span><span>)</span><span>;</span>
+
+<span>//或者字典</span>
+<span><span>var</span></span> dic <span>=</span> <span>new</span> <span>Dictionary<span>&lt;</span><span>string</span><span>,</span> <span>object</span><span>></span></span><span>(</span><span>)</span><span>;</span>
+dic<span>.</span><span>Add</span><span>(</span><span>"id"</span><span>,</span> <span>1</span><span>)</span><span>;</span>
+dic<span>.</span><span>Add</span><span>(</span><span>"name"</span><span>,</span> <span>"xxxx"</span><span>)</span><span>;</span>
+
+fsql<span>.</span><span>InsertDict</span><span>(</span>dic<span>)</span><span>.</span><span>AsTable</span><span>(</span><span>"table1"</span><span>)</span><span>.</span><span>ExecuteAffrows</span><span>(</span><span>)</span><span>;</span>
+fsql<span>.</span><span>UpdateDict</span><span>(</span>dic<span>)</span><span>.</span><span>AsTable</span><span>(</span><span>"table1"</span><span>)</span><span>.</span><span>WherePrimary</span><span>(</span><span>"id"</span><span>)</span><span>.</span><span>ExecuteAffrows</span><span>(</span><span>)</span><span>;</span>
+fsql<span>.</span><span>DeleteDict</span><span>(</span>dic<span>)</span><span>.</span><span>AsTable</span><span>(</span><span>"table1"</span><span>)</span><span>.</span><span>ExecuteAffrows</span><span>(</span><span>)</span><span>;</span>
+fsql<span>.</span><span>InsertOrUpdateDict</span><span>(</span>dic<span>)</span><span>.</span><span>AsTable</span><span>(</span><span>"table1"</span><span>)</span><span>.</span><span>WherePrimary</span><span>(</span><span>"id"</span><span>)</span><span>.</span><span>ExecuteAffrows</span><span>(</span><span>)</span><span>;</span>
+</code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br><span>10</span><br><span>11</span><br><span>12</span><br><span>13</span><br><span>14</span><br><span>15</span><br><span>16</span><br><span>17</span><br><span>18</span><br><span>19</span><br><span>20</span><br><span>21</span><br><span>22</span><br><span>23</span><br><span>24</span><br><span>25</span><br><span>26</span><br><span>27</span><br><span>28</span><br><span>29</span><br><span>30</span><br></div></div><hr>
 <h2 id="_5、withsql" tabindex="-1"> 5、WithSql</h2>
 <div><pre><code>fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>Topic<span>></span></span></span><span>(</span><span>)</span>
   <span>.</span><span>WithSql</span><span>(</span><span>"select * from Topic where clicks > @val"</span><span>,</span> <span>new</span> <span>{</span> val <span>=</span> <span>10</span> <span>}</span><span>)</span>
