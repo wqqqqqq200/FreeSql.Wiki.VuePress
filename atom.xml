@@ -3,7 +3,7 @@
   <id>http://freesql.net/FreeSql.Wiki.VuePress/</id>
   <title>FreeSql 官方文档</title>
   <subtitle>FreeSql Documents</subtitle>
-  <updated>2022-06-24T16:46:23.485Z</updated>
+  <updated>2022-06-29T02:25:16.006Z</updated>
   <generator>vuepress-plugin-feed2</generator>
   <link rel="self" href="http://freesql.net/FreeSql.Wiki.VuePress/atom.xml"/>
   <link rel="alternate" href="http://freesql.net/FreeSql.Wiki.VuePress/"/>
@@ -10697,7 +10697,7 @@ fsql<span>.</span><span>UpdateDict</span><span>(</span>dic<span>)</span><span>.<
     <title type="html">API 文档</title>
     <id>http://freesql.net/FreeSql.Wiki.VuePress/reference/api.html</id>
     <link href="http://freesql.net/FreeSql.Wiki.VuePress/reference/api.html"/>
-    <updated>2022-05-19T13:04:10.000Z</updated>
+    <updated>2022-06-29T02:23:44.000Z</updated>
     <content type="html"><![CDATA[<h1 id="api-文档" tabindex="-1"> API 文档</h1>
 <ul>
 <li><a href="http://124.70.130.97:8082/api/FreeSql.html" target="_blank" rel="noopener noreferrer">http://124.70.130.97:8082/api/FreeSql.html</a></li>
@@ -10721,6 +10721,11 @@ fsql<span>.</span><span>UpdateDict</span><span>(</span>dic<span>)</span><span>.<
 <td>UseSlave</td>
 <td>this</td>
 <td>设置从数据库，支持多个</td>
+</tr>
+<tr>
+<td>UseSlaveWeight</td>
+<td>this</td>
+<td>设置从数据库权重</td>
 </tr>
 <tr>
 <td>UseConnectionFactory</td>
@@ -10753,9 +10758,19 @@ fsql<span>.</span><span>UpdateDict</span><span>(</span>dic<span>)</span><span>.<
 <td>监视全局 SQL 执行前后</td>
 </tr>
 <tr>
+<td>UseMappingPriority</td>
+<td>this</td>
+<td>指定映射优先级（默认 Aop &lt; FluentApi &lt; Attribute）</td>
+</tr>
+<tr>
 <td><strong>UseNameConvert</strong></td>
 <td>this</td>
-<td>转换实体、属性名称 Entity Property -&gt; Db Filed</td>
+<td>自动转换名称 Entity -&gt; Db</td>
+</tr>
+<tr>
+<td>UseExitAutoDisposePool</td>
+<td>this</td>
+<td>监听 AppDomain.CurrentDomain.ProcessExit/Console.CancelKeyPress 事件自动释放连接池 (默认true)</td>
 </tr>
 <tr>
 <td>Build&lt;T&gt;</td>

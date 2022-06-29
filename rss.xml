@@ -6,8 +6,8 @@
     <link>http://freesql.net/FreeSql.Wiki.VuePress/</link>
     <description>FreeSql Documents</description>
     <language>zh-CN</language>
-    <pubDate>Fri, 24 Jun 2022 16:46:23 GMT</pubDate>
-    <lastBuildDate>Fri, 24 Jun 2022 16:46:23 GMT</lastBuildDate>
+    <pubDate>Wed, 29 Jun 2022 02:25:16 GMT</pubDate>
+    <lastBuildDate>Wed, 29 Jun 2022 02:25:16 GMT</lastBuildDate>
     <generator>vuepress-plugin-feed2</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
     <item>
@@ -10732,6 +10732,11 @@ fsql<span>.</span><span>UpdateDict</span><span>(</span>dic<span>)</span><span>.<
 <td>设置从数据库，支持多个</td>
 </tr>
 <tr>
+<td>UseSlaveWeight</td>
+<td>this</td>
+<td>设置从数据库权重</td>
+</tr>
+<tr>
 <td>UseConnectionFactory</td>
 <td>this</td>
 <td>设置自定义数据库连接对象（放弃内置对象连接池技术）</td>
@@ -10762,9 +10767,19 @@ fsql<span>.</span><span>UpdateDict</span><span>(</span>dic<span>)</span><span>.<
 <td>监视全局 SQL 执行前后</td>
 </tr>
 <tr>
+<td>UseMappingPriority</td>
+<td>this</td>
+<td>指定映射优先级（默认 Aop &lt; FluentApi &lt; Attribute）</td>
+</tr>
+<tr>
 <td><strong>UseNameConvert</strong></td>
 <td>this</td>
-<td>转换实体、属性名称 Entity Property -&gt; Db Filed</td>
+<td>自动转换名称 Entity -&gt; Db</td>
+</tr>
+<tr>
+<td>UseExitAutoDisposePool</td>
+<td>this</td>
+<td>监听 AppDomain.CurrentDomain.ProcessExit/Console.CancelKeyPress 事件自动释放连接池 (默认true)</td>
 </tr>
 <tr>
 <td>Build&lt;T&gt;</td>
