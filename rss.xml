@@ -6,8 +6,8 @@
     <link>http://freesql.net/FreeSql.Wiki.VuePress/</link>
     <description>FreeSql Documents</description>
     <language>zh-CN</language>
-    <pubDate>Mon, 04 Jul 2022 06:19:49 GMT</pubDate>
-    <lastBuildDate>Mon, 04 Jul 2022 06:19:49 GMT</lastBuildDate>
+    <pubDate>Mon, 04 Jul 2022 09:32:04 GMT</pubDate>
+    <lastBuildDate>Mon, 04 Jul 2022 09:32:04 GMT</lastBuildDate>
     <generator>vuepress-plugin-feed2</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
     <item>
@@ -11945,7 +11945,21 @@ fsql<span>.</span><span>UpdateDict</span><span>(</span>dic<span>)</span><span>.<
 <blockquote>
 <p>preview 预览版 添加 nuget 源：https://www.myget.org/F/ncc/api/v3/index.json</p>
 </blockquote>
-<h2 id="v3-2-663" tabindex="-1"> v3.2.663</h2>
+<h2 id="v3-2-665" tabindex="-1"> v3.2.665</h2>
+<ul>
+<li>增加 IsVersion string 字符串乐观锁；<a href="https://github.com/dotnetcore/FreeSql/issues/1178" target="_blank" rel="noopener noreferrer">#1178</a></li>
+<li>增加 IUpdate.SetSource ignoreVersion 参数可实现忽略乐观锁；<a href="https://github.com/dotnetcore/FreeSql/issues/1161" target="_blank" rel="noopener noreferrer">#1161</a></li>
+<li>增加 IInsertOrUpdate.SetSource(items, tempPrimarys) 指定临时主键参数；<a href="https://github.com/dotnetcore/FreeSql/issues/1160" target="_blank" rel="noopener noreferrer">#1160</a></li>
+<li>增加 DbContext/Repository 审计日志 ChangeInfo 增加属性 EntityType；</li>
+<li>修复 SqlServer WithLock 子查询不生效的 bug；<a href="https://github.com/dotnetcore/FreeSql/issues/1159" target="_blank" rel="noopener noreferrer">#1159</a></li>
+<li>修复 AsTreeCte + AsTable 无效的 bug；<a href="https://github.com/dotnetcore/FreeSql/issues/1176" target="_blank" rel="noopener noreferrer">#1176</a></li>
+<li>修复 UseGenerateCommandParameterWithLambda(true) 问题；<a href="https://github.com/dotnetcore/FreeSql/issues/1173" target="_blank" rel="noopener noreferrer">#1173</a> <a href="https://github.com/dotnetcore/FreeSql/issues/900" target="_blank" rel="noopener noreferrer">#900</a></li>
+<li>修复 SetSource 临时主键重载方法 + Column 设置 Name 后无效的 bug；</li>
+<li>修复 Dto 映射查询 Negate 表达式解析 bug；</li>
+<li>修复 pgsql OldName + XML 注释迁移代码顺序问题；</li>
+<li>优化 string Contains 模糊查找 % 的情况；</li>
+</ul>
+<h2 id="v3-2-664" tabindex="-1"> v3.2.664</h2>
 <ul>
 <li><strong>修复 UseGenerateCommandParameterWithLambda 子查询并发 bug；<a href="https://github.com/dotnetcore/FreeSql/issues/1155" target="_blank" rel="noopener noreferrer">#1155</a> （重要）</strong></li>
 <li>修复 pgsql Dto 映射使用常量 false 转换失败；</li>

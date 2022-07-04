@@ -3,7 +3,7 @@
   <id>http://freesql.net/FreeSql.Wiki.VuePress/</id>
   <title>FreeSql 官方文档</title>
   <subtitle>FreeSql Documents</subtitle>
-  <updated>2022-07-04T06:19:49.224Z</updated>
+  <updated>2022-07-04T09:32:04.804Z</updated>
   <generator>vuepress-plugin-feed2</generator>
   <link rel="self" href="http://freesql.net/FreeSql.Wiki.VuePress/atom.xml"/>
   <link rel="alternate" href="http://freesql.net/FreeSql.Wiki.VuePress/"/>
@@ -11930,13 +11930,27 @@ fsql<span>.</span><span>UpdateDict</span><span>(</span>dic<span>)</span><span>.<
     <title type="html">更新日志</title>
     <id>http://freesql.net/FreeSql.Wiki.VuePress/reference/change-log.html</id>
     <link href="http://freesql.net/FreeSql.Wiki.VuePress/reference/change-log.html"/>
-    <updated>2022-06-13T14:31:03.000Z</updated>
+    <updated>2022-07-04T09:30:51.000Z</updated>
     <content type="html"><![CDATA[<h1 id="更新日志" tabindex="-1"> 更新日志</h1>
 <p>大约每三个月一次版本号，暂时以修复 bug 为主</p>
 <blockquote>
 <p>preview 预览版 添加 nuget 源：https://www.myget.org/F/ncc/api/v3/index.json</p>
 </blockquote>
-<h2 id="v3-2-663" tabindex="-1"> v3.2.663</h2>
+<h2 id="v3-2-665" tabindex="-1"> v3.2.665</h2>
+<ul>
+<li>增加 IsVersion string 字符串乐观锁；<a href="https://github.com/dotnetcore/FreeSql/issues/1178" target="_blank" rel="noopener noreferrer">#1178</a></li>
+<li>增加 IUpdate.SetSource ignoreVersion 参数可实现忽略乐观锁；<a href="https://github.com/dotnetcore/FreeSql/issues/1161" target="_blank" rel="noopener noreferrer">#1161</a></li>
+<li>增加 IInsertOrUpdate.SetSource(items, tempPrimarys) 指定临时主键参数；<a href="https://github.com/dotnetcore/FreeSql/issues/1160" target="_blank" rel="noopener noreferrer">#1160</a></li>
+<li>增加 DbContext/Repository 审计日志 ChangeInfo 增加属性 EntityType；</li>
+<li>修复 SqlServer WithLock 子查询不生效的 bug；<a href="https://github.com/dotnetcore/FreeSql/issues/1159" target="_blank" rel="noopener noreferrer">#1159</a></li>
+<li>修复 AsTreeCte + AsTable 无效的 bug；<a href="https://github.com/dotnetcore/FreeSql/issues/1176" target="_blank" rel="noopener noreferrer">#1176</a></li>
+<li>修复 UseGenerateCommandParameterWithLambda(true) 问题；<a href="https://github.com/dotnetcore/FreeSql/issues/1173" target="_blank" rel="noopener noreferrer">#1173</a> <a href="https://github.com/dotnetcore/FreeSql/issues/900" target="_blank" rel="noopener noreferrer">#900</a></li>
+<li>修复 SetSource 临时主键重载方法 + Column 设置 Name 后无效的 bug；</li>
+<li>修复 Dto 映射查询 Negate 表达式解析 bug；</li>
+<li>修复 pgsql OldName + XML 注释迁移代码顺序问题；</li>
+<li>优化 string Contains 模糊查找 % 的情况；</li>
+</ul>
+<h2 id="v3-2-664" tabindex="-1"> v3.2.664</h2>
 <ul>
 <li><strong>修复 UseGenerateCommandParameterWithLambda 子查询并发 bug；<a href="https://github.com/dotnetcore/FreeSql/issues/1155" target="_blank" rel="noopener noreferrer">#1155</a> （重要）</strong></li>
 <li>修复 pgsql Dto 映射使用常量 false 转换失败；</li>
