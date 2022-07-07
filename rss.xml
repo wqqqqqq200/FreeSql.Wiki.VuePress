@@ -6,8 +6,8 @@
     <link>http://freesql.net/FreeSql.Wiki.VuePress/</link>
     <description>FreeSql Documents</description>
     <language>zh-CN</language>
-    <pubDate>Thu, 07 Jul 2022 01:04:35 GMT</pubDate>
-    <lastBuildDate>Thu, 07 Jul 2022 01:04:35 GMT</lastBuildDate>
+    <pubDate>Thu, 07 Jul 2022 01:05:49 GMT</pubDate>
+    <lastBuildDate>Thu, 07 Jul 2022 01:05:49 GMT</lastBuildDate>
     <generator>vuepress-plugin-feed2</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
     <item>
@@ -1890,7 +1890,7 @@ fsql<span>.</span>Ado<span>.</span><span>CommandFluent</span><span>(</span><span
     <span>.</span><span>ExecuteNonQuery</span><span>(</span><span>)</span><span>;</span> <span>//.Query&lt;T>() 或者 .ExecuteDataTable() 或者 ...</span>
 
 Console<span>.</span><span>WriteLine</span><span>(</span>p2<span>.</span>Value<span>)</span><span>;</span>
-</code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br><span>10</span><br><span>11</span><br><span>12</span><br><span>13</span><br><span>14</span><br><span>15</span><br><span>16</span><br></div></div><p>Oracle 存储过程获取DataTable：</p>
+</code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br><span>10</span><br><span>11</span><br><span>12</span><br><span>13</span><br><span>14</span><br><span>15</span><br><span>16</span><br></div></div><p>Oracle 存储过程获取 DataTable：</p>
 <div><pre><code><span>OracleParameter</span> p2 <span>=</span> <span>null</span><span>;</span>
 <span><span>var</span></span> dt <span>=</span> fsql<span>.</span>Ado<span>.</span><span>CommandFluent</span><span>(</span><span>"getTableInfo"</span><span>)</span>
      <span>.</span><span>CommandType</span><span>(</span>CommandType<span>.</span>StoredProcedure<span>)</span>
