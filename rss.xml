@@ -6,8 +6,8 @@
     <link>http://freesql.net/FreeSql.Wiki.VuePress/</link>
     <description>FreeSql Documents</description>
     <language>zh-CN</language>
-    <pubDate>Thu, 07 Jul 2022 00:22:19 GMT</pubDate>
-    <lastBuildDate>Thu, 07 Jul 2022 00:22:19 GMT</lastBuildDate>
+    <pubDate>Thu, 07 Jul 2022 01:04:35 GMT</pubDate>
+    <lastBuildDate>Thu, 07 Jul 2022 01:04:35 GMT</lastBuildDate>
     <generator>vuepress-plugin-feed2</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
     <item>
@@ -1890,7 +1890,22 @@ fsql<span>.</span>Ado<span>.</span><span>CommandFluent</span><span>(</span><span
     <span>.</span><span>ExecuteNonQuery</span><span>(</span><span>)</span><span>;</span> <span>//.Query&lt;T>() 或者 .ExecuteDataTable() 或者 ...</span>
 
 Console<span>.</span><span>WriteLine</span><span>(</span>p2<span>.</span>Value<span>)</span><span>;</span>
-</code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br><span>10</span><br><span>11</span><br><span>12</span><br><span>13</span><br><span>14</span><br><span>15</span><br><span>16</span><br></div></div><h2 id="ado-net-扩展方法" tabindex="-1"> Ado.net 扩展方法</h2>
+</code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br><span>10</span><br><span>11</span><br><span>12</span><br><span>13</span><br><span>14</span><br><span>15</span><br><span>16</span><br></div></div><p>Oracle 存储过程获取DataTable：</p>
+<div><pre><code><span>OracleParameter</span> p2 <span>=</span> <span>null</span><span>;</span>
+<span><span>var</span></span> dt <span>=</span> fsql<span>.</span>Ado<span>.</span><span>CommandFluent</span><span>(</span><span>"getTableInfo"</span><span>)</span>
+     <span>.</span><span>CommandType</span><span>(</span>CommandType<span>.</span>StoredProcedure<span>)</span>
+     <span>.</span><span>CommandTimeout</span><span>(</span><span>60</span><span>)</span>
+     <span>.</span><span>WithParameter</span><span>(</span><span>"out_var"</span><span>,</span> <span>null</span><span>,</span> p <span>=></span>
+     <span>{</span>
+         p2 <span>=</span> p <span>as</span> <span>OracleParameter</span><span>;</span>
+
+         p2<span>.</span>OracleDbType <span>=</span> OracleDbType<span>.</span>RefCursor<span>;</span>
+         p2<span>.</span>Direction <span>=</span> ParameterDirection<span>.</span>Output<span>;</span>
+
+     <span>}</span><span>)</span>
+     <span>.</span><span>ExecuteDataTable</span><span>(</span><span>)</span><span>;</span>
+Console<span>.</span><span>WriteLine</span><span>(</span>dt<span>.</span>Rows<span>.</span>Count<span>)</span><span>;</span>
+</code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br><span>10</span><br><span>11</span><br><span>12</span><br><span>13</span><br><span>14</span><br></div></div><h2 id="ado-net-扩展方法" tabindex="-1"> Ado.net 扩展方法</h2>
 <p>提供了类似 Dapper 的使用方法，FreeSql 增加了 IDbConnection/IDbTransaction 对象的扩展方法 Select/Insert/Update/Delete 实现 CRUD。</p>
 <div><pre><code><span>using</span> <span>FreeSql</span><span>;</span>
 
