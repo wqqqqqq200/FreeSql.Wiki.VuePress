@@ -3,7 +3,7 @@
   <id>http://freesql.net/FreeSql.Wiki.VuePress/</id>
   <title>FreeSql 官方文档</title>
   <subtitle>FreeSql Documents</subtitle>
-  <updated>2022-07-04T09:32:04.804Z</updated>
+  <updated>2022-07-07T00:22:19.040Z</updated>
   <generator>vuepress-plugin-feed2</generator>
   <link rel="self" href="http://freesql.net/FreeSql.Wiki.VuePress/atom.xml"/>
   <link rel="alternate" href="http://freesql.net/FreeSql.Wiki.VuePress/"/>
@@ -9566,12 +9566,12 @@ fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>VM_District_Pa
     <title type="html">分表分库</title>
     <id>http://freesql.net/FreeSql.Wiki.VuePress/guide/sharding.html</id>
     <link href="http://freesql.net/FreeSql.Wiki.VuePress/guide/sharding.html"/>
-    <updated>2022-05-31T14:08:53.000Z</updated>
+    <updated>2022-07-07T00:20:39.000Z</updated>
     <content type="html"><![CDATA[<h1 id="分表分库" tabindex="-1"> 分表分库</h1>
 <h2 id="理论知识" tabindex="-1"> 理论知识</h2>
 <p>分表 - 从表面意思上看呢，就是把一张表分成 N 多个小表，每一个小表都是完整的一张表。分表后数据都是存放在分表里，总表只是一个外壳，存取数据发生在一个一个的分表里面。分表后单表的并发能力提高了，磁盘 I/O 性能也提高了。并发能力为什么提高了呢，因为查寻一次所花的时间变短了，如果出现高并发的话，总表可以根据不同 的查询，将并发压力分到不同的小表里面。</p>
 <p>分库 - 把原本存储于一个库的数据分块存储到多个库上，把原本存储于一个表的数据分块存储到多个表上。数据库中的数据量不一定是可控的，在未进行分表分库的情况下，随着时间和业务的发展，库中的表会越来越多，表中的数据量也会越来越大，相应地，数据操作，增删改查的开销也会越来越大；另外，一台服务器的资源（CPU、磁盘、内存、IO 等）是有限的，最终数据库所能承载的数据量、数据处理能力都将遭遇瓶颈。</p>
-<h2 id="分表-astable" tabindex="-1"> 分表 AsTable</h2>
+<h2 id="手工分表-astable" tabindex="-1"> 手工分表 AsTable</h2>
 <p>FreeSql 原生用法、FreeSql.Repository 仓储用法 都提供了 AsTable 方法对分表进行 CRUD 操作，例如：</p>
 <div><pre><code><span><span>var</span></span> repo <span>=</span> fsql<span>.</span><span><span>GetRepository</span><span><span>&lt;</span>Log<span>></span></span></span><span>(</span><span>)</span><span>;</span>
 repo<span>.</span><span>AsTable</span><span>(</span>oldname <span>=></span> <span><span>$"</span><span><span>{</span><span>oldname</span><span>}</span></span><span>_201903"</span></span><span>)</span><span>;</span> <span>//对 Log_201903 表 CRUD</span>
@@ -9605,7 +9605,59 @@ repoComment<span>.</span><span>AsTable</span><span>(</span>oldname <span>=></spa
     repoLog<span>.</span><span>Insert</span><span>(</span><span>new</span> <span>Log</span> <span>{</span> <span>..</span><span>.</span> <span>}</span><span>)</span><span>;</span>
     ts<span>.</span><span>Complete</span><span>(</span><span>)</span><span>;</span>
 <span>}</span>
-</code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br><span>10</span><br><span>11</span><br></div></div><h2 id="分库-idlebus" tabindex="-1"> 分库 IdleBus</h2>
+</code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br><span>10</span><br><span>11</span><br></div></div><h2 id="自动分表-astable-beta" tabindex="-1"> 自动分表 AsTable (beta)</h2>
+<p>【自动分表】不同于 CURD.AsTable 方法，目前第一期完成按【时间】自动分表（不支持分库）。</p>
+<p>欢迎积极参与测试、反馈，请优先使用源代码进行测试，方便反馈定位问题，谢谢。</p>
+<div><pre><code>[Table(Name = &quot;as_table_log_{yyyyMM}&quot;, AsTable = &quot;createtime=2022-1-1(1 month)&quot;)]
+class AsTableLog
+{
+    public Guid id { get; set; }
+    public string msg { get; set; }
+    public DateTime createtime { get; set; }
+}
+</code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br></div></div><blockquote>
+<p>从 2022-1-1 开始，每月创建一个分表，按 createtime 字段分表</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>示范</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>AsTable = &quot;createtime=2022-1-1(1 year)&quot;</td>
+<td>一年一个分表</td>
+</tr>
+<tr>
+<td>AsTable = &quot;createtime=2022-1-1(2 year)&quot;</td>
+<td>两年一个分表</td>
+</tr>
+<tr>
+<td>AsTable = &quot;createtime=2022-1-1(1 month)&quot;</td>
+<td>一月一个分表</td>
+</tr>
+<tr>
+<td>AsTable = &quot;createtime=2022-1-1(3 month)&quot;</td>
+<td>三月一个分表</td>
+</tr>
+<tr>
+<td>AsTable = &quot;createtime=2022-1-1(1 day)&quot;</td>
+<td>一天一个分表</td>
+</tr>
+<tr>
+<td>AsTable = &quot;createtime=2022-1-1(7 day)&quot;</td>
+<td>七天一个分表</td>
+</tr>
+<tr>
+<td>AsTable = &quot;createtime=2022-1-1(12 hour)&quot;</td>
+<td>12小时一个分表</td>
+</tr>
+</tbody>
+</table>
+<p>详细介绍：<a href="https://github.com/dotnetcore/FreeSql/discussions/1066" target="_blank" rel="noopener noreferrer">https://github.com/dotnetcore/FreeSql/discussions/1066</a></p>
+<h2 id="分库-idlebus" tabindex="-1"> 分库 IdleBus</h2>
 <p>IFreeSql 对应一个数据库，分库是不是要定义 N 个 IFreeSql？分库的租户场景，那不要定义 10000 个？</p>
 <p>IdleBus 空闲对象管理容器，有效组织对象重复利用，自动创建、销毁，解决【实例】过多且长时间占用的问题。有时候想做一个单例对象重复使用提升性能，但是定义多了，有的又可能一直空闲着占用资源。专门解决：又想重复利用，又想少占资源的场景。https://github.com/2881099/IdleBus</p>
 <blockquote>
