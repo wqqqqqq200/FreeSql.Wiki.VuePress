@@ -6,8 +6,8 @@
     <link>http://freesql.net/FreeSql.Wiki.VuePress/en/</link>
     <description>FreeSql Documents</description>
     <language>en-US</language>
-    <pubDate>Thu, 07 Jul 2022 01:05:49 GMT</pubDate>
-    <lastBuildDate>Thu, 07 Jul 2022 01:05:49 GMT</lastBuildDate>
+    <pubDate>Sat, 09 Jul 2022 09:13:48 GMT</pubDate>
+    <lastBuildDate>Sat, 09 Jul 2022 09:13:48 GMT</lastBuildDate>
     <generator>vuepress-plugin-feed2</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
     <item>
@@ -81,7 +81,7 @@
 
     <span>public</span> <span>User</span> User <span>{</span> <span>get</span><span>;</span> <span>set</span><span>;</span> <span>}</span>
 <span>}</span>
-</code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br><span>10</span><br><span>11</span><br></div></div><p><a href="https://github.com/2881099/FreeSql/issues/45" target="_blank" rel="noopener noreferrer">《How to add data in one-to-one mode?》</a></p>
+</code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br><span>10</span><br><span>11</span><br></div></div><p><a href="https://github.com/dotnetcore/FreeSql/issues/45" target="_blank" rel="noopener noreferrer">《How to add data in one-to-one mode?》</a></p>
 <h3 id="many-to-one" tabindex="-1"> Many-to-One</h3>
 <div><pre><code><span>class</span> <span>Group</span> <span>{</span>
     <span>public</span> <span><span>int</span></span> Id <span>{</span> <span>get</span><span>;</span> <span>set</span><span>;</span> <span>}</span> <span>//Id、GroupId、Group_id</span>
@@ -115,7 +115,7 @@
     <span>public</span> <span><span>int</span></span> BGroupId <span>{</span> <span>get</span><span>;</span> <span>set</span><span>;</span> <span>}</span>
     <span>public</span> <span>Group</span> BGroup <span>{</span> <span>get</span><span>;</span> <span>set</span><span>;</span> <span>}</span>
 <span>}</span>
-</code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br><span>10</span><br><span>11</span><br><span>12</span><br><span>13</span><br><span>14</span><br><span>15</span><br><span>16</span><br><span>17</span><br></div></div><p><a href="https://github.com/2881099/FreeSql/issues/46" target="_blank" rel="noopener noreferrer">《How to add data in one-to-many mode?》</a></p>
+</code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br><span>10</span><br><span>11</span><br><span>12</span><br><span>13</span><br><span>14</span><br><span>15</span><br><span>16</span><br><span>17</span><br></div></div><p><a href="https://github.com/dotnetcore/FreeSql/issues/46" target="_blank" rel="noopener noreferrer">《How to add data in one-to-many mode?》</a></p>
 <h3 id="parent-and-children" tabindex="-1"> Parent and Children</h3>
 <div><pre><code><span>class</span> <span>Group</span> <span>{</span>
     <span>public</span> <span><span>int</span></span> Id <span>{</span> <span>get</span><span>;</span> <span>set</span><span>;</span> <span>}</span> <span>//Id、GroupId、Group_id</span>
@@ -126,7 +126,7 @@
     <span>public</span> <span>ICollection<span>&lt;</span>Group<span>></span></span> Childs <span>{</span> <span>get</span><span>;</span> <span>set</span><span>;</span> <span>}</span>
 <span>}</span>
 </code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br></div></div><p>The parent-children relationship is similar to One-to-Many mode. You can also refer to this link:</p>
-<p><a href="https://github.com/2881099/FreeSql/issues/46" target="_blank" rel="noopener noreferrer">《How to add data in one-to-many mode?》</a></p>
+<p><a href="https://github.com/dotnetcore/FreeSql/issues/46" target="_blank" rel="noopener noreferrer">《How to add data in one-to-many mode?》</a></p>
 <h3 id="many-to-many" tabindex="-1"> Many-to-Many</h3>
 <div><pre><code><span>class</span> <span>Song</span> <span>{</span>
     <span>[</span><span><span>Column</span><span><span>(</span>IsIdentity <span>=</span> <span>true</span><span>)</span></span></span><span>]</span>
@@ -4295,7 +4295,7 @@ blog<span>.</span>BlogId <span>=</span> <span>(</span><span>int</span><span>)</s
 <td>Driver={SQL Server};Server=.;Persist Security Info=False; Trusted_Connection=Yes;Integrated Security=True; DATABASE=freesqlTest_odbc; Pooling=true;Min pool size=1</td>
 </tr>
 <tr>
-<td><a href="https://github.com/2881099/FreeSql/tree/master/Providers/FreeSql.Provider.Custom" target="_blank" rel="noopener noreferrer">DataType.Custom</a></td>
+<td><a href="https://github.com/dotnetcore/FreeSql/tree/master/Providers/FreeSql.Provider.Custom" target="_blank" rel="noopener noreferrer">DataType.Custom</a></td>
 <td>Custom connection string, access any database</td>
 </tr>
 </tbody>
@@ -4645,13 +4645,13 @@ dotnet add package FreeSql.Provider.MySqlConnector
 <td><strong><a href="https://www.nuget.org/packages/FreeSql.Provider.KingbaseES" target="_blank" rel="noopener noreferrer"><img src="https://buildstats.info/nuget/FreeSql.Provider.KingbaseES" alt="NuGet" loading="lazy"></a></strong></td>
 </tr>
 <tr>
-<td><a href="https://github.com/2881099/FreeSql/tree/master/Providers/FreeSql.Provider.Odbc" target="_blank" rel="noopener noreferrer">FreeSql.Provider.Odbc</a></td>
+<td><a href="https://github.com/dotnetcore/FreeSql/tree/master/Providers/FreeSql.Provider.Odbc" target="_blank" rel="noopener noreferrer">FreeSql.Provider.Odbc</a></td>
 <td>NETStandard2.0、net45、net40</td>
 <td>Based on ODBC</td>
 <td><strong><a href="https://www.nuget.org/packages/FreeSql.Provider.Odbc" target="_blank" rel="noopener noreferrer"><img src="https://buildstats.info/nuget/FreeSql.Provider.Odbc" alt="NuGet" loading="lazy"></a></strong></td>
 </tr>
 <tr>
-<td><a href="https://github.com/2881099/FreeSql/tree/master/Providers/FreeSql.Provider.Custom" target="_blank" rel="noopener noreferrer">FreeSql.Provider.Custom</a></td>
+<td><a href="https://github.com/dotnetcore/FreeSql/tree/master/Providers/FreeSql.Provider.Custom" target="_blank" rel="noopener noreferrer">FreeSql.Provider.Custom</a></td>
 <td>NETStandard2.0、net45、net40</td>
 <td>Custom database provider</td>
 <td><strong><a href="https://www.nuget.org/packages/FreeSql.Provider.Custom" target="_blank" rel="noopener noreferrer"><img src="https://buildstats.info/nuget/FreeSql.Provider.Custom" alt="NuGet" loading="lazy"></a></strong></td>
@@ -4744,7 +4744,7 @@ dotnet add package FreeSql.Provider.MySqlConnector
 <h2 id="features" tabindex="-1"> Features</h2>
 <ul>
 <li>🛠 Support CodeFirst data migration.</li>
-<li>💻 Support DbFirst import entity class from database, or use <a href="https://github.com/2881099/FreeSql/wiki/DbFirst" target="_blank" rel="noopener noreferrer">Generation Tool</a>.</li>
+<li>💻 Support DbFirst import entity class from database, or use <a href="https://github.com/dotnetcore/FreeSql/wiki/DbFirst" target="_blank" rel="noopener noreferrer">Generation Tool</a>.</li>
 <li>⛳ Support advanced type mapping, such as PostgreSQL array type, etc.</li>
 <li>🌲 Support expression functions, and customizable analysis.</li>
 <li>🏁 Support one-to-many and many-to-many navigation properties, include and lazy loading.</li>
