@@ -3,7 +3,7 @@
   <id>http://freesql.net/FreeSql.Wiki.VuePress/</id>
   <title>FreeSql 官方文档</title>
   <subtitle>FreeSql Documents</subtitle>
-  <updated>2022-07-09T09:13:48.954Z</updated>
+  <updated>2022-07-14T02:07:30.935Z</updated>
   <generator>vuepress-plugin-feed2</generator>
   <link rel="self" href="http://freesql.net/FreeSql.Wiki.VuePress/atom.xml"/>
   <link rel="alternate" href="http://freesql.net/FreeSql.Wiki.VuePress/"/>
@@ -7184,7 +7184,7 @@ fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>Topic<span>></
     <title type="html">导航属性 ✨</title>
     <id>http://freesql.net/FreeSql.Wiki.VuePress/guide/navigate-attribute.html</id>
     <link href="http://freesql.net/FreeSql.Wiki.VuePress/guide/navigate-attribute.html"/>
-    <updated>2022-07-09T09:12:32.000Z</updated>
+    <updated>2022-07-14T02:06:02.000Z</updated>
     <content type="html"><![CDATA[<h1 id="导航属性-✨" tabindex="-1"> 导航属性 ✨</h1>
 <p>导航属性是 FreeSql 的特色功能之一，可通过约定配置、或自定义配置对象间的关系。</p>
 <p>导航属性有 OneToMany, ManyToOne, ManyToMany, OneToOne, Parent, <a href="https://www.cnblogs.com/FreeSql/p/16351417.html" target="_blank" rel="noopener noreferrer">PgArrayToMany</a> 六种配置关系。</p>
@@ -7198,6 +7198,7 @@ fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>Topic<span>></
 <blockquote>
 <p>预热说明：导航属性加载，因为要解决死循环引用问题，当引用关系很复杂的时候，有可能导致首次使用导航属性失败，第二次就可以了。解决办法可以程序启动时就预热所有实体类，循环执行 fsql.Select&lt;object&gt;().AsType(实体类);</p>
 </blockquote>
+<p>OneToMany/ManyToMany 集合导航属性支持的类型：ICollection、List、ObservableCollection</p>
 <h1 id="自定义导航关系" tabindex="-1"> 自定义导航关系</h1>
 <div><pre><code><span>//导航属性，OneToMany</span>
 <span>[</span><span>Navigate</span><span>(</span><span>nameof</span><span>(</span>song_tag<span>.</span>song_id<span>)</span><span>)</span><span>]</span>
