@@ -6,8 +6,8 @@
     <link>http://freesql.net/FreeSql.Wiki.VuePress/</link>
     <description>FreeSql Documents</description>
     <language>zh-CN</language>
-    <pubDate>Thu, 14 Jul 2022 02:10:59 GMT</pubDate>
-    <lastBuildDate>Thu, 14 Jul 2022 02:10:59 GMT</lastBuildDate>
+    <pubDate>Sun, 17 Jul 2022 03:55:07 GMT</pubDate>
+    <lastBuildDate>Sun, 17 Jul 2022 03:55:07 GMT</lastBuildDate>
     <generator>vuepress-plugin-feed2</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
     <item>
@@ -9194,6 +9194,7 @@ fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>Topic<span>></
 <li>多租户</li>
 </ul>
 <h2 id="特别介绍-wheredynamicfilter" tabindex="-1"> 特别介绍 WhereDynamicFilter</h2>
+<p><a href="https://www.cnblogs.com/FreeSql/p/16485310.html" target="_blank" rel="noopener noreferrer">《高效理解 FreeSql WhereDynamicFilter，深入了解设计初衷》</a></p>
 <p>ISelect.WhereDynamicFilter 方法实现动态过滤条件（与前端交互），支持的操作符：</p>
 <ul>
 <li>Contains/StartsWith/EndsWith/NotContains/NotStartsWith/NotEndsWith：包含/不包含，like '%xx%'，或者 like 'xx%'，或者 like '%xx'</li>
