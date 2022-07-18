@@ -6,8 +6,8 @@
     <link>http://freesql.net/FreeSql.Wiki.VuePress/</link>
     <description>FreeSql Documents</description>
     <language>zh-CN</language>
-    <pubDate>Sun, 17 Jul 2022 03:55:07 GMT</pubDate>
-    <lastBuildDate>Sun, 17 Jul 2022 03:55:07 GMT</lastBuildDate>
+    <pubDate>Mon, 18 Jul 2022 01:46:09 GMT</pubDate>
+    <lastBuildDate>Mon, 18 Jul 2022 01:46:09 GMT</lastBuildDate>
     <generator>vuepress-plugin-feed2</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
     <item>
@@ -9205,6 +9205,7 @@ fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>Topic<span>></
 <li>DateRange：日期范围，有特殊处理 value[1] + 1</li>
 <li>Any/NotAny：是否符合 value 中任何一项（直白的说是 SQL IN）</li>
 </ul>
+<p><img src="https://user-images.githubusercontent.com/16286519/179434456-0f8361d7-05fe-42a1-af74-74be76146f9b.png" alt="image" loading="lazy"></p>
 <div><pre><code><span>DynamicFilterInfo</span> dyfilter <span>=</span> JsonConvert<span>.</span><span><span>DeserializeObject</span><span><span>&lt;</span>DynamicFilterInfo<span>></span></span></span><span>(</span><span>@"
 {
   ""Logic"" : ""Or"",
@@ -9647,6 +9648,7 @@ fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>VM_District_Pa
 </tbody>
 </table>
 ]]></content:encoded>
+      <enclosure url="https://user-images.githubusercontent.com/16286519/179434456-0f8361d7-05fe-42a1-af74-74be76146f9b.png" type="image/png"/>
     </item>
     <item>
       <title>分表分库</title>
