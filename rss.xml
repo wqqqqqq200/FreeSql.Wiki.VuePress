@@ -6,8 +6,8 @@
     <link>http://freesql.net/FreeSql.Wiki.VuePress/</link>
     <description>FreeSql Documents</description>
     <language>zh-CN</language>
-    <pubDate>Tue, 19 Jul 2022 11:02:03 GMT</pubDate>
-    <lastBuildDate>Tue, 19 Jul 2022 11:02:03 GMT</lastBuildDate>
+    <pubDate>Fri, 22 Jul 2022 13:46:58 GMT</pubDate>
+    <lastBuildDate>Fri, 22 Jul 2022 13:46:58 GMT</lastBuildDate>
     <generator>vuepress-plugin-feed2</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
     <item>
@@ -10074,9 +10074,15 @@ class AsTableLog
     public DateTime createtime { get; set; }
 }
 </code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br></div></div><blockquote>
-<p>从 2022-1-1 开始，每月创建一个分表，按 createtime 字段分表</p>
+<p>从 2022-1-1 开始至当前时间，每月创建一个分表，按 createtime 字段分表</p>
 </blockquote>
-<table>
+<blockquote>
+<p>若最大日期大于当前时间，可手工扩容分表：</p>
+</blockquote>
+<div><pre><code>fsql.CodeFirst.GetTableByEntity(typeof(AsTableLog))
+    .AsTableImpl
+    .GetTableNameByColumnValue(DateTime.Parse(&quot;2023-7-1&quot;), autoExpand: true);
+</code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br></div></div><table>
 <thead>
 <tr>
 <th>示范</th>
