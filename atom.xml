@@ -3,15 +3,72 @@
   <id>http://freesql.net/FreeSql.Wiki.VuePress/</id>
   <title>FreeSql 官方文档</title>
   <subtitle>FreeSql Documents</subtitle>
-  <updated>2022-07-22T13:46:58.964Z</updated>
+  <updated>2022-07-23T05:32:39.866Z</updated>
   <generator>vuepress-plugin-feed2</generator>
   <link rel="self" href="http://freesql.net/FreeSql.Wiki.VuePress/atom.xml"/>
   <link rel="alternate" href="http://freesql.net/FreeSql.Wiki.VuePress/"/>
   <entry>
+    <title type="html">WithTempQuery</title>
+    <id>http://freesql.net/FreeSql.Wiki.VuePress/guide/withtempquery.html</id>
+    <link href="http://freesql.net/FreeSql.Wiki.VuePress/guide/withtempquery.html"/>
+    <updated>2022-07-23T05:30:46.000Z</updated>
+    <content type="html"><![CDATA[<h1 id="withtempquery" tabindex="-1"> WithTempQuery</h1>
+<blockquote>
+<p>版本要求：v3.2.666+</p>
+</blockquote>
+<p>场景1：查询分组第一条记录</p>
+<div><pre><code>fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>User1<span>></span></span></span><span>(</span><span>)</span>
+    <span>.</span><span>Where</span><span>(</span>a <span>=></span> a<span>.</span>Id <span>&lt;</span> <span>1000</span><span>)</span>
+    <span>.</span><span>WithTempQuery</span><span>(</span>a <span>=></span> <span>new</span>
+    <span>{</span>
+        item <span>=</span> a<span>,</span>
+        rownum <span>=</span> SqlExt<span>.</span><span>RowNumber</span><span>(</span><span>)</span><span>.</span><span>Over</span><span>(</span><span>)</span><span>.</span><span>PartitionBy</span><span>(</span>a<span>.</span>Nickname<span>)</span><span>.</span><span>OrderBy</span><span>(</span>a<span>.</span>Id<span>)</span><span>.</span><span>ToValue</span><span>(</span><span>)</span>
+    <span>}</span><span>)</span>
+    <span>.</span><span>Where</span><span>(</span>a <span>=></span> a<span>.</span>rownum <span>==</span> <span>1</span><span>)</span>
+    <span>.</span><span>ToList</span><span>(</span><span>)</span><span>;</span>
+</code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br></div></div><blockquote>
+<p>提示：支持多表嵌套查询，fsql.Select&lt;User1, UserGroup1&gt;()</p>
+</blockquote>
+<div><pre><code><span>SELECT</span> <span>*</span>
+<span>FROM</span> <span>(</span>
+    <span>SELECT</span> a<span>.</span><span>[</span>Id<span>]</span><span>,</span> a<span>.</span><span>[</span>Nickname<span>]</span><span>,</span> row_number<span>(</span><span>)</span> <span>over</span><span>(</span> <span>partition</span> <span>by</span> a<span>.</span><span>[</span>Nickname<span>]</span> <span>order</span> <span>by</span> a<span>.</span><span>[</span>Id<span>]</span><span>)</span> <span>[</span>rownum<span>]</span>
+    <span>FROM</span> <span>[</span>User1<span>]</span> a
+    <span>WHERE</span> a<span>.</span><span>[</span>Id<span>]</span> <span>&lt;</span> <span>1000</span>
+<span>)</span> a
+<span>WHERE</span> <span>(</span>a<span>.</span><span>[</span>rownum<span>]</span> <span>=</span> <span>1</span><span>)</span>
+</code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br></div></div><p>场景2：分组查询嵌套</p>
+<p>待补充..</p>
+<p>场景3：嵌套查询 + Join</p>
+<p>待补充..</p>
+<h2 id="tosql-withsql" tabindex="-1"> ToSql + WithSql</h2>
+<p>这是早期提供的嵌套查询方法</p>
+<div><pre><code><span><span>var</span></span> sql <span>=</span> fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>User1<span>></span></span></span><span>(</span><span>)</span>
+    <span>.</span><span>Where</span><span>(</span>a <span>=></span> a<span>.</span>Id <span>&lt;</span> <span>1000</span><span>)</span>
+    <span>.</span><span>ToSql</span><span>(</span>a <span>=></span> <span>new</span>
+    <span>{</span>
+        item <span>=</span> a<span>,</span>
+        rownum <span>=</span> SqlExt<span>.</span><span>RowNumber</span><span>(</span><span>)</span><span>.</span><span>Over</span><span>(</span><span>)</span><span>.</span><span>PartitionBy</span><span>(</span>a<span>.</span>Nickname<span>)</span><span>.</span><span>OrderBy</span><span>(</span>a<span>.</span>Id<span>)</span><span>.</span><span>ToValue</span><span>(</span><span>)</span>
+    <span>}</span><span>,</span> FieldAliasOptions<span>.</span>AsProperty<span>)</span><span>;</span>
+
+fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>User1<span>></span></span></span><span>(</span><span>)</span>
+    <span>.</span><span>WithSql</span><span>(</span>sql<span>)</span>
+    <span>.</span><span>Where</span><span>(</span><span>"a.rownum = 1"</span><span>)</span>
+    <span>.</span><span>ToList</span><span>(</span><span>)</span><span>;</span>
+</code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br><span>10</span><br><span>11</span><br><span>12</span><br></div></div><div><pre><code><span>SELECT</span> a<span>.</span><span>[</span>Id<span>]</span><span>,</span> a<span>.</span><span>[</span>Nickname<span>]</span> 
+<span>FROM</span> <span>(</span>
+    <span>SELECT</span> a<span>.</span><span>[</span>Id<span>]</span><span>,</span> a<span>.</span><span>[</span>Nickname<span>]</span><span>,</span> row_number<span>(</span><span>)</span> <span>over</span><span>(</span> <span>partition</span> <span>by</span> a<span>.</span><span>[</span>Nickname<span>]</span> <span>order</span> <span>by</span> a<span>.</span><span>[</span>Id<span>]</span><span>)</span> <span>[</span>rownum<span>]</span>
+    <span>FROM</span> <span>[</span>User1<span>]</span> a
+    <span>WHERE</span> a<span>.</span><span>[</span>Id<span>]</span> <span>&lt;</span> <span>1000</span>
+<span>)</span> a
+<span>WHERE</span> <span>(</span>a<span>.</span>rownum <span>=</span> <span>1</span><span>)</span>
+</code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br></div></div>]]></content>
+    <published>2022-07-23T05:30:46.000Z</published>
+  </entry>
+  <entry>
     <title type="html">AOP+FreeSql 跨方法异步事务</title>
     <id>http://freesql.net/FreeSql.Wiki.VuePress/extra/aop-freesql-autofac.html</id>
     <link href="http://freesql.net/FreeSql.Wiki.VuePress/extra/aop-freesql-autofac.html"/>
-    <updated>2022-07-18T16:31:09.000Z</updated>
+    <updated>2022-07-23T05:30:46.000Z</updated>
     <content type="html"><![CDATA[<h1 id="aop-freesql-跨方法异步事务" tabindex="-1"> AOP+FreeSql 跨方法异步事务</h1>
 <p>使用Autofac基于特性标签，实现跨方法的异步事务处理</p>
 <ul>
@@ -25,7 +82,7 @@
 dotnet <span>add</span> package FreeSql.DbContext
 dotnet <span>add</span> package FreeSql.Provider.MySqlConnector
 </code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br></div></div><p>手动创建一个MySql/MariaDB数据库,名为<code>ovov_freesql_repository</code></p>
-<h3 id="appsetting-json" tabindex="-1"> appsetting.json</h3>
+<h3 id="appsettings-json" tabindex="-1"> appsettings.json</h3>
 <div><pre><code><span>{</span>
   <span>"Default"</span><span>:</span> <span>"Data Source=127.0.0.1;Port=3306;User ID=root;Password=root;Initial Catalog=ovov_freesql_repository;Charset=utf8;SslMode=none;Max pool size=10"</span>
 <span>}</span>
@@ -309,7 +366,7 @@ builder<span>.</span>Host
 </ul>
 <h2 id="autofac批量注册" tabindex="-1"> Autofac批量注册</h2>
 <ul>
-<li>Autofac支持批量注入以Service后缀的接口。该方法在lin-cms-dotnetcore项目中有使用<a href="https://github.com/luoyunchong/lin-cms-dotnetcore/blob/master/src/LinCms.Web/Startup/Configuration/ServiceModule.cs" target="_blank" rel="noopener noreferrer">https://github.com/luoyunchong/lin-cms-dotnetcore/blob/master/src/LinCms.Web/Startup/Configuration/ServiceModule.cs</a></li>
+<li>Autofac支持批量注入以Service后缀的接口。该方法在lin-cms-dotnetcore项目中有使用<a href="https://github.com/luoyunchong/lin-cms-dotnetcore/blob/master/src/LinCms.Web/Startup/Configuration/ServiceModule.cs" target="_blank" rel="noopener noreferrer">LinCms.Web/Startup/Configuration/ServiceModule.cs</a></li>
 </ul>
 <div><pre><code><span>public</span> <span>class</span> <span>ServiceModule</span> <span>:</span> <span><span>Autofac<span>.</span>Module</span></span>
 <span>{</span>
@@ -8750,20 +8807,21 @@ Assert<span>.</span><span>Equal</span><span>(</span><span>"中国[100000] -> 北
     <title type="html">分组聚合</title>
     <id>http://freesql.net/FreeSql.Wiki.VuePress/guide/select-group-by.html</id>
     <link href="http://freesql.net/FreeSql.Wiki.VuePress/guide/select-group-by.html"/>
-    <updated>2022-05-23T02:38:02.000Z</updated>
+    <updated>2022-07-23T05:30:46.000Z</updated>
     <content type="html"><![CDATA[<h1 id="分组聚合" tabindex="-1"> 分组聚合</h1>
 <div><pre><code><span>static</span> <span>IFreeSql</span> fsql <span>=</span> <span>new</span> <span>FreeSql<span>.</span>FreeSqlBuilder</span><span>(</span><span>)</span>
     <span>.</span><span>UseConnectionString</span><span>(</span>FreeSql<span>.</span>DataType<span>.</span>MySql<span>,</span> <span>"Data Source=127.0.0.1;Port=3306;User ID=root;Password=root;Initial Catalog=cccddd;Charset=utf8;SslMode=none;Max pool size=10"</span><span>)</span>
     <span>.</span><span>Build</span><span>(</span><span>)</span><span>;</span> <span>//请务必定义成 Singleton 单例模式</span>
 
-<span>class</span> <span>Topic</span> <span>{</span>
+<span>class</span> <span>Topic</span> 
+<span>{</span>
     <span>[</span><span><span>Column</span><span><span>(</span>IsIdentity <span>=</span> <span>true</span><span>,</span> IsPrimary <span>=</span> <span>true</span><span>)</span></span></span><span>]</span>
     <span>public</span> <span><span>int</span></span> Id <span>{</span> <span>get</span><span>;</span> <span>set</span><span>;</span> <span>}</span>
     <span>public</span> <span><span>int</span></span> Clicks <span>{</span> <span>get</span><span>;</span> <span>set</span><span>;</span> <span>}</span>
     <span>public</span> <span><span>string</span></span> Title <span>{</span> <span>get</span><span>;</span> <span>set</span><span>;</span> <span>}</span>
     <span>public</span> <span>DateTime</span> CreateTime <span>{</span> <span>get</span><span>;</span> <span>set</span><span>;</span> <span>}</span>
 <span>}</span>
-</code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br><span>10</span><br><span>11</span><br></div></div><h2 id="groupby分组聚合" tabindex="-1"> GroupBy分组聚合</h2>
+</code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br><span>10</span><br><span>11</span><br><span>12</span><br></div></div><h2 id="分组聚合-1" tabindex="-1"> 分组聚合</h2>
 <div><pre><code><span><span>var</span></span> list <span>=</span> fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>Topic<span>></span></span></span><span>(</span><span>)</span>
     <span>.</span><span>GroupBy</span><span>(</span>a <span>=></span> <span>new</span> <span>{</span> tt2 <span>=</span> a<span>.</span>Title<span>.</span><span>Substring</span><span>(</span><span>0</span><span>,</span> <span>2</span><span>)</span><span>,</span> mod4 <span>=</span> a<span>.</span>Id <span>%</span> <span>4</span> <span>}</span><span>)</span>
     <span>.</span><span>Having</span><span>(</span>a <span>=></span> a<span>.</span><span>Count</span><span>(</span><span>)</span> <span>></span> <span>0</span> <span>&amp;&amp;</span> a<span>.</span><span>Avg</span><span>(</span>a<span>.</span>Key<span>.</span>mod4<span>)</span> <span>></span> <span>0</span> <span>&amp;&amp;</span> a<span>.</span><span>Max</span><span>(</span>a<span>.</span>Key<span>.</span>mod4<span>)</span> <span>></span> <span>0</span><span>)</span>
@@ -8771,15 +8829,45 @@ Assert<span>.</span><span>Equal</span><span>(</span><span>"中国[100000] -> 北
     <span>.</span><span>OrderBy</span><span>(</span>a <span>=></span> a<span>.</span>Key<span>.</span>tt2<span>)</span>
     <span>.</span><span>OrderByDescending</span><span>(</span>a <span>=></span> a<span>.</span><span>Count</span><span>(</span><span>)</span><span>)</span>
     <span>.</span><span>ToList</span><span>(</span>a <span>=></span> <span>new</span> <span>{</span> a<span>.</span>Key<span>,</span> cou1 <span>=</span> a<span>.</span><span>Count</span><span>(</span><span>)</span><span>,</span> arg1 <span>=</span> a<span>.</span><span>Avg</span><span>(</span>a<span>.</span>Value<span>.</span>Clicks<span>)</span> <span>}</span><span>)</span><span>;</span>
-<span>//SELECT substr(a.`Title`, 1, 2) as1, count(1) as2, avg(a.`Id`) as3</span>
-<span>//FROM `Topic` a</span>
-<span>//GROUP BY substr(a.`Title`, 1, 2), (a.`Id` % 4)</span>
+<span>//SELECT substr(a.`Title`, 1, 2) as1, count(1) as2, avg(a.`Id`) as3 </span>
+<span>//FROM `Topic` a </span>
+<span>//GROUP BY substr(a.`Title`, 1, 2), (a.`Id` % 4) </span>
 <span>//HAVING (count(1) > 0 AND avg((a.`Id` % 4)) > 0 AND max((a.`Id` % 4)) > 0) AND (count(1) &lt; 300 OR avg((a.`Id` % 4)) &lt; 100)</span>
 <span>//ORDER BY substr(a.`Title`, 1, 2), count(1) DESC</span>
 </code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br><span>10</span><br><span>11</span><br><span>12</span><br></div></div><blockquote>
 <p>不分组求聚合值，请使用 ToAggregate 替代 ToList</p>
 </blockquote>
-<h2 id="api" tabindex="-1"> API</h2>
+<h2 id="导航属性分组" tabindex="-1"> 导航属性分组</h2>
+<p>假如 Topic 有导航属性 Category，Category 又有导航属性 Area，导航属性分组代码如下：</p>
+<div><pre><code><span><span>var</span></span> list <span>=</span> fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>Topic<span>></span></span></span><span>(</span><span>)</span>
+    <span>.</span><span>GroupBy</span><span>(</span>a <span>=></span> <span>new</span> <span>{</span> a<span>.</span>Clicks<span>,</span> a<span>.</span>Category <span>}</span><span>)</span>
+    <span>.</span><span>ToList</span><span>(</span>a <span>=></span> <span>new</span> <span>{</span> a<span>.</span>Key<span>.</span>Category<span>.</span>Area<span>.</span>Name <span>}</span><span>)</span><span>;</span>
+</code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br></div></div><p>注意：如上这样编写，会报错无法解析 a.Key.Category.Area.Name，解决办法使用 Include：</p>
+<div><pre><code><span><span>var</span></span> list <span>=</span> fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>Topic<span>></span></span></span><span>(</span><span>)</span>
+    <span>.</span><span>Include</span><span>(</span>a <span>=></span> a<span>.</span>Category<span>.</span>Area<span>)</span>
+    <span>//必须添加此行，否则只分组 Category 而不包含它的下级导航属性 Area</span>
+
+    <span>.</span><span>GroupBy</span><span>(</span>a <span>=></span> <span>new</span> <span>{</span> a<span>.</span>Clicks<span>,</span> a<span>.</span>Category <span>}</span><span>)</span>
+    <span>.</span><span>ToList</span><span>(</span>a <span>=></span> <span>new</span> <span>{</span> a<span>.</span>Key<span>.</span>Category<span>.</span>Area<span>.</span>Name <span>}</span><span>)</span><span>;</span>
+</code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br></div></div><p>但是，你还可以这样解决：</p>
+<div><pre><code><span><span>var</span></span> list <span>=</span> fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>Topic<span>></span></span></span><span>(</span><span>)</span>
+    <span>.</span><span>GroupBy</span><span>(</span>a <span>=></span> <span>new</span> <span>{</span> a<span>.</span>Clicks<span>,</span> a<span>.</span>Category<span>,</span> a<span>.</span>Category<span>.</span>Area <span>}</span><span>)</span>
+    <span>.</span><span>ToList</span><span>(</span>a <span>=></span> <span>new</span> <span>{</span> a<span>.</span>Key<span>.</span>Area<span>.</span>Name <span>}</span><span>)</span><span>;</span>
+</code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br></div></div><h2 id="多表分组" tabindex="-1"> 多表分组</h2>
+<div><pre><code>var list = fsql.Select&lt;Topic, Category, Area&gt;()
+    .GroupBy((a, b, c) =&gt; new { a.Title, c.Name })
+    .Having(g =&gt; g.Count() &lt; 300 || g.Avg(g.Value.Item1.Clicks) &lt; 100)
+    .ToList(g =&gt; new { count = g.Count(), Name = g.Key.Name });
+</code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br></div></div><ul>
+<li>g.Value.Item1 对应 Topic</li>
+<li>g.Value.Item2 对应 Category</li>
+<li>g.Value.Item3 对应 Area</li>
+</ul>
+<h2 id="aggregate" tabindex="-1"> Aggregate</h2>
+<div><pre><code>var list = fsql.Select&lt;Topic&gt;()
+    .Aggregate(a =&gt; Convert.ToInt32(&quot;count(distinct title)&quot;), out var count)
+    .ToList();
+</code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br></div></div><h2 id="api" tabindex="-1"> API</h2>
 <table>
 <thead>
 <tr>
@@ -8854,13 +8942,13 @@ Assert<span>.</span><span>Equal</span><span>(</span><span>"中国[100000] -> 北
 <td>GroupBy</td>
 <td>&lt;this&gt;</td>
 <td>string, parms</td>
-<td>按原生 sql 语法分组，GroupBy(&quot;concat(name, ?cc)&quot;, new { cc = 1 })</td>
+<td>按原生sql语法分组，GroupBy(&quot;concat(name, @cc)&quot;, new { cc = 1 })</td>
 </tr>
 <tr>
 <td>Having</td>
 <td>&lt;this&gt;</td>
 <td>string, parms</td>
-<td>按原生 sql 语法聚合条件过滤，Having(&quot;count(name) = ?cc&quot;, new { cc = 1 })</td>
+<td>按原生sql语法聚合条件过滤，Having(&quot;count(name) = @cc&quot;, new { cc = 1 })</td>
 </tr>
 <tr>
 <td>【成员】</td>
@@ -9092,7 +9180,7 @@ dto<span>.</span><span>IncludeMany</span><span>(</span>fsql<span>,</span> d <spa
     <title type="html">多表查询</title>
     <id>http://freesql.net/FreeSql.Wiki.VuePress/guide/select-multi-table.html</id>
     <link href="http://freesql.net/FreeSql.Wiki.VuePress/guide/select-multi-table.html"/>
-    <updated>2022-05-01T07:36:16.000Z</updated>
+    <updated>2022-07-23T05:30:46.000Z</updated>
     <content type="html"><![CDATA[<h1 id="多表查询" tabindex="-1"> 多表查询</h1>
 <div><pre><code><span>static</span> <span>IFreeSql</span> fsql <span>=</span> <span>new</span> <span>FreeSql<span>.</span>FreeSqlBuilder</span><span>(</span><span>)</span>
     <span>.</span><span>UseConnectionString</span><span>(</span>FreeSql<span>.</span>DataType<span>.</span>MySql<span>,</span> <span>"Data Source=127.0.0.1;Port=3306;User ID=root;Password=root;Initial Catalog=cccddd;Charset=utf8;SslMode=none;Max pool size=10"</span><span>)</span>
@@ -9236,7 +9324,17 @@ fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>Topic<span>,</
   min <span>=</span> fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>Topic<span>></span></span></span><span>(</span><span>)</span><span>.</span><span>Where</span><span>(</span>b <span>=></span> b<span>.</span>CategoryId <span>==</span> a<span>.</span>Id<span>)</span><span>.</span><span>Min</span><span>(</span>b <span>=></span> b<span>.</span>Clicks<span>)</span><span>,</span>
   avg <span>=</span> fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>Topic<span>></span></span></span><span>(</span><span>)</span><span>.</span><span>Where</span><span>(</span>b <span>=></span> b<span>.</span>CategoryId <span>==</span> a<span>.</span>Id<span>)</span><span>.</span><span>Avg</span><span>(</span>b <span>=></span> b<span>.</span>Clicks<span>)</span>
 <span>}</span><span>)</span><span>;</span>
-</code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br></div></div><h2 id="_9、集合属性" tabindex="-1"> 9、集合属性</h2>
+</code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br></div></div><h2 id="_9、子表tolist" tabindex="-1"> 9、子表ToList</h2>
+<blockquote>
+<p>v3.2.650+ 以下最多执行3次 SQL</p>
+</blockquote>
+<div><pre><code>fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>Topic<span>></span></span></span><span>(</span><span>)</span><span>.</span><span>ToList</span><span>(</span>a <span>=></span> <span>new</span>
+<span>{</span>
+  all <span>=</span> a<span>,</span>
+  list1 <span>=</span> fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>T2<span>></span></span></span><span>(</span><span>)</span><span>.</span><span>ToList</span><span>(</span><span>)</span><span>,</span>
+  list2 <span>=</span> fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>T2<span>></span></span></span><span>(</span><span>)</span><span>.</span><span>Where</span><span>(</span>b <span>=></span> b<span>.</span>TopicId <span>==</span> a<span>.</span>Id<span>)</span><span>.</span><span>ToList</span><span>(</span><span>)</span>
+<span>}</span><span>)</span><span>;</span>
+</code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br></div></div><h2 id="_10、集合属性" tabindex="-1"> 10、集合属性</h2>
 <div><pre><code>fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>Category<span>></span></span></span><span>(</span><span>)</span>
   <span>.</span><span>Where</span><span>(</span>a <span>=></span> a<span>.</span>Topics<span>.</span><span>Any</span><span>(</span>b <span>=></span> b<span>.</span>Title<span>.</span><span>Contains</span><span>(</span><span>"xx"</span><span>)</span><span>)</span><span>)</span> <span>//v3.2.600 以下使用 a.Topics.AsSelect()</span>
   <span>.</span><span>ToList</span><span>(</span><span>)</span><span>;</span>
@@ -9245,7 +9343,7 @@ fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>Topic<span>,</
   <span>.</span><span>Where</span><span>(</span>a <span>=></span> fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>Topic<span>></span></span></span><span>(</span><span>)</span><span>.</span><span>Any</span><span>(</span>b <span>=></span> b<span>.</span>Title<span>.</span><span>Contains</span><span>(</span><span>"xx"</span><span>)</span><span>)</span><span>)</span>
   <span>.</span><span>ToList</span><span>(</span><span>)</span><span>;</span>
 </code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br></div></div><p>将集合属性快速转换为 ISelect 进行子查询操作。</p>
-<h2 id="_10、wherecascade" tabindex="-1"> 10、WhereCascade</h2>
+<h2 id="_11、wherecascade" tabindex="-1"> 11、WhereCascade</h2>
 <p>多表查询时，像isdeleted每个表都给条件，挺麻烦的。WhereCascade使用后生成sql时，所有表都附上这个条件。</p>
 <p>如：</p>
 <div><pre><code>fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>t1<span>></span></span></span><span>(</span><span>)</span>
@@ -9262,7 +9360,7 @@ fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>Topic<span>,</
 <ul>
 <li>子查询，一对多、多对多、自定义的子查询；</li>
 <li>Join 查询，导航属性、自定义的Join查询；</li>
-<li>Include/IncludeMany 的子集合查询；</li>
+<li>Include/<a href="/guide/select-include.html">IncludeMany</a> 的子集合查询；</li>
 </ul>
 <blockquote>
 <p>暂时不支持【延时属性】的广播；</p>
@@ -9277,7 +9375,7 @@ fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>Topic<span>,</
     <title type="html">返回数据 ✨</title>
     <id>http://freesql.net/FreeSql.Wiki.VuePress/guide/select-return-data.html</id>
     <link href="http://freesql.net/FreeSql.Wiki.VuePress/guide/select-return-data.html"/>
-    <updated>2022-05-23T02:38:02.000Z</updated>
+    <updated>2022-07-23T05:30:46.000Z</updated>
     <content type="html"><![CDATA[<h1 id="返回数据-✨" tabindex="-1"> 返回数据 ✨</h1>
 <p>FreeSql 采用 ExpressionTree 优化读取速度，如果懂技术的你一定知道 .NET Core 技术下除了原生代码，最快就是 Emit 和 ExpressionTree。项目在初期使用的反射 + 缓存，虽然 .NET Core 优化了反射性能，但经过与 Dapper 性能测试对比之后，发现仍然有一定差距，改成 ExpresstionTree 后才与 Dapper 性能相当。FreeSql 支持的类型较多，实现 ExpressionTree 的复杂度较大，有兴趣的朋友可以翻阅源代码。</p>
 <h2 id="_1、返回单条记录" tabindex="-1"> 1、返回单条记录</h2>
@@ -9310,7 +9408,7 @@ fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>Topic<span>,</
 <span>//返回导航属性</span>
 <span>List<span>&lt;</span>匿名类<span>></span></span> t8 <span>=</span> fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>Topic<span>></span></span></span><span>(</span><span>)</span><span>.</span><span>ToList</span><span>(</span>a <span>=></span> <span>new</span> <span>{</span>
     a<span>.</span>Id<span>,</span> a<span>.</span>Title<span>,</span>
-    a<span>.</span>Type <span>//可以直接返回导航属性 Type</span>
+    a<span>.</span>Type <span>//导航属性</span>
 <span>}</span><span>)</span><span>;</span>
 
 <span>//返回SQL字段</span>
@@ -9329,7 +9427,7 @@ fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>Topic<span>,</
     name <span>=</span> fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>2<span>></span></span></span><span>(</span><span>)</span><span>.</span><span>First</span><span>(</span>b <span>=></span> b<span>.</span>name<span>)</span>
 <span>}</span><span>)</span><span>;</span>
 
-<span>//返回子查询集合 v3.2.650+</span>
+<span>//返回子查询集合 v3.2.650+ 以下最多执行3次 SQL</span>
 <span>List<span>&lt;</span>匿名类<span>></span></span> t11 <span>=</span> fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>Topic<span>></span></span></span><span>(</span><span>)</span><span>.</span><span>ToList</span><span>(</span>a <span>=></span> <span>new</span> <span>{</span>
     a<span>.</span>Id<span>,</span>
     list1 <span>=</span> fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>T2<span>></span></span></span><span>(</span><span>)</span><span>.</span><span>ToList</span><span>(</span><span>)</span><span>,</span>
@@ -9500,7 +9598,7 @@ fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>Song<span>></s
     <title type="html">单表查询</title>
     <id>http://freesql.net/FreeSql.Wiki.VuePress/guide/select-single-table.html</id>
     <link href="http://freesql.net/FreeSql.Wiki.VuePress/guide/select-single-table.html"/>
-    <updated>2022-05-16T12:50:28.000Z</updated>
+    <updated>2022-07-23T05:30:46.000Z</updated>
     <content type="html"><![CDATA[<h1 id="单表查询" tabindex="-1"> 单表查询</h1>
 <div><pre><code><span>static</span> <span>IFreeSql</span> fsql <span>=</span> <span>new</span> <span>FreeSql<span>.</span>FreeSqlBuilder</span><span>(</span><span>)</span>
     <span>.</span><span>UseConnectionString</span><span>(</span>FreeSql<span>.</span>DataType<span>.</span>MySql<span>,</span> <span>"Data Source=127.0.0.1;Port=3306;User ID=root;Password=root;Initial Catalog=cccddd;Charset=utf8;SslMode=none;Max pool size=10"</span><span>)</span>
@@ -9538,11 +9636,11 @@ fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>Topic<span>></
 <span>//WHERE (a.`Id` in (1,2,3))</span>
 </code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br><span>10</span><br><span>11</span><br><span>12</span><br><span>13</span><br><span>14</span><br><span>15</span><br><span>16</span><br><span>17</span><br><span>18</span><br><span>19</span><br><span>20</span><br></div></div><h2 id="withsql" tabindex="-1"> <a href="/guide/WithSql.html">WithSql</a></h2>
 <div><pre><code>fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>Topic<span>></span></span></span><span>(</span><span>)</span>
-  <span>.</span><span>WithSql</span><span>(</span><span>"select * from Topic where clicks > ?val"</span><span>,</span> <span>new</span> <span>{</span> val <span>=</span> <span>10</span> <span>}</span><span>)</span>
+  <span>.</span><span>WithSql</span><span>(</span><span>"select * from Topic where clicks > @val"</span><span>,</span> <span>new</span> <span>{</span> val <span>=</span> <span>10</span> <span>}</span><span>)</span>
   <span>.</span><span>Page</span><span>(</span><span>1</span><span>,</span> <span>10</span><span>)</span>
   <span>.</span><span>ToList</span><span>(</span><span>)</span>
-<span>//SELECT a.`Id`, a.`Clicks`, a.`CategoryId`, a.`Title`, a.`CreateTime`</span>
-<span>//FROM (select * from Topic where clicks > ?val) a</span>
+<span>//SELECT a.`Id`, a.`Clicks`, a.`CategoryId`, a.`Title`, a.`CreateTime` </span>
+<span>//FROM (select * from Topic where clicks > @val) a </span>
 </code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br></div></div><blockquote>
 <p>关于<a href="/guide/WithSql.html">WithSql</a>的详情文档， 使用多次为 UNION ALL 查询</p>
 </blockquote>
