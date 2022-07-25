@@ -6,8 +6,8 @@
     <link>http://freesql.net/FreeSql.Wiki.VuePress/</link>
     <description>FreeSql Documents</description>
     <language>zh-CN</language>
-    <pubDate>Mon, 25 Jul 2022 09:55:36 GMT</pubDate>
-    <lastBuildDate>Mon, 25 Jul 2022 09:55:36 GMT</lastBuildDate>
+    <pubDate>Mon, 25 Jul 2022 09:56:19 GMT</pubDate>
+    <lastBuildDate>Mon, 25 Jul 2022 09:56:19 GMT</lastBuildDate>
     <generator>vuepress-plugin-feed2</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
     <item>
@@ -7274,6 +7274,13 @@ fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>Song<span>></s
 <span>//情况8：查询 id, ext，返回 List&lt;Song></span>
 </code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br><span>10</span><br><span>11</span><br></div></div><blockquote>
 <p>GroupBy 所有方法不使用 DTO 映射规则</p>
+</blockquote>
+<p>DTO 查询只映射默认字段（普通属性），映射对象请使用：</p>
+<blockquote>
+<p>导航对象：ToList(a =&gt; new Dto { Catalog = a.Catalog })</p>
+</blockquote>
+<blockquote>
+<p>多表对象：ToList((a, b) =&gt; new Dto { Catalog = b })</p>
 </blockquote>
 <hr>
 <h2 id="_8、父子关系表" tabindex="-1"> 8、父子关系表</h2>
