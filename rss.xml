@@ -6,8 +6,8 @@
     <link>http://freesql.net/FreeSql.Wiki.VuePress/</link>
     <description>FreeSql Documents</description>
     <language>zh-CN</language>
-    <pubDate>Sat, 23 Jul 2022 06:19:30 GMT</pubDate>
-    <lastBuildDate>Sat, 23 Jul 2022 06:19:30 GMT</lastBuildDate>
+    <pubDate>Mon, 25 Jul 2022 08:38:52 GMT</pubDate>
+    <lastBuildDate>Mon, 25 Jul 2022 08:38:52 GMT</lastBuildDate>
     <generator>vuepress-plugin-feed2</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
     <item>
@@ -6304,7 +6304,7 @@ repo<span>.</span><span>InsertOrUpdate</span><span>(</span>实体<span>)</span><
     cts<span>[</span><span>0</span><span>]</span><span>.</span>Name <span>=</span> <span>"123123"</span><span>;</span>
     cts<span>.</span><span>RemoveAt</span><span>(</span><span>1</span><span>)</span><span>;</span>
 
-    Assert<span>.</span><span>Equal</span><span>(</span><span>3</span><span>,</span> repo<span>.</span><span>EndEdit</span><span>(</span><span>)</span><span>)</span><span>;</span>
+    Assert<span>.</span><span>Equal</span><span>(</span><span>3</span><span>,</span> repo<span>.</span><span>EndEdit</span><span>(</span><span>)</span><span>)</span><span>;</span> <span>//重载方法新旧对比 repo.EndEdit(newlist)</span>
 <span>}</span>
 <span>class</span> <span>BeginEdit01</span>
 <span>{</span>
