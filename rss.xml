@@ -6,8 +6,8 @@
     <link>http://freesql.net/FreeSql.Wiki.VuePress/</link>
     <description>FreeSql Documents</description>
     <language>zh-CN</language>
-    <pubDate>Mon, 25 Jul 2022 08:38:52 GMT</pubDate>
-    <lastBuildDate>Mon, 25 Jul 2022 08:38:52 GMT</lastBuildDate>
+    <pubDate>Mon, 25 Jul 2022 09:55:36 GMT</pubDate>
+    <lastBuildDate>Mon, 25 Jul 2022 09:55:36 GMT</lastBuildDate>
     <generator>vuepress-plugin-feed2</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
     <item>
@@ -9519,8 +9519,12 @@ fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>Song<span>></s
 <p>查找规则，查找属性名，会循环内部对象 _tables（join 查询后会增长），以 主表优先查，直到查到相同的字段。</p>
 <p>如：</p>
 <p>A, B, C 都有 id，Dto { id, a1, a2, b1, b2 }，A.id 被映射。也可以指定 id = C.id 映射。</p>
+<p>DTO 查询只映射默认字段（普通属性），映射对象请使用：</p>
 <blockquote>
-<p>友情提醒：在 dto 可以直接映射一个导航属性</p>
+<p>导航对象：ToList(a =&gt; new Dto { Catalog = a.Catalog })</p>
+</blockquote>
+<blockquote>
+<p>多表对象：ToList((a, b) =&gt; new Dto { Catalog = b })</p>
 </blockquote>
 <h2 id="_12、api" tabindex="-1"> 12、API</h2>
 <table>

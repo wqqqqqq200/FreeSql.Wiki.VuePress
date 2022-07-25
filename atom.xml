@@ -3,7 +3,7 @@
   <id>http://freesql.net/FreeSql.Wiki.VuePress/</id>
   <title>FreeSql 官方文档</title>
   <subtitle>FreeSql Documents</subtitle>
-  <updated>2022-07-25T08:38:52.740Z</updated>
+  <updated>2022-07-25T09:55:36.161Z</updated>
   <generator>vuepress-plugin-feed2</generator>
   <link rel="self" href="http://freesql.net/FreeSql.Wiki.VuePress/atom.xml"/>
   <link rel="alternate" href="http://freesql.net/FreeSql.Wiki.VuePress/"/>
@@ -9376,7 +9376,7 @@ fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>Topic<span>,</
     <title type="html">返回数据 ✨</title>
     <id>http://freesql.net/FreeSql.Wiki.VuePress/guide/select-return-data.html</id>
     <link href="http://freesql.net/FreeSql.Wiki.VuePress/guide/select-return-data.html"/>
-    <updated>2022-07-23T05:30:46.000Z</updated>
+    <updated>2022-07-25T09:54:16.000Z</updated>
     <content type="html"><![CDATA[<h1 id="返回数据-✨" tabindex="-1"> 返回数据 ✨</h1>
 <p>FreeSql 采用 ExpressionTree 优化读取速度，如果懂技术的你一定知道 .NET Core 技术下除了原生代码，最快就是 Emit 和 ExpressionTree。项目在初期使用的反射 + 缓存，虽然 .NET Core 优化了反射性能，但经过与 Dapper 性能测试对比之后，发现仍然有一定差距，改成 ExpresstionTree 后才与 Dapper 性能相当。FreeSql 支持的类型较多，实现 ExpressionTree 的复杂度较大，有兴趣的朋友可以翻阅源代码。</p>
 <h2 id="_1、返回单条记录" tabindex="-1"> 1、返回单条记录</h2>
@@ -9510,8 +9510,12 @@ fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>Song<span>></s
 <p>查找规则，查找属性名，会循环内部对象 _tables（join 查询后会增长），以 主表优先查，直到查到相同的字段。</p>
 <p>如：</p>
 <p>A, B, C 都有 id，Dto { id, a1, a2, b1, b2 }，A.id 被映射。也可以指定 id = C.id 映射。</p>
+<p>DTO 查询只映射默认字段（普通属性），映射对象请使用：</p>
 <blockquote>
-<p>友情提醒：在 dto 可以直接映射一个导航属性</p>
+<p>导航对象：ToList(a =&gt; new Dto { Catalog = a.Catalog })</p>
+</blockquote>
+<blockquote>
+<p>多表对象：ToList((a, b) =&gt; new Dto { Catalog = b })</p>
 </blockquote>
 <h2 id="_12、api" tabindex="-1"> 12、API</h2>
 <table>
