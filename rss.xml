@@ -6,8 +6,8 @@
     <link>http://freesql.net/FreeSql.Wiki.VuePress/</link>
     <description>FreeSql Documents</description>
     <language>zh-CN</language>
-    <pubDate>Tue, 26 Jul 2022 04:22:46 GMT</pubDate>
-    <lastBuildDate>Tue, 26 Jul 2022 04:22:46 GMT</lastBuildDate>
+    <pubDate>Tue, 26 Jul 2022 04:28:18 GMT</pubDate>
+    <lastBuildDate>Tue, 26 Jul 2022 04:28:18 GMT</lastBuildDate>
     <generator>vuepress-plugin-feed2</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
     <item>
@@ -18,10 +18,9 @@
       <pubDate>Sat, 23 Jul 2022 05:30:46 GMT</pubDate>
       <content:encoded><![CDATA[<h1 id="嵌套查询" tabindex="-1"> 嵌套查询</h1>
 <h2 id="withtempquery" tabindex="-1"> WithTempQuery</h2>
-<blockquote>
-<p>版本要求：v3.2.666+</p>
-</blockquote>
-<p>场景1：查询分组第一条记录</p>
+<p>意见往集：<a href="https://github.com/dotnetcore/FreeSql/discussions/1192" target="_blank" rel="noopener noreferrer">https://github.com/dotnetcore/FreeSql/discussions/1192</a></p>
+<p>需求版本：v3.2.666-preview (最新)</p>
+<h2 id="场景1-查询分组第一条记录" tabindex="-1"> 场景1：查询分组第一条记录</h2>
 <div><pre><code>fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>User1<span>></span></span></span><span>(</span><span>)</span>
     <span>.</span><span>Where</span><span>(</span>a <span>=></span> a<span>.</span>Id <span>&lt;</span> <span>1000</span><span>)</span>
     <span>.</span><span>WithTempQuery</span><span>(</span>a <span>=></span> <span>new</span>
@@ -41,11 +40,107 @@
     <span>WHERE</span> a<span>.</span><span>[</span>Id<span>]</span> <span>&lt;</span> <span>1000</span>
 <span>)</span> a
 <span>WHERE</span> <span>(</span>a<span>.</span><span>[</span>rownum<span>]</span> <span>=</span> <span>1</span><span>)</span>
-</code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br></div></div><p>场景2：分组查询嵌套</p>
-<p>待补充..</p>
-<p>场景3：嵌套查询 + Join</p>
-<p>待补充..</p>
-<h2 id="tosql-withsql" tabindex="-1"> ToSql + WithSql</h2>
+</code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br></div></div><h2 id="场景2-嵌套查询-join" tabindex="-1"> 场景2：嵌套查询 + Join</h2>
+<p>WithTempQuery + From&lt;T2&gt; 或 FromQuery(ISelect&lt;T2&gt;) 可实现无限联表</p>
+<div><pre><code>fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>User1<span>></span></span></span><span>(</span><span>)</span>
+    <span>.</span><span>Where</span><span>(</span>a <span>=></span> a<span>.</span>Id <span>&lt;</span> <span>1000</span><span>)</span>
+    <span>.</span><span>WithTempQuery</span><span>(</span>a <span>=></span> <span>new</span>
+    <span>{</span>
+        item <span>=</span> a<span>,</span>
+        rownum <span>=</span> SqlExt<span>.</span><span>RowNumber</span><span>(</span><span>)</span><span>.</span><span>Over</span><span>(</span><span>)</span><span>.</span><span>PartitionBy</span><span>(</span>a<span>.</span>Nickname<span>)</span><span>.</span><span>OrderBy</span><span>(</span>a<span>.</span>Id<span>)</span><span>.</span><span>ToValue</span><span>(</span><span>)</span>
+    <span>}</span><span>)</span>
+    <span>.</span><span>Where</span><span>(</span>a <span>=></span> a<span>.</span>rownum <span>==</span> <span>1</span><span>)</span>
+    <span>//.From&lt;UserExt>() //普通联表</span>
+    <span>.</span><span>FromQuery</span><span>(</span>fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>UserExt<span>></span></span></span><span>(</span><span>)</span><span>.</span><span>Where</span><span>(</span>b <span>=></span> b<span>.</span>Id <span>></span> <span>0</span><span>)</span><span>)</span> <span>//子查询联表</span>
+    <span>//.FromQuery(fsql.Select&lt;UserExt, UserGroup, xxx>() //子多表查询联表</span>
+    <span>//    .WithTempQuery((a,b,c) => new { ... }))</span>
+    <span>.</span><span>InnerJoin</span><span>(</span><span>(</span>a<span>,</span> b<span>)</span> <span>=></span> a<span>.</span>item<span>.</span>Id <span>==</span> b<span>.</span>UserId<span>)</span>
+    <span>.</span><span>ToList</span><span>(</span><span>(</span>a<span>,</span> b<span>)</span> <span>=></span> <span>new</span>
+    <span>{</span>
+        user <span>=</span> a<span>.</span>item<span>,</span>
+        rownum <span>=</span> a<span>.</span>rownum<span>,</span>
+        userext <span>=</span> b
+    <span>}</span><span>)</span><span>;</span>
+</code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br><span>10</span><br><span>11</span><br><span>12</span><br><span>13</span><br><span>14</span><br><span>15</span><br><span>16</span><br><span>17</span><br><span>18</span><br><span>19</span><br></div></div><div><pre><code><span>SELECT</span> <span>.</span><span>.</span><span>.</span> 
+<span>FROM</span> <span>(</span> 
+    <span>SELECT</span> a<span>.</span><span>[</span>Id<span>]</span><span>,</span> a<span>.</span><span>[</span>Nickname<span>]</span><span>,</span> row_number<span>(</span><span>)</span> <span>over</span><span>(</span> <span>partition</span> <span>by</span> a<span>.</span><span>[</span>Nickname<span>]</span> <span>order</span> <span>by</span> a<span>.</span><span>[</span>Id<span>]</span><span>)</span> <span>[</span>rownum<span>]</span> 
+    <span>FROM</span> <span>[</span>User1<span>]</span> a <span>)</span> a 
+<span>INNER</span> <span>JOIN</span> <span>(</span> 
+    <span>SELECT</span> a<span>.</span><span>[</span>UserId<span>]</span><span>,</span> a<span>.</span><span>[</span>Remark<span>]</span> 
+    <span>FROM</span> <span>[</span>TwoTablePartitionBy_UserExt<span>]</span> a 
+    <span>WHERE</span> <span>(</span>a<span>.</span><span>[</span>UserId<span>]</span> <span>></span> <span>0</span><span>)</span> <span>)</span> b <span>ON</span> a<span>.</span><span>[</span>Id<span>]</span> <span>=</span> b<span>.</span><span>[</span>UserId<span>]</span> 
+<span>WHERE</span> <span>(</span>a<span>.</span><span>[</span>rownum<span>]</span> <span>=</span> <span>1</span><span>)</span>
+</code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br></div></div><h2 id="场景3-分组查询嵌套" tabindex="-1"> 场景3：分组查询嵌套</h2>
+<div><pre><code>fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>User1<span>></span></span></span><span>(</span><span>)</span>
+    <span>.</span><span>WithTempQuery</span><span>(</span>a <span>=></span> <span>new</span>
+    <span>{</span>
+        user <span>=</span> a<span>,</span>
+        rownum <span>=</span> SqlExt<span>.</span><span>RowNumber</span><span>(</span><span>)</span><span>.</span><span>Over</span><span>(</span><span>)</span><span>.</span><span>PartitionBy</span><span>(</span>a<span>.</span>Nickname<span>)</span><span>.</span><span>OrderBy</span><span>(</span>a<span>.</span>Id<span>)</span><span>.</span><span>ToValue</span><span>(</span><span>)</span>
+    <span>}</span><span>)</span>
+    <span>.</span><span>Where</span><span>(</span>a <span>=></span> a<span>.</span>rownum <span>==</span> <span>1</span><span>)</span>
+    <span>.</span><span>FromQuery</span><span>(</span>fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>UserExt<span>></span></span></span><span>(</span><span>)</span><span>.</span><span>Where</span><span>(</span>b <span>=></span> b<span>.</span>UserId <span>></span> <span>0</span><span>)</span>
+        <span>.</span><span>GroupBy</span><span>(</span>b <span>=></span> <span>new</span> <span>{</span> b<span>.</span>UserId<span>,</span> b<span>.</span>Remark <span>}</span><span>)</span>
+        <span>.</span><span>WithTempQuery</span><span>(</span>b <span>=></span> <span>new</span> <span>{</span> b<span>.</span>Key<span>,</span> sum1 <span>=</span> b<span>.</span><span>Sum</span><span>(</span>b<span>.</span>Value<span>.</span>UserId<span>)</span> <span>}</span><span>)</span><span>)</span>
+    <span>.</span><span>InnerJoin</span><span>(</span><span>(</span>a<span>,</span> b<span>)</span> <span>=></span> a<span>.</span>user<span>.</span>Id <span>==</span> b<span>.</span>Key<span>.</span>UserId<span>)</span>
+    <span>.</span><span>Where</span><span>(</span><span>(</span>a<span>,</span> b<span>)</span> <span>=></span> a<span>.</span>user<span>.</span>Nickname <span>==</span> <span>"name03"</span> <span>||</span> a<span>.</span>user<span>.</span>Nickname <span>==</span> <span>"name02"</span><span>)</span>
+    <span>.</span><span>ToList</span><span>(</span><span>(</span>a<span>,</span> b<span>)</span> <span>=></span> <span>new</span>
+    <span>{</span>
+        user <span>=</span> a<span>.</span>user<span>,</span>
+        rownum <span>=</span> a<span>.</span>rownum<span>,</span>
+        groupby <span>=</span> b
+    <span>}</span><span>)</span><span>;</span>
+</code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br><span>10</span><br><span>11</span><br><span>12</span><br><span>13</span><br><span>14</span><br><span>15</span><br><span>16</span><br><span>17</span><br><span>18</span><br></div></div><div><pre><code><span>SELECT</span> <span>.</span><span>.</span><span>.</span> 
+<span>FROM</span> <span>(</span> 
+    <span>SELECT</span> a<span>.</span><span>[</span>Id<span>]</span><span>,</span> a<span>.</span><span>[</span>Nickname<span>]</span><span>,</span> row_number<span>(</span><span>)</span> <span>over</span><span>(</span> <span>partition</span> <span>by</span> a<span>.</span><span>[</span>Nickname<span>]</span> <span>order</span> <span>by</span> a<span>.</span><span>[</span>Id<span>]</span><span>)</span> <span>[</span>rownum<span>]</span> 
+    <span>FROM</span> <span>[</span><span>User</span><span>]</span> a <span>)</span> a 
+<span>INNER</span> <span>JOIN</span> <span>(</span> 
+    <span>SELECT</span> a<span>.</span><span>[</span>UserId<span>]</span><span>,</span> a<span>.</span><span>[</span>Remark<span>]</span><span>,</span> <span>sum</span><span>(</span>a<span>.</span><span>[</span>UserId<span>]</span><span>)</span> <span>[</span>rownum<span>]</span> 
+    <span>FROM</span> <span>[</span>UserExt<span>]</span> a 
+    <span>WHERE</span> <span>(</span>a<span>.</span><span>[</span>UserId<span>]</span> <span>></span> <span>0</span><span>)</span> 
+    <span>GROUP</span> <span>BY</span> a<span>.</span><span>[</span>UserId<span>]</span><span>,</span> a<span>.</span><span>[</span>Remark<span>]</span> <span>)</span> b <span>ON</span> a<span>.</span><span>[</span>Id<span>]</span> <span>=</span> b<span>.</span><span>[</span>UserId<span>]</span> 
+<span>WHERE</span> <span>(</span>a<span>.</span><span>[</span>rownum<span>]</span> <span>=</span> <span>1</span><span>)</span> <span>AND</span> <span>(</span><span>(</span>a<span>.</span><span>[</span>Nickname<span>]</span> <span>=</span> N<span>'name03'</span> <span>OR</span> a<span>.</span><span>[</span>Nickname<span>]</span> <span>=</span> N<span>'name02'</span><span>)</span><span>)</span>
+</code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br><span>10</span><br></div></div><hr>
+<h2 id="子表exists" tabindex="-1"> 子表Exists</h2>
+<div><pre><code>fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>Topic<span>></span></span></span><span>(</span><span>)</span>
+  <span>.</span><span>Where</span><span>(</span>a <span>=></span> fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>Topic<span>></span></span></span><span>(</span><span>)</span><span>.</span><span>As</span><span>(</span><span>"b"</span><span>)</span><span>.</span><span>Where</span><span>(</span>b <span>=></span> b<span>.</span>Id <span>==</span> a<span>.</span>Id<span>)</span><span>.</span><span>Any</span><span>(</span><span>)</span><span>)</span>
+  <span>.</span><span>ToList</span><span>(</span><span>)</span><span>;</span>
+<span>//SELECT a.[Id], a.[Title], a.[Clicks], a.[CreateTime], a.[CategoryId]</span>
+<span>//FROM [Topic] a</span>
+<span>//WHERE (exists(SELECT 1</span>
+<span>//    FROM [Topic] b</span>
+<span>//    WHERE (b.[Id] = a.[Id])</span>
+<span>//    limit 0,1))</span>
+</code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br></div></div><blockquote>
+<p>提示：由于子查询的实体类与上层相同，使用 As(&quot;b&quot;) 指明别名，以便区分</p>
+</blockquote>
+<h2 id="子表in" tabindex="-1"> 子表In</h2>
+<div><pre><code>fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>Topic<span>></span></span></span><span>(</span><span>)</span>
+  <span>.</span><span>Where</span><span>(</span>a <span>=></span> fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>Topic<span>></span></span></span><span>(</span><span>)</span><span>.</span><span>As</span><span>(</span><span>"b"</span><span>)</span><span>.</span><span>ToList</span><span>(</span>b <span>=></span> b<span>.</span>Id<span>)</span><span>.</span><span>Contains</span><span>(</span>a<span>.</span>Id<span>)</span><span>)</span>
+  <span>.</span><span>ToList</span><span>(</span><span>)</span><span>;</span>
+<span>//SELECT a.[Id], a.[Title], a.[Clicks], a.[CreateTime], a.[CategoryId]</span>
+<span>//FROM [Topic] a</span>
+<span>//WHERE (((a.[Id]) in (SELECT b.[Id]</span>
+<span>//    FROM [Topic] b)))</span>
+</code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br></div></div><h2 id="子表join" tabindex="-1"> 子表Join</h2>
+<p>v1.8.0+ string.Join + ToList 实现将子查询的多行结果，拼接为一个字符串，如：&quot;1,2,3,4&quot;</p>
+<div><pre><code>fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>Topic<span>></span></span></span><span>(</span><span>)</span><span>.</span><span>ToList</span><span>(</span>a <span>=></span> <span>new</span> <span>{</span>
+  id <span>=</span> a<span>.</span>Id<span>,</span>
+  concat <span>=</span> <span>string</span><span>.</span><span>Join</span><span>(</span><span>","</span><span>,</span> fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>StringJoin01<span>></span></span></span><span>(</span><span>)</span><span>.</span><span>ToList</span><span>(</span>b <span>=></span> b<span>.</span>Id<span>)</span><span>)</span>
+<span>}</span><span>)</span><span>;</span>
+<span>//SELECT a.[Id], (SELECT group_concat(b.[Id] separator ',') </span>
+<span>//    FROM [StringJoin01] b) </span>
+<span>//FROM [Topic] a</span>
+</code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br></div></div><h2 id="子表first-count-sum-max-min-avg" tabindex="-1"> 子表First/Count/Sum/Max/Min/Avg</h2>
+<div><pre><code>fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>Category<span>></span></span></span><span>(</span><span>)</span><span>.</span><span>ToList</span><span>(</span>a <span>=></span> <span>new</span>  <span>{</span>
+  all <span>=</span> a<span>,</span>
+  first <span>=</span> fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>Topic<span>></span></span></span><span>(</span><span>)</span><span>.</span><span>Where</span><span>(</span>b <span>=></span> b<span>.</span>CategoryId <span>==</span> a<span>.</span>Id<span>)</span><span>.</span><span>First</span><span>(</span>b <span>=></span> b<span>.</span>Id<span>)</span><span>,</span>
+  count <span>=</span> fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>Topic<span>></span></span></span><span>(</span><span>)</span><span>.</span><span>Where</span><span>(</span>b <span>=></span> b<span>.</span>CategoryId <span>==</span> a<span>.</span>Id<span>)</span><span>.</span><span>Count</span><span>(</span><span>)</span><span>,</span>
+  sum <span>=</span> fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>Topic<span>></span></span></span><span>(</span><span>)</span><span>.</span><span>Where</span><span>(</span>b <span>=></span> b<span>.</span>CategoryId <span>==</span> a<span>.</span>Id<span>)</span><span>.</span><span>Sum</span><span>(</span>b <span>=></span> b<span>.</span>Clicks<span>)</span><span>,</span>
+  max <span>=</span> fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>Topic<span>></span></span></span><span>(</span><span>)</span><span>.</span><span>Where</span><span>(</span>b <span>=></span> b<span>.</span>CategoryId <span>==</span> a<span>.</span>Id<span>)</span><span>.</span><span>Max</span><span>(</span>b <span>=></span> b<span>.</span>Clicks<span>)</span><span>,</span>
+  min <span>=</span> fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>Topic<span>></span></span></span><span>(</span><span>)</span><span>.</span><span>Where</span><span>(</span>b <span>=></span> b<span>.</span>CategoryId <span>==</span> a<span>.</span>Id<span>)</span><span>.</span><span>Min</span><span>(</span>b <span>=></span> b<span>.</span>Clicks<span>)</span><span>,</span>
+  avg <span>=</span> fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>Topic<span>></span></span></span><span>(</span><span>)</span><span>.</span><span>Where</span><span>(</span>b <span>=></span> b<span>.</span>CategoryId <span>==</span> a<span>.</span>Id<span>)</span><span>.</span><span>Avg</span><span>(</span>b <span>=></span> b<span>.</span>Clicks<span>)</span>
+<span>}</span><span>)</span><span>;</span>
+</code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br></div></div><h2 id="tosql-withsql" tabindex="-1"> ToSql + WithSql</h2>
 <p>这是早期提供的嵌套查询方法</p>
 <div><pre><code><span><span>var</span></span> sql <span>=</span> fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>User1<span>></span></span></span><span>(</span><span>)</span>
     <span>.</span><span>Where</span><span>(</span>a <span>=></span> a<span>.</span>Id <span>&lt;</span> <span>1000</span><span>)</span>
