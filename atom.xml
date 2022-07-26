@@ -3,7 +3,7 @@
   <id>http://freesql.net/FreeSql.Wiki.VuePress/</id>
   <title>FreeSql 官方文档</title>
   <subtitle>FreeSql Documents</subtitle>
-  <updated>2022-07-25T09:56:19.256Z</updated>
+  <updated>2022-07-26T04:22:46.799Z</updated>
   <generator>vuepress-plugin-feed2</generator>
   <link rel="self" href="http://freesql.net/FreeSql.Wiki.VuePress/atom.xml"/>
   <link rel="alternate" href="http://freesql.net/FreeSql.Wiki.VuePress/"/>
@@ -1349,13 +1349,13 @@ db<span>.</span><span>Register</span><span>(</span><span>"db2"</span><span>,</sp
     <title type="html">FreeSql.Provider.SqliteCore</title>
     <id>http://freesql.net/FreeSql.Wiki.VuePress/guide/freesql-provider-sqlitecore.html</id>
     <link href="http://freesql.net/FreeSql.Wiki.VuePress/guide/freesql-provider-sqlitecore.html"/>
-    <updated>2022-05-16T12:50:28.000Z</updated>
+    <updated>2022-07-26T04:21:13.000Z</updated>
     <content type="html"><![CDATA[<h1 id="freesql-provider-sqlitecore" tabindex="-1"> FreeSql.Provider.SqliteCore</h1>
 <p>FreeSql.Provider.SqliteCore是<code>FreeSql</code>基于微软提供的最新的<a href="https://docs.microsoft.com/zh-cn/dotnet/standard/data/sqlite/?tabs=netcore-cli" target="_blank" rel="noopener noreferrer"><code>Microsoft.Data.Sqlite.Core</code></a>驱动的实现。
 <strong>需要另外安装对应的bundle_xxx</strong>实现加密。</p>
 <h2 id="支持的版本" tabindex="-1"> 支持的版本</h2>
 <ul>
-<li>.NETStandard2.0+</li>
+<li>.NETStandard2.0（支持.NET Framework4.6.1+）</li>
 <li>net6.0</li>
 <li>SQLite（3.7 及以上版本）</li>
 </ul>
@@ -1527,6 +1527,19 @@ AppDomain<span>.</span>CurrentDomain<span>.</span><span>SetData</span><span>(</s
 <p>若要初始化该绑定，请在使用 <code>Microsoft.Data.Sqlite</code> 之前，将以下代码行添加到应用。</p>
 <div><pre><code>SQLitePCL<span>.</span>Batteries_V2<span>.</span><span>Init</span><span>(</span><span>)</span><span>;</span>
 </code></pre><div aria-hidden="true"><span>1</span><br></div></div><p>即在上方定义<code>FreeSql</code>单例时，在<code>new Lazy</code>内，调用一次即可。</p>
+<h2 id="net-framework-支持" tabindex="-1"> .NET Framework 支持</h2>
+<ul>
+<li>.NETStandard2.0（支持.NET Framework4.6.1+）</li>
+</ul>
+<p>有二种方法支持.NET Framework(选择其中一个即可)</p>
+<h3 id="_1-复制-net-core中的dll" tabindex="-1"> 1.复制.NET Core中的dll</h3>
+<p>创建一个.NET Core的console项目，然后安装nuget包 <code>SQLitePCLRaw.bundle_e_sqlcipher</code>，编译后生成的<code>bin\Debug\net5.0\runtimes\win-x64\native\e_sqlcipher.dll</code>
+复制到 .net framework 4.8的项目中<code>bin/Debug/e_sqlcipher.dll</code>中</p>
+<h3 id="_2-转换项目-建议" tabindex="-1"> 2.转换项目 <strong>（建议）</strong></h3>
+<p>先安装好相关的包,然后右键<code>packages.config</code>,选择将<code>packages.config 迁移到PackageReference中</code>,弹出的框勾选所有包，确定即可。</p>
+<div><pre><code>Install-Package SQLitePCLRaw.bundle_e_sqlcipher
+Install-Package FreeSql.Provider.SqliteCore
+</code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br></div></div><p><img src="@source/guide/images/dotnetframwork-sqlitecore.png" alt="./images/dotnetframwork-sqlitecore.png" loading="lazy"></p>
 ]]></content>
     <published>2022-03-25T06:41:57.000Z</published>
   </entry>
