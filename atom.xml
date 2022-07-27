@@ -3,7 +3,7 @@
   <id>http://freesql.net/FreeSql.Wiki.VuePress/</id>
   <title>FreeSql 官方文档</title>
   <subtitle>FreeSql Documents</subtitle>
-  <updated>2022-07-26T15:52:33.585Z</updated>
+  <updated>2022-07-27T01:18:19.845Z</updated>
   <generator>vuepress-plugin-feed2</generator>
   <link rel="self" href="http://freesql.net/FreeSql.Wiki.VuePress/atom.xml"/>
   <link rel="alternate" href="http://freesql.net/FreeSql.Wiki.VuePress/"/>
@@ -6026,7 +6026,7 @@ fsql<span>.</span>CodeFirst<span>.</span><span><span>Entity</span><span><span>&l
     <title type="html">入门</title>
     <id>http://freesql.net/FreeSql.Wiki.VuePress/guide/getting-started.html</id>
     <link href="http://freesql.net/FreeSql.Wiki.VuePress/guide/getting-started.html"/>
-    <updated>2022-07-18T16:31:09.000Z</updated>
+    <updated>2022-07-27T01:16:46.000Z</updated>
     <content type="html"><![CDATA[<h1 id="入门" tabindex="-1"> 入门</h1>
 <h2 id="模型" tabindex="-1"> 模型</h2>
 <p><code>FreeSql</code> 使用模型执行数据访问，模型由实体类表示数据库表或视图，用于查询和保存数据。</p>
@@ -6054,7 +6054,7 @@ Install-Package FreeSql.Provider.Sqlite
 </code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br></div></div></CodeGroupItem>
 </CodeGroup>
 <h2 id="声明" tabindex="-1"> 声明</h2>
-<div><pre><code><span>IFreeSql</span> fsql <span>=</span> <span>new</span> <span>FreeSql<span>.</span>FreeSqlBuilder</span><span>(</span><span>)</span>
+<div><pre><code><span>static</span> <span>IFreeSql</span> fsql <span>=</span> <span>new</span> <span>FreeSql<span>.</span>FreeSqlBuilder</span><span>(</span><span>)</span>
     <span>.</span><span>UseConnectionString</span><span>(</span>FreeSql<span>.</span>DataType<span>.</span>Sqlite<span>,</span> <span>@"Data Source=db1.db"</span><span>)</span>
     <span>.</span><span>UseAutoSyncStructure</span><span>(</span><span>true</span><span>)</span> <span>//自动同步实体结构到数据库，FreeSql不会扫描程序集，只有CRUD时才会生成表。</span>
     <span>.</span><span>Build</span><span>(</span><span>)</span><span>;</span> <span>//请务必定义成 Singleton 单例模式</span>

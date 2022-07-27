@@ -6,8 +6,8 @@
     <link>http://freesql.net/FreeSql.Wiki.VuePress/</link>
     <description>FreeSql Documents</description>
     <language>zh-CN</language>
-    <pubDate>Tue, 26 Jul 2022 15:52:33 GMT</pubDate>
-    <lastBuildDate>Tue, 26 Jul 2022 15:52:33 GMT</lastBuildDate>
+    <pubDate>Wed, 27 Jul 2022 01:18:19 GMT</pubDate>
+    <lastBuildDate>Wed, 27 Jul 2022 01:18:19 GMT</lastBuildDate>
     <generator>vuepress-plugin-feed2</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
     <item>
@@ -6061,7 +6061,7 @@ Install-Package FreeSql.Provider.Sqlite
 </code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br></div></div></CodeGroupItem>
 </CodeGroup>
 <h2 id="声明" tabindex="-1"> 声明</h2>
-<div><pre><code><span>IFreeSql</span> fsql <span>=</span> <span>new</span> <span>FreeSql<span>.</span>FreeSqlBuilder</span><span>(</span><span>)</span>
+<div><pre><code><span>static</span> <span>IFreeSql</span> fsql <span>=</span> <span>new</span> <span>FreeSql<span>.</span>FreeSqlBuilder</span><span>(</span><span>)</span>
     <span>.</span><span>UseConnectionString</span><span>(</span>FreeSql<span>.</span>DataType<span>.</span>Sqlite<span>,</span> <span>@"Data Source=db1.db"</span><span>)</span>
     <span>.</span><span>UseAutoSyncStructure</span><span>(</span><span>true</span><span>)</span> <span>//自动同步实体结构到数据库，FreeSql不会扫描程序集，只有CRUD时才会生成表。</span>
     <span>.</span><span>Build</span><span>(</span><span>)</span><span>;</span> <span>//请务必定义成 Singleton 单例模式</span>
