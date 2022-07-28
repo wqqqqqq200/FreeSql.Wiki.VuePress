@@ -6,8 +6,8 @@
     <link>http://freesql.net/FreeSql.Wiki.VuePress/</link>
     <description>FreeSql Documents</description>
     <language>zh-CN</language>
-    <pubDate>Thu, 28 Jul 2022 04:11:36 GMT</pubDate>
-    <lastBuildDate>Thu, 28 Jul 2022 04:11:36 GMT</lastBuildDate>
+    <pubDate>Thu, 28 Jul 2022 04:37:21 GMT</pubDate>
+    <lastBuildDate>Thu, 28 Jul 2022 04:37:21 GMT</lastBuildDate>
     <generator>vuepress-plugin-feed2</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
     <item>
@@ -1102,9 +1102,6 @@ fsql<span>.</span><span><span>Delete</span><span><span>&lt;</span>T<span>></span
 <span>//以后所有 fsql.Select/Insert/Update/Delete 操作是 db3</span>
 </code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br></div></div><h2 id="参考" tabindex="-1"> 参考</h2>
 <p><a href="https://github.com/dotnetcore/FreeSql/issues/44" target="_blank" rel="noopener noreferrer">多个 IFreeSql 实例，如何注入使用？ · Issue #44 · dotnetcore/FreeSql (github.com)</a></p>
-<blockquote>
-<p>与此文章有点区别，增加了一些配置项和静态方法的理解，把<code>Change</code> 下放到<code>MultiFreeSqlExtensions</code>扩展中，从而保持简单，静态方法和DI保持一致的写法</p>
-</blockquote>
 ]]></content:encoded>
     </item>
     <item>
