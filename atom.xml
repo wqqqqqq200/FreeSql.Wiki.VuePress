@@ -3,7 +3,7 @@
   <id>http://freesql.net/FreeSql.Wiki.VuePress/</id>
   <title>FreeSql 官方文档</title>
   <subtitle>FreeSql Documents</subtitle>
-  <updated>2022-07-28T03:41:27.298Z</updated>
+  <updated>2022-07-28T04:11:36.318Z</updated>
   <generator>vuepress-plugin-feed2</generator>
   <link rel="self" href="http://freesql.net/FreeSql.Wiki.VuePress/atom.xml"/>
   <link rel="alternate" href="http://freesql.net/FreeSql.Wiki.VuePress/"/>
@@ -1023,7 +1023,7 @@ lst<span>.</span><span>Add</span><span>(</span><span>(</span>Guid<span>.</span><
     <title type="html">多个 IFreeSql实例，如何注入使用</title>
     <id>http://freesql.net/FreeSql.Wiki.VuePress/extra/idlebus-freesql.html</id>
     <link href="http://freesql.net/FreeSql.Wiki.VuePress/extra/idlebus-freesql.html"/>
-    <updated>2022-07-28T03:36:59.000Z</updated>
+    <updated>2022-07-28T04:10:05.000Z</updated>
     <content type="html"><![CDATA[<h1 id="多个-ifreesql实例-如何注入使用" tabindex="-1"> 多个 IFreeSql实例，如何注入使用</h1>
 <p>多库切换，动态切库，动态注册数据库</p>
 <h2 id="一、定义多个-ifreesql" tabindex="-1"> 一、定义多个 IFreeSql</h2>
@@ -1061,22 +1061,22 @@ lst<span>.</span><span>Add</span><span>(</span><span>(</span>Guid<span>.</span><
 <blockquote>
 <p>Install-Package FreeSql.Cloud</p>
 </blockquote>
-<div><pre><code>public enum DbEnum { db1, db2, db3 }
+<div><pre><code><span>public</span> <span>enum</span> <span>DbEnum</span> <span>{</span> db1<span>,</span> db2<span>,</span> db3 <span>}</span>
 
-var fsql = new FreeSqlCloud&lt;DbEnum&gt;(&quot;myapp&quot;); //提示：泛型可以传入 string
-fsql.DistributeTrace = log =&gt; Console.WriteLine(log.Split('\n')[0].Trim());
+<span><span>var</span></span> fsql <span>=</span> <span>new</span> <span>FreeSqlCloud<span>&lt;</span>DbEnum<span>></span></span><span>(</span><span>"myapp"</span><span>)</span><span>;</span> <span>//提示：泛型可以传入 string</span>
+fsql<span>.</span>DistributeTrace <span>=</span> log <span>=></span> Console<span>.</span><span>WriteLine</span><span>(</span>log<span>.</span><span>Split</span><span>(</span><span>'\n'</span><span>)</span><span>[</span><span>0</span><span>]</span><span>.</span><span>Trim</span><span>(</span><span>)</span><span>)</span><span>;</span>
 
-fsql.Register(DbEnum.db1, () =&gt; new FreeSqlBuilder()
-    .UseConnectionString(DataType.Sqlite, @&quot;Data Source=db1.db&quot;)
-    .Build());
+fsql<span>.</span><span>Register</span><span>(</span>DbEnum<span>.</span>db1<span>,</span> <span>(</span><span>)</span> <span>=></span> <span>new</span> <span>FreeSqlBuilder</span><span>(</span><span>)</span>
+    <span>.</span><span>UseConnectionString</span><span>(</span>DataType<span>.</span>Sqlite<span>,</span> <span>@"Data Source=db1.db"</span><span>)</span>
+    <span>.</span><span>Build</span><span>(</span><span>)</span><span>)</span><span>;</span>
 
-fsql.Register(DbEnum.db2, () =&gt; new FreeSqlBuilder()
-    .UseConnectionString(DataType.Sqlite, @&quot;Data Source=db2.db&quot;)
-    .Build());
+fsql<span>.</span><span>Register</span><span>(</span>DbEnum<span>.</span>db2<span>,</span> <span>(</span><span>)</span> <span>=></span> <span>new</span> <span>FreeSqlBuilder</span><span>(</span><span>)</span>
+    <span>.</span><span>UseConnectionString</span><span>(</span>DataType<span>.</span>Sqlite<span>,</span> <span>@"Data Source=db2.db"</span><span>)</span>
+    <span>.</span><span>Build</span><span>(</span><span>)</span><span>)</span><span>;</span>
 
-fsql.Register(DbEnum.db3, () =&gt; new FreeSqlBuilder()
-    .UseConnectionString(DataType.Sqlite, @&quot;Data Source=db3.db&quot;)
-    .Build());
+fsql<span>.</span><span>Register</span><span>(</span>DbEnum<span>.</span>db3<span>,</span> <span>(</span><span>)</span> <span>=></span> <span>new</span> <span>FreeSqlBuilder</span><span>(</span><span>)</span>
+    <span>.</span><span>UseConnectionString</span><span>(</span>DataType<span>.</span>Sqlite<span>,</span> <span>@"Data Source=db3.db"</span><span>)</span>
+    <span>.</span><span>Build</span><span>(</span><span>)</span><span>)</span><span>;</span>
 </code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br><span>10</span><br><span>11</span><br><span>12</span><br><span>13</span><br><span>14</span><br><span>15</span><br><span>16</span><br></div></div><blockquote>
 <p>FreeSqlCloud 必须定义成单例模式</p>
 </blockquote>
@@ -1087,18 +1087,16 @@ fsql.Register(DbEnum.db3, () =&gt; new FreeSqlBuilder()
 <p>new FreeSqlCloud&lt;DbEnum&gt;(&quot;myapp&quot;) 开启 TCC/SAGA 事务生效</p>
 </blockquote>
 <p>FreeSqlCloud 的访问方式和 IFreeSql 一样：</p>
-<div><pre><code>fsql.Select&lt;T&gt;();
-fsql.Insert&lt;T&gt;();
-fsql.Update&lt;T&gt;();
-fsql.Delete&lt;T&gt;();
+<div><pre><code>fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>T<span>></span></span></span><span>(</span><span>)</span><span>;</span>
+fsql<span>.</span><span><span>Insert</span><span><span>&lt;</span>T<span>></span></span></span><span>(</span><span>)</span><span>;</span>
+fsql<span>.</span><span><span>Update</span><span><span>&lt;</span>T<span>></span></span></span><span>(</span><span>)</span><span>;</span>
+fsql<span>.</span><span><span>Delete</span><span><span>&lt;</span>T<span>></span></span></span><span>(</span><span>)</span><span>;</span>
 
-//...
+<span>//...</span>
 </code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br></div></div><p>切换数据库：</p>
-<div><pre><code>fsql.Change(DbEnum.db3).Select&lt;T&gt;();
-//以后所有 fsql.Select/Insert/Update/Delete 操作是 db3
+<div><pre><code>fsql<span>.</span><span>Change</span><span>(</span>DbEnum<span>.</span>db3<span>)</span><span>.</span><span><span>Select</span><span><span>&lt;</span>T<span>></span></span></span><span>(</span><span>)</span><span>;</span>
+<span>//以后所有 fsql.Select/Insert/Update/Delete 操作是 db3</span>
 </code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br></div></div><h2 id="参考" tabindex="-1"> 参考</h2>
-<p><a href="https://github.com/luoyunchong/SampleApp/blob/master/SampleApi/Controllers/HomeController.cs" target="_blank" rel="noopener noreferrer">SampleApp/HomeController.cs at master · luoyunchong/SampleApp (github.com)</a></p>
-<p><a href="https://github.com/luoyunchong/SampleApp/blob/master/SampleCore/MultiFreeSql.cs" target="_blank" rel="noopener noreferrer">SampleApp/MultiFreeSql.cs at master · luoyunchong/SampleApp (github.com)</a></p>
 <p><a href="https://github.com/dotnetcore/FreeSql/issues/44" target="_blank" rel="noopener noreferrer">多个 IFreeSql 实例，如何注入使用？ · Issue #44 · dotnetcore/FreeSql (github.com)</a></p>
 <blockquote>
 <p>与此文章有点区别，增加了一些配置项和静态方法的理解，把<code>Change</code> 下放到<code>MultiFreeSqlExtensions</code>扩展中，从而保持简单，静态方法和DI保持一致的写法</p>
