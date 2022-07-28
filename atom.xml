@@ -3,7 +3,7 @@
   <id>http://freesql.net/FreeSql.Wiki.VuePress/</id>
   <title>FreeSql 官方文档</title>
   <subtitle>FreeSql Documents</subtitle>
-  <updated>2022-07-28T04:37:21.624Z</updated>
+  <updated>2022-07-28T07:50:54.353Z</updated>
   <generator>vuepress-plugin-feed2</generator>
   <link rel="self" href="http://freesql.net/FreeSql.Wiki.VuePress/atom.xml"/>
   <link rel="alternate" href="http://freesql.net/FreeSql.Wiki.VuePress/"/>
@@ -6680,7 +6680,7 @@ fsql<span>.</span><span>InsertDict</span><span>(</span>dic<span>)</span><span>.<
     <title type="html">安装</title>
     <id>http://freesql.net/FreeSql.Wiki.VuePress/guide/install.html</id>
     <link href="http://freesql.net/FreeSql.Wiki.VuePress/guide/install.html"/>
-    <updated>2022-07-18T16:31:09.000Z</updated>
+    <updated>2022-07-28T07:45:26.000Z</updated>
     <content type="html"><![CDATA[<h1 id="安装" tabindex="-1"> 安装</h1>
 <h2 id="版本" tabindex="-1"> 版本</h2>
 <p>FreeSql 是一个 .NET Standard 2.0 库，仅支持 .NET Framework 4.0 或 .NET Core 或更高版本的应用程序。</p>
@@ -6749,6 +6749,18 @@ dotnet <span>add</span> package FreeSql.Provider.Sqlite
 <td><strong><a href="https://www.nuget.org/packages/FreeSql.Provider.Sqlite" target="_blank" rel="noopener noreferrer"><img src="https://buildstats.info/nuget/FreeSql.Provider.Sqlite" alt="NuGet" loading="lazy"></a></strong></td>
 </tr>
 <tr>
+<td><a href="/guide/freesql-provider-sqlitecore.html">FreeSql.Provider.SqliteCore</a></td>
+<td>NETStandard2.0、net6.0</td>
+<td>基于Microsoft.Data.Sqlite.Core，需安装bundle_xxx</td>
+<td><strong><a href="https://www.nuget.org/packages/FreeSql.Provider.SqliteCore" target="_blank" rel="noopener noreferrer"><img src="https://buildstats.info/nuget/FreeSql.Provider.SqliteCore" alt="NuGet" loading="lazy"></a></strong></td>
+</tr>
+<tr>
+<td>FreeSql.Provider.ClickHouse</td>
+<td>NETStandard2.1</td>
+<td>基于ClickHouse.Client</td>
+<td><strong><a href="https://www.nuget.org/packages/FreeSql.Provider.ClickHouse" target="_blank" rel="noopener noreferrer"><img src="https://buildstats.info/nuget/FreeSql.Provider.ClickHouse" alt="NuGet" loading="lazy"></a></strong></td>
+</tr>
+<tr>
 <td>FreeSql.Provider.Oracle</td>
 <td>NETStandard2.0、net45、net40</td>
 <td></td>
@@ -6785,13 +6797,13 @@ dotnet <span>add</span> package FreeSql.Provider.Sqlite
 <td><strong><a href="https://www.nuget.org/packages/FreeSql.Provider.KingbaseES" target="_blank" rel="noopener noreferrer"><img src="https://buildstats.info/nuget/FreeSql.Provider.KingbaseES" alt="NuGet" loading="lazy"></a></strong></td>
 </tr>
 <tr>
-<td><a href="https://github.com/dotnetcore/FreeSql/tree/master/Providers/FreeSql.Provider.Odbc" target="_blank" rel="noopener noreferrer">FreeSql.Provider.Odbc</a></td>
+<td><a href="/guide/freesql-provider-odbc.html">FreeSql.Provider.Odbc</a></td>
 <td>NETStandard2.0、net45、net40</td>
 <td>基于 ODBC</td>
 <td><strong><a href="https://www.nuget.org/packages/FreeSql.Provider.Odbc" target="_blank" rel="noopener noreferrer"><img src="https://buildstats.info/nuget/FreeSql.Provider.Odbc" alt="NuGet" loading="lazy"></a></strong></td>
 </tr>
 <tr>
-<td><a href="https://github.com/dotnetcore/FreeSql/tree/master/Providers/FreeSql.Provider.Custom" target="_blank" rel="noopener noreferrer">FreeSql.Provider.Custom</a></td>
+<td><a href="/guide/freesql-provider-custom.html">FreeSql.Provider.Custom</a></td>
 <td>NETStandard2.0、net45、net40</td>
 <td>自定义数据库访问</td>
 <td><strong><a href="https://www.nuget.org/packages/FreeSql.Provider.Custom" target="_blank" rel="noopener noreferrer"><img src="https://buildstats.info/nuget/FreeSql.Provider.Custom" alt="NuGet" loading="lazy"></a></strong></td>
