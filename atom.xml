@@ -3,7 +3,7 @@
   <id>http://freesql.net/FreeSql.Wiki.VuePress/</id>
   <title>FreeSql 官方文档</title>
   <subtitle>FreeSql Documents</subtitle>
-  <updated>2022-07-30T09:35:30.812Z</updated>
+  <updated>2022-07-30T09:37:44.687Z</updated>
   <generator>vuepress-plugin-feed2</generator>
   <link rel="self" href="http://freesql.net/FreeSql.Wiki.VuePress/atom.xml"/>
   <link rel="alternate" href="http://freesql.net/FreeSql.Wiki.VuePress/"/>
@@ -2456,7 +2456,7 @@ item<span>.</span><span>Restore</span><span>(</span><span>)</span><span>;</span>
     <title type="html">指南</title>
     <id>http://freesql.net/FreeSql.Wiki.VuePress/guide/</id>
     <link href="http://freesql.net/FreeSql.Wiki.VuePress/guide/"/>
-    <updated>2022-07-30T09:33:19.000Z</updated>
+    <updated>2022-07-30T09:36:26.000Z</updated>
     <content type="html"><![CDATA[<h1 id="指南" tabindex="-1"> 指南</h1>
 <p><a href="https://github.com/dotnetcore" target="_blank" rel="noopener noreferrer"><img src="https://img.shields.io/badge/member project of-NCC-9e20c9.svg" alt="Member project of .NET Core Community" loading="lazy"></a>
 <a href="https://www.nuget.org/packages/FreeSql" target="_blank" rel="noopener noreferrer"><img src="https://img.shields.io/nuget/v/FreeSql.svg?style=flat-square" alt="nuget" loading="lazy"></a>
@@ -2485,7 +2485,7 @@ item<span>.</span><span>Restore</span><span>(</span><span>)</span><span>;</span>
 <li><input type="checkbox" checked="checked" disabled="disabled" id="task-item-5"><label for="task-item-5"> 支持导航属性查询，和延时加载；</label></li>
 <li><input type="checkbox" checked="checked" disabled="disabled" id="task-item-6"><label for="task-item-6"> 支持同步/异步数据库操作方法，丰富多彩的链式查询方法；</label></li>
 <li><input type="checkbox" checked="checked" disabled="disabled" id="task-item-7"><label for="task-item-7"> 支持读写分离、分表分库，租户设计；</label></li>
-<li><input type="checkbox" checked="checked" disabled="disabled" id="task-item-8"><label for="task-item-8"> 支持多种数据库，MySql/SqlServer/PostgreSQL/Oracle/Sqlite/Firebird/达梦/神通/人大金仓/翰高/华为 GaussDB/MsAccess；</label></li>
+<li><input type="checkbox" checked="checked" disabled="disabled" id="task-item-8"><label for="task-item-8"> 支持多种数据库，MySql/SqlServer/PostgreSQL/Oracle/Sqlite/Firebird/ClickHouse/达梦/南大通用GBase/神通/人大金仓/翰高/华为 GaussDB/MsAccess；</label></li>
 </ul>
 <h2 id="学习指南" tabindex="-1"> 学习指南</h2>
 <p>FreeSql 除了支持基本的增删查改功能外，还支持基于现有数据库创建模型（<a href="/guide/db-first.html">DbFirst</a>），和支持基于模型创建数据库（<a href="/guide/code-first.html">CodeFirst</a>)。</p>
