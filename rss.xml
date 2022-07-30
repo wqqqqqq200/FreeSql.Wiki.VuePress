@@ -6,8 +6,8 @@
     <link>http://freesql.net/FreeSql.Wiki.VuePress/</link>
     <description>FreeSql Documents</description>
     <language>zh-CN</language>
-    <pubDate>Sat, 30 Jul 2022 09:34:40 GMT</pubDate>
-    <lastBuildDate>Sat, 30 Jul 2022 09:34:40 GMT</lastBuildDate>
+    <pubDate>Sat, 30 Jul 2022 09:35:30 GMT</pubDate>
+    <lastBuildDate>Sat, 30 Jul 2022 09:35:30 GMT</lastBuildDate>
     <generator>vuepress-plugin-feed2</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
     <item>
@@ -6889,6 +6889,12 @@ dotnet <span>add</span> package FreeSql.Provider.Sqlite
 <td>NETStandard2.0、net461</td>
 <td>基于 人大金仓数据库</td>
 <td><strong><a href="https://www.nuget.org/packages/FreeSql.Provider.KingbaseES" target="_blank" rel="noopener noreferrer"><img src="https://buildstats.info/nuget/FreeSql.Provider.KingbaseES" alt="NuGet" loading="lazy"></a></strong></td>
+</tr>
+<tr>
+<td>FreeSql.Provider.GBase</td>
+<td>NETStandard2.0、net461</td>
+<td>基于 南大通用GBase数据库</td>
+<td><strong><a href="https://www.nuget.org/packages/FreeSql.Provider.GBase" target="_blank" rel="noopener noreferrer"><img src="https://buildstats.info/nuget/FreeSql.Provider.GBase" alt="NuGet" loading="lazy"></a></strong></td>
 </tr>
 <tr>
 <td><a href="/guide/freesql-provider-odbc.html">FreeSql.Provider.Odbc</a></td>
