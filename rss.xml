@@ -6,8 +6,8 @@
     <link>http://freesql.net/FreeSql.Wiki.VuePress/</link>
     <description>FreeSql Documents</description>
     <language>zh-CN</language>
-    <pubDate>Thu, 28 Jul 2022 07:50:54 GMT</pubDate>
-    <lastBuildDate>Thu, 28 Jul 2022 07:50:54 GMT</lastBuildDate>
+    <pubDate>Sat, 30 Jul 2022 00:35:27 GMT</pubDate>
+    <lastBuildDate>Sat, 30 Jul 2022 00:35:27 GMT</lastBuildDate>
     <generator>vuepress-plugin-feed2</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
     <item>
@@ -10073,7 +10073,7 @@ class AsTableLog
 </tbody>
 </table>
 <p>详细介绍：<a href="https://github.com/dotnetcore/FreeSql/discussions/1066" target="_blank" rel="noopener noreferrer">https://github.com/dotnetcore/FreeSql/discussions/1066</a></p>
-<h2 id="【分库】使用-freesql-clound" tabindex="-1"> 【分库】使用 FreeSql.Clound</h2>
+<h2 id="【分库】使用-freesql-cloud" tabindex="-1"> 【分库】使用 FreeSql.Cloud</h2>
 <p>为 FreeSql 提供跨数据库访问，分布式事务TCC、SAGA解决方案，支持 .NET Core 2.1+, .NET Framework 4.0+.</p>
 <p>开源地址：https://github.com/2881099/FreeSql.Cloud</p>
 <blockquote>

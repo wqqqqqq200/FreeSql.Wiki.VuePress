@@ -3,7 +3,7 @@
   <id>http://freesql.net/FreeSql.Wiki.VuePress/</id>
   <title>FreeSql 官方文档</title>
   <subtitle>FreeSql Documents</subtitle>
-  <updated>2022-07-28T07:50:54.353Z</updated>
+  <updated>2022-07-30T00:35:27.541Z</updated>
   <generator>vuepress-plugin-feed2</generator>
   <link rel="self" href="http://freesql.net/FreeSql.Wiki.VuePress/atom.xml"/>
   <link rel="alternate" href="http://freesql.net/FreeSql.Wiki.VuePress/"/>
@@ -9967,7 +9967,7 @@ fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>VM_District_Pa
     <title type="html">分表分库</title>
     <id>http://freesql.net/FreeSql.Wiki.VuePress/guide/sharding.html</id>
     <link href="http://freesql.net/FreeSql.Wiki.VuePress/guide/sharding.html"/>
-    <updated>2022-07-28T03:39:46.000Z</updated>
+    <updated>2022-07-30T00:33:51.000Z</updated>
     <content type="html"><![CDATA[<h1 id="分表分库" tabindex="-1"> 分表分库</h1>
 <h2 id="理论知识" tabindex="-1"> 理论知识</h2>
 <p>分表 - 从表面意思上看呢，就是把一张表分成 N 多个小表，每一个小表都是完整的一张表。分表后数据都是存放在分表里，总表只是一个外壳，存取数据发生在一个一个的分表里面。分表后单表的并发能力提高了，磁盘 I/O 性能也提高了。并发能力为什么提高了呢，因为查寻一次所花的时间变短了，如果出现高并发的话，总表可以根据不同 的查询，将并发压力分到不同的小表里面。</p>
@@ -10064,7 +10064,7 @@ class AsTableLog
 </tbody>
 </table>
 <p>详细介绍：<a href="https://github.com/dotnetcore/FreeSql/discussions/1066" target="_blank" rel="noopener noreferrer">https://github.com/dotnetcore/FreeSql/discussions/1066</a></p>
-<h2 id="【分库】使用-freesql-clound" tabindex="-1"> 【分库】使用 FreeSql.Clound</h2>
+<h2 id="【分库】使用-freesql-cloud" tabindex="-1"> 【分库】使用 FreeSql.Cloud</h2>
 <p>为 FreeSql 提供跨数据库访问，分布式事务TCC、SAGA解决方案，支持 .NET Core 2.1+, .NET Framework 4.0+.</p>
 <p>开源地址：https://github.com/2881099/FreeSql.Cloud</p>
 <blockquote>
