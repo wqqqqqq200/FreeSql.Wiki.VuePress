@@ -3,7 +3,7 @@
   <id>http://freesql.net/FreeSql.Wiki.VuePress/</id>
   <title>FreeSql 官方文档</title>
   <subtitle>FreeSql Documents</subtitle>
-  <updated>2022-08-01T02:06:09.446Z</updated>
+  <updated>2022-08-01T02:14:48.008Z</updated>
   <generator>vuepress-plugin-feed2</generator>
   <link rel="self" href="http://freesql.net/FreeSql.Wiki.VuePress/atom.xml"/>
   <link rel="alternate" href="http://freesql.net/FreeSql.Wiki.VuePress/"/>
@@ -98,7 +98,7 @@ repo<span>.</span><span>Delete</span><span>(</span>groups<span>)</span><span>;</
     <title type="html">嵌套查询</title>
     <id>http://freesql.net/FreeSql.Wiki.VuePress/guide/withtempquery.html</id>
     <link href="http://freesql.net/FreeSql.Wiki.VuePress/guide/withtempquery.html"/>
-    <updated>2022-08-01T02:01:42.000Z</updated>
+    <updated>2022-08-01T02:13:27.000Z</updated>
     <content type="html"><![CDATA[<h1 id="嵌套查询" tabindex="-1"> 嵌套查询</h1>
 <h2 id="withtempquery" tabindex="-1"> WithTempQuery</h2>
 <p>意见往集：<a href="https://github.com/dotnetcore/FreeSql/discussions/1192" target="_blank" rel="noopener noreferrer">https://github.com/dotnetcore/FreeSql/discussions/1192</a></p>
@@ -192,6 +192,15 @@ var listSql2 = fsql.Select&lt;UserGroup&gt;()
     .FromQuery(fsql.Select&lt;User1&gt;().WithMemory(list))
     .InnerJoin((a, b) =&gt; a.Id == b.GroupId)
     .ToSql();
+</code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br></div></div><div><pre><code><span>SELECT</span> <span>.</span><span>.</span><span>.</span>
+<span>FROM</span> <span>[</span>UserGroup<span>]</span> a
+<span>INNER</span> <span>JOIN</span> <span>(</span>
+    <span>SELECT</span> <span>.</span><span>.</span><span>.</span>
+    <span>UNION</span> <span>ALL</span>
+    <span>SELECT</span> <span>.</span><span>.</span><span>.</span>
+    <span>UNION</span> <span>ALL</span>
+    <span>SELECT</span> <span>.</span><span>.</span><span>.</span>
+<span>)</span> b <span>ON</span> a<span>.</span><span>[</span>Id<span>]</span> <span>=</span> b<span>.</span><span>[</span>GroupId<span>]</span>
 </code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br></div></div><hr>
 <h2 id="子表exists" tabindex="-1"> 子表Exists</h2>
 <div><pre><code>fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>Topic<span>></span></span></span><span>(</span><span>)</span>
