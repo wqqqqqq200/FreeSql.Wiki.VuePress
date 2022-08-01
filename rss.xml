@@ -6,8 +6,8 @@
     <link>http://freesql.net/FreeSql.Wiki.VuePress/</link>
     <description>FreeSql Documents</description>
     <language>zh-CN</language>
-    <pubDate>Sat, 30 Jul 2022 09:37:44 GMT</pubDate>
-    <lastBuildDate>Sat, 30 Jul 2022 09:37:44 GMT</lastBuildDate>
+    <pubDate>Mon, 01 Aug 2022 02:03:10 GMT</pubDate>
+    <lastBuildDate>Mon, 01 Aug 2022 02:03:10 GMT</lastBuildDate>
     <generator>vuepress-plugin-feed2</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
     <item>
@@ -186,7 +186,17 @@ repo<span>.</span><span>Delete</span><span>(</span>groups<span>)</span><span>;</
     <span>WHERE</span> <span>(</span>a<span>.</span><span>[</span>UserId<span>]</span> <span>></span> <span>0</span><span>)</span> 
     <span>GROUP</span> <span>BY</span> a<span>.</span><span>[</span>UserId<span>]</span><span>,</span> a<span>.</span><span>[</span>Remark<span>]</span> <span>)</span> b <span>ON</span> a<span>.</span><span>[</span>Id<span>]</span> <span>=</span> b<span>.</span><span>[</span>UserId<span>]</span> 
 <span>WHERE</span> <span>(</span>a<span>.</span><span>[</span>rownum<span>]</span> <span>=</span> <span>1</span><span>)</span> <span>AND</span> <span>(</span><span>(</span>a<span>.</span><span>[</span>Nickname<span>]</span> <span>=</span> N<span>'name03'</span> <span>OR</span> a<span>.</span><span>[</span>Nickname<span>]</span> <span>=</span> N<span>'name02'</span><span>)</span><span>)</span>
-</code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br><span>10</span><br></div></div><hr>
+</code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br><span>10</span><br></div></div><h4 id="场景4-内存数据嵌套" tabindex="-1"> 场景4：内存数据嵌套</h4>
+<div><pre><code>var list = new List&lt;User1&gt;();
+list.Add(new User1 { Id = Guid.NewGuid() });
+list.Add(new User1 { Id = Guid.NewGuid() });
+list.Add(new User1 { Id = Guid.NewGuid() });
+
+var listSql2 = fsql.Select&lt;UserGroup&gt;()
+    .FromQuery(fsql.Select&lt;User1&gt;().WithMemory(list))
+    .InnerJoin((a, b) =&gt; a.Id == b.GroupId)
+    .ToSql();
+</code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br></div></div><hr>
 <h2 id="子表exists" tabindex="-1"> 子表Exists</h2>
 <div><pre><code>fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>Topic<span>></span></span></span><span>(</span><span>)</span>
   <span>.</span><span>Where</span><span>(</span>a <span>=></span> fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>Topic<span>></span></span></span><span>(</span><span>)</span><span>.</span><span>As</span><span>(</span><span>"b"</span><span>)</span><span>.</span><span>Where</span><span>(</span>b <span>=></span> b<span>.</span>Id <span>==</span> a<span>.</span>Id<span>)</span><span>.</span><span>Any</span><span>(</span><span>)</span><span>)</span>
