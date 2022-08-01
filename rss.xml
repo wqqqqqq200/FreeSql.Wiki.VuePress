@@ -6,8 +6,8 @@
     <link>http://freesql.net/FreeSql.Wiki.VuePress/</link>
     <description>FreeSql Documents</description>
     <language>zh-CN</language>
-    <pubDate>Mon, 01 Aug 2022 02:14:48 GMT</pubDate>
-    <lastBuildDate>Mon, 01 Aug 2022 02:14:48 GMT</lastBuildDate>
+    <pubDate>Mon, 01 Aug 2022 09:40:14 GMT</pubDate>
+    <lastBuildDate>Mon, 01 Aug 2022 09:40:14 GMT</lastBuildDate>
     <generator>vuepress-plugin-feed2</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
     <item>
@@ -12552,9 +12552,6 @@ fsql<span>.</span><span>UpdateDict</span><span>(</span>dic<span>)</span><span>.<
       <pubDate>Thu, 04 Feb 2021 16:03:18 GMT</pubDate>
       <content:encoded><![CDATA[<h1 id="更新日志" tabindex="-1"> 更新日志</h1>
 <p>大约每三个月一次版本号，暂时以修复 bug 为主</p>
-<blockquote>
-<p>preview 预览版 添加 nuget 源：https://www.myget.org/F/ncc/api/v3/index.json</p>
-</blockquote>
 <h2 id="v3-2-665" tabindex="-1"> v3.2.665</h2>
 <ul>
 <li>增加 IsVersion string 字符串乐观锁；<a href="https://github.com/dotnetcore/FreeSql/issues/1178" target="_blank" rel="noopener noreferrer">#1178</a></li>
