@@ -6,8 +6,8 @@
     <link>http://freesql.net/FreeSql.Wiki.VuePress/</link>
     <description>FreeSql Documents</description>
     <language>zh-CN</language>
-    <pubDate>Mon, 01 Aug 2022 02:04:22 GMT</pubDate>
-    <lastBuildDate>Mon, 01 Aug 2022 02:04:22 GMT</lastBuildDate>
+    <pubDate>Mon, 01 Aug 2022 02:06:09 GMT</pubDate>
+    <lastBuildDate>Mon, 01 Aug 2022 02:06:09 GMT</lastBuildDate>
     <generator>vuepress-plugin-feed2</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
     <item>
@@ -7165,7 +7165,26 @@ fsql<span>.</span><span>InsertOrUpdateDict</span><span>(</span>dic<span>)</span>
 </code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br></div></div><ul>
 <li><a href="/guide/withsql.html">WithSql</a>使用多次为 UNION ALL 查询</li>
 </ul>
-<hr>
+<blockquote>
+<p>v3.2.666 <a href="%e5%b5%8c%e5%a5%97%e6%9f%a5%e8%af%a2">WithTempQuery + FromQuery 嵌套查询</a></p>
+</blockquote>
+<blockquote>
+<p>v3.2.666 WithMemory 使用内存数据进行查询</p>
+</blockquote>
+<div><pre><code>var list = new List&lt;Topic&gt;();
+list.Add(new Topic { ... });
+list.Add(new Topic { ... });
+
+fsql.Select&lt;Topic&gt;()
+  .WithMemory(list)
+  .ToList()
+//SELECT a.`Id`, a.`Clicks`, a.`CategoryId`, a.`Title`, a.`CreateTime` 
+//FROM (
+//  SELECT ...
+//  UNION ALL
+//  SELECT ...
+//) a 
+</code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br><span>10</span><br><span>11</span><br><span>12</span><br><span>13</span><br></div></div><hr>
 <h2 id="_6、你不知道的-指定字段返回" tabindex="-1"> 6、你不知道的，指定字段返回</h2>
 <div><pre><code>fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>t1<span>></span></span></span><span>(</span><span>)</span>
   <span>.</span><span>ToList</span><span>(</span>a <span>=></span> <span>new</span> <span>{</span>
