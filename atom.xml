@@ -3,7 +3,7 @@
   <id>http://freesql.net/FreeSql.Wiki.VuePress/</id>
   <title>FreeSql 官方文档</title>
   <subtitle>FreeSql Documents</subtitle>
-  <updated>2022-08-02T13:00:20.412Z</updated>
+  <updated>2022-08-02T14:20:36.718Z</updated>
   <generator>vuepress-plugin-feed2</generator>
   <link rel="self" href="http://freesql.net/FreeSql.Wiki.VuePress/atom.xml"/>
   <link rel="alternate" href="http://freesql.net/FreeSql.Wiki.VuePress/"/>
@@ -98,7 +98,7 @@ repo<span>.</span><span>Delete</span><span>(</span>groups<span>)</span><span>;</
     <title type="html">嵌套查询</title>
     <id>http://freesql.net/FreeSql.Wiki.VuePress/guide/withtempquery.html</id>
     <link href="http://freesql.net/FreeSql.Wiki.VuePress/guide/withtempquery.html"/>
-    <updated>2022-08-02T12:58:51.000Z</updated>
+    <updated>2022-08-02T14:19:08.000Z</updated>
     <content type="html"><![CDATA[<h1 id="嵌套查询" tabindex="-1"> 嵌套查询</h1>
 <h2 id="withtempquery" tabindex="-1"> WithTempQuery</h2>
 <p>意见往集：<a href="https://github.com/dotnetcore/FreeSql/discussions/1192" target="_blank" rel="noopener noreferrer">https://github.com/dotnetcore/FreeSql/discussions/1192</a></p>
@@ -183,6 +183,7 @@ repo<span>.</span><span>Delete</span><span>(</span>groups<span>)</span><span>;</
     <span>GROUP</span> <span>BY</span> a<span>.</span><span>[</span>UserId<span>]</span><span>,</span> a<span>.</span><span>[</span>Remark<span>]</span> <span>)</span> b <span>ON</span> a<span>.</span><span>[</span>Id<span>]</span> <span>=</span> b<span>.</span><span>[</span>UserId<span>]</span> 
 <span>WHERE</span> <span>(</span>a<span>.</span><span>[</span>rownum<span>]</span> <span>=</span> <span>1</span><span>)</span> <span>AND</span> <span>(</span><span>(</span>a<span>.</span><span>[</span>Nickname<span>]</span> <span>=</span> N<span>'name03'</span> <span>OR</span> a<span>.</span><span>[</span>Nickname<span>]</span> <span>=</span> N<span>'name02'</span><span>)</span><span>)</span>
 </code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br><span>10</span><br></div></div><h2 id="场景4-内存数据嵌套" tabindex="-1"> 场景4：内存数据嵌套</h2>
+<p>假设跨数据库服务器，或者数据表被缓存过，WithMemory 便可以实现数据表与内存关联查询。</p>
 <div><pre><code>var list = new List&lt;User1&gt;();
 list.Add(new User1 { Id = Guid.NewGuid() });
 list.Add(new User1 { Id = Guid.NewGuid() });
