@@ -6,8 +6,8 @@
     <link>http://freesql.net/FreeSql.Wiki.VuePress/</link>
     <description>FreeSql Documents</description>
     <language>zh-CN</language>
-    <pubDate>Wed, 03 Aug 2022 06:49:14 GMT</pubDate>
-    <lastBuildDate>Wed, 03 Aug 2022 06:49:14 GMT</lastBuildDate>
+    <pubDate>Wed, 03 Aug 2022 06:52:29 GMT</pubDate>
+    <lastBuildDate>Wed, 03 Aug 2022 06:52:29 GMT</lastBuildDate>
     <generator>vuepress-plugin-feed2</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
     <item>
@@ -10257,7 +10257,7 @@ class AsTableLog
 [Table(Name = &quot;db2.Comment&quot;)]
 class Comment { ... }
 
-[Table(Name = &quot;dbd.Comment&quot;)]
+[Table(Name = &quot;db3.Comment&quot;)]
 class Topic { .. }
 </code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br></div></div><p>SQLite 跨库操作是 FreeSql 独有的功能，连接串 attachs 参数值逗号分割。</p>
 <p>2、SqlServer 跨库</p>
