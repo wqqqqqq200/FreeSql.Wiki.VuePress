@@ -6,8 +6,8 @@
     <link>http://freesql.net/FreeSql.Wiki.VuePress/</link>
     <description>FreeSql Documents</description>
     <language>zh-CN</language>
-    <pubDate>Wed, 03 Aug 2022 06:52:29 GMT</pubDate>
-    <lastBuildDate>Wed, 03 Aug 2022 06:52:29 GMT</lastBuildDate>
+    <pubDate>Wed, 03 Aug 2022 08:54:15 GMT</pubDate>
+    <lastBuildDate>Wed, 03 Aug 2022 08:54:15 GMT</lastBuildDate>
     <generator>vuepress-plugin-feed2</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
     <item>
@@ -6379,20 +6379,20 @@ fsql<span>.</span><span>Insert</span><span>(</span>items<span>)</span>
 <span>}</span>
 
 <span><span>var</span></span> items <span>=</span> <span>new</span> <span>List<span>&lt;</span>Topic<span>></span></span><span>(</span><span>)</span><span>;</span>
-<span>for</span> <span>(</span><span><span>var</span></span> a <span>=</span> <span>0</span><span>;</span> a <span>&lt;</span> <span>10</span><span>;</span> a<span>++</span><span>)</span> items<span>.</span><span>Add</span><span>(</span><span>new</span> <span>Topic</span> <span>{</span> Id <span>=</span> a <span>+</span> <span>1</span><span>,</span> Title <span>=</span> <span><span>$"newtitle</span><span><span>{</span><span>a</span><span>}</span></span><span>"</span></span><span>,</span> Clicks <span>=</span> a <span>*</span> <span>100</span> <span>}</span><span>)</span><span>;</span>
+<span>for</span> <span>(</span><span><span>var</span></span> a <span>=</span> <span>0</span><span>;</span> a <span>&lt;</span> <span>10</span><span>;</span> a<span>++</span><span>)</span> items<span>.</span><span>Add</span><span>(</span><span>new</span> <span>Topic</span> <span>{</span> Title <span>=</span> <span><span>$"newtitle</span><span><span>{</span><span>a</span><span>}</span></span><span>"</span></span><span>,</span> Clicks <span>=</span> a <span>*</span> <span>100</span> <span>}</span><span>)</span><span>;</span>
 </code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br><span>10</span><br><span>11</span><br><span>12</span><br><span>13</span><br><span>14</span><br><span>15</span><br><span>16</span><br><span>17</span><br><span>18</span><br></div></div><h2 id="_1、单条插入" tabindex="-1"> 1、单条插入</h2>
-<div><pre><code><span><span>var</span></span> t1 <span>=</span> fsql<span>.</span><span>Insert</span><span>(</span>items<span>.</span><span>First</span><span>(</span><span>)</span><span>)</span><span>.</span><span>ExecuteAffrows</span><span>(</span><span>)</span><span>;</span>
+<div><pre><code><span><span>var</span></span> t1 <span>=</span> fsql<span>.</span><span>Insert</span><span>(</span>items<span>[</span><span>0</span><span>]</span><span>)</span><span>.</span><span>ExecuteAffrows</span><span>(</span><span>)</span><span>;</span>
 <span>//INSERT INTO `Topic`(`Clicks`, `Title`, `CreateTime`)</span>
 <span>//VALUES(?Clicks0, ?Title0, ?CreateTime0)</span>
 </code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br></div></div><p>如果表有自增列，插入数据后应该要返回 id。</p>
 <p>方法 1：(原始)</p>
-<div><pre><code><span><span>long</span></span> id <span>=</span> fsql<span>.</span><span>Insert</span><span>(</span>blog<span>)</span><span>.</span><span>ExecuteIdentity</span><span>(</span><span>)</span><span>;</span>
-blog<span>.</span>Id <span>=</span> id<span>;</span>
+<div><pre><code><span><span>long</span></span> id <span>=</span> fsql<span>.</span><span>Insert</span><span>(</span>items<span>[</span><span>0</span><span>]</span><span>)</span><span>.</span><span>ExecuteIdentity</span><span>(</span><span>)</span><span>;</span>
+items<span>[</span><span>0</span><span>]</span><span>.</span>Id <span>=</span> id<span>;</span>
 </code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br></div></div><p>方法 2：(依赖 FreeSql.Repository)</p>
-<div><pre><code><span><span>var</span></span> repo <span>=</span> fsql<span>.</span><span><span>GetRepository</span><span><span>&lt;</span>Blog<span>></span></span></span><span>(</span><span>)</span><span>;</span>
-repo<span>.</span><span>Insert</span><span>(</span>blog<span>)</span><span>;</span>
+<div><pre><code><span><span>var</span></span> repo <span>=</span> fsql<span>.</span><span><span>GetRepository</span><span><span>&lt;</span>Topic<span>></span></span></span><span>(</span><span>)</span><span>;</span>
+repo<span>.</span><span>Insert</span><span>(</span>items<span>[</span><span>0</span><span>]</span><span>)</span><span>;</span>
 </code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br></div></div><blockquote>
-<p>内部会将插入后的自增值填充给 blog.Id</p>
+<p>内部会将插入后的自增值填充给 items[0].Id (支持批量插入回填)</p>
 </blockquote>
 <h2 id="_2、批量插入" tabindex="-1"> 2、批量插入</h2>
 <div><pre><code><span><span>var</span></span> t2 <span>=</span> fsql<span>.</span><span>Insert</span><span>(</span>items<span>)</span><span>.</span><span>ExecuteAffrows</span><span>(</span><span>)</span><span>;</span>
