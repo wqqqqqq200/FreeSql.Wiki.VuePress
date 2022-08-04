@@ -3,7 +3,7 @@
   <id>http://freesql.net/FreeSql.Wiki.VuePress/</id>
   <title>FreeSql 官方文档</title>
   <subtitle>FreeSql Documents</subtitle>
-  <updated>2022-08-04T03:10:19.951Z</updated>
+  <updated>2022-08-04T03:45:10.273Z</updated>
   <generator>vuepress-plugin-feed2</generator>
   <link rel="self" href="http://freesql.net/FreeSql.Wiki.VuePress/atom.xml"/>
   <link rel="alternate" href="http://freesql.net/FreeSql.Wiki.VuePress/"/>
@@ -1468,7 +1468,7 @@ Install-Package FreeSql.Provider.SqliteCore
     <title type="html">UnitOfWorkManager 事务</title>
     <id>http://freesql.net/FreeSql.Wiki.VuePress/guide/unitofwork-manager.html</id>
     <link href="http://freesql.net/FreeSql.Wiki.VuePress/guide/unitofwork-manager.html"/>
-    <updated>2022-06-29T14:18:15.000Z</updated>
+    <updated>2022-08-04T03:43:43.000Z</updated>
     <content type="html"><![CDATA[<h1 id="unitofworkmanager-事务" tabindex="-1"> UnitOfWorkManager 事务</h1>
 <h2 id="asp-net-core-下-freesql-的仓储事务" tabindex="-1"> ASP.NET Core 下 FreeSql 的仓储事务</h2>
 <h3 id="引入包" tabindex="-1"> 引入包</h3>
@@ -1497,7 +1497,16 @@ dotnet <span>add</span> package FreeSql.Provider.MySqlConnector
 <div><pre><code><span>{</span>
   <span>"Mysql"</span><span>:</span> <span>"Data Source=127.0.0.1;Port=3306;User ID=root;Password=root;Initial Catalog=ovov_freesql_repository;Charset=utf8;SslMode=none;Max pool size=10"</span>
 <span>}</span>
-</code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br></div></div><table>
+</code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br></div></div><p>支持六种传播方式(propagation)，意味着跨方法的事务非常方便，并且支持同步异步：</p>
+<ul>
+<li>Requierd：如果当前没有事务，就新建一个事务，如果已存在一个事务中，加入到这个事务中，默认的选择。</li>
+<li>Supports：支持当前事务，如果没有当前事务，就以非事务方法执行。</li>
+<li>Mandatory：使用当前事务，如果没有当前事务，就抛出异常。</li>
+<li>NotSupported：以非事务方式执行操作，如果当前存在事务，就把当前事务挂起。</li>
+<li>Never：以非事务方式执行操作，如果当前事务存在则抛出异常。</li>
+<li>Nested：以嵌套事务方式执行。</li>
+</ul>
+<table>
 <thead>
 <tr>
 <th>UnitOfWorkManager 成员</th>
