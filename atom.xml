@@ -3,7 +3,7 @@
   <id>http://freesql.net/FreeSql.Wiki.VuePress/</id>
   <title>FreeSql 官方文档</title>
   <subtitle>FreeSql Documents</subtitle>
-  <updated>2022-08-04T03:45:10.273Z</updated>
+  <updated>2022-08-04T05:34:20.107Z</updated>
   <generator>vuepress-plugin-feed2</generator>
   <link rel="self" href="http://freesql.net/FreeSql.Wiki.VuePress/atom.xml"/>
   <link rel="alternate" href="http://freesql.net/FreeSql.Wiki.VuePress/"/>
@@ -5864,7 +5864,7 @@ fsql<span>.</span>CodeFirst<span>.</span><span><span>Entity</span><span><span>&l
     <title type="html">入门</title>
     <id>http://freesql.net/FreeSql.Wiki.VuePress/guide/getting-started.html</id>
     <link href="http://freesql.net/FreeSql.Wiki.VuePress/guide/getting-started.html"/>
-    <updated>2022-08-04T03:08:28.000Z</updated>
+    <updated>2022-08-04T03:23:43.000Z</updated>
     <content type="html"><![CDATA[<h1 id="入门" tabindex="-1"> 入门</h1>
 <h2 id="模型" tabindex="-1"> 模型</h2>
 <p><code>FreeSql</code> 使用模型执行数据访问，模型由实体类表示数据库表或视图，用于查询和保存数据。</p>
@@ -5883,8 +5883,8 @@ fsql<span>.</span>CodeFirst<span>.</span><span><span>Entity</span><span><span>&l
 <p>FreeSql.Provider.xxx(<a href="/guide/install.html">可选的驱动</a>)</p>
 <CodeGroup>
 <CodeGroupItem title=".NET CLI">
-<div><pre><code>dotnet <span>add</span> packages FreeSql
-dotnet <span>add</span> packages FreeSql.Provider.Sqlite
+<div><pre><code>dotnet <span>add</span> package FreeSql
+dotnet <span>add</span> package FreeSql.Provider.Sqlite
 </code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br></div></div></CodeGroupItem>
 <CodeGroupItem title="Package Manager">
 <div><pre><code>Install-Package FreeSql
@@ -5892,13 +5892,10 @@ Install-Package FreeSql.Provider.Sqlite
 </code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br></div></div></CodeGroupItem>
 </CodeGroup>
 <h2 id="声明" tabindex="-1"> 声明</h2>
-<div><pre><code><span>static</span> <span>IFreeSql</span> fsql <span>=</span> <span>new</span> <span>FreeSql<span>.</span>FreeSqlBuilder</span><span>(</span><span>)</span>
-    <span>.</span><span>UseConnectionString</span><span>(</span>FreeSql<span>.</span>DataType<span>.</span>Sqlite<span>,</span> <span>@"Data Source=db1.db"</span><span>)</span>
-    <span>.</span><span>UseAutoSyncStructure</span><span>(</span><span>true</span><span>)</span> <span>//自动同步实体结构到数据库，FreeSql不会扫描程序集，只有CRUD时才会生成表。</span>
-    <span>.</span><span>Build</span><span>(</span><span>)</span><span>;</span> <span>//请务必定义成 Singleton 单例模式</span>
-
-    <span>//注意： IFreeSql 在项目中应以单例声明，而不是在每次使用的时候创建。</span>
-</code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br></div></div><ul>
+<blockquote>
+<p>注意： IFreeSql 在项目中应以单例声明，而不是在每次使用的时候创建。</p>
+</blockquote>
+<ul>
 <li>.NET Core 单例模式</li>
 </ul>
 <CodeGroup>
@@ -14267,7 +14264,7 @@ GetAsync await 为异步方法获取连接的排队数量
     <title type="html">与 Dapper 比较</title>
     <id>http://freesql.net/FreeSql.Wiki.VuePress/reference/vs-dapper.html</id>
     <link href="http://freesql.net/FreeSql.Wiki.VuePress/reference/vs-dapper.html"/>
-    <updated>2022-06-23T07:11:19.000Z</updated>
+    <updated>2022-08-04T03:23:43.000Z</updated>
     <content type="html"><![CDATA[<h1 id="与-dapper-比较" tabindex="-1"> 与 Dapper 比较</h1>
 <p>众所周知 Dapper 是 .NET 下最轻最快的 ORM，它是喜欢写 SQL 码农的福音，相对于 SqlHelper 它更加方便，据统计 10 个 .NETer 有 9 个 用过 Dapper。</p>
 <p>这篇文章为准备使用 FreeSql 的朋友解惑，对比 Dapper 有何优势，为什么要使用 FreeSql？希望本文内容对大家有所帮助。</p>
@@ -14406,7 +14403,7 @@ Intel Core i7-8700K CPU <span>3</span>.70GHz <span>(</span>Coffee Lake<span>)</s
 <p>如果你的项目正在使用 Dapper，请看以下成本最低的接入方法。</p>
 <p>FreeSql 支持调用 SQL/存储过程，同时也为 IDbConnection/IDbTransaction 提供扩展方法 Select/Delete/Insert/Update/InsertOrUpdate。</p>
 <p>第一步：以数据库 SqlServer 访问为例，只需要安装已经划分好的小包：</p>
-<div><pre><code>dotnet <span>add</span> packages FreeSql.Provider.SqlServer
+<div><pre><code>dotnet <span>add</span> package FreeSql.Provider.SqlServer
 </code></pre><div aria-hidden="true"><span>1</span><br></div></div><p>or</p>
 <div><pre><code>Install-Package FreeSql.Provider.SqlServer
 </code></pre><div aria-hidden="true"><span>1</span><br></div></div><p>第二步：建立实体类</p>
