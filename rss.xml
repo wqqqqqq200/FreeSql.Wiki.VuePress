@@ -6,8 +6,8 @@
     <link>http://freesql.net/FreeSql.Wiki.VuePress/</link>
     <description>FreeSql Documents</description>
     <language>zh-CN</language>
-    <pubDate>Fri, 05 Aug 2022 07:33:32 GMT</pubDate>
-    <lastBuildDate>Fri, 05 Aug 2022 07:33:32 GMT</lastBuildDate>
+    <pubDate>Fri, 05 Aug 2022 07:41:02 GMT</pubDate>
+    <lastBuildDate>Fri, 05 Aug 2022 07:41:02 GMT</lastBuildDate>
     <generator>vuepress-plugin-feed2</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
     <item>
@@ -7576,7 +7576,7 @@ fsql<span>.</span>Aop<span>.</span>ConfigEntityProperty <span>+=</span> <span>(<
 <p>维基百科：“软件多租户是指一种软件架构，在这种软件架构中，软件的一个实例运行在服务器上并且为多个租户服务”。一个租户是一组共享该软件实例特定权限的用户。有了多租户架构，软件应用被设计成为每个租户提供一个 专用的实例包括该实例的数据的共享，还可以共享配置，用户管理，租户自己的功能和非功能属性。多租户和多实例架构相比，多租户分离了代表不同的租户操作的多个实例。</p>
 <p>多租户用于创建 Saas（Software as-a service）应用（云处理）。</p>
 <h3 id="方案一-按租户字段区分" tabindex="-1"> 方案一：按租户字段区分</h3>
-<p>1、AsyncLocal&lt;string&gt;</p>
+<p>1、AsyncLocal&lt;int&gt;</p>
 <p>ThreadLocal 可以理解为字典 Dictionary&lt;int, string&gt; Key=线程ID Value=值，跨方法时只需要知道线程ID，就能取得对应的 Value。</p>
 <p>我们知道跨异步方法可能造成线程ID变化，ThreadLocal 将不能满足我们使用。</p>
 <p>AsyncLocal 是 ThreadLocal 的升级版，异步也能获取到对应的 Value。</p>
@@ -7651,26 +7651,77 @@ fsql<span>.</span>Aop<span>.</span>ConfigEntityProperty <span>+=</span> <span>(<
 <span><span>var</span></span> reposTopic <span>=</span> orm<span>.</span><span><span>GetGuidRepository</span><span><span>&lt;</span>Topic<span>></span></span></span><span>(</span><span>null</span><span>,</span> oldname <span>=></span> <span><span>$"</span><span><span>{</span><span>oldname</span><span>}</span></span><span><span>{</span><span>tenantId</span><span>}</span></span><span>"</span></span><span>)</span><span>;</span>
 </code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br></div></div><p>上面我们得到一个仓储按租户分表，使用它 CURD 最终会操作 Topic_1 表。</p>
 <blockquote>
-<p>更多说明参考：<a href="/guide/repository.html">《FreeSql.Repository 仓储》</a></p>
+<p>更多说明参考：<a href="/guide/repository.html">《FreeSql.Repository 仓储》</a>、<a href="/guide/sharding.html">《分表分库》</a>。</p>
 </blockquote>
 <h3 id="方案三-按租户分库" tabindex="-1"> 方案三：按租户分库</h3>
-<p>与方案二相同，只是表存储的位置不同，请查看 <a href="/guide/repository.html">《FreeSql.Repository 仓储》</a>、<a href="/guide/sharding.html">《分表分库》</a>。</p>
-<h3 id="多表查询" tabindex="-1"> 多表查询</h3>
-<p>分表下的租户也支持多表查询，得益于 FreeSql 提供的优良基础。这部份仍然在 FreeSql.Repository 扩展库中实现的。</p>
-<div><pre><code><span><span>var</span></span> tenantId <span>=</span> <span>1</span><span>;</span>
-<span>//联表查询也支持</span>
-fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>Topic<span>></span></span></span><span>(</span><span>)</span>
-    <span>.</span><span>AsTable</span><span>(</span><span>(</span>type<span>,</span> oldname<span>)</span> <span>=></span> <span><span>$"</span><span><span>{</span><span>oldname</span><span>}</span></span><span><span>{</span><span>tenantId</span><span>}</span></span><span>"</span></span><span>)</span>
-    <span>.</span><span><span>LeftJoin</span><span><span>&lt;</span>TopicType<span>></span></span></span><span>(</span><span>(</span>a<span>,</span> b<span>)</span> <span>=></span> a<span>.</span>TypeId <span>==</span> b<span>.</span>Id<span>)</span>
-    <span>.</span><span>ToList</span><span>(</span><span>)</span><span>;</span>
-</code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br></div></div><p>上述代码的使用，将两个设置好的租户仓储合并起来查询，查询租户 1 下的 topic + topictype 数据，执行的 SQL 语句：</p>
-<div><pre><code><span>SELECT</span> <span>.</span><span>.</span><span>.</span>
-<span>FROM</span> <span>"Topic_1"</span> a
-<span>LEFT</span> <span>JOIN</span> <span>"TopicType_1"</span> b <span>ON</span> a<span>.</span><span>"TypeId"</span> <span>=</span> b<span>.</span><span>"Id"</span>
-</code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br></div></div><h3 id="实现全局控制租户" tabindex="-1"> 实现全局控制租户</h3>
-<p>FreeSql.Repository Autofac 注入方式实现了全局【过滤与验证】的设定，方便租户功能的设计；</p>
-<p>具体可参考：<a href="/guide/filters.html">《过滤器》</a></p>
-]]></content:encoded>
+<p>场景1：同数据库实例（未跨服务器），租户间使用不同的数据库名或Schema区分，使用方法与方案二相同。</p>
+<p>场景2：跨服务器分库</p>
+<p>1、FreeSql.Cloud 为 FreeSql 提供跨数据库访问，分布式事务TCC、SAGA解决方案，支持 .NET Core 2.1+, .NET Framework 4.0+.</p>
+<blockquote>
+<p>dotnet add package FreeSql.Cloud</p>
+</blockquote>
+<p>or</p>
+<blockquote>
+<p>Install-Package FreeSql.Cloud</p>
+</blockquote>
+<div><pre><code>FreeSqlCloud&lt;string&gt; fsql = new FreeSqlCloud&lt;string&gt;();
+
+public void ConfigureServices(IServiceCollection services)
+{
+    fsql.DistributeTrace = log =&gt; Console.WriteLine(log.Split('\n')[0].Trim());
+    fsql.Register(&quot;main&quot;, () =&gt;
+    {
+        var db = new FreeSqlBuilder().UseConnectionString(DataType.SqlServer, &quot;data source=...&quot;).Build();
+        //db.Aop.CommandAfter += ...
+        return db;
+    });
+
+    services.AddSingleton&lt;IFreeSql&gt;(fsql);
+    services.AddControllers();
+}
+
+public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+{
+    app.Use(async (context, next) =&gt;
+    {
+        try
+        {
+            // 假设 YourGetTerantFunction 返回租户信息和连接串
+            (string terant, string connectionString) = YourGetTerantFunction();
+
+            // 只会首次注册，如果已经注册过则不生效
+            fsql.Register(terant, () =&gt;
+            {
+                var db = new FreeSqlBuilder().UseConnectionString(DataType.SqlServer, connectionString).Build();
+                //db.Aop.CommandAfter += ...
+                return db;
+            });
+
+            // 切换租户
+            fsql.Change(terant);
+            await next();
+        }
+        finally
+        {
+            // 切换回 main 库
+            fsql.Change(&quot;main&quot;);
+        }
+    });
+    app.UseRouting();
+    app.UseEndpoints(a =&gt; a.MapControllers());
+}
+</code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br><span>10</span><br><span>11</span><br><span>12</span><br><span>13</span><br><span>14</span><br><span>15</span><br><span>16</span><br><span>17</span><br><span>18</span><br><span>19</span><br><span>20</span><br><span>21</span><br><span>22</span><br><span>23</span><br><span>24</span><br><span>25</span><br><span>26</span><br><span>27</span><br><span>28</span><br><span>29</span><br><span>30</span><br><span>31</span><br><span>32</span><br><span>33</span><br><span>34</span><br><span>35</span><br><span>36</span><br><span>37</span><br><span>38</span><br><span>39</span><br><span>40</span><br><span>41</span><br><span>42</span><br><span>43</span><br><span>44</span><br><span>45</span><br><span>46</span><br></div></div><p>2、直接使用 IFreeSql 访问租户数据库</p>
+<div><pre><code>public class HomeController : ControllerBase
+{
+
+    [HttpGet]
+    public object Get([FromServices] IFreeSql fsql)
+    {
+        // 使用 fsql 操作当前租户对应的数据库
+        return &quot;&quot;;
+    }
+}
+</code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br><span>10</span><br></div></div>]]></content:encoded>
     </item>
     <item>
       <title>导航属性 ✨</title>
