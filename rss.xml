@@ -6,8 +6,8 @@
     <link>http://freesql.net/FreeSql.Wiki.VuePress/</link>
     <description>FreeSql Documents</description>
     <language>zh-CN</language>
-    <pubDate>Thu, 04 Aug 2022 05:34:20 GMT</pubDate>
-    <lastBuildDate>Thu, 04 Aug 2022 05:34:20 GMT</lastBuildDate>
+    <pubDate>Fri, 05 Aug 2022 05:35:25 GMT</pubDate>
+    <lastBuildDate>Fri, 05 Aug 2022 05:35:25 GMT</lastBuildDate>
     <generator>vuepress-plugin-feed2</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
     <item>
@@ -7802,15 +7802,14 @@ fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>Topic<span>></
     <span>.</span><span>Page</span><span>(</span><span>1</span><span>,</span> <span>20</span><span>)</span>
     <span>.</span><span>Tolist</span><span>(</span><span>)</span><span>;</span>
 </code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br></div></div><blockquote>
-<p>注意： 上述例子是对单表进行的查询。如果您正在对多表进行查询，必须要在 Count 之前先进行排序，防止出现不可理解的分页情况。当然，即使是单表，为了防止让分页的次序明确，也建议先排序。</p>
+<p>Count(out var total) 是同步方法，原因是 out 不支持异步，如果介意可以单独执行如下：</p>
 </blockquote>
-<div><pre><code><span><span>var</span></span> list <span>=</span> fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>Topic<span>></span></span></span><span>(</span><span>)</span>
-    <span>.</span><span>Where</span><span>(</span>a <span>=></span> a<span>.</span>Id <span>></span> <span>10</span><span>)</span>
-    <span>.</span><span>OrderBy</span><span>(</span>a <span>=></span> a<span>.</span>MsgTime<span>)</span>
-    <span>.</span><span>Count</span><span>(</span><span>out</span> <span><span>var</span></span> total<span>)</span> <span>//总记录数量</span>
-    <span>.</span><span>Page</span><span>(</span><span>1</span><span>,</span> <span>20</span><span>)</span>
-    <span>.</span><span>Tolist</span><span>(</span><span>)</span><span>;</span>
-</code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br></div></div><h2 id="优化" tabindex="-1"> 优化</h2>
+<p>提示：数据量大一般不建议查 Count/CountAsync，而应该采用流式分页（上一页、下一页、不返回总数量）</p>
+<div><pre><code>var select = fsql.Select&lt;Topic&gt;()
+    .Where(a =&gt; a.Id &gt; 10);
+var total = await select.CountAsync();
+var list = await select.Page(1, 20).ToListAsync();
+</code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br></div></div><h2 id="优化" tabindex="-1"> 优化</h2>
 <p>SqlServer 2012 以前的版本，使用 row_number 分页；</p>
 <p>SqlServer 2012+ 版本，使用最新的 fetch next rows 分页；</p>
 <h2 id="api" tabindex="-1"> API</h2>
