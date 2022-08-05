@@ -3,7 +3,7 @@
   <id>http://freesql.net/FreeSql.Wiki.VuePress/</id>
   <title>FreeSql 官方文档</title>
   <subtitle>FreeSql Documents</subtitle>
-  <updated>2022-08-05T07:00:00.625Z</updated>
+  <updated>2022-08-05T07:33:32.381Z</updated>
   <generator>vuepress-plugin-feed2</generator>
   <link rel="self" href="http://freesql.net/FreeSql.Wiki.VuePress/atom.xml"/>
   <link rel="alternate" href="http://freesql.net/FreeSql.Wiki.VuePress/"/>
@@ -98,7 +98,7 @@ repo<span>.</span><span>Delete</span><span>(</span>groups<span>)</span><span>;</
     <title type="html">嵌套查询</title>
     <id>http://freesql.net/FreeSql.Wiki.VuePress/guide/withtempquery.html</id>
     <link href="http://freesql.net/FreeSql.Wiki.VuePress/guide/withtempquery.html"/>
-    <updated>2022-08-02T14:19:08.000Z</updated>
+    <updated>2022-08-05T07:32:05.000Z</updated>
     <content type="html"><![CDATA[<h1 id="嵌套查询" tabindex="-1"> 嵌套查询</h1>
 <h2 id="withtempquery" tabindex="-1"> WithTempQuery</h2>
 <p>意见往集：<a href="https://github.com/dotnetcore/FreeSql/discussions/1192" target="_blank" rel="noopener noreferrer">https://github.com/dotnetcore/FreeSql/discussions/1192</a></p>
@@ -184,15 +184,15 @@ repo<span>.</span><span>Delete</span><span>(</span>groups<span>)</span><span>;</
 <span>WHERE</span> <span>(</span>a<span>.</span><span>[</span>rownum<span>]</span> <span>=</span> <span>1</span><span>)</span> <span>AND</span> <span>(</span><span>(</span>a<span>.</span><span>[</span>Nickname<span>]</span> <span>=</span> N<span>'name03'</span> <span>OR</span> a<span>.</span><span>[</span>Nickname<span>]</span> <span>=</span> N<span>'name02'</span><span>)</span><span>)</span>
 </code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br><span>10</span><br></div></div><h2 id="场景4-内存数据嵌套" tabindex="-1"> 场景4：内存数据嵌套</h2>
 <p>假设跨数据库服务器，或者数据表被缓存过，WithMemory 便可以实现数据表与内存关联查询。</p>
-<div><pre><code>var list = new List&lt;User1&gt;();
-list.Add(new User1 { Id = Guid.NewGuid() });
-list.Add(new User1 { Id = Guid.NewGuid() });
-list.Add(new User1 { Id = Guid.NewGuid() });
+<div><pre><code><span><span>var</span></span> list <span>=</span> <span>new</span> <span>List<span>&lt;</span>User1<span>></span></span><span>(</span><span>)</span><span>;</span>
+list<span>.</span><span>Add</span><span>(</span><span>new</span> <span>User1</span> <span>{</span> Id <span>=</span> Guid<span>.</span><span>NewGuid</span><span>(</span><span>)</span> <span>}</span><span>)</span><span>;</span>
+list<span>.</span><span>Add</span><span>(</span><span>new</span> <span>User1</span> <span>{</span> Id <span>=</span> Guid<span>.</span><span>NewGuid</span><span>(</span><span>)</span> <span>}</span><span>)</span><span>;</span>
+list<span>.</span><span>Add</span><span>(</span><span>new</span> <span>User1</span> <span>{</span> Id <span>=</span> Guid<span>.</span><span>NewGuid</span><span>(</span><span>)</span> <span>}</span><span>)</span><span>;</span>
 
-var listSql2 = fsql.Select&lt;UserGroup&gt;()
-    .FromQuery(fsql.Select&lt;User1&gt;().WithMemory(list))
-    .InnerJoin((a, b) =&gt; a.Id == b.GroupId)
-    .ToSql();
+<span><span>var</span></span> listSql2 <span>=</span> fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>UserGroup<span>></span></span></span><span>(</span><span>)</span>
+    <span>.</span><span>FromQuery</span><span>(</span>fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>User1<span>></span></span></span><span>(</span><span>)</span><span>.</span><span>WithMemory</span><span>(</span>list<span>)</span><span>)</span>
+    <span>.</span><span>InnerJoin</span><span>(</span><span>(</span>a<span>,</span> b<span>)</span> <span>=></span> a<span>.</span>Id <span>==</span> b<span>.</span>GroupId<span>)</span>
+    <span>.</span><span>ToSql</span><span>(</span><span>)</span><span>;</span>
 </code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br></div></div><div><pre><code><span>SELECT</span> <span>.</span><span>.</span><span>.</span>
 <span>FROM</span> <span>[</span>UserGroup<span>]</span> a
 <span>INNER</span> <span>JOIN</span> <span>(</span>
@@ -7116,7 +7116,7 @@ dotnet <span>add</span> package FreeSql.Provider.Sqlite
     <title type="html">你不知道的功能 ✨</title>
     <id>http://freesql.net/FreeSql.Wiki.VuePress/guide/more.html</id>
     <link href="http://freesql.net/FreeSql.Wiki.VuePress/guide/more.html"/>
-    <updated>2022-08-02T14:22:06.000Z</updated>
+    <updated>2022-08-05T07:32:05.000Z</updated>
     <content type="html"><![CDATA[<h1 id="你不知道的功能-✨" tabindex="-1"> 你不知道的功能 ✨</h1>
 <h2 id="_1、备注-迁移到数据库" tabindex="-1"> 1、备注 -&gt; 迁移到数据库</h2>
 <p>FreeSql CodeFirst 支持将 c# 代码内的注释，迁移至数据库的备注。先决条件：</p>
@@ -7192,19 +7192,19 @@ fsql<span>.</span><span>InsertOrUpdateDict</span><span>(</span>dic<span>)</span>
 <blockquote>
 <p>假设跨数据库服务器，或者数据表被缓存过，WithMemory 便可以实现数据表与内存关联查询。</p>
 </blockquote>
-<div><pre><code>var list = new List&lt;Topic&gt;();
-list.Add(new Topic { ... });
-list.Add(new Topic { ... });
+<div><pre><code><span><span>var</span></span> list <span>=</span> <span>new</span> <span>List<span>&lt;</span>Topic<span>></span></span><span>(</span><span>)</span><span>;</span>
+list<span>.</span><span>Add</span><span>(</span><span>new</span> <span>Topic</span> <span>{</span> <span>..</span><span>.</span> <span>}</span><span>)</span><span>;</span>
+list<span>.</span><span>Add</span><span>(</span><span>new</span> <span>Topic</span> <span>{</span> <span>..</span><span>.</span> <span>}</span><span>)</span><span>;</span>
 
-fsql.Select&lt;Topic&gt;()
-  .WithMemory(list)
-  .ToList()
-//SELECT a.`Id`, a.`Clicks`, a.`CategoryId`, a.`Title`, a.`CreateTime` 
-//FROM (
-//  SELECT ...
-//  UNION ALL
-//  SELECT ...
-//) a 
+fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>Topic<span>></span></span></span><span>(</span><span>)</span>
+  <span>.</span><span>WithMemory</span><span>(</span>list<span>)</span>
+  <span>.</span><span>ToList</span><span>(</span><span>)</span>
+<span>//SELECT a.`Id`, a.`Clicks`, a.`CategoryId`, a.`Title`, a.`CreateTime` </span>
+<span>//FROM (</span>
+<span>//  SELECT ...</span>
+<span>//  UNION ALL</span>
+<span>//  SELECT ...</span>
+<span>//) a </span>
 </code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br><span>10</span><br><span>11</span><br><span>12</span><br><span>13</span><br></div></div><hr>
 <h2 id="_6、你不知道的-指定字段返回" tabindex="-1"> 6、你不知道的，指定字段返回</h2>
 <div><pre><code>fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>t1<span>></span></span></span><span>(</span><span>)</span>
@@ -7561,7 +7561,7 @@ fsql<span>.</span>Aop<span>.</span>ConfigEntityProperty <span>+=</span> <span>(<
     <title type="html">多租户</title>
     <id>http://freesql.net/FreeSql.Wiki.VuePress/guide/multi-tenancy.html</id>
     <link href="http://freesql.net/FreeSql.Wiki.VuePress/guide/multi-tenancy.html"/>
-    <updated>2022-08-05T06:58:42.000Z</updated>
+    <updated>2022-08-05T07:32:05.000Z</updated>
     <content type="html"><![CDATA[<h1 id="多租户" tabindex="-1"> 多租户</h1>
 <h3 id="什么是多租户" tabindex="-1"> 什么是多租户</h3>
 <p>维基百科：“软件多租户是指一种软件架构，在这种软件架构中，软件的一个实例运行在服务器上并且为多个租户服务”。一个租户是一组共享该软件实例特定权限的用户。有了多租户架构，软件应用被设计成为每个租户提供一个 专用的实例包括该实例的数据的共享，还可以共享配置，用户管理，租户自己的功能和非功能属性。多租户和多实例架构相比，多租户分离了代表不同的租户操作的多个实例。</p>
@@ -7571,46 +7571,46 @@ fsql<span>.</span>Aop<span>.</span>ConfigEntityProperty <span>+=</span> <span>(<
 <p>ThreadLocal 可以理解为字典 Dictionary&lt;int, string&gt; Key=线程ID Value=值，跨方法时只需要知道线程ID，就能取得对应的 Value。</p>
 <p>我们知道跨异步方法可能造成线程ID变化，ThreadLocal 将不能满足我们使用。</p>
 <p>AsyncLocal 是 ThreadLocal 的升级版，异步也能获取到对应的 Value。</p>
-<div><pre><code>public class TerantManager
-{
-    // 注意一定是 static 静态化
-    static AsyncLocal&lt;int&gt; _asyncLocal = new AsyncLocal&lt;int&gt;();
+<div><pre><code><span>public</span> <span>class</span> <span>TerantManager</span>
+<span>{</span>
+    <span>// 注意一定是 static 静态化</span>
+    <span>static</span> <span>AsyncLocal<span>&lt;</span><span>int</span><span>></span></span> _asyncLocal <span>=</span> <span>new</span> <span>AsyncLocal<span>&lt;</span><span>int</span><span>></span></span><span>(</span><span>)</span><span>;</span>
 
-    public static int Current
-    {
-        get =&gt; _asyncLocal.Value;
-        set =&gt; _asyncLocal.Value = value;    
-    }
-}
+    <span>public</span> <span>static</span> <span><span>int</span></span> Current
+    <span>{</span>
+        <span>get</span> <span>=></span> _asyncLocal<span>.</span>Value<span>;</span>
+        <span>set</span> <span>=></span> _asyncLocal<span>.</span>Value <span>=</span> <span>value</span><span>;</span>    
+    <span>}</span>
+<span>}</span>
 </code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br><span>10</span><br><span>11</span><br></div></div><p>2、FreeSql 全局过滤器，让任何查询，都附带租户条件；</p>
-<div><pre><code>fsql.GlobalFilter.ApplyIf&lt;ITerant&gt;(&quot;TerantFilter&quot;, () =&gt; TerantManager.Current &gt; 0, a =&gt; a.TerantId == TerantManager.Current);
+<div><pre><code>fsql<span>.</span>GlobalFilter<span>.</span><span><span>ApplyIf</span><span><span>&lt;</span>ITerant<span>></span></span></span><span>(</span><span>"TerantFilter"</span><span>,</span> <span>(</span><span>)</span> <span>=></span> TerantManager<span>.</span>Current <span>></span> <span>0</span><span>,</span> a <span>=></span> a<span>.</span>TerantId <span>==</span> TerantManager<span>.</span>Current<span>)</span><span>;</span>
 </code></pre><div aria-hidden="true"><span>1</span><br></div></div><p>3、FreeSql Aop.AuditValue 对象审计事件，实现统一拦截插入、更新实体对象；</p>
-<div><pre><code>fsql.Aop.AuditValue += (_, e) =&gt;
-{
-    if (e.Property.PropertyType == typeof(int) &amp;&amp; e.Property.Name == &quot;TerantId&quot;)
-    {
-        e.Value = TerantManager.Current
-    }
-};
+<div><pre><code>fsql<span>.</span>Aop<span>.</span>AuditValue <span>+=</span> <span>(</span>_<span>,</span> e<span>)</span> <span>=></span>
+<span>{</span>
+    <span>if</span> <span>(</span>e<span>.</span>Property<span>.</span>PropertyType <span>==</span> <span>typeof</span><span>(</span><span><span>int</span></span><span>)</span> <span>&amp;&amp;</span> e<span>.</span>Property<span>.</span>Name <span>==</span> <span>"TerantId"</span><span>)</span>
+    <span>{</span>
+        e<span>.</span>Value <span>=</span> TerantManager<span>.</span>Current
+    <span>}</span>
+<span>}</span><span>;</span>
 </code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br></div></div><p>4、AspnetCore Startup.cs Configure 中间件处理租户逻辑；</p>
-<div><pre><code>public void Configure(IApplicationBuilder app)
-{
-    app.Use(async (context, next) =&gt;
-    {
-        try
-        {
-            TerantManager.Current = YourGetTerantIdFunction();
-            await next();
-        }
-        finally
-        {
-            // 清除租户状态
-            TerantManager.Current = 0;
-        }
-    });
-    app.UseRouting();
-    app.UseEndpoints(a =&gt; a.MapControllers());
-}
+<div><pre><code><span>public</span> <span><span>void</span></span> <span>Configure</span><span>(</span><span>IApplicationBuilder</span> app<span>)</span>
+<span>{</span>
+    app<span>.</span><span>Use</span><span>(</span><span>async</span> <span>(</span>context<span>,</span> next<span>)</span> <span>=></span>
+    <span>{</span>
+        <span>try</span>
+        <span>{</span>
+            TerantManager<span>.</span>Current <span>=</span> <span>YourGetTerantIdFunction</span><span>(</span><span>)</span><span>;</span>
+            <span>await</span> <span>next</span><span>(</span><span>)</span><span>;</span>
+        <span>}</span>
+        <span>finally</span>
+        <span>{</span>
+            <span>// 清除租户状态</span>
+            TerantManager<span>.</span>Current <span>=</span> <span>0</span><span>;</span>
+        <span>}</span>
+    <span>}</span><span>)</span><span>;</span>
+    app<span>.</span><span>UseRouting</span><span>(</span><span>)</span><span>;</span>
+    app<span>.</span><span>UseEndpoints</span><span>(</span>a <span>=></span> a<span>.</span><span>MapControllers</span><span>(</span><span>)</span><span>)</span><span>;</span>
+<span>}</span>
 </code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br><span>10</span><br><span>11</span><br><span>12</span><br><span>13</span><br><span>14</span><br><span>15</span><br><span>16</span><br><span>17</span><br><span>18</span><br></div></div><h3 id="wherecascade" tabindex="-1"> WhereCascade</h3>
 <p>多表查询时，像 isdeleted 每个表都给条件，挺麻烦的。WhereCascade 使用后生成 sql 时，所有表都附上这个条件。多表租户条件也可以这样解决。</p>
 <p>如：</p>
@@ -7807,7 +7807,7 @@ fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>Topic<span>></
     <title type="html">分页查询</title>
     <id>http://freesql.net/FreeSql.Wiki.VuePress/guide/paging.html</id>
     <link href="http://freesql.net/FreeSql.Wiki.VuePress/guide/paging.html"/>
-    <updated>2022-08-05T05:34:09.000Z</updated>
+    <updated>2022-08-05T07:32:05.000Z</updated>
     <content type="html"><![CDATA[<h1 id="分页查询" tabindex="-1"> 分页查询</h1>
 <div><pre><code><span>static</span> <span>IFreeSql</span> fsql <span>=</span> <span>new</span> <span>FreeSql<span>.</span>FreeSqlBuilder</span><span>(</span><span>)</span>
     <span>.</span><span>UseConnectionString</span><span>(</span>FreeSql<span>.</span>DataType<span>.</span>MySql<span>,</span> <span>"Data Source=127.0.0.1;Port=3306;User ID=root;Password=root;Initial Catalog=cccddd;Charset=utf8;SslMode=none;Max pool size=10"</span><span>)</span>
@@ -7832,10 +7832,10 @@ fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>Topic<span>></
 <p>Count(out var total) 是同步方法，原因是 out 不支持异步，如果介意可以单独执行如下：</p>
 </blockquote>
 <p>提示：数据量大一般不建议查 Count/CountAsync，而应该采用流式分页（上一页、下一页、不返回总数量）</p>
-<div><pre><code>var select = fsql.Select&lt;Topic&gt;()
-    .Where(a =&gt; a.Id &gt; 10);
-var total = await select.CountAsync();
-var list = await select.Page(1, 20).ToListAsync();
+<div><pre><code><span><span>var</span></span> <span>select</span> <span>=</span> fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>Topic<span>></span></span></span><span>(</span><span>)</span>
+    <span>.</span><span>Where</span><span>(</span>a <span>=></span> a<span>.</span>Id <span>></span> <span>10</span><span>)</span><span>;</span>
+<span><span>var</span></span> total <span>=</span> <span>await</span> <span>select</span><span>.</span><span>CountAsync</span><span>(</span><span>)</span><span>;</span>
+<span><span>var</span></span> list <span>=</span> <span>await</span> <span>select</span><span>.</span><span>Page</span><span>(</span><span>1</span><span>,</span> <span>20</span><span>)</span><span>.</span><span>ToListAsync</span><span>(</span><span>)</span><span>;</span>
 </code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br></div></div><h2 id="优化" tabindex="-1"> 优化</h2>
 <p>SqlServer 2012 以前的版本，使用 row_number 分页；</p>
 <p>SqlServer 2012+ 版本，使用最新的 fetch next rows 分页；</p>
@@ -8844,7 +8844,7 @@ Assert<span>.</span><span>Equal</span><span>(</span><span>"中国[100000] -> 北
     <title type="html">分组聚合</title>
     <id>http://freesql.net/FreeSql.Wiki.VuePress/guide/select-group-by.html</id>
     <link href="http://freesql.net/FreeSql.Wiki.VuePress/guide/select-group-by.html"/>
-    <updated>2022-07-23T05:30:46.000Z</updated>
+    <updated>2022-08-05T07:32:05.000Z</updated>
     <content type="html"><![CDATA[<h1 id="分组聚合" tabindex="-1"> 分组聚合</h1>
 <div><pre><code><span>static</span> <span>IFreeSql</span> fsql <span>=</span> <span>new</span> <span>FreeSql<span>.</span>FreeSqlBuilder</span><span>(</span><span>)</span>
     <span>.</span><span>UseConnectionString</span><span>(</span>FreeSql<span>.</span>DataType<span>.</span>MySql<span>,</span> <span>"Data Source=127.0.0.1;Port=3306;User ID=root;Password=root;Initial Catalog=cccddd;Charset=utf8;SslMode=none;Max pool size=10"</span><span>)</span>
@@ -8891,19 +8891,19 @@ Assert<span>.</span><span>Equal</span><span>(</span><span>"中国[100000] -> 北
     <span>.</span><span>GroupBy</span><span>(</span>a <span>=></span> <span>new</span> <span>{</span> a<span>.</span>Clicks<span>,</span> a<span>.</span>Category<span>,</span> a<span>.</span>Category<span>.</span>Area <span>}</span><span>)</span>
     <span>.</span><span>ToList</span><span>(</span>a <span>=></span> <span>new</span> <span>{</span> a<span>.</span>Key<span>.</span>Area<span>.</span>Name <span>}</span><span>)</span><span>;</span>
 </code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br></div></div><h2 id="多表分组" tabindex="-1"> 多表分组</h2>
-<div><pre><code>var list = fsql.Select&lt;Topic, Category, Area&gt;()
-    .GroupBy((a, b, c) =&gt; new { a.Title, c.Name })
-    .Having(g =&gt; g.Count() &lt; 300 || g.Avg(g.Value.Item1.Clicks) &lt; 100)
-    .ToList(g =&gt; new { count = g.Count(), Name = g.Key.Name });
+<div><pre><code><span><span>var</span></span> list <span>=</span> fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>Topic<span>,</span> Category<span>,</span> Area<span>></span></span></span><span>(</span><span>)</span>
+    <span>.</span><span>GroupBy</span><span>(</span><span>(</span>a<span>,</span> b<span>,</span> c<span>)</span> <span>=></span> <span>new</span> <span>{</span> a<span>.</span>Title<span>,</span> c<span>.</span>Name <span>}</span><span>)</span>
+    <span>.</span><span>Having</span><span>(</span>g <span>=></span> g<span>.</span><span>Count</span><span>(</span><span>)</span> <span>&lt;</span> <span>300</span> <span>||</span> g<span>.</span><span>Avg</span><span>(</span>g<span>.</span>Value<span>.</span>Item1<span>.</span>Clicks<span>)</span> <span>&lt;</span> <span>100</span><span>)</span>
+    <span>.</span><span>ToList</span><span>(</span>g <span>=></span> <span>new</span> <span>{</span> count <span>=</span> g<span>.</span><span>Count</span><span>(</span><span>)</span><span>,</span> Name <span>=</span> g<span>.</span>Key<span>.</span>Name <span>}</span><span>)</span><span>;</span>
 </code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br></div></div><ul>
 <li>g.Value.Item1 对应 Topic</li>
 <li>g.Value.Item2 对应 Category</li>
 <li>g.Value.Item3 对应 Area</li>
 </ul>
 <h2 id="aggregate" tabindex="-1"> Aggregate</h2>
-<div><pre><code>var list = fsql.Select&lt;Topic&gt;()
-    .Aggregate(a =&gt; Convert.ToInt32(&quot;count(distinct title)&quot;), out var count)
-    .ToList();
+<div><pre><code><span><span>var</span></span> list <span>=</span> fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>Topic<span>></span></span></span><span>(</span><span>)</span>
+    <span>.</span><span>Aggregate</span><span>(</span>a <span>=></span> Convert<span>.</span><span>ToInt32</span><span>(</span><span>"count(distinct title)"</span><span>)</span><span>,</span> <span>out</span> <span><span>var</span></span> count<span>)</span>
+    <span>.</span><span>ToList</span><span>(</span><span>)</span><span>;</span>
 </code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br></div></div><h2 id="api" tabindex="-1"> API</h2>
 <table>
 <thead>
@@ -9412,7 +9412,7 @@ fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>Topic<span>,</
     <title type="html">返回数据 ✨</title>
     <id>http://freesql.net/FreeSql.Wiki.VuePress/guide/select-return-data.html</id>
     <link href="http://freesql.net/FreeSql.Wiki.VuePress/guide/select-return-data.html"/>
-    <updated>2022-08-01T02:02:50.000Z</updated>
+    <updated>2022-08-05T07:32:05.000Z</updated>
     <content type="html"><![CDATA[<h1 id="返回数据-✨" tabindex="-1"> 返回数据 ✨</h1>
 <p>FreeSql 采用 ExpressionTree 优化读取速度，如果懂技术的你一定知道 .NET Core 技术下除了原生代码，最快就是 Emit 和 ExpressionTree。项目在初期使用的反射 + 缓存，虽然 .NET Core 优化了反射性能，但经过与 Dapper 性能测试对比之后，发现仍然有一定差距，改成 ExpresstionTree 后才与 Dapper 性能相当。FreeSql 支持的类型较多，实现 ExpressionTree 的复杂度较大，有兴趣的朋友可以翻阅源代码。</p>
 <h2 id="_1、返回单条记录" tabindex="-1"> 1、返回单条记录</h2>
@@ -9510,19 +9510,19 @@ fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>Topic<span>,</
 <blockquote>
 <p>v3.2.666 WithMemory 使用内存数据进行查询</p>
 </blockquote>
-<div><pre><code>var list = new List&lt;Topic&gt;();
-list.Add(new Topic { ... });
-list.Add(new Topic { ... });
+<div><pre><code><span><span>var</span></span> list <span>=</span> <span>new</span> <span>List<span>&lt;</span>Topic<span>></span></span><span>(</span><span>)</span><span>;</span>
+list<span>.</span><span>Add</span><span>(</span><span>new</span> <span>Topic</span> <span>{</span> <span>..</span><span>.</span> <span>}</span><span>)</span><span>;</span>
+list<span>.</span><span>Add</span><span>(</span><span>new</span> <span>Topic</span> <span>{</span> <span>..</span><span>.</span> <span>}</span><span>)</span><span>;</span>
 
-fsql.Select&lt;Topic&gt;()
-  .WithMemory(list)
-  .ToList()
-//SELECT a.`Id`, a.`Clicks`, a.`CategoryId`, a.`Title`, a.`CreateTime` 
-//FROM (
-//  SELECT ...
-//  UNION ALL
-//  SELECT ...
-//) a 
+fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>Topic<span>></span></span></span><span>(</span><span>)</span>
+  <span>.</span><span>WithMemory</span><span>(</span>list<span>)</span>
+  <span>.</span><span>ToList</span><span>(</span><span>)</span>
+<span>//SELECT a.`Id`, a.`Clicks`, a.`CategoryId`, a.`Title`, a.`CreateTime` </span>
+<span>//FROM (</span>
+<span>//  SELECT ...</span>
+<span>//  UNION ALL</span>
+<span>//  SELECT ...</span>
+<span>//) a </span>
 </code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br><span>10</span><br><span>11</span><br><span>12</span><br><span>13</span><br></div></div><h2 id="_10、tochunk" tabindex="-1"> 10、ToChunk</h2>
 <p>执行查询，分块返回数据，可减少内存开销。比如读取 10 万条数据，每次返回 100 条处理。</p>
 <div><pre><code><span><span>var</span></span> testlist1 <span>=</span> fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>Song<span>></span></span></span><span>(</span><span>)</span><span>.</span><span>OrderBy</span><span>(</span>a <span>=></span> a<span>.</span>Id<span>)</span><span>.</span><span>ToList</span><span>(</span><span>)</span><span>;</span>
@@ -9658,7 +9658,7 @@ fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>Song<span>></s
     <title type="html">单表查询</title>
     <id>http://freesql.net/FreeSql.Wiki.VuePress/guide/select-single-table.html</id>
     <link href="http://freesql.net/FreeSql.Wiki.VuePress/guide/select-single-table.html"/>
-    <updated>2022-08-02T14:20:26.000Z</updated>
+    <updated>2022-08-05T07:32:05.000Z</updated>
     <content type="html"><![CDATA[<h1 id="单表查询" tabindex="-1"> 单表查询</h1>
 <div><pre><code><span>static</span> <span>IFreeSql</span> fsql <span>=</span> <span>new</span> <span>FreeSql<span>.</span>FreeSqlBuilder</span><span>(</span><span>)</span>
     <span>.</span><span>UseConnectionString</span><span>(</span>FreeSql<span>.</span>DataType<span>.</span>MySql<span>,</span> <span>"Data Source=127.0.0.1;Port=3306;User ID=root;Password=root;Initial Catalog=cccddd;Charset=utf8;SslMode=none;Max pool size=10"</span><span>)</span>
@@ -9713,19 +9713,19 @@ fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>Topic<span>></
 <blockquote>
 <p>假设跨数据库服务器，或者数据表被缓存过，WithMemory 便可以实现数据表与内存关联查询。</p>
 </blockquote>
-<div><pre><code>var list = new List&lt;Topic&gt;();
-list.Add(new Topic { ... });
-list.Add(new Topic { ... });
+<div><pre><code><span><span>var</span></span> list <span>=</span> <span>new</span> <span>List<span>&lt;</span>Topic<span>></span></span><span>(</span><span>)</span><span>;</span>
+list<span>.</span><span>Add</span><span>(</span><span>new</span> <span>Topic</span> <span>{</span> <span>..</span><span>.</span> <span>}</span><span>)</span><span>;</span>
+list<span>.</span><span>Add</span><span>(</span><span>new</span> <span>Topic</span> <span>{</span> <span>..</span><span>.</span> <span>}</span><span>)</span><span>;</span>
 
-fsql.Select&lt;Topic&gt;()
-  .WithMemory(list)
-  .ToList()
-//SELECT a.`Id`, a.`Clicks`, a.`CategoryId`, a.`Title`, a.`CreateTime` 
-//FROM (
-//  SELECT ...
-//  UNION ALL
-//  SELECT ...
-//) a 
+fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>Topic<span>></span></span></span><span>(</span><span>)</span>
+  <span>.</span><span>WithMemory</span><span>(</span>list<span>)</span>
+  <span>.</span><span>ToList</span><span>(</span><span>)</span>
+<span>//SELECT a.`Id`, a.`Clicks`, a.`CategoryId`, a.`Title`, a.`CreateTime` </span>
+<span>//FROM (</span>
+<span>//  SELECT ...</span>
+<span>//  UNION ALL</span>
+<span>//  SELECT ...</span>
+<span>//) a </span>
 </code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br><span>10</span><br><span>11</span><br><span>12</span><br><span>13</span><br></div></div>]]></content>
     <published>2021-02-04T16:03:18.000Z</published>
   </entry>
@@ -10195,7 +10195,7 @@ fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>VM_District_Pa
     <title type="html">分表分库</title>
     <id>http://freesql.net/FreeSql.Wiki.VuePress/guide/sharding.html</id>
     <link href="http://freesql.net/FreeSql.Wiki.VuePress/guide/sharding.html"/>
-    <updated>2022-08-03T06:51:03.000Z</updated>
+    <updated>2022-08-05T07:32:05.000Z</updated>
     <content type="html"><![CDATA[<h1 id="分表分库" tabindex="-1"> 分表分库</h1>
 <h2 id="理论知识" tabindex="-1"> 理论知识</h2>
 <p>分表 - 从表面意思上看呢，就是把一张表分成 N 多个小表，每一个小表都是完整的一张表。分表后数据都是存放在分表里，总表只是一个外壳，存取数据发生在一个一个的分表里面。分表后单表的并发能力提高了，磁盘 I/O 性能也提高了。并发能力为什么提高了呢，因为查寻一次所花的时间变短了，如果出现高并发的话，总表可以根据不同 的查询，将并发压力分到不同的小表里面。</p>
@@ -10238,22 +10238,22 @@ repoComment<span>.</span><span>AsTable</span><span>(</span>oldname <span>=></spa
 <h2 id="自动分表-astable-beta" tabindex="-1"> 自动分表 AsTable (beta)</h2>
 <p>【自动分表】不同于 CURD.AsTable 方法，目前第一期完成按【时间】自动分表（不支持分库）。</p>
 <p>欢迎积极参与测试、反馈，请优先使用源代码进行测试，方便反馈定位问题，谢谢。</p>
-<div><pre><code>[Table(Name = &quot;as_table_log_{yyyyMM}&quot;, AsTable = &quot;createtime=2022-1-1(1 month)&quot;)]
-class AsTableLog
-{
-    public Guid id { get; set; }
-    public string msg { get; set; }
-    public DateTime createtime { get; set; }
-}
+<div><pre><code><span>[</span><span><span>Table</span><span><span>(</span>Name <span>=</span> <span>"as_table_log_{yyyyMM}"</span><span>,</span> AsTable <span>=</span> <span>"createtime=2022-1-1(1 month)"</span><span>)</span></span></span><span>]</span>
+<span>class</span> <span>AsTableLog</span>
+<span>{</span>
+    <span>public</span> <span>Guid</span> id <span>{</span> <span>get</span><span>;</span> <span>set</span><span>;</span> <span>}</span>
+    <span>public</span> <span><span>string</span></span> msg <span>{</span> <span>get</span><span>;</span> <span>set</span><span>;</span> <span>}</span>
+    <span>public</span> <span>DateTime</span> createtime <span>{</span> <span>get</span><span>;</span> <span>set</span><span>;</span> <span>}</span>
+<span>}</span>
 </code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br></div></div><blockquote>
 <p>从 2022-1-1 开始至当前时间，每月创建一个分表，按 createtime 字段分表</p>
 </blockquote>
 <blockquote>
 <p>若最大日期大于当前时间，可手工扩容分表：</p>
 </blockquote>
-<div><pre><code>fsql.CodeFirst.GetTableByEntity(typeof(AsTableLog))
-    .AsTableImpl
-    .GetTableNameByColumnValue(DateTime.Parse(&quot;2023-7-1&quot;), autoExpand: true);
+<div><pre><code>fsql<span>.</span>CodeFirst<span>.</span><span>GetTableByEntity</span><span>(</span><span>typeof</span><span>(</span><span>AsTableLog</span><span>)</span><span>)</span>
+    <span>.</span>AsTableImpl
+    <span>.</span><span>GetTableNameByColumnValue</span><span>(</span>DateTime<span>.</span><span>Parse</span><span>(</span><span>"2023-7-1"</span><span>)</span><span>,</span> <span>autoExpand</span><span>:</span> <span>true</span><span>)</span><span>;</span>
 </code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br></div></div><table>
 <thead>
 <tr>
@@ -10295,18 +10295,18 @@ class AsTableLog
 <p>详细介绍：<a href="https://github.com/dotnetcore/FreeSql/discussions/1066" target="_blank" rel="noopener noreferrer">https://github.com/dotnetcore/FreeSql/discussions/1066</a></p>
 <h2 id="【分库】常规技巧" tabindex="-1"> 【分库】常规技巧</h2>
 <p>1、Sqlite 跨库</p>
-<div><pre><code>.UseConnectionString(DataType.Sqlite, @&quot;data source=document.db;attachs=db2.db,db3.db&quot;)
+<div><pre><code><span>.</span><span>UseConnectionString</span><span>(</span>DataType<span>.</span>Sqlite<span>,</span> <span>@"data source=document.db;attachs=db2.db,db3.db"</span><span>)</span>
 
-[Table(Name = &quot;db2.Comment&quot;)]
-class Comment { ... }
+<span>[</span><span>Table</span><span>(</span>Name <span>=</span> <span>"db2.Comment"</span><span>)</span><span>]</span>
+<span>class</span> <span>Comment</span> <span>{</span> <span>..</span><span>.</span> <span>}</span>
 
-[Table(Name = &quot;db3.Comment&quot;)]
-class Topic { .. }
+<span>[</span><span><span>Table</span><span><span>(</span>Name <span>=</span> <span>"db3.Comment"</span><span>)</span></span></span><span>]</span>
+<span>class</span> <span>Topic</span> <span>{</span> <span>..</span> <span>}</span>
 </code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br></div></div><p>SQLite 跨库操作是 FreeSql 独有的功能，连接串 attachs 参数值逗号分割。</p>
 <p>2、SqlServer 跨库</p>
-<div><pre><code>//相同数据库实例，跨库访问
-[Table(Name = &quot;db2.dbo.tablename&quot;)]
-class Comment { ... }
+<div><pre><code><span>//相同数据库实例，跨库访问</span>
+<span>[</span><span>Table</span><span>(</span>Name <span>=</span> <span>"db2.dbo.tablename"</span><span>)</span><span>]</span>
+<span>class</span> <span>Comment</span> <span>{</span> <span>..</span><span>.</span> <span>}</span>
 </code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br></div></div><p>不同数据库实例，可使用 SQLServer linkserver 技术，具体请百度了解。</p>
 <p>3、其他</p>
 <p>几乎每种数据库都支持 dbo.table 的方式访问：</p>
@@ -10325,22 +10325,22 @@ class Comment { ... }
 <blockquote>
 <p>Install-Package FreeSql.Cloud</p>
 </blockquote>
-<div><pre><code>public enum DbEnum { db1, db2, db3 }
+<div><pre><code><span>public</span> <span>enum</span> <span>DbEnum</span> <span>{</span> db1<span>,</span> db2<span>,</span> db3 <span>}</span>
 
-var fsql = new FreeSqlCloud&lt;DbEnum&gt;(&quot;myapp&quot;); //提示：泛型可以传入 string
-fsql.DistributeTrace = log =&gt; Console.WriteLine(log.Split('\n')[0].Trim());
+<span><span>var</span></span> fsql <span>=</span> <span>new</span> <span>FreeSqlCloud<span>&lt;</span>DbEnum<span>></span></span><span>(</span><span>"myapp"</span><span>)</span><span>;</span> <span>//提示：泛型可以传入 string</span>
+fsql<span>.</span>DistributeTrace <span>=</span> log <span>=></span> Console<span>.</span><span>WriteLine</span><span>(</span>log<span>.</span><span>Split</span><span>(</span><span>'\n'</span><span>)</span><span>[</span><span>0</span><span>]</span><span>.</span><span>Trim</span><span>(</span><span>)</span><span>)</span><span>;</span>
 
-fsql.Register(DbEnum.db1, () =&gt; new FreeSqlBuilder()
-    .UseConnectionString(DataType.Sqlite, @&quot;Data Source=db1.db&quot;)
-    .Build());
+fsql<span>.</span><span>Register</span><span>(</span>DbEnum<span>.</span>db1<span>,</span> <span>(</span><span>)</span> <span>=></span> <span>new</span> <span>FreeSqlBuilder</span><span>(</span><span>)</span>
+    <span>.</span><span>UseConnectionString</span><span>(</span>DataType<span>.</span>Sqlite<span>,</span> <span>@"Data Source=db1.db"</span><span>)</span>
+    <span>.</span><span>Build</span><span>(</span><span>)</span><span>)</span><span>;</span>
 
-fsql.Register(DbEnum.db2, () =&gt; new FreeSqlBuilder()
-    .UseConnectionString(DataType.Sqlite, @&quot;Data Source=db2.db&quot;)
-    .Build());
+fsql<span>.</span><span>Register</span><span>(</span>DbEnum<span>.</span>db2<span>,</span> <span>(</span><span>)</span> <span>=></span> <span>new</span> <span>FreeSqlBuilder</span><span>(</span><span>)</span>
+    <span>.</span><span>UseConnectionString</span><span>(</span>DataType<span>.</span>Sqlite<span>,</span> <span>@"Data Source=db2.db"</span><span>)</span>
+    <span>.</span><span>Build</span><span>(</span><span>)</span><span>)</span><span>;</span>
 
-fsql.Register(DbEnum.db3, () =&gt; new FreeSqlBuilder()
-    .UseConnectionString(DataType.Sqlite, @&quot;Data Source=db3.db&quot;)
-    .Build());
+fsql<span>.</span><span>Register</span><span>(</span>DbEnum<span>.</span>db3<span>,</span> <span>(</span><span>)</span> <span>=></span> <span>new</span> <span>FreeSqlBuilder</span><span>(</span><span>)</span>
+    <span>.</span><span>UseConnectionString</span><span>(</span>DataType<span>.</span>Sqlite<span>,</span> <span>@"Data Source=db3.db"</span><span>)</span>
+    <span>.</span><span>Build</span><span>(</span><span>)</span><span>)</span><span>;</span>
 </code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br><span>10</span><br><span>11</span><br><span>12</span><br><span>13</span><br><span>14</span><br><span>15</span><br><span>16</span><br></div></div><blockquote>
 <p>FreeSqlCloud 必须定义成单例模式</p>
 </blockquote>
@@ -10351,15 +10351,15 @@ fsql.Register(DbEnum.db3, () =&gt; new FreeSqlBuilder()
 <p>new FreeSqlCloud&lt;DbEnum&gt;(&quot;myapp&quot;) 开启 TCC/SAGA 事务生效</p>
 </blockquote>
 <p>FreeSqlCloud 的访问方式和 IFreeSql 一样：</p>
-<div><pre><code>fsql.Select&lt;T&gt;();
-fsql.Insert&lt;T&gt;();
-fsql.Update&lt;T&gt;();
-fsql.Delete&lt;T&gt;();
+<div><pre><code>fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>T<span>></span></span></span><span>(</span><span>)</span><span>;</span>
+fsql<span>.</span><span><span>Insert</span><span><span>&lt;</span>T<span>></span></span></span><span>(</span><span>)</span><span>;</span>
+fsql<span>.</span><span><span>Update</span><span><span>&lt;</span>T<span>></span></span></span><span>(</span><span>)</span><span>;</span>
+fsql<span>.</span><span><span>Delete</span><span><span>&lt;</span>T<span>></span></span></span><span>(</span><span>)</span><span>;</span>
 
-//...
+<span>//...</span>
 </code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br></div></div><p>切换数据库：</p>
-<div><pre><code>fsql.Change(DbEnum.db3).Select&lt;T&gt;();
-//以后所有 fsql.Select/Insert/Update/Delete 操作是 db3
+<div><pre><code>fsql<span>.</span><span>Change</span><span>(</span>DbEnum<span>.</span>db3<span>)</span><span>.</span><span><span>Select</span><span><span>&lt;</span>T<span>></span></span></span><span>(</span><span>)</span><span>;</span>
+<span>//以后所有 fsql.Select/Insert/Update/Delete 操作是 db3</span>
 </code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br></div></div><p>分库总结：</p>
 <ul>
 <li>跨库 事务不好处理，注意了；</li>
