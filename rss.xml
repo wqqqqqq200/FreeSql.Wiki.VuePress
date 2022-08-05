@@ -6,8 +6,8 @@
     <link>http://freesql.net/FreeSql.Wiki.VuePress/</link>
     <description>FreeSql Documents</description>
     <language>zh-CN</language>
-    <pubDate>Fri, 05 Aug 2022 07:49:32 GMT</pubDate>
-    <lastBuildDate>Fri, 05 Aug 2022 07:49:32 GMT</lastBuildDate>
+    <pubDate>Fri, 05 Aug 2022 07:50:50 GMT</pubDate>
+    <lastBuildDate>Fri, 05 Aug 2022 07:50:50 GMT</lastBuildDate>
     <generator>vuepress-plugin-feed2</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
     <item>
@@ -7608,6 +7608,7 @@ fsql<span>.</span>Aop<span>.</span>ConfigEntityProperty <span>+=</span> <span>(<
     <span>{</span>
         <span>try</span>
         <span>{</span>
+            <span>// 使用者通过 aspnetcore 中间件，解析 token 获得 租户ID</span>
             TerantManager<span>.</span>Current <span>=</span> <span>YourGetTerantIdFunction</span><span>(</span><span>)</span><span>;</span>
             <span>await</span> <span>next</span><span>(</span><span>)</span><span>;</span>
         <span>}</span>
@@ -7620,7 +7621,7 @@ fsql<span>.</span>Aop<span>.</span>ConfigEntityProperty <span>+=</span> <span>(<
     app<span>.</span><span>UseRouting</span><span>(</span><span>)</span><span>;</span>
     app<span>.</span><span>UseEndpoints</span><span>(</span>a <span>=></span> a<span>.</span><span>MapControllers</span><span>(</span><span>)</span><span>)</span><span>;</span>
 <span>}</span>
-</code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br><span>10</span><br><span>11</span><br><span>12</span><br><span>13</span><br><span>14</span><br><span>15</span><br><span>16</span><br><span>17</span><br><span>18</span><br></div></div><h3 id="wherecascade" tabindex="-1"> WhereCascade</h3>
+</code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br><span>10</span><br><span>11</span><br><span>12</span><br><span>13</span><br><span>14</span><br><span>15</span><br><span>16</span><br><span>17</span><br><span>18</span><br><span>19</span><br></div></div><h3 id="wherecascade" tabindex="-1"> WhereCascade</h3>
 <p>多表查询时，像 isdeleted 每个表都给条件，挺麻烦的。WhereCascade 使用后生成 sql 时，所有表都附上这个条件。多表租户条件也可以这样解决。</p>
 <p>如：</p>
 <div><pre><code>fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>t1<span>></span></span></span><span>(</span><span>)</span>
@@ -7686,7 +7687,7 @@ fsql<span>.</span>Aop<span>.</span>ConfigEntityProperty <span>+=</span> <span>(<
     <span>{</span>
         <span>try</span>
         <span>{</span>
-            <span>// 假设 YourGetTerantFunction 返回租户信息和连接串</span>
+            <span>// 使用者通过 aspnetcore 中间件，解析 token，查询  main 库得到租户信息。</span>
             <span>(</span><span><span>string</span></span> terant<span>,</span> <span><span>string</span></span> connectionString<span>)</span> <span>=</span> <span>YourGetTerantFunction</span><span>(</span><span>)</span><span>;</span>
 
             <span>// 只会首次注册，如果已经注册过则不生效</span>

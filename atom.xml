@@ -3,7 +3,7 @@
   <id>http://freesql.net/FreeSql.Wiki.VuePress/</id>
   <title>FreeSql 官方文档</title>
   <subtitle>FreeSql Documents</subtitle>
-  <updated>2022-08-05T07:49:32.938Z</updated>
+  <updated>2022-08-05T07:50:50.839Z</updated>
   <generator>vuepress-plugin-feed2</generator>
   <link rel="self" href="http://freesql.net/FreeSql.Wiki.VuePress/atom.xml"/>
   <link rel="alternate" href="http://freesql.net/FreeSql.Wiki.VuePress/"/>
@@ -7561,7 +7561,7 @@ fsql<span>.</span>Aop<span>.</span>ConfigEntityProperty <span>+=</span> <span>(<
     <title type="html">多租户</title>
     <id>http://freesql.net/FreeSql.Wiki.VuePress/guide/multi-tenancy.html</id>
     <link href="http://freesql.net/FreeSql.Wiki.VuePress/guide/multi-tenancy.html"/>
-    <updated>2022-08-05T07:48:06.000Z</updated>
+    <updated>2022-08-05T07:49:35.000Z</updated>
     <content type="html"><![CDATA[<h1 id="多租户" tabindex="-1"> 多租户</h1>
 <h3 id="什么是多租户" tabindex="-1"> 什么是多租户</h3>
 <p>维基百科：“软件多租户是指一种软件架构，在这种软件架构中，软件的一个实例运行在服务器上并且为多个租户服务”。一个租户是一组共享该软件实例特定权限的用户。有了多租户架构，软件应用被设计成为每个租户提供一个 专用的实例包括该实例的数据的共享，还可以共享配置，用户管理，租户自己的功能和非功能属性。多租户和多实例架构相比，多租户分离了代表不同的租户操作的多个实例。</p>
@@ -7599,6 +7599,7 @@ fsql<span>.</span>Aop<span>.</span>ConfigEntityProperty <span>+=</span> <span>(<
     <span>{</span>
         <span>try</span>
         <span>{</span>
+            <span>// 使用者通过 aspnetcore 中间件，解析 token 获得 租户ID</span>
             TerantManager<span>.</span>Current <span>=</span> <span>YourGetTerantIdFunction</span><span>(</span><span>)</span><span>;</span>
             <span>await</span> <span>next</span><span>(</span><span>)</span><span>;</span>
         <span>}</span>
@@ -7611,7 +7612,7 @@ fsql<span>.</span>Aop<span>.</span>ConfigEntityProperty <span>+=</span> <span>(<
     app<span>.</span><span>UseRouting</span><span>(</span><span>)</span><span>;</span>
     app<span>.</span><span>UseEndpoints</span><span>(</span>a <span>=></span> a<span>.</span><span>MapControllers</span><span>(</span><span>)</span><span>)</span><span>;</span>
 <span>}</span>
-</code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br><span>10</span><br><span>11</span><br><span>12</span><br><span>13</span><br><span>14</span><br><span>15</span><br><span>16</span><br><span>17</span><br><span>18</span><br></div></div><h3 id="wherecascade" tabindex="-1"> WhereCascade</h3>
+</code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br><span>10</span><br><span>11</span><br><span>12</span><br><span>13</span><br><span>14</span><br><span>15</span><br><span>16</span><br><span>17</span><br><span>18</span><br><span>19</span><br></div></div><h3 id="wherecascade" tabindex="-1"> WhereCascade</h3>
 <p>多表查询时，像 isdeleted 每个表都给条件，挺麻烦的。WhereCascade 使用后生成 sql 时，所有表都附上这个条件。多表租户条件也可以这样解决。</p>
 <p>如：</p>
 <div><pre><code>fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>t1<span>></span></span></span><span>(</span><span>)</span>
@@ -7677,7 +7678,7 @@ fsql<span>.</span>Aop<span>.</span>ConfigEntityProperty <span>+=</span> <span>(<
     <span>{</span>
         <span>try</span>
         <span>{</span>
-            <span>// 假设 YourGetTerantFunction 返回租户信息和连接串</span>
+            <span>// 使用者通过 aspnetcore 中间件，解析 token，查询  main 库得到租户信息。</span>
             <span>(</span><span><span>string</span></span> terant<span>,</span> <span><span>string</span></span> connectionString<span>)</span> <span>=</span> <span>YourGetTerantFunction</span><span>(</span><span>)</span><span>;</span>
 
             <span>// 只会首次注册，如果已经注册过则不生效</span>
