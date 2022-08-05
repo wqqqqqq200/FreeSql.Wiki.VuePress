@@ -6,8 +6,8 @@
     <link>http://freesql.net/FreeSql.Wiki.VuePress/</link>
     <description>FreeSql Documents</description>
     <language>zh-CN</language>
-    <pubDate>Fri, 05 Aug 2022 07:41:02 GMT</pubDate>
-    <lastBuildDate>Fri, 05 Aug 2022 07:41:02 GMT</lastBuildDate>
+    <pubDate>Fri, 05 Aug 2022 07:49:32 GMT</pubDate>
+    <lastBuildDate>Fri, 05 Aug 2022 07:49:32 GMT</lastBuildDate>
     <generator>vuepress-plugin-feed2</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
     <item>
@@ -7664,63 +7664,63 @@ fsql<span>.</span>Aop<span>.</span>ConfigEntityProperty <span>+=</span> <span>(<
 <blockquote>
 <p>Install-Package FreeSql.Cloud</p>
 </blockquote>
-<div><pre><code>FreeSqlCloud&lt;string&gt; fsql = new FreeSqlCloud&lt;string&gt;();
+<div><pre><code><span>FreeSqlCloud<span>&lt;</span><span>string</span><span>></span></span> fsql <span>=</span> <span>new</span> <span>FreeSqlCloud<span>&lt;</span><span>string</span><span>></span></span><span>(</span><span>)</span><span>;</span>
 
-public void ConfigureServices(IServiceCollection services)
-{
-    fsql.DistributeTrace = log =&gt; Console.WriteLine(log.Split('\n')[0].Trim());
-    fsql.Register(&quot;main&quot;, () =&gt;
-    {
-        var db = new FreeSqlBuilder().UseConnectionString(DataType.SqlServer, &quot;data source=...&quot;).Build();
-        //db.Aop.CommandAfter += ...
-        return db;
-    });
+<span>public</span> <span><span>void</span></span> <span>ConfigureServices</span><span>(</span><span>IServiceCollection</span> services<span>)</span>
+<span>{</span>
+    fsql<span>.</span>DistributeTrace <span>=</span> log <span>=></span> Console<span>.</span><span>WriteLine</span><span>(</span>log<span>.</span><span>Split</span><span>(</span><span>'\n'</span><span>)</span><span>[</span><span>0</span><span>]</span><span>.</span><span>Trim</span><span>(</span><span>)</span><span>)</span><span>;</span>
+    fsql<span>.</span><span>Register</span><span>(</span><span>"main"</span><span>,</span> <span>(</span><span>)</span> <span>=></span>
+    <span>{</span>
+        <span><span>var</span></span> db <span>=</span> <span>new</span> <span>FreeSqlBuilder</span><span>(</span><span>)</span><span>.</span><span>UseConnectionString</span><span>(</span>DataType<span>.</span>SqlServer<span>,</span> <span>"data source=..."</span><span>)</span><span>.</span><span>Build</span><span>(</span><span>)</span><span>;</span>
+        <span>//db.Aop.CommandAfter += ...</span>
+        <span>return</span> db<span>;</span>
+    <span>}</span><span>)</span><span>;</span>
 
-    services.AddSingleton&lt;IFreeSql&gt;(fsql);
-    services.AddControllers();
-}
+    services<span>.</span><span><span>AddSingleton</span><span><span>&lt;</span>IFreeSql<span>></span></span></span><span>(</span>fsql<span>)</span><span>;</span>
+    services<span>.</span><span>AddControllers</span><span>(</span><span>)</span><span>;</span>
+<span>}</span>
 
-public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
-{
-    app.Use(async (context, next) =&gt;
-    {
-        try
-        {
-            // 假设 YourGetTerantFunction 返回租户信息和连接串
-            (string terant, string connectionString) = YourGetTerantFunction();
+<span>public</span> <span><span>void</span></span> <span>Configure</span><span>(</span><span>IApplicationBuilder</span> app<span>,</span> <span>IWebHostEnvironment</span> env<span>)</span>
+<span>{</span>
+    app<span>.</span><span>Use</span><span>(</span><span>async</span> <span>(</span>context<span>,</span> next<span>)</span> <span>=></span>
+    <span>{</span>
+        <span>try</span>
+        <span>{</span>
+            <span>// 假设 YourGetTerantFunction 返回租户信息和连接串</span>
+            <span>(</span><span><span>string</span></span> terant<span>,</span> <span><span>string</span></span> connectionString<span>)</span> <span>=</span> <span>YourGetTerantFunction</span><span>(</span><span>)</span><span>;</span>
 
-            // 只会首次注册，如果已经注册过则不生效
-            fsql.Register(terant, () =&gt;
-            {
-                var db = new FreeSqlBuilder().UseConnectionString(DataType.SqlServer, connectionString).Build();
-                //db.Aop.CommandAfter += ...
-                return db;
-            });
+            <span>// 只会首次注册，如果已经注册过则不生效</span>
+            fsql<span>.</span><span>Register</span><span>(</span>terant<span>,</span> <span>(</span><span>)</span> <span>=></span>
+            <span>{</span>
+                <span><span>var</span></span> db <span>=</span> <span>new</span> <span>FreeSqlBuilder</span><span>(</span><span>)</span><span>.</span><span>UseConnectionString</span><span>(</span>DataType<span>.</span>SqlServer<span>,</span> connectionString<span>)</span><span>.</span><span>Build</span><span>(</span><span>)</span><span>;</span>
+                <span>//db.Aop.CommandAfter += ...</span>
+                <span>return</span> db<span>;</span>
+            <span>}</span><span>)</span><span>;</span>
 
-            // 切换租户
-            fsql.Change(terant);
-            await next();
-        }
-        finally
-        {
-            // 切换回 main 库
-            fsql.Change(&quot;main&quot;);
-        }
-    });
-    app.UseRouting();
-    app.UseEndpoints(a =&gt; a.MapControllers());
-}
+            <span>// 切换租户</span>
+            fsql<span>.</span><span>Change</span><span>(</span>terant<span>)</span><span>;</span>
+            <span>await</span> <span>next</span><span>(</span><span>)</span><span>;</span>
+        <span>}</span>
+        <span>finally</span>
+        <span>{</span>
+            <span>// 切换回 main 库</span>
+            fsql<span>.</span><span>Change</span><span>(</span><span>"main"</span><span>)</span><span>;</span>
+        <span>}</span>
+    <span>}</span><span>)</span><span>;</span>
+    app<span>.</span><span>UseRouting</span><span>(</span><span>)</span><span>;</span>
+    app<span>.</span><span>UseEndpoints</span><span>(</span>a <span>=></span> a<span>.</span><span>MapControllers</span><span>(</span><span>)</span><span>)</span><span>;</span>
+<span>}</span>
 </code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br><span>10</span><br><span>11</span><br><span>12</span><br><span>13</span><br><span>14</span><br><span>15</span><br><span>16</span><br><span>17</span><br><span>18</span><br><span>19</span><br><span>20</span><br><span>21</span><br><span>22</span><br><span>23</span><br><span>24</span><br><span>25</span><br><span>26</span><br><span>27</span><br><span>28</span><br><span>29</span><br><span>30</span><br><span>31</span><br><span>32</span><br><span>33</span><br><span>34</span><br><span>35</span><br><span>36</span><br><span>37</span><br><span>38</span><br><span>39</span><br><span>40</span><br><span>41</span><br><span>42</span><br><span>43</span><br><span>44</span><br><span>45</span><br><span>46</span><br></div></div><p>2、直接使用 IFreeSql 访问租户数据库</p>
-<div><pre><code>public class HomeController : ControllerBase
-{
+<div><pre><code><span>public</span> <span>class</span> <span>HomeController</span> <span>:</span> <span><span>ControllerBase</span></span>
+<span>{</span>
 
-    [HttpGet]
-    public object Get([FromServices] IFreeSql fsql)
-    {
-        // 使用 fsql 操作当前租户对应的数据库
-        return &quot;&quot;;
-    }
-}
+    <span>[</span><span><span>HttpGet</span></span><span>]</span>
+    <span>public</span> <span><span>object</span></span> <span>Get</span><span>(</span><span>[</span><span><span>FromServices</span></span><span>]</span> <span>IFreeSql</span> fsql<span>)</span>
+    <span>{</span>
+        <span>// 使用 fsql 操作当前租户对应的数据库</span>
+        <span>return</span> <span>""</span><span>;</span>
+    <span>}</span>
+<span>}</span>
 </code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br><span>10</span><br></div></div>]]></content:encoded>
     </item>
     <item>
