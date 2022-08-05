@@ -6,8 +6,8 @@
     <link>http://freesql.net/FreeSql.Wiki.VuePress/</link>
     <description>FreeSql Documents</description>
     <language>zh-CN</language>
-    <pubDate>Fri, 05 Aug 2022 06:54:18 GMT</pubDate>
-    <lastBuildDate>Fri, 05 Aug 2022 06:54:18 GMT</lastBuildDate>
+    <pubDate>Fri, 05 Aug 2022 07:00:00 GMT</pubDate>
+    <lastBuildDate>Fri, 05 Aug 2022 07:00:00 GMT</lastBuildDate>
     <generator>vuepress-plugin-feed2</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
     <item>
@@ -7579,7 +7579,7 @@ fsql<span>.</span>Aop<span>.</span>ConfigEntityProperty <span>+=</span> <span>(<
 <p>1、AsyncLocal&lt;string&gt;</p>
 <p>ThreadLocal 可以理解为字典 Dictionary&lt;int, string&gt; Key=线程ID Value=值，跨方法时只需要知道线程ID，就能取得对应的 Value。</p>
 <p>我们知道跨异步方法可能造成线程ID变化，ThreadLocal 将不能满足我们使用。</p>
-<p>AsyncLocal 是 ThreadLocal 的升级版，将异步跨方法也能获取到对应的 Value。</p>
+<p>AsyncLocal 是 ThreadLocal 的升级版，异步也能获取到对应的 Value。</p>
 <div><pre><code>public class TerantManager
 {
     // 注意一定是 static 静态化

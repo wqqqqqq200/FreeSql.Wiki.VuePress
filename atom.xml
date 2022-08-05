@@ -3,7 +3,7 @@
   <id>http://freesql.net/FreeSql.Wiki.VuePress/</id>
   <title>FreeSql 官方文档</title>
   <subtitle>FreeSql Documents</subtitle>
-  <updated>2022-08-05T06:54:18.178Z</updated>
+  <updated>2022-08-05T07:00:00.625Z</updated>
   <generator>vuepress-plugin-feed2</generator>
   <link rel="self" href="http://freesql.net/FreeSql.Wiki.VuePress/atom.xml"/>
   <link rel="alternate" href="http://freesql.net/FreeSql.Wiki.VuePress/"/>
@@ -7561,7 +7561,7 @@ fsql<span>.</span>Aop<span>.</span>ConfigEntityProperty <span>+=</span> <span>(<
     <title type="html">多租户</title>
     <id>http://freesql.net/FreeSql.Wiki.VuePress/guide/multi-tenancy.html</id>
     <link href="http://freesql.net/FreeSql.Wiki.VuePress/guide/multi-tenancy.html"/>
-    <updated>2022-08-05T06:53:02.000Z</updated>
+    <updated>2022-08-05T06:58:42.000Z</updated>
     <content type="html"><![CDATA[<h1 id="多租户" tabindex="-1"> 多租户</h1>
 <h3 id="什么是多租户" tabindex="-1"> 什么是多租户</h3>
 <p>维基百科：“软件多租户是指一种软件架构，在这种软件架构中，软件的一个实例运行在服务器上并且为多个租户服务”。一个租户是一组共享该软件实例特定权限的用户。有了多租户架构，软件应用被设计成为每个租户提供一个 专用的实例包括该实例的数据的共享，还可以共享配置，用户管理，租户自己的功能和非功能属性。多租户和多实例架构相比，多租户分离了代表不同的租户操作的多个实例。</p>
@@ -7570,7 +7570,7 @@ fsql<span>.</span>Aop<span>.</span>ConfigEntityProperty <span>+=</span> <span>(<
 <p>1、AsyncLocal&lt;string&gt;</p>
 <p>ThreadLocal 可以理解为字典 Dictionary&lt;int, string&gt; Key=线程ID Value=值，跨方法时只需要知道线程ID，就能取得对应的 Value。</p>
 <p>我们知道跨异步方法可能造成线程ID变化，ThreadLocal 将不能满足我们使用。</p>
-<p>AsyncLocal 是 ThreadLocal 的升级版，将异步跨方法也能获取到对应的 Value。</p>
+<p>AsyncLocal 是 ThreadLocal 的升级版，异步也能获取到对应的 Value。</p>
 <div><pre><code>public class TerantManager
 {
     // 注意一定是 static 静态化
