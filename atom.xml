@@ -3,7 +3,7 @@
   <id>http://freesql.net/FreeSql.Wiki.VuePress/</id>
   <title>FreeSql 官方文档</title>
   <subtitle>FreeSql Documents</subtitle>
-  <updated>2022-08-05T06:52:54.131Z</updated>
+  <updated>2022-08-05T06:54:18.178Z</updated>
   <generator>vuepress-plugin-feed2</generator>
   <link rel="self" href="http://freesql.net/FreeSql.Wiki.VuePress/atom.xml"/>
   <link rel="alternate" href="http://freesql.net/FreeSql.Wiki.VuePress/"/>
@@ -7561,15 +7561,13 @@ fsql<span>.</span>Aop<span>.</span>ConfigEntityProperty <span>+=</span> <span>(<
     <title type="html">多租户</title>
     <id>http://freesql.net/FreeSql.Wiki.VuePress/guide/multi-tenancy.html</id>
     <link href="http://freesql.net/FreeSql.Wiki.VuePress/guide/multi-tenancy.html"/>
-    <updated>2022-08-05T06:51:37.000Z</updated>
+    <updated>2022-08-05T06:53:02.000Z</updated>
     <content type="html"><![CDATA[<h1 id="多租户" tabindex="-1"> 多租户</h1>
 <h3 id="什么是多租户" tabindex="-1"> 什么是多租户</h3>
 <p>维基百科：“软件多租户是指一种软件架构，在这种软件架构中，软件的一个实例运行在服务器上并且为多个租户服务”。一个租户是一组共享该软件实例特定权限的用户。有了多租户架构，软件应用被设计成为每个租户提供一个 专用的实例包括该实例的数据的共享，还可以共享配置，用户管理，租户自己的功能和非功能属性。多租户和多实例架构相比，多租户分离了代表不同的租户操作的多个实例。</p>
 <p>多租户用于创建 Saas（Software as-a service）应用（云处理）。</p>
 <h3 id="方案一-按租户字段区分" tabindex="-1"> 方案一：按租户字段区分</h3>
-<ol>
-<li>AsyncLocal&lt;string&gt;</li>
-</ol>
+<p>1、AsyncLocal&lt;string&gt;</p>
 <p>ThreadLocal 可以理解为字典 Dictionary&lt;int, string&gt; Key=线程ID Value=值，跨方法时只需要知道线程ID，就能取得对应的 Value。</p>
 <p>我们知道跨异步方法可能造成线程ID变化，ThreadLocal 将不能满足我们使用。</p>
 <p>AsyncLocal 是 ThreadLocal 的升级版，将异步跨方法也能获取到对应的 Value。</p>
@@ -7584,13 +7582,9 @@ fsql<span>.</span>Aop<span>.</span>ConfigEntityProperty <span>+=</span> <span>(<
         set =&gt; _asyncLocal.Value = value;    
     }
 }
-</code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br><span>10</span><br><span>11</span><br></div></div><ol start="2">
-<li>FreeSql 全局过滤器，让任何查询，都附带租户条件；</li>
-</ol>
+</code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br><span>10</span><br><span>11</span><br></div></div><p>2、FreeSql 全局过滤器，让任何查询，都附带租户条件；</p>
 <div><pre><code>fsql.GlobalFilter.ApplyIf&lt;ITerant&gt;(&quot;TerantFilter&quot;, () =&gt; TerantManager.Current &gt; 0, a =&gt; a.TerantId == TerantManager.Current);
-</code></pre><div aria-hidden="true"><span>1</span><br></div></div><ol start="3">
-<li>FreeSql Aop.AuditValue 对象审计事件，实现统一拦截插入、更新实体对象；</li>
-</ol>
+</code></pre><div aria-hidden="true"><span>1</span><br></div></div><p>3、FreeSql Aop.AuditValue 对象审计事件，实现统一拦截插入、更新实体对象；</p>
 <div><pre><code>fsql.Aop.AuditValue += (_, e) =&gt;
 {
     if (e.Property.PropertyType == typeof(int) &amp;&amp; e.Property.Name == &quot;TerantId&quot;)
@@ -7598,9 +7592,7 @@ fsql<span>.</span>Aop<span>.</span>ConfigEntityProperty <span>+=</span> <span>(<
         e.Value = TerantManager.Current
     }
 };
-</code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br></div></div><ol start="4">
-<li>AspnetCore Startup.cs Configure 中间件处理租户逻辑；</li>
-</ol>
+</code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br></div></div><p>4、AspnetCore Startup.cs Configure 中间件处理租户逻辑；</p>
 <div><pre><code>public void Configure(IApplicationBuilder app)
 {
     app.Use(async (context, next) =&gt;
