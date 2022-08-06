@@ -3,7 +3,7 @@
   <id>http://freesql.net/FreeSql.Wiki.VuePress/</id>
   <title>FreeSql 官方文档</title>
   <subtitle>FreeSql Documents</subtitle>
-  <updated>2022-08-05T16:05:22.633Z</updated>
+  <updated>2022-08-06T07:11:26.219Z</updated>
   <generator>vuepress-plugin-feed2</generator>
   <link rel="self" href="http://freesql.net/FreeSql.Wiki.VuePress/atom.xml"/>
   <link rel="alternate" href="http://freesql.net/FreeSql.Wiki.VuePress/"/>
@@ -10444,7 +10444,7 @@ fsql<span>.</span><span><span>Delete</span><span><span>&lt;</span>T<span>></span
     <title type="html">事务</title>
     <id>http://freesql.net/FreeSql.Wiki.VuePress/guide/transaction.html</id>
     <link href="http://freesql.net/FreeSql.Wiki.VuePress/guide/transaction.html"/>
-    <updated>2022-07-19T07:17:43.000Z</updated>
+    <updated>2022-08-06T07:10:01.000Z</updated>
     <content type="html"><![CDATA[<h1 id="事务" tabindex="-1"> 事务</h1>
 <p>本文所有内容基于单机数据库事务，分布式数据库 TCC/SAGA 方案请移步：<a href="https://github.com/2881099/FreeSql.Cloud" target="_blank" rel="noopener noreferrer">https://github.com/2881099/FreeSql.Cloud</a></p>
 <h2 id="_0、unitofworkmanager跨方法异步" tabindex="-1"> 0、UnitOfWorkManager跨方法异步</h2>
@@ -10516,12 +10516,54 @@ fsql<span>.</span><span><span>Delete</span><span><span>&lt;</span>T<span>></span
 </ul>
 <h2 id="_4、外部事务" tabindex="-1"> 4、外部事务</h2>
 <p>在与其他开源项目一起使用时，事务由外部开启，使用 WithTransaction 将事务对象传入执行。</p>
-<div><pre><code><span>await</span> fsql<span>.</span><span><span>Update</span><span><span>&lt;</span>xxx<span>></span></span></span><span>(</span><span>)</span>
-  <span>.</span><span>WithTransaction</span><span>(</span>指定事务<span>)</span>
-  <span>.</span><span>Set</span><span>(</span>a <span>=></span> a<span>.</span>Clicks <span>+</span> <span>1</span><span>)</span>
-  <span>.</span><span>ExecuteAffrowsAsync</span><span>(</span><span>)</span><span>;</span>
+<div><pre><code>    <span>await</span> fsql<span>.</span><span><span>Update</span><span><span>&lt;</span>xxx<span>></span></span></span><span>(</span><span>)</span>
+    <span>.</span><span>WithTransaction</span><span>(</span>指定事务<span>)</span>
+    <span>.</span><span>Set</span><span>(</span>a <span>=></span> a<span>.</span>Clicks <span>+</span> <span>1</span><span>)</span>
+    <span>.</span><span>ExecuteAffrowsAsync</span><span>(</span><span>)</span><span>;</span>
 </code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br></div></div><p>ISelect、IInsert、IUpdate、IDelete，都支持 WithTransaction 方法。</p>
-<h2 id="_5、更新排他锁" tabindex="-1"> 5、更新排他锁</h2>
+<h3 id="获取dbtransaction" tabindex="-1"> 获取DbTransaction</h3>
+<ul>
+<li>异步方法</li>
+</ul>
+<div><pre><code>    <span>using</span> <span>Object<span>&lt;</span>DbConnection<span>></span></span> conn <span>=</span> <span>await</span> _freeSql<span>.</span>Ado<span>.</span>MasterPool<span>.</span><span>GetAsync</span><span>(</span><span>)</span><span>;</span>
+    <span>await</span> <span>using</span> <span>DbTransaction</span> transaction <span>=</span> <span>await</span> conn<span>.</span>Value<span>.</span><span>BeginTransactionAsync</span><span>(</span><span>)</span><span>;</span>
+</code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br></div></div><ul>
+<li>同步方法(using新语法)</li>
+</ul>
+<div><pre><code>    <span>using</span> <span>Object<span>&lt;</span>DbConnection<span>></span></span> conn <span>=</span> _freeSql<span>.</span>Ado<span>.</span>MasterPool<span>.</span><span>Get</span><span>(</span><span>)</span><span>;</span>
+    <span>using</span> <span>DbTransaction</span> transaction <span>=</span> conn<span>.</span>Value<span>.</span><span>BeginTransaction</span><span>(</span><span>)</span><span>;</span>
+</code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br></div></div><ul>
+<li>同步方法(using旧语法)</li>
+</ul>
+<div><pre><code>    <span>using</span><span>(</span><span>Object<span>&lt;</span>DbConnection<span>></span></span> conn <span>=</span> _freeSql<span>.</span>Ado<span>.</span>MasterPool<span>.</span><span>Get</span><span>(</span><span>)</span><span>)</span>
+    <span>{</span>
+        <span>using</span><span>(</span><span>DbTransaction</span> transaction <span>=</span> conn<span>.</span>Value<span>.</span><span>BeginTransaction</span><span>(</span><span>)</span><span>)</span>
+        <span>{</span>
+            <span>..</span><span>.</span>
+        <span>}</span>
+    <span>}</span>
+</code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br></div></div><h3 id="示例" tabindex="-1"> 示例</h3>
+<div><pre><code><span>public</span> <span>async</span> <span>Task</span> <span>CreateAsync</span><span>(</span><span>CreateGroupDto</span> inputDto<span>)</span>
+<span>{</span>
+    <span>using</span> <span>Object<span>&lt;</span>DbConnection<span>></span></span> conn <span>=</span> _freeSql<span>.</span>Ado<span>.</span>MasterPool<span>.</span><span>Get</span><span>(</span><span>)</span><span>;</span>
+    <span>using</span> <span>DbTransaction</span> transaction <span>=</span> conn<span>.</span>Value<span>.</span><span>BeginTransaction</span><span>(</span><span>)</span><span>;</span>
+    <span>try</span>
+    <span>{</span>
+        <span>await</span> fsql<span>.</span><span><span>Update</span><span><span>&lt;</span>xxx<span>></span></span></span><span>(</span><span>)</span>
+        <span>.</span><span>WithTransaction</span><span>(</span>transaction<span>)</span>
+        <span>.</span><span>Set</span><span>(</span>a <span>=></span> a<span>.</span>Clicks <span>+</span> <span>1</span><span>)</span>
+        <span>.</span><span>ExecuteAffrowsAsync</span><span>(</span><span>)</span><span>;</span>
+
+        transaction<span>.</span><span>Commit</span><span>(</span><span>)</span><span>;</span>
+    <span>}</span>
+    <span>catch</span> <span>(</span><span>Exception</span> ex<span>)</span>
+    <span>{</span>
+        transaction<span>.</span><span>Rollback</span><span>(</span><span>)</span><span>;</span>
+        <span>//记录日志，抛出异常（使用全局异常）或者返回自定义数据 </span>
+        <span>throw</span><span>;</span>
+    <span>}</span> 
+<span>}</span>
+</code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br><span>10</span><br><span>11</span><br><span>12</span><br><span>13</span><br><span>14</span><br><span>15</span><br><span>16</span><br><span>17</span><br><span>18</span><br><span>19</span><br><span>20</span><br></div></div><h2 id="_5、更新排他锁" tabindex="-1"> 5、更新排他锁</h2>
 <div><pre><code><span><span>var</span></span> user <span>=</span> fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>User<span>></span></span></span><span>(</span><span>)</span><span>.</span><span>ForUpdate</span><span>(</span><span>true</span><span>)</span><span>.</span><span>Where</span><span>(</span>a <span>=></span> a<span>.</span>Id <span>==</span> <span>1</span><span>)</span><span>.</span><span>ToOne</span><span>(</span><span>)</span><span>;</span>
 <span>//SELECT ... FROM User a for update nowait</span>
 </code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br></div></div><p>for update 在 Oracle/PostgreSQL/MySql 是通用的写法，我们对 SqlServer 做了特别适配，执行的 SQL 语句大致如下：</p>
