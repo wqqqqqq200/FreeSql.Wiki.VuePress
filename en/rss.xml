@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:dc="http://purl.org/dc/elements/1.1/">
   <channel>
-    <atom:link href="http://freesql.net/FreeSql.Wiki.VuePress/rss.xml" rel="self" type="application/rss+xml"/>
+    <atom:link href="http://freesql.net/rss.xml" rel="self" type="application/rss+xml"/>
     <title>FreeSql Documents</title>
-    <link>http://freesql.net/FreeSql.Wiki.VuePress/en/</link>
+    <link>http://freesql.net/en/</link>
     <description>FreeSql Documents</description>
     <language>en-US</language>
-    <pubDate>Sun, 07 Aug 2022 07:35:34 GMT</pubDate>
-    <lastBuildDate>Sun, 07 Aug 2022 07:35:34 GMT</lastBuildDate>
+    <pubDate>Sun, 07 Aug 2022 14:17:35 GMT</pubDate>
+    <lastBuildDate>Sun, 07 Aug 2022 14:17:35 GMT</lastBuildDate>
     <generator>vuepress-plugin-feed2</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
     <item>
       <title>Entity-Relationship</title>
-      <link>http://freesql.net/FreeSql.Wiki.VuePress/en/guide/Entity-Relationship.html</link>
-      <guid>http://freesql.net/FreeSql.Wiki.VuePress/en/guide/Entity-Relationship.html</guid>
-      <source url="http://freesql.net/FreeSql.Wiki.VuePress/rss.xml">Entity-Relationship</source>
+      <link>http://freesql.net/en/guide/Entity-Relationship.html</link>
+      <guid>http://freesql.net/en/guide/Entity-Relationship.html</guid>
+      <source url="http://freesql.net/rss.xml">Entity-Relationship</source>
       <pubDate>Tue, 07 Jun 2022 13:45:28 GMT</pubDate>
       <content:encoded><![CDATA[<h1 id="entity-relationship" tabindex="-1"> Entity-Relationship</h1>
 <p>Navigation properties are one of FreeSql's characteristic functions, which can be configured by agreement or customized configuration of the relationship between objects.</p>
@@ -167,9 +167,9 @@
     </item>
     <item>
       <title>Cascade Saving</title>
-      <link>http://freesql.net/FreeSql.Wiki.VuePress/en/guide/Cascade-Saving.html</link>
-      <guid>http://freesql.net/FreeSql.Wiki.VuePress/en/guide/Cascade-Saving.html</guid>
-      <source url="http://freesql.net/FreeSql.Wiki.VuePress/rss.xml">Cascade Saving</source>
+      <link>http://freesql.net/en/guide/Cascade-Saving.html</link>
+      <guid>http://freesql.net/en/guide/Cascade-Saving.html</guid>
+      <source url="http://freesql.net/rss.xml">Cascade Saving</source>
       <pubDate>Sun, 21 Nov 2021 08:13:16 GMT</pubDate>
       <content:encoded><![CDATA[<h1 id="cascade-saving" tabindex="-1"> Cascade Saving</h1>
 <p>It is found that n to 1 is not suitable for cascade preservation. Save the type information when saving the topic? Personally, I think the bottom-up saving function is too uncontrollable. FreeSQL does not support bottom-up saving at present. Therefore, we will only talk about OneToOne/OneToMany/ManyToMany cascade save. As for manytoone cascade storage, manual processing is used, which is more safe and controllable.</p>
@@ -392,9 +392,9 @@ repo<span>.</span> <span>Insert</span><span>(</span>type<span>)</span><span>;</s
     </item>
     <item>
       <title>Delete</title>
-      <link>http://freesql.net/FreeSql.Wiki.VuePress/en/guide/Delete-Data.html</link>
-      <guid>http://freesql.net/FreeSql.Wiki.VuePress/en/guide/Delete-Data.html</guid>
-      <source url="http://freesql.net/FreeSql.Wiki.VuePress/rss.xml">Delete</source>
+      <link>http://freesql.net/en/guide/Delete-Data.html</link>
+      <guid>http://freesql.net/en/guide/Delete-Data.html</guid>
+      <source url="http://freesql.net/rss.xml">Delete</source>
       <pubDate>Sun, 21 Nov 2021 08:13:16 GMT</pubDate>
       <content:encoded><![CDATA[<h1 id="delete" tabindex="-1"> Delete</h1>
 <p>Deleting data is a very dangerous operation. FreeSql does not support deletion very powerfully. By default, it only supports single-table and conditional deletion methods.</p>
@@ -624,9 +624,9 @@ repo<span>.</span><span>Delete</span><span>(</span>groups<span>)</span><span>;</
     </item>
     <item>
       <title>Greed-Loading</title>
-      <link>http://freesql.net/FreeSql.Wiki.VuePress/en/guide/Greed-Loading.html</link>
-      <guid>http://freesql.net/FreeSql.Wiki.VuePress/en/guide/Greed-Loading.html</guid>
-      <source url="http://freesql.net/FreeSql.Wiki.VuePress/rss.xml">Greed-Loading</source>
+      <link>http://freesql.net/en/guide/Greed-Loading.html</link>
+      <guid>http://freesql.net/en/guide/Greed-Loading.html</guid>
+      <source url="http://freesql.net/rss.xml">Greed-Loading</source>
       <pubDate>Sun, 21 Nov 2021 08:13:16 GMT</pubDate>
       <content:encoded><![CDATA[<h1 id="greed-loading" tabindex="-1"> Greed-Loading</h1>
 <h2 id="navigation-properties-manytoone" tabindex="-1"> Navigation Properties - ManyToOne</h2>
@@ -727,9 +727,9 @@ dto<span>.</span><span>IncludeMany</span><span>(</span>fsql<span>,</span> d <spa
     </item>
     <item>
       <title>Group Aggregation Query</title>
-      <link>http://freesql.net/FreeSql.Wiki.VuePress/en/guide/Group-Aggregation-Query.html</link>
-      <guid>http://freesql.net/FreeSql.Wiki.VuePress/en/guide/Group-Aggregation-Query.html</guid>
-      <source url="http://freesql.net/FreeSql.Wiki.VuePress/rss.xml">Group Aggregation Query</source>
+      <link>http://freesql.net/en/guide/Group-Aggregation-Query.html</link>
+      <guid>http://freesql.net/en/guide/Group-Aggregation-Query.html</guid>
+      <source url="http://freesql.net/rss.xml">Group Aggregation Query</source>
       <pubDate>Sun, 21 Nov 2021 08:13:16 GMT</pubDate>
       <content:encoded><![CDATA[<h1 id="group-aggregation-query" tabindex="-1"> Group Aggregation Query</h1>
 <div><pre><code><span>static</span> <span>IFreeSql</span> fsql <span>=</span> <span>new</span> <span>FreeSql<span>.</span>FreeSqlBuilder</span><span>(</span><span>)</span>
@@ -913,9 +913,9 @@ dto<span>.</span><span>IncludeMany</span><span>(</span>fsql<span>,</span> d <spa
     </item>
     <item>
       <title>Insert Data</title>
-      <link>http://freesql.net/FreeSql.Wiki.VuePress/en/guide/Insert-Data.html</link>
-      <guid>http://freesql.net/FreeSql.Wiki.VuePress/en/guide/Insert-Data.html</guid>
-      <source url="http://freesql.net/FreeSql.Wiki.VuePress/rss.xml">Insert Data</source>
+      <link>http://freesql.net/en/guide/Insert-Data.html</link>
+      <guid>http://freesql.net/en/guide/Insert-Data.html</guid>
+      <source url="http://freesql.net/rss.xml">Insert Data</source>
       <pubDate>Sun, 21 Nov 2021 08:13:16 GMT</pubDate>
       <content:encoded><![CDATA[<h1 id="insert-data" tabindex="-1"> Insert Data</h1>
 <p>FreeSql provides methods for inserting data in single and batches, and it can also return the inserted records when executed in a specific database.</p>
@@ -1370,9 +1370,9 @@ fsql<span>.</span><span>InsertDict</span><span>(</span>dic<span>)</span><span>.<
     </item>
     <item>
       <title>Lazy Loading</title>
-      <link>http://freesql.net/FreeSql.Wiki.VuePress/en/guide/Lazy-Loading.html</link>
-      <guid>http://freesql.net/FreeSql.Wiki.VuePress/en/guide/Lazy-Loading.html</guid>
-      <source url="http://freesql.net/FreeSql.Wiki.VuePress/rss.xml">Lazy Loading</source>
+      <link>http://freesql.net/en/guide/Lazy-Loading.html</link>
+      <guid>http://freesql.net/en/guide/Lazy-Loading.html</guid>
+      <source url="http://freesql.net/rss.xml">Lazy Loading</source>
       <pubDate>Sun, 21 Nov 2021 08:13:16 GMT</pubDate>
       <content:encoded><![CDATA[<h1 id="lazy-loading" tabindex="-1"> Lazy Loading</h1>
 <p>FreeSql supports lazy loading of navigation properties, that is, data is loaded (read) when we need it. It supports navigation properties of <em>One-to-One</em>, <em>Many-to-One</em>, <em>One-to-Many</em>, and <em>Many-to-Many</em> relationships.</p>
@@ -1483,9 +1483,9 @@ fsql<span>.</span><span>InsertDict</span><span>(</span>dic<span>)</span><span>.<
     </item>
     <item>
       <title>Linq to Sql</title>
-      <link>http://freesql.net/FreeSql.Wiki.VuePress/en/guide/Linq-to-Sql.html</link>
-      <guid>http://freesql.net/FreeSql.Wiki.VuePress/en/guide/Linq-to-Sql.html</guid>
-      <source url="http://freesql.net/FreeSql.Wiki.VuePress/rss.xml">Linq to Sql</source>
+      <link>http://freesql.net/en/guide/Linq-to-Sql.html</link>
+      <guid>http://freesql.net/en/guide/Linq-to-Sql.html</guid>
+      <source url="http://freesql.net/rss.xml">Linq to Sql</source>
       <pubDate>Sun, 21 Nov 2021 08:13:16 GMT</pubDate>
       <content:encoded><![CDATA[<h1 id="linq-to-sql" tabindex="-1"> Linq to Sql</h1>
 <p>Originally not supporting IQueryable is mainly due to the consideration of usage habits. The intelligence of writing code will always prompt a bunch of methods you don't want to use. IQueryable itself provides a bunch of methods that cannot be implemented, as well as external intrusion extension methods, which seriously affect Coding experience. As shown below:</p>
@@ -1630,9 +1630,9 @@ fsql<span>.</span><span>InsertDict</span><span>(</span>dic<span>)</span><span>.<
     </item>
     <item>
       <title>Pagination</title>
-      <link>http://freesql.net/FreeSql.Wiki.VuePress/en/guide/Pagination.html</link>
-      <guid>http://freesql.net/FreeSql.Wiki.VuePress/en/guide/Pagination.html</guid>
-      <source url="http://freesql.net/FreeSql.Wiki.VuePress/rss.xml">Pagination</source>
+      <link>http://freesql.net/en/guide/Pagination.html</link>
+      <guid>http://freesql.net/en/guide/Pagination.html</guid>
+      <source url="http://freesql.net/rss.xml">Pagination</source>
       <pubDate>Sun, 21 Nov 2021 08:13:16 GMT</pubDate>
       <content:encoded><![CDATA[<h1 id="pagination" tabindex="-1"> Pagination</h1>
 <div><pre><code><span>static</span> <span>IFreeSql</span> fsql <span>=</span> <span>new</span> <span>FreeSql<span>.</span>FreeSqlBuilder</span><span>(</span><span>)</span>
@@ -1760,9 +1760,9 @@ fsql<span>.</span><span>InsertDict</span><span>(</span>dic<span>)</span><span>.<
     </item>
     <item>
       <title>Parent Child Relationship Query</title>
-      <link>http://freesql.net/FreeSql.Wiki.VuePress/en/guide/Parent-Child-Relationship-Query.html</link>
-      <guid>http://freesql.net/FreeSql.Wiki.VuePress/en/guide/Parent-Child-Relationship-Query.html</guid>
-      <source url="http://freesql.net/FreeSql.Wiki.VuePress/rss.xml">Parent Child Relationship Query</source>
+      <link>http://freesql.net/en/guide/Parent-Child-Relationship-Query.html</link>
+      <guid>http://freesql.net/en/guide/Parent-Child-Relationship-Query.html</guid>
+      <source url="http://freesql.net/rss.xml">Parent Child Relationship Query</source>
       <pubDate>Sun, 21 Nov 2021 08:13:16 GMT</pubDate>
       <content:encoded><![CDATA[<h1 id="parent-child-relationship-query" tabindex="-1"> Parent Child Relationship Query</h1>
 <p>Unlimited classification (father and child) is a commonly used table design. Each design method highlights advantages but also brings defects, such as:</p>
@@ -1968,9 +1968,9 @@ Assert<span>.</span><span>Equal</span><span>(</span><span>"中国[100000] -> 北
     </item>
     <item>
       <title>Query Data</title>
-      <link>http://freesql.net/FreeSql.Wiki.VuePress/en/guide/Query-Data.html</link>
-      <guid>http://freesql.net/FreeSql.Wiki.VuePress/en/guide/Query-Data.html</guid>
-      <source url="http://freesql.net/FreeSql.Wiki.VuePress/rss.xml">Query Data</source>
+      <link>http://freesql.net/en/guide/Query-Data.html</link>
+      <guid>http://freesql.net/en/guide/Query-Data.html</guid>
+      <source url="http://freesql.net/rss.xml">Query Data</source>
       <pubDate>Sun, 21 Nov 2021 08:13:16 GMT</pubDate>
       <content:encoded><![CDATA[<h1 id="query-data" tabindex="-1"> Query Data</h1>
 <p>FreeSql has made great efforts in querying data, especially the functions such as chain query syntax, multi-table query, expression function, etc.</p>
@@ -2391,9 +2391,9 @@ fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>VM_District_Pa
     </item>
     <item>
       <title>Query from Multi Tables</title>
-      <link>http://freesql.net/FreeSql.Wiki.VuePress/en/guide/Query-from-Multi-Table.html</link>
-      <guid>http://freesql.net/FreeSql.Wiki.VuePress/en/guide/Query-from-Multi-Table.html</guid>
-      <source url="http://freesql.net/FreeSql.Wiki.VuePress/rss.xml">Query from Multi Tables</source>
+      <link>http://freesql.net/en/guide/Query-from-Multi-Table.html</link>
+      <guid>http://freesql.net/en/guide/Query-from-Multi-Table.html</guid>
+      <source url="http://freesql.net/rss.xml">Query from Multi Tables</source>
       <pubDate>Sun, 21 Nov 2021 08:13:16 GMT</pubDate>
       <content:encoded><![CDATA[<h1 id="query-from-multi-tables" tabindex="-1"> Query from Multi Tables</h1>
 <div><pre><code><span>static</span> <span>IFreeSql</span> fsql <span>=</span> <span>new</span> <span>FreeSql<span>.</span>FreeSqlBuilder</span><span>(</span><span>)</span>
@@ -2593,9 +2593,9 @@ fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>Topic<span>,</
     </item>
     <item>
       <title>Query from Single Table</title>
-      <link>http://freesql.net/FreeSql.Wiki.VuePress/en/guide/Query-from-Single-Table.html</link>
-      <guid>http://freesql.net/FreeSql.Wiki.VuePress/en/guide/Query-from-Single-Table.html</guid>
-      <source url="http://freesql.net/FreeSql.Wiki.VuePress/rss.xml">Query from Single Table</source>
+      <link>http://freesql.net/en/guide/Query-from-Single-Table.html</link>
+      <guid>http://freesql.net/en/guide/Query-from-Single-Table.html</guid>
+      <source url="http://freesql.net/rss.xml">Query from Single Table</source>
       <pubDate>Sun, 21 Nov 2021 08:13:16 GMT</pubDate>
       <content:encoded><![CDATA[<h1 id="query-from-single-table" tabindex="-1"> Query from Single Table</h1>
 <div><pre><code><span>static</span> <span>IFreeSql</span> fsql <span>=</span> <span>new</span> <span>FreeSql<span>.</span>FreeSqlBuilder</span><span>(</span><span>)</span>
@@ -2659,9 +2659,9 @@ fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>Topic<span>></
     </item>
     <item>
       <title>Repository Layer</title>
-      <link>http://freesql.net/FreeSql.Wiki.VuePress/en/guide/Repository-Layer.html</link>
-      <guid>http://freesql.net/FreeSql.Wiki.VuePress/en/guide/Repository-Layer.html</guid>
-      <source url="http://freesql.net/FreeSql.Wiki.VuePress/rss.xml">Repository Layer</source>
+      <link>http://freesql.net/en/guide/Repository-Layer.html</link>
+      <guid>http://freesql.net/en/guide/Repository-Layer.html</guid>
+      <source url="http://freesql.net/rss.xml">Repository Layer</source>
       <pubDate>Sun, 21 Nov 2021 08:13:16 GMT</pubDate>
       <content:encoded><![CDATA[<h1 id="repository-layer" tabindex="-1"> Repository Layer</h1>
 <p>As an extension, FreeSql.Repository realizes the functions of the common DAL. There is a certain standard definition for the repository layer. FreeSql.Repository refers to the interface design of Abp vNext, defines and implements the basic repository layer for CURD operations.</p>
@@ -2967,9 +2967,9 @@ repo<span>.</span><span>Update</span><span>(</span>item<span>)</span><span>;</sp
     </item>
     <item>
       <title>Return Data</title>
-      <link>http://freesql.net/FreeSql.Wiki.VuePress/en/guide/Return-Data.html</link>
-      <guid>http://freesql.net/FreeSql.Wiki.VuePress/en/guide/Return-Data.html</guid>
-      <source url="http://freesql.net/FreeSql.Wiki.VuePress/rss.xml">Return Data</source>
+      <link>http://freesql.net/en/guide/Return-Data.html</link>
+      <guid>http://freesql.net/en/guide/Return-Data.html</guid>
+      <source url="http://freesql.net/rss.xml">Return Data</source>
       <pubDate>Sun, 21 Nov 2021 08:13:16 GMT</pubDate>
       <content:encoded><![CDATA[<h1 id="return-data" tabindex="-1"> Return Data</h1>
 <p>FreeSql uses ExpressionTree to optimize the reading speed. If you know the technology, you must know that in addition to native code under .NETCore technology, the fastest are Emit and ExpressionTree.</p>
@@ -3209,9 +3209,9 @@ fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>Song<span>></s
     </item>
     <item>
       <title>Unit of Work Manager</title>
-      <link>http://freesql.net/FreeSql.Wiki.VuePress/en/guide/Unit-of-Work-Manager.html</link>
-      <guid>http://freesql.net/FreeSql.Wiki.VuePress/en/guide/Unit-of-Work-Manager.html</guid>
-      <source url="http://freesql.net/FreeSql.Wiki.VuePress/rss.xml">Unit of Work Manager</source>
+      <link>http://freesql.net/en/guide/Unit-of-Work-Manager.html</link>
+      <guid>http://freesql.net/en/guide/Unit-of-Work-Manager.html</guid>
+      <source url="http://freesql.net/rss.xml">Unit of Work Manager</source>
       <pubDate>Sun, 21 Nov 2021 08:13:16 GMT</pubDate>
       <content:encoded><![CDATA[<h1 id="unit-of-work-manager" tabindex="-1"> Unit of Work Manager</h1>
 <h2 id="use-freesql-s-repository-transaction-in-asp-net-core" tabindex="-1"> Use FreeSql's repository transaction in ASP.NET Core</h2>
@@ -3382,9 +3382,9 @@ dotnet <span>add</span> package FreeSql.Provider.MySqlConnector
     </item>
     <item>
       <title>Unit of Work</title>
-      <link>http://freesql.net/FreeSql.Wiki.VuePress/en/guide/Unit-of-Work.html</link>
-      <guid>http://freesql.net/FreeSql.Wiki.VuePress/en/guide/Unit-of-Work.html</guid>
-      <source url="http://freesql.net/FreeSql.Wiki.VuePress/rss.xml">Unit of Work</source>
+      <link>http://freesql.net/en/guide/Unit-of-Work.html</link>
+      <guid>http://freesql.net/en/guide/Unit-of-Work.html</guid>
+      <source url="http://freesql.net/rss.xml">Unit of Work</source>
       <pubDate>Sun, 21 Nov 2021 08:13:16 GMT</pubDate>
       <content:encoded><![CDATA[<h1 id="unit-of-work" tabindex="-1"> Unit of Work</h1>
 <p>Unit of work can put multiple repositories into one unit for internal management and execution, and finally execute all operations through <code>Commit</code>. Unit of work internally uses database transactions.</p>
@@ -3509,9 +3509,9 @@ uow<span>.</span>OnEntityChange <span>=</span> report <span>=></span> <span>{</s
     </item>
     <item>
       <title>Update</title>
-      <link>http://freesql.net/FreeSql.Wiki.VuePress/en/guide/Update-Data.html</link>
-      <guid>http://freesql.net/FreeSql.Wiki.VuePress/en/guide/Update-Data.html</guid>
-      <source url="http://freesql.net/FreeSql.Wiki.VuePress/rss.xml">Update</source>
+      <link>http://freesql.net/en/guide/Update-Data.html</link>
+      <guid>http://freesql.net/en/guide/Update-Data.html</guid>
+      <source url="http://freesql.net/rss.xml">Update</source>
       <pubDate>Sun, 21 Nov 2021 08:13:16 GMT</pubDate>
       <content:encoded><![CDATA[<h1 id="update" tabindex="-1"> Update</h1>
 <p>FreeSql provides a variety of database update functions. It supports single or batch updates, and can also return updated records when executed in a specific database.</p>
@@ -3831,9 +3831,9 @@ fsql<span>.</span><span>UpdateDict</span><span>(</span>dic<span>)</span><span>.<
     </item>
     <item>
       <title>withsql</title>
-      <link>http://freesql.net/FreeSql.Wiki.VuePress/en/guide/With-Sql.html</link>
-      <guid>http://freesql.net/FreeSql.Wiki.VuePress/en/guide/With-Sql.html</guid>
-      <source url="http://freesql.net/FreeSql.Wiki.VuePress/rss.xml">withsql</source>
+      <link>http://freesql.net/en/guide/With-Sql.html</link>
+      <guid>http://freesql.net/en/guide/With-Sql.html</guid>
+      <source url="http://freesql.net/rss.xml">withsql</source>
       <pubDate>Sun, 21 Nov 2021 08:13:16 GMT</pubDate>
       <content:encoded><![CDATA[<h1 id="withsql" tabindex="-1"> withsql</h1>
 <h1 id="use-custom-sql-statements" tabindex="-1"> Use Custom SQL Statements</h1>
@@ -4024,9 +4024,9 @@ fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>Topic<span>></
     </item>
     <item>
       <title>Getting Started</title>
-      <link>http://freesql.net/FreeSql.Wiki.VuePress/en/guide/getting-started.html</link>
-      <guid>http://freesql.net/FreeSql.Wiki.VuePress/en/guide/getting-started.html</guid>
-      <source url="http://freesql.net/FreeSql.Wiki.VuePress/rss.xml">Getting Started</source>
+      <link>http://freesql.net/en/guide/getting-started.html</link>
+      <guid>http://freesql.net/en/guide/getting-started.html</guid>
+      <source url="http://freesql.net/rss.xml">Getting Started</source>
       <pubDate>Sat, 21 Aug 2021 05:59:59 GMT</pubDate>
       <content:encoded><![CDATA[<h1 id="getting-started" tabindex="-1"> Getting Started</h1>
 <p>FreeSql is a powerful <strong>.NET ORM</strong> that supports all <em>.NET Standard</em> runtime platforms like <em>.NET Framework 4.0+</em>, <em>.NET Core 2.1+</em> and <em>Xamarin</em>, etc.</p>
@@ -4324,9 +4324,9 @@ blog<span>.</span>BlogId <span>=</span> <span>(</span><span>int</span><span>)</s
     </item>
     <item>
       <title>Insert Or Update</title>
-      <link>http://freesql.net/FreeSql.Wiki.VuePress/en/guide/insert-or-update.html</link>
-      <guid>http://freesql.net/FreeSql.Wiki.VuePress/en/guide/insert-or-update.html</guid>
-      <source url="http://freesql.net/FreeSql.Wiki.VuePress/rss.xml">Insert Or Update</source>
+      <link>http://freesql.net/en/guide/insert-or-update.html</link>
+      <guid>http://freesql.net/en/guide/insert-or-update.html</guid>
+      <source url="http://freesql.net/rss.xml">Insert Or Update</source>
       <pubDate>Sat, 21 Aug 2021 05:59:59 GMT</pubDate>
       <content:encoded><![CDATA[<h1 id="insert-or-update" tabindex="-1"> Insert Or Update</h1>
 <h2 id="_1-ifreesql-insertorupdate" tabindex="-1"> 1. IFreeSql.InsertOrUpdate</h2>
@@ -4549,9 +4549,9 @@ fsql<span>.</span><span>Insert</span><span>(</span>items<span>)</span>
     </item>
     <item>
       <title>Install</title>
-      <link>http://freesql.net/FreeSql.Wiki.VuePress/en/guide/install.html</link>
-      <guid>http://freesql.net/FreeSql.Wiki.VuePress/en/guide/install.html</guid>
-      <source url="http://freesql.net/FreeSql.Wiki.VuePress/rss.xml">Install</source>
+      <link>http://freesql.net/en/guide/install.html</link>
+      <guid>http://freesql.net/en/guide/install.html</guid>
+      <source url="http://freesql.net/rss.xml">Install</source>
       <pubDate>Sat, 21 Aug 2021 05:59:59 GMT</pubDate>
       <content:encoded><![CDATA[<h1 id="install" tabindex="-1"> Install</h1>
 <p>FreeSql is a <code>.NET Standard 2.0</code> library, which only supports applications of <code>.NET Framework 4.0</code>, <code>.NET Core</code> or higher.</p>
@@ -4737,9 +4737,9 @@ dotnet add package FreeSql.Provider.MySqlConnector
     </item>
     <item>
       <title>Guide</title>
-      <link>http://freesql.net/FreeSql.Wiki.VuePress/en/guide/</link>
-      <guid>http://freesql.net/FreeSql.Wiki.VuePress/en/guide/</guid>
-      <source url="http://freesql.net/FreeSql.Wiki.VuePress/rss.xml">Guide</source>
+      <link>http://freesql.net/en/guide/</link>
+      <guid>http://freesql.net/en/guide/</guid>
+      <source url="http://freesql.net/rss.xml">Guide</source>
       <pubDate>Thu, 04 Feb 2021 16:03:18 GMT</pubDate>
       <content:encoded><![CDATA[<h1 id="guide" tabindex="-1"> Guide</h1>
 <h2 id="freesql" tabindex="-1"> FreeSql</h2>
