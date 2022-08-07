@@ -3,7 +3,7 @@
   <id>http://freesql.net/FreeSql.Wiki.VuePress/</id>
   <title>FreeSql 官方文档</title>
   <subtitle>FreeSql Documents</subtitle>
-  <updated>2022-08-06T07:11:26.219Z</updated>
+  <updated>2022-08-07T07:35:34.287Z</updated>
   <generator>vuepress-plugin-feed2</generator>
   <link rel="self" href="http://freesql.net/FreeSql.Wiki.VuePress/atom.xml"/>
   <link rel="alternate" href="http://freesql.net/FreeSql.Wiki.VuePress/"/>
@@ -7561,7 +7561,7 @@ fsql<span>.</span>Aop<span>.</span>ConfigEntityProperty <span>+=</span> <span>(<
     <title type="html">多租户</title>
     <id>http://freesql.net/FreeSql.Wiki.VuePress/guide/multi-tenancy.html</id>
     <link href="http://freesql.net/FreeSql.Wiki.VuePress/guide/multi-tenancy.html"/>
-    <updated>2022-08-05T16:04:05.000Z</updated>
+    <updated>2022-08-07T07:34:05.000Z</updated>
     <content type="html"><![CDATA[<h1 id="多租户" tabindex="-1"> 多租户</h1>
 <h3 id="什么是多租户" tabindex="-1"> 什么是多租户</h3>
 <p>维基百科：“软件多租户是指一种软件架构，在这种软件架构中，软件的一个实例运行在服务器上并且为多个租户服务”。一个租户是一组共享该软件实例特定权限的用户。有了多租户架构，软件应用被设计成为每个租户提供一个 专用的实例包括该实例的数据的共享，还可以共享配置，用户管理，租户自己的功能和非功能属性。多租户和多实例架构相比，多租户分离了代表不同的租户操作的多个实例。</p>
@@ -7571,60 +7571,60 @@ fsql<span>.</span>Aop<span>.</span>ConfigEntityProperty <span>+=</span> <span>(<
 <p>ThreadLocal 可以理解为字典 Dictionary&lt;int, string&gt; Key=线程ID Value=值，跨方法时只需要知道线程ID，就能取得对应的 Value。</p>
 <p>我们知道跨异步方法可能造成线程ID变化，ThreadLocal 将不能满足我们使用。</p>
 <p>AsyncLocal 是 ThreadLocal 的升级版，解决跨异步方法也能获取到对应的 Value。</p>
-<div><pre><code>public class TerantManager
-{
-    // 注意一定是 static 静态化
-    static AsyncLocal&lt;int&gt; _asyncLocal = new AsyncLocal&lt;int&gt;();
+<div><pre><code><span>public</span> <span>class</span> <span>TerantManager</span>
+<span>{</span>
+    <span>// 注意一定是 static 静态化</span>
+    <span>static</span> <span>AsyncLocal<span>&lt;</span><span>int</span><span>></span></span> _asyncLocal <span>=</span> <span>new</span> <span>AsyncLocal<span>&lt;</span><span>int</span><span>></span></span><span>(</span><span>)</span><span>;</span>
 
-    public static int Current
-    {
-        get =&gt; _asyncLocal.Value;
-        set =&gt; _asyncLocal.Value = value;    
-    }
-}
+    <span>public</span> <span>static</span> <span><span>int</span></span> Current
+    <span>{</span>
+        <span>get</span> <span>=></span> _asyncLocal<span>.</span>Value<span>;</span>
+        <span>set</span> <span>=></span> _asyncLocal<span>.</span>Value <span>=</span> <span>value</span><span>;</span>    
+    <span>}</span>
+<span>}</span>
 </code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br><span>10</span><br><span>11</span><br></div></div><p>第2步：FreeSql 全局过滤器，让任何查询/更新/删除，都附带租户条件；</p>
 <p>以下代码若当前没有设置租户值，则过滤器不生效，什么意思？</p>
-<div><pre><code>// 全局过滤器只需要在 IFreeSql 初始化处执行一次
-// ITerant 可以是自定义接口，也可以是任何一个包含 TerantId 属性的实体类型，FreeSql 不需要为每个实体类型都设置过滤器（一次即可）
-fsql.GlobalFilter.ApplyIf&lt;ITerant&gt;(
-    &quot;TerantFilter&quot;, // 过滤器名称
-    () =&gt; TerantManager.Current &gt; 0, // 过滤器生效判断
-    a =&gt; a.TerantId == TerantManager.Current // 过滤器条件
-);
+<div><pre><code><span>// 全局过滤器只需要在 IFreeSql 初始化处执行一次</span>
+<span>// ITerant 可以是自定义接口，也可以是任何一个包含 TerantId 属性的实体类型，FreeSql 不需要为每个实体类型都设置过滤器（一次即可）</span>
+fsql<span>.</span>GlobalFilter<span>.</span><span><span>ApplyIf</span><span><span>&lt;</span>ITerant<span>></span></span></span><span>(</span>
+    <span>"TerantFilter"</span><span>,</span> <span>// 过滤器名称</span>
+    <span>(</span><span>)</span> <span>=></span> TerantManager<span>.</span>Current <span>></span> <span>0</span><span>,</span> <span>// 过滤器生效判断</span>
+    a <span>=></span> a<span>.</span>TerantId <span>==</span> TerantManager<span>.</span>Current <span>// 过滤器条件</span>
+<span>)</span><span>;</span>
 
-TerantManager.Current = 0;
-fsql.Select&lt;T&gt;().ToList(); // SELECT .. FROM T
+TerantManager<span>.</span>Current <span>=</span> <span>0</span><span>;</span>
+fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>T<span>></span></span></span><span>(</span><span>)</span><span>.</span><span>ToList</span><span>(</span><span>)</span><span>;</span> <span>// SELECT .. FROM T</span>
 
-TerantManager.Current = 1;
-fsql.Select&lt;T&gt;().ToList(); // SELECT .. FROM T WHERE TerantId = 1
+TerantManager<span>.</span>Current <span>=</span> <span>1</span><span>;</span>
+fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>T<span>></span></span></span><span>(</span><span>)</span><span>.</span><span>ToList</span><span>(</span><span>)</span><span>;</span> <span>// SELECT .. FROM T WHERE TerantId = 1</span>
 </code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br><span>10</span><br><span>11</span><br><span>12</span><br><span>13</span><br></div></div><p>第3步：FreeSql Aop.AuditValue 对象审计事件，实现统一拦截插入、更新实体对象；</p>
-<div><pre><code>fsql.Aop.AuditValue += (_, e) =&gt;
-{
-    if (TerantManager.Current &gt; 0 &amp;&amp; e.Property.PropertyType == typeof(int) &amp;&amp; e.Property.Name == &quot;TerantId&quot;)
-    {
-        e.Value = TerantManager.Current
-    }
-};
+<div><pre><code>fsql<span>.</span>Aop<span>.</span>AuditValue <span>+=</span> <span>(</span>_<span>,</span> e<span>)</span> <span>=></span>
+<span>{</span>
+    <span>if</span> <span>(</span>TerantManager<span>.</span>Current <span>></span> <span>0</span> <span>&amp;&amp;</span> e<span>.</span>Property<span>.</span>PropertyType <span>==</span> <span>typeof</span><span>(</span><span><span>int</span></span><span>)</span> <span>&amp;&amp;</span> e<span>.</span>Property<span>.</span>Name <span>==</span> <span>"TerantId"</span><span>)</span>
+    <span>{</span>
+        e<span>.</span>Value <span>=</span> TerantManager<span>.</span>Current
+    <span>}</span>
+<span>}</span><span>;</span>
 </code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br></div></div><p>第4步：AspnetCore Startup.cs Configure 中间件处理租户逻辑；</p>
-<div><pre><code>public void Configure(IApplicationBuilder app)
-{
-    app.Use(async (context, next) =&gt;
-    {
-        try
-        {
-            // 使用者通过 aspnetcore 中间件，解析 token 获得 租户ID
-            TerantManager.Current = YourGetTerantIdFunction();
-            await next();
-        }
-        finally
-        {
-            // 清除租户状态
-            TerantManager.Current = 0;
-        }
-    });
-    app.UseRouting();
-    app.UseEndpoints(a =&gt; a.MapControllers());
-}
+<div><pre><code><span>public</span> <span><span>void</span></span> <span>Configure</span><span>(</span><span>IApplicationBuilder</span> app<span>)</span>
+<span>{</span>
+    app<span>.</span><span>Use</span><span>(</span><span>async</span> <span>(</span>context<span>,</span> next<span>)</span> <span>=></span>
+    <span>{</span>
+        <span>try</span>
+        <span>{</span>
+            <span>// 使用者通过 aspnetcore 中间件，解析 token 获得 租户ID</span>
+            TerantManager<span>.</span>Current <span>=</span> <span>YourGetTerantIdFunction</span><span>(</span><span>)</span><span>;</span>
+            <span>await</span> <span>next</span><span>(</span><span>)</span><span>;</span>
+        <span>}</span>
+        <span>finally</span>
+        <span>{</span>
+            <span>// 清除租户状态</span>
+            TerantManager<span>.</span>Current <span>=</span> <span>0</span><span>;</span>
+        <span>}</span>
+    <span>}</span><span>)</span><span>;</span>
+    app<span>.</span><span>UseRouting</span><span>(</span><span>)</span><span>;</span>
+    app<span>.</span><span>UseEndpoints</span><span>(</span>a <span>=></span> a<span>.</span><span>MapControllers</span><span>(</span><span>)</span><span>)</span><span>;</span>
+<span>}</span>
 </code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br><span>10</span><br><span>11</span><br><span>12</span><br><span>13</span><br><span>14</span><br><span>15</span><br><span>16</span><br><span>17</span><br><span>18</span><br><span>19</span><br></div></div><h3 id="wherecascade" tabindex="-1"> WhereCascade</h3>
 <p>多表查询时，像 isdeleted 每个表都给条件，挺麻烦的。WhereCascade 使用后生成 sql 时，所有表都附上这个条件。多表租户条件也可以这样解决。</p>
 <p>如：</p>
@@ -7657,7 +7657,7 @@ fsql.Select&lt;T&gt;().ToList(); // SELECT .. FROM T WHERE TerantId = 1
 <li>创建表 fsql.CodeFirst.SyncStructure(typeof(Goods), &quot;Goods_1&quot;)</li>
 <li>操作表 CURD</li>
 </ul>
-<div><pre><code>var goodsRepository = fsql.GetRepository&lt;Goods&gt;(null, old =&gt; $&quot;{Goods}_{TerantManager.Current}&quot;);
+<div><pre><code><span><span>var</span></span> goodsRepository <span>=</span> fsql<span>.</span><span><span>GetRepository</span><span><span>&lt;</span>Goods<span>></span></span></span><span>(</span><span>null</span><span>,</span> old <span>=></span> <span><span>$"</span><span><span>{</span><span>Goods</span><span>}</span></span><span>_</span><span><span>{</span><span>TerantManager<span>.</span>Current</span><span>}</span></span><span>"</span></span><span>)</span><span>;</span>
 </code></pre><div aria-hidden="true"><span>1</span><br></div></div><p>上面我们得到一个仓储按租户分表，使用它 CURD 最终会操作 Goods_1 表。</p>
 <blockquote>
 <p>更多说明参考：<a href="/guide/repository.html">《FreeSql.Repository 仓储》</a>、<a href="/guide/sharding.html">《分表分库》</a>。</p>
@@ -7676,63 +7676,63 @@ fsql.Select&lt;T&gt;().ToList(); // SELECT .. FROM T WHERE TerantId = 1
 <blockquote>
 <p>Install-Package FreeSql.Cloud</p>
 </blockquote>
-<div><pre><code>FreeSqlCloud&lt;string&gt; fsql = new FreeSqlCloud&lt;string&gt;();
+<div><pre><code><span>FreeSqlCloud<span>&lt;</span><span>string</span><span>></span></span> fsql <span>=</span> <span>new</span> <span>FreeSqlCloud<span>&lt;</span><span>string</span><span>></span></span><span>(</span><span>)</span><span>;</span>
 
-public void ConfigureServices(IServiceCollection services)
-{
-    fsql.DistributeTrace = log =&gt; Console.WriteLine(log.Split('\n')[0].Trim());
-    fsql.Register(&quot;main&quot;, () =&gt;
-    {
-        var db = new FreeSqlBuilder().UseConnectionString(DataType.SqlServer, &quot;data source=main.db&quot;).Build();
-        //db.Aop.CommandAfter += ...
-        return db;
-    });
+<span>public</span> <span><span>void</span></span> <span>ConfigureServices</span><span>(</span><span>IServiceCollection</span> services<span>)</span>
+<span>{</span>
+    fsql<span>.</span>DistributeTrace <span>=</span> log <span>=></span> Console<span>.</span><span>WriteLine</span><span>(</span>log<span>.</span><span>Split</span><span>(</span><span>'\n'</span><span>)</span><span>[</span><span>0</span><span>]</span><span>.</span><span>Trim</span><span>(</span><span>)</span><span>)</span><span>;</span>
+    fsql<span>.</span><span>Register</span><span>(</span><span>"main"</span><span>,</span> <span>(</span><span>)</span> <span>=></span>
+    <span>{</span>
+        <span><span>var</span></span> db <span>=</span> <span>new</span> <span>FreeSqlBuilder</span><span>(</span><span>)</span><span>.</span><span>UseConnectionString</span><span>(</span>DataType<span>.</span>SqlServer<span>,</span> <span>"data source=main.db"</span><span>)</span><span>.</span><span>Build</span><span>(</span><span>)</span><span>;</span>
+        <span>//db.Aop.CommandAfter += ...</span>
+        <span>return</span> db<span>;</span>
+    <span>}</span><span>)</span><span>;</span>
 
-    services.AddSingleton&lt;IFreeSql&gt;(fsql);
-    services.AddControllers();
-}
+    services<span>.</span><span><span>AddSingleton</span><span><span>&lt;</span>IFreeSql<span>></span></span></span><span>(</span>fsql<span>)</span><span>;</span>
+    services<span>.</span><span>AddControllers</span><span>(</span><span>)</span><span>;</span>
+<span>}</span>
 
-public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
-{
-    app.Use(async (context, next) =&gt;
-    {
-        try
-        {
-            // 使用者通过 aspnetcore 中间件，解析 token，查询  main 库得到租户信息。
-            (string terant, string connectionString) = YourGetTerantFunction();
+<span>public</span> <span><span>void</span></span> <span>Configure</span><span>(</span><span>IApplicationBuilder</span> app<span>,</span> <span>IWebHostEnvironment</span> env<span>)</span>
+<span>{</span>
+    app<span>.</span><span>Use</span><span>(</span><span>async</span> <span>(</span>context<span>,</span> next<span>)</span> <span>=></span>
+    <span>{</span>
+        <span>try</span>
+        <span>{</span>
+            <span>// 使用者通过 aspnetcore 中间件，解析 token，查询  main 库得到租户信息。</span>
+            <span>(</span><span><span>string</span></span> terant<span>,</span> <span><span>string</span></span> connectionString<span>)</span> <span>=</span> <span>YourGetTerantFunction</span><span>(</span><span>)</span><span>;</span>
 
-            // 只会首次注册，如果已经注册过则不生效
-            fsql.Register(terant, () =&gt;
-            {
-                var db = new FreeSqlBuilder().UseConnectionString(DataType.SqlServer, connectionString).Build();
-                //db.Aop.CommandAfter += ...
-                return db;
-            });
+            <span>// 只会首次注册，如果已经注册过则不生效</span>
+            fsql<span>.</span><span>Register</span><span>(</span>terant<span>,</span> <span>(</span><span>)</span> <span>=></span>
+            <span>{</span>
+                <span><span>var</span></span> db <span>=</span> <span>new</span> <span>FreeSqlBuilder</span><span>(</span><span>)</span><span>.</span><span>UseConnectionString</span><span>(</span>DataType<span>.</span>SqlServer<span>,</span> connectionString<span>)</span><span>.</span><span>Build</span><span>(</span><span>)</span><span>;</span>
+                <span>//db.Aop.CommandAfter += ...</span>
+                <span>return</span> db<span>;</span>
+            <span>}</span><span>)</span><span>;</span>
 
-            // 切换租户
-            fsql.Change(terant);
-            await next();
-        }
-        finally
-        {
-            // 切换回 main 库
-            fsql.Change(&quot;main&quot;);
-        }
-    });
-    app.UseRouting();
-    app.UseEndpoints(a =&gt; a.MapControllers());
-}
+            <span>// 切换租户</span>
+            fsql<span>.</span><span>Change</span><span>(</span>terant<span>)</span><span>;</span>
+            <span>await</span> <span>next</span><span>(</span><span>)</span><span>;</span>
+        <span>}</span>
+        <span>finally</span>
+        <span>{</span>
+            <span>// 切换回 main 库</span>
+            fsql<span>.</span><span>Change</span><span>(</span><span>"main"</span><span>)</span><span>;</span>
+        <span>}</span>
+    <span>}</span><span>)</span><span>;</span>
+    app<span>.</span><span>UseRouting</span><span>(</span><span>)</span><span>;</span>
+    app<span>.</span><span>UseEndpoints</span><span>(</span>a <span>=></span> a<span>.</span><span>MapControllers</span><span>(</span><span>)</span><span>)</span><span>;</span>
+<span>}</span>
 </code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br><span>10</span><br><span>11</span><br><span>12</span><br><span>13</span><br><span>14</span><br><span>15</span><br><span>16</span><br><span>17</span><br><span>18</span><br><span>19</span><br><span>20</span><br><span>21</span><br><span>22</span><br><span>23</span><br><span>24</span><br><span>25</span><br><span>26</span><br><span>27</span><br><span>28</span><br><span>29</span><br><span>30</span><br><span>31</span><br><span>32</span><br><span>33</span><br><span>34</span><br><span>35</span><br><span>36</span><br><span>37</span><br><span>38</span><br><span>39</span><br><span>40</span><br><span>41</span><br><span>42</span><br><span>43</span><br><span>44</span><br><span>45</span><br><span>46</span><br></div></div><p>第2步：直接使用 IFreeSql 访问租户数据库</p>
-<div><pre><code>public class HomeController : ControllerBase
-{
+<div><pre><code><span>public</span> <span>class</span> <span>HomeController</span> <span>:</span> <span><span>ControllerBase</span></span>
+<span>{</span>
 
-    [HttpGet]
-    public object Get([FromServices] IFreeSql fsql)
-    {
-        // 使用 fsql 操作当前租户对应的数据库
-        return &quot;&quot;;
-    }
-}
+    <span>[</span><span><span>HttpGet</span></span><span>]</span>
+    <span>public</span> <span><span>object</span></span> <span>Get</span><span>(</span><span>[</span><span><span>FromServices</span></span><span>]</span> <span>IFreeSql</span> fsql<span>)</span>
+    <span>{</span>
+        <span>// 使用 fsql 操作当前租户对应的数据库</span>
+        <span>return</span> <span>""</span><span>;</span>
+    <span>}</span>
+<span>}</span>
 </code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br><span>10</span><br></div></div>]]></content>
     <published>2021-02-04T16:03:18.000Z</published>
   </entry>
