@@ -3,7 +3,7 @@
   <id>http://freesql.net/en/</id>
   <title>FreeSql Documents</title>
   <subtitle>FreeSql Documents</subtitle>
-  <updated>2022-08-09T06:24:26.204Z</updated>
+  <updated>2022-08-09T08:06:07.606Z</updated>
   <generator>vuepress-plugin-feed2</generator>
   <link rel="self" href="http://freesql.net/atom.xml"/>
   <link rel="alternate" href="http://freesql.net/en/"/>
@@ -726,7 +726,7 @@ dto<span>.</span><span>IncludeMany</span><span>(</span>fsql<span>,</span> d <spa
     <title type="html">Group Aggregation Query</title>
     <id>http://freesql.net/en/guide/Group-Aggregation-Query.html</id>
     <link href="http://freesql.net/en/guide/Group-Aggregation-Query.html"/>
-    <updated>2022-05-31T14:08:53.000Z</updated>
+    <updated>2022-08-09T08:03:53.000Z</updated>
     <content type="html"><![CDATA[<h1 id="group-aggregation-query" tabindex="-1"> Group Aggregation Query</h1>
 <div><pre><code><span>static</span> <span>IFreeSql</span> fsql <span>=</span> <span>new</span> <span>FreeSql<span>.</span>FreeSqlBuilder</span><span>(</span><span>)</span>
     <span>.</span><span>UseConnectionString</span><span>(</span>FreeSql<span>.</span>DataType<span>.</span>MySql<span>,</span> connectionString<span>)</span>
@@ -786,10 +786,21 @@ dto<span>.</span><span>IncludeMany</span><span>(</span>fsql<span>,</span> d <spa
 <li><code>g.Value.Item3</code> corresponds to <code>Area</code></li>
 </ul>
 <h2 id="aggregate" tabindex="-1"> Aggregate</h2>
+<ul>
+<li>distinct</li>
+</ul>
 <div><pre><code><span><span>var</span></span> list <span>=</span> fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>Topic<span>></span></span></span><span>(</span><span>)</span>
     <span>.</span><span>Aggregate</span><span>(</span>a <span>=></span> Convert<span>.</span><span>ToInt32</span><span>(</span><span>"count(distinct title)"</span><span>)</span><span>,</span> <span>out</span> <span><span>var</span></span> count<span>)</span>
     <span>.</span><span>ToList</span><span>(</span><span>)</span><span>;</span>
-</code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br></div></div><h2 id="api" tabindex="-1"> API</h2>
+</code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br></div></div><ul>
+<li>SqlExt.DistinctCount</li>
+</ul>
+<div><pre><code>fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>Topic<span>></span></span></span><span>(</span><span>)</span>
+    <span>.</span><span>Aggregate</span><span>(</span>a <span>=></span> SqlExt<span>.</span><span>DistinctCount</span><span>(</span>a<span>.</span>Key<span>.</span>Title<span>)</span><span>,</span> <span>out</span> <span><span>var</span></span> count<span>)</span><span>;</span>
+</code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br></div></div><blockquote>
+<p>SELECT count(distinct a.&quot;title&quot;) as1 FROM &quot;Topic&quot; a</p>
+</blockquote>
+<h2 id="api" tabindex="-1"> API</h2>
 <table>
 <thead>
 <tr>

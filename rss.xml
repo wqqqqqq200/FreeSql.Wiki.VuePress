@@ -6,8 +6,8 @@
     <link>http://freesql.net/</link>
     <description>FreeSql Documents</description>
     <language>zh-CN</language>
-    <pubDate>Tue, 09 Aug 2022 06:24:26 GMT</pubDate>
-    <lastBuildDate>Tue, 09 Aug 2022 06:24:26 GMT</lastBuildDate>
+    <pubDate>Tue, 09 Aug 2022 08:06:07 GMT</pubDate>
+    <lastBuildDate>Tue, 09 Aug 2022 08:06:07 GMT</lastBuildDate>
     <generator>vuepress-plugin-feed2</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
     <item>
@@ -6815,10 +6815,11 @@ fsql<span>.</span><span>InsertDict</span><span>(</span>dic<span>)</span><span>.<
       <content:encoded><![CDATA[<h1 id="安装" tabindex="-1"> 安装</h1>
 <h2 id="版本" tabindex="-1"> 版本</h2>
 <p>FreeSql 是一个 .NET Standard 2.0 库，仅支持 .NET Framework 4.0 或 .NET Core 或更高版本的应用程序。</p>
-<h2 id="安装-1" tabindex="-1"> 安装</h2>
+<h2 id="安装包" tabindex="-1"> 安装包</h2>
 <div><pre><code>dotnet <span>add</span> package FreeSql
+dotnet <span>add</span> package FreeSql.DbContext
 dotnet <span>add</span> package FreeSql.Provider.Sqlite
-</code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br></div></div><p>需要访问什么数据库，就安装对应的Provider.XX类库，也可直接安装FreeSql.All</p>
+</code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br></div></div><p>需要访问什么数据库，就安装对应的Provider.XX类库，也可直接安装FreeSql.All</p>
 <div><pre><code>dotnet <span>add</span> package FreeSql.All
 </code></pre><div aria-hidden="true"><span>1</span><br></div></div><h2 id="packages" tabindex="-1"> Packages</h2>
 <table>
