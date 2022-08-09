@@ -3,7 +3,7 @@
   <id>http://freesql.net/</id>
   <title>FreeSql 官方文档</title>
   <subtitle>FreeSql Documents</subtitle>
-  <updated>2022-08-09T08:06:07.605Z</updated>
+  <updated>2022-08-09T12:12:26.486Z</updated>
   <generator>vuepress-plugin-feed2</generator>
   <link rel="self" href="http://freesql.net/atom.xml"/>
   <link rel="alternate" href="http://freesql.net/"/>
@@ -1270,15 +1270,16 @@ fsql<span>.</span><span><span>Delete</span><span><span>&lt;</span>T<span>></span
     <title type="html">FreeSql.Provider.SqliteCore</title>
     <id>http://freesql.net/guide/freesql-provider-sqlitecore.html</id>
     <link href="http://freesql.net/guide/freesql-provider-sqlitecore.html"/>
-    <updated>2022-07-26T04:21:13.000Z</updated>
+    <updated>2022-08-09T12:11:04.000Z</updated>
     <content type="html"><![CDATA[<h1 id="freesql-provider-sqlitecore" tabindex="-1"> FreeSql.Provider.SqliteCore</h1>
 <p>FreeSql.Provider.SqliteCore是<code>FreeSql</code>基于微软提供的最新的<a href="https://docs.microsoft.com/zh-cn/dotnet/standard/data/sqlite/?tabs=netcore-cli" target="_blank" rel="noopener noreferrer"><code>Microsoft.Data.Sqlite.Core</code></a>驱动的实现。
 <strong>需要另外安装对应的bundle_xxx</strong>实现加密。</p>
 <h2 id="支持的版本" tabindex="-1"> 支持的版本</h2>
 <ul>
-<li>.NETStandard2.0（支持.NET Framework4.6.1+）</li>
+<li>.NET Standard 2.0（支持.NET Framework4.6.1+/支持.NET Core 2.0+）</li>
 <li>net6.0</li>
 <li>SQLite（3.7 及以上版本）</li>
+<li>Linux ARM/X86/MAUI Android/MAUI iOS等</li>
 </ul>
 <p>安装<code>FreeSql.Provider.SqliteCore</code>包。</p>
 <div><pre><code>dotnet add package FreeSql.Provider.SqliteCore

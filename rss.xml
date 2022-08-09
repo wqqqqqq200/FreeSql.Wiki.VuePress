@@ -6,8 +6,8 @@
     <link>http://freesql.net/</link>
     <description>FreeSql Documents</description>
     <language>zh-CN</language>
-    <pubDate>Tue, 09 Aug 2022 08:06:07 GMT</pubDate>
-    <lastBuildDate>Tue, 09 Aug 2022 08:06:07 GMT</lastBuildDate>
+    <pubDate>Tue, 09 Aug 2022 12:12:26 GMT</pubDate>
+    <lastBuildDate>Tue, 09 Aug 2022 12:12:26 GMT</lastBuildDate>
     <generator>vuepress-plugin-feed2</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
     <item>
@@ -1280,9 +1280,10 @@ fsql<span>.</span><span><span>Delete</span><span><span>&lt;</span>T<span>></span
 <strong>需要另外安装对应的bundle_xxx</strong>实现加密。</p>
 <h2 id="支持的版本" tabindex="-1"> 支持的版本</h2>
 <ul>
-<li>.NETStandard2.0（支持.NET Framework4.6.1+）</li>
+<li>.NET Standard 2.0（支持.NET Framework4.6.1+/支持.NET Core 2.0+）</li>
 <li>net6.0</li>
 <li>SQLite（3.7 及以上版本）</li>
+<li>Linux ARM/X86/MAUI Android/MAUI iOS等</li>
 </ul>
 <p>安装<code>FreeSql.Provider.SqliteCore</code>包。</p>
 <div><pre><code>dotnet add package FreeSql.Provider.SqliteCore
