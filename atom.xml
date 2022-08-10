@@ -3,7 +3,7 @@
   <id>http://freesql.net/</id>
   <title>FreeSql 官方文档</title>
   <subtitle>FreeSql Documents</subtitle>
-  <updated>2022-08-10T00:00:06.742Z</updated>
+  <updated>2022-08-10T00:07:19.570Z</updated>
   <generator>vuepress-plugin-feed2</generator>
   <link rel="self" href="http://freesql.net/atom.xml"/>
   <link rel="alternate" href="http://freesql.net/"/>
@@ -98,7 +98,7 @@ repo<span>.</span><span>Delete</span><span>(</span>groups<span>)</span><span>;</
     <title type="html">嵌套查询</title>
     <id>http://freesql.net/guide/withtempquery.html</id>
     <link href="http://freesql.net/guide/withtempquery.html"/>
-    <updated>2022-08-05T07:32:05.000Z</updated>
+    <updated>2022-08-10T00:05:58.000Z</updated>
     <content type="html"><![CDATA[<h1 id="嵌套查询" tabindex="-1"> 嵌套查询</h1>
 <h2 id="withtempquery" tabindex="-1"> WithTempQuery</h2>
 <p>意见往集：<a href="https://github.com/dotnetcore/FreeSql/discussions/1192" target="_blank" rel="noopener noreferrer">https://github.com/dotnetcore/FreeSql/discussions/1192</a></p>
@@ -123,6 +123,21 @@ repo<span>.</span><span>Delete</span><span>(</span>groups<span>)</span><span>;</
     <span>WHERE</span> a<span>.</span><span>[</span>Id<span>]</span> <span>&lt;</span> <span>1000</span>
 <span>)</span> a
 <span>WHERE</span> <span>(</span>a<span>.</span><span>[</span>rownum<span>]</span> <span>=</span> <span>1</span><span>)</span>
+</code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br></div></div><p>如果数据库不支持开窗函数，可以使用分组嵌套查询解决：</p>
+<div><pre><code>fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>User1<span>></span></span></span><span>(</span><span>)</span>
+    <span>.</span><span>Where</span><span>(</span>a <span>=></span> a<span>.</span>Id <span>&lt;</span> <span>1000</span><span>)</span>
+    <span>.</span><span>GroupBy</span><span>(</span>a <span>=></span> a<span>.</span>Nickname<span>)</span>
+    <span>.</span><span>WithTempQuery</span><span>(</span>g <span>=></span> <span>new</span> <span>{</span> min <span>=</span> g<span>.</span><span>Min</span><span>(</span>g<span>.</span>Value<span>.</span>Id<span>)</span> <span>}</span><span>)</span>
+    <span>.</span><span><span>From</span><span><span>&lt;</span>User1<span>></span></span></span><span>(</span><span>)</span>
+    <span>.</span><span>InnerJoin</span><span>(</span><span>(</span>a<span>,</span> b<span>)</span> <span>=></span> a<span>.</span>min <span>==</span> b<span>.</span>Id<span>)</span>
+    <span>.</span><span>ToList</span><span>(</span><span>(</span>a<span>,</span> b<span>)</span> <span>=></span> b<span>)</span><span>;</span>
+</code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br></div></div><div><pre><code><span>SELECT</span> b<span>.</span><span>[</span>Id<span>]</span><span>,</span> b<span>.</span><span>[</span>Nickname<span>]</span> 
+<span>FROM</span> <span>(</span> 
+    <span>SELECT</span> <span>min</span><span>(</span>a<span>.</span><span>[</span>Id<span>]</span><span>)</span> <span>[</span>min<span>]</span> 
+    <span>FROM</span> <span>[</span>User1<span>]</span> a 
+    <span>WHERE</span> a<span>.</span><span>[</span>Id<span>]</span> <span>&lt;</span> <span>1000</span> 
+    <span>GROUP</span> <span>BY</span> a<span>.</span><span>[</span>Nickname<span>]</span> <span>)</span> a 
+<span>INNER</span> <span>JOIN</span> <span>[</span>User1<span>]</span> b <span>ON</span> a<span>.</span><span>[</span>min<span>]</span> <span>=</span> b<span>.</span><span>[</span>Id<span>]</span>
 </code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br></div></div><h2 id="场景2-嵌套查询-join" tabindex="-1"> 场景2：嵌套查询 + Join</h2>
 <p>WithTempQuery + From&lt;T2&gt; 或 FromQuery(ISelect&lt;T2&gt;) 可实现无限联表</p>
 <div><pre><code>fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>User1<span>></span></span></span><span>(</span><span>)</span>

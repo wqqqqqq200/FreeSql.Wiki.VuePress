@@ -6,8 +6,8 @@
     <link>http://freesql.net/</link>
     <description>FreeSql Documents</description>
     <language>zh-CN</language>
-    <pubDate>Wed, 10 Aug 2022 00:00:06 GMT</pubDate>
-    <lastBuildDate>Wed, 10 Aug 2022 00:00:06 GMT</lastBuildDate>
+    <pubDate>Wed, 10 Aug 2022 00:07:19 GMT</pubDate>
+    <lastBuildDate>Wed, 10 Aug 2022 00:07:19 GMT</lastBuildDate>
     <generator>vuepress-plugin-feed2</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
     <item>
@@ -127,6 +127,21 @@ repo<span>.</span><span>Delete</span><span>(</span>groups<span>)</span><span>;</
     <span>WHERE</span> a<span>.</span><span>[</span>Id<span>]</span> <span>&lt;</span> <span>1000</span>
 <span>)</span> a
 <span>WHERE</span> <span>(</span>a<span>.</span><span>[</span>rownum<span>]</span> <span>=</span> <span>1</span><span>)</span>
+</code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br></div></div><p>如果数据库不支持开窗函数，可以使用分组嵌套查询解决：</p>
+<div><pre><code>fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>User1<span>></span></span></span><span>(</span><span>)</span>
+    <span>.</span><span>Where</span><span>(</span>a <span>=></span> a<span>.</span>Id <span>&lt;</span> <span>1000</span><span>)</span>
+    <span>.</span><span>GroupBy</span><span>(</span>a <span>=></span> a<span>.</span>Nickname<span>)</span>
+    <span>.</span><span>WithTempQuery</span><span>(</span>g <span>=></span> <span>new</span> <span>{</span> min <span>=</span> g<span>.</span><span>Min</span><span>(</span>g<span>.</span>Value<span>.</span>Id<span>)</span> <span>}</span><span>)</span>
+    <span>.</span><span><span>From</span><span><span>&lt;</span>User1<span>></span></span></span><span>(</span><span>)</span>
+    <span>.</span><span>InnerJoin</span><span>(</span><span>(</span>a<span>,</span> b<span>)</span> <span>=></span> a<span>.</span>min <span>==</span> b<span>.</span>Id<span>)</span>
+    <span>.</span><span>ToList</span><span>(</span><span>(</span>a<span>,</span> b<span>)</span> <span>=></span> b<span>)</span><span>;</span>
+</code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br></div></div><div><pre><code><span>SELECT</span> b<span>.</span><span>[</span>Id<span>]</span><span>,</span> b<span>.</span><span>[</span>Nickname<span>]</span> 
+<span>FROM</span> <span>(</span> 
+    <span>SELECT</span> <span>min</span><span>(</span>a<span>.</span><span>[</span>Id<span>]</span><span>)</span> <span>[</span>min<span>]</span> 
+    <span>FROM</span> <span>[</span>User1<span>]</span> a 
+    <span>WHERE</span> a<span>.</span><span>[</span>Id<span>]</span> <span>&lt;</span> <span>1000</span> 
+    <span>GROUP</span> <span>BY</span> a<span>.</span><span>[</span>Nickname<span>]</span> <span>)</span> a 
+<span>INNER</span> <span>JOIN</span> <span>[</span>User1<span>]</span> b <span>ON</span> a<span>.</span><span>[</span>min<span>]</span> <span>=</span> b<span>.</span><span>[</span>Id<span>]</span>
 </code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br></div></div><h2 id="场景2-嵌套查询-join" tabindex="-1"> 场景2：嵌套查询 + Join</h2>
 <p>WithTempQuery + From&lt;T2&gt; 或 FromQuery(ISelect&lt;T2&gt;) 可实现无限联表</p>
 <div><pre><code>fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>User1<span>></span></span></span><span>(</span><span>)</span>
