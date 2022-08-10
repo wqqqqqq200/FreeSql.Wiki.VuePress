@@ -6,8 +6,8 @@
     <link>http://freesql.net/</link>
     <description>FreeSql Documents</description>
     <language>zh-CN</language>
-    <pubDate>Wed, 10 Aug 2022 00:09:11 GMT</pubDate>
-    <lastBuildDate>Wed, 10 Aug 2022 00:09:11 GMT</lastBuildDate>
+    <pubDate>Wed, 10 Aug 2022 00:36:52 GMT</pubDate>
+    <lastBuildDate>Wed, 10 Aug 2022 00:36:52 GMT</lastBuildDate>
     <generator>vuepress-plugin-feed2</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
     <item>
@@ -9200,7 +9200,7 @@ Assert<span>.</span><span>Equal</span><span>(</span><span>"中国[100000] -> 北
 </code></pre><div aria-hidden="true"><span>1</span><br></div></div><p>IncludeMany 有第二个参数，可以进行二次查询前的修饰工作。</p>
 <div><pre><code><span><span>Select</span><span><span>&lt;</span>Tag<span>></span></span></span><span>(</span><span>)</span><span>.</span><span>IncludeMany</span><span>(</span>a <span>=></span> a<span>.</span>Songs<span>,</span>
     then <span>=></span> then<span>.</span><span>Where</span><span>(</span>song <span>=></span> song<span>.</span>User <span>==</span> <span>"admin"</span><span>)</span><span>)</span><span>.</span><span>ToList</span><span>(</span><span>)</span><span>;</span>
-</code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br></div></div><p>其实在 then 那里，还可以继续进行向下 Include/IncludeMany。只要你喜欢，向下 100 层都没问题。</p>
+</code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br></div></div><p>其实在 then 那里，还可以继续进行向下 Include/IncludeMany。只要你喜欢，向下 100 层也没问题。</p>
 <h2 id="_3、变异" tabindex="-1"> 3、变异</h2>
 <p>没有配置导航关系，也可以贪婪加载。</p>
 <div><pre><code><span><span>Select</span><span><span>&lt;</span>Tag<span>></span></span></span><span>(</span><span>)</span><span>.</span><span>IncludeMany</span><span>(</span>a <span>=></span> a<span>.</span>TestManys<span>.</span><span>Where</span><span>(</span>b <span>=></span> b<span>.</span>TagId <span>==</span> a<span>.</span>Id<span>)</span><span>)</span><span>;</span>
