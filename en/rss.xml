@@ -6,8 +6,8 @@
     <link>http://freesql.net/en/</link>
     <description>FreeSql Documents</description>
     <language>en-US</language>
-    <pubDate>Wed, 10 Aug 2022 03:56:03 GMT</pubDate>
-    <lastBuildDate>Wed, 10 Aug 2022 03:56:03 GMT</lastBuildDate>
+    <pubDate>Wed, 10 Aug 2022 12:05:41 GMT</pubDate>
+    <lastBuildDate>Wed, 10 Aug 2022 12:05:41 GMT</lastBuildDate>
     <generator>vuepress-plugin-feed2</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
     <item>
@@ -4079,25 +4079,33 @@ Install-Package FreeSql.Provider.Sqlite
 <CodeGroupItem title=".NET Core 5">
 <div><pre><code><span>public</span> <span><span>void</span></span> <span>ConfigureServices</span><span>(</span><span>IServiceCollection</span> services<span>)</span>
 <span>{</span>
-    <span>IFreeSql</span> fsql <span>=</span> <span>new</span> <span>FreeSql<span>.</span>FreeSqlBuilder</span><span>(</span><span>)</span>
-      <span>.</span><span>UseConnectionString</span><span>(</span>FreeSql<span>.</span>DataType<span>.</span>Sqlite<span>,</span> <span>@"Data Source=db1.db"</span><span>)</span>
-      <span>.</span><span>UseAutoSyncStructure</span><span>(</span><span>true</span><span>)</span>      
-      <span>//Automatically synchronize the entity structure to the database.</span>
-      <span>//FreeSql will not scan the assembly, and will generate a table if and only when the CRUD instruction is executed.</span>
-      <span>.</span><span>Build</span><span>(</span><span>)</span><span>;</span>
-    services<span>.</span><span><span>AddSingleton</span><span><span>&lt;</span>IFreeSql<span>></span></span></span><span>(</span>fsql<span>)</span><span>;</span>
+    <span>Func<span>&lt;</span>IServiceProvider<span>,</span> IFreeSql<span>></span></span> implementationFreeSql <span>=</span> r <span>=></span>
+    <span>{</span>
+        <span>IFreeSql</span> fsql <span>=</span> <span>new</span> <span>FreeSql<span>.</span>FreeSqlBuilder</span><span>(</span><span>)</span>
+        <span>.</span><span>UseConnectionString</span><span>(</span>FreeSql<span>.</span>DataType<span>.</span>Sqlite<span>,</span> <span>@"Data Source=db1.db"</span><span>)</span>
+        <span>.</span><span>UseAutoSyncStructure</span><span>(</span><span>true</span><span>)</span>      
+        <span>//Automatically synchronize the entity structure to the database.</span>
+        <span>//FreeSql will not scan the assembly, and will generate a table if and only when the CRUD instruction is executed.</span>
+        <span>.</span><span>Build</span><span>(</span><span>)</span><span>;</span>
+        <span>return</span> fsql<span>;</span>
+    <span>}</span><span>;</span>
+    services<span>.</span><span><span>AddSingleton</span><span><span>&lt;</span>IFreeSql<span>></span></span></span><span>(</span>implementationFreeSql<span>)</span><span>;</span>
 <span>}</span>
-</code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br><span>10</span><br></div></div></CodeGroupItem>
+</code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br><span>10</span><br><span>11</span><br><span>12</span><br><span>13</span><br><span>14</span><br></div></div></CodeGroupItem>
 <CodeGroupItem title=".NET 6">
 <div><pre><code><span><span>var</span></span> builder <span>=</span> WebApplication<span>.</span><span>CreateBuilder</span><span>(</span>args<span>)</span><span>;</span>
-<span>IFreeSql</span> fsql <span>=</span> <span>new</span> <span>FreeSql<span>.</span>FreeSqlBuilder</span><span>(</span><span>)</span>
-    <span>.</span><span>UseConnectionString</span><span>(</span>FreeSql<span>.</span>DataType<span>.</span>Sqlite<span>,</span> <span>@"Data Source=db1.db"</span><span>)</span>
-    <span>.</span><span>UseAutoSyncStructure</span><span>(</span><span>true</span><span>)</span> 
-    <span>//Automatically synchronize the entity structure to the database.</span>
-    <span>//FreeSql will not scan the assembly, and will generate a table if and only when the CRUD instruction is executed.</span>
-    <span>.</span><span>Build</span><span>(</span><span>)</span><span>;</span> 
-builder<span>.</span>Services<span>.</span><span><span>AddSingleton</span><span><span>&lt;</span>IFreeSql<span>></span></span></span><span>(</span>fsql<span>)</span><span>;</span>
-</code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br></div></div></CodeGroupItem>
+<span>Func<span>&lt;</span>IServiceProvider<span>,</span> IFreeSql<span>></span></span> implementationFreeSql <span>=</span> r <span>=></span>
+<span>{</span>
+    <span>IFreeSql</span> fsql <span>=</span> <span>new</span> <span>FreeSql<span>.</span>FreeSqlBuilder</span><span>(</span><span>)</span>
+        <span>.</span><span>UseConnectionString</span><span>(</span>FreeSql<span>.</span>DataType<span>.</span>Sqlite<span>,</span> <span>@"Data Source=db1.db"</span><span>)</span>
+        <span>.</span><span>UseAutoSyncStructure</span><span>(</span><span>true</span><span>)</span> 
+        <span>//Automatically synchronize the entity structure to the database.</span>
+        <span>//FreeSql will not scan the assembly, and will generate a table if and only when the CRUD instruction is executed.</span>
+        <span>.</span><span>Build</span><span>(</span><span>)</span><span>;</span>
+    <span>return</span> fsql<span>;</span>
+<span>}</span><span>;</span> 
+builder<span>.</span>Services<span>.</span><span><span>AddSingleton</span><span><span>&lt;</span>IFreeSql<span>></span></span></span><span>(</span>implementationFreeSql<span>)</span><span>;</span>
+</code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br><span>10</span><br><span>11</span><br><span>12</span><br></div></div></CodeGroupItem>
 </CodeGroup>
 <ul>
 <li><a href="https://github.com/dotnetcore/FreeSql/issues/44" target="_blank" rel="noopener noreferrer">.NET Core injects multiple FreeSql instances</a></li>
