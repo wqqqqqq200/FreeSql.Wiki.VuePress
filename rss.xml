@@ -6,8 +6,8 @@
     <link>http://freesql.net/</link>
     <description>FreeSql Documents</description>
     <language>zh-CN</language>
-    <pubDate>Wed, 10 Aug 2022 02:26:29 GMT</pubDate>
-    <lastBuildDate>Wed, 10 Aug 2022 02:26:29 GMT</lastBuildDate>
+    <pubDate>Wed, 10 Aug 2022 02:53:26 GMT</pubDate>
+    <lastBuildDate>Wed, 10 Aug 2022 02:53:26 GMT</lastBuildDate>
     <generator>vuepress-plugin-feed2</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
     <item>
@@ -1114,6 +1114,16 @@ lst<span>.</span><span>Add</span><span>(</span><span>(</span>Guid<span>.</span><
       <content:encoded><![CDATA[
 <p><code>FreeSql.Provider.MySqlConnector</code>是<code>FreeSql</code>基于社区提供的最新的<a href="https://github.com/mysql-net/MySqlConnector" target="_blank" rel="noopener noreferrer"><code>MySqlConnector</code></a>驱动的实现，兼容性、性能都比<code>FreeSql.Provider.MySql</code>好，且支持多种数据库,如：<code>MySQL Server, MariaDB, Percona Server, Amazon Aurora, Azure Database for MySQL, Google Cloud SQL for MySQL</code></p>
 <p>并且支持BulkCopy，<strong>推荐使用</strong></p>
+<p>如果你使用 <code>FreeSql.Provider.MySql</code> 发生了以下错误，请替换到 FreeSql.Provider.MySqlConnector：</p>
+<ul>
+<li>The given key '0' was not present in the dictionary.</li>
+<li>The given key '25653' was not present in the dictionary.</li>
+<li>The given key '26995' was not present in the dictionary.</li>
+<li>The given key '28261 was not present in the dictionary.</li>
+<li>The given key '65535' was not present in the dictionary.</li>
+<li>The type initializer for 'MySql.Data.MySqlClient.Replication.ReplicationManager' threw an exception.</li>
+<li>Parameter '@xxx' must be defined.</li>
+</ul>
 <h2 id="executemysqlbulkcopy" tabindex="-1"> ExecuteMySqlBulkCopy</h2>
 <ul>
 <li>主键无值</li>
