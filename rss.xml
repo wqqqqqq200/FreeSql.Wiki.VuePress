@@ -6,8 +6,8 @@
     <link>http://freesql.net/</link>
     <description>FreeSql Documents</description>
     <language>zh-CN</language>
-    <pubDate>Wed, 10 Aug 2022 01:26:40 GMT</pubDate>
-    <lastBuildDate>Wed, 10 Aug 2022 01:26:40 GMT</lastBuildDate>
+    <pubDate>Wed, 10 Aug 2022 01:27:17 GMT</pubDate>
+    <lastBuildDate>Wed, 10 Aug 2022 01:27:17 GMT</lastBuildDate>
     <generator>vuepress-plugin-feed2</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
     <item>
@@ -1332,7 +1332,7 @@ dotnet <span>add</span> package SQLitePCLRaw.bundle_e_sqlcipher
 </code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br></div></div><ol start="2">
 <li>连接串直接指定Password=xxx即可</li>
 </ol>
-<p>创建一个类<code>g.cs</code>,可直接通过<code>g.sqlite</code>访问到<code>IFreeSql</code>对象</p>
+<p>创建一个类<code>DB.cs</code>,可直接通过<code>DB.sqlite</code>访问到<code>IFreeSql</code>对象</p>
 <div><pre><code><span>public</span> <span>class</span> <span>DB</span>
 <span>{</span>
     <span>static</span> <span>Lazy<span>&lt;</span>IFreeSql<span>></span></span> sqliteLazy <span>=</span> <span>new</span> <span>Lazy<span>&lt;</span>IFreeSql<span>></span></span><span>(</span><span>(</span><span>)</span> <span>=></span>

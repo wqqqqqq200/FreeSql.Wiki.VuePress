@@ -3,7 +3,7 @@
   <id>http://freesql.net/</id>
   <title>FreeSql 官方文档</title>
   <subtitle>FreeSql Documents</subtitle>
-  <updated>2022-08-10T01:26:40.321Z</updated>
+  <updated>2022-08-10T01:27:17.530Z</updated>
   <generator>vuepress-plugin-feed2</generator>
   <link rel="self" href="http://freesql.net/atom.xml"/>
   <link rel="alternate" href="http://freesql.net/"/>
@@ -1285,7 +1285,7 @@ fsql<span>.</span><span><span>Delete</span><span><span>&lt;</span>T<span>></span
     <title type="html">FreeSql.Provider.SqliteCore</title>
     <id>http://freesql.net/guide/freesql-provider-sqlitecore.html</id>
     <link href="http://freesql.net/guide/freesql-provider-sqlitecore.html"/>
-    <updated>2022-08-10T01:25:09.000Z</updated>
+    <updated>2022-08-10T01:25:50.000Z</updated>
     <content type="html"><![CDATA[<h1 id="freesql-provider-sqlitecore" tabindex="-1"> FreeSql.Provider.SqliteCore</h1>
 <p>FreeSql.Provider.SqliteCore是<code>FreeSql</code>基于微软提供的最新的<a href="https://docs.microsoft.com/zh-cn/dotnet/standard/data/sqlite/?tabs=netcore-cli" target="_blank" rel="noopener noreferrer"><code>Microsoft.Data.Sqlite.Core</code></a>驱动的实现。
 <strong>需要另外安装对应的bundle_xxx</strong>实现加密。</p>
@@ -1328,7 +1328,7 @@ dotnet <span>add</span> package SQLitePCLRaw.bundle_e_sqlcipher
 </code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br></div></div><ol start="2">
 <li>连接串直接指定Password=xxx即可</li>
 </ol>
-<p>创建一个类<code>g.cs</code>,可直接通过<code>g.sqlite</code>访问到<code>IFreeSql</code>对象</p>
+<p>创建一个类<code>DB.cs</code>,可直接通过<code>DB.sqlite</code>访问到<code>IFreeSql</code>对象</p>
 <div><pre><code><span>public</span> <span>class</span> <span>DB</span>
 <span>{</span>
     <span>static</span> <span>Lazy<span>&lt;</span>IFreeSql<span>></span></span> sqliteLazy <span>=</span> <span>new</span> <span>Lazy<span>&lt;</span>IFreeSql<span>></span></span><span>(</span><span>(</span><span>)</span> <span>=></span>
