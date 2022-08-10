@@ -6,8 +6,8 @@
     <link>http://freesql.net/</link>
     <description>FreeSql Documents</description>
     <language>zh-CN</language>
-    <pubDate>Wed, 10 Aug 2022 00:07:19 GMT</pubDate>
-    <lastBuildDate>Wed, 10 Aug 2022 00:07:19 GMT</lastBuildDate>
+    <pubDate>Wed, 10 Aug 2022 00:09:11 GMT</pubDate>
+    <lastBuildDate>Wed, 10 Aug 2022 00:09:11 GMT</lastBuildDate>
     <generator>vuepress-plugin-feed2</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
     <item>
@@ -9910,6 +9910,7 @@ fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>Topic<span>></
 <li>分页查询</li>
 <li>单表查询</li>
 <li>多表查询</li>
+<li>嵌套查询</li>
 <li>分组聚合查询</li>
 <li>返回数据</li>
 <li>LinqToSql</li>
