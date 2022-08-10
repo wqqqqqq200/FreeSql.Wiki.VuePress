@@ -3,7 +3,7 @@
   <id>http://freesql.net/</id>
   <title>FreeSql 官方文档</title>
   <subtitle>FreeSql Documents</subtitle>
-  <updated>2022-08-10T12:05:41.774Z</updated>
+  <updated>2022-08-10T15:37:13.486Z</updated>
   <generator>vuepress-plugin-feed2</generator>
   <link rel="self" href="http://freesql.net/atom.xml"/>
   <link rel="alternate" href="http://freesql.net/"/>
@@ -5917,7 +5917,7 @@ fsql<span>.</span>CodeFirst<span>.</span><span><span>Entity</span><span><span>&l
     <title type="html">入门</title>
     <id>http://freesql.net/guide/getting-started.html</id>
     <link href="http://freesql.net/guide/getting-started.html"/>
-    <updated>2022-08-10T12:04:00.000Z</updated>
+    <updated>2022-08-10T15:35:54.000Z</updated>
     <content type="html"><![CDATA[<h1 id="入门" tabindex="-1"> 入门</h1>
 <h2 id="模型" tabindex="-1"> 模型</h2>
 <p><code>FreeSql</code> 使用模型执行数据访问，模型由实体类表示数据库表或视图，用于查询和保存数据。</p>
@@ -5965,7 +5965,17 @@ Install-Package FreeSql.Provider.Sqlite
     <span>}</span><span>;</span>
     services<span>.</span><span><span>AddSingleton</span><span><span>&lt;</span>IFreeSql<span>></span></span></span><span>(</span>implementationFreeSql<span>)</span><span>;</span>
 <span>}</span>
-</code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br><span>10</span><br><span>11</span><br><span>12</span><br></div></div></CodeGroupItem>
+
+<span>public</span> <span><span>void</span></span> <span>Configure</span><span>(</span><span>IApplicationBuilder</span> app<span>,</span> <span>IWebHostEnvironment</span> env<span>)</span>
+<span>{</span>
+    <span>//在项目启动时，从容器中获取IFreeSql实例，并执行一些操作：同步表，种子数据,FluentAPI等</span>
+    <span>using</span><span>(</span><span>IServiceScope</span> serviceScope <span>=</span> app<span>.</span>ApplicationServices<span>.</span><span>CreateScope</span><span>(</span><span>)</span><span>)</span>
+    <span>{</span>
+        <span><span>var</span></span> fsql <span>=</span> serviceScope<span>.</span>ServiceProvider<span>.</span><span><span>GetRequiredService</span><span><span>&lt;</span>IFreeSql<span>></span></span></span><span>(</span><span>)</span><span>;</span>
+        fsql<span>.</span>CodeFirst<span>.</span><span>SyncStructure</span><span>(</span><span>typeof</span><span>(</span><span>Topic</span><span>)</span><span>)</span><span>;</span><span>//Topic 为要同步的实体类</span>
+    <span>}</span>
+<span>}</span>
+</code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br><span>10</span><br><span>11</span><br><span>12</span><br><span>13</span><br><span>14</span><br><span>15</span><br><span>16</span><br><span>17</span><br><span>18</span><br><span>19</span><br><span>20</span><br><span>21</span><br><span>22</span><br></div></div></CodeGroupItem>
 <CodeGroupItem title=".NET 6的Program.cs">
 <div><pre><code><span><span>var</span></span> builder <span>=</span> WebApplication<span>.</span><span>CreateBuilder</span><span>(</span>args<span>)</span><span>;</span>
 <span>Func<span>&lt;</span>IServiceProvider<span>,</span> IFreeSql<span>></span></span> implementationFreeSql <span>=</span> r <span>=></span>
@@ -5977,7 +5987,17 @@ Install-Package FreeSql.Provider.Sqlite
     <span>return</span> fsql<span>;</span>
 <span>}</span><span>;</span>
 builder<span>.</span>Services<span>.</span><span><span>AddSingleton</span><span><span>&lt;</span>IFreeSql<span>></span></span></span><span>(</span>implementationFreeSql<span>)</span><span>;</span>
-</code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br><span>10</span><br></div></div></CodeGroupItem>
+
+
+<span>WebApplication</span> app <span>=</span> builder<span>.</span><span>Build</span><span>(</span><span>)</span><span>;</span>
+
+<span>//在项目启动时，从容器中获取IFreeSql实例，并执行一些操作：同步表，种子数据,FluentAPI等</span>
+<span>using</span><span>(</span><span>IServiceScope</span> serviceScope <span>=</span> app<span>.</span>Services<span>.</span><span>CreateScope</span><span>(</span><span>)</span><span>)</span>
+<span>{</span>
+    <span><span>var</span></span> fsql <span>=</span> serviceScope<span>.</span>ServiceProvider<span>.</span><span><span>GetRequiredService</span><span><span>&lt;</span>IFreeSql<span>></span></span></span><span>(</span><span>)</span><span>;</span>
+    fsql<span>.</span>CodeFirst<span>.</span><span>SyncStructure</span><span>(</span><span>typeof</span><span>(</span><span>Topic</span><span>)</span><span>)</span><span>;</span><span>//Topic 为要同步的实体类</span>
+<span>}</span>
+</code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br><span>10</span><br><span>11</span><br><span>12</span><br><span>13</span><br><span>14</span><br><span>15</span><br><span>16</span><br><span>17</span><br><span>18</span><br><span>19</span><br><span>20</span><br></div></div></CodeGroupItem>
 </CodeGroup>
 <ul>
 <li><a href="/extra/idlebus-freesql.html">.NET Core 注入多个 FreeSql 实例</a></li>
