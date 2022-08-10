@@ -6,8 +6,8 @@
     <link>http://freesql.net/</link>
     <description>FreeSql Documents</description>
     <language>zh-CN</language>
-    <pubDate>Tue, 09 Aug 2022 23:59:46 GMT</pubDate>
-    <lastBuildDate>Tue, 09 Aug 2022 23:59:46 GMT</lastBuildDate>
+    <pubDate>Wed, 10 Aug 2022 00:00:06 GMT</pubDate>
+    <lastBuildDate>Wed, 10 Aug 2022 00:00:06 GMT</lastBuildDate>
     <generator>vuepress-plugin-feed2</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
     <item>
@@ -6692,7 +6692,7 @@ fsql<span>.</span><span>InsertDict</span><span>(</span>dic<span>)</span><span>.<
 <span>FROM</span> <span><span>`</span>Topic<span>`</span></span> a
 <span>limit</span> <span>10</span>
 </code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br></div></div><p>注意：因为 <code>Clicks</code>、<code>CreateTime</code> 没有被选择，所以使用目标实体属性<code>[Column(InsertValueSql = xx)]</code> 设置的值，或者使用目标实体属性的 <code>c#</code>默认值。</p>
-<h2 id="_9、mysql-特有功能-insert-ignore-into" tabindex="-1"> 9、MySql 特有功能 Insert Ignore Into</h2>
+<h2 id="_9、mysql-特有功能-insert-ignore-into" tabindex="-1"> 9、MySql 特有功能 <code>Insert Ignore Into</code></h2>
 <div><pre><code>fsql<span>.</span><span><span>Insert</span><span><span>&lt;</span>Topic<span>></span></span></span><span>(</span><span>)</span><span>.</span><span>MySqlIgnoreInto</span><span>(</span><span>)</span><span>.</span><span>AppendData</span><span>(</span>items<span>)</span><span>.</span><span>ExecuteAffrows</span><span>(</span><span>)</span><span>;</span>
 <span>///INSERT IGNORE INTO `Topic`(`Clicks`)</span>
 <span>//VALUES(?Clicks0), (?Clicks1), (?Clicks2), (?Clicks3), (?Clicks4),</span>
