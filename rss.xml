@@ -6,8 +6,8 @@
     <link>http://freesql.net/</link>
     <description>FreeSql Documents</description>
     <language>zh-CN</language>
-    <pubDate>Wed, 10 Aug 2022 00:36:52 GMT</pubDate>
-    <lastBuildDate>Wed, 10 Aug 2022 00:36:52 GMT</lastBuildDate>
+    <pubDate>Wed, 10 Aug 2022 00:48:42 GMT</pubDate>
+    <lastBuildDate>Wed, 10 Aug 2022 00:48:42 GMT</lastBuildDate>
     <generator>vuepress-plugin-feed2</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
     <item>
@@ -8598,7 +8598,14 @@ item<span>.</span>Title <span>=</span> <span>"newtitle"</span><span>;</span>
 repo<span>.</span><span>Update</span><span>(</span>item<span>)</span><span>;</span> <span>//对比快照时的变化</span>
 <span>//UPDATE `tb_topic` SET `Title` = ?p_0</span>
 <span>//WHERE (`Id` = 1)</span>
-</code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br></div></div><h2 id="过滤与验证" tabindex="-1"> 过滤与验证</h2>
+</code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br></div></div><p>repo.CompareState(item) 可获取 item 的状态变化信息</p>
+<div><pre><code><span>/// <span><span><span>&lt;</span>summary</span><span>></span></span></span>
+<span>/// 比较实体，计算出值发生变化的属性，以及属性变化的前后值</span>
+<span>/// <span><span><span>&lt;/</span>summary</span><span>></span></span></span>
+<span>/// <span><span><span>&lt;</span>param</span> <span>name</span><span><span>=</span><span>"</span>newdata<span>"</span></span><span>></span></span>最新的实体对象，它将与附加实体的状态对比<span><span><span>&lt;/</span>param</span><span>></span></span></span>
+<span>/// <span><span><span>&lt;</span>returns</span><span>></span></span>key: 属性名, value: [旧值, 新值]<span><span><span>&lt;/</span>returns</span><span>></span></span></span>
+<span>Dictionary<span>&lt;</span><span>string</span><span>,</span> <span>object</span><span>[</span><span>]</span><span>></span></span> <span>CompareState</span><span>(</span><span>TEntity</span> newdata<span>)</span><span>;</span>
+</code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br></div></div><h2 id="过滤与验证" tabindex="-1"> 过滤与验证</h2>
 <p>假设我们有 User(用户)、Topic(主题)两个实体，在领域类中定义了两个仓储：</p>
 <div><pre><code><span><span>var</span></span> userRepository <span>=</span> fsql<span>.</span><span><span>GetGuidRepository</span><span><span>&lt;</span>User<span>></span></span></span><span>(</span><span>)</span><span>;</span>
 <span><span>var</span></span> topicRepository <span>=</span> fsql<span>.</span><span><span>GetGuidRepository</span><span><span>&lt;</span>Topic<span>></span></span></span><span>(</span><span>)</span><span>;</span>
