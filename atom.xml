@@ -3,7 +3,7 @@
   <id>http://freesql.net/</id>
   <title>FreeSql 官方文档</title>
   <subtitle>FreeSql Documents</subtitle>
-  <updated>2022-08-10T15:37:13.486Z</updated>
+  <updated>2022-08-11T04:36:33.339Z</updated>
   <generator>vuepress-plugin-feed2</generator>
   <link rel="self" href="http://freesql.net/atom.xml"/>
   <link rel="alternate" href="http://freesql.net/"/>
@@ -1275,11 +1275,11 @@ fsql<span>.</span><span><span>Delete</span><span><span>&lt;</span>T<span>></span
     <title type="html">服务支持</title>
     <id>http://freesql.net/reference/service-support.html</id>
     <link href="http://freesql.net/reference/service-support.html"/>
-    <updated>2022-05-25T15:18:32.000Z</updated>
+    <updated>2022-08-11T04:35:21.000Z</updated>
     <content type="html"><![CDATA[<h1 id="服务支持" tabindex="-1"> 服务支持</h1>
 <h2 id="💻-开源免费" tabindex="-1"> 💻 开源免费</h2>
 <p>FreeSql 采用 MIT 最宽松的开源协议，永久免费开源。任何公司或个人，都可以使用在任何商业项目中。</p>
-<p>QQ 技术群：4336577(满员)、8578575(满员)、52508226(在线)</p>
+<p>QQ 技术群：4336577(满员)、8578575(满员)、52508226(满员)、反馈问题请前往 https://github.com/dotnetcore/FreeSql/issues</p>
 <h2 id="🌳-有偿服务" tabindex="-1"> 🌳 有偿服务</h2>
 <table>
 <thead>
@@ -2538,7 +2538,7 @@ item<span>.</span><span>Restore</span><span>(</span><span>)</span><span>;</span>
     <title type="html">指南</title>
     <id>http://freesql.net/guide/</id>
     <link href="http://freesql.net/guide/"/>
-    <updated>2022-07-30T09:36:26.000Z</updated>
+    <updated>2022-08-11T04:35:15.000Z</updated>
     <content type="html"><![CDATA[<h1 id="指南" tabindex="-1"> 指南</h1>
 <p><a href="https://github.com/dotnetcore" target="_blank" rel="noopener noreferrer"><img src="https://img.shields.io/badge/member project of-NCC-9e20c9.svg" alt="Member project of .NET Core Community" loading="lazy"></a>
 <a href="https://www.nuget.org/packages/FreeSql" target="_blank" rel="noopener noreferrer"><img src="https://img.shields.io/nuget/v/FreeSql.svg?style=flat-square" alt="nuget" loading="lazy"></a>
@@ -2550,7 +2550,7 @@ item<span>.</span><span>Restore</span><span>(</span><span>)</span><span>;</span>
 <p>支持 <code>MySql/SqlServer/PostgreSQL/Oracle/Sqlite/Firebird/ClickHouse/达梦/南大通用GBase/神通/人大金仓/翰高/华为GaussDB/MsAccess</code> 等数据库，以及自定义适配其它数据库。</p>
 <ul>
 <li>
-<p>QQ 群：4336577(已满)、8578575(已满)、<code>52508226(在线)</code></p>
+<p>QQ 群：4336577(已满)、8578575(已满)、52508226(已满)、反馈问题请前往 https://github.com/dotnetcore/FreeSql/issues</p>
 </li>
 <li>
 <p>欢迎微信关注 <strong>dotNET 搬砖队</strong>，分享 .NET Core + FreeSql 相关技术栈</p>
