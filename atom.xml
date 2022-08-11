@@ -3,7 +3,7 @@
   <id>http://freesql.net/</id>
   <title>FreeSql 官方文档</title>
   <subtitle>FreeSql Documents</subtitle>
-  <updated>2022-08-11T04:52:21.478Z</updated>
+  <updated>2022-08-11T04:52:25.933Z</updated>
   <generator>vuepress-plugin-feed2</generator>
   <link rel="self" href="http://freesql.net/atom.xml"/>
   <link rel="alternate" href="http://freesql.net/"/>
@@ -1275,11 +1275,11 @@ fsql<span>.</span><span><span>Delete</span><span><span>&lt;</span>T<span>></span
     <title type="html">服务支持</title>
     <id>http://freesql.net/reference/service-support.html</id>
     <link href="http://freesql.net/reference/service-support.html"/>
-    <updated>2022-08-11T04:51:10.000Z</updated>
+    <updated>2022-08-11T04:35:21.000Z</updated>
     <content type="html"><![CDATA[<h1 id="服务支持" tabindex="-1"> 服务支持</h1>
 <h2 id="💻-开源免费" tabindex="-1"> 💻 开源免费</h2>
 <p>FreeSql 采用 MIT 最宽松的开源协议，永久免费开源。任何公司或个人，都可以使用在任何商业项目中。</p>
-<p>QQ 技术群：4336577(满员)、8578575(满员)、52508226(满员)、反馈问题请前往 <a href="https://github.com/dotnetcore/FreeSql/issues" target="_blank" rel="noopener noreferrer">https://github.com/dotnetcore/FreeSql/issues</a></p>
+<p>QQ 技术群：4336577(满员)、8578575(满员)、52508226(满员)、反馈问题请前往 https://github.com/dotnetcore/FreeSql/issues</p>
 <h2 id="🌳-有偿服务" tabindex="-1"> 🌳 有偿服务</h2>
 <table>
 <thead>

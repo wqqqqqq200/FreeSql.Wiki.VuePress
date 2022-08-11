@@ -6,8 +6,8 @@
     <link>http://freesql.net/</link>
     <description>FreeSql Documents</description>
     <language>zh-CN</language>
-    <pubDate>Thu, 11 Aug 2022 04:52:21 GMT</pubDate>
-    <lastBuildDate>Thu, 11 Aug 2022 04:52:21 GMT</lastBuildDate>
+    <pubDate>Thu, 11 Aug 2022 04:52:25 GMT</pubDate>
+    <lastBuildDate>Thu, 11 Aug 2022 04:52:25 GMT</lastBuildDate>
     <generator>vuepress-plugin-feed2</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
     <item>
@@ -1283,7 +1283,7 @@ fsql<span>.</span><span><span>Delete</span><span><span>&lt;</span>T<span>></span
       <content:encoded><![CDATA[<h1 id="服务支持" tabindex="-1"> 服务支持</h1>
 <h2 id="💻-开源免费" tabindex="-1"> 💻 开源免费</h2>
 <p>FreeSql 采用 MIT 最宽松的开源协议，永久免费开源。任何公司或个人，都可以使用在任何商业项目中。</p>
-<p>QQ 技术群：4336577(满员)、8578575(满员)、52508226(满员)、反馈问题请前往 <a href="https://github.com/dotnetcore/FreeSql/issues" target="_blank" rel="noopener noreferrer">https://github.com/dotnetcore/FreeSql/issues</a></p>
+<p>QQ 技术群：4336577(满员)、8578575(满员)、52508226(满员)、反馈问题请前往 https://github.com/dotnetcore/FreeSql/issues</p>
 <h2 id="🌳-有偿服务" tabindex="-1"> 🌳 有偿服务</h2>
 <table>
 <thead>
