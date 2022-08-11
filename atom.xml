@@ -3,7 +3,7 @@
   <id>http://freesql.net/</id>
   <title>FreeSql 官方文档</title>
   <subtitle>FreeSql Documents</subtitle>
-  <updated>2022-08-11T08:58:28.614Z</updated>
+  <updated>2022-08-11T11:14:24.607Z</updated>
   <generator>vuepress-plugin-feed2</generator>
   <link rel="self" href="http://freesql.net/atom.xml"/>
   <link rel="alternate" href="http://freesql.net/"/>
@@ -1106,9 +1106,9 @@ lst<span>.</span><span>Add</span><span>(</span><span>(</span>Guid<span>.</span><
     <title type="html">MySqlConnector</title>
     <id>http://freesql.net/guide/freesql-provider-mysqlconnector.html</id>
     <link href="http://freesql.net/guide/freesql-provider-mysqlconnector.html"/>
-    <updated>2022-08-10T02:52:11.000Z</updated>
+    <updated>2022-08-11T11:13:06.000Z</updated>
     <content type="html"><![CDATA[
-<p><code>FreeSql.Provider.MySqlConnector</code>是<code>FreeSql</code>基于社区提供的最新的<a href="https://github.com/mysql-net/MySqlConnector" target="_blank" rel="noopener noreferrer"><code>MySqlConnector</code></a>驱动的实现，兼容性、性能都比<code>FreeSql.Provider.MySql</code>好，且支持多种数据库,如：<code>MySQL Server, MariaDB, Percona Server, Amazon Aurora, Azure Database for MySQL, Google Cloud SQL for MySQL</code></p>
+<p><code>FreeSql.Provider.MySqlConnector</code>是<code>FreeSql</code>基于社区提供的最新的<a href="https://github.com/mysql-net/MySqlConnector" target="_blank" rel="noopener noreferrer"><code>MySqlConnector</code></a>驱动的实现，兼容性、性能都比<code>FreeSql.Provider.MySql</code>好，且支持多种数据库，如：<code>MySQL Server, MariaDB, Percona Server, Amazon Aurora, Azure Database for MySQL, Google Cloud SQL for MySQL, OceanBase</code></p>
 <p>并且支持BulkCopy，<strong>推荐使用</strong></p>
 <p>如果你使用 <code>FreeSql.Provider.MySql</code> 发生了以下错误，请替换到 FreeSql.Provider.MySqlConnector：</p>
 <ul>
