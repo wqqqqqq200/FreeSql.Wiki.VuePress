@@ -3,10 +3,159 @@
   <id>http://freesql.net/</id>
   <title>FreeSql 官方文档</title>
   <subtitle>FreeSql Documents</subtitle>
-  <updated>2022-08-11T11:14:24.607Z</updated>
+  <updated>2022-08-11T15:35:29.364Z</updated>
   <generator>vuepress-plugin-feed2</generator>
   <link rel="self" href="http://freesql.net/atom.xml"/>
   <link rel="alternate" href="http://freesql.net/"/>
+  <entry>
+    <title type="html">BaseEntity</title>
+    <id>http://freesql.net/guide/freeSql-extensions-baseentity.html</id>
+    <link href="http://freesql.net/guide/freeSql-extensions-baseentity.html"/>
+    <updated>2022-08-11T15:34:05.000Z</updated>
+    <content type="html"><![CDATA[<h2 id="前言" tabindex="-1"> 前言</h2>
+<p>尝试过 ado.net、dapper、ef，以及Repository仓储，甚至自己还写过生成器工具，以便做常规CRUD操作。</p>
+<p>它们日常操作不方便之处：</p>
+<ul>
+<li>
+<p>每次使用前需要声明，再操作；</p>
+</li>
+<li>
+<p>很多人一个实体类，对应一个操作类（或DAL、DbContext、Repository）；</p>
+</li>
+</ul>
+<p>BaseEntity 是一种极简单的 CodeFirst 开发方式，特别对单表或多表CRUD，利用继承节省了每个实体类的重复属性（创建时间、ID等字段），软件删除等功能，进行 crud 操作时不必时常考虑仓储的使用；</p>
+<p>本文介绍 BaseEntity 一种极简约的 CRUD 操作方法。</p>
+<h2 id="功能特点" tabindex="-1"> 功能特点</h2>
+<ul>
+<li>
+<p>自动迁移实体结构（CodeFirst），到数据库；</p>
+</li>
+<li>
+<p>直接操作实体的方法，进行 CRUD 操作；</p>
+</li>
+<li>
+<p>简化用户定义实体类型，省去主键、常用字段的配置（如CreateTime、UpdateTime）；</p>
+</li>
+<li>
+<p>实现单表、多表查询的软删除逻辑；</p>
+</li>
+</ul>
+<h2 id="声明" tabindex="-1"> 声明</h2>
+<div><pre><code>dotnet <span>add</span> package FreeSql.Extensions.BaseEntity
+dotnet <span>add</span> package FreeSql.Provider.Sqlite
+</code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br></div></div><p>1、定义一个主键 int 并且自增的实体类型，BaseEntity TKey 指定为 int/long 时，会认为主键是自增；</p>
+<div><pre><code><span>public</span> <span>class</span> <span>UserGroup</span> <span>:</span> <span><span>BaseEntity<span>&lt;</span>UserGroup<span>,</span> <span>int</span><span>></span></span></span>
+<span>{</span>
+    <span>public</span> <span><span>string</span></span> GroupName <span>{</span> <span>get</span><span>;</span> <span>set</span><span>;</span> <span>}</span>
+<span>}</span>
+</code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br></div></div><p>如果不想主键是自增键，可以重写属性：</p>
+<div><pre><code><span>public</span> <span>class</span> <span>UserGroup</span> <span>:</span> <span><span>BaseEntity<span>&lt;</span>UserGroup<span>,</span> <span>int</span><span>></span></span></span>
+<span>{</span>
+    <span>[</span><span><span>Column</span><span><span>(</span>IsIdentity <span>=</span> <span>false</span><span>)</span></span></span><span>]</span>
+    <span>public</span> <span>override</span> <span><span>int</span></span> Id <span>{</span> <span>get</span><span>;</span> <span>set</span><span>;</span> <span>}</span>
+    <span>public</span> <span><span>string</span></span> GroupName <span>{</span> <span>get</span><span>;</span> <span>set</span><span>;</span> <span>}</span>
+<span>}</span>
+</code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br></div></div><blockquote>
+<p>有关更多实体的特性配置，请参考资料：<a href="/guide/entity-attribute.html">实体特性</a></p>
+</blockquote>
+<p>2、定义一个主键 Guid 的实体类型，保存数据时会自动产生有序不重复的 Guid 值（不用自己指定 Guid.NewGuid()）；</p>
+<div><pre><code><span>public</span> <span>class</span> <span>User</span> <span>:</span> <span><span>BaseEntity<span>&lt;</span>UserGroup<span>,</span> Guid<span>></span></span></span>
+<span>{</span>
+    <span>public</span> <span><span>string</span></span> UserName <span>{</span> <span>get</span><span>;</span> <span>set</span><span>;</span> <span>}</span>
+<span>}</span>
+</code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br></div></div><h2 id="crud-使用" tabindex="-1"> CRUD 使用</h2>
+<div><pre><code><span>//添加</span>
+<span><span>var</span></span> item <span>=</span> <span>new</span> <span>UserGroup</span> <span>{</span> GroupName <span>=</span> <span>"组一"</span> <span>}</span><span>;</span>
+item<span>.</span><span>Insert</span><span>(</span><span>)</span><span>;</span>
+
+<span>//更新</span>
+item<span>.</span>GroupName <span>=</span> <span>"组二"</span><span>;</span>
+item<span>.</span><span>Update</span><span>(</span><span>)</span><span>;</span>
+
+<span>//添加或更新</span>
+item<span>.</span><span>Save</span><span>(</span><span>)</span><span>;</span>
+
+<span>//软删除</span>
+item<span>.</span><span>Delete</span><span>(</span><span>)</span><span>;</span>
+
+<span>//恢复软删除</span>
+item<span>.</span><span>Restore</span><span>(</span><span>)</span><span>;</span>
+
+<span>//根据主键获取对象</span>
+<span><span>var</span></span> item <span>=</span> UserGroup<span>.</span><span>Find</span><span>(</span><span>1</span><span>)</span><span>;</span>
+
+<span>//查询数据</span>
+<span><span>var</span></span> items <span>=</span> UserGroup<span>.</span><span>Where</span><span>(</span>a <span>=></span> a<span>.</span>Id <span>></span> <span>10</span><span>)</span><span>.</span><span>ToList</span><span>(</span><span>)</span><span>;</span>
+</code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br><span>10</span><br><span>11</span><br><span>12</span><br><span>13</span><br><span>14</span><br><span>15</span><br><span>16</span><br><span>17</span><br><span>18</span><br><span>19</span><br><span>20</span><br><span>21</span><br><span>22</span><br></div></div><p>实体类型.Select 是一个查询对象，使用方法和 FreeSql.ISelect 一样；</p>
+<p>支持多表查询时，软删除条件会附加在每个表中；</p>
+<blockquote>
+<p>有关更多查询方法，请参考资料：<a href="/guide/select.html">查询</a></p>
+</blockquote>
+<h2 id="事务建议" tabindex="-1"> 事务建议</h2>
+<p>1、同线程事务，不支持异步：</p>
+<div><pre><code>fsql<span>.</span><span>Transaction</span><span>(</span><span>(</span><span>)</span> <span>=></span>
+<span>{</span>
+    <span>//todo ...</span>
+<span>}</span><span>)</span>
+```<span>;</span>
+
+<span>2</span>、如果你是异步控
+
+由于 AsyncLocal 平台兼容不好，所以交给外部管理事务。
+
+```csharp
+<span>static</span> <span>AsyncLocal<span>&lt;</span>IUnitOfWork<span>></span></span> _asyncUow <span>=</span> <span>new</span> <span>AsyncLocal<span>&lt;</span>IUnitOfWork<span>></span></span><span>(</span><span>)</span><span>;</span>
+
+BaseEntity<span>.</span><span>Initialization</span><span>(</span>fsql<span>,</span> <span>(</span><span>)</span> <span>=></span> _asyncUow<span>.</span>Value<span>)</span><span>;</span>
+</code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br><span>10</span><br><span>11</span><br><span>12</span><br><span>13</span><br><span>14</span><br></div></div><p>在 Scoped 开始时：_asyncUow.Value = fsql.CreateUnitOfWork(); (也可以使用 UnitOfWorkManager 对象获取 uow)</p>
+<p>在 Scoped 结束时：_asyncUow.Value = null;</p>
+<p>如下：</p>
+<div><pre><code><span>using</span> <span>(</span><span><span>var</span></span> uow <span>=</span> fsql<span>.</span><span>CreateUnitOfWork</span><span>(</span><span>)</span><span>)</span>
+<span>{</span>
+    _asyncUow<span>.</span>Value <span>=</span> uow<span>;</span>
+
+    <span>try</span>
+    <span>{</span>
+        <span>//todo ... BaseEntity 内部 curd 方法保持使用 uow 事务</span>
+    <span>}</span>
+    <span>finally</span>
+    <span>{</span>
+        _asyncUow<span>.</span>Value <span>=</span> <span>null</span><span>;</span>
+    <span>}</span>
+    
+    uow<span>.</span><span>Commit</span><span>(</span><span>)</span><span>;</span>
+<span>}</span>
+</code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br><span>10</span><br><span>11</span><br><span>12</span><br><span>13</span><br><span>14</span><br><span>15</span><br></div></div>]]></content>
+    <published>2022-08-11T15:34:05.000Z</published>
+  </entry>
+  <entry>
+    <title type="html">JsonMap</title>
+    <id>http://freesql.net/guide/freesql-extensions-jsonmap.html</id>
+    <link href="http://freesql.net/guide/freesql-extensions-jsonmap.html"/>
+    <updated>2022-08-11T15:34:05.000Z</updated>
+    <content type="html"><![CDATA[<h1 id="jsonmap" tabindex="-1"> JsonMap</h1>
+<p>FreeSql 扩展包，将值对象映射成 <code>typeof(string)</code>，安装扩展包：</p>
+<div><pre><code>dotnet <span>add</span> package FreeSql.Extensions.JsonMap
+</code></pre><div aria-hidden="true"><span>1</span><br></div></div><div><pre><code>fsql<span>.</span><span>UseJsonMap</span><span>(</span><span>)</span><span>;</span> <span>//开启功能</span>
+
+<span>class</span> <span>TestConfig</span>
+<span>{</span>
+    <span>public</span> <span><span>int</span></span> clicks <span>{</span> <span>get</span><span>;</span> <span>set</span><span>;</span> <span>}</span>
+    <span>public</span> <span><span>string</span></span> title <span>{</span> <span>get</span><span>;</span> <span>set</span><span>;</span> <span>}</span>
+<span>}</span>
+
+<span>[</span><span><span>Table</span><span><span>(</span>Name <span>=</span> <span>"sysconfig"</span><span>)</span></span></span><span>]</span>
+<span>public</span> <span>class</span> <span>S_SysConfig<span>&lt;</span>T<span>></span></span>
+<span>{</span>
+    <span>[</span><span><span>Column</span><span><span>(</span>IsPrimary <span>=</span> <span>true</span><span>)</span></span></span><span>]</span>
+    <span>public</span> <span><span>string</span></span> Name <span>{</span> <span>get</span><span>;</span> <span>set</span><span>;</span> <span>}</span>
+
+    <span>[</span><span><span>JsonMap</span></span><span>]</span>
+    <span>public</span> <span>T</span> Config <span>{</span> <span>get</span><span>;</span> <span>set</span><span>;</span> <span>}</span>
+<span>}</span>
+</code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br><span>10</span><br><span>11</span><br><span>12</span><br><span>13</span><br><span>14</span><br><span>15</span><br><span>16</span><br><span>17</span><br></div></div>]]></content>
+    <published>2022-08-11T15:34:05.000Z</published>
+  </entry>
   <entry>
     <title type="html">级联删除</title>
     <id>http://freesql.net/guide/cascade-delete.html</id>
@@ -1185,7 +1334,7 @@ fsql<span>.</span><span>Insert</span><span>(</span>departments<span>)</span>
     <title type="html">多个 IFreeSql实例，如何注入使用</title>
     <id>http://freesql.net/extra/idlebus-freesql.html</id>
     <link href="http://freesql.net/extra/idlebus-freesql.html"/>
-    <updated>2022-08-11T07:55:24.000Z</updated>
+    <updated>2022-08-11T15:34:05.000Z</updated>
     <content type="html"><![CDATA[<h1 id="多个-ifreesql实例-如何注入使用" tabindex="-1"> 多个 IFreeSql实例，如何注入使用</h1>
 <p>多库切换，动态切库，动态注册数据库</p>
 <h2 id="一、定义多个-ifreesql" tabindex="-1"> 一、定义多个 IFreeSql</h2>
@@ -1267,31 +1416,31 @@ fsql<span>.</span><span><span>Delete</span><span><span>&lt;</span>T<span>></span
 <div><pre><code>fsql<span>.</span><span>Change</span><span>(</span>DbEnum<span>.</span>db3<span>)</span><span>.</span><span><span>Select</span><span><span>&lt;</span>T<span>></span></span></span><span>(</span><span>)</span><span>;</span>
 <span>//以后所有 fsql.Select/Insert/Update/Delete 操作是 db3</span>
 </code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br></div></div><p>自动定向数据库配置：</p>
-<div><pre><code>//对 fsql.CRUD 方法名 + 实体类型 进行拦截，自动定向到对应的数据库，达到自动 Change 切换数据库目的
-fsql.EntitySteering = (_, e) =&gt;
-{
-    switch (e.MethodName)
-    {
-        case &quot;Select&quot;:
-            if (e.EntityType == typeof(T))
-            {
-                //查询 T 自动定向 db3
-                e.DBKey = DbEnum.db3;
-            }
-            else if (e.DBKey == DbEnum.db1)
-            {
-                //此处像不像读写分离？
-                var dbkeyIndex = new Random().Next(0, e.AvailableDBKeys.Length);
-                e.DBKey = e.AvailableDBKeys[dbkeyIndex]; //重新定向到其他 db
-            }
-            break;
-        case &quot;Insert&quot;:
-        case &quot;Update&quot;:
-        case &quot;Delete&quot;:
-        case &quot;InsertOrUpdate&quot;:
-            break;
-    }
-};
+<div><pre><code><span>//对 fsql.CRUD 方法名 + 实体类型 进行拦截，自动定向到对应的数据库，达到自动 Change 切换数据库目的</span>
+fsql<span>.</span>EntitySteering <span>=</span> <span>(</span>_<span>,</span> e<span>)</span> <span>=></span>
+<span>{</span>
+    <span>switch</span> <span>(</span>e<span>.</span>MethodName<span>)</span>
+    <span>{</span>
+        <span>case</span> <span>"Select"</span><span>:</span>
+            <span>if</span> <span>(</span>e<span>.</span>EntityType <span>==</span> <span>typeof</span><span>(</span><span>T</span><span>)</span><span>)</span>
+            <span>{</span>
+                <span>//查询 T 自动定向 db3</span>
+                e<span>.</span>DBKey <span>=</span> DbEnum<span>.</span>db3<span>;</span>
+            <span>}</span>
+            <span>else</span> <span>if</span> <span>(</span>e<span>.</span>DBKey <span>==</span> DbEnum<span>.</span>db1<span>)</span>
+            <span>{</span>
+                <span>//此处像不像读写分离？</span>
+                <span><span>var</span></span> dbkeyIndex <span>=</span> <span>new</span> <span>Random</span><span>(</span><span>)</span><span>.</span><span>Next</span><span>(</span><span>0</span><span>,</span> e<span>.</span>AvailableDBKeys<span>.</span>Length<span>)</span><span>;</span>
+                e<span>.</span>DBKey <span>=</span> e<span>.</span>AvailableDBKeys<span>[</span>dbkeyIndex<span>]</span><span>;</span> <span>//重新定向到其他 db</span>
+            <span>}</span>
+            <span>break</span><span>;</span>
+        <span>case</span> <span>"Insert"</span><span>:</span>
+        <span>case</span> <span>"Update"</span><span>:</span>
+        <span>case</span> <span>"Delete"</span><span>:</span>
+        <span>case</span> <span>"InsertOrUpdate"</span><span>:</span>
+            <span>break</span><span>;</span>
+    <span>}</span>
+<span>}</span><span>;</span>
 </code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br><span>10</span><br><span>11</span><br><span>12</span><br><span>13</span><br><span>14</span><br><span>15</span><br><span>16</span><br><span>17</span><br><span>18</span><br><span>19</span><br><span>20</span><br><span>21</span><br><span>22</span><br><span>23</span><br><span>24</span><br><span>25</span><br></div></div><h2 id="参考" tabindex="-1"> 参考</h2>
 <p><a href="https://github.com/dotnetcore/FreeSql/issues/44" target="_blank" rel="noopener noreferrer">多个 IFreeSql 实例，如何注入使用？ · Issue #44 · dotnetcore/FreeSql (github.com)</a></p>
 ]]></content>
@@ -2564,10 +2713,11 @@ item<span>.</span><span>Restore</span><span>(</span><span>)</span><span>;</span>
     <title type="html">指南</title>
     <id>http://freesql.net/guide/</id>
     <link href="http://freesql.net/guide/"/>
-    <updated>2022-08-11T04:50:48.000Z</updated>
+    <updated>2022-08-11T15:34:05.000Z</updated>
     <content type="html"><![CDATA[<h1 id="指南" tabindex="-1"> 指南</h1>
 <p><a href="https://github.com/dotnetcore" target="_blank" rel="noopener noreferrer"><img src="https://img.shields.io/badge/member project of-NCC-9e20c9.svg" alt="Member project of .NET Core Community" loading="lazy"></a>
 <a href="https://www.nuget.org/packages/FreeSql" target="_blank" rel="noopener noreferrer"><img src="https://img.shields.io/nuget/v/FreeSql.svg?style=flat-square" alt="nuget" loading="lazy"></a>
+<a href="https://www.nuget.org/packages/FreeSql" target="_blank" rel="noopener noreferrer"><img src="https://img.shields.io/nuget/vpre/FreeSql.svg?style=flat-square" alt="nuget" loading="lazy"></a>
 <a href="https://www.nuget.org/stats/packages/FreeSql?groupby=Version" target="_blank" rel="noopener noreferrer"><img src="https://img.shields.io/nuget/dt/FreeSql.svg?style=flat-square" alt="stats" loading="lazy"></a>
 <a href="https://github.com/dotnetcore/FreeSql/blob/master/LICENSE" target="_blank" rel="noopener noreferrer"><img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="License" loading="lazy"></a></p>
 <p><a href="https://starchart.cc/dotnetcore/FreeSql" target="_blank" rel="noopener noreferrer"><img src="https://starchart.cc/dotnetcore/FreeSql.svg" alt="Stargazers over time" loading="lazy"></a></p>
@@ -3019,7 +3169,7 @@ repo<span>.</span><span>Insert</span><span>(</span>type<span>)</span><span>;</sp
     <title type="html">Code First</title>
     <id>http://freesql.net/guide/code-first.html</id>
     <link href="http://freesql.net/guide/code-first.html"/>
-    <updated>2022-08-02T09:51:52.000Z</updated>
+    <updated>2022-08-11T15:34:05.000Z</updated>
     <content type="html"><![CDATA[<p><code>FreeSql</code> 支持 <code>CodeFirst</code> 迁移结构至数据库，这应该是(<code>O/RM</code>)必须标配的一个功能。</p>
 <p>与其他(<code>O/RM</code>)不同的是：<code>FreeSql</code>支持更多的数据库特性，而不只是支持基础的数据类型，这既是优点也是缺点，优点是充分利用数据库特性辅助开发，缺点是切换数据库变得困难。不同程序员的理念可能不太一致，<code>FreeSql</code>尽量把功能支持到极致，至于是否使用是项目组技术衡量的另一个问题。</p>
 <p>尽管多种数据库适配逻辑非常复杂，<code>FreeSql</code>始终秉承优化程序开发习惯的原则尽量去实现，中间碰到了一些非技术无法攻克的难题，比如数据库的自定义类型，和实体类本身就是一种冲突，为了减少使用成本，诸如此类的数据库功能没有得到支持。</p>
@@ -5667,8 +5817,9 @@ fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>TestMySqlStrin
     <title type="html">过滤器</title>
     <id>http://freesql.net/guide/filters.html</id>
     <link href="http://freesql.net/guide/filters.html"/>
-    <updated>2022-05-16T12:50:28.000Z</updated>
+    <updated>2022-08-11T15:34:05.000Z</updated>
     <content type="html"><![CDATA[<h1 id="过滤器" tabindex="-1"> 过滤器</h1>
+<h2 id="全局过滤器-建议" tabindex="-1"> 全局过滤器（建议）</h2>
 <p>FreeSql 基础层实现了 Select/Update/Delete 可设置的全局过滤器功能。</p>
 <div><pre><code><span>public</span> <span>static</span> <span>AsyncLocal<span>&lt;</span>Guid<span>></span></span> TenantId <span>{</span> <span>get</span><span>;</span> <span>set</span><span>;</span> <span>}</span> <span>=</span> <span>new</span> <span>AsyncLocal<span>&lt;</span>Guid<span>></span></span><span>(</span><span>)</span><span>;</span>
 
@@ -5728,8 +5879,7 @@ fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>TestAddEnum<sp
 <li>在查询/修改/删除时附加此条件，从而达到不会修改其他用户的数据；</li>
 <li>在添加时，使用表达式验证数据的合法性，若不合法则抛出异常；</li>
 </ul>
-<h2 id="全局过滤器" tabindex="-1"> 全局过滤器</h2>
-<p>全局过滤器，可帮助实现“软删除”、“租户”等设计，目前使用 AspNetCore 注入的方式实现的全局过滤器。</p>
+<p>仓储过滤器，可帮助实现“软删除”、“租户”等设计，目前使用 AspNetCore 注入的方式实现的仓储过滤器。</p>
 <div><pre><code><span>public</span> <span><span>void</span></span> <span>ConfigureServices</span><span>(</span><span>IServiceCollection</span> services<span>)</span> <span>{</span>
 
     services<span>.</span><span><span>AddSingleton</span><span><span>&lt;</span>IFreeSql<span>></span></span></span><span>(</span>Fsql<span>)</span><span>;</span>
@@ -5781,9 +5931,8 @@ repo1.DataFilter.Disable(&quot;test&quot;)</p>
     <title type="html">流式接口</title>
     <id>http://freesql.net/guide/fluent-api.html</id>
     <link href="http://freesql.net/guide/fluent-api.html"/>
-    <updated>2022-08-04T03:08:28.000Z</updated>
-    <content type="html"><![CDATA[<h1 id="流式接口" tabindex="-1"> 流式接口</h1>
-<h2 id="支持-fluent-api" tabindex="-1"> 支持 Fluent API</h2>
+    <updated>2022-08-11T15:34:05.000Z</updated>
+    <content type="html"><![CDATA[<h2 id="支持-fluent-api" tabindex="-1"> 支持 Fluent API</h2>
 <p>FreeSql 提供了 Fluent Api 的方式,使用链式调用，可在外部配置实体的数据库特性。<code>Fluent Api</code> 的方法命名与特性名保持一致，共三种使用方法，选择<strong>一种即可</strong>：</p>
 <blockquote>
 <p>fsql 是一个 IFreeSql 对象、配置尽量只执行一次，避免性能损耗 参考：<a href="/guide/entity-attribute.html">《实体特性说明》</a></p>
@@ -5925,7 +6074,7 @@ fsql<span>.</span>CodeFirst<span>.</span><span><span>Entity</span><span><span>&l
     <title type="html">入门</title>
     <id>http://freesql.net/guide/getting-started.html</id>
     <link href="http://freesql.net/guide/getting-started.html"/>
-    <updated>2022-08-10T15:35:54.000Z</updated>
+    <updated>2022-08-11T15:34:05.000Z</updated>
     <content type="html"><![CDATA[<h1 id="入门" tabindex="-1"> 入门</h1>
 <h2 id="模型" tabindex="-1"> 模型</h2>
 <p><code>FreeSql</code> 使用模型执行数据访问，模型由实体类表示数据库表或视图，用于查询和保存数据。</p>
@@ -6020,7 +6169,8 @@ builder<span>.</span>Services<span>.</span><span><span>AddSingleton</span><span>
 
     <span>public</span> <span>static</span> <span>IFreeSql</span> Sqlite <span>=></span> sqliteLazy<span>.</span>Value<span>;</span>
 <span>}</span>
-</code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br></div></div><p><code>IFreeSql</code> 是 <code>ORM</code> 最顶级对象，所有操作都是使用它的方法或者属性：</p>
+</code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br></div></div><p>然后直接通过 <code>IFreeSql  fsql = DB.Sqlite;</code>  即可得到fsql实例。</p>
+<p><code>IFreeSql</code> 是 <code>ORM</code> 最顶级对象，所有操作都是使用它的方法或者属性：</p>
 <div><pre><code>
 fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>T<span>></span></span></span><span>(</span><span>)</span><span>;</span> <span>//查询</span>
 fsql<span>.</span><span><span>Insert</span><span><span>&lt;</span>T<span>></span></span></span><span>(</span><span>)</span><span>;</span> <span>//插入</span>
@@ -6954,7 +7104,7 @@ fsql<span>.</span><span>Insert</span><span>(</span>item<span>)</span>
     <title type="html">安装</title>
     <id>http://freesql.net/guide/install.html</id>
     <link href="http://freesql.net/guide/install.html"/>
-    <updated>2022-08-09T08:03:53.000Z</updated>
+    <updated>2022-08-11T15:34:05.000Z</updated>
     <content type="html"><![CDATA[<h1 id="安装" tabindex="-1"> 安装</h1>
 <h2 id="版本" tabindex="-1"> 版本</h2>
 <p>FreeSql 是一个 .NET Standard 2.0 库，仅支持 .NET Framework 4.0 或 .NET Core 或更高版本的应用程序。</p>
@@ -6976,6 +7126,12 @@ dotnet <span>add</span> package FreeSql.Provider.Sqlite
 </thead>
 <tbody>
 <tr>
+<td>FreeSql</td>
+<td>netstandard2.0+、net45+、net40+</td>
+<td>freesql基础包</td>
+<td><strong><a href="https://www.nuget.org/packages/FreeSql" target="_blank" rel="noopener noreferrer"><img src="https://buildstats.info/nuget/FreeSql" alt="NuGet" loading="lazy"></a></strong></td>
+</tr>
+<tr>
 <td><a href="/guide/repository.html">FreeSql.Repository</a></td>
 <td>NETStandard2.0、net45、net40</td>
 <td>通用仓储 + UnitOfWork 实现</td>
@@ -6994,7 +7150,7 @@ dotnet <span>add</span> package FreeSql.Provider.Sqlite
 <td><strong><a href="https://www.nuget.org/packages/FreeSql.Provider.MySql" target="_blank" rel="noopener noreferrer"><img src="https://buildstats.info/nuget/FreeSql.Provider.MySql" alt="NuGet" loading="lazy"></a></strong></td>
 </tr>
 <tr>
-<td>FreeSql.Provider.MySqlConnector</td>
+<td><a href="/guide/freesql-provider-mysqlconnector.html">FreeSql.Provider.MySqlConnector</a></td>
 <td>NETStandard2.0、net45</td>
 <td>基于 MySqlConnector</td>
 <td><strong><a href="https://www.nuget.org/packages/FreeSql.Provider.MySqlConnector" target="_blank" rel="noopener noreferrer"><img src="https://buildstats.info/nuget/FreeSql.Provider.MySqlConnector" alt="NuGet" loading="lazy"></a></strong></td>
@@ -7096,7 +7252,7 @@ dotnet <span>add</span> package FreeSql.Provider.Sqlite
 <td><strong><a href="https://www.nuget.org/packages/FreeSql.Extensions.LazyLoading" target="_blank" rel="noopener noreferrer"><img src="https://buildstats.info/nuget/FreeSql.Extensions.LazyLoading" alt="NuGet" loading="lazy"></a></strong></td>
 </tr>
 <tr>
-<td>FreeSql.Extensions.JsonMap</td>
+<td><a href="/guide/freesql-extensions-jsonmap.html">FreeSql.Extensions.JsonMap</a></td>
 <td>NETStandard2.0、net45、net40</td>
 <td>Json 序列化扩展包</td>
 <td><strong><a href="https://www.nuget.org/packages/FreeSql.Extensions.JsonMap" target="_blank" rel="noopener noreferrer"><img src="https://buildstats.info/nuget/FreeSql.Extensions.JsonMap" alt="NuGet" loading="lazy"></a></strong></td>
@@ -7108,7 +7264,7 @@ dotnet <span>add</span> package FreeSql.Provider.Sqlite
 <td><strong><a href="https://www.nuget.org/packages/FreeSql.Extensions.Linq" target="_blank" rel="noopener noreferrer"><img src="https://buildstats.info/nuget/FreeSql.Extensions.Linq" alt="NuGet" loading="lazy"></a></strong></td>
 </tr>
 <tr>
-<td>FreeSql.Extensions.BaseEntity</td>
+<td><a href="/guide/freesql-extensions-baseentity.html">FreeSql.Extensions.BaseEntity</a></td>
 <td>NETStandard2.0</td>
 <td></td>
 <td><strong><a href="https://www.nuget.org/packages/FreeSql.Extensions.BaseEntity" target="_blank" rel="noopener noreferrer"><img src="https://buildstats.info/nuget/FreeSql.Extensions.BaseEntity" alt="NuGet" loading="lazy"></a></strong></td>
@@ -8587,7 +8743,7 @@ fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>T<span>></span
     <title type="html">仓储</title>
     <id>http://freesql.net/guide/repository.html</id>
     <link href="http://freesql.net/guide/repository.html"/>
-    <updated>2022-08-10T00:47:28.000Z</updated>
+    <updated>2022-08-11T15:34:05.000Z</updated>
     <content type="html"><![CDATA[<h1 id="仓储" tabindex="-1"> 仓储</h1>
 <p>FreeSql.Repository 作为扩展，实现了通用仓储层功能。与其他规范标准一样，仓储层也有相应的规范定义。FreeSql.Repository 参考 abp vnext 接口，定义和实现基础的仓储层（CURD），应该算比较通用的方法吧。</p>
 <h2 id="特性" tabindex="-1"> 特性</h2>
@@ -8600,7 +8756,7 @@ fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>T<span>></span
 <h2 id="安装" tabindex="-1"> 安装</h2>
 <div><pre><code> dotnet <span>add</span> package FreeSql.Repository
 </code></pre><div aria-hidden="true"><span>1</span><br></div></div><p>环境 2、.NET Framework</p>
-<div><pre><code>Install-Package FreeSql.DbContext
+<div><pre><code>Install-Package FreeSql.Repository
 </code></pre><div aria-hidden="true"><span>1</span><br></div></div><h2 id="定义" tabindex="-1"> 定义</h2>
 <div><pre><code><span>static</span> <span>IFreeSql</span> fsql <span>=</span> <span>new</span> <span>FreeSql<span>.</span>FreeSqlBuilder</span><span>(</span><span>)</span>
     <span>.</span><span>UseConnectionString</span><span>(</span>FreeSql<span>.</span>DataType<span>.</span>Sqlite<span>,</span> connectionString<span>)</span>
@@ -9899,7 +10055,7 @@ fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>Song<span>></s
     <title type="html">单表查询</title>
     <id>http://freesql.net/guide/select-single-table.html</id>
     <link href="http://freesql.net/guide/select-single-table.html"/>
-    <updated>2022-08-05T07:32:05.000Z</updated>
+    <updated>2022-08-11T15:34:05.000Z</updated>
     <content type="html"><![CDATA[<h1 id="单表查询" tabindex="-1"> 单表查询</h1>
 <div><pre><code><span>static</span> <span>IFreeSql</span> fsql <span>=</span> <span>new</span> <span>FreeSql<span>.</span>FreeSqlBuilder</span><span>(</span><span>)</span>
     <span>.</span><span>UseConnectionString</span><span>(</span>FreeSql<span>.</span>DataType<span>.</span>MySql<span>,</span> <span>"Data Source=127.0.0.1;Port=3306;User ID=root;Password=root;Initial Catalog=cccddd;Charset=utf8;SslMode=none;Max pool size=10"</span><span>)</span>
@@ -9935,7 +10091,7 @@ fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>Topic<span>></
 <span>//SELECT a.`Id`, a.`Clicks`, a.`CategoryId`, a.`Title`, a.`CreateTime`</span>
 <span>//FROM `Topic` a</span>
 <span>//WHERE (a.`Id` in (1,2,3))</span>
-</code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br><span>10</span><br><span>11</span><br><span>12</span><br><span>13</span><br><span>14</span><br><span>15</span><br><span>16</span><br><span>17</span><br><span>18</span><br><span>19</span><br><span>20</span><br></div></div><h2 id="withsql" tabindex="-1"> <a href="/guide/WithSql.html">WithSql</a></h2>
+</code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br><span>10</span><br><span>11</span><br><span>12</span><br><span>13</span><br><span>14</span><br><span>15</span><br><span>16</span><br><span>17</span><br><span>18</span><br><span>19</span><br><span>20</span><br></div></div><h2 id="withsql" tabindex="-1"> <a href="/guide/withsql.html">WithSql</a></h2>
 <div><pre><code>fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>Topic<span>></span></span></span><span>(</span><span>)</span>
   <span>.</span><span>WithSql</span><span>(</span><span>"select * from Topic where clicks > @val"</span><span>,</span> <span>new</span> <span>{</span> val <span>=</span> <span>10</span> <span>}</span><span>)</span>
   <span>.</span><span>Page</span><span>(</span><span>1</span><span>,</span> <span>10</span><span>)</span>
@@ -9943,7 +10099,7 @@ fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>Topic<span>></
 <span>//SELECT a.`Id`, a.`Clicks`, a.`CategoryId`, a.`Title`, a.`CreateTime` </span>
 <span>//FROM (select * from Topic where clicks > @val) a </span>
 </code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br></div></div><blockquote>
-<p>关于<a href="/guide/WithSql.html">WithSql</a>的详情文档， 使用多次为 UNION ALL 查询</p>
+<p>关于<a href="/guide/withsql.html">WithSql</a>的详情文档， 使用多次为 UNION ALL 查询</p>
 </blockquote>
 <blockquote>
 <p>v3.2.666 <a href="%e5%b5%8c%e5%a5%97%e6%9f%a5%e8%af%a2">WithTempQuery + FromQuery 嵌套查询</a></p>
@@ -9974,26 +10130,26 @@ fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>Topic<span>></
     <title type="html">查询</title>
     <id>http://freesql.net/guide/select.html</id>
     <link href="http://freesql.net/guide/select.html"/>
-    <updated>2022-08-10T00:07:51.000Z</updated>
+    <updated>2022-08-11T15:34:05.000Z</updated>
     <content type="html"><![CDATA[<h1 id="查询" tabindex="-1"> 查询</h1>
 <p>FreeSql 在查询数据下足了功夫，链式查询语法、多表查询、表达式函数支持得非常到位。</p>
 <ul>
-<li>分页查询</li>
-<li>单表查询</li>
-<li>多表查询</li>
-<li>嵌套查询</li>
-<li>分组聚合查询</li>
-<li>返回数据</li>
-<li>LinqToSql</li>
-<li>仓储层 Repository</li>
-<li>过滤器</li>
-<li>延时加载</li>
-<li>贪婪加载</li>
-<li>表达式函数</li>
-<li>读写分离</li>
-<li>性能</li>
-<li>分表分库</li>
-<li>多租户</li>
+<li><a href="/guide/paging.html">分页查询</a></li>
+<li><a href="/guide/select-single-table.html">单表查询</a></li>
+<li><a href="/guide/select-multi-table.html">多表查询</a></li>
+<li><a href="/guide/withtempquery.html">嵌套查询</a></li>
+<li><a href="/guide/select-group-by.html">分组聚合查询</a></li>
+<li><a href="/guide/select-return-data.html">返回数据</a></li>
+<li><a href="/guide/linq-to-sql.html">LinqToSql</a></li>
+<li><a href="/guide/repository.html">仓储层 Repository</a></li>
+<li><a href="/guide/filters.html">过滤器</a></li>
+<li><a href="/guide/select-lazy-loading.html">延时加载</a></li>
+<li><a href="/guide/select-include.html">贪婪加载</a></li>
+<li><a href="/guide/expression-function.html">表达式函数</a></li>
+<li><a href="/guide/read-write-splitting.html">读写分离</a></li>
+<li><a href="/guide/performance.html">性能</a></li>
+<li><a href="/guide/sharding.html">分表分库</a></li>
+<li><a href="/guide/multi-tenancy.html">多租户</a></li>
 </ul>
 <h2 id="特别介绍-wheredynamicfilter" tabindex="-1"> 特别介绍 WhereDynamicFilter</h2>
 <p><a href="https://www.cnblogs.com/FreeSql/p/16485310.html" target="_blank" rel="noopener noreferrer">《高效理解 FreeSql WhereDynamicFilter，深入了解设计初衷》</a></p>
@@ -10437,7 +10593,7 @@ fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>VM_District_Pa
     <title type="html">分表分库</title>
     <id>http://freesql.net/guide/sharding.html</id>
     <link href="http://freesql.net/guide/sharding.html"/>
-    <updated>2022-08-11T07:53:45.000Z</updated>
+    <updated>2022-08-11T15:34:05.000Z</updated>
     <content type="html"><![CDATA[<h1 id="分表分库" tabindex="-1"> 分表分库</h1>
 <h2 id="理论知识" tabindex="-1"> 理论知识</h2>
 <p>分表 - 从表面意思上看呢，就是把一张表分成 N 多个小表，每一个小表都是完整的一张表。分表后数据都是存放在分表里，总表只是一个外壳，存取数据发生在一个一个的分表里面。分表后单表的并发能力提高了，磁盘 I/O 性能也提高了。并发能力为什么提高了呢，因为查寻一次所花的时间变短了，如果出现高并发的话，总表可以根据不同 的查询，将并发压力分到不同的小表里面。</p>
@@ -10603,31 +10759,31 @@ fsql<span>.</span><span><span>Delete</span><span><span>&lt;</span>T<span>></span
 <div><pre><code>fsql<span>.</span><span>Change</span><span>(</span>DbEnum<span>.</span>db3<span>)</span><span>.</span><span><span>Select</span><span><span>&lt;</span>T<span>></span></span></span><span>(</span><span>)</span><span>;</span>
 <span>//以后所有 fsql.Select/Insert/Update/Delete 操作是 db3</span>
 </code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br></div></div><p>自动定向数据库配置：</p>
-<div><pre><code>//对 fsql.CRUD 方法名 + 实体类型 进行拦截，自动定向到对应的数据库，达到自动 Change 切换数据库目的
-fsql.EntitySteering = (_, e) =&gt;
-{
-    switch (e.MethodName)
-    {
-        case &quot;Select&quot;:
-            if (e.EntityType == typeof(T))
-            {
-                //查询 T 自动定向 db3
-                e.DBKey = DbEnum.db3;
-            }
-            else if (e.DBKey == DbEnum.db1)
-            {
-                //此处像不像读写分离？
-                var dbkeyIndex = new Random().Next(0, e.AvailableDBKeys.Length);
-                e.DBKey = e.AvailableDBKeys[dbkeyIndex]; //重新定向到其他 db
-            }
-            break;
-        case &quot;Insert&quot;:
-        case &quot;Update&quot;:
-        case &quot;Delete&quot;:
-        case &quot;InsertOrUpdate&quot;:
-            break;
-    }
-};
+<div><pre><code><span>//对 fsql.CRUD 方法名 + 实体类型 进行拦截，自动定向到对应的数据库，达到自动 Change 切换数据库目的</span>
+fsql<span>.</span>EntitySteering <span>=</span> <span>(</span>_<span>,</span> e<span>)</span> <span>=></span>
+<span>{</span>
+    <span>switch</span> <span>(</span>e<span>.</span>MethodName<span>)</span>
+    <span>{</span>
+        <span>case</span> <span>"Select"</span><span>:</span>
+            <span>if</span> <span>(</span>e<span>.</span>EntityType <span>==</span> <span>typeof</span><span>(</span><span>T</span><span>)</span><span>)</span>
+            <span>{</span>
+                <span>//查询 T 自动定向 db3</span>
+                e<span>.</span>DBKey <span>=</span> DbEnum<span>.</span>db3<span>;</span>
+            <span>}</span>
+            <span>else</span> <span>if</span> <span>(</span>e<span>.</span>DBKey <span>==</span> DbEnum<span>.</span>db1<span>)</span>
+            <span>{</span>
+                <span>//此处像不像读写分离？</span>
+                <span><span>var</span></span> dbkeyIndex <span>=</span> <span>new</span> <span>Random</span><span>(</span><span>)</span><span>.</span><span>Next</span><span>(</span><span>0</span><span>,</span> e<span>.</span>AvailableDBKeys<span>.</span>Length<span>)</span><span>;</span>
+                e<span>.</span>DBKey <span>=</span> e<span>.</span>AvailableDBKeys<span>[</span>dbkeyIndex<span>]</span><span>;</span> <span>//重新定向到其他 db</span>
+            <span>}</span>
+            <span>break</span><span>;</span>
+        <span>case</span> <span>"Insert"</span><span>:</span>
+        <span>case</span> <span>"Update"</span><span>:</span>
+        <span>case</span> <span>"Delete"</span><span>:</span>
+        <span>case</span> <span>"InsertOrUpdate"</span><span>:</span>
+            <span>break</span><span>;</span>
+    <span>}</span>
+<span>}</span><span>;</span>
 </code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br><span>10</span><br><span>11</span><br><span>12</span><br><span>13</span><br><span>14</span><br><span>15</span><br><span>16</span><br><span>17</span><br><span>18</span><br><span>19</span><br><span>20</span><br><span>21</span><br><span>22</span><br><span>23</span><br><span>24</span><br><span>25</span><br></div></div>]]></content>
     <published>2021-02-04T16:03:18.000Z</published>
   </entry>
