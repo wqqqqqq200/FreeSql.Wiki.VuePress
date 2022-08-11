@@ -6,8 +6,8 @@
     <link>http://freesql.net/</link>
     <description>FreeSql Documents</description>
     <language>zh-CN</language>
-    <pubDate>Thu, 11 Aug 2022 07:55:00 GMT</pubDate>
-    <lastBuildDate>Thu, 11 Aug 2022 07:55:00 GMT</lastBuildDate>
+    <pubDate>Thu, 11 Aug 2022 07:56:39 GMT</pubDate>
+    <lastBuildDate>Thu, 11 Aug 2022 07:56:39 GMT</lastBuildDate>
     <generator>vuepress-plugin-feed2</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
     <item>
@@ -1270,7 +1270,33 @@ fsql<span>.</span><span><span>Delete</span><span><span>&lt;</span>T<span>></span
 </code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br></div></div><p>切换数据库：</p>
 <div><pre><code>fsql<span>.</span><span>Change</span><span>(</span>DbEnum<span>.</span>db3<span>)</span><span>.</span><span><span>Select</span><span><span>&lt;</span>T<span>></span></span></span><span>(</span><span>)</span><span>;</span>
 <span>//以后所有 fsql.Select/Insert/Update/Delete 操作是 db3</span>
-</code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br></div></div><h2 id="参考" tabindex="-1"> 参考</h2>
+</code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br></div></div><p>自动定向数据库配置：</p>
+<div><pre><code>//对 fsql.CRUD 方法名 + 实体类型 进行拦截，自动定向到对应的数据库，达到自动 Change 切换数据库目的
+fsql.EntitySteering = (_, e) =&gt;
+{
+    switch (e.MethodName)
+    {
+        case &quot;Select&quot;:
+            if (e.EntityType == typeof(T))
+            {
+                //查询 T 自动定向 db3
+                e.DBKey = DbEnum.db3;
+            }
+            else if (e.DBKey == DbEnum.db1)
+            {
+                //此处像不像读写分离？
+                var dbkeyIndex = new Random().Next(0, e.AvailableDBKeys.Length);
+                e.DBKey = e.AvailableDBKeys[dbkeyIndex]; //重新定向到其他 db
+            }
+            break;
+        case &quot;Insert&quot;:
+        case &quot;Update&quot;:
+        case &quot;Delete&quot;:
+        case &quot;InsertOrUpdate&quot;:
+            break;
+    }
+};
+</code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br><span>10</span><br><span>11</span><br><span>12</span><br><span>13</span><br><span>14</span><br><span>15</span><br><span>16</span><br><span>17</span><br><span>18</span><br><span>19</span><br><span>20</span><br><span>21</span><br><span>22</span><br><span>23</span><br><span>24</span><br><span>25</span><br></div></div><h2 id="参考" tabindex="-1"> 参考</h2>
 <p><a href="https://github.com/dotnetcore/FreeSql/issues/44" target="_blank" rel="noopener noreferrer">多个 IFreeSql 实例，如何注入使用？ · Issue #44 · dotnetcore/FreeSql (github.com)</a></p>
 ]]></content:encoded>
     </item>
