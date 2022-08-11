@@ -3,7 +3,7 @@
   <id>http://freesql.net/</id>
   <title>FreeSql 官方文档</title>
   <subtitle>FreeSql Documents</subtitle>
-  <updated>2022-08-11T08:12:00.233Z</updated>
+  <updated>2022-08-11T08:58:28.614Z</updated>
   <generator>vuepress-plugin-feed2</generator>
   <link rel="self" href="http://freesql.net/atom.xml"/>
   <link rel="alternate" href="http://freesql.net/"/>
@@ -934,7 +934,7 @@ RUN sed -i 's/MinProtocol = TLSv1.2/MinProtocol = TLSv1/g' /usr/lib/ssl/openssl.
     <title type="html">技巧：自定义解析表达式树，实现动态聚合列 sum(case when ...)</title>
     <id>http://freesql.net/extra/issues-expression-groupbysum.html</id>
     <link href="http://freesql.net/extra/issues-expression-groupbysum.html"/>
-    <updated>2022-06-24T16:45:08.000Z</updated>
+    <updated>2022-08-11T08:57:16.000Z</updated>
     <content type="html"><![CDATA[<h1 id="技巧-自定义解析表达式树-实现动态聚合列-sum-case-when" tabindex="-1"> 技巧：自定义解析表达式树，实现动态聚合列 sum(case when ...)</h1>
 <div><pre><code><span>SELECT</span>
 a<span>.</span><span>"Time"</span><span>,</span>
@@ -975,7 +975,7 @@ fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>table<span>></
     <span>public</span> <span>static</span> <span><span>string</span></span> <span><span>SumCase</span><span><span>&lt;</span>TValue<span>></span></span></span><span>(</span><span>[</span><span><span>RawValue</span></span><span>]</span> <span>TValue<span>[</span><span>]</span></span> values<span>,</span> <span>TValue</span> column<span>)</span>
     <span>{</span>
         <span><span>var</span></span> ctx <span>=</span> expContext<span>.</span>Value<span>;</span>
-        ctx<span>.</span>Result <span>=</span> ctx<span>.</span>_commonExp<span>.</span>_common<span>.</span><span>StringConcat</span><span>(</span>
+        ctx<span>.</span>Result <span>=</span> ctx<span>.</span>Utility<span>.</span>CommonUtils<span>.</span><span>StringConcat</span><span>(</span>
             values<span>.</span><span>Select</span><span>(</span><span>(</span>val<span>,</span> idx<span>)</span> <span>=></span> 
                 <span>new</span> <span>[</span><span>]</span> <span>{</span>
                     ctx<span>.</span>_commonExp<span>.</span>_common<span>.</span><span>IsNull</span><span>(</span><span><span>$"SUM(case when </span><span><span>{</span><span>ctx<span>.</span>ParsedContent<span>[</span><span>"column"</span><span>]</span></span><span>}</span></span><span> = </span><span><span>{</span><span>ctx<span>.</span><span>FormatSql</span><span>(</span>val<span>)</span></span><span>}</span></span><span> then 1 else 0 end)"</span></span><span>,</span> <span>0</span><span>)</span><span>,</span>

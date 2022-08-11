@@ -6,8 +6,8 @@
     <link>http://freesql.net/</link>
     <description>FreeSql Documents</description>
     <language>zh-CN</language>
-    <pubDate>Thu, 11 Aug 2022 08:12:00 GMT</pubDate>
-    <lastBuildDate>Thu, 11 Aug 2022 08:12:00 GMT</lastBuildDate>
+    <pubDate>Thu, 11 Aug 2022 08:58:28 GMT</pubDate>
+    <lastBuildDate>Thu, 11 Aug 2022 08:58:28 GMT</lastBuildDate>
     <generator>vuepress-plugin-feed2</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
     <item>
@@ -979,7 +979,7 @@ fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>table<span>></
     <span>public</span> <span>static</span> <span><span>string</span></span> <span><span>SumCase</span><span><span>&lt;</span>TValue<span>></span></span></span><span>(</span><span>[</span><span><span>RawValue</span></span><span>]</span> <span>TValue<span>[</span><span>]</span></span> values<span>,</span> <span>TValue</span> column<span>)</span>
     <span>{</span>
         <span><span>var</span></span> ctx <span>=</span> expContext<span>.</span>Value<span>;</span>
-        ctx<span>.</span>Result <span>=</span> ctx<span>.</span>_commonExp<span>.</span>_common<span>.</span><span>StringConcat</span><span>(</span>
+        ctx<span>.</span>Result <span>=</span> ctx<span>.</span>Utility<span>.</span>CommonUtils<span>.</span><span>StringConcat</span><span>(</span>
             values<span>.</span><span>Select</span><span>(</span><span>(</span>val<span>,</span> idx<span>)</span> <span>=></span> 
                 <span>new</span> <span>[</span><span>]</span> <span>{</span>
                     ctx<span>.</span>_commonExp<span>.</span>_common<span>.</span><span>IsNull</span><span>(</span><span><span>$"SUM(case when </span><span><span>{</span><span>ctx<span>.</span>ParsedContent<span>[</span><span>"column"</span><span>]</span></span><span>}</span></span><span> = </span><span><span>{</span><span>ctx<span>.</span><span>FormatSql</span><span>(</span>val<span>)</span></span><span>}</span></span><span> then 1 else 0 end)"</span></span><span>,</span> <span>0</span><span>)</span><span>,</span>
