@@ -3,7 +3,7 @@
   <id>http://freesql.net/</id>
   <title>FreeSql 官方文档</title>
   <subtitle>FreeSql Documents</subtitle>
-  <updated>2022-08-11T04:52:25.933Z</updated>
+  <updated>2022-08-11T07:55:00.944Z</updated>
   <generator>vuepress-plugin-feed2</generator>
   <link rel="self" href="http://freesql.net/atom.xml"/>
   <link rel="alternate" href="http://freesql.net/"/>
@@ -1275,11 +1275,11 @@ fsql<span>.</span><span><span>Delete</span><span><span>&lt;</span>T<span>></span
     <title type="html">服务支持</title>
     <id>http://freesql.net/reference/service-support.html</id>
     <link href="http://freesql.net/reference/service-support.html"/>
-    <updated>2022-08-11T04:35:21.000Z</updated>
+    <updated>2022-08-11T04:51:10.000Z</updated>
     <content type="html"><![CDATA[<h1 id="服务支持" tabindex="-1"> 服务支持</h1>
 <h2 id="💻-开源免费" tabindex="-1"> 💻 开源免费</h2>
 <p>FreeSql 采用 MIT 最宽松的开源协议，永久免费开源。任何公司或个人，都可以使用在任何商业项目中。</p>
-<p>QQ 技术群：4336577(满员)、8578575(满员)、52508226(满员)、反馈问题请前往 https://github.com/dotnetcore/FreeSql/issues</p>
+<p>QQ 技术群：4336577(满员)、8578575(满员)、52508226(满员)、反馈问题请前往 <a href="https://github.com/dotnetcore/FreeSql/issues" target="_blank" rel="noopener noreferrer">https://github.com/dotnetcore/FreeSql/issues</a></p>
 <h2 id="🌳-有偿服务" tabindex="-1"> 🌳 有偿服务</h2>
 <table>
 <thead>
@@ -10429,7 +10429,7 @@ fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>VM_District_Pa
     <title type="html">分表分库</title>
     <id>http://freesql.net/guide/sharding.html</id>
     <link href="http://freesql.net/guide/sharding.html"/>
-    <updated>2022-08-05T07:32:05.000Z</updated>
+    <updated>2022-08-11T07:53:45.000Z</updated>
     <content type="html"><![CDATA[<h1 id="分表分库" tabindex="-1"> 分表分库</h1>
 <h2 id="理论知识" tabindex="-1"> 理论知识</h2>
 <p>分表 - 从表面意思上看呢，就是把一张表分成 N 多个小表，每一个小表都是完整的一张表。分表后数据都是存放在分表里，总表只是一个外壳，存取数据发生在一个一个的分表里面。分表后单表的并发能力提高了，磁盘 I/O 性能也提高了。并发能力为什么提高了呢，因为查寻一次所花的时间变短了，如果出现高并发的话，总表可以根据不同 的查询，将并发压力分到不同的小表里面。</p>
@@ -10594,12 +10594,33 @@ fsql<span>.</span><span><span>Delete</span><span><span>&lt;</span>T<span>></span
 </code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br></div></div><p>切换数据库：</p>
 <div><pre><code>fsql<span>.</span><span>Change</span><span>(</span>DbEnum<span>.</span>db3<span>)</span><span>.</span><span><span>Select</span><span><span>&lt;</span>T<span>></span></span></span><span>(</span><span>)</span><span>;</span>
 <span>//以后所有 fsql.Select/Insert/Update/Delete 操作是 db3</span>
-</code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br></div></div><p>分库总结：</p>
-<ul>
-<li>跨库 事务不好处理，注意了；</li>
-<li>跨库 查询不好处理，注意了；</li>
-</ul>
-]]></content>
+</code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br></div></div><p>自动定向数据库配置：</p>
+<div><pre><code>//对 fsql.CRUD 方法名 + 实体类型 进行拦截，自动定向到对应的数据库，达到自动 Change 切换数据库目的
+fsql.EntitySteering = (_, e) =&gt;
+{
+    switch (e.MethodName)
+    {
+        case &quot;Select&quot;:
+            if (e.EntityType == typeof(T))
+            {
+                //查询 T 自动定向 db3
+                e.DBKey = DbEnum.db3;
+            }
+            else if (e.DBKey == DbEnum.db1)
+            {
+                //此处像不像读写分离？
+                var dbkeyIndex = new Random().Next(0, e.AvailableDBKeys.Length);
+                e.DBKey = e.AvailableDBKeys[dbkeyIndex]; //重新定向到其他 db
+            }
+            break;
+        case &quot;Insert&quot;:
+        case &quot;Update&quot;:
+        case &quot;Delete&quot;:
+        case &quot;InsertOrUpdate&quot;:
+            break;
+    }
+};
+</code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br><span>10</span><br><span>11</span><br><span>12</span><br><span>13</span><br><span>14</span><br><span>15</span><br><span>16</span><br><span>17</span><br><span>18</span><br><span>19</span><br><span>20</span><br><span>21</span><br><span>22</span><br><span>23</span><br><span>24</span><br><span>25</span><br></div></div>]]></content>
     <published>2021-02-04T16:03:18.000Z</published>
   </entry>
   <entry>
