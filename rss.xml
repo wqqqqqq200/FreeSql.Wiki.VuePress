@@ -6,8 +6,8 @@
     <link>http://freesql.net/</link>
     <description>FreeSql Documents</description>
     <language>zh-CN</language>
-    <pubDate>Fri, 12 Aug 2022 15:36:53 GMT</pubDate>
-    <lastBuildDate>Fri, 12 Aug 2022 15:36:53 GMT</lastBuildDate>
+    <pubDate>Fri, 12 Aug 2022 15:40:47 GMT</pubDate>
+    <lastBuildDate>Fri, 12 Aug 2022 15:40:47 GMT</lastBuildDate>
     <generator>vuepress-plugin-feed2</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
     <item>
@@ -7779,7 +7779,7 @@ repo<span>.</span><span>SaveMany</span><span>(</span>song<span>,</span> <span>"T
 </tbody>
 </table>
 <blockquote>
-<p>当扩展方法返回值为 string 时，其返回值也可以当作 context.Value.Result 功能</p>
+<p>当扩展方法返回值为 string 时，其返回值也可以当作 context.Value.Result 设置</p>
 </blockquote>
 <blockquote>
 <p>当不想解析指定参数时，使用特性 [RawValue] 标记</p>
