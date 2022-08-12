@@ -6,8 +6,8 @@
     <link>http://freesql.net/</link>
     <description>FreeSql Documents</description>
     <language>zh-CN</language>
-    <pubDate>Fri, 12 Aug 2022 15:33:42 GMT</pubDate>
-    <lastBuildDate>Fri, 12 Aug 2022 15:33:42 GMT</lastBuildDate>
+    <pubDate>Fri, 12 Aug 2022 15:36:53 GMT</pubDate>
+    <lastBuildDate>Fri, 12 Aug 2022 15:36:53 GMT</lastBuildDate>
     <generator>vuepress-plugin-feed2</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
     <item>
@@ -7698,7 +7698,7 @@ fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>VM_District_Pa
 <hr>
 <h2 id="_13、保存多对多数据-savemany" tabindex="-1"> 13、保存多对多数据 SaveMany</h2>
 <p>之前：</p>
-<p>FreeSql.DbContext 和 仓储实现，已经实现了联级保存功能，联级保存功能可实现保存对象的时候，将其【OneToMany】、【ManyToMany】导航属性集合也一并保存。</p>
+<p>FreeSql.DbContext 和 仓储实现，已经实现了联级保存功能，可实现保存对象的时候，将其【OneToMany】、【ManyToMany】导航属性集合也一并保存。</p>
 <p>全局关闭：</p>
 <div><pre><code>fsql<span>.</span><span>SetDbContextOptions</span><span>(</span>opt <span>=></span> opt<span>.</span>EnableCascadeSave <span>=</span> <span>false</span><span>)</span><span>;</span>
 </code></pre><div aria-hidden="true"><span>1</span><br></div></div><p>局部关闭：</p>
