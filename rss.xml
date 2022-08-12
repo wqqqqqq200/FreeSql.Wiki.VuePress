@@ -6,8 +6,8 @@
     <link>http://freesql.net/</link>
     <description>FreeSql Documents</description>
     <language>zh-CN</language>
-    <pubDate>Thu, 11 Aug 2022 15:35:29 GMT</pubDate>
-    <lastBuildDate>Thu, 11 Aug 2022 15:35:29 GMT</lastBuildDate>
+    <pubDate>Fri, 12 Aug 2022 05:39:27 GMT</pubDate>
+    <lastBuildDate>Fri, 12 Aug 2022 05:39:27 GMT</lastBuildDate>
     <generator>vuepress-plugin-feed2</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
     <item>
@@ -2797,18 +2797,20 @@ item<span>.</span><span>Restore</span><span>(</span><span>)</span><span>;</span>
       <pubDate>Thu, 04 Feb 2021 16:03:18 GMT</pubDate>
       <content:encoded><![CDATA[<h1 id="aop✨" tabindex="-1"> AOP✨</h1>
 <p>FreeSql AOP 已有的功能介绍，未来为会根据用户需求不断增强。</p>
-<h2 id="审计-crud" tabindex="-1"> 审计 CRUD</h2>
+<h2 id="审计-crud-如何监视-sql" tabindex="-1"> 审计 CRUD(如何监视 SQL？)</h2>
 <p>如果因为某个 sql 骚操作耗时很高，没有一个相关的审计功能，排查起来可以说无从下手。</p>
 <p>FreeSql 支持简单的类似功能：</p>
 <div><pre><code>fsql<span>.</span>Aop<span>.</span>CurdAfter <span>+=</span> <span>(</span>s<span>,</span> e<span>)</span> <span>=></span>
 <span>{</span>
+    Console<span>.</span><span>WriteLine</span><span>(</span><span><span>$"ManagedThreadId:</span><span><span>{</span><span>Thread<span>.</span>CurrentThread<span>.</span>ManagedThreadId</span><span>}</span></span><span>;"</span></span><span>+</span>
+    <span><span>$" FullName:</span><span><span>{</span><span>e<span>.</span>EntityType<span>.</span>FullName</span><span>}</span></span><span> ElapsedMilliseconds:</span><span><span>{</span><span>e<span>.</span>ElapsedMilliseconds</span><span>}</span></span><span>ms, </span><span><span>{</span><span>e<span>.</span>Sql</span><span>}</span></span><span>"</span></span><span>)</span><span>;</span>
     <span>if</span> <span>(</span>e<span>.</span>ElapsedMilliseconds <span>></span> <span>200</span><span>)</span>
     <span>{</span>
         <span>//记录日志</span>
         <span>//发送短信给负责人</span>
     <span>}</span>
 <span>}</span><span>;</span>
-</code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br></div></div><p>只需要一个事件，就可以对全局起到作用。</p>
+</code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br><span>10</span><br></div></div><p>只需要一个事件，就可以对全局起到作用。</p>
 <p>还有一个 CurdBefore 在执行 sql 之前触发，常用于记录日志或开发调试。</p>
 <h2 id="审计属性值" tabindex="-1"> 审计属性值</h2>
 <p>实现插入/更新时统一处理某些值，比如某属性的雪花算法值、创建时间值、甚至是业务值。</p>
@@ -2866,7 +2868,24 @@ item<span>.</span><span>Restore</span><span>(</span><span>)</span><span>;</span>
 <p>这些操作在 FreeSql.CodeFirst 实现下基本不需要理会，而且我们只推荐在开发环境使用自动迁移的功能，正式环境可使用其他工具替代此操作。</p>
 <p>但我们仍然可能需要对项目做完整的日志记录。</p>
 <p>fsql.Aop.SyncStructureBefore、fsql.Aop.SyncStructureAfter 这两个事件将排上用场。</p>
-<h2 id="自定义实体特性" tabindex="-1"> 自定义实体特性</h2>
+<h2 id="configentityproperty" tabindex="-1"> ConfigEntityProperty</h2>
+<h3 id="mysql-enum-映射" tabindex="-1"> MySql Enum 映射</h3>
+<p>默认情况 c# 枚举会映射为 MySql Enum 类型，如果想映射为 int 在 FreeSqlBuilder Build 之后执行以下 Aop 统一处理：</p>
+<div><pre><code>fsql<span>.</span>Aop<span>.</span>ConfigEntityProperty <span>+=</span> <span>(</span>s<span>,</span> e<span>)</span> <span>=></span> <span>{</span>
+  <span>if</span> <span>(</span>e<span>.</span>Property<span>.</span>PropertyType<span>.</span>IsEnum<span>)</span>
+    e<span>.</span>ModifyResult<span>.</span>MapType <span>=</span> <span>typeof</span><span>(</span><span><span>int</span></span><span>)</span><span>;</span>
+<span>}</span><span>;</span>
+</code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br></div></div><h3 id="修改-decimal-默认特性" tabindex="-1"> 修改 decimal 默认特性</h3>
+<p>因为默认 decimal 只支持 decimal(10,2)，范围太小，我们可以全局修改 decimal 类型的支持范围，比如支持 decimal(18,6)</p>
+<div><pre><code>fsql1<span>.</span>Aop<span>.</span>ConfigEntityProperty <span>+=</span> <span>(</span>s<span>,</span> e<span>)</span> <span>=></span>
+<span>{</span>
+    <span>if</span> <span>(</span>e<span>.</span>Property<span>.</span>PropertyType <span>==</span> <span>typeof</span><span>(</span><span><span>decimal</span></span><span>)</span><span>||</span> e<span>.</span>Property<span>.</span>PropertyType <span>==</span> <span>typeof</span><span>(</span><span><span>decimal</span><span>?</span></span><span>)</span><span>)</span>
+    <span>{</span>
+       e<span>.</span>ModifyResult<span>.</span>Precision <span>=</span> <span>18</span><span>;</span>
+       e<span>.</span>ModifyResult<span>.</span>Scale <span>=</span> <span>6</span><span>;</span>
+    <span>}</span>
+<span>}</span><span>;</span>
+</code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br></div></div><h3 id="自定义实体特性" tabindex="-1"> 自定义实体特性</h3>
 <p>比如项目内已经使用了其它 orm，如 efcore，这样意味着实体中可能存在 [Key]，但它与 FreeSql [Column(IsPrimary = true] 不同。</p>
 <p>Q： FreeSql 实体特性为啥这么别扭？</p>
 <p>A： 为了考虑一致性用法，全部封装在 ColumnAttribute 下，这样用户使用起来，不用到处 using 或者 回忆特性应该用哪个名字，如自增 [Column(IsIdentity = true)] 即可。</p>
@@ -2929,17 +2948,7 @@ fsql<span>.</span>Aop<span>.</span>ConfigEntityProperty <span>+=</span> <span>(<
         e<span>.</span>Result <span>=</span> <span>"1111"</span><span>;</span>
 <span>}</span><span>;</span>
 </code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br></div></div><p>这个解析有点复杂，当 <code>e.Expression</code> 很复杂的时候，我们还提供了 <code>e.FreeParse</code> 方法，使用它相当于调用 <code>FreeSql</code> 内置表达式解析引擎，辅助您进行解析。</p>
-<h2 id="修改-decimal-默认特性" tabindex="-1"> 修改 decimal 默认特性</h2>
-<p>因为默认 decimal 只支持 decimal(10,2)，范围太小，我们可以全局修改 decimal 类型的支持范围，比如支持 decimal(18,6)</p>
-<div><pre><code>fsql1<span>.</span>Aop<span>.</span>ConfigEntityProperty <span>+=</span> <span>(</span>s<span>,</span> e<span>)</span> <span>=></span>
-<span>{</span>
-    <span>if</span> <span>(</span>e<span>.</span>Property<span>.</span>PropertyType <span>==</span> <span>typeof</span><span>(</span><span><span>decimal</span></span><span>)</span><span>||</span> e<span>.</span>Property<span>.</span>PropertyType <span>==</span> <span>typeof</span><span>(</span><span><span>decimal</span><span>?</span></span><span>)</span><span>)</span>
-    <span>{</span>
-       e<span>.</span>ModifyResult<span>.</span>Precision <span>=</span> <span>18</span><span>;</span>
-       e<span>.</span>ModifyResult<span>.</span>Scale <span>=</span> <span>6</span><span>;</span>
-    <span>}</span>
-<span>}</span><span>;</span>
-</code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br></div></div>]]></content:encoded>
+]]></content:encoded>
     </item>
     <item>
       <title>级联保存</title>
@@ -6122,14 +6131,14 @@ Install-Package FreeSql.Provider.Sqlite
     <span>Func<span>&lt;</span>IServiceProvider<span>,</span> IFreeSql<span>></span></span> implementationFreeSql <span>=</span> r <span>=></span>
     <span>{</span>
         <span>IFreeSql</span> fsql <span>=</span> <span>new</span> <span>FreeSql<span>.</span>FreeSqlBuilder</span><span>(</span><span>)</span>
-            <span>.</span><span>UseConnectionString</span><span>(</span>FreeSql<span>.</span>DataType<span>.</span>Sqlite<span>,</span> <span>@"Data Source=db1.db"</span><span>)</span>
+            <span>.</span><span>UseConnectionString</span><span>(</span>FreeSql<span>.</span>DataType<span>.</span>Sqlite<span>,</span> <span>@"Data Source=freedb.db"</span><span>)</span>
+            <span>.</span><span>UseMonitorCommand</span><span>(</span>cmd <span>=></span> Console<span>.</span><span>WriteLine</span><span>(</span><span><span>$"Sql：</span><span><span>{</span><span>cmd<span>.</span>CommandText</span><span>}</span></span><span>"</span></span><span>)</span><span>)</span><span>//监听SQL语句</span>
             <span>.</span><span>UseAutoSyncStructure</span><span>(</span><span>true</span><span>)</span> <span>//自动同步实体结构到数据库，FreeSql不会扫描程序集，只有CRUD时才会生成表。</span>
             <span>.</span><span>Build</span><span>(</span><span>)</span><span>;</span>
         <span>return</span> fsql<span>;</span>
     <span>}</span><span>;</span>
     services<span>.</span><span><span>AddSingleton</span><span><span>&lt;</span>IFreeSql<span>></span></span></span><span>(</span>implementationFreeSql<span>)</span><span>;</span>
 <span>}</span>
-
 <span>public</span> <span><span>void</span></span> <span>Configure</span><span>(</span><span>IApplicationBuilder</span> app<span>,</span> <span>IWebHostEnvironment</span> env<span>)</span>
 <span>{</span>
     <span>//在项目启动时，从容器中获取IFreeSql实例，并执行一些操作：同步表，种子数据,FluentAPI等</span>
@@ -6145,23 +6154,22 @@ Install-Package FreeSql.Provider.Sqlite
 <span>Func<span>&lt;</span>IServiceProvider<span>,</span> IFreeSql<span>></span></span> implementationFreeSql <span>=</span> r <span>=></span>
 <span>{</span>
     <span>IFreeSql</span> fsql <span>=</span> <span>new</span> <span>FreeSql<span>.</span>FreeSqlBuilder</span><span>(</span><span>)</span>
-        <span>.</span><span>UseConnectionString</span><span>(</span>FreeSql<span>.</span>DataType<span>.</span>Sqlite<span>,</span> <span>@"Data Source=db1.db"</span><span>)</span>
+        <span>.</span><span>UseConnectionString</span><span>(</span>FreeSql<span>.</span>DataType<span>.</span>Sqlite<span>,</span> <span>@"Data Source=freedb.db"</span><span>)</span>
+        <span>.</span><span>UseMonitorCommand</span><span>(</span>cmd <span>=></span> Console<span>.</span><span>WriteLine</span><span>(</span><span><span>$"Sql：</span><span><span>{</span><span>cmd<span>.</span>CommandText</span><span>}</span></span><span>"</span></span><span>)</span><span>)</span><span>//监听SQL语句</span>
         <span>.</span><span>UseAutoSyncStructure</span><span>(</span><span>true</span><span>)</span> <span>//自动同步实体结构到数据库，FreeSql不会扫描程序集，只有CRUD时才会生成表。</span>
         <span>.</span><span>Build</span><span>(</span><span>)</span><span>;</span>
     <span>return</span> fsql<span>;</span>
 <span>}</span><span>;</span>
 builder<span>.</span>Services<span>.</span><span><span>AddSingleton</span><span><span>&lt;</span>IFreeSql<span>></span></span></span><span>(</span>implementationFreeSql<span>)</span><span>;</span>
 
-
 <span>WebApplication</span> app <span>=</span> builder<span>.</span><span>Build</span><span>(</span><span>)</span><span>;</span>
-
 <span>//在项目启动时，从容器中获取IFreeSql实例，并执行一些操作：同步表，种子数据,FluentAPI等</span>
 <span>using</span><span>(</span><span>IServiceScope</span> serviceScope <span>=</span> app<span>.</span>Services<span>.</span><span>CreateScope</span><span>(</span><span>)</span><span>)</span>
 <span>{</span>
     <span><span>var</span></span> fsql <span>=</span> serviceScope<span>.</span>ServiceProvider<span>.</span><span><span>GetRequiredService</span><span><span>&lt;</span>IFreeSql<span>></span></span></span><span>(</span><span>)</span><span>;</span>
     fsql<span>.</span>CodeFirst<span>.</span><span>SyncStructure</span><span>(</span><span>typeof</span><span>(</span><span>Topic</span><span>)</span><span>)</span><span>;</span><span>//Topic 为要同步的实体类</span>
 <span>}</span>
-</code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br><span>10</span><br><span>11</span><br><span>12</span><br><span>13</span><br><span>14</span><br><span>15</span><br><span>16</span><br><span>17</span><br><span>18</span><br><span>19</span><br><span>20</span><br></div></div></CodeGroupItem>
+</code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br><span>10</span><br><span>11</span><br><span>12</span><br><span>13</span><br><span>14</span><br><span>15</span><br><span>16</span><br><span>17</span><br><span>18</span><br><span>19</span><br></div></div></CodeGroupItem>
 </CodeGroup>
 <ul>
 <li><a href="/extra/idlebus-freesql.html">.NET Core 注入多个 FreeSql 实例</a></li>
@@ -6170,10 +6178,10 @@ builder<span>.</span>Services<span>.</span><span><span>AddSingleton</span><span>
 <div><pre><code><span>public</span> <span>class</span> <span>DB</span>
 <span>{</span>
    <span>static</span> Lazy<span>&lt;</span>IFreeSql<span>></span>sqliteLazy <span>=</span> <span>new</span> <span>Lazy<span>&lt;</span>IFreeSql<span>></span></span><span>(</span><span>(</span><span>)</span> <span>=></span> <span>new</span> <span>FreeSql<span>.</span>FreeSqlBuilder</span><span>(</span><span>)</span>
-         <span>.</span><span>UseConnectionString</span><span>(</span>FreeSql<span>.</span>DataType<span>.</span>Sqlite<span>,</span> <span>@"Data Source=db1.db"</span><span>)</span>
+         <span>.</span><span>UseMonitorCommand</span><span>(</span>cmd <span>=></span> Trace<span>.</span><span>WriteLine</span><span>(</span><span><span>$"Sql：</span><span><span>{</span><span>cmd<span>.</span>CommandText</span><span>}</span></span><span>"</span></span><span>)</span><span>)</span><span>//监听SQL语句,Trace在输入选项卡中查看</span>
+         <span>.</span><span>UseConnectionString</span><span>(</span>FreeSql<span>.</span>DataType<span>.</span>Sqlite<span>,</span> <span>@"Data Source=freedb.db"</span><span>)</span>
          <span>.</span><span>UseAutoSyncStructure</span><span>(</span><span>true</span><span>)</span> <span>//自动同步实体结构到数据库，FreeSql不会扫描程序集，只有CRUD时才会生成表。</span>
          <span>.</span><span>Build</span><span>(</span><span>)</span><span>)</span><span>;</span>
-
     <span>public</span> <span>static</span> <span>IFreeSql</span> Sqlite <span>=></span> sqliteLazy<span>.</span>Value<span>;</span>
 <span>}</span>
 </code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br></div></div><p>然后直接通过 <code>IFreeSql  fsql = DB.Sqlite;</code>  即可得到fsql实例。</p>
