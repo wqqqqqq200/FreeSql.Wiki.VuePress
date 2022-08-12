@@ -6,8 +6,8 @@
     <link>http://freesql.net/</link>
     <description>FreeSql Documents</description>
     <language>zh-CN</language>
-    <pubDate>Fri, 12 Aug 2022 05:39:27 GMT</pubDate>
-    <lastBuildDate>Fri, 12 Aug 2022 05:39:27 GMT</lastBuildDate>
+    <pubDate>Fri, 12 Aug 2022 15:33:42 GMT</pubDate>
+    <lastBuildDate>Fri, 12 Aug 2022 15:33:42 GMT</lastBuildDate>
     <generator>vuepress-plugin-feed2</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
     <item>
@@ -7630,7 +7630,7 @@ Assert<span>.</span><span>Equal</span><span>(</span><span>"中国[100000] -> 北
 <span><span>var</span></span> dto <span>=</span> <span>new</span> <span>[</span><span>]</span> <span>{</span> <span>1</span><span>,</span><span>2</span><span>,</span><span>3</span> <span>}</span><span>.</span><span>Select</span><span>(</span>a <span>=></span> <span>new</span> <span>Dto</span> <span>{</span> TypeId <span>=</span> a <span>}</span><span>)</span><span>.</span><span>ToList</span><span>(</span><span>)</span><span>;</span>
 dto<span>.</span><span>IncludeMany</span><span>(</span>d <span>=></span> d<span>.</span>GoodsList<span>.</span><span>Take</span><span>(</span><span>10</span><span>)</span><span>.</span><span>Where</span><span>(</span>gd <span>=></span> gd<span>.</span>TypeId <span>==</span> d<span>.</span>TypeId<span>)</span><span>)</span><span>;</span>
 
-<span>//执行后，dto 每个元素.Vods 将只有 10条记录</span>
+<span>//执行后，dto 每个元素.GoodsList 将只有 10条记录</span>
 </code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br><span>10</span><br><span>11</span><br></div></div><p>查询子集合表的部分字段，避免子集合字段过多的问题：</p>
 <div><pre><code>fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>Tag<span>></span></span></span><span>(</span><span>)</span><span>.</span><span>IncludeMany</span><span>(</span>a <span>=></span> a<span>.</span>Goods<span>.</span><span>Select</span><span>(</span>b <span>=></span> <span>new</span> <span>Goods</span> <span>{</span> Id <span>=</span> b<span>.</span>Id<span>,</span> Title <span>=</span> b<span>.</span>Title <span>}</span><span>)</span><span>)</span><span>;</span>
 <span>//只查询 goods 表 id, title 字段，再作填充</span>
