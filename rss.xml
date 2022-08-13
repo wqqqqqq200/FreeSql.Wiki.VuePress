@@ -6,8 +6,8 @@
     <link>http://freesql.net/</link>
     <description>FreeSql Documents</description>
     <language>zh-CN</language>
-    <pubDate>Sat, 13 Aug 2022 09:42:24 GMT</pubDate>
-    <lastBuildDate>Sat, 13 Aug 2022 09:42:24 GMT</lastBuildDate>
+    <pubDate>Sat, 13 Aug 2022 09:43:03 GMT</pubDate>
+    <lastBuildDate>Sat, 13 Aug 2022 09:43:03 GMT</lastBuildDate>
     <generator>vuepress-plugin-feed2</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
     <item>
@@ -7666,25 +7666,23 @@ dto<span>.</span><span>IncludeMany</span><span>(</span>d <span>=></span> d<span>
 </ul>
 <div><pre><code><span>DynamicFilterInfo</span> dyfilter <span>=</span> JsonConvert<span>.</span><span><span>DeserializeObject</span><span><span>&lt;</span>DynamicFilterInfo<span>></span></span></span><span>(</span><span>@"
 {
-  ""Logic"" : ""Or"",
-  ""Filters"" :
-  [
-    {
-      ""Field"" : ""Code"", ""Operator"" : ""NotContains"", ""Value"" : ""val1"", 
-      ""Filters"" : [{ ""Field"" : ""Name"", ""Operator"" : ""NotStartsWith"", ""Value"" : ""val2"" }]
-    },
-    {
-      ""Field"" : ""Parent.Code"", ""Operator"" : ""Equals"", ""Value"" : ""val11"",
-      ""Filters"" : [{ ""Field"" : ""Parent.Name"", ""Operator"" : ""Contains"", ""Value"" : ""val22"" }]
-    }
-  ]
+    ""Logic"": ""And"",
+    ""Filters"":
+    [
+        { ""Field"": ""id"", ""Operator"": ""Equals"", ""Value"": 1 },
+        {
+            ""Logic"": ""Or"",
+            ""Filters"":
+            [
+                { ""Field"": ""id"", ""Operator"": ""Equals"", ""Value"": 2 },
+                { ""Field"": ""id"", ""Operator"": ""Equals"", ""Value"": 3 }
+            ]
+        }
+    ]
 }"</span><span>)</span><span>;</span>
-fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>VM_District_Parent<span>></span></span></span><span>(</span><span>)</span><span>.</span><span>WhereDynamicFilter</span><span>(</span>dyfilter<span>)</span><span>.</span><span>ToList</span><span>(</span><span>)</span><span>;</span>
-<span>//SELECT a.""Code"", a.""Name"", a.""ParentCode"", a__Parent.""Code"" as4, a__Parent.""Name"" as5, a__Parent.""ParentCode"" as6</span>
-<span>//FROM ""D_District"" a</span>
-<span>//LEFT JOIN ""D_District"" a__Parent ON a__Parent.""Code"" = a.""ParentCode""</span>
-<span>//WHERE (not((a.""Code"") LIKE '%val1%') AND not((a.""Name"") LIKE 'val2%') OR a__Parent.""Code"" = 'val11' AND (a__Parent.""Name"") LIKE '%val22%')</span>
-</code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br><span>10</span><br><span>11</span><br><span>12</span><br><span>13</span><br><span>14</span><br><span>15</span><br><span>16</span><br><span>17</span><br><span>18</span><br><span>19</span><br><span>20</span><br></div></div><hr>
+fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>Region<span>></span></span></span><span>(</span><span>)</span><span>.</span><span>WhereDynamicFilter</span><span>(</span>dyfilter<span>)</span><span>.</span><span>ToList</span><span>(</span><span>)</span><span>;</span>
+<span>//WHERE id = 1 AND (id = 2 OR id = 3)</span>
+</code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br><span>10</span><br><span>11</span><br><span>12</span><br><span>13</span><br><span>14</span><br><span>15</span><br><span>16</span><br><span>17</span><br><span>18</span><br></div></div><hr>
 <h2 id="_12、iselect-todelete、iselect-toupdate" tabindex="-1"> 12、ISelect.ToDelete、ISelect.ToUpdate</h2>
 <p>默认 IDelete 不支持导航对象，多表关联等。ISelect.ToDelete 可将查询转为删除对象，以便支持导航对象或其他查询功能删除数据，如下：</p>
 <div><pre><code>fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>T1<span>></span></span></span><span>(</span><span>)</span><span>.</span><span>Where</span><span>(</span>a <span>=></span> a<span>.</span>Options<span>.</span>xxx <span>==</span> <span>1</span><span>)</span><span>.</span><span>ToDelete</span><span>(</span><span>)</span><span>.</span><span>ExecuteAffrows</span><span>(</span><span>)</span><span>;</span>
