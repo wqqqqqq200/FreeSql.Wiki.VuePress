@@ -6,8 +6,8 @@
     <link>http://freesql.net/</link>
     <description>FreeSql Documents</description>
     <language>zh-CN</language>
-    <pubDate>Sat, 13 Aug 2022 04:57:58 GMT</pubDate>
-    <lastBuildDate>Sat, 13 Aug 2022 04:57:58 GMT</lastBuildDate>
+    <pubDate>Sat, 13 Aug 2022 05:30:07 GMT</pubDate>
+    <lastBuildDate>Sat, 13 Aug 2022 05:30:07 GMT</lastBuildDate>
     <generator>vuepress-plugin-feed2</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
     <item>
@@ -9441,7 +9441,7 @@ Assert<span>.</span><span>Equal</span><span>(</span><span>"中国[100000] -> 北
 
 <span><span>Select</span><span><span>&lt;</span>Tag<span>></span></span></span><span>(</span><span>)</span><span>.</span><span>Where</span><span>(</span>a <span>=></span> a<span>.</span>Parent<span>.</span>Parent<span>.</span>Name <span>==</span> <span>"1"</span><span>)</span><span>.</span><span>ToList</span><span>(</span><span>true</span><span>)</span><span>;</span>
 <span>//这样写，不需要再标记 Join，解析表达式时自动处理成 LeftJoin</span>
-</code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br></div></div><h2 id="_2、导航属性-onetomany-manytomany" tabindex="-1"> 2、导航属性 OneToMany/ManyToMany</h2>
+</code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br></div></div><h2 id="_2、导航属性-onetomany-manytomany-pgarraytomany" tabindex="-1"> 2、导航属性 OneToMany/ManyToMany/PgArrayToMany</h2>
 <p>IncludeMany 贪婪加载集合的导航属性，其实是分两次查询，在 ToList 后进行了数据重装。</p>
 <div><pre><code><span><span>Select</span><span><span>&lt;</span>Tag<span>></span></span></span><span>(</span><span>)</span><span>.</span><span>IncludeMany</span><span>(</span>a <span>=></span> a<span>.</span>Songs<span>)</span><span>.</span><span>ToList</span><span>(</span><span>)</span><span>;</span>
 </code></pre><div aria-hidden="true"><span>1</span><br></div></div><p>IncludeMany 有第二个参数，可以进行二次查询前的修饰工作。</p>
