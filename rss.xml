@@ -6,8 +6,8 @@
     <link>http://freesql.net/</link>
     <description>FreeSql Documents</description>
     <language>zh-CN</language>
-    <pubDate>Fri, 12 Aug 2022 15:40:47 GMT</pubDate>
-    <lastBuildDate>Fri, 12 Aug 2022 15:40:47 GMT</lastBuildDate>
+    <pubDate>Sat, 13 Aug 2022 04:57:58 GMT</pubDate>
+    <lastBuildDate>Sat, 13 Aug 2022 04:57:58 GMT</lastBuildDate>
     <generator>vuepress-plugin-feed2</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
     <item>
@@ -6184,7 +6184,10 @@ builder<span>.</span>Services<span>.</span><span><span>AddSingleton</span><span>
          <span>.</span><span>Build</span><span>(</span><span>)</span><span>)</span><span>;</span>
     <span>public</span> <span>static</span> <span>IFreeSql</span> Sqlite <span>=></span> sqliteLazy<span>.</span>Value<span>;</span>
 <span>}</span>
-</code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br></div></div><p>然后直接通过 <code>IFreeSql  fsql = DB.Sqlite;</code>  即可得到fsql实例。</p>
+</code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br></div></div><blockquote>
+<p>注意：<code>class DB\&lt;T\&gt;</code> 泛型类不适合定义 static 单例</p>
+</blockquote>
+<p>然后直接通过 <code>IFreeSql  fsql = DB.Sqlite;</code>  即可得到 fsql 实例。</p>
 <p><code>IFreeSql</code> 是 <code>ORM</code> 最顶级对象，所有操作都是使用它的方法或者属性：</p>
 <div><pre><code>
 fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>T<span>></span></span></span><span>(</span><span>)</span><span>;</span> <span>//查询</span>

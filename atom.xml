@@ -3,7 +3,7 @@
   <id>http://freesql.net/</id>
   <title>FreeSql 官方文档</title>
   <subtitle>FreeSql Documents</subtitle>
-  <updated>2022-08-12T15:40:47.260Z</updated>
+  <updated>2022-08-13T04:57:58.625Z</updated>
   <generator>vuepress-plugin-feed2</generator>
   <link rel="self" href="http://freesql.net/atom.xml"/>
   <link rel="alternate" href="http://freesql.net/"/>
@@ -6083,7 +6083,7 @@ fsql<span>.</span>CodeFirst<span>.</span><span><span>Entity</span><span><span>&l
     <title type="html">入门</title>
     <id>http://freesql.net/guide/getting-started.html</id>
     <link href="http://freesql.net/guide/getting-started.html"/>
-    <updated>2022-08-12T05:37:54.000Z</updated>
+    <updated>2022-08-13T04:56:38.000Z</updated>
     <content type="html"><![CDATA[<h1 id="入门" tabindex="-1"> 入门</h1>
 <h2 id="模型" tabindex="-1"> 模型</h2>
 <p><code>FreeSql</code> 使用模型执行数据访问，模型由实体类表示数据库表或视图，用于查询和保存数据。</p>
@@ -6177,7 +6177,10 @@ builder<span>.</span>Services<span>.</span><span><span>AddSingleton</span><span>
          <span>.</span><span>Build</span><span>(</span><span>)</span><span>)</span><span>;</span>
     <span>public</span> <span>static</span> <span>IFreeSql</span> Sqlite <span>=></span> sqliteLazy<span>.</span>Value<span>;</span>
 <span>}</span>
-</code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br></div></div><p>然后直接通过 <code>IFreeSql  fsql = DB.Sqlite;</code>  即可得到fsql实例。</p>
+</code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br></div></div><blockquote>
+<p>注意：<code>class DB\&lt;T\&gt;</code> 泛型类不适合定义 static 单例</p>
+</blockquote>
+<p>然后直接通过 <code>IFreeSql  fsql = DB.Sqlite;</code>  即可得到 fsql 实例。</p>
 <p><code>IFreeSql</code> 是 <code>ORM</code> 最顶级对象，所有操作都是使用它的方法或者属性：</p>
 <div><pre><code>
 fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>T<span>></span></span></span><span>(</span><span>)</span><span>;</span> <span>//查询</span>
