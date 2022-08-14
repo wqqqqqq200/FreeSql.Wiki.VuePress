@@ -6,8 +6,8 @@
     <link>http://freesql.net/</link>
     <description>FreeSql Documents</description>
     <language>zh-CN</language>
-    <pubDate>Sat, 13 Aug 2022 09:43:03 GMT</pubDate>
-    <lastBuildDate>Sat, 13 Aug 2022 09:43:03 GMT</lastBuildDate>
+    <pubDate>Sun, 14 Aug 2022 09:04:52 GMT</pubDate>
+    <lastBuildDate>Sun, 14 Aug 2022 09:04:52 GMT</lastBuildDate>
     <generator>vuepress-plugin-feed2</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
     <item>
@@ -4546,7 +4546,7 @@ fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>T<span>></span
 <p>当不想解析指定参数时，使用特性 [RawValue] 标记</p>
 </blockquote>
 <h2 id="参数化" tabindex="-1"> 参数化</h2>
-<p>在之前 Where(lambda) 解析出来的是纯文本，做了防止注入功能，对数据库执行计划要求高的，现在可以开启 lambda 参数化功能。</p>
+<p>Where(lambda) 解析出来的默认是纯文本（已防止SQL注入），对数据库执行计划要求特别高，可以开启 lambda 参数化功能。</p>
 <div><pre><code><span><span>var</span></span> fsql <span>=</span> <span>new</span> <span>FreeSqlBuilder</span><span>(</span><span>)</span> <span>//请务必定义成 Singleton 单例模式</span>
   <span>.</span><span>UseGenerateCommandParameterWithLambda</span><span>(</span><span>true</span><span>)</span>
   <span>..</span><span>.</span>

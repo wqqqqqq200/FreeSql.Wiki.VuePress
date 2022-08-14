@@ -3,7 +3,7 @@
   <id>http://freesql.net/</id>
   <title>FreeSql 官方文档</title>
   <subtitle>FreeSql Documents</subtitle>
-  <updated>2022-08-13T09:43:03.630Z</updated>
+  <updated>2022-08-14T09:04:52.705Z</updated>
   <generator>vuepress-plugin-feed2</generator>
   <link rel="self" href="http://freesql.net/atom.xml"/>
   <link rel="alternate" href="http://freesql.net/"/>
@@ -4336,7 +4336,7 @@ fsql<span>.</span><span>Insert</span><span>(</span><span>new</span> <span>Type</
     <title type="html">表达式函数</title>
     <id>http://freesql.net/guide/expression-function.html</id>
     <link href="http://freesql.net/guide/expression-function.html"/>
-    <updated>2022-08-11T07:35:49.000Z</updated>
+    <updated>2022-08-14T09:03:36.000Z</updated>
     <content type="html"><![CDATA[<h1 id="表达式函数" tabindex="-1"> 表达式函数</h1>
 <p>这是 <code>FreeSql</code> 非常特色的功能之一，深入细化函数解析，所支持的类型基本都可以使用对应的表达式函数，例如 日期、字符串、<code>IN</code>查询、数组（<code>PostgreSQL</code>的数组）、字典（PostgreSQL HStore)等等。</p>
 <h2 id="动态lambda表达式" tabindex="-1"> 动态Lambda表达式</h2>
@@ -4540,7 +4540,7 @@ fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>T<span>></span
 <p>当不想解析指定参数时，使用特性 [RawValue] 标记</p>
 </blockquote>
 <h2 id="参数化" tabindex="-1"> 参数化</h2>
-<p>在之前 Where(lambda) 解析出来的是纯文本，做了防止注入功能，对数据库执行计划要求高的，现在可以开启 lambda 参数化功能。</p>
+<p>Where(lambda) 解析出来的默认是纯文本（已防止SQL注入），对数据库执行计划要求特别高，可以开启 lambda 参数化功能。</p>
 <div><pre><code><span><span>var</span></span> fsql <span>=</span> <span>new</span> <span>FreeSqlBuilder</span><span>(</span><span>)</span> <span>//请务必定义成 Singleton 单例模式</span>
   <span>.</span><span>UseGenerateCommandParameterWithLambda</span><span>(</span><span>true</span><span>)</span>
   <span>..</span><span>.</span>
