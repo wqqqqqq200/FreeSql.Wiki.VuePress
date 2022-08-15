@@ -6,8 +6,8 @@
     <link>http://freesql.net/</link>
     <description>FreeSql Documents</description>
     <language>zh-CN</language>
-    <pubDate>Mon, 15 Aug 2022 13:54:17 GMT</pubDate>
-    <lastBuildDate>Mon, 15 Aug 2022 13:54:17 GMT</lastBuildDate>
+    <pubDate>Mon, 15 Aug 2022 13:56:19 GMT</pubDate>
+    <lastBuildDate>Mon, 15 Aug 2022 13:56:19 GMT</lastBuildDate>
     <generator>vuepress-plugin-feed2</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
     <item>
@@ -8906,6 +8906,11 @@ repo<span>.</span><span>Update</span><span>(</span>item<span>)</span><span>;</sp
 <td>DataFilter</td>
 <td>IDataFilter&lt;TEntity&gt;</td>
 <td>仓储过滤器，本对象内生效</td>
+</tr>
+<tr>
+<td>UpdateDiy</td>
+<td>IUpdate&lt;TEntity&gt;</td>
+<td>准备更新数据，与仓储同事务</td>
 </tr>
 <tr>
 <td>Select</td>
