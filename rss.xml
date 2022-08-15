@@ -6,8 +6,8 @@
     <link>http://freesql.net/</link>
     <description>FreeSql Documents</description>
     <language>zh-CN</language>
-    <pubDate>Mon, 15 Aug 2022 08:56:20 GMT</pubDate>
-    <lastBuildDate>Mon, 15 Aug 2022 08:56:20 GMT</lastBuildDate>
+    <pubDate>Mon, 15 Aug 2022 13:54:17 GMT</pubDate>
+    <lastBuildDate>Mon, 15 Aug 2022 13:54:17 GMT</lastBuildDate>
     <generator>vuepress-plugin-feed2</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
     <item>
@@ -8967,7 +8967,7 @@ repo<span>.</span><span>Update</span><span>(</span>item<span>)</span><span>;</sp
 <td>批量删除数据</td>
 </tr>
 <tr>
-<td>DeleteCascadeByDatabase</td>
+<td><a href="https://freesql.net/guide/cascade-delete.html" target="_blank" rel="noopener noreferrer">DeleteCascadeByDatabase</a></td>
 <td>List&lt;object&gt;</td>
 <td>Lambda</td>
 <td>根据导航属性递归数据库删除数据</td>
@@ -9027,13 +9027,13 @@ repo<span>.</span><span>Update</span><span>(</span>item<span>)</span><span>;</sp
 <td>只附加实体的主键数据到状态管理</td>
 </tr>
 <tr>
-<td><a href="%E8%81%94%E7%BA%A7%E4%BF%9D%E5%AD%98#savemany">SaveMany</a></td>
+<td><a href="/guide/cascade-saving.html">SaveMany</a></td>
 <td>-</td>
 <td>TEntity, string</td>
 <td>保存实体的指定 ManyToMany/OneToMany 导航属性（完整对比）</td>
 </tr>
 <tr>
-<td><a href="%E6%B7%BB%E5%8A%A0%E6%88%96%E4%BF%AE%E6%94%B9#3beginedit-%E6%89%B9%E9%87%8F%E7%BC%96%E8%BE%91">BeginEdit</a></td>
+<td><a href="/guide/insert-or-update.html#_4%E3%80%81beginedit-%E6%89%B9%E9%87%8F%E7%BC%96%E8%BE%91">BeginEdit</a></td>
 <td>-</td>
 <td>List&lt;TEntity&gt;</td>
 <td>准备编辑一个 List 实体</td>

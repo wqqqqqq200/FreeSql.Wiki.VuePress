@@ -3,7 +3,7 @@
   <id>http://freesql.net/</id>
   <title>FreeSql 官方文档</title>
   <subtitle>FreeSql Documents</subtitle>
-  <updated>2022-08-15T08:56:20.990Z</updated>
+  <updated>2022-08-15T13:54:17.367Z</updated>
   <generator>vuepress-plugin-feed2</generator>
   <link rel="self" href="http://freesql.net/atom.xml"/>
   <link rel="alternate" href="http://freesql.net/"/>
@@ -8752,7 +8752,7 @@ fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>T<span>></span
     <title type="html">仓储</title>
     <id>http://freesql.net/guide/repository.html</id>
     <link href="http://freesql.net/guide/repository.html"/>
-    <updated>2022-08-11T15:34:05.000Z</updated>
+    <updated>2022-08-15T13:53:02.000Z</updated>
     <content type="html"><![CDATA[<h1 id="仓储" tabindex="-1"> 仓储</h1>
 <p>FreeSql.Repository 作为扩展，实现了通用仓储层功能。与其他规范标准一样，仓储层也有相应的规范定义。FreeSql.Repository 参考 abp vnext 接口，定义和实现基础的仓储层（CURD），应该算比较通用的方法吧。</p>
 <h2 id="特性" tabindex="-1"> 特性</h2>
@@ -8958,7 +8958,7 @@ repo<span>.</span><span>Update</span><span>(</span>item<span>)</span><span>;</sp
 <td>批量删除数据</td>
 </tr>
 <tr>
-<td>DeleteCascadeByDatabase</td>
+<td><a href="https://freesql.net/guide/cascade-delete.html" target="_blank" rel="noopener noreferrer">DeleteCascadeByDatabase</a></td>
 <td>List&lt;object&gt;</td>
 <td>Lambda</td>
 <td>根据导航属性递归数据库删除数据</td>
@@ -9018,13 +9018,13 @@ repo<span>.</span><span>Update</span><span>(</span>item<span>)</span><span>;</sp
 <td>只附加实体的主键数据到状态管理</td>
 </tr>
 <tr>
-<td><a href="%E8%81%94%E7%BA%A7%E4%BF%9D%E5%AD%98#savemany">SaveMany</a></td>
+<td><a href="/guide/cascade-saving.html">SaveMany</a></td>
 <td>-</td>
 <td>TEntity, string</td>
 <td>保存实体的指定 ManyToMany/OneToMany 导航属性（完整对比）</td>
 </tr>
 <tr>
-<td><a href="%E6%B7%BB%E5%8A%A0%E6%88%96%E4%BF%AE%E6%94%B9#3beginedit-%E6%89%B9%E9%87%8F%E7%BC%96%E8%BE%91">BeginEdit</a></td>
+<td><a href="/guide/insert-or-update.html#_4%E3%80%81beginedit-%E6%89%B9%E9%87%8F%E7%BC%96%E8%BE%91">BeginEdit</a></td>
 <td>-</td>
 <td>List&lt;TEntity&gt;</td>
 <td>准备编辑一个 List 实体</td>
