@@ -6,8 +6,8 @@
     <link>http://freesql.net/</link>
     <description>FreeSql Documents</description>
     <language>zh-CN</language>
-    <pubDate>Wed, 17 Aug 2022 03:37:37 GMT</pubDate>
-    <lastBuildDate>Wed, 17 Aug 2022 03:37:37 GMT</lastBuildDate>
+    <pubDate>Wed, 17 Aug 2022 04:16:35 GMT</pubDate>
+    <lastBuildDate>Wed, 17 Aug 2022 04:16:35 GMT</lastBuildDate>
     <generator>vuepress-plugin-feed2</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
     <item>
@@ -4500,14 +4500,24 @@ fsql<span>.</span><span>Insert</span><span>(</span><span>new</span> <span>Type</
 <p>这是 <code>FreeSql</code> 非常特色的功能之一，深入细化函数解析，所支持的类型基本都可以使用对应的表达式函数，例如 日期、字符串、<code>IN</code>查询、数组（<code>PostgreSQL</code>的数组）、字典（PostgreSQL HStore)等等。</p>
 <h2 id="动态lambda表达式" tabindex="-1"> 动态Lambda表达式</h2>
 <ul>
-<li><code>And</code>、<code>Or</code>扩展方法 <a href="https://github.com/dotnetcore/FreeSql/blob/master/FreeSql/Extensions/LambadaExpressionExtensions.cs" target="_blank" rel="noopener noreferrer">LambadaExpressionExtensions.cs</a></li>
+<li>
+<p><code>And</code>、<code>Or</code>扩展方法 <a href="https://github.com/dotnetcore/FreeSql/blob/master/FreeSql/Extensions/LambadaExpressionExtensions.cs" target="_blank" rel="noopener noreferrer">LambadaExpressionExtensions.cs</a></p>
+</li>
+<li>
+<p>单表</p>
+</li>
 </ul>
-<p>示例</p>
 <div><pre><code><span>Expression<span>&lt;</span>Func<span>&lt;</span>T<span>,</span> <span>bool</span><span>></span><span>></span></span> <span>where</span> <span>=</span> <span>null</span><span>;</span>
 <span>where</span> <span>=</span> <span>where</span><span>.</span><span>And</span><span>(</span>b <span>=></span> b<span>.</span>num <span>></span> <span>0</span><span>)</span><span>;</span>
 <span>where</span> <span>=</span> <span>where</span><span>.</span><span>Or</span><span>(</span>b <span>=></span> b<span>.</span>num <span>></span> <span>0</span><span>)</span><span>;</span>
-fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>T<span>></span></span></span><span>(</span><span>)</span><span>.</span><span>Where</span><span>(</span><span>where</span><span>)</span><span>;</span>
-</code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br></div></div><h2 id="in查询" tabindex="-1"> In查询</h2>
+fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>T<span>></span></span></span><span>(</span><span>)</span><span>.</span><span>Where</span><span>(</span><span>where</span><span>)</span>
+</code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br></div></div><ul>
+<li>多表</li>
+</ul>
+<div><pre><code><span>Expression<span>&lt;</span>Func<span>&lt;</span>HzyTuple<span>&lt;</span>T1<span>,</span> T2<span>,</span> T3<span>,</span> T4<span>,</span> T5<span>,</span> T6<span>></span><span>,</span> <span>bool</span><span>></span><span>></span></span> <span>where</span> <span>=</span> <span>null</span><span>;</span>
+<span>where</span> <span>=</span> <span>where</span><span>.</span><span>Or</span><span>(</span>a <span>=></span> a<span>.</span>t6<span>.</span>Id <span>></span> <span>0</span><span>)</span><span>;</span>
+fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>T1<span>,</span> T2<span>,</span> T3<span>,</span> T4<span>,</span> T5<span>,</span> T6<span>></span></span></span><span>(</span><span>)</span><span>.</span><span>Where</span><span>(</span><span>where</span><span>)</span>
+</code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br></div></div><h2 id="in查询" tabindex="-1"> In查询</h2>
 <div><pre><code><span><span>var</span></span> t1 <span>=</span> fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>T<span>></span></span></span><span>(</span><span>)</span>
   <span>.</span><span>Where</span><span>(</span>a <span>=></span> <span>new</span><span>[</span><span>]</span> <span>{</span> <span>1</span><span>,</span> <span>2</span><span>,</span> <span>3</span> <span>}</span><span>.</span><span>Contains</span><span>(</span>a<span>.</span>Id<span>)</span><span>)</span>
   <span>.</span><span>ToList</span><span>(</span><span>)</span><span>;</span>
