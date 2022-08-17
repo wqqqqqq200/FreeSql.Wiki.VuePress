@@ -6,8 +6,8 @@
     <link>http://freesql.net/</link>
     <description>FreeSql Documents</description>
     <language>zh-CN</language>
-    <pubDate>Wed, 17 Aug 2022 04:16:35 GMT</pubDate>
-    <lastBuildDate>Wed, 17 Aug 2022 04:16:35 GMT</lastBuildDate>
+    <pubDate>Wed, 17 Aug 2022 11:57:48 GMT</pubDate>
+    <lastBuildDate>Wed, 17 Aug 2022 11:57:48 GMT</lastBuildDate>
     <generator>vuepress-plugin-feed2</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
     <item>
@@ -6617,7 +6617,19 @@ blog<span>.</span>BlogId <span>=</span> <span>(</span><span>int</span><span>)</s
   <span>.</span><span>SetSource</span><span>(</span>items<span>)</span> <span>//需要操作的数据</span>
   <span>//.IfExistsDoNothing() //如果数据存在，啥事也不干（相当于只有不存在数据时才插入）</span>
   <span>.</span><span>ExecuteAffrows</span><span>(</span><span>)</span><span>;</span>
-</code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br></div></div><p>当实体类有自增属性时，批量 InsertOrUpdate 最多可被拆成两次执行，内部计算出未设置自增值、和有设置自增值的数据，分别执行 insert into 和 上面讲到的 merge into 两种命令（采用事务执行）。</p>
+
+<span>//或者..</span>
+<span><span>var</span></span> sql <span>=</span> fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>T2<span>,</span> T3<span>></span></span></span><span>(</span><span>)</span>
+  <span>.</span><span>ToSql</span><span>(</span><span>(</span>a<span>,</span> b<span>)</span> <span>=></span> <span>new</span>
+  <span>{</span>
+    id <span>=</span> a<span>.</span>id <span>+</span> <span>1</span><span>,</span>
+    name <span>=</span> <span>"xxx"</span>
+  <span>}</span><span>,</span> FieldAliasOptions<span>.</span>AsProperty<span>)</span><span>;</span>
+
+fsql<span>.</span><span><span>InsertOrUpdate</span><span><span>&lt;</span>T<span>></span></span></span><span>(</span><span>)</span>
+  <span>.</span><span>SetSource</span><span>(</span>sql<span>)</span>
+  <span>.</span><span>ExecuteAffrows</span><span>(</span><span>)</span><span>;</span>
+</code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br><span>10</span><br><span>11</span><br><span>12</span><br><span>13</span><br><span>14</span><br><span>15</span><br><span>16</span><br></div></div><p>当实体类有自增属性时，批量 InsertOrUpdate 最多可被拆成两次执行，内部计算出未设置自增值、和有设置自增值的数据，分别执行 insert into 和 上面讲到的 merge into 两种命令（采用事务执行）。</p>
 <p>注意：FreeSql.Repository 通用仓储也有 InsertOrUpdate 方法，它们的机制不一样。</p>
 <hr>
 <h2 id="_2、字典插入或更新" tabindex="-1"> 2、字典插入或更新</h2>
