@@ -6,8 +6,8 @@
     <link>http://freesql.net/</link>
     <description>FreeSql Documents</description>
     <language>zh-CN</language>
-    <pubDate>Wed, 17 Aug 2022 03:32:20 GMT</pubDate>
-    <lastBuildDate>Wed, 17 Aug 2022 03:32:20 GMT</lastBuildDate>
+    <pubDate>Wed, 17 Aug 2022 03:37:37 GMT</pubDate>
+    <lastBuildDate>Wed, 17 Aug 2022 03:37:37 GMT</lastBuildDate>
     <generator>vuepress-plugin-feed2</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
     <item>
@@ -54,7 +54,16 @@ fsql<span>.</span><span>InsertOrUpdateDict</span><span>(</span>dic<span>)</span>
 <h2 id="动态条件" tabindex="-1"> 动态条件</h2>
 <p>1、ISelect.Where(string sql) 使用原生条件：</p>
 <div><pre><code>fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>Region<span>></span></span></span><span>(</span><span>)</span><span>.</span><span>Where</span><span>(</span><span>"a.id > 0"</span><span>)</span> <span>//提示：存在SQL注入安全问题</span>
-</code></pre><div aria-hidden="true"><span>1</span><br></div></div><p>2、ISelect.WhereDynamicFilter 方法实现动态过滤条件（与前端交互），支持的操作符：</p>
+</code></pre><div aria-hidden="true"><span>1</span><br></div></div><p>2、动态 Lambda 表达式</p>
+<ul>
+<li><code>And</code>、<code>Or</code>扩展方法 <a href="https://github.com/dotnetcore/FreeSql/blob/master/FreeSql/Extensions/LambadaExpressionExtensions.cs" target="_blank" rel="noopener noreferrer">LambadaExpressionExtensions.cs</a></li>
+</ul>
+<div><pre><code><span>Expression<span>&lt;</span>Func<span>&lt;</span>Region<span>,</span> <span>bool</span><span>></span><span>></span></span> <span>where</span> <span>=</span> <span>null</span><span>;</span>
+<span>where</span> <span>=</span> <span>where</span><span>.</span><span>And</span><span>(</span>b <span>=></span> b<span>.</span>Id <span>></span> <span>10</span><span>)</span><span>;</span>
+<span>where</span> <span>=</span> <span>where</span><span>.</span><span>Or</span><span>(</span>b <span>=></span> b<span>.</span>Id <span>==</span> <span>1</span><span>)</span><span>;</span>
+fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>Region<span>></span></span></span><span>(</span><span>)</span><span>.</span><span>Where</span><span>(</span><span>where</span><span>)</span><span>.</span><span>ToList</span><span>(</span><span>)</span><span>;</span>
+<span>//WHERE id > 10 OR id = 1</span>
+</code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br></div></div><p>3、ISelect.WhereDynamicFilter 方法实现动态过滤条件（与前端交互），支持的操作符：</p>
 <ul>
 <li>Contains/StartsWith/EndsWith/NotContains/NotStartsWith/NotEndsWith：包含/不包含，like '%xx%'，或者 like 'xx%'，或者 like '%xx'</li>
 <li>Equal/NotEqual：等于/不等于</li>
