@@ -3,7 +3,7 @@
   <id>http://freesql.net/</id>
   <title>FreeSql 官方文档</title>
   <subtitle>FreeSql Documents</subtitle>
-  <updated>2022-08-15T18:13:13.144Z</updated>
+  <updated>2022-08-17T03:19:30.886Z</updated>
   <generator>vuepress-plugin-feed2</generator>
   <link rel="self" href="http://freesql.net/atom.xml"/>
   <link rel="alternate" href="http://freesql.net/"/>
@@ -4214,7 +4214,7 @@ repo<span>.</span><span>Delete</span><span>(</span>groups<span>)</span><span>;</
     <title type="html">实体特性✨</title>
     <id>http://freesql.net/guide/entity-attribute.html</id>
     <link href="http://freesql.net/guide/entity-attribute.html"/>
-    <updated>2022-07-27T01:48:44.000Z</updated>
+    <updated>2022-08-17T03:18:17.000Z</updated>
     <content type="html"><![CDATA[<h1 id="实体特性✨" tabindex="-1"> 实体特性✨</h1>
 <p>v1.4.0+ 已自动识别 EFCore 实体特性 Key/Required/NotMapped/MaxLength/StringLength/DatabaseGenerated/Table/Column</p>
 <h2 id="名称" tabindex="-1"> 名称</h2>
@@ -4264,6 +4264,7 @@ repo<span>.</span><span>Delete</span><span>(</span>groups<span>)</span><span>;</
 </code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br></div></div><p>约定：</p>
 <ul>
 <li>当没有指明主键时，标记自增的成员将成为主键；</li>
+<li>DbFirst 模式序列：[Column(IsIdentity = true, InsertValueSql = &quot;seqname.nextval&quot;)]</li>
 </ul>
 <h2 id="唯一键-unique-key-、索引-index" tabindex="-1"> 唯一键(Unique Key)、索引（Index）</h2>
 <div><pre><code><span>[</span><span><span>Index</span><span><span>(</span><span>"uk_phone"</span><span>,</span> <span>"phone"</span><span>,</span> <span>true</span><span>)</span></span></span><span>]</span>

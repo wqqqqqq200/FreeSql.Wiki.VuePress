@@ -6,8 +6,8 @@
     <link>http://freesql.net/</link>
     <description>FreeSql Documents</description>
     <language>zh-CN</language>
-    <pubDate>Mon, 15 Aug 2022 18:13:13 GMT</pubDate>
-    <lastBuildDate>Mon, 15 Aug 2022 18:13:13 GMT</lastBuildDate>
+    <pubDate>Wed, 17 Aug 2022 03:19:30 GMT</pubDate>
+    <lastBuildDate>Wed, 17 Aug 2022 03:19:30 GMT</lastBuildDate>
     <generator>vuepress-plugin-feed2</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
     <item>
@@ -4270,6 +4270,7 @@ repo<span>.</span><span>Delete</span><span>(</span>groups<span>)</span><span>;</
 </code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br></div></div><p>约定：</p>
 <ul>
 <li>当没有指明主键时，标记自增的成员将成为主键；</li>
+<li>DbFirst 模式序列：[Column(IsIdentity = true, InsertValueSql = &quot;seqname.nextval&quot;)]</li>
 </ul>
 <h2 id="唯一键-unique-key-、索引-index" tabindex="-1"> 唯一键(Unique Key)、索引（Index）</h2>
 <div><pre><code><span>[</span><span><span>Index</span><span><span>(</span><span>"uk_phone"</span><span>,</span> <span>"phone"</span><span>,</span> <span>true</span><span>)</span></span></span><span>]</span>
