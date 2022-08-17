@@ -6,8 +6,8 @@
     <link>http://freesql.net/</link>
     <description>FreeSql Documents</description>
     <language>zh-CN</language>
-    <pubDate>Wed, 17 Aug 2022 03:19:30 GMT</pubDate>
-    <lastBuildDate>Wed, 17 Aug 2022 03:19:30 GMT</lastBuildDate>
+    <pubDate>Wed, 17 Aug 2022 03:28:47 GMT</pubDate>
+    <lastBuildDate>Wed, 17 Aug 2022 03:28:47 GMT</lastBuildDate>
     <generator>vuepress-plugin-feed2</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
     <item>
@@ -6800,6 +6800,9 @@ items<span>[</span><span>0</span><span>]</span><span>.</span>Id <span>=</span> i
 repo<span>.</span><span>Insert</span><span>(</span>items<span>[</span><span>0</span><span>]</span><span>)</span><span>;</span>
 </code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br></div></div><blockquote>
 <p>内部会将插入后的自增值填充给 items[0].Id (支持批量插入回填)</p>
+</blockquote>
+<blockquote>
+<p>DbFirst 模式序列：[Column(IsIdentity = true, InsertValueSql = &quot;seqname.nextval&quot;)]</p>
 </blockquote>
 <h2 id="_2、批量插入" tabindex="-1"> 2、批量插入</h2>
 <div><pre><code><span><span>var</span></span> t2 <span>=</span> fsql<span>.</span><span>Insert</span><span>(</span>items<span>)</span><span>.</span><span>ExecuteAffrows</span><span>(</span><span>)</span><span>;</span>
