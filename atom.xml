@@ -3,7 +3,7 @@
   <id>http://freesql.net/</id>
   <title>FreeSql 官方文档</title>
   <subtitle>FreeSql Documents</subtitle>
-  <updated>2022-08-17T03:28:47.295Z</updated>
+  <updated>2022-08-17T03:32:20.928Z</updated>
   <generator>vuepress-plugin-feed2</generator>
   <link rel="self" href="http://freesql.net/atom.xml"/>
   <link rel="alternate" href="http://freesql.net/"/>
@@ -4480,7 +4480,7 @@ fsql<span>.</span><span>Insert</span><span>(</span><span>new</span> <span>Type</
     <title type="html">表达式函数</title>
     <id>http://freesql.net/guide/expression-function.html</id>
     <link href="http://freesql.net/guide/expression-function.html"/>
-    <updated>2022-08-14T09:03:36.000Z</updated>
+    <updated>2022-08-17T03:31:05.000Z</updated>
     <content type="html"><![CDATA[<h1 id="表达式函数" tabindex="-1"> 表达式函数</h1>
 <p>这是 <code>FreeSql</code> 非常特色的功能之一，深入细化函数解析，所支持的类型基本都可以使用对应的表达式函数，例如 日期、字符串、<code>IN</code>查询、数组（<code>PostgreSQL</code>的数组）、字典（PostgreSQL HStore)等等。</p>
 <h2 id="动态lambda表达式" tabindex="-1"> 动态Lambda表达式</h2>
@@ -4491,13 +4491,8 @@ fsql<span>.</span><span>Insert</span><span>(</span><span>new</span> <span>Type</
 <div><pre><code><span>Expression<span>&lt;</span>Func<span>&lt;</span>T<span>,</span> <span>bool</span><span>></span><span>></span></span> <span>where</span> <span>=</span> <span>null</span><span>;</span>
 <span>where</span> <span>=</span> <span>where</span><span>.</span><span>And</span><span>(</span>b <span>=></span> b<span>.</span>num <span>></span> <span>0</span><span>)</span><span>;</span>
 <span>where</span> <span>=</span> <span>where</span><span>.</span><span>Or</span><span>(</span>b <span>=></span> b<span>.</span>num <span>></span> <span>0</span><span>)</span><span>;</span>
-</code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br></div></div><p>动态拼接<code>Or</code>,通过<code>Or</code>扩展方法动态拼接<code>Lambda</code>表达式</p>
-<div><pre><code><span>Expression<span>&lt;</span>Func<span>&lt;</span>T<span>,</span> <span>bool</span><span>></span><span>></span></span> <span>where</span> <span>=</span> <span>null</span><span>;</span>
-<span>if</span> <span>(</span>xxx<span>)</span>
-<span>{</span>
-   <span>where</span> <span>=</span> <span>where</span><span>.</span><span>Or</span><span>(</span>b <span>=></span> b<span>.</span>num <span>></span> <span>0</span><span>)</span><span>;</span>  
-<span>}</span>
-</code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br></div></div><h2 id="in查询" tabindex="-1"> In查询</h2>
+fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>T<span>></span></span></span><span>(</span><span>)</span><span>.</span><span>Where</span><span>(</span><span>where</span><span>)</span><span>;</span>
+</code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br></div></div><h2 id="in查询" tabindex="-1"> In查询</h2>
 <div><pre><code><span><span>var</span></span> t1 <span>=</span> fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>T<span>></span></span></span><span>(</span><span>)</span>
   <span>.</span><span>Where</span><span>(</span>a <span>=></span> <span>new</span><span>[</span><span>]</span> <span>{</span> <span>1</span><span>,</span> <span>2</span><span>,</span> <span>3</span> <span>}</span><span>.</span><span>Contains</span><span>(</span>a<span>.</span>Id<span>)</span><span>)</span>
   <span>.</span><span>ToList</span><span>(</span><span>)</span><span>;</span>
