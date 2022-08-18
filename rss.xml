@@ -6,8 +6,8 @@
     <link>http://freesql.net/</link>
     <description>FreeSql Documents</description>
     <language>zh-CN</language>
-    <pubDate>Thu, 18 Aug 2022 07:34:28 GMT</pubDate>
-    <lastBuildDate>Thu, 18 Aug 2022 07:34:28 GMT</lastBuildDate>
+    <pubDate>Thu, 18 Aug 2022 09:19:00 GMT</pubDate>
+    <lastBuildDate>Thu, 18 Aug 2022 09:19:00 GMT</lastBuildDate>
     <generator>vuepress-plugin-feed2</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
     <item>
@@ -6483,7 +6483,7 @@ blog<span>.</span>BlogId <span>=</span> <span>(</span><span>int</span><span>)</s
 </tr>
 <tr>
 <td>DataType.SqlServer</td>
-<td>Data Source=.;User Id=sa;Password=123456;Initial Catalog=freesqlTest;TrustServerCertificate=true;Pooling=true;Min Pool Size=1</td>
+<td>Data Source=.;User Id=sa;Password=123456;Initial Catalog=freesqlTest;Encrypt=True;TrustServerCertificate=True;Pooling=true;Min Pool Size=1</td>
 </tr>
 <tr>
 <td>DataType.Oracle</td>
@@ -6523,7 +6523,7 @@ blog<span>.</span>BlogId <span>=</span> <span>(</span><span>int</span><span>)</s
 </tr>
 <tr>
 <td>DataType.OdbcSqlServer</td>
-<td>Driver={SQL Server};Server=.;Persist Security Info=False; Trusted_Connection=Yes;Integrated Security=True; DATABASE=freesqlTest_odbc; Pooling=true;Min Pool Size=1</td>
+<td>Driver={SQL Server};Data Source=.;User Id=sa;Password=123456;Initial Catalog=freesqlTest;Encrypt=True;TrustServerCertificate=True;Pooling=true;Min Pool Size=1</td>
 </tr>
 <tr>
 <td>DataType.OdbcOracle</td>
