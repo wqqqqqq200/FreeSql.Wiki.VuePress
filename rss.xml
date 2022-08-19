@@ -6,8 +6,8 @@
     <link>https://freesql.net/</link>
     <description>FreeSql Documents</description>
     <language>zh-CN</language>
-    <pubDate>Fri, 19 Aug 2022 15:25:29 GMT</pubDate>
-    <lastBuildDate>Fri, 19 Aug 2022 15:25:29 GMT</lastBuildDate>
+    <pubDate>Fri, 19 Aug 2022 15:29:58 GMT</pubDate>
+    <lastBuildDate>Fri, 19 Aug 2022 15:29:58 GMT</lastBuildDate>
     <generator>vuepress-plugin-feed2</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
     <item>
@@ -9461,30 +9461,36 @@ Assert<span>.</span><span>Equal</span><span>(</span><span>"中国[100000] -> 北
 <li>g.Value.Item3 对应 Area</li>
 </ul>
 <h2 id="aggregate" tabindex="-1"> Aggregate</h2>
-<ul>
-<li>Distinct</li>
-</ul>
+<h3 id="distinct" tabindex="-1"> Distinct</h3>
 <div><pre><code><span><span>var</span></span> list <span>=</span> fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>Topic<span>></span></span></span><span>(</span><span>)</span>
     <span>.</span><span>Aggregate</span><span>(</span>a <span>=></span> Convert<span>.</span><span>ToInt32</span><span>(</span><span>"count(distinct title)"</span><span>)</span><span>,</span> <span>out</span> <span><span>var</span></span> count<span>)</span>
     <span>.</span><span>ToList</span><span>(</span><span>)</span><span>;</span>
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div></div></div><ul>
-<li>SqlExt.DistinctCount</li>
-</ul>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div></div></div><blockquote>
+<p>SELECT count(distinct title) as1
+FROM &quot;Topic&quot; a</p>
+</blockquote>
+<blockquote>
+<p>SELECT a.&quot;Id&quot;, a.&quot;Clicks&quot;, a.&quot;Title&quot;, a.&quot;CreateTime&quot;
+FROM &quot;Topic&quot; a</p>
+</blockquote>
+<h3 id="sqlext-distinctcount" tabindex="-1"> SqlExt.DistinctCount</h3>
 <div><pre><code>fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>Topic<span>></span></span></span><span>(</span><span>)</span>
     <span>.</span><span>Aggregate</span><span>(</span>a <span>=></span> SqlExt<span>.</span><span>DistinctCount</span><span>(</span>a<span>.</span>Key<span>.</span>Title<span>)</span><span>,</span> <span>out</span> <span><span>var</span></span> count<span>)</span><span>;</span>
 </code></pre><div aria-hidden="true"><div></div><div></div></div></div><blockquote>
 <p>SELECT count(distinct a.&quot;title&quot;) as1 FROM &quot;Topic&quot; a</p>
 </blockquote>
-<ul>
-<li>ToAggregate + SqlExt.DistinctCount</li>
-</ul>
+<h3 id="toaggregate-sqlext-distinctcount" tabindex="-1"> ToAggregate + SqlExt.DistinctCount</h3>
 <div><pre><code><span><span>var</span></span> distinctAggregate <span>=</span> fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>Topic<span>></span></span></span><span>(</span><span>)</span><span>.</span><span>ToAggregate</span><span>(</span>a <span>=></span> <span>new</span>
     <span>{</span>
         TitleCount<span>=</span>SqlExt<span>.</span><span>DistinctCount</span><span>(</span>a<span>.</span>Key<span>.</span>Title<span>)</span><span>,</span>
         ClicksCount<span>=</span> SqlExt<span>.</span><span>DistinctCount</span><span>(</span>a<span>.</span>Key<span>.</span>Clicks<span>)</span><span>,</span>
     <span>}</span>
 <span>)</span><span>;</span>
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div></div></div><h2 id="api" tabindex="-1"> API</h2>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div></div></div><blockquote>
+<p>SELECT count(distinct a.&quot;Title&quot;) as1, count(distinct a.&quot;Clicks&quot;) as2
+FROM &quot;Topic&quot; a</p>
+</blockquote>
+<h2 id="api" tabindex="-1"> API</h2>
 <table>
 <thead>
 <tr>
