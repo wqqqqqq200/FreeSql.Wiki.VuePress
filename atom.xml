@@ -3,7 +3,7 @@
   <id>http://freesql.net/</id>
   <title>FreeSql 官方文档</title>
   <subtitle>FreeSql Documents</subtitle>
-  <updated>2022-08-19T12:07:11.871Z</updated>
+  <updated>2022-08-19T12:07:33.300Z</updated>
   <generator>vuepress-plugin-feed2</generator>
   <link rel="self" href="http://freesql.net/atom.xml"/>
   <link rel="alternate" href="http://freesql.net/"/>
@@ -11574,7 +11574,7 @@ fsql<span>.</span><span>Transaction</span><span>(</span><span>(</span><span>)</s
     <title type="html">UnitOfWork</title>
     <id>http://freesql.net/guide/unit-of-work.html</id>
     <link href="http://freesql.net/guide/unit-of-work.html"/>
-    <updated>2022-08-19T12:04:01.000Z</updated>
+    <updated>2022-08-19T12:06:05.000Z</updated>
     <content type="html"><![CDATA[<h1 id="unitofwork" tabindex="-1"> UnitOfWork</h1>
 <p>UnitOfWork 可将多个仓储放在一个单元管理执行，最终通用 Commit 执行所有操作，内部采用了数据库事务；</p>
 <div><pre><code><span><span>var</span></span> connstr <span>=</span> <span>"Data Source=127.0.0.1;Port=3306;User ID=root;Password=root;"</span> <span>+</span>
