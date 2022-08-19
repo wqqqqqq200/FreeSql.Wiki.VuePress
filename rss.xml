@@ -6,8 +6,8 @@
     <link>http://freesql.net/</link>
     <description>FreeSql Documents</description>
     <language>zh-CN</language>
-    <pubDate>Fri, 19 Aug 2022 12:09:20 GMT</pubDate>
-    <lastBuildDate>Fri, 19 Aug 2022 12:09:20 GMT</lastBuildDate>
+    <pubDate>Fri, 19 Aug 2022 12:10:03 GMT</pubDate>
+    <lastBuildDate>Fri, 19 Aug 2022 12:10:03 GMT</lastBuildDate>
     <generator>vuepress-plugin-feed2</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
     <item>
@@ -587,12 +587,12 @@ fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>User1<span>></
 </code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br></div></div>]]></content:encoded>
     </item>
     <item>
-      <title>AOP+FreeSql 跨方法异步事务</title>
+      <title>Castle AOP + FreeSql 跨方法异步事务</title>
       <link>http://freesql.net/extra/aop-freesql-autofac.html</link>
       <guid>http://freesql.net/extra/aop-freesql-autofac.html</guid>
-      <source url="http://freesql.net/rss.xml">AOP+FreeSql 跨方法异步事务</source>
+      <source url="http://freesql.net/rss.xml">Castle AOP + FreeSql 跨方法异步事务</source>
       <pubDate>Mon, 18 Jul 2022 15:41:00 GMT</pubDate>
-      <content:encoded><![CDATA[<h1 id="aop-freesql-跨方法异步事务" tabindex="-1"> AOP+FreeSql 跨方法异步事务</h1>
+      <content:encoded><![CDATA[<h1 id="castle-aop-freesql-跨方法异步事务" tabindex="-1"> Castle AOP + FreeSql 跨方法异步事务</h1>
 <p>使用Autofac基于特性标签，实现跨方法的异步事务处理</p>
 <ul>
 <li>Autofac.Extensions.DependencyInjection</li>

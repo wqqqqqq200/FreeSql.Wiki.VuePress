@@ -3,7 +3,7 @@
   <id>http://freesql.net/</id>
   <title>FreeSql 官方文档</title>
   <subtitle>FreeSql Documents</subtitle>
-  <updated>2022-08-19T12:09:20.926Z</updated>
+  <updated>2022-08-19T12:10:03.425Z</updated>
   <generator>vuepress-plugin-feed2</generator>
   <link rel="self" href="http://freesql.net/atom.xml"/>
   <link rel="alternate" href="http://freesql.net/"/>
@@ -584,11 +584,11 @@ fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>User1<span>></
     <published>2022-07-23T05:30:46.000Z</published>
   </entry>
   <entry>
-    <title type="html">AOP+FreeSql 跨方法异步事务</title>
+    <title type="html">Castle AOP + FreeSql 跨方法异步事务</title>
     <id>http://freesql.net/extra/aop-freesql-autofac.html</id>
     <link href="http://freesql.net/extra/aop-freesql-autofac.html"/>
-    <updated>2022-07-23T05:30:46.000Z</updated>
-    <content type="html"><![CDATA[<h1 id="aop-freesql-跨方法异步事务" tabindex="-1"> AOP+FreeSql 跨方法异步事务</h1>
+    <updated>2022-08-19T12:08:50.000Z</updated>
+    <content type="html"><![CDATA[<h1 id="castle-aop-freesql-跨方法异步事务" tabindex="-1"> Castle AOP + FreeSql 跨方法异步事务</h1>
 <p>使用Autofac基于特性标签，实现跨方法的异步事务处理</p>
 <ul>
 <li>Autofac.Extensions.DependencyInjection</li>
