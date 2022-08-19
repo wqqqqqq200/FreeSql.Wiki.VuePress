@@ -6,8 +6,8 @@
     <link>https://freesql.net/</link>
     <description>FreeSql Documents</description>
     <language>zh-CN</language>
-    <pubDate>Fri, 19 Aug 2022 15:29:58 GMT</pubDate>
-    <lastBuildDate>Fri, 19 Aug 2022 15:29:58 GMT</lastBuildDate>
+    <pubDate>Fri, 19 Aug 2022 16:45:35 GMT</pubDate>
+    <lastBuildDate>Fri, 19 Aug 2022 16:45:35 GMT</lastBuildDate>
     <generator>vuepress-plugin-feed2</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
     <item>
@@ -1869,6 +1869,9 @@ Install-Package FreeSql.Provider.SqliteCore
 </ul>
 <h2 id="第一步-引入动态代理库" tabindex="-1"> 第一步：引入动态代理库</h2>
 <blockquote>
+<p>肉夹馍：<a href="https://github.com/inversionhourglass/Rougamo" target="_blank" rel="noopener noreferrer">https://github.com/inversionhourglass/Rougamo</a></p>
+</blockquote>
+<blockquote>
 <p>dotnet add package Rougamo.Fody</p>
 </blockquote>
 <div><pre><code><span>[</span><span><span>AttributeUsage</span><span><span>(</span>AttributeTargets<span>.</span>Method<span>)</span></span></span><span>]</span>
@@ -1889,18 +1892,25 @@ Install-Package FreeSql.Provider.SqliteCore
     <span>}</span>
     <span>public</span> <span>override</span> <span><span>void</span></span> <span>OnExit</span><span>(</span><span>MethodContext</span> context<span>)</span>
     <span>{</span>
-        <span>try</span>
+        <span>if</span> <span>(</span><span>typeof</span><span>(</span><span>Task</span><span>)</span><span>.</span><span>IsAssignableFrom</span><span>(</span>context<span>.</span>RealReturnType<span>)</span><span>)</span>
+            <span>(</span><span>(</span>Task<span>)</span>context<span>.</span>ReturnValue<span>)</span><span>.</span><span>ContinueWith</span><span>(</span>t <span>=></span> <span>_OnExit</span><span>(</span><span>)</span><span>)</span><span>;</span>
+        <span>else</span> <span>_OnExit</span><span>(</span><span>)</span><span>;</span>
+
+        <span><span>void</span></span> <span>_OnExit</span><span>(</span><span>)</span>
         <span>{</span>
-            <span>if</span> <span>(</span>context<span>.</span>Exception <span>==</span> <span>null</span><span>)</span> _uow<span>.</span><span>Commit</span><span>(</span><span>)</span><span>;</span>
-            <span>else</span> _uow<span>.</span><span>Rollback</span><span>(</span><span>)</span><span>;</span>
-        <span>}</span>
-        <span>finally</span>
-        <span>{</span>
-            _uow<span>.</span><span>Dispose</span><span>(</span><span>)</span><span>;</span>
+            <span>try</span>
+            <span>{</span>
+                <span>if</span> <span>(</span>context<span>.</span>Exception <span>==</span> <span>null</span><span>)</span> _uow<span>.</span><span>Commit</span><span>(</span><span>)</span><span>;</span>
+                <span>else</span> _uow<span>.</span><span>Rollback</span><span>(</span><span>)</span><span>;</span>
+            <span>}</span>
+            <span>finally</span>
+            <span>{</span>
+                _uow<span>.</span><span>Dispose</span><span>(</span><span>)</span><span>;</span>
+            <span>}</span>
         <span>}</span>
     <span>}</span>
 <span>}</span>
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><table>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><table>
 <thead>
 <tr>
 <th>UnitOfWorkManager 成员</th>
