@@ -6,8 +6,8 @@
     <link>http://freesql.net/</link>
     <description>FreeSql Documents</description>
     <language>zh-CN</language>
-    <pubDate>Fri, 19 Aug 2022 12:05:37 GMT</pubDate>
-    <lastBuildDate>Fri, 19 Aug 2022 12:05:37 GMT</lastBuildDate>
+    <pubDate>Fri, 19 Aug 2022 12:07:11 GMT</pubDate>
+    <lastBuildDate>Fri, 19 Aug 2022 12:07:11 GMT</lastBuildDate>
     <generator>vuepress-plugin-feed2</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
     <item>
@@ -10941,8 +10941,7 @@ fsql<span>.</span>EntitySteering <span>=</span> <span>(</span>_<span>,</span> e<
 <p>本文所有内容基于单机数据库事务，分布式数据库 TCC/SAGA 方案请移步：<a href="https://github.com/2881099/FreeSql.Cloud" target="_blank" rel="noopener noreferrer">https://github.com/2881099/FreeSql.Cloud</a></p>
 <h2 id="_0、unitofworkmanager跨方法异步" tabindex="-1"> 0、UnitOfWorkManager跨方法异步</h2>
 <ul>
-<li><a href="/extra/aop-freesql-autofac.html">AOP+FreeSql 基于特性标签实现跨方法异步事务</a></li>
-<li><a href="/guide/unitofwork-manager.html">ASP.NET Core 配置 DI 使用 UnitOfWorkManager，此方法很简单</a></li>
+<li><a href="/guide/unitofwork-manager.html">AOP + FreeSql 基于特性标签实现跨方法异步事务</a></li>
 </ul>
 <h2 id="_1、unitofwork-事务" tabindex="-1"> 1、UnitOfWork 事务</h2>
 <div><pre><code><span>using</span> <span>(</span><span><span>var</span></span> uow <span>=</span> fsql<span>.</span><span>CreateUnitOfWork</span><span>(</span><span>)</span><span>)</span>
@@ -10962,8 +10961,7 @@ fsql<span>.</span>EntitySteering <span>=</span> <span>(</span>_<span>,</span> e<
 
   uow<span>.</span><span>Commit</span><span>(</span><span>)</span><span>;</span>
 <span>}</span>
-</code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br><span>10</span><br><span>11</span><br><span>12</span><br><span>13</span><br><span>14</span><br><span>15</span><br><span>16</span><br><span>17</span><br></div></div><p>参考：<a href="https://github.com/dotnetcore/FreeSql/issues/289" target="_blank" rel="noopener noreferrer">在 asp.net core 中使用 TransactionalAttribute + UnitOfWorkManager 实现多种事务传播</a></p>
-<h2 id="_2、dbcontext-事务" tabindex="-1"> 2、DbContext 事务</h2>
+</code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br><span>10</span><br><span>11</span><br><span>12</span><br><span>13</span><br><span>14</span><br><span>15</span><br><span>16</span><br><span>17</span><br></div></div><h2 id="_2、dbcontext-事务" tabindex="-1"> 2、DbContext 事务</h2>
 <div><pre><code><span>using</span> <span>(</span><span><span>var</span></span> ctx <span>=</span> fsql<span>.</span><span>CreateDbContext</span><span>(</span><span>)</span><span>)</span> <span>{</span>
   <span><span>var</span></span> song <span>=</span> ctx<span>.</span><span><span>Set</span><span><span>&lt;</span>Song<span>></span></span></span><span>(</span><span>)</span><span>;</span>
   <span><span>var</span></span> user <span>=</span> ctx<span>.</span><span><span>Set</span><span><span>&lt;</span>User<span>></span></span></span><span>(</span><span>)</span><span>;</span>
