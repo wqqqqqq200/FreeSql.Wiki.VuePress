@@ -3,7 +3,7 @@
   <id>http://freesql.net/</id>
   <title>FreeSql 官方文档</title>
   <subtitle>FreeSql Documents</subtitle>
-  <updated>2022-08-18T09:19:00.161Z</updated>
+  <updated>2022-08-19T12:05:04.371Z</updated>
   <generator>vuepress-plugin-feed2</generator>
   <link rel="self" href="http://freesql.net/atom.xml"/>
   <link rel="alternate" href="http://freesql.net/"/>
@@ -1848,36 +1848,13 @@ Install-Package FreeSql.Provider.SqliteCore
     <title type="html">UnitOfWorkManager 事务</title>
     <id>http://freesql.net/guide/unitofwork-manager.html</id>
     <link href="http://freesql.net/guide/unitofwork-manager.html"/>
-    <updated>2022-08-15T16:01:12.000Z</updated>
+    <updated>2022-08-19T12:03:34.000Z</updated>
     <content type="html"><![CDATA[<h1 id="unitofworkmanager-事务" tabindex="-1"> UnitOfWorkManager 事务</h1>
-<h2 id="aspnetcore-下-freesql-的仓储事务" tabindex="-1"> <strong>aspnetcore</strong> 下 FreeSql 的仓储事务</h2>
-<h3 id="引入包" tabindex="-1"> 引入包</h3>
-<div><pre><code>dotnet <span>add</span> package FreeSql
-dotnet <span>add</span> package FreeSql.DbContext
-dotnet <span>add</span> package FreeSql.Provider.MySqlConnector
-</code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br></div></div><h3 id="配置-startup-cs-注入" tabindex="-1"> 配置 Startup.cs 注入</h3>
-<div><pre><code><span>public</span> <span><span>void</span></span> <span>ConfigureServices</span><span>(</span><span>IServiceCollection</span> services<span>)</span>
-<span>{</span>
-  <span>IConfigurationSection</span> Mysql <span>=</span> Configuration<span>.</span><span>GetSection</span><span>(</span><span>"Mysql"</span><span>)</span><span>;</span>
-  <span><span>var</span></span> fsql <span>=</span> <span>new</span> <span>FreeSqlBuilder</span><span>(</span><span>)</span>
-            <span>.</span><span>UseConnectionString</span><span>(</span>DataType<span>.</span>MySql<span>,</span> Mysql<span>.</span>Value<span>)</span>
-            <span>.</span><span>UseAutoSyncStructure</span><span>(</span><span>true</span><span>)</span>
-            <span>.</span><span>UseNameConvert</span><span>(</span>NameConvertType<span>.</span>PascalCaseToUnderscoreWithLower<span>)</span>
-            <span>.</span><span>UseMonitorCommand</span><span>(</span>cmd <span>=></span> Trace<span>.</span><span>WriteLine</span><span>(</span>cmd<span>.</span>CommandText<span>)</span><span>)</span>
-            <span>.</span><span>Build</span><span>(</span><span>)</span><span>;</span>
-    services<span>.</span><span><span>AddSingleton</span><span><span>&lt;</span>IFreeSql<span>></span></span></span><span>(</span>fsql<span>)</span><span>;</span>
-    services<span>.</span><span><span>AddScoped</span><span><span>&lt;</span>UnitOfWorkManager<span>></span></span></span><span>(</span><span>)</span><span>;</span>
-    services<span>.</span><span>AddFreeRepository</span><span>(</span><span>null</span><span>,</span> <span>typeof</span><span>(</span><span>Startup</span><span>)</span><span>.</span>Assembly<span>)</span><span>;</span>
-    <span>//新增自己的服务，这里只有实现</span>
-    services<span>.</span><span><span>AddScoped</span><span><span>&lt;</span>TransBlogService<span>></span></span></span><span>(</span><span>)</span><span>;</span>
-<span>}</span>
-</code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br><span>10</span><br><span>11</span><br><span>12</span><br><span>13</span><br><span>14</span><br><span>15</span><br></div></div><ul>
-<li>appsettings.json</li>
-</ul>
-<div><pre><code><span>{</span>
-  <span>"Mysql"</span><span>:</span> <span>"Data Source=127.0.0.1;Port=3306;User ID=root;Password=root;Initial Catalog=ovov_freesql_repository;Charset=utf8;SslMode=none;Max pool size=10"</span>
-<span>}</span>
-</code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br></div></div><p>支持六种传播方式(propagation)，意味着跨方法的事务非常方便，并且支持同步异步：</p>
+<p>本篇文章内容引导，如何在 asp.net core 项目中使用特性(注解) 的方式管理事务。</p>
+<blockquote>
+<p>UnitOfWorkManager 只可以管理 Repository 仓储对象的事务，直接 fsql.Insert&lt;T&gt;() 是不行的！！但是可以用 repository.Orm.Insert&lt;T&gt;！！repository.Orm 是特殊实现的 IFreeSql，与 当前事务保持一致。</p>
+</blockquote>
+<p>支持六种传播方式(propagation)，意味着跨方法的事务非常方便，并且支持同步异步：</p>
 <ul>
 <li>Requierd：如果当前没有事务，就新建一个事务，如果已存在一个事务中，加入到这个事务中，默认的选择。</li>
 <li>Supports：支持当前事务，如果没有当前事务，就以非事务方法执行。</li>
@@ -1886,7 +1863,40 @@ dotnet <span>add</span> package FreeSql.Provider.MySqlConnector
 <li>Never：以非事务方式执行操作，如果当前事务存在则抛出异常。</li>
 <li>Nested：以嵌套事务方式执行。</li>
 </ul>
-<table>
+<h2 id="第一步-引入动态代理库" tabindex="-1"> 第一步：引入动态代理库</h2>
+<blockquote>
+<p>dotnet add package Rougamo.Fody</p>
+</blockquote>
+<div><pre><code><span>[</span><span><span>AttributeUsage</span><span><span>(</span>AttributeTargets<span>.</span>Method<span>)</span></span></span><span>]</span>
+<span>public</span> <span>class</span> <span>TransactionalAttribute</span> <span>:</span> <span><span>Rougamo<span>.</span>MoAttribute</span></span>
+<span>{</span>
+    <span>public</span> <span>Propagation</span> Propagation <span>{</span> <span>get</span><span>;</span> <span>set</span><span>;</span> <span>}</span> <span>=</span> Propagation<span>.</span>Required<span>;</span>
+    <span>public</span> <span>IsolationLevel</span> IsolationLevel <span>{</span> <span>get</span> <span>=></span> m_IsolationLevel<span>.</span>Value<span>;</span> <span>set</span> <span>=></span> m_IsolationLevel <span>=</span> <span>value</span><span>;</span> <span>}</span>
+    <span>IsolationLevel<span>?</span></span> m_IsolationLevel<span>;</span>
+
+    <span>static</span> <span>AsyncLocal<span>&lt;</span>IServiceProvider<span>></span></span> m_ServiceProvider <span>=</span> <span>new</span> <span>AsyncLocal<span>&lt;</span>IServiceProvider<span>></span></span><span>(</span><span>)</span><span>;</span>
+    <span>public</span> <span>static</span> <span><span>void</span></span> <span>SetServiceProvider</span><span>(</span><span>IServiceProvider</span> serviceProvider<span>)</span> <span>=></span> m_ServiceProvider<span>.</span>Value <span>=</span> serviceProvider<span>;</span>
+
+    <span>IUnitOfWork</span> _uow<span>;</span>
+    <span>public</span> <span>override</span> <span><span>void</span></span> <span>OnEntry</span><span>(</span><span>MethodContext</span> context<span>)</span>
+    <span>{</span>
+        <span><span>var</span></span> uowManager <span>=</span> m_ServiceProvider<span>.</span>Value<span>.</span><span>GetService</span><span>(</span><span>typeof</span><span>(</span><span>UnitOfWorkManager</span><span>)</span><span>)</span> <span>as</span> <span>UnitOfWorkManager</span><span>;</span>
+        _uow <span>=</span> uowManager<span>.</span><span>Begin</span><span>(</span><span>this</span><span>.</span>Propagation<span>,</span> <span>this</span><span>.</span>m_IsolationLevel<span>)</span><span>;</span>
+    <span>}</span>
+    <span>public</span> <span>override</span> <span><span>void</span></span> <span>OnExit</span><span>(</span><span>MethodContext</span> context<span>)</span>
+    <span>{</span>
+        <span>try</span>
+        <span>{</span>
+            <span>if</span> <span>(</span>context<span>.</span>Exception <span>==</span> <span>null</span><span>)</span> _uow<span>.</span><span>Commit</span><span>(</span><span>)</span><span>;</span>
+            <span>else</span> _uow<span>.</span><span>Rollback</span><span>(</span><span>)</span><span>;</span>
+        <span>}</span>
+        <span>finally</span>
+        <span>{</span>
+            _uow<span>.</span><span>Dispose</span><span>(</span><span>)</span><span>;</span>
+        <span>}</span>
+    <span>}</span>
+<span>}</span>
+</code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br><span>10</span><br><span>11</span><br><span>12</span><br><span>13</span><br><span>14</span><br><span>15</span><br><span>16</span><br><span>17</span><br><span>18</span><br><span>19</span><br><span>20</span><br><span>21</span><br><span>22</span><br><span>23</span><br><span>24</span><br><span>25</span><br><span>26</span><br><span>27</span><br><span>28</span><br><span>29</span><br></div></div><table>
 <thead>
 <tr>
 <th>UnitOfWorkManager 成员</th>
@@ -1908,122 +1918,56 @@ dotnet <span>add</span> package FreeSql.Provider.MySqlConnector
 </tr>
 </tbody>
 </table>
-<h3 id="transblogservice-cs" tabindex="-1"> TransBlogService.cs</h3>
-<div><pre><code><span>private</span> <span>readonly</span> <span>IBaseRepository<span>&lt;</span>Blog<span>,</span> <span>int</span><span>></span></span> _blogRepository<span>;</span>
-<span>private</span> <span>readonly</span> <span>IBaseRepository<span>&lt;</span>Tag<span>,</span> <span>int</span><span>></span></span> _tagRepository<span>;</span>
-<span>private</span> <span>readonly</span> <span>UnitOfWorkManager</span> _unitOfWorkManager<span>;</span>
-
-<span>public</span> <span>TransBlogService</span><span>(</span><span>IBaseRepository<span>&lt;</span>Blog<span>,</span> <span>int</span><span>></span></span> blogRepository<span>,</span> <span>IBaseRepository<span>&lt;</span>Tag<span>,</span> <span>int</span><span>></span></span> tagRepository<span>,</span><span>UnitOfWorkManager</span> unitOfWorkManager<span>)</span>
+<h2 id="第二步-配置-startup-cs-注入、中间件" tabindex="-1"> 第二步：配置 Startup.cs 注入、中间件</h2>
+<div><pre><code><span>//Startup.cs</span>
+<span>public</span> <span><span>void</span></span> <span>ConfigureServices</span><span>(</span><span>IServiceCollection</span> services<span>)</span>
 <span>{</span>
-    _blogRepository <span>=</span> blogRepository <span>;</span>
-    _tagRepository <span>=</span> tagRepository <span>;</span>
-    _unitOfWorkManager <span>=</span> unitOfWorkManager<span>;</span>
+    services<span>.</span><span><span>AddSingleton</span><span><span>&lt;</span>IFreeSql<span>></span></span></span><span>(</span>fsql<span>)</span><span>;</span>
+    services<span>.</span><span><span>AddScoped</span><span><span>&lt;</span>UnitOfWorkManager<span>></span></span></span><span>(</span><span>)</span><span>;</span>
+    services<span>.</span><span>AddFreeRepository</span><span>(</span><span>null</span><span>,</span> <span>typeof</span><span>(</span><span>Startup</span><span>)</span><span>.</span>Assembly<span>)</span><span>;</span>
+   <span>//批量注入 Service</span>
 <span>}</span>
 
-<span>public</span> <span>async</span> <span>Task</span> <span>CreateBlogUnitOfWorkAsync</span><span>(</span><span>Blog</span> blog<span>,</span>List<span>&lt;</span>Tag<span>></span>tagList<span>)</span>
+<span>public</span> <span><span>void</span></span> <span>Configure</span><span>(</span><span>IApplicationBuilder</span> app<span>,</span> <span>IWebHostEnvironment</span> env<span>)</span>
 <span>{</span>
-    <span>using</span> <span>(</span><span>IUnitOfWork</span> unitOfWork <span>=</span> _unitOfWorkManager<span>.</span><span>Begin</span><span>(</span><span>)</span><span>)</span>
+    app<span>.</span><span>Use</span><span>(</span><span>async</span> <span>(</span>context<span>,</span> next<span>)</span> <span>=></span>
     <span>{</span>
-        <span>try</span>
-        <span>{</span>
-            <span>await</span> _blogRepository<span>.</span><span>InsertAsync</span><span>(</span>blog<span>)</span><span>;</span>
-            tagList<span>.</span><span>ForEach</span><span>(</span>r <span>=></span>
-            <span>{</span>
-                r<span>.</span>PostId <span>=</span> blog<span>.</span>Id<span>;</span>
-            <span>}</span><span>)</span><span>;</span>
-            <span>await</span> _tagRepository<span>.</span><span>InsertAsync</span><span>(</span>tagList<span>)</span><span>;</span>
-            unitOfWork<span>.</span><span>Commit</span><span>(</span><span>)</span><span>;</span>
-        <span>}</span>
-        <span>catch</span> <span>(</span><span>Exception</span> e<span>)</span>
-        <span>{</span>
-            <span>//实际 可以不Rollback。因为IUnitOfWork内部Dispose，会把没有Commit的事务Rollback回来，但能提前Rollback</span>
+        TransactionalAttribute<span>.</span><span>SetServiceProvider</span><span>(</span>context<span>.</span>RequestServices<span>)</span><span>;</span>
+        <span>await</span> <span>next</span><span>(</span><span>)</span><span>;</span>
+    <span>}</span><span>)</span><span>;</span>
+<span>}</span>
+</code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br><span>10</span><br><span>11</span><br><span>12</span><br><span>13</span><br><span>14</span><br><span>15</span><br><span>16</span><br><span>17</span><br></div></div><h2 id="第三步-在-controller-或者-service-或者-repository-中使用事务特性" tabindex="-1"> 第三步：在 Controller 或者 Service 或者 Repository 中使用事务特性</h2>
+<div><pre><code><span>public</span> <span>class</span> <span>SongService</span>
+<span>{</span>
+    <span>readonly</span> <span>IBaseRepository<span>&lt;</span>Song<span>></span></span> _repoSong<span>;</span>
+    <span>readonly</span> <span>IBaseRepository<span>&lt;</span>Detail<span>></span></span> _repoDetail<span>;</span>
+    <span>readonly</span> <span>SongRepository</span> _repoSong2<span>;</span>
 
-            unitOfWork<span>.</span><span>Rollback</span><span>(</span><span>)</span><span>;</span>
-            <span>//记录日志、或继续throw;出来</span>
-        <span>}</span>
+    <span>public</span> <span>SongService</span><span>(</span><span>IBaseRepository<span>&lt;</span>Song<span>></span></span> repoSong<span>,</span> <span>IBaseRepository<span>&lt;</span>Detail<span>></span></span> repoDetail<span>,</span> <span>SongRepository</span> repoSong2<span>)</span>
+    <span>{</span>
+        _repoSong <span>=</span> repoSong<span>;</span>
+        _repoDetail <span>=</span> repoDetail<span>;</span>
+        _repoSong2 <span>=</span> repoSong2<span>;</span>
+    <span>}</span>
+
+    <span>[</span><span><span>Transactional</span></span><span>]</span>
+    <span>public</span> <span>virtual</span> <span><span>void</span></span> <span>Test1</span><span>(</span><span>)</span>
+    <span>{</span>
+        <span>//这里 _repoSong、_repoDetail、_repoSong2 所有操作都是一个工作单元</span>
+        <span>this</span><span>.</span><span>Test2</span><span>(</span><span>)</span><span>;</span>
+    <span>}</span>
+
+    <span>[</span><span><span>Transactional</span><span><span>(</span>Propagation <span>=</span> Propagation<span>.</span>Nested<span>)</span></span></span><span>]</span>
+    <span>public</span> <span>virtual</span> <span><span>void</span></span> <span>Test2</span><span>(</span><span>)</span> <span>//嵌套事务，新的（不使用 Test1 的事务）</span>
+    <span>{</span>
+        <span>//这里 _repoSong、_repoDetail、_repoSong2 所有操作都是一个工作单元</span>
     <span>}</span>
 <span>}</span>
-
-<span>public</span> <span>async</span> <span>Task</span> <span>UpdateBlogAsync</span><span>(</span><span><span>int</span></span> id<span>)</span>
-<span>{</span>
-    <span>using</span> <span>(</span><span>IUnitOfWork</span> unitOfWork <span>=</span> _unitOfWorkManager<span>.</span><span>Begin</span><span>(</span><span>)</span><span>)</span>
-    <span>{</span>
-        <span>try</span>
-        <span>{</span>
-            <span>Blog</span> blog <span>=</span> _blogRepository<span>.</span>Select<span>.</span><span>Where</span><span>(</span>r <span>=></span> r<span>.</span>Id <span>==</span> id<span>)</span><span>.</span><span>First</span><span>(</span><span>)</span><span>;</span>
-            blog<span>.</span>IsDeleted <span>=</span> <span>true</span><span>;</span>
-            <span>await</span> _blogRepository<span>.</span><span>UpdateAsync</span><span>(</span>blog<span>)</span><span>;</span>
-            unitOfWork<span>.</span><span>Commit</span><span>(</span><span>)</span><span>;</span>
-        <span>}</span>
-        <span>catch</span> <span>(</span><span>Exception</span> e<span>)</span>
-        <span>{</span>
-           <span>//记录日志、或继续throw;出来</span>
-            unitOfWork<span>.</span><span>Rollback</span><span>(</span><span>)</span><span>;</span>
-        <span>}</span>
-    <span>}</span>
-<span>}</span>
-</code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br><span>10</span><br><span>11</span><br><span>12</span><br><span>13</span><br><span>14</span><br><span>15</span><br><span>16</span><br><span>17</span><br><span>18</span><br><span>19</span><br><span>20</span><br><span>21</span><br><span>22</span><br><span>23</span><br><span>24</span><br><span>25</span><br><span>26</span><br><span>27</span><br><span>28</span><br><span>29</span><br><span>30</span><br><span>31</span><br><span>32</span><br><span>33</span><br><span>34</span><br><span>35</span><br><span>36</span><br><span>37</span><br><span>38</span><br><span>39</span><br><span>40</span><br><span>41</span><br><span>42</span><br><span>43</span><br><span>44</span><br><span>45</span><br><span>46</span><br><span>47</span><br><span>48</span><br><span>49</span><br><span>50</span><br><span>51</span><br><span>52</span><br><span>53</span><br></div></div><table>
-<thead>
-<tr>
-<th>IUnitOfWork 成员</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>IFreeSql Orm</td>
-<td>该对象 Select/Delete/Insert/Update/InsertOrUpdate 与工作单元事务保持一致，可省略传递 WithTransaction</td>
-</tr>
-<tr>
-<td>DbTransaction GetOrBeginTransaction()</td>
-<td>开启事务，或者返回已开启的事务</td>
-</tr>
-<tr>
-<td>void Commit()</td>
-<td>提交事务</td>
-</tr>
-<tr>
-<td>void Rollback()</td>
-<td>回滚事务</td>
-</tr>
-<tr>
-<td>DbContext.EntityChangeReport EntityChangeReport</td>
-<td>工作单元内的实体变化跟踪</td>
-</tr>
-<tr>
-<td>Dictionary&lt;string, object&gt; States</td>
-<td>用户自定义的状态数据，便于扩展</td>
-</tr>
-</tbody>
-</table>
-<h3 id="完整代码" tabindex="-1"> 完整代码</h3>
-<ul>
-<li><a href="https://github.com/luoyunchong/dotnetcore-examples/blob/master/ORM/FreeSql/OvOv.Core/Domain/Blog.cs" target="_blank" rel="noopener noreferrer">Blog.cs</a></li>
-<li><a href="https://github.com/luoyunchong/dotnetcore-examples/blob/master/ORM/FreeSql/OvOv.Core/Domain/Tag.cs" target="_blank" rel="noopener noreferrer">Tag.cs</a></li>
-<li><a href="https://github.com/luoyunchong/dotnetcore-examples/blob/master/ORM/FreeSql/OvOv.FreeSql.AutoFac.DynamicProxy/Services/TransBlogService.cs" target="_blank" rel="noopener noreferrer">TransBlogService.cs</a></li>
-</ul>
-<h3 id="重写仓储实现" tabindex="-1"> 重写仓储实现</h3>
-<p>以上使用的是泛型仓储，那我们如果是重写一个仓储 如何保持和<code>UnitOfWorkManager</code>同一个事务呢。
-继承现有的<code>DefaultRepository&lt;,&gt;</code>仓储，实现自定义的仓储<code>BlogRepository.cs</code>,</p>
-<div><pre><code>    <span>public</span> <span>class</span> <span>BlogRepository</span> <span>:</span> <span><span>DefaultRepository<span>&lt;</span>Blog<span>,</span> <span>int</span><span>></span></span><span>,</span> <span>IBlogRepository</span></span>
-    <span>{</span>
-        <span>public</span> <span>BlogRepository</span><span>(</span><span>UnitOfWorkManager</span> uowm<span>)</span> <span>:</span> <span>base</span><span>(</span>uowm<span>?.</span>Orm<span>,</span> uowm<span>)</span>
-        <span>{</span>
-        <span>}</span>
-
-        <span>public</span> <span>List<span>&lt;</span>Blog<span>></span></span> <span>GetBlogs</span><span>(</span><span>)</span>
-        <span>{</span>
-            <span>return</span> Select<span>.</span><span>Page</span><span>(</span><span>1</span><span>,</span> <span>10</span><span>)</span><span>.</span><span>ToList</span><span>(</span><span>)</span><span>;</span>
-        <span>}</span>
-    <span>}</span>
-</code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br><span>10</span><br><span>11</span><br></div></div><p>其中接口。<code>IBlogRepository.cs</code></p>
-<div><pre><code>    <span>public</span> <span>interface</span> <span>IBlogRepository</span> <span>:</span> <span><span>IBaseRepository<span>&lt;</span>Blog<span>,</span> <span>int</span><span>></span></span></span>
-    <span>{</span>
-        <span>List<span>&lt;</span>Blog<span>></span></span> <span>GetBlogs</span><span>(</span><span>)</span><span>;</span>
-    <span>}</span>
-</code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br></div></div><p>在 startup.cs 注入此服务</p>
-<div><pre><code>    services<span>.</span><span><span>AddScoped</span><span><span>&lt;</span>IBlogRepository<span>,</span> BlogRepository<span>></span></span></span><span>(</span><span>)</span><span>;</span>
-</code></pre><div aria-hidden="true"><span>1</span><br></div></div>]]></content>
+</code></pre><div aria-hidden="true"><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br><span>10</span><br><span>11</span><br><span>12</span><br><span>13</span><br><span>14</span><br><span>15</span><br><span>16</span><br><span>17</span><br><span>18</span><br><span>19</span><br><span>20</span><br><span>21</span><br><span>22</span><br><span>23</span><br><span>24</span><br><span>25</span><br><span>26</span><br></div></div><p>是不是进方法就开事务呢？</p>
+<p>不一定是真实事务，有可能是虚的，就是一个假的 unitofwork（不带事务）</p>
+<p>也有可能是延用上一次的事务</p>
+<p>也有可能是新开事务，具体要看传播模式</p>
+]]></content>
     <published>2021-08-21T05:59:59.000Z</published>
   </entry>
   <entry>
