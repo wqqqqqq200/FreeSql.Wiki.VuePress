@@ -3,7 +3,7 @@
   <id>https://freesql.net/</id>
   <title>FreeSql 官方文档</title>
   <subtitle>FreeSql Documents</subtitle>
-  <updated>2022-08-19T16:45:35.816Z</updated>
+  <updated>2022-08-19T16:49:33.127Z</updated>
   <generator>vuepress-plugin-feed2</generator>
   <link rel="self" href="https://freesql.net/atom.xml"/>
   <link rel="alternate" href="https://freesql.net/"/>
@@ -1848,7 +1848,7 @@ Install-Package FreeSql.Provider.SqliteCore
     <title type="html">UnitOfWorkManager 事务</title>
     <id>https://freesql.net/guide/unitofwork-manager.html</id>
     <link href="https://freesql.net/guide/unitofwork-manager.html"/>
-    <updated>2022-08-19T16:44:09.000Z</updated>
+    <updated>2022-08-19T16:48:02.000Z</updated>
     <content type="html"><![CDATA[<h1 id="unitofworkmanager-事务" tabindex="-1"> UnitOfWorkManager 事务</h1>
 <p>本篇文章内容引导，如何在 <a href="http://asp.net" target="_blank" rel="noopener noreferrer">asp.net</a> core 项目中使用特性(注解) 的方式管理事务。</p>
 <blockquote>
@@ -1980,23 +1980,23 @@ Install-Package FreeSql.Provider.SqliteCore
 <h2 id="重写仓储实现" tabindex="-1"> 重写仓储实现</h2>
 <p>以上使用的是泛型仓储，那我们如果是重写一个仓储 如何保持和<code>UnitOfWorkManager</code>同一个事务呢。
 继承现有的<code>DefaultRepository&lt;,&gt;</code>仓储，实现自定义的仓储<code>SongRepository.cs</code>,</p>
-<div><pre><code>    <span>public</span> <span>class</span> <span>SongRepository</span> <span>:</span> <span><span>DefaultRepository<span>&lt;</span>Song<span>,</span> <span>int</span><span>></span></span><span>,</span> <span>ISongRepository</span></span>
+<div><pre><code><span>public</span> <span>class</span> <span>SongRepository</span> <span>:</span> <span><span>DefaultRepository<span>&lt;</span>Song<span>,</span> <span>int</span><span>></span></span><span>,</span> <span>ISongRepository</span></span>
+<span>{</span>
+    <span>public</span> <span>SongRepository</span><span>(</span><span>UnitOfWorkManager</span> uowm<span>)</span> <span>:</span> <span>base</span><span>(</span>uowm<span>?.</span>Orm<span>,</span> uowm<span>)</span>
     <span>{</span>
-        <span>public</span> <span>SongRepository</span><span>(</span><span>UnitOfWorkManager</span> uowm<span>)</span> <span>:</span> <span>base</span><span>(</span>uowm<span>?.</span>Orm<span>,</span> uowm<span>)</span>
-        <span>{</span>
-        <span>}</span>
-        <span>public</span> <span>List<span>&lt;</span>Song<span>></span></span> <span>GetSongs</span><span>(</span><span>)</span>
-        <span>{</span>
-            <span>return</span> Select<span>.</span><span>Page</span><span>(</span><span>1</span><span>,</span> <span>10</span><span>)</span><span>.</span><span>ToList</span><span>(</span><span>)</span><span>;</span>
-        <span>}</span>
     <span>}</span>
+    <span>public</span> <span>List<span>&lt;</span>Song<span>></span></span> <span>GetSongs</span><span>(</span><span>)</span>
+    <span>{</span>
+        <span>return</span> Select<span>.</span><span>Page</span><span>(</span><span>1</span><span>,</span> <span>10</span><span>)</span><span>.</span><span>ToList</span><span>(</span><span>)</span><span>;</span>
+    <span>}</span>
+<span>}</span>
 </code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><p>其中接口。<code>ISongRepository.cs</code></p>
-<div><pre><code>    <span>public</span> <span>interface</span> <span>ISongRepository</span> <span>:</span> <span><span>IBaseRepository<span>&lt;</span>Song<span>,</span> <span>int</span><span>></span></span></span>
-    <span>{</span>
-        <span>List<span>&lt;</span>Song<span>></span></span> <span>GetSongs</span><span>(</span><span>)</span><span>;</span>
-    <span>}</span>
+<div><pre><code><span>public</span> <span>interface</span> <span>ISongRepository</span> <span>:</span> <span><span>IBaseRepository<span>&lt;</span>Song<span>,</span> <span>int</span><span>></span></span></span>
+<span>{</span>
+    <span>List<span>&lt;</span>Song<span>></span></span> <span>GetSongs</span><span>(</span><span>)</span><span>;</span>
+<span>}</span>
 </code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div></div></div><p>在 startup.cs 注入此服务</p>
-<div><pre><code>    services<span>.</span><span><span>AddScoped</span><span><span>&lt;</span>ISongRepository<span>,</span> SongRepository<span>></span></span></span><span>(</span><span>)</span><span>;</span>
+<div><pre><code>services<span>.</span><span><span>AddScoped</span><span><span>&lt;</span>ISongRepository<span>,</span> SongRepository<span>></span></span></span><span>(</span><span>)</span><span>;</span>
 </code></pre><div aria-hidden="true"><div></div></div></div>]]></content>
     <published>2021-08-21T05:59:59.000Z</published>
   </entry>

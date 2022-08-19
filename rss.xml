@@ -6,8 +6,8 @@
     <link>https://freesql.net/</link>
     <description>FreeSql Documents</description>
     <language>zh-CN</language>
-    <pubDate>Fri, 19 Aug 2022 16:45:35 GMT</pubDate>
-    <lastBuildDate>Fri, 19 Aug 2022 16:45:35 GMT</lastBuildDate>
+    <pubDate>Fri, 19 Aug 2022 16:49:33 GMT</pubDate>
+    <lastBuildDate>Fri, 19 Aug 2022 16:49:33 GMT</lastBuildDate>
     <generator>vuepress-plugin-feed2</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
     <item>
@@ -1984,23 +1984,23 @@ Install-Package FreeSql.Provider.SqliteCore
 <h2 id="重写仓储实现" tabindex="-1"> 重写仓储实现</h2>
 <p>以上使用的是泛型仓储，那我们如果是重写一个仓储 如何保持和<code>UnitOfWorkManager</code>同一个事务呢。
 继承现有的<code>DefaultRepository&lt;,&gt;</code>仓储，实现自定义的仓储<code>SongRepository.cs</code>,</p>
-<div><pre><code>    <span>public</span> <span>class</span> <span>SongRepository</span> <span>:</span> <span><span>DefaultRepository<span>&lt;</span>Song<span>,</span> <span>int</span><span>></span></span><span>,</span> <span>ISongRepository</span></span>
+<div><pre><code><span>public</span> <span>class</span> <span>SongRepository</span> <span>:</span> <span><span>DefaultRepository<span>&lt;</span>Song<span>,</span> <span>int</span><span>></span></span><span>,</span> <span>ISongRepository</span></span>
+<span>{</span>
+    <span>public</span> <span>SongRepository</span><span>(</span><span>UnitOfWorkManager</span> uowm<span>)</span> <span>:</span> <span>base</span><span>(</span>uowm<span>?.</span>Orm<span>,</span> uowm<span>)</span>
     <span>{</span>
-        <span>public</span> <span>SongRepository</span><span>(</span><span>UnitOfWorkManager</span> uowm<span>)</span> <span>:</span> <span>base</span><span>(</span>uowm<span>?.</span>Orm<span>,</span> uowm<span>)</span>
-        <span>{</span>
-        <span>}</span>
-        <span>public</span> <span>List<span>&lt;</span>Song<span>></span></span> <span>GetSongs</span><span>(</span><span>)</span>
-        <span>{</span>
-            <span>return</span> Select<span>.</span><span>Page</span><span>(</span><span>1</span><span>,</span> <span>10</span><span>)</span><span>.</span><span>ToList</span><span>(</span><span>)</span><span>;</span>
-        <span>}</span>
     <span>}</span>
+    <span>public</span> <span>List<span>&lt;</span>Song<span>></span></span> <span>GetSongs</span><span>(</span><span>)</span>
+    <span>{</span>
+        <span>return</span> Select<span>.</span><span>Page</span><span>(</span><span>1</span><span>,</span> <span>10</span><span>)</span><span>.</span><span>ToList</span><span>(</span><span>)</span><span>;</span>
+    <span>}</span>
+<span>}</span>
 </code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><p>其中接口。<code>ISongRepository.cs</code></p>
-<div><pre><code>    <span>public</span> <span>interface</span> <span>ISongRepository</span> <span>:</span> <span><span>IBaseRepository<span>&lt;</span>Song<span>,</span> <span>int</span><span>></span></span></span>
-    <span>{</span>
-        <span>List<span>&lt;</span>Song<span>></span></span> <span>GetSongs</span><span>(</span><span>)</span><span>;</span>
-    <span>}</span>
+<div><pre><code><span>public</span> <span>interface</span> <span>ISongRepository</span> <span>:</span> <span><span>IBaseRepository<span>&lt;</span>Song<span>,</span> <span>int</span><span>></span></span></span>
+<span>{</span>
+    <span>List<span>&lt;</span>Song<span>></span></span> <span>GetSongs</span><span>(</span><span>)</span><span>;</span>
+<span>}</span>
 </code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div></div></div><p>在 startup.cs 注入此服务</p>
-<div><pre><code>    services<span>.</span><span><span>AddScoped</span><span><span>&lt;</span>ISongRepository<span>,</span> SongRepository<span>></span></span></span><span>(</span><span>)</span><span>;</span>
+<div><pre><code>services<span>.</span><span><span>AddScoped</span><span><span>&lt;</span>ISongRepository<span>,</span> SongRepository<span>></span></span></span><span>(</span><span>)</span><span>;</span>
 </code></pre><div aria-hidden="true"><div></div></div></div>]]></content:encoded>
     </item>
     <item>
