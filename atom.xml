@@ -3,7 +3,7 @@
   <id>https://freesql.net/</id>
   <title>FreeSql 官方文档</title>
   <subtitle>FreeSql Documents</subtitle>
-  <updated>2022-08-19T16:49:33.127Z</updated>
+  <updated>2022-08-20T05:05:45.097Z</updated>
   <generator>vuepress-plugin-feed2</generator>
   <link rel="self" href="https://freesql.net/atom.xml"/>
   <link rel="alternate" href="https://freesql.net/"/>
@@ -8035,7 +8035,7 @@ fsql<span>.</span>Aop<span>.</span>ConfigEntityProperty <span>+=</span> <span>(<
     <title type="html">多租户</title>
     <id>https://freesql.net/guide/multi-tenancy.html</id>
     <link href="https://freesql.net/guide/multi-tenancy.html"/>
-    <updated>2022-08-08T01:34:30.000Z</updated>
+    <updated>2022-08-20T05:04:09.000Z</updated>
     <content type="html"><![CDATA[<h1 id="多租户" tabindex="-1"> 多租户</h1>
 <h3 id="什么是多租户" tabindex="-1"> 什么是多租户</h3>
 <p>维基百科：“软件多租户是指一种软件架构，在这种软件架构中，软件的一个实例运行在服务器上并且为多个租户服务”。一个租户是一组共享该软件实例特定权限的用户。有了多租户架构，软件应用被设计成为每个租户提供一个 专用的实例包括该实例的数据的共享，还可以共享配置，用户管理，租户自己的功能和非功能属性。多租户和多实例架构相比，多租户分离了代表不同的租户操作的多个实例。</p>
@@ -8207,7 +8207,19 @@ fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>T<span>></span
         <span>return</span> <span>""</span><span>;</span>
     <span>}</span>
 <span>}</span>
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div>]]></content>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><ul>
+<li>临时访问其他数据库表，使用 FreeSqlCloud 对象 Use(&quot;db3&quot;).Select&lt;T&gt;().ToList()</li>
+<li>主库基础表，应该使用 FreeSqlCloud 对象 EntitySteering 设置固定永久定向到 main，而不需要使用 .Use 手工切换</li>
+</ul>
+<div><pre><code>fsql<span>.</span>EntitySteering <span>=</span> <span>(</span>_<span>,</span> e<span>)</span> <span>=></span>
+<span>{</span>
+    <span>if</span> <span>(</span>e<span>.</span>EntityType <span>==</span> <span>typeof</span><span>(</span><span>T</span><span>)</span><span>)</span>
+    <span>{</span>
+        <span>//查询 T 自动定向 db3</span>
+        e<span>.</span>DBKey <span>=</span> <span>"db3"</span><span>;</span>
+    <span>}</span>
+<span>}</span><span>;</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div>]]></content>
     <published>2021-02-04T16:03:18.000Z</published>
   </entry>
   <entry>

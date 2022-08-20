@@ -6,8 +6,8 @@
     <link>https://freesql.net/</link>
     <description>FreeSql Documents</description>
     <language>zh-CN</language>
-    <pubDate>Fri, 19 Aug 2022 16:49:33 GMT</pubDate>
-    <lastBuildDate>Fri, 19 Aug 2022 16:49:33 GMT</lastBuildDate>
+    <pubDate>Sat, 20 Aug 2022 05:05:45 GMT</pubDate>
+    <lastBuildDate>Sat, 20 Aug 2022 05:05:45 GMT</lastBuildDate>
     <generator>vuepress-plugin-feed2</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
     <item>
@@ -8216,7 +8216,19 @@ fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>T<span>></span
         <span>return</span> <span>""</span><span>;</span>
     <span>}</span>
 <span>}</span>
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div>]]></content:encoded>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><ul>
+<li>临时访问其他数据库表，使用 FreeSqlCloud 对象 Use(&quot;db3&quot;).Select&lt;T&gt;().ToList()</li>
+<li>主库基础表，应该使用 FreeSqlCloud 对象 EntitySteering 设置固定永久定向到 main，而不需要使用 .Use 手工切换</li>
+</ul>
+<div><pre><code>fsql<span>.</span>EntitySteering <span>=</span> <span>(</span>_<span>,</span> e<span>)</span> <span>=></span>
+<span>{</span>
+    <span>if</span> <span>(</span>e<span>.</span>EntityType <span>==</span> <span>typeof</span><span>(</span><span>T</span><span>)</span><span>)</span>
+    <span>{</span>
+        <span>//查询 T 自动定向 db3</span>
+        e<span>.</span>DBKey <span>=</span> <span>"db3"</span><span>;</span>
+    <span>}</span>
+<span>}</span><span>;</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div>]]></content:encoded>
     </item>
     <item>
       <title>导航属性 ✨</title>
