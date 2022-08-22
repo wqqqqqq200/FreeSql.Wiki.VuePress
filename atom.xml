@@ -3,7 +3,7 @@
   <id>https://freesql.net/</id>
   <title>FreeSql 官方文档</title>
   <subtitle>FreeSql Documents</subtitle>
-  <updated>2022-08-22T09:52:35.348Z</updated>
+  <updated>2022-08-22T10:21:12.818Z</updated>
   <generator>vuepress-plugin-feed2</generator>
   <link rel="self" href="https://freesql.net/atom.xml"/>
   <link rel="alternate" href="https://freesql.net/"/>
@@ -1848,7 +1848,7 @@ Install-Package FreeSql.Provider.SqliteCore
     <title type="html">UnitOfWorkManager 事务</title>
     <id>https://freesql.net/guide/unitofwork-manager.html</id>
     <link href="https://freesql.net/guide/unitofwork-manager.html"/>
-    <updated>2022-08-22T09:51:03.000Z</updated>
+    <updated>2022-08-22T10:19:04.000Z</updated>
     <content type="html"><![CDATA[<h1 id="unitofworkmanager-事务" tabindex="-1"> UnitOfWorkManager 事务</h1>
 <p>本篇文章内容引导，如何在 <a href="http://asp.net" target="_blank" rel="noopener noreferrer">asp.net</a> core 项目中使用特性(注解) 的方式管理事务。</p>
 <blockquote>
@@ -1997,7 +1997,129 @@ Install-Package FreeSql.Provider.SqliteCore
 <span>}</span>
 </code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div></div></div><p>在 startup.cs 注入此服务</p>
 <div><pre><code>services<span>.</span><span><span>AddScoped</span><span><span>&lt;</span>ISongRepository<span>,</span> SongRepository<span>></span></span></span><span>(</span><span>)</span><span>;</span>
-</code></pre><div aria-hidden="true"><div></div></div></div>]]></content>
+</code></pre><div aria-hidden="true"><div></div></div></div><hr>
+<h3 id="freesql-cloud-如何使用-unitofworkmanager" tabindex="-1"> FreeSql.Cloud 如何使用 UnitOfWorkManager？</h3>
+<p>以 DbEnum 为例定义 FreeSqlCloud 对象如下：</p>
+<div><pre><code><span>public</span> <span>enum</span> <span>DbEnum</span> <span>{</span> db1<span>,</span> db2<span>,</span> db3 <span>}</span>
+<span>public</span> <span>static</span> <span>FreeSqlCloud<span>&lt;</span>DbEnum<span>></span></span> Cloud <span>=</span> <span>new</span> <span>..</span><span>.</span>
+</code></pre><div aria-hidden="true"><div></div><div></div></div></div><p>最终呈现的 AOP 事务代码如下：</p>
+<div><pre><code><span>class</span> <span>UserRepository</span> <span>:</span> <span><span>RepositoryCloud<span>&lt;</span>User<span>></span></span><span>,</span> <span>IBaseRepository<span>&lt;</span>User<span>></span></span></span>
+<span>{</span>
+    <span>public</span> <span>UserRepository</span><span>(</span><span>UnitOfWorkManagerCloud</span> uowm<span>)</span> <span>:</span> <span>base</span><span>(</span>DbEnum<span>.</span>db3<span>,</span> uowm<span>)</span> <span>{</span> <span>}</span>
+<span>}</span>
+
+<span>class</span> <span>UserService</span> <span>:</span> <span><span>IUserService</span></span>
+<span>{</span>
+    <span>readonly</span> <span>IBaseRepository<span>&lt;</span>User<span>></span></span> m_repo1<span>;</span>
+    <span>readonly</span> <span>BaseRepository<span>&lt;</span>User<span>></span></span> m_repo2<span>;</span>
+    <span>readonly</span> <span>UserRepository</span> m_repo3<span>;</span>
+    <span>public</span> <span>UserService</span><span>(</span><span>IBaseRepository<span>&lt;</span>User<span>></span></span> repo1<span>,</span> <span>BaseRepository<span>&lt;</span>User<span>></span></span> repo2<span>,</span> <span>UserRepository</span> repo3<span>)</span>
+    <span>{</span>
+        m_repo1 <span>=</span> repo1<span>;</span> <span>//db1</span>
+        m_repo2 <span>=</span> repo2<span>;</span> <span>//db1</span>
+        m_repo3 <span>=</span> repo3<span>;</span> <span>//db3</span>
+    <span>}</span>
+
+    <span>[</span><span><span>Transactional</span><span><span>(</span>DbEnum<span>.</span>db1<span>)</span></span></span><span>]</span>
+    <span>[</span><span><span>Transactional</span><span><span>(</span>DbEnum<span>.</span>db3<span>)</span></span></span><span>]</span>
+    <span>public</span> <span><span>void</span></span> <span>Test01</span><span>(</span><span>)</span>
+    <span>{</span>
+        Console<span>.</span><span>WriteLine</span><span>(</span><span>"xxx"</span><span>)</span><span>;</span> <span>//debugger</span>
+    <span>}</span>
+<span>}</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><p>约定好 IBaseRepository&lt;T&gt; 默认是 db1 的仓储实现，注入如下：</p>
+<div><pre><code><span>public</span> <span><span>void</span></span> <span>ConfigureServices</span><span>(</span><span>IServiceCollection</span> services<span>)</span>
+<span>{</span>
+    services<span>.</span><span>AddSingleton</span><span>(</span>DB<span>.</span>Cloud<span>)</span><span>;</span> <span>//注入 FreeSqlCloud&lt;DbEnum></span>
+    services<span>.</span><span>AddSingleton</span><span>(</span>provider <span>=></span> DB<span>.</span>Cloud<span>.</span><span>Use</span><span>(</span>DbEnum<span>.</span>db1<span>)</span><span>)</span><span>;</span> <span>//注入 IFreeSql</span>
+    services<span>.</span><span><span>AddScoped</span><span><span>&lt;</span>UnitOfWorkManagerCloud<span>></span></span></span><span>(</span><span>)</span><span>;</span>
+
+    services<span>.</span><span>AddScoped</span><span>(</span><span>typeof</span><span>(</span><span>IBaseRepository<span>&lt;</span><span>></span></span><span>)</span><span>,</span> <span>typeof</span><span>(</span><span>RepositoryCloud<span>&lt;</span><span>></span></span><span>)</span><span>)</span><span>;</span> <span>//default: db1</span>
+    <span>foreach</span> <span>(</span><span><span>var</span></span> repositoryType <span>in</span> <span>typeof</span><span>(</span><span>User</span><span>)</span><span>.</span>Assembly<span>.</span><span>GetTypes</span><span>(</span><span>)</span><span>.</span><span>Where</span><span>(</span>a <span>=></span> a<span>.</span>IsAbstract <span>==</span> <span>false</span> <span>&amp;&amp;</span> <span>typeof</span><span>(</span><span>IBaseRepository</span><span>)</span><span>.</span><span>IsAssignableFrom</span><span>(</span>a<span>)</span><span>)</span><span>)</span>
+        services<span>.</span><span>AddScoped</span><span>(</span>repositoryType<span>)</span><span>;</span>
+<span>}</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><p>UnitOfWorkManagerCloud、RepositoryCloud、TransactionalAttribute 是我们需要实现的部分：</p>
+<div><pre><code><span>class</span> <span>UnitOfWorkManagerCloud</span>
+<span>{</span>
+    <span>readonly</span> <span>Dictionary<span>&lt;</span>DbEnum<span>,</span> UnitOfWorkManager<span>></span></span> m_managers <span>=</span> <span>new</span> <span>Dictionary<span>&lt;</span>DbEnum<span>,</span> UnitOfWorkManager<span>></span></span><span>(</span><span>)</span><span>;</span>
+    <span>readonly</span> <span>FreeSqlCloud<span>&lt;</span>DbEnum<span>></span></span> m_cloud<span>;</span>
+    <span>public</span> <span>UnitOfWorkManagerCloud</span><span>(</span><span>FreeSqlCloud<span>&lt;</span>DbEnum<span>></span></span> cloud<span>)</span>
+    <span>{</span>
+        m_cloud <span>=</span> cloud<span>;</span>
+    <span>}</span>
+    
+    <span>public</span> <span>UnitOfWorkManager</span> <span>GetUnitOfWorkManager</span><span>(</span><span>DbEnum</span> db<span>)</span>
+    <span>{</span>
+        <span>if</span> <span>(</span>m_managers<span>.</span><span>TryGetValue</span><span>(</span>db<span>,</span> <span>out</span> <span><span>var</span></span> uowm<span>)</span> <span>==</span> <span>false</span><span>)</span>
+            m_managers<span>.</span><span>Add</span><span>(</span>db<span>,</span> uowm <span>=</span> <span>new</span> <span>UnitOfWorkManager</span><span>(</span>m_cloud<span>.</span><span>Use</span><span>(</span>db<span>)</span><span>)</span><span>)</span><span>;</span>
+        <span>return</span> uowm<span>;</span>
+    <span>}</span>
+
+    <span>public</span> <span><span>void</span></span> <span>Dispose</span><span>(</span><span>)</span>
+    <span>{</span>
+        <span>foreach</span><span>(</span><span><span>var</span></span> uowm <span>in</span> m_managers<span>.</span>Values<span>)</span> uowm<span>.</span><span>Dispose</span><span>(</span><span>)</span><span>;</span>
+        m_managers<span>.</span><span>Clear</span><span>(</span><span>)</span><span>;</span>
+    <span>}</span>
+
+    <span>public</span> <span>IUnitOfWork</span> <span>Begin</span><span>(</span><span>DbEnum</span> db<span>,</span> <span>Propagation</span> propagation <span>=</span> Propagation<span>.</span>Required<span>,</span> <span>IsolationLevel<span>?</span></span> isolationLevel <span>=</span> <span>null</span><span>)</span>
+    <span>{</span>
+        <span>return</span> <span>GetUnitOfWorkManager</span><span>(</span>db<span>)</span><span>.</span><span>Begin</span><span>(</span>propagation<span>,</span> isolationLevel<span>)</span><span>;</span>
+    <span>}</span>
+<span>}</span>
+
+<span>class</span> <span>RepositoryCloud<span>&lt;</span>T<span>></span></span> <span>:</span> <span><span>DefaultRepository<span>&lt;</span>T<span>,</span> <span>int</span><span>></span></span></span> <span>where</span> <span>T</span> <span>:</span> <span><span>class</span></span>
+<span>{</span>
+    <span>public</span> <span>RepositoryCloud</span><span>(</span><span>UnitOfWorkManagerCloud</span> uomw<span>)</span> <span>:</span> <span>this</span><span>(</span>DbEnum<span>.</span>db1<span>,</span> uomw<span>)</span> <span>{</span> <span>}</span> <span>//DI</span>
+    <span>public</span> <span>RepositoryCloud</span><span>(</span><span>DbEnum</span> db<span>,</span> <span>UnitOfWorkManagerCloud</span> uomw<span>)</span> <span>:</span> <span>this</span><span>(</span>uomw<span>.</span><span>GetUnitOfWorkManager</span><span>(</span>db<span>)</span><span>)</span> <span>{</span> <span>}</span>
+    <span>RepositoryCloud</span><span>(</span><span>UnitOfWorkManager</span> uomw<span>)</span> <span>:</span> <span>base</span><span>(</span>uomw<span>.</span>Orm<span>,</span> uomw<span>)</span>
+    <span>{</span>
+        uomw<span>.</span><span>Binding</span><span>(</span><span>this</span><span>)</span><span>;</span>
+    <span>}</span>
+<span>}</span>
+
+<span>[</span><span><span>AttributeUsage</span><span><span>(</span>AttributeTargets<span>.</span>Method<span>,</span> AllowMultiple <span>=</span> <span>true</span><span>)</span></span></span><span>]</span>
+<span>public</span> <span>class</span> <span>TransactionalAttribute</span> <span>:</span> <span><span>Rougamo<span>.</span>MoAttribute</span></span>
+<span>{</span>
+    <span>public</span> <span>Propagation</span> Propagation <span>{</span> <span>get</span><span>;</span> <span>set</span><span>;</span> <span>}</span> <span>=</span> Propagation<span>.</span>Required<span>;</span>
+    <span>public</span> <span>IsolationLevel</span> IsolationLevel <span>{</span> <span>get</span> <span>=></span> m_IsolationLevel<span>.</span>Value<span>;</span> <span>set</span> <span>=></span> m_IsolationLevel <span>=</span> <span>value</span><span>;</span> <span>}</span>
+    <span>IsolationLevel<span>?</span></span> m_IsolationLevel<span>;</span>
+    <span>readonly</span> <span>DbEnum</span> m_db<span>;</span>
+
+    <span>public</span> <span>TransactionalAttribute</span><span>(</span><span>DbEnum</span> db<span>)</span>
+    <span>{</span>
+        m_db <span>=</span> db<span>;</span>
+    <span>}</span>
+
+    <span>static</span> <span>AsyncLocal<span>&lt;</span>IServiceProvider<span>></span></span> m_ServiceProvider <span>=</span> <span>new</span> <span>AsyncLocal<span>&lt;</span>IServiceProvider<span>></span></span><span>(</span><span>)</span><span>;</span>
+    <span>public</span> <span>static</span> <span><span>void</span></span> <span>SetServiceProvider</span><span>(</span><span>IServiceProvider</span> serviceProvider<span>)</span> <span>=></span> m_ServiceProvider<span>.</span>Value <span>=</span> serviceProvider<span>;</span>
+
+    <span>IUnitOfWork</span> _uow<span>;</span>
+    <span>public</span> <span>override</span> <span><span>void</span></span> <span>OnEntry</span><span>(</span><span>MethodContext</span> context<span>)</span>
+    <span>{</span>
+        <span><span>var</span></span> uowManager <span>=</span> m_ServiceProvider<span>.</span>Value<span>.</span><span><span>GetService</span><span><span>&lt;</span>UnitOfWorkManagerCloud<span>></span></span></span><span>(</span><span>)</span><span>;</span>
+        _uow <span>=</span> uowManager<span>.</span><span>Begin</span><span>(</span>m_db<span>,</span> <span>this</span><span>.</span>Propagation<span>,</span> <span>this</span><span>.</span>m_IsolationLevel<span>)</span><span>;</span>
+    <span>}</span>
+    <span>public</span> <span>override</span> <span><span>void</span></span> <span>OnExit</span><span>(</span><span>MethodContext</span> context<span>)</span>
+    <span>{</span>
+        <span>if</span> <span>(</span><span>typeof</span><span>(</span><span>Task</span><span>)</span><span>.</span><span>IsAssignableFrom</span><span>(</span>context<span>.</span>RealReturnType<span>)</span><span>)</span>
+            <span>(</span><span>(</span>Task<span>)</span>context<span>.</span>ReturnValue<span>)</span><span>.</span><span>ContinueWith</span><span>(</span>t <span>=></span> <span>_OnExit</span><span>(</span><span>)</span><span>)</span><span>;</span>
+        <span>else</span> <span>_OnExit</span><span>(</span><span>)</span><span>;</span>
+
+        <span><span>void</span></span> <span>_OnExit</span><span>(</span><span>)</span>
+        <span>{</span>
+            <span>try</span>
+            <span>{</span>
+                <span>if</span> <span>(</span>context<span>.</span>Exception <span>==</span> <span>null</span><span>)</span> _uow<span>.</span><span>Commit</span><span>(</span><span>)</span><span>;</span>
+                <span>else</span> _uow<span>.</span><span>Rollback</span><span>(</span><span>)</span><span>;</span>
+            <span>}</span>
+            <span>finally</span>
+            <span>{</span>
+                _uow<span>.</span><span>Dispose</span><span>(</span><span>)</span><span>;</span>
+            <span>}</span>
+        <span>}</span>
+    <span>}</span>
+<span>}</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div>]]></content>
     <published>2021-08-21T05:59:59.000Z</published>
   </entry>
   <entry>
