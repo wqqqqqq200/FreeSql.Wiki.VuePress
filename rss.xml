@@ -6,8 +6,8 @@
     <link>https://freesql.net/</link>
     <description>FreeSql Documents</description>
     <language>zh-CN</language>
-    <pubDate>Mon, 22 Aug 2022 13:14:38 GMT</pubDate>
-    <lastBuildDate>Mon, 22 Aug 2022 13:14:38 GMT</lastBuildDate>
+    <pubDate>Mon, 22 Aug 2022 17:40:24 GMT</pubDate>
+    <lastBuildDate>Mon, 22 Aug 2022 17:40:24 GMT</lastBuildDate>
     <generator>vuepress-plugin-feed2</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
     <item>
@@ -7467,6 +7467,12 @@ dotnet <span>add</span> package FreeSql.Provider.Sqlite
 <td>NETStandard2.0、net45、net40</td>
 <td></td>
 <td><strong><a href="https://www.nuget.org/packages/FreeSql.Provider.Oracle" target="_blank" rel="noopener noreferrer"><img src="https://buildstats.info/nuget/FreeSql.Provider.Oracle" alt="NuGet" loading="lazy"></a></strong></td>
+</tr>
+<tr>
+<td>FreeSql.Provider.OracleOledb</td>
+<td>NETStandard2.0、net45、net40</td>
+<td>基于 Oledb 解决 US7ASCII 中文乱码问题</td>
+<td><strong><a href="https://www.nuget.org/packages/FreeSql.Provider.OracleOledb" target="_blank" rel="noopener noreferrer"><img src="https://buildstats.info/nuget/FreeSql.Provider.OracleOledb" alt="NuGet" loading="lazy"></a></strong></td>
 </tr>
 <tr>
 <td>FreeSql.Provider.Firebird</td>
