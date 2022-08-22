@@ -6,8 +6,8 @@
     <link>https://freesql.net/</link>
     <description>FreeSql Documents</description>
     <language>zh-CN</language>
-    <pubDate>Sat, 20 Aug 2022 05:05:45 GMT</pubDate>
-    <lastBuildDate>Sat, 20 Aug 2022 05:05:45 GMT</lastBuildDate>
+    <pubDate>Mon, 22 Aug 2022 09:52:35 GMT</pubDate>
+    <lastBuildDate>Mon, 22 Aug 2022 09:52:35 GMT</lastBuildDate>
     <generator>vuepress-plugin-feed2</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
     <item>
@@ -1887,7 +1887,7 @@ Install-Package FreeSql.Provider.SqliteCore
     <span>IUnitOfWork</span> _uow<span>;</span>
     <span>public</span> <span>override</span> <span><span>void</span></span> <span>OnEntry</span><span>(</span><span>MethodContext</span> context<span>)</span>
     <span>{</span>
-        <span><span>var</span></span> uowManager <span>=</span> m_ServiceProvider<span>.</span>Value<span>.</span><span>GetService</span><span>(</span><span>typeof</span><span>(</span><span>UnitOfWorkManager</span><span>)</span><span>)</span> <span>as</span> <span>UnitOfWorkManager</span><span>;</span>
+        <span><span>var</span></span> uowManager <span>=</span> m_ServiceProvider<span>.</span>Value<span>.</span><span><span>GetService</span><span><span>&lt;</span>UnitOfWorkManager<span>></span></span></span><span>(</span><span>)</span><span>;</span>
         _uow <span>=</span> uowManager<span>.</span><span>Begin</span><span>(</span><span>this</span><span>.</span>Propagation<span>,</span> <span>this</span><span>.</span>m_IsolationLevel<span>)</span><span>;</span>
     <span>}</span>
     <span>public</span> <span>override</span> <span><span>void</span></span> <span>OnExit</span><span>(</span><span>MethodContext</span> context<span>)</span>
