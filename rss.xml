@@ -6,8 +6,8 @@
     <link>https://freesql.net/</link>
     <description>FreeSql Documents</description>
     <language>zh-CN</language>
-    <pubDate>Mon, 22 Aug 2022 10:34:32 GMT</pubDate>
-    <lastBuildDate>Mon, 22 Aug 2022 10:34:32 GMT</lastBuildDate>
+    <pubDate>Mon, 22 Aug 2022 10:38:32 GMT</pubDate>
+    <lastBuildDate>Mon, 22 Aug 2022 10:38:32 GMT</lastBuildDate>
     <generator>vuepress-plugin-feed2</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
     <item>
@@ -2034,8 +2034,8 @@ Install-Package FreeSql.Provider.SqliteCore
 </code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><p>约定好 IBaseRepository&lt;T&gt; 默认是 db1 的仓储实现，注入如下：</p>
 <div><pre><code><span>public</span> <span><span>void</span></span> <span>ConfigureServices</span><span>(</span><span>IServiceCollection</span> services<span>)</span>
 <span>{</span>
-    services<span>.</span><span>AddSingleton</span><span>(</span>DB<span>.</span>Cloud<span>)</span><span>;</span> <span>//注入 FreeSqlCloud&lt;DbEnum></span>
-    services<span>.</span><span>AddSingleton</span><span>(</span>provider <span>=></span> DB<span>.</span>Cloud<span>.</span><span>Use</span><span>(</span>DbEnum<span>.</span>db1<span>)</span><span>)</span><span>;</span> <span>//注入 IFreeSql</span>
+    services<span>.</span><span>AddSingleton</span><span>(</span>Cloud<span>)</span><span>;</span> <span>//注入 FreeSqlCloud&lt;DbEnum></span>
+    services<span>.</span><span>AddSingleton</span><span>(</span>provider <span>=></span> Cloud<span>.</span><span>Use</span><span>(</span>DbEnum<span>.</span>db1<span>)</span><span>)</span><span>;</span> <span>//注入 IFreeSql</span>
     services<span>.</span><span><span>AddScoped</span><span><span>&lt;</span>UnitOfWorkManagerCloud<span>></span></span></span><span>(</span><span>)</span><span>;</span>
 
     services<span>.</span><span>AddScoped</span><span>(</span><span>typeof</span><span>(</span><span>IBaseRepository<span>&lt;</span><span>></span></span><span>)</span><span>,</span> <span>typeof</span><span>(</span><span>RepositoryCloud<span>&lt;</span><span>></span></span><span>)</span><span>)</span><span>;</span> <span>//default: db1</span>
