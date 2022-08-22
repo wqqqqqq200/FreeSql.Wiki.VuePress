@@ -6,8 +6,8 @@
     <link>https://freesql.net/</link>
     <description>FreeSql Documents</description>
     <language>zh-CN</language>
-    <pubDate>Mon, 22 Aug 2022 10:21:12 GMT</pubDate>
-    <lastBuildDate>Mon, 22 Aug 2022 10:21:12 GMT</lastBuildDate>
+    <pubDate>Mon, 22 Aug 2022 10:34:32 GMT</pubDate>
+    <lastBuildDate>Mon, 22 Aug 2022 10:34:32 GMT</lastBuildDate>
     <generator>vuepress-plugin-feed2</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
     <item>
@@ -2002,7 +2002,7 @@ Install-Package FreeSql.Provider.SqliteCore
 </code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div></div></div><p>在 startup.cs 注入此服务</p>
 <div><pre><code>services<span>.</span><span><span>AddScoped</span><span><span>&lt;</span>ISongRepository<span>,</span> SongRepository<span>></span></span></span><span>(</span><span>)</span><span>;</span>
 </code></pre><div aria-hidden="true"><div></div></div></div><hr>
-<h3 id="freesql-cloud-如何使用-unitofworkmanager" tabindex="-1"> FreeSql.Cloud 如何使用 UnitOfWorkManager？</h3>
+<h2 id="freesql-cloud-如何使用-unitofworkmanager" tabindex="-1"> FreeSql.Cloud 如何使用 UnitOfWorkManager？</h2>
 <p>以 DbEnum 为例定义 FreeSqlCloud 对象如下：</p>
 <div><pre><code><span>public</span> <span>enum</span> <span>DbEnum</span> <span>{</span> db1<span>,</span> db2<span>,</span> db3 <span>}</span>
 <span>public</span> <span>static</span> <span>FreeSqlCloud<span>&lt;</span>DbEnum<span>></span></span> Cloud <span>=</span> <span>new</span> <span>..</span><span>.</span>

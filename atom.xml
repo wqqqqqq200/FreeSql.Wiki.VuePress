@@ -3,7 +3,7 @@
   <id>https://freesql.net/</id>
   <title>FreeSql 官方文档</title>
   <subtitle>FreeSql Documents</subtitle>
-  <updated>2022-08-22T10:21:12.818Z</updated>
+  <updated>2022-08-22T10:34:32.690Z</updated>
   <generator>vuepress-plugin-feed2</generator>
   <link rel="self" href="https://freesql.net/atom.xml"/>
   <link rel="alternate" href="https://freesql.net/"/>
@@ -1848,7 +1848,7 @@ Install-Package FreeSql.Provider.SqliteCore
     <title type="html">UnitOfWorkManager 事务</title>
     <id>https://freesql.net/guide/unitofwork-manager.html</id>
     <link href="https://freesql.net/guide/unitofwork-manager.html"/>
-    <updated>2022-08-22T10:19:04.000Z</updated>
+    <updated>2022-08-22T10:33:01.000Z</updated>
     <content type="html"><![CDATA[<h1 id="unitofworkmanager-事务" tabindex="-1"> UnitOfWorkManager 事务</h1>
 <p>本篇文章内容引导，如何在 <a href="http://asp.net" target="_blank" rel="noopener noreferrer">asp.net</a> core 项目中使用特性(注解) 的方式管理事务。</p>
 <blockquote>
@@ -1998,7 +1998,7 @@ Install-Package FreeSql.Provider.SqliteCore
 </code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div></div></div><p>在 startup.cs 注入此服务</p>
 <div><pre><code>services<span>.</span><span><span>AddScoped</span><span><span>&lt;</span>ISongRepository<span>,</span> SongRepository<span>></span></span></span><span>(</span><span>)</span><span>;</span>
 </code></pre><div aria-hidden="true"><div></div></div></div><hr>
-<h3 id="freesql-cloud-如何使用-unitofworkmanager" tabindex="-1"> FreeSql.Cloud 如何使用 UnitOfWorkManager？</h3>
+<h2 id="freesql-cloud-如何使用-unitofworkmanager" tabindex="-1"> FreeSql.Cloud 如何使用 UnitOfWorkManager？</h2>
 <p>以 DbEnum 为例定义 FreeSqlCloud 对象如下：</p>
 <div><pre><code><span>public</span> <span>enum</span> <span>DbEnum</span> <span>{</span> db1<span>,</span> db2<span>,</span> db3 <span>}</span>
 <span>public</span> <span>static</span> <span>FreeSqlCloud<span>&lt;</span>DbEnum<span>></span></span> Cloud <span>=</span> <span>new</span> <span>..</span><span>.</span>
