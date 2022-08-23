@@ -3,7 +3,7 @@
   <id>https://freesql.net/</id>
   <title>FreeSql 官方文档</title>
   <subtitle>FreeSql Documents</subtitle>
-  <updated>2022-08-23T01:38:05.301Z</updated>
+  <updated>2022-08-23T01:40:15.037Z</updated>
   <generator>vuepress-plugin-feed2</generator>
   <link rel="self" href="https://freesql.net/atom.xml"/>
   <link rel="alternate" href="https://freesql.net/"/>
@@ -7693,7 +7693,7 @@ dotnet <span>add</span> package FreeSql.Provider.Sqlite
     <title type="html">你不知道的功能 ✨</title>
     <id>https://freesql.net/guide/more.html</id>
     <link href="https://freesql.net/guide/more.html"/>
-    <updated>2022-08-17T12:11:16.000Z</updated>
+    <updated>2022-08-23T01:38:42.000Z</updated>
     <content type="html"><![CDATA[<h1 id="你不知道的功能-✨" tabindex="-1"> 你不知道的功能 ✨</h1>
 <h2 id="_1、备注-迁移到数据库" tabindex="-1"> 1、备注 -&gt; 迁移到数据库</h2>
 <p>FreeSql CodeFirst 支持将 c# 代码内的注释，迁移至数据库的备注。先决条件：</p>
@@ -7761,7 +7761,7 @@ fsql<span>.</span><span>InsertOrUpdateDict</span><span>(</span>dic<span>)</span>
 <li><a href="/guide/withsql.html">WithSql</a>使用多次为 UNION ALL 查询</li>
 </ul>
 <blockquote>
-<p>v3.2.666 <a href="%e5%b5%8c%e5%a5%97%e6%9f%a5%e8%af%a2">WithTempQuery + FromQuery 嵌套查询</a></p>
+<p>v3.2.666 <a href="/guide/withtempquery.html">WithTempQuery + FromQuery 嵌套查询</a></p>
 </blockquote>
 <blockquote>
 <p>v3.2.666 WithMemory 使用内存数据进行查询</p>
