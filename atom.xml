@@ -3,7 +3,7 @@
   <id>https://freesql.net/</id>
   <title>FreeSql 官方文档</title>
   <subtitle>FreeSql Documents</subtitle>
-  <updated>2022-08-22T17:40:24.976Z</updated>
+  <updated>2022-08-23T01:33:17.768Z</updated>
   <generator>vuepress-plugin-feed2</generator>
   <link rel="self" href="https://freesql.net/atom.xml"/>
   <link rel="alternate" href="https://freesql.net/"/>
@@ -10117,7 +10117,7 @@ fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>Topic<span>,</
     <title type="html">返回数据 ✨</title>
     <id>https://freesql.net/guide/select-return-data.html</id>
     <link href="https://freesql.net/guide/select-return-data.html"/>
-    <updated>2022-08-05T07:32:05.000Z</updated>
+    <updated>2022-08-23T01:31:38.000Z</updated>
     <content type="html"><![CDATA[<h1 id="返回数据-✨" tabindex="-1"> 返回数据 ✨</h1>
 <p>FreeSql 采用 ExpressionTree 优化读取速度，如果懂技术的你一定知道 .NET Core 技术下除了原生代码，最快就是 Emit 和 ExpressionTree。项目在初期使用的反射 + 缓存，虽然 .NET Core 优化了反射性能，但经过与 Dapper 性能测试对比之后，发现仍然有一定差距，改成 ExpresstionTree 后才与 Dapper 性能相当。FreeSql 支持的类型较多，实现 ExpressionTree 的复杂度较大，有兴趣的朋友可以翻阅源代码。</p>
 <h2 id="_1、返回单条记录" tabindex="-1"> 1、返回单条记录</h2>
@@ -10210,7 +10210,7 @@ fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>Topic<span>,</
 <p>WithSql 使用多次为 UNION ALL 查询</p>
 </blockquote>
 <blockquote>
-<p>v3.2.666 <a href="%e5%b5%8c%e5%a5%97%e6%9f%a5%e8%af%a2">WithTempQuery + FromQuery 嵌套查询</a></p>
+<p>v3.2.666 <a href="/guide/withtempquery.html">WithTempQuery + FromQuery 嵌套查询</a></p>
 </blockquote>
 <blockquote>
 <p>v3.2.666 WithMemory 使用内存数据进行查询</p>
