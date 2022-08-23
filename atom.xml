@@ -3,7 +3,7 @@
   <id>https://freesql.net/</id>
   <title>FreeSql 官方文档</title>
   <subtitle>FreeSql Documents</subtitle>
-  <updated>2022-08-23T01:33:17.768Z</updated>
+  <updated>2022-08-23T01:38:05.301Z</updated>
   <generator>vuepress-plugin-feed2</generator>
   <link rel="self" href="https://freesql.net/atom.xml"/>
   <link rel="alternate" href="https://freesql.net/"/>
@@ -10363,7 +10363,7 @@ fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>Song<span>></s
     <title type="html">单表查询</title>
     <id>https://freesql.net/guide/select-single-table.html</id>
     <link href="https://freesql.net/guide/select-single-table.html"/>
-    <updated>2022-08-11T15:34:05.000Z</updated>
+    <updated>2022-08-23T01:36:06.000Z</updated>
     <content type="html"><![CDATA[<h1 id="单表查询" tabindex="-1"> 单表查询</h1>
 <div><pre><code><span>static</span> <span>IFreeSql</span> fsql <span>=</span> <span>new</span> <span>FreeSql<span>.</span>FreeSqlBuilder</span><span>(</span><span>)</span>
     <span>.</span><span>UseConnectionString</span><span>(</span>FreeSql<span>.</span>DataType<span>.</span>MySql<span>,</span> <span>"Data Source=127.0.0.1;Port=3306;User ID=root;Password=root;Initial Catalog=cccddd;Charset=utf8;SslMode=none;Max pool size=10"</span><span>)</span>
@@ -10410,7 +10410,7 @@ fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>Topic<span>></
 <p>关于<a href="/guide/withsql.html">WithSql</a>的详情文档， 使用多次为 UNION ALL 查询</p>
 </blockquote>
 <blockquote>
-<p>v3.2.666 <a href="%e5%b5%8c%e5%a5%97%e6%9f%a5%e8%af%a2">WithTempQuery + FromQuery 嵌套查询</a></p>
+<p>v3.2.666 <a href="/guide/withtempquery.html">WithTempQuery + FromQuery 嵌套查询</a></p>
 </blockquote>
 <blockquote>
 <p>v3.2.666 WithMemory 使用内存数据进行查询</p>
