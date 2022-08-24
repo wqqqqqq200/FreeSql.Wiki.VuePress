@@ -6,8 +6,8 @@
     <link>https://freesql.net/</link>
     <description>FreeSql Documents</description>
     <language>zh-CN</language>
-    <pubDate>Wed, 24 Aug 2022 12:10:07 GMT</pubDate>
-    <lastBuildDate>Wed, 24 Aug 2022 12:10:07 GMT</lastBuildDate>
+    <pubDate>Wed, 24 Aug 2022 13:05:48 GMT</pubDate>
+    <lastBuildDate>Wed, 24 Aug 2022 13:05:48 GMT</lastBuildDate>
     <generator>vuepress-plugin-feed2</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
     <item>
@@ -9852,7 +9852,7 @@ dto<span>.</span><span>IncludeMany</span><span>(</span>fsql<span>,</span> d <spa
     <span>public</span> <span>virtual</span> <span>Order</span> Order <span>{</span> <span>get</span><span>;</span> <span>set</span><span>;</span> <span>}</span>
 <span>}</span>
 </code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><blockquote>
-<p>延时加载功能默认被关闭的，使用此功能请时，请在声明处开启；</p>
+<p>延时加载功能默认被关闭的，使用此功能之前，请在声明处开启；</p>
 </blockquote>
 <blockquote>
 <p>延时加载功能，依赖 FreeSql.Extensions.LazyLoading 包，请前往 nuget 下载；</p>

@@ -3,7 +3,7 @@
   <id>https://freesql.net/</id>
   <title>FreeSql 官方文档</title>
   <subtitle>FreeSql Documents</subtitle>
-  <updated>2022-08-24T12:10:07.355Z</updated>
+  <updated>2022-08-24T13:05:48.984Z</updated>
   <generator>vuepress-plugin-feed2</generator>
   <link rel="self" href="https://freesql.net/atom.xml"/>
   <link rel="alternate" href="https://freesql.net/"/>
@@ -9822,7 +9822,7 @@ dto<span>.</span><span>IncludeMany</span><span>(</span>fsql<span>,</span> d <spa
     <title type="html">延时加载</title>
     <id>https://freesql.net/guide/select-lazy-loading.html</id>
     <link href="https://freesql.net/guide/select-lazy-loading.html"/>
-    <updated>2022-06-22T02:21:11.000Z</updated>
+    <updated>2022-08-24T13:04:12.000Z</updated>
     <content type="html"><![CDATA[<h1 id="延时加载" tabindex="-1"> 延时加载</h1>
 <p>FreeSql 支持导航属性延时加载，即当我们需要用到的时候才进行加载（读取），支持 1 对 1、多对 1、1 对多、多对多关系的导航属性。</p>
 <p>当我们希望浏览某条订单信息的时候，才显示其对应的订单详细记录时，我们希望使用延迟加载来实现，这样不仅加快的了 读取的效率，同时也避免加载不需要的数据。延迟加载通常用于 foreach 循环读取数据时。</p>
@@ -9843,7 +9843,7 @@ dto<span>.</span><span>IncludeMany</span><span>(</span>fsql<span>,</span> d <spa
     <span>public</span> <span>virtual</span> <span>Order</span> Order <span>{</span> <span>get</span><span>;</span> <span>set</span><span>;</span> <span>}</span>
 <span>}</span>
 </code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><blockquote>
-<p>延时加载功能默认被关闭的，使用此功能请时，请在声明处开启；</p>
+<p>延时加载功能默认被关闭的，使用此功能之前，请在声明处开启；</p>
 </blockquote>
 <blockquote>
 <p>延时加载功能，依赖 FreeSql.Extensions.LazyLoading 包，请前往 nuget 下载；</p>
