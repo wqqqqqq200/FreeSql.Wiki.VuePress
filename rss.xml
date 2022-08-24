@@ -6,8 +6,8 @@
     <link>https://freesql.net/</link>
     <description>FreeSql Documents</description>
     <language>zh-CN</language>
-    <pubDate>Tue, 23 Aug 2022 01:40:15 GMT</pubDate>
-    <lastBuildDate>Tue, 23 Aug 2022 01:40:15 GMT</lastBuildDate>
+    <pubDate>Wed, 24 Aug 2022 12:10:07 GMT</pubDate>
+    <lastBuildDate>Wed, 24 Aug 2022 12:10:07 GMT</lastBuildDate>
     <generator>vuepress-plugin-feed2</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
     <item>
@@ -1981,6 +1981,8 @@ Install-Package FreeSql.Provider.SqliteCore
 <div><pre><code>services<span>.</span><span><span>AddScoped</span><span><span>&lt;</span>ISongRepository<span>,</span> SongRepository<span>></span></span></span><span>(</span><span>)</span><span>;</span>
 </code></pre><div aria-hidden="true"><div></div></div></div><hr>
 <h2 id="freesql-cloud-如何使用-unitofworkmanager" tabindex="-1"> FreeSql.Cloud 如何使用 UnitOfWorkManager？</h2>
+<p>注意：如果是<a href="/guide/multi-tenancy.html#%E6%96%B9%E6%A1%88%E4%B8%89-%E6%8C%89%E7%A7%9F%E6%88%B7%E5%88%86%E5%BA%93">多租户分库场景</a>，请直接使用上面的方案，多租户同一请求大部分都只操作一个数据库，只需要提前将 FreeSqlCloud 对象 Change 切换好。</p>
+<hr>
 <p>以 DbEnum 为例定义 FreeSqlCloud 对象如下：</p>
 <div><pre><code><span>public</span> <span>enum</span> <span>DbEnum</span> <span>{</span> db1<span>,</span> db2<span>,</span> db3 <span>}</span>
 <span>public</span> <span>static</span> <span>FreeSqlCloud<span>&lt;</span>DbEnum<span>></span></span> Cloud <span>=</span> <span>new</span> <span>..</span><span>.</span>
