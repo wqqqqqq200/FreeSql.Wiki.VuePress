@@ -3,7 +3,7 @@
   <id>https://freesql.net/</id>
   <title>FreeSql 官方文档</title>
   <subtitle>FreeSql Documents</subtitle>
-  <updated>2022-08-25T02:15:26.724Z</updated>
+  <updated>2022-08-25T02:16:33.354Z</updated>
   <generator>vuepress-plugin-feed2</generator>
   <link rel="self" href="https://freesql.net/atom.xml"/>
   <link rel="alternate" href="https://freesql.net/"/>
@@ -1826,7 +1826,7 @@ Install-Package FreeSql.Provider.SqliteCore
     <title type="html">UnitOfWorkManager 事务</title>
     <id>https://freesql.net/guide/unitofwork-manager.html</id>
     <link href="https://freesql.net/guide/unitofwork-manager.html"/>
-    <updated>2022-08-24T12:08:35.000Z</updated>
+    <updated>2022-08-25T02:14:26.000Z</updated>
     <content type="html"><![CDATA[<h1 id="unitofworkmanager-事务" tabindex="-1"> UnitOfWorkManager 事务</h1>
 <p>本篇文章内容引导，如何在 <a href="http://asp.net" target="_blank" rel="noopener noreferrer">asp.net</a> core 项目中使用特性(注解) 的方式管理事务。</p>
 <blockquote>
@@ -1980,9 +1980,15 @@ Install-Package FreeSql.Provider.SqliteCore
 <p>注意：如果是<a href="/guide/multi-tenancy.html#%E6%96%B9%E6%A1%88%E4%B8%89-%E6%8C%89%E7%A7%9F%E6%88%B7%E5%88%86%E5%BA%93">多租户分库场景</a>，请直接使用上面的方案，多租户同一请求大部分都只操作一个数据库，只需要提前将 FreeSqlCloud 对象 Change 切换好。</p>
 <hr>
 <p>以 DbEnum 为例定义 FreeSqlCloud 对象如下：</p>
-<div><pre><code><span>public</span> <span>enum</span> <span>DbEnum</span> <span>{</span> db1<span>,</span> db2<span>,</span> db3 <span>}</span>
-<span>public</span> <span>static</span> <span>FreeSqlCloud<span>&lt;</span>DbEnum<span>></span></span> Cloud <span>=</span> <span>new</span> <span>..</span><span>.</span>
-</code></pre><div aria-hidden="true"><div></div><div></div></div></div><p>最终呈现的 AOP 事务代码如下：</p>
+<div><pre><code><span>public</span> <span>enum</span> <span>DbEnum</span> <span>{</span> db1<span>,</span> db2 <span>}</span>
+<span>public</span> <span>class</span> <span>FreeSqlCloud</span> <span>:</span> <span><span>FreeSqlCloud<span>&lt;</span>DbEnum<span>></span></span></span> <span>//DbEnum 换成 string 就是多租户管理</span>
+<span>{</span>
+    <span>public</span> <span>FreeSqlCloud</span><span>(</span><span>)</span> <span>:</span> <span>base</span><span>(</span><span>null</span><span>)</span> <span>{</span> <span>}</span>
+    <span>public</span> <span>FreeSqlCloud</span><span>(</span><span><span>string</span></span> distributeKey<span>)</span> <span>:</span> <span>base</span><span>(</span>distributeKey<span>)</span> <span>{</span> <span>}</span>
+<span>}</span>
+
+<span>public</span> <span>static</span> <span>FreeSqlCloud</span> Cloud <span>=</span> <span>new</span> <span>..</span><span>.</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><p>最终呈现的 AOP 事务代码如下：</p>
 <div><pre><code><span>class</span> <span>UserRepository</span> <span>:</span> <span><span>RepositoryCloud<span>&lt;</span>User<span>></span></span><span>,</span> <span>IBaseRepository<span>&lt;</span>User<span>></span></span></span>
 <span>{</span>
     <span>public</span> <span>UserRepository</span><span>(</span><span>UnitOfWorkManagerCloud</span> uowm<span>)</span> <span>:</span> <span>base</span><span>(</span>DbEnum<span>.</span>db3<span>,</span> uowm<span>)</span> <span>{</span> <span>}</span>
@@ -2010,7 +2016,7 @@ Install-Package FreeSql.Provider.SqliteCore
 </code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><p>约定好 IBaseRepository&lt;T&gt; 默认是 db1 的仓储实现，注入如下：</p>
 <div><pre><code><span>public</span> <span><span>void</span></span> <span>ConfigureServices</span><span>(</span><span>IServiceCollection</span> services<span>)</span>
 <span>{</span>
-    services<span>.</span><span>AddSingleton</span><span>(</span>Cloud<span>)</span><span>;</span> <span>//注入 FreeSqlCloud&lt;DbEnum></span>
+    services<span>.</span><span>AddSingleton</span><span>(</span>Cloud<span>)</span><span>;</span> <span>//注入 FreeSqlCloud</span>
     services<span>.</span><span>AddSingleton</span><span>(</span>provider <span>=></span> Cloud<span>.</span><span>Use</span><span>(</span>DbEnum<span>.</span>db1<span>)</span><span>)</span><span>;</span> <span>//注入 IFreeSql</span>
     services<span>.</span><span><span>AddScoped</span><span><span>&lt;</span>UnitOfWorkManagerCloud<span>></span></span></span><span>(</span><span>)</span><span>;</span>
 
@@ -2021,14 +2027,14 @@ Install-Package FreeSql.Provider.SqliteCore
 </code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><p>UnitOfWorkManagerCloud、RepositoryCloud、TransactionalAttribute 是我们需要实现的部分：</p>
 <div><pre><code><span>class</span> <span>UnitOfWorkManagerCloud</span>
 <span>{</span>
-    <span>readonly</span> <span>Dictionary<span>&lt;</span>DbEnum<span>,</span> UnitOfWorkManager<span>></span></span> m_managers <span>=</span> <span>new</span> <span>Dictionary<span>&lt;</span>DbEnum<span>,</span> UnitOfWorkManager<span>></span></span><span>(</span><span>)</span><span>;</span>
-    <span>readonly</span> <span>FreeSqlCloud<span>&lt;</span>DbEnum<span>></span></span> m_cloud<span>;</span>
-    <span>public</span> <span>UnitOfWorkManagerCloud</span><span>(</span><span>FreeSqlCloud<span>&lt;</span>DbEnum<span>></span></span> cloud<span>)</span>
+    <span>readonly</span> <span>Dictionary<span>&lt;</span><span>string</span><span>,</span> UnitOfWorkManager<span>></span></span> m_managers <span>=</span> <span>new</span> <span>Dictionary<span>&lt;</span><span>string</span><span>,</span> UnitOfWorkManager<span>></span></span><span>(</span><span>)</span><span>;</span>
+    <span>readonly</span> <span>FreeSqlCloud</span> m_cloud<span>;</span>
+    <span>public</span> <span>UnitOfWorkManagerCloud</span><span>(</span><span>FreeSqlCloud</span> cloud<span>)</span>
     <span>{</span>
         m_cloud <span>=</span> cloud<span>;</span>
     <span>}</span>
     
-    <span>public</span> <span>UnitOfWorkManager</span> <span>GetUnitOfWorkManager</span><span>(</span><span>DbEnum</span> db<span>)</span>
+    <span>public</span> <span>UnitOfWorkManager</span> <span>GetUnitOfWorkManager</span><span>(</span><span><span>string</span></span> db<span>)</span>
     <span>{</span>
         <span>if</span> <span>(</span>m_managers<span>.</span><span>TryGetValue</span><span>(</span>db<span>,</span> <span>out</span> <span><span>var</span></span> uowm<span>)</span> <span>==</span> <span>false</span><span>)</span>
             m_managers<span>.</span><span>Add</span><span>(</span>db<span>,</span> uowm <span>=</span> <span>new</span> <span>UnitOfWorkManager</span><span>(</span>m_cloud<span>.</span><span>Use</span><span>(</span>db<span>)</span><span>)</span><span>)</span><span>;</span>
@@ -2041,7 +2047,7 @@ Install-Package FreeSql.Provider.SqliteCore
         m_managers<span>.</span><span>Clear</span><span>(</span><span>)</span><span>;</span>
     <span>}</span>
 
-    <span>public</span> <span>IUnitOfWork</span> <span>Begin</span><span>(</span><span>DbEnum</span> db<span>,</span> <span>Propagation</span> propagation <span>=</span> Propagation<span>.</span>Required<span>,</span> <span>IsolationLevel<span>?</span></span> isolationLevel <span>=</span> <span>null</span><span>)</span>
+    <span>public</span> <span>IUnitOfWork</span> <span>Begin</span><span>(</span><span><span>string</span></span> db<span>,</span> <span>Propagation</span> propagation <span>=</span> Propagation<span>.</span>Required<span>,</span> <span>IsolationLevel<span>?</span></span> isolationLevel <span>=</span> <span>null</span><span>)</span>
     <span>{</span>
         <span>return</span> <span>GetUnitOfWorkManager</span><span>(</span>db<span>)</span><span>.</span><span>Begin</span><span>(</span>propagation<span>,</span> isolationLevel<span>)</span><span>;</span>
     <span>}</span>
@@ -2050,7 +2056,7 @@ Install-Package FreeSql.Provider.SqliteCore
 <span>class</span> <span>RepositoryCloud<span>&lt;</span>T<span>></span></span> <span>:</span> <span><span>DefaultRepository<span>&lt;</span>T<span>,</span> <span>int</span><span>></span></span></span> <span>where</span> <span>T</span> <span>:</span> <span><span>class</span></span>
 <span>{</span>
     <span>public</span> <span>RepositoryCloud</span><span>(</span><span>UnitOfWorkManagerCloud</span> uomw<span>)</span> <span>:</span> <span>this</span><span>(</span>DbEnum<span>.</span>db1<span>,</span> uomw<span>)</span> <span>{</span> <span>}</span> <span>//DI</span>
-    <span>public</span> <span>RepositoryCloud</span><span>(</span><span>DbEnum</span> db<span>,</span> <span>UnitOfWorkManagerCloud</span> uomw<span>)</span> <span>:</span> <span>this</span><span>(</span>uomw<span>.</span><span>GetUnitOfWorkManager</span><span>(</span>db<span>)</span><span>)</span> <span>{</span> <span>}</span>
+    <span>public</span> <span>RepositoryCloud</span><span>(</span><span>DbEnum</span> db<span>,</span> <span>UnitOfWorkManagerCloud</span> uomw<span>)</span> <span>:</span> <span>this</span><span>(</span>uomw<span>.</span><span>GetUnitOfWorkManager</span><span>(</span>db<span>.</span><span>ToString</span><span>(</span><span>)</span><span>)</span><span>)</span> <span>{</span> <span>}</span>
     <span>RepositoryCloud</span><span>(</span><span>UnitOfWorkManager</span> uomw<span>)</span> <span>:</span> <span>base</span><span>(</span>uomw<span>.</span>Orm<span>,</span> uomw<span>)</span>
     <span>{</span>
         uomw<span>.</span><span>Binding</span><span>(</span><span>this</span><span>)</span><span>;</span>
