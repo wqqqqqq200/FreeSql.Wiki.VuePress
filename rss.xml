@@ -6,8 +6,8 @@
     <link>https://freesql.net/</link>
     <description>FreeSql Documents</description>
     <language>zh-CN</language>
-    <pubDate>Thu, 25 Aug 2022 00:54:56 GMT</pubDate>
-    <lastBuildDate>Thu, 25 Aug 2022 00:54:56 GMT</lastBuildDate>
+    <pubDate>Thu, 25 Aug 2022 02:15:26 GMT</pubDate>
+    <lastBuildDate>Thu, 25 Aug 2022 02:15:26 GMT</lastBuildDate>
     <generator>vuepress-plugin-feed2</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
     <item>
@@ -11040,8 +11040,13 @@ repoComment<span>.</span><span>AsTable</span><span>(</span>oldname <span>=></spa
 <p>Install-Package FreeSql.Cloud</p>
 </blockquote>
 <div><pre><code><span>public</span> <span>enum</span> <span>DbEnum</span> <span>{</span> db1<span>,</span> db2 <span>}</span>
+<span>public</span> <span>class</span> <span>FreeSqlCloud</span> <span>:</span> <span><span>FreeSqlCloud<span>&lt;</span>DbEnum<span>></span></span></span> <span>//DbEnum 换成 string 就是多租户管理</span>
+<span>{</span>
+    <span>public</span> <span>FreeSqlCloud</span><span>(</span><span>)</span> <span>:</span> <span>base</span><span>(</span><span>null</span><span>)</span> <span>{</span> <span>}</span>
+    <span>public</span> <span>FreeSqlCloud</span><span>(</span><span><span>string</span></span> distributeKey<span>)</span> <span>:</span> <span>base</span><span>(</span>distributeKey<span>)</span> <span>{</span> <span>}</span>
+<span>}</span>
 
-<span><span>var</span></span> fsql <span>=</span> <span>new</span> <span>FreeSqlCloud<span>&lt;</span>DbEnum<span>></span></span><span>(</span><span>)</span><span>;</span>
+<span><span>var</span></span> fsql <span>=</span> <span>new</span> <span>FreeSqlCloud</span><span>(</span><span>)</span><span>;</span>
 fsql<span>.</span>DistributeTrace <span>=</span> log <span>=></span> Console<span>.</span><span>WriteLine</span><span>(</span>log<span>.</span><span>Split</span><span>(</span><span>'\n'</span><span>)</span><span>[</span><span>0</span><span>]</span><span>.</span><span>Trim</span><span>(</span><span>)</span><span>)</span><span>;</span>
 
 fsql<span>.</span><span>Register</span><span>(</span>DbEnum<span>.</span>db1<span>,</span> <span>(</span><span>)</span> <span>=></span> <span>new</span> <span>FreeSqlBuilder</span><span>(</span><span>)</span><span>.</span><span>UseConnectionString</span><span>(</span>DataType<span>.</span>Sqlite<span>,</span> <span>@"Data Source=db1.db"</span><span>)</span><span>.</span><span>Build</span><span>(</span><span>)</span><span>)</span><span>;</span>
@@ -11049,14 +11054,14 @@ fsql<span>.</span><span>Register</span><span>(</span>DbEnum<span>.</span>db2<spa
 
 services<span>.</span><span><span>AddSingleton</span><span><span>&lt;</span>IFreeSql<span>></span></span></span><span>(</span>fsql<span>)</span><span>;</span>
 services<span>.</span><span>AddSingleton</span><span>(</span>fsql<span>)</span><span>;</span>
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><blockquote>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><blockquote>
 <p>FreeSqlCloud 必须定义成单例模式</p>
 </blockquote>
 <blockquote>
-<p>new FreeSqlCloud&lt;DbEnum&gt;() 多连接管理，DbEnum 换成 string 就是多租户管理</p>
+<p>new FreeSqlCloud() 多连接管理</p>
 </blockquote>
 <blockquote>
-<p>new FreeSqlCloud&lt;DbEnum&gt;(&quot;myapp&quot;) 开启 TCC/SAGA 事务生效</p>
+<p>new FreeSqlCloud(&quot;myapp&quot;) 开启 TCC/SAGA 事务生效</p>
 </blockquote>
 <p>FreeSqlCloud 的访问方式和 IFreeSql 一样：</p>
 <div><pre><code>fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>T<span>></span></span></span><span>(</span><span>)</span><span>;</span>

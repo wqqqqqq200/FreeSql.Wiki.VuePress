@@ -3,7 +3,7 @@
   <id>https://freesql.net/</id>
   <title>FreeSql 官方文档</title>
   <subtitle>FreeSql Documents</subtitle>
-  <updated>2022-08-25T00:54:56.836Z</updated>
+  <updated>2022-08-25T02:15:26.724Z</updated>
   <generator>vuepress-plugin-feed2</generator>
   <link rel="self" href="https://freesql.net/atom.xml"/>
   <link rel="alternate" href="https://freesql.net/"/>
@@ -10900,7 +10900,7 @@ fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>Region<span>><
     <title type="html">分表分库</title>
     <id>https://freesql.net/guide/sharding.html</id>
     <link href="https://freesql.net/guide/sharding.html"/>
-    <updated>2022-08-25T00:52:50.000Z</updated>
+    <updated>2022-08-25T02:13:17.000Z</updated>
     <content type="html"><![CDATA[<h1 id="分表分库" tabindex="-1"> 分表分库</h1>
 <h2 id="理论知识" tabindex="-1"> 理论知识</h2>
 <p>分表 - 从表面意思上看呢，就是把一张表分成 N 多个小表，每一个小表都是完整的一张表。分表后数据都是存放在分表里，总表只是一个外壳，存取数据发生在一个一个的分表里面。分表后单表的并发能力提高了，磁盘 I/O 性能也提高了。并发能力为什么提高了呢，因为查寻一次所花的时间变短了，如果出现高并发的话，总表可以根据不同 的查询，将并发压力分到不同的小表里面。</p>
@@ -11031,8 +11031,13 @@ repoComment<span>.</span><span>AsTable</span><span>(</span>oldname <span>=></spa
 <p>Install-Package FreeSql.Cloud</p>
 </blockquote>
 <div><pre><code><span>public</span> <span>enum</span> <span>DbEnum</span> <span>{</span> db1<span>,</span> db2 <span>}</span>
+<span>public</span> <span>class</span> <span>FreeSqlCloud</span> <span>:</span> <span><span>FreeSqlCloud<span>&lt;</span>DbEnum<span>></span></span></span> <span>//DbEnum 换成 string 就是多租户管理</span>
+<span>{</span>
+    <span>public</span> <span>FreeSqlCloud</span><span>(</span><span>)</span> <span>:</span> <span>base</span><span>(</span><span>null</span><span>)</span> <span>{</span> <span>}</span>
+    <span>public</span> <span>FreeSqlCloud</span><span>(</span><span><span>string</span></span> distributeKey<span>)</span> <span>:</span> <span>base</span><span>(</span>distributeKey<span>)</span> <span>{</span> <span>}</span>
+<span>}</span>
 
-<span><span>var</span></span> fsql <span>=</span> <span>new</span> <span>FreeSqlCloud<span>&lt;</span>DbEnum<span>></span></span><span>(</span><span>)</span><span>;</span>
+<span><span>var</span></span> fsql <span>=</span> <span>new</span> <span>FreeSqlCloud</span><span>(</span><span>)</span><span>;</span>
 fsql<span>.</span>DistributeTrace <span>=</span> log <span>=></span> Console<span>.</span><span>WriteLine</span><span>(</span>log<span>.</span><span>Split</span><span>(</span><span>'\n'</span><span>)</span><span>[</span><span>0</span><span>]</span><span>.</span><span>Trim</span><span>(</span><span>)</span><span>)</span><span>;</span>
 
 fsql<span>.</span><span>Register</span><span>(</span>DbEnum<span>.</span>db1<span>,</span> <span>(</span><span>)</span> <span>=></span> <span>new</span> <span>FreeSqlBuilder</span><span>(</span><span>)</span><span>.</span><span>UseConnectionString</span><span>(</span>DataType<span>.</span>Sqlite<span>,</span> <span>@"Data Source=db1.db"</span><span>)</span><span>.</span><span>Build</span><span>(</span><span>)</span><span>)</span><span>;</span>
@@ -11040,14 +11045,14 @@ fsql<span>.</span><span>Register</span><span>(</span>DbEnum<span>.</span>db2<spa
 
 services<span>.</span><span><span>AddSingleton</span><span><span>&lt;</span>IFreeSql<span>></span></span></span><span>(</span>fsql<span>)</span><span>;</span>
 services<span>.</span><span>AddSingleton</span><span>(</span>fsql<span>)</span><span>;</span>
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><blockquote>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><blockquote>
 <p>FreeSqlCloud 必须定义成单例模式</p>
 </blockquote>
 <blockquote>
-<p>new FreeSqlCloud&lt;DbEnum&gt;() 多连接管理，DbEnum 换成 string 就是多租户管理</p>
+<p>new FreeSqlCloud() 多连接管理</p>
 </blockquote>
 <blockquote>
-<p>new FreeSqlCloud&lt;DbEnum&gt;(&quot;myapp&quot;) 开启 TCC/SAGA 事务生效</p>
+<p>new FreeSqlCloud(&quot;myapp&quot;) 开启 TCC/SAGA 事务生效</p>
 </blockquote>
 <p>FreeSqlCloud 的访问方式和 IFreeSql 一样：</p>
 <div><pre><code>fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>T<span>></span></span></span><span>(</span><span>)</span><span>;</span>
