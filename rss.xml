@@ -6,8 +6,8 @@
     <link>https://freesql.net/</link>
     <description>FreeSql Documents</description>
     <language>zh-CN</language>
-    <pubDate>Thu, 25 Aug 2022 00:53:35 GMT</pubDate>
-    <lastBuildDate>Thu, 25 Aug 2022 00:53:35 GMT</lastBuildDate>
+    <pubDate>Thu, 25 Aug 2022 00:54:56 GMT</pubDate>
+    <lastBuildDate>Thu, 25 Aug 2022 00:54:56 GMT</lastBuildDate>
     <generator>vuepress-plugin-feed2</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
     <item>
@@ -11086,11 +11086,11 @@ fsql<span>.</span><span>Use</span><span>(</span>DbEnum<span>.</span>db2<span>)</
 <p><a href="/guide/unitofwork-manager.html#freesql-cloud-%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8-unitofworkmanager">《FreeSql.Cloud 如何使用 UnitOfWorkManager 实现 AOP 事务？》</a></p>
 <p>4、动态创建对象（不推荐）</p>
 <p>但是。。。仍然有一种特殊需求，Repository 在创建之后，仍然能跟随 fsql.Change 切换数据库。</p>
-<div><pre><code>var repo = fsql.GetCloudRepository&lt;User&gt;();
-fsql.Change(DbEnum.db2);
-Console.WriteLine(repo.Orm.Ado.ConnectionString); //repo -&gt; db2
-fsql.Change(DbEnum.db1);
-Console.WriteLine(repo.Orm.Ado.ConnectionString); //repo -&gt; db1
+<div><pre><code><span><span>var</span></span> repo <span>=</span> fsql<span>.</span><span><span>GetCloudRepository</span><span><span>&lt;</span>User<span>></span></span></span><span>(</span><span>)</span><span>;</span>
+fsql<span>.</span><span>Change</span><span>(</span>DbEnum<span>.</span>db2<span>)</span><span>;</span>
+Console<span>.</span><span>WriteLine</span><span>(</span>repo<span>.</span>Orm<span>.</span>Ado<span>.</span>ConnectionString<span>)</span><span>;</span> <span>//repo -> db2</span>
+fsql<span>.</span><span>Change</span><span>(</span>DbEnum<span>.</span>db1<span>)</span><span>;</span>
+Console<span>.</span><span>WriteLine</span><span>(</span>repo<span>.</span>Orm<span>.</span>Ado<span>.</span>ConnectionString<span>)</span><span>;</span> <span>//repo -> db1</span>
 </code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div></div></div><p>这种机制太不可控，所以只做了简单的扩展方法创建，并不推荐 Ioc 注入。</p>
 ]]></content:encoded>
     </item>
