@@ -6,8 +6,8 @@
     <link>https://freesql.net/</link>
     <description>FreeSql Documents</description>
     <language>zh-CN</language>
-    <pubDate>Wed, 24 Aug 2022 13:05:48 GMT</pubDate>
-    <lastBuildDate>Wed, 24 Aug 2022 13:05:48 GMT</lastBuildDate>
+    <pubDate>Thu, 25 Aug 2022 00:53:35 GMT</pubDate>
+    <lastBuildDate>Thu, 25 Aug 2022 00:53:35 GMT</lastBuildDate>
     <generator>vuepress-plugin-feed2</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
     <item>
@@ -11039,27 +11039,21 @@ repoComment<span>.</span><span>AsTable</span><span>(</span>oldname <span>=></spa
 <blockquote>
 <p>Install-Package FreeSql.Cloud</p>
 </blockquote>
-<div><pre><code><span>public</span> <span>enum</span> <span>DbEnum</span> <span>{</span> db1<span>,</span> db2<span>,</span> db3 <span>}</span>
+<div><pre><code><span>public</span> <span>enum</span> <span>DbEnum</span> <span>{</span> db1<span>,</span> db2 <span>}</span>
 
-<span><span>var</span></span> fsql <span>=</span> <span>new</span> <span>FreeSqlCloud<span>&lt;</span>DbEnum<span>></span></span><span>(</span><span>"myapp"</span><span>)</span><span>;</span> <span>//提示：泛型可以传入 string</span>
+<span><span>var</span></span> fsql <span>=</span> <span>new</span> <span>FreeSqlCloud<span>&lt;</span>DbEnum<span>></span></span><span>(</span><span>)</span><span>;</span>
 fsql<span>.</span>DistributeTrace <span>=</span> log <span>=></span> Console<span>.</span><span>WriteLine</span><span>(</span>log<span>.</span><span>Split</span><span>(</span><span>'\n'</span><span>)</span><span>[</span><span>0</span><span>]</span><span>.</span><span>Trim</span><span>(</span><span>)</span><span>)</span><span>;</span>
 
-fsql<span>.</span><span>Register</span><span>(</span>DbEnum<span>.</span>db1<span>,</span> <span>(</span><span>)</span> <span>=></span> <span>new</span> <span>FreeSqlBuilder</span><span>(</span><span>)</span>
-    <span>.</span><span>UseConnectionString</span><span>(</span>DataType<span>.</span>Sqlite<span>,</span> <span>@"Data Source=db1.db"</span><span>)</span>
-    <span>.</span><span>Build</span><span>(</span><span>)</span><span>)</span><span>;</span>
+fsql<span>.</span><span>Register</span><span>(</span>DbEnum<span>.</span>db1<span>,</span> <span>(</span><span>)</span> <span>=></span> <span>new</span> <span>FreeSqlBuilder</span><span>(</span><span>)</span><span>.</span><span>UseConnectionString</span><span>(</span>DataType<span>.</span>Sqlite<span>,</span> <span>@"Data Source=db1.db"</span><span>)</span><span>.</span><span>Build</span><span>(</span><span>)</span><span>)</span><span>;</span>
+fsql<span>.</span><span>Register</span><span>(</span>DbEnum<span>.</span>db2<span>,</span> <span>(</span><span>)</span> <span>=></span> <span>new</span> <span>FreeSqlBuilder</span><span>(</span><span>)</span><span>.</span><span>UseConnectionString</span><span>(</span>DataType<span>.</span>Sqlite<span>,</span> <span>@"Data Source=db2.db"</span><span>)</span><span>.</span><span>Build</span><span>(</span><span>)</span><span>)</span><span>;</span>
 
-fsql<span>.</span><span>Register</span><span>(</span>DbEnum<span>.</span>db2<span>,</span> <span>(</span><span>)</span> <span>=></span> <span>new</span> <span>FreeSqlBuilder</span><span>(</span><span>)</span>
-    <span>.</span><span>UseConnectionString</span><span>(</span>DataType<span>.</span>Sqlite<span>,</span> <span>@"Data Source=db2.db"</span><span>)</span>
-    <span>.</span><span>Build</span><span>(</span><span>)</span><span>)</span><span>;</span>
-
-fsql<span>.</span><span>Register</span><span>(</span>DbEnum<span>.</span>db3<span>,</span> <span>(</span><span>)</span> <span>=></span> <span>new</span> <span>FreeSqlBuilder</span><span>(</span><span>)</span>
-    <span>.</span><span>UseConnectionString</span><span>(</span>DataType<span>.</span>Sqlite<span>,</span> <span>@"Data Source=db3.db"</span><span>)</span>
-    <span>.</span><span>Build</span><span>(</span><span>)</span><span>)</span><span>;</span>
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><blockquote>
+services<span>.</span><span><span>AddSingleton</span><span><span>&lt;</span>IFreeSql<span>></span></span></span><span>(</span>fsql<span>)</span><span>;</span>
+services<span>.</span><span>AddSingleton</span><span>(</span>fsql<span>)</span><span>;</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><blockquote>
 <p>FreeSqlCloud 必须定义成单例模式</p>
 </blockquote>
 <blockquote>
-<p>new FreeSqlCloud&lt;DbEnum&gt;() 多连接管理</p>
+<p>new FreeSqlCloud&lt;DbEnum&gt;() 多连接管理，DbEnum 换成 string 就是多租户管理</p>
 </blockquote>
 <blockquote>
 <p>new FreeSqlCloud&lt;DbEnum&gt;(&quot;myapp&quot;) 开启 TCC/SAGA 事务生效</p>
@@ -11071,39 +11065,34 @@ fsql<span>.</span><span><span>Update</span><span><span>&lt;</span>T<span>></span
 fsql<span>.</span><span><span>Delete</span><span><span>&lt;</span>T<span>></span></span></span><span>(</span><span>)</span><span>;</span>
 
 <span>//...</span>
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div></div></div><p>切换数据库：</p>
-<div><pre><code>fsql<span>.</span><span>Change</span><span>(</span>DbEnum<span>.</span>db3<span>)</span><span>.</span><span><span>Select</span><span><span>&lt;</span>T<span>></span></span></span><span>(</span><span>)</span><span>;</span>
-<span>//同一线程，或异步await 后续 fsql.Select/Insert/Update/Delete 操作是 db3</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div></div></div><p>1、切换数据库（多线程安全）：</p>
+<div><pre><code>fsql<span>.</span><span>Change</span><span>(</span>DbEnum<span>.</span>db2<span>)</span><span>.</span><span><span>Select</span><span><span>&lt;</span>T<span>></span></span></span><span>(</span><span>)</span><span>;</span>
+<span>//同一线程，或异步await 后续 fsql.Select/Insert/Update/Delete 操作是 db2</span>
 
-fsql<span>.</span><span>Use</span><span>(</span>DbEnum<span>.</span>db3<span>)</span><span>.</span><span><span>Select</span><span><span>&lt;</span>T<span>></span></span></span><span>(</span><span>)</span><span>;</span>
+fsql<span>.</span><span>Use</span><span>(</span>DbEnum<span>.</span>db2<span>)</span><span>.</span><span><span>Select</span><span><span>&lt;</span>T<span>></span></span></span><span>(</span><span>)</span><span>;</span>
 <span>//单次有效</span>
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div></div></div><p>自动定向数据库配置：</p>
-<div><pre><code><span>//对 fsql.CRUD 方法名 + 实体类型 进行拦截，自动定向到对应的数据库，达到自动 Change 切换数据库目的</span>
-fsql<span>.</span>EntitySteering <span>=</span> <span>(</span>_<span>,</span> e<span>)</span> <span>=></span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div></div></div><p>2、自动定向数据库配置：</p>
+<div><pre><code>fsql<span>.</span>EntitySteering <span>=</span> <span>(</span>_<span>,</span> e<span>)</span> <span>=></span>
 <span>{</span>
-    <span>switch</span> <span>(</span>e<span>.</span>MethodName<span>)</span>
-    <span>{</span>
-        <span>case</span> <span>"Select"</span><span>:</span>
-            <span>if</span> <span>(</span>e<span>.</span>EntityType <span>==</span> <span>typeof</span><span>(</span><span>T</span><span>)</span><span>)</span>
-            <span>{</span>
-                <span>//查询 T 自动定向 db3</span>
-                e<span>.</span>DBKey <span>=</span> DbEnum<span>.</span>db3<span>;</span>
-            <span>}</span>
-            <span>else</span> <span>if</span> <span>(</span>e<span>.</span>DBKey <span>==</span> DbEnum<span>.</span>db1<span>)</span>
-            <span>{</span>
-                <span>//此处像不像读写分离？</span>
-                <span><span>var</span></span> dbkeyIndex <span>=</span> <span>new</span> <span>Random</span><span>(</span><span>)</span><span>.</span><span>Next</span><span>(</span><span>0</span><span>,</span> e<span>.</span>AvailableDBKeys<span>.</span>Length<span>)</span><span>;</span>
-                e<span>.</span>DBKey <span>=</span> e<span>.</span>AvailableDBKeys<span>[</span>dbkeyIndex<span>]</span><span>;</span> <span>//重新定向到其他 db</span>
-            <span>}</span>
-            <span>break</span><span>;</span>
-        <span>case</span> <span>"Insert"</span><span>:</span>
-        <span>case</span> <span>"Update"</span><span>:</span>
-        <span>case</span> <span>"Delete"</span><span>:</span>
-        <span>case</span> <span>"InsertOrUpdate"</span><span>:</span>
-            <span>break</span><span>;</span>
-    <span>}</span>
+    <span>if</span> <span>(</span>e<span>.</span>EntityType <span>==</span> <span>typeof</span><span>(</span><span>User</span><span>)</span><span>)</span> e<span>.</span>DBKey <span>=</span> DbEnum<span>.</span>db2<span>;</span>
+    <span>//查询 User 自动定向 db2</span>
 <span>}</span><span>;</span>
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div>]]></content:encoded>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div></div></div><p>3、静态仓储对象</p>
+<p>FreeSql.Repository/UnitOfWorkManager 对象创建时固定了 IFreeSql，因此无法跟随 FreeSqlCloud 切换数据库。</p>
+<blockquote>
+<p>注意：是同一个对象实例创建之后，无法跟随切换，创建新对象实例不受影响。</p>
+</blockquote>
+<p>租户分库场景 Repository/UnitOfWorkManager 创建之前，先调用 fsql.Change 切换好数据库。</p>
+<p><a href="/guide/unitofwork-manager.html#freesql-cloud-%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8-unitofworkmanager">《FreeSql.Cloud 如何使用 UnitOfWorkManager 实现 AOP 事务？》</a></p>
+<p>4、动态创建对象（不推荐）</p>
+<p>但是。。。仍然有一种特殊需求，Repository 在创建之后，仍然能跟随 fsql.Change 切换数据库。</p>
+<div><pre><code>var repo = fsql.GetCloudRepository&lt;User&gt;();
+fsql.Change(DbEnum.db2);
+Console.WriteLine(repo.Orm.Ado.ConnectionString); //repo -&gt; db2
+fsql.Change(DbEnum.db1);
+Console.WriteLine(repo.Orm.Ado.ConnectionString); //repo -&gt; db1
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div></div></div><p>这种机制太不可控，所以只做了简单的扩展方法创建，并不推荐 Ioc 注入。</p>
+]]></content:encoded>
     </item>
     <item>
       <title>事务</title>
