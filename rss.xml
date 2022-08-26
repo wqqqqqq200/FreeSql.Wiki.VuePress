@@ -6,8 +6,8 @@
     <link>https://freesql.net/</link>
     <description>FreeSql Documents</description>
     <language>zh-CN</language>
-    <pubDate>Fri, 26 Aug 2022 09:44:59 GMT</pubDate>
-    <lastBuildDate>Fri, 26 Aug 2022 09:44:59 GMT</lastBuildDate>
+    <pubDate>Fri, 26 Aug 2022 09:46:06 GMT</pubDate>
+    <lastBuildDate>Fri, 26 Aug 2022 09:46:06 GMT</lastBuildDate>
     <generator>vuepress-plugin-feed2</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
     <item>
@@ -489,12 +489,12 @@ repo<span>.</span><span>Delete</span><span>(</span>groups<span>)</span><span>;</
 </code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div>]]></content:encoded>
     </item>
     <item>
-      <title>嵌套查询</title>
+      <title>嵌套查询 ✨</title>
       <link>https://freesql.net/guide/withtempquery.html</link>
       <guid>https://freesql.net/guide/withtempquery.html</guid>
-      <source url="https://freesql.net/rss.xml">嵌套查询</source>
+      <source url="https://freesql.net/rss.xml">嵌套查询 ✨</source>
       <pubDate>Sat, 23 Jul 2022 05:30:46 GMT</pubDate>
-      <content:encoded><![CDATA[<h1 id="嵌套查询" tabindex="-1"> 嵌套查询</h1>
+      <content:encoded><![CDATA[<h1 id="嵌套查询-✨" tabindex="-1"> 嵌套查询 ✨</h1>
 <h2 id="withtempquery" tabindex="-1"> WithTempQuery</h2>
 <p>意见往集：<a href="https://github.com/dotnetcore/FreeSql/discussions/1192" target="_blank" rel="noopener noreferrer">https://github.com/dotnetcore/FreeSql/discussions/1192</a></p>
 <p>需求版本：v3.2.666-preview (最新)</p>

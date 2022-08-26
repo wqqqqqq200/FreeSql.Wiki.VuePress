@@ -3,7 +3,7 @@
   <id>https://freesql.net/</id>
   <title>FreeSql 官方文档</title>
   <subtitle>FreeSql Documents</subtitle>
-  <updated>2022-08-26T09:44:59.907Z</updated>
+  <updated>2022-08-26T09:46:06.699Z</updated>
   <generator>vuepress-plugin-feed2</generator>
   <link rel="self" href="https://freesql.net/atom.xml"/>
   <link rel="alternate" href="https://freesql.net/"/>
@@ -486,11 +486,11 @@ repo<span>.</span><span>Delete</span><span>(</span>groups<span>)</span><span>;</
     <published>2022-07-30T09:07:52.000Z</published>
   </entry>
   <entry>
-    <title type="html">嵌套查询</title>
+    <title type="html">嵌套查询 ✨</title>
     <id>https://freesql.net/guide/withtempquery.html</id>
     <link href="https://freesql.net/guide/withtempquery.html"/>
-    <updated>2022-08-26T09:42:48.000Z</updated>
-    <content type="html"><![CDATA[<h1 id="嵌套查询" tabindex="-1"> 嵌套查询</h1>
+    <updated>2022-08-26T09:44:37.000Z</updated>
+    <content type="html"><![CDATA[<h1 id="嵌套查询-✨" tabindex="-1"> 嵌套查询 ✨</h1>
 <h2 id="withtempquery" tabindex="-1"> WithTempQuery</h2>
 <p>意见往集：<a href="https://github.com/dotnetcore/FreeSql/discussions/1192" target="_blank" rel="noopener noreferrer">https://github.com/dotnetcore/FreeSql/discussions/1192</a></p>
 <p>需求版本：v3.2.666-preview (最新)</p>
