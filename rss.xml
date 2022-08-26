@@ -6,8 +6,8 @@
     <link>https://freesql.net/</link>
     <description>FreeSql Documents</description>
     <language>zh-CN</language>
-    <pubDate>Fri, 26 Aug 2022 09:44:14 GMT</pubDate>
-    <lastBuildDate>Fri, 26 Aug 2022 09:44:14 GMT</lastBuildDate>
+    <pubDate>Fri, 26 Aug 2022 09:44:28 GMT</pubDate>
+    <lastBuildDate>Fri, 26 Aug 2022 09:44:28 GMT</lastBuildDate>
     <generator>vuepress-plugin-feed2</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
     <item>
@@ -498,7 +498,6 @@ repo<span>.</span><span>Delete</span><span>(</span>groups<span>)</span><span>;</
 <h2 id="withtempquery" tabindex="-1"> WithTempQuery</h2>
 <p>意见往集：<a href="https://github.com/dotnetcore/FreeSql/discussions/1192" target="_blank" rel="noopener noreferrer">https://github.com/dotnetcore/FreeSql/discussions/1192</a></p>
 <p>需求版本：v3.2.666-preview (最新)</p>
-<p>GroupBy + WithTempQuery(嵌套查询) + FromQuery + UnionAll 组合使用，会让查询功能更加强大、灵活。</p>
 <h2 id="场景1-查询分组第一条记录" tabindex="-1"> 场景1：查询分组第一条记录</h2>
 <div><pre><code>fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>User1<span>></span></span></span><span>(</span><span>)</span>
     <span>.</span><span>Where</span><span>(</span>a <span>=></span> a<span>.</span>Id <span>&lt;</span> <span>1000</span><span>)</span>
