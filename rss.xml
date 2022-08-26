@@ -6,8 +6,8 @@
     <link>https://freesql.net/</link>
     <description>FreeSql Documents</description>
     <language>zh-CN</language>
-    <pubDate>Thu, 25 Aug 2022 02:16:33 GMT</pubDate>
-    <lastBuildDate>Thu, 25 Aug 2022 02:16:33 GMT</lastBuildDate>
+    <pubDate>Fri, 26 Aug 2022 07:03:37 GMT</pubDate>
+    <lastBuildDate>Fri, 26 Aug 2022 07:03:37 GMT</lastBuildDate>
     <generator>vuepress-plugin-feed2</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
     <item>
@@ -2327,7 +2327,7 @@ fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>Topic<span>></
     <span>WHERE</span> <span>(</span><span>(</span>a<span>.</span><span><span>`</span>Title<span>`</span></span><span>)</span> <span>LIKE</span> <span>'%yyy%'</span><span>)</span> <span>)</span> a<span>)</span> ftb
 </code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><h3 id="_2、跨分表查询-astable-相同实体多次操作-等于-union-all-查询" tabindex="-1"> 2、跨分表查询：AsTable 相同实体多次操作，等于 Union ALL 查询</h3>
 <div><pre><code><span><span>var</span></span> sql <span>=</span> fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>User<span>></span></span></span><span>(</span><span>)</span>
-    <span>.</span><span>AsTable</span><span>(</span><span>(</span>type<span>,</span> oldname<span>)</span> <span>=></span> <span>"table_1"</span><span>)</span>a
+    <span>.</span><span>AsTable</span><span>(</span><span>(</span>type<span>,</span> oldname<span>)</span> <span>=></span> <span>"table_1"</span><span>)</span>
     <span>.</span><span>AsTable</span><span>(</span><span>(</span>type<span>,</span> oldname<span>)</span> <span>=></span> <span>"table_2"</span><span>)</span>
     <span>.</span><span>ToSql</span><span>(</span>a <span>=></span> a<span>.</span>Id<span>)</span><span>;</span>
 </code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div></div></div><div><pre><code><span>select</span> <span>*</span> <span>from</span> <span>(</span><span>SELECT</span> a<span>.</span><span>"Id"</span> as1 <span>FROM</span> <span>"table_1"</span> a<span>)</span> ftb
