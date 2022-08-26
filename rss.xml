@@ -6,8 +6,8 @@
     <link>https://freesql.net/</link>
     <description>FreeSql Documents</description>
     <language>zh-CN</language>
-    <pubDate>Fri, 26 Aug 2022 07:03:37 GMT</pubDate>
-    <lastBuildDate>Fri, 26 Aug 2022 07:03:37 GMT</lastBuildDate>
+    <pubDate>Fri, 26 Aug 2022 09:41:07 GMT</pubDate>
+    <lastBuildDate>Fri, 26 Aug 2022 09:41:07 GMT</lastBuildDate>
     <generator>vuepress-plugin-feed2</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
     <item>
@@ -10427,7 +10427,7 @@ fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>Topic<span>></
 <p>关于<a href="/guide/withsql.html">WithSql</a>的详情文档， 使用多次为 UNION ALL 查询</p>
 </blockquote>
 <blockquote>
-<p>v3.2.666 <a href="/guide/withtempquery.html">WithTempQuery + FromQuery 嵌套查询</a></p>
+<p>v3.2.666 <a href="/guide/unionall.html">UnionAll 联合查询</a>、<a href="/guide/withtempquery.html">WithTempQuery + FromQuery 嵌套查询</a></p>
 </blockquote>
 <blockquote>
 <p>v3.2.666 WithMemory 使用内存数据进行查询</p>
