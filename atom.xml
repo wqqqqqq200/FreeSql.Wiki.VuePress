@@ -3,10 +3,100 @@
   <id>https://freesql.net/</id>
   <title>FreeSql 官方文档</title>
   <subtitle>FreeSql Documents</subtitle>
-  <updated>2022-08-26T09:41:07.825Z</updated>
+  <updated>2022-08-26T09:42:15.192Z</updated>
   <generator>vuepress-plugin-feed2</generator>
   <link rel="self" href="https://freesql.net/atom.xml"/>
   <link rel="alternate" href="https://freesql.net/"/>
+  <entry>
+    <title type="html">联合查询</title>
+    <id>https://freesql.net/guide/unionall.html</id>
+    <link href="https://freesql.net/guide/unionall.html"/>
+    <updated>2022-08-26T09:40:43.000Z</updated>
+    <content type="html"><![CDATA[<h1 id="联合查询" tabindex="-1"> 联合查询</h1>
+<p>在之前都是推荐使用 ToSql + WithSql 完成联合查询操作，v3.2.666 最增功能直接使用 UnionAll 方法。</p>
+<p>GroupBy + WithTempQuery(嵌套查询) + FromQuery + UnionAll 组合使用，会让查询功能更加强大、灵活。</p>
+<p>1、单表 UNION ALL</p>
+<div><pre><code><span><span>var</span></span> sql <span>=</span> fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>User<span>></span></span></span><span>(</span><span>)</span><span>.</span><span>Where</span><span>(</span>a <span>=></span> a<span>.</span>Id <span>==</span> <span>1</span><span>)</span>
+    <span>.</span><span>UnionAll</span><span>(</span>
+        fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>User<span>></span></span></span><span>(</span><span>)</span><span>.</span><span>Where</span><span>(</span>a <span>=></span> a<span>.</span>Id <span>==</span> <span>2</span><span>)</span>
+    <span>)</span>
+    <span>.</span><span>Where</span><span>(</span>a <span>=></span> a<span>.</span>Id <span>==</span> <span>1</span> <span>||</span> a<span>.</span>Id <span>==</span> <span>2</span><span>)</span>
+    <span>.</span><span>ToSql</span><span>(</span><span>)</span><span>;</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div></div></div><div><pre><code><span>SELECT</span> a<span>.</span><span>"Id"</span><span>,</span> a<span>.</span><span>"GroupId"</span><span>,</span> a<span>.</span><span>"Username"</span> 
+<span>FROM</span> <span>(</span> <span>SELECT</span> a<span>.</span><span>"Id"</span><span>,</span> a<span>.</span><span>"GroupId"</span><span>,</span> a<span>.</span><span>"Username"</span> 
+    <span>FROM</span> <span>"User"</span> a 
+    <span>WHERE</span> <span>(</span>a<span>.</span><span>"Id"</span> <span>=</span> <span>1</span><span>)</span> 
+    <span>UNION</span> <span>ALL</span> 
+    <span>SELECT</span> a<span>.</span><span>"Id"</span><span>,</span> a<span>.</span><span>"GroupId"</span><span>,</span> a<span>.</span><span>"Username"</span> 
+    <span>FROM</span> <span>"User"</span> a 
+    <span>WHERE</span> <span>(</span>a<span>.</span><span>"Id"</span> <span>=</span> <span>2</span><span>)</span> <span>)</span> a 
+<span>WHERE</span> <span>(</span><span>(</span>a<span>.</span><span>"Id"</span> <span>=</span> <span>1</span> <span>OR</span> a<span>.</span><span>"Id"</span> <span>=</span> <span>2</span><span>)</span><span>)</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><p>2、多表 UNION ALL</p>
+<div><pre><code><span><span>var</span></span> sql <span>=</span> fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>User<span>,</span> Group<span>></span></span></span><span>(</span><span>)</span>
+    <span>.</span><span>Where</span><span>(</span><span>(</span>a<span>,</span> b<span>)</span> <span>=></span> a<span>.</span>Id <span>==</span> <span>1</span><span>)</span>
+    <span>.</span><span>WithTempQuery</span><span>(</span><span>(</span>a<span>,</span> b<span>)</span> <span>=></span> <span>new</span> <span>{</span> user <span>=</span> a<span>,</span> <span>group</span> <span>=</span> b <span>}</span><span>)</span> <span>//匿名类型</span>
+
+    <span>.</span><span>UnionAll</span><span>(</span>
+        fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>User<span>,</span> Group<span>></span></span></span><span>(</span><span>)</span>
+            <span>.</span><span>Where</span><span>(</span><span>(</span>a<span>,</span> b<span>)</span> <span>=></span> a<span>.</span>Id <span>==</span> <span>2</span><span>)</span>
+            <span>.</span><span>WithTempQuery</span><span>(</span><span>(</span>a<span>,</span> b<span>)</span> <span>=></span> <span>new</span> <span>{</span> user <span>=</span> a<span>,</span> <span>group</span> <span>=</span> b <span>}</span><span>)</span> <span>//匿名类型</span>
+    <span>)</span>
+    <span>.</span><span>Where</span><span>(</span>a <span>=></span> a<span>.</span>user<span>.</span>Id <span>==</span> <span>1</span> <span>||</span> a<span>.</span>user<span>.</span>Id <span>==</span> <span>2</span><span>)</span>
+    <span>.</span><span>ToSql</span><span>(</span><span>)</span><span>;</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><div><pre><code><span>SELECT</span> <span>*</span> 
+<span>FROM</span> <span>(</span> <span>SELECT</span> <span>*</span> 
+    <span>FROM</span> <span>(</span> 
+        <span>SELECT</span> a<span>.</span><span>"Id"</span><span>,</span> a<span>.</span><span>"GroupId"</span><span>,</span> a<span>.</span><span>"Username"</span><span>,</span> b<span>.</span><span>"Id"</span><span>,</span> b<span>.</span><span>"GroupName"</span> 
+        <span>FROM</span> <span>"User"</span> a 
+        <span>INNER</span> <span>JOIN</span> <span>"UserGroup"</span> b <span>ON</span> a<span>.</span><span>"GroupId"</span> <span>=</span> b<span>.</span><span>"Id"</span> 
+        <span>WHERE</span> <span>(</span>a<span>.</span><span>"Id"</span> <span>=</span> <span>1</span><span>)</span> <span>)</span> a 
+    <span>UNION</span> <span>ALL</span> 
+    <span>SELECT</span> <span>*</span> 
+    <span>FROM</span> <span>(</span> 
+        <span>SELECT</span> a<span>.</span><span>"Id"</span><span>,</span> a<span>.</span><span>"GroupId"</span><span>,</span> a<span>.</span><span>"Username"</span><span>,</span> b<span>.</span><span>"Id"</span><span>,</span> b<span>.</span><span>"GroupName"</span> 
+        <span>FROM</span> <span>"User"</span> a 
+        <span>INNER</span> <span>JOIN</span> <span>"UserGroup"</span> b <span>ON</span> a<span>.</span><span>"GroupId"</span> <span>=</span> b<span>.</span><span>"Id"</span> 
+        <span>WHERE</span> <span>(</span>a<span>.</span><span>"Id"</span> <span>=</span> <span>2</span><span>)</span> <span>)</span> a <span>)</span> a 
+<span>WHERE</span> <span>(</span><span>(</span>a<span>.</span><span>"Id"</span> <span>=</span> <span>1</span> <span>OR</span> a<span>.</span><span>"Id"</span> <span>=</span> <span>2</span><span>)</span><span>)</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><p>注意：如上 SQL 会执行报错，因为 User、UserGroup 都存在相同的 Id 字段名称，暂时的解决办法需要指定字段</p>
+<div><pre><code>    <span>.</span><span>WithTempQuery</span><span>(</span><span>(</span>a<span>,</span> b<span>)</span> <span>=></span> <span>new</span> 
+    <span>{</span> 
+        user <span>=</span> a<span>,</span> 
+        <span>group</span> <span>=</span> <span>new</span>
+        <span>{</span>
+            GroupId <span>=</span> b<span>.</span>Id<span>,</span>
+            GroupName <span>=</span> b<span>.</span>GroupName
+        <span>}</span> 
+    <span>}</span><span>)</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><p>3、WithParameters 参数化共享</p>
+<p>开启参数化查询功能后，使用 WithParameters 共享参数化，避免产生相同的参数名称：</p>
+<div><pre><code><span><span>var</span></span> dbpars <span>=</span> <span>new</span> <span>List<span>&lt;</span>DbParameter<span>></span></span><span>(</span><span>)</span><span>;</span>
+
+<span><span>var</span></span> id1 <span>=</span> <span>1</span><span>;</span>
+<span><span>var</span></span> id2 <span>=</span> <span>2</span><span>;</span>
+<span><span>var</span></span> sql <span>=</span> fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>User<span>></span></span></span><span>(</span><span>)</span>
+    <span>.</span><span>WithParameters</span><span>(</span>dbpars<span>)</span>
+    <span>.</span><span>Where</span><span>(</span>a <span>=></span> a<span>.</span>Id <span>==</span> id1<span>)</span>
+
+    <span>.</span><span>UnionAll</span><span>(</span>
+        fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>User<span>></span></span></span><span>(</span><span>)</span>
+            <span>.</span><span>WithParameters</span><span>(</span>dbpars<span>)</span>
+            <span>.</span><span>Where</span><span>(</span>a <span>=></span> a<span>.</span>Id <span>==</span> id2<span>)</span>
+    <span>)</span>
+    <span>.</span><span>Where</span><span>(</span>a <span>=></span> a<span>.</span>Id <span>==</span> <span>1</span> <span>||</span> a<span>.</span>Id <span>==</span> <span>2</span><span>)</span>
+    <span>.</span><span>ToSql</span><span>(</span><span>)</span><span>;</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><div><pre><code><span>SELECT</span> a<span>.</span><span>"Id"</span><span>,</span> a<span>.</span><span>"GroupId"</span><span>,</span> a<span>.</span><span>"Username"</span> 
+<span>FROM</span> <span>(</span> <span>SELECT</span> a<span>.</span><span>"Id"</span><span>,</span> a<span>.</span><span>"GroupId"</span><span>,</span> a<span>.</span><span>"Username"</span> 
+    <span>FROM</span> <span>"User1"</span> a 
+    <span>WHERE</span> <span>(</span>a<span>.</span><span>"Id"</span> <span>=</span> <span>@exp_0</span><span>)</span> 
+    <span>UNION</span> <span>ALL</span> 
+    <span>SELECT</span> a<span>.</span><span>"Id"</span><span>,</span> a<span>.</span><span>"GroupId"</span><span>,</span> a<span>.</span><span>"Username"</span> 
+    <span>FROM</span> <span>"User1"</span> a 
+    <span>WHERE</span> <span>(</span>a<span>.</span><span>"Id"</span> <span>=</span> <span>@exp_1</span><span>)</span> <span>)</span> a 
+<span>WHERE</span> <span>(</span><span>(</span>a<span>.</span><span>"Id"</span> <span>=</span> <span>1</span> <span>OR</span> a<span>.</span><span>"Id"</span> <span>=</span> <span>2</span><span>)</span><span>)</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div>]]></content>
+    <published>2022-08-26T09:40:43.000Z</published>
+  </entry>
   <entry>
     <title type="html">动态操作</title>
     <id>https://freesql.net/guide/dynamic.html</id>
