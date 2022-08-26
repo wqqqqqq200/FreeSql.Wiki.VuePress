@@ -6,8 +6,8 @@
     <link>https://freesql.net/</link>
     <description>FreeSql Documents</description>
     <language>zh-CN</language>
-    <pubDate>Fri, 26 Aug 2022 09:52:57 GMT</pubDate>
-    <lastBuildDate>Fri, 26 Aug 2022 09:52:57 GMT</lastBuildDate>
+    <pubDate>Fri, 26 Aug 2022 10:29:37 GMT</pubDate>
+    <lastBuildDate>Fri, 26 Aug 2022 10:29:37 GMT</lastBuildDate>
     <generator>vuepress-plugin-feed2</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
     <item>
@@ -22,20 +22,25 @@
 <p>1、单表 UNION ALL</p>
 <div><pre><code><span><span>var</span></span> sql <span>=</span> fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>User<span>></span></span></span><span>(</span><span>)</span><span>.</span><span>Where</span><span>(</span>a <span>=></span> a<span>.</span>Id <span>==</span> <span>1</span><span>)</span>
     <span>.</span><span>UnionAll</span><span>(</span>
-        fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>User<span>></span></span></span><span>(</span><span>)</span><span>.</span><span>Where</span><span>(</span>a <span>=></span> a<span>.</span>Id <span>==</span> <span>2</span><span>)</span>
+        fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>User<span>></span></span></span><span>(</span><span>)</span><span>.</span><span>Where</span><span>(</span>a <span>=></span> a<span>.</span>Id <span>==</span> <span>2</span><span>)</span><span>,</span>
+        fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>User<span>></span></span></span><span>(</span><span>)</span><span>.</span><span>Where</span><span>(</span>a <span>=></span> a<span>.</span>Id <span>==</span> <span>3</span><span>)</span>
     <span>)</span>
     <span>.</span><span>Where</span><span>(</span>a <span>=></span> a<span>.</span>Id <span>==</span> <span>1</span> <span>||</span> a<span>.</span>Id <span>==</span> <span>2</span><span>)</span>
     <span>.</span><span>ToSql</span><span>(</span><span>)</span><span>;</span>
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div></div></div><div><pre><code><span>SELECT</span> a<span>.</span><span>"Id"</span><span>,</span> a<span>.</span><span>"GroupId"</span><span>,</span> a<span>.</span><span>"Username"</span> 
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><div><pre><code><span>SELECT</span> a<span>.</span><span>"Id"</span><span>,</span> a<span>.</span><span>"GroupId"</span><span>,</span> a<span>.</span><span>"Username"</span> 
 <span>FROM</span> <span>(</span> <span>SELECT</span> a<span>.</span><span>"Id"</span><span>,</span> a<span>.</span><span>"GroupId"</span><span>,</span> a<span>.</span><span>"Username"</span> 
     <span>FROM</span> <span>"User"</span> a 
     <span>WHERE</span> <span>(</span>a<span>.</span><span>"Id"</span> <span>=</span> <span>1</span><span>)</span> 
     <span>UNION</span> <span>ALL</span> 
     <span>SELECT</span> a<span>.</span><span>"Id"</span><span>,</span> a<span>.</span><span>"GroupId"</span><span>,</span> a<span>.</span><span>"Username"</span> 
     <span>FROM</span> <span>"User"</span> a 
-    <span>WHERE</span> <span>(</span>a<span>.</span><span>"Id"</span> <span>=</span> <span>2</span><span>)</span> <span>)</span> a 
+    <span>WHERE</span> <span>(</span>a<span>.</span><span>"Id"</span> <span>=</span> <span>2</span><span>)</span> 
+    <span>UNION</span> <span>ALL</span> 
+    <span>SELECT</span> a<span>.</span><span>"Id"</span><span>,</span> a<span>.</span><span>"GroupId"</span><span>,</span> a<span>.</span><span>"Username"</span> 
+    <span>FROM</span> <span>"User"</span> a 
+    <span>WHERE</span> <span>(</span>a<span>.</span><span>"Id"</span> <span>=</span> <span>3</span><span>)</span> <span>)</span> a 
 <span>WHERE</span> <span>(</span><span>(</span>a<span>.</span><span>"Id"</span> <span>=</span> <span>1</span> <span>OR</span> a<span>.</span><span>"Id"</span> <span>=</span> <span>2</span><span>)</span><span>)</span>
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><p>2、多表 UNION ALL</p>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><p>2、多表 UNION ALL</p>
 <div><pre><code><span><span>var</span></span> sql <span>=</span> fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>User<span>,</span> Group<span>></span></span></span><span>(</span><span>)</span>
     <span>.</span><span>Where</span><span>(</span><span>(</span>a<span>,</span> b<span>)</span> <span>=></span> a<span>.</span>Id <span>==</span> <span>1</span><span>)</span>
     <span>.</span><span>WithTempQuery</span><span>(</span><span>(</span>a<span>,</span> b<span>)</span> <span>=></span> <span>new</span> <span>{</span> user <span>=</span> a<span>,</span> <span>group</span> <span>=</span> b <span>}</span><span>)</span> <span>//匿名类型</span>
