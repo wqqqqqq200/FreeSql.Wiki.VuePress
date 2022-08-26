@@ -3,7 +3,7 @@
   <id>https://freesql.net/</id>
   <title>FreeSql 官方文档</title>
   <subtitle>FreeSql Documents</subtitle>
-  <updated>2022-08-26T09:49:21.176Z</updated>
+  <updated>2022-08-26T09:52:57.796Z</updated>
   <generator>vuepress-plugin-feed2</generator>
   <link rel="self" href="https://freesql.net/atom.xml"/>
   <link rel="alternate" href="https://freesql.net/"/>
@@ -1524,11 +1524,46 @@ fsql<span>.</span><span>Insert</span><span>(</span>departments<span>)</span>
     <published>2022-06-24T16:45:08.000Z</published>
   </entry>
   <entry>
-    <title type="html">Oracle</title>
+    <title type="html">FreeSql.Provider.Oracle</title>
     <id>https://freesql.net/guide/freesql-provider-oracle.html</id>
     <link href="https://freesql.net/guide/freesql-provider-oracle.html"/>
-    <updated>2022-06-24T16:45:08.000Z</updated>
-    <content type="html"><![CDATA[<h1 id="oracle" tabindex="-1"> Oracle</h1>
+    <updated>2022-08-26T09:51:00.000Z</updated>
+    <content type="html"><![CDATA[<h1 id="freesql-provider-oracle" tabindex="-1"> FreeSql.Provider.Oracle</h1>
+<p>FreeSql 对 Oracle 支持非常友好，是 c#.net ORM 不二之选，提供了 <a href="http://Ado.net/Odbc/Oledb" target="_blank" rel="noopener noreferrer">Ado.net/Odbc/Oledb</a> 三种实现包，他们都支持 .NETCore2.1+、.NET4.0+ 等最新或较低的 .NETFramework 版本。</p>
+<p>若想以 <a href="http://Ado.net" target="_blank" rel="noopener noreferrer">Ado.net</a> 驱动访问数据库，请安装：</p>
+<blockquote>
+<p>dotnet add package FreeSql.Provider.Oracle</p>
+</blockquote>
+<p>若想以 ODBC 驱动访问数据库，请安装：</p>
+<blockquote>
+<p>dotnet add package FreeSql.Provider.Odbc</p>
+</blockquote>
+<p>若想以 Oledb 驱动访问数据库，请安装：</p>
+<blockquote>
+<p>dotnet add package FreeSql.Provider.OracleOledb</p>
+</blockquote>
+<hr>
+<p>关于 Oracle US7ASCII 中文乱码的问题，<a href="http://Ado.Net" target="_blank" rel="noopener noreferrer">Ado.Net</a> 和 Odbc 无法解决。<a href="http://xn--uiry38ay5bnubq85b.Net" target="_blank" rel="noopener noreferrer">包括最新的.Net</a> Core、.NET6、.NET7 都无法解决这个问题。</p>
+<p>安装 FreeSql.Provider.OracleOledb 使用 Oledb 驱动解决读取使用 US7ASCII 的 Oracle 数据库中文显示乱码问题。</p>
+<div><pre><code><span>public</span> <span>class</span> <span>DB</span>
+<span>{</span>
+    <span>static</span> <span>Lazy<span>&lt;</span>IFreeSql<span>></span></span> oracleLazy <span>=</span> <span>new</span> <span>Lazy<span>&lt;</span>IFreeSql<span>></span></span><span>(</span><span>(</span><span>)</span> <span>=></span> <span>new</span> <span>FreeSql<span>.</span>FreeSqlBuilder</span><span>(</span><span>)</span>
+        <span>.</span><span>UseConnectionString</span><span>(</span>FreeSql<span>.</span>DataType<span>.</span>Oracle<span>,</span> <span>"Provider=OraOLEDB.Oracle;user id=9user;password=123456;data source=//127.0.0.1:1521/XE;Pooling=true;Max Pool Size=2"</span><span>)</span>
+        <span>.</span><span>UseAutoSyncStructure</span><span>(</span><span>true</span><span>)</span>
+        <span>.</span><span>UseNameConvert</span><span>(</span>FreeSql<span>.</span>Internal<span>.</span>NameConvertType<span>.</span>ToUpper<span>)</span>
+        <span>.</span><span>UseNoneCommandParameter</span><span>(</span><span>true</span><span>)</span>
+        <span>.</span><span>UseMonitorCommand</span><span>(</span>cmd <span>=></span> Trace<span>.</span><span>WriteLine</span><span>(</span>cmd<span>.</span>CommandText<span>)</span><span>)</span>
+        <span>.</span><span>Build</span><span>(</span><span>)</span><span>)</span><span>;</span>
+    <span>public</span> <span>static</span> <span>IFreeSql</span> oracle <span>=></span> oracleLazy<span>.</span>Value<span>;</span>
+<span>}</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><p>定义 DB.cs 类之后就可以快乐的 CRUD 了。FreeSql 提供多种 CRUD 使用习惯，请根据实际情况选择团队合适的一种：</p>
+<ul>
+<li>要么 FreeSql，原始用法；</li>
+<li>要么 FreeSql.Repository，仓储+工作单元习惯；</li>
+<li>要么 FreeSql.DbContext，很像 EFCore 的使用习惯；</li>
+<li>要么 FreeSql.BaseEntity，充血模式；</li>
+<li>要么 直接像 dapper 那样使用 OracleConnection 扩展方法；</li>
+</ul>
 ]]></content>
     <published>2022-06-24T16:45:08.000Z</published>
   </entry>
