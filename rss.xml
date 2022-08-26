@@ -6,8 +6,8 @@
     <link>https://freesql.net/</link>
     <description>FreeSql Documents</description>
     <language>zh-CN</language>
-    <pubDate>Fri, 26 Aug 2022 10:29:37 GMT</pubDate>
-    <lastBuildDate>Fri, 26 Aug 2022 10:29:37 GMT</lastBuildDate>
+    <pubDate>Fri, 26 Aug 2022 10:37:50 GMT</pubDate>
+    <lastBuildDate>Fri, 26 Aug 2022 10:37:50 GMT</lastBuildDate>
     <generator>vuepress-plugin-feed2</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
     <item>
@@ -10961,6 +10961,34 @@ fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>Region<span>><
 <td>&lt;this&gt;</td>
 <td>Lambda</td>
 <td>多表查询，3 个表以上使用非常方便，目前设计最大支持 10 个表</td>
+<td></td>
+</tr>
+<tr>
+<td>FromQuery</td>
+<td>ISelect&lt;T1, T2&gt;</td>
+<td>ISelect&lt;T2&gt;</td>
+<td>单表连成双表查询</td>
+<td></td>
+</tr>
+<tr>
+<td>WithTempQuery</td>
+<td>ISelect&lt;T1&gt;</td>
+<td>Lambda</td>
+<td>将单表或多表查询嵌套成单表查询</td>
+<td></td>
+</tr>
+<tr>
+<td>WithMemory</td>
+<td>ISelect&lt;T1&gt;</td>
+<td>List&lt;T1&gt;</td>
+<td>使用内存数据查询</td>
+<td></td>
+</tr>
+<tr>
+<td>UnionAll</td>
+<td>ISelect&lt;T1&gt;</td>
+<td>ISelect&lt;T1&gt;[]</td>
+<td>联合查询</td>
 <td></td>
 </tr>
 <tr>

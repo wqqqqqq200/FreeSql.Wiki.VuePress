@@ -3,7 +3,7 @@
   <id>https://freesql.net/</id>
   <title>FreeSql 官方文档</title>
   <subtitle>FreeSql Documents</subtitle>
-  <updated>2022-08-26T10:29:37.228Z</updated>
+  <updated>2022-08-26T10:37:50.684Z</updated>
   <generator>vuepress-plugin-feed2</generator>
   <link rel="self" href="https://freesql.net/atom.xml"/>
   <link rel="alternate" href="https://freesql.net/"/>
@@ -10580,7 +10580,7 @@ fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>Topic<span>></
     <title type="html">查询</title>
     <id>https://freesql.net/guide/select.html</id>
     <link href="https://freesql.net/guide/select.html"/>
-    <updated>2022-08-13T09:41:11.000Z</updated>
+    <updated>2022-08-26T10:36:26.000Z</updated>
     <content type="html"><![CDATA[<h1 id="查询" tabindex="-1"> 查询</h1>
 <p>FreeSql 在查询数据下足了功夫，链式查询语法、多表查询、表达式函数支持得非常到位。</p>
 <ul>
@@ -10952,6 +10952,34 @@ fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>Region<span>><
 <td>&lt;this&gt;</td>
 <td>Lambda</td>
 <td>多表查询，3 个表以上使用非常方便，目前设计最大支持 10 个表</td>
+<td></td>
+</tr>
+<tr>
+<td>FromQuery</td>
+<td>ISelect&lt;T1, T2&gt;</td>
+<td>ISelect&lt;T2&gt;</td>
+<td>单表连成双表查询</td>
+<td></td>
+</tr>
+<tr>
+<td>WithTempQuery</td>
+<td>ISelect&lt;T1&gt;</td>
+<td>Lambda</td>
+<td>将单表或多表查询嵌套成单表查询</td>
+<td></td>
+</tr>
+<tr>
+<td>WithMemory</td>
+<td>ISelect&lt;T1&gt;</td>
+<td>List&lt;T1&gt;</td>
+<td>使用内存数据查询</td>
+<td></td>
+</tr>
+<tr>
+<td>UnionAll</td>
+<td>ISelect&lt;T1&gt;</td>
+<td>ISelect&lt;T1&gt;[]</td>
+<td>联合查询</td>
 <td></td>
 </tr>
 <tr>
