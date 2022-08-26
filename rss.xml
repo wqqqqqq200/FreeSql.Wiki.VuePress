@@ -6,8 +6,8 @@
     <link>https://freesql.net/</link>
     <description>FreeSql Documents</description>
     <language>zh-CN</language>
-    <pubDate>Fri, 26 Aug 2022 09:44:28 GMT</pubDate>
-    <lastBuildDate>Fri, 26 Aug 2022 09:44:28 GMT</lastBuildDate>
+    <pubDate>Fri, 26 Aug 2022 09:44:59 GMT</pubDate>
+    <lastBuildDate>Fri, 26 Aug 2022 09:44:59 GMT</lastBuildDate>
     <generator>vuepress-plugin-feed2</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
     <item>
@@ -498,6 +498,7 @@ repo<span>.</span><span>Delete</span><span>(</span>groups<span>)</span><span>;</
 <h2 id="withtempquery" tabindex="-1"> WithTempQuery</h2>
 <p>意见往集：<a href="https://github.com/dotnetcore/FreeSql/discussions/1192" target="_blank" rel="noopener noreferrer">https://github.com/dotnetcore/FreeSql/discussions/1192</a></p>
 <p>需求版本：v3.2.666-preview (最新)</p>
+<p>GroupBy + WithTempQuery(嵌套查询) + FromQuery + UnionAll 组合使用，会让查询功能更加强大、灵活。</p>
 <h2 id="场景1-查询分组第一条记录" tabindex="-1"> 场景1：查询分组第一条记录</h2>
 <div><pre><code>fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>User1<span>></span></span></span><span>(</span><span>)</span>
     <span>.</span><span>Where</span><span>(</span>a <span>=></span> a<span>.</span>Id <span>&lt;</span> <span>1000</span><span>)</span>
@@ -7868,7 +7869,7 @@ fsql<span>.</span><span>InsertOrUpdateDict</span><span>(</span>dic<span>)</span>
 <li><a href="/guide/withsql.html">WithSql</a>使用多次为 UNION ALL 查询</li>
 </ul>
 <blockquote>
-<p>v3.2.666 <a href="/guide/withtempquery.html">WithTempQuery + FromQuery 嵌套查询</a></p>
+<p>v3.2.666 <a href="/guide/unionall.html">UnionAll 联合查询</a>、<a href="/guide/withtempquery.html">WithTempQuery + FromQuery 嵌套查询</a></p>
 </blockquote>
 <blockquote>
 <p>v3.2.666 WithMemory 使用内存数据进行查询</p>
