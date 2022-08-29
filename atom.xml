@@ -3,7 +3,7 @@
   <id>https://freesql.net/</id>
   <title>FreeSql 官方文档</title>
   <subtitle>FreeSql Documents</subtitle>
-  <updated>2022-08-26T10:37:50.684Z</updated>
+  <updated>2022-08-29T06:00:34.017Z</updated>
   <generator>vuepress-plugin-feed2</generator>
   <link rel="self" href="https://freesql.net/atom.xml"/>
   <link rel="alternate" href="https://freesql.net/"/>
@@ -4052,7 +4052,7 @@ uow<span>.</span>OnEntityChange <span>=</span> report <span>=></span> <span>{</s
     <title type="html">DB First</title>
     <id>https://freesql.net/guide/db-first.html</id>
     <link href="https://freesql.net/guide/db-first.html"/>
-    <updated>2022-07-09T09:12:32.000Z</updated>
+    <updated>2022-08-29T05:57:39.000Z</updated>
     <content type="html"><![CDATA[<h1 id="db-first" tabindex="-1"> DB First</h1>
 <div><pre><code><span>static</span> <span>IFreeSql</span> fsql <span>=</span> <span>new</span> <span>FreeSql<span>.</span>FreeSqlBuilder</span><span>(</span><span>)</span>
     <span>.</span><span>UseConnectionString</span><span>(</span>FreeSql<span>.</span>DataType<span>.</span>MySql<span>,</span>
@@ -4197,7 +4197,7 @@ uow<span>.</span>OnEntityChange <span>=</span> report <span>=></span> <span>{</s
 <li>-NameSpace 指定了命名空间 LinCms.Core.Entities</li>
 <li>-DB 就是数据库的相关配置</li>
 <li>mysql 本地地址 127.0.0.1 3306 端口 用户名 root 密码 123456 数据库 lin-cms</li>
-<li>-Match book 这样就能只生成 book，支持正则表达式，如 -Math lin<em>user 就会生成以 lin_user 开头的表。如 dbo.TB</em>.+，会生成以 TB 开头的表。即只生成匹配的表</li>
+<li>-Match book 这样就能只生成 book，支持正则表达式，如 -Match lin<em>user 就会生成以 lin_user 开头的表。如 dbo.TB</em>.+，会生成以 TB 开头的表。即只生成匹配的表</li>
 </ul>
 <h2 id="安装-winform-生成器-已停止更新" tabindex="-1"> 安装 Winform 生成器（已停止更新）</h2>
 <p>源码地址：<a href="https://github.com/dotnetcore/FreeSql.Tools" target="_blank" rel="noopener noreferrer">FreeSql.Tools</a></p>

@@ -6,8 +6,8 @@
     <link>https://freesql.net/</link>
     <description>FreeSql Documents</description>
     <language>zh-CN</language>
-    <pubDate>Fri, 26 Aug 2022 10:37:50 GMT</pubDate>
-    <lastBuildDate>Fri, 26 Aug 2022 10:37:50 GMT</lastBuildDate>
+    <pubDate>Mon, 29 Aug 2022 06:00:34 GMT</pubDate>
+    <lastBuildDate>Mon, 29 Aug 2022 06:00:34 GMT</lastBuildDate>
     <generator>vuepress-plugin-feed2</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
     <item>
@@ -4202,7 +4202,7 @@ uow<span>.</span>OnEntityChange <span>=</span> report <span>=></span> <span>{</s
 <li>-NameSpace 指定了命名空间 LinCms.Core.Entities</li>
 <li>-DB 就是数据库的相关配置</li>
 <li>mysql 本地地址 127.0.0.1 3306 端口 用户名 root 密码 123456 数据库 lin-cms</li>
-<li>-Match book 这样就能只生成 book，支持正则表达式，如 -Math lin<em>user 就会生成以 lin_user 开头的表。如 dbo.TB</em>.+，会生成以 TB 开头的表。即只生成匹配的表</li>
+<li>-Match book 这样就能只生成 book，支持正则表达式，如 -Match lin<em>user 就会生成以 lin_user 开头的表。如 dbo.TB</em>.+，会生成以 TB 开头的表。即只生成匹配的表</li>
 </ul>
 <h2 id="安装-winform-生成器-已停止更新" tabindex="-1"> 安装 Winform 生成器（已停止更新）</h2>
 <p>源码地址：<a href="https://github.com/dotnetcore/FreeSql.Tools" target="_blank" rel="noopener noreferrer">FreeSql.Tools</a></p>
