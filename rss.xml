@@ -6,8 +6,8 @@
     <link>https://freesql.net/</link>
     <description>FreeSql Documents</description>
     <language>zh-CN</language>
-    <pubDate>Tue, 30 Aug 2022 23:15:24 GMT</pubDate>
-    <lastBuildDate>Tue, 30 Aug 2022 23:15:24 GMT</lastBuildDate>
+    <pubDate>Tue, 30 Aug 2022 23:15:29 GMT</pubDate>
+    <lastBuildDate>Tue, 30 Aug 2022 23:15:29 GMT</lastBuildDate>
     <generator>vuepress-plugin-feed2</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
     <item>
@@ -1868,12 +1868,12 @@ fsql<span>.</span><span>SetOdbcAdapter</span><span>(</span><span>new</span> <spa
 ]]></content:encoded>
     </item>
     <item>
-      <title>FreeSql 如何实现审计日志</title>
+      <title>FreeSql 实现审计日志</title>
       <link>https://freesql.net/extra/freesql-auditlog.html</link>
       <guid>https://freesql.net/extra/freesql-auditlog.html</guid>
-      <source url="https://freesql.net/rss.xml">FreeSql 如何实现审计日志</source>
+      <source url="https://freesql.net/rss.xml">FreeSql 实现审计日志</source>
       <pubDate>Fri, 24 Jun 2022 16:45:08 GMT</pubDate>
-      <content:encoded><![CDATA[<h1 id="freesql-如何实现审计日志" tabindex="-1"> FreeSql 如何实现审计日志</h1>
+      <content:encoded><![CDATA[<h1 id="freesql-实现审计日志" tabindex="-1"> FreeSql 实现审计日志</h1>
 <p>有两种情况，如果都是针对实体操作，确实很好做这个功能。</p>
 <p>IFreeSql 更新/删除，都可以不传实体进行操作，所以这个 old_values, new_values 实现起来比较麻烦（可能需要查询一次？性能？）。另外还有批量操作。</p>
 <h2 id="_1、fsql-aop-curdafter-事件是-crud-之后触发-提供以下参数" tabindex="-1"> 1、fsql.Aop.CurdAfter 事件是 CRUD 之后触发，提供以下参数</h2>
