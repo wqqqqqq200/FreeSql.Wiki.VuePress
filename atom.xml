@@ -3,7 +3,7 @@
   <id>https://freesql.net/</id>
   <title>FreeSql 官方文档</title>
   <subtitle>FreeSql Documents</subtitle>
-  <updated>2022-08-30T06:17:02.584Z</updated>
+  <updated>2022-08-30T06:18:13.902Z</updated>
   <generator>vuepress-plugin-feed2</generator>
   <link rel="self" href="https://freesql.net/atom.xml"/>
   <link rel="alternate" href="https://freesql.net/"/>
@@ -153,12 +153,12 @@
     <title type="html">FreeScheduler</title>
     <id>https://freesql.net/guide/freescheduler.html</id>
     <link href="https://freesql.net/guide/freescheduler.html"/>
-    <updated>2022-08-30T05:55:32.000Z</updated>
+    <updated>2022-08-30T06:16:22.000Z</updated>
     <content type="html"><![CDATA[<h1 id="freescheduler" tabindex="-1"> FreeScheduler</h1>
 <p>FreeScheduler 是利用 IdleBus 实现的轻量化定时任务调度，支持临时的延时任务和重复循环任务(可持久化)，可按秒，每天/每周/每月固定时间，自定义间隔执行，支持 .NET Core 2.1+、.NET Framework 4.0+ 运行环境。</p>
 <p>开源地址：<a href="https://github.com/2881099/FreeScheduler" target="_blank" rel="noopener noreferrer">https://github.com/2881099/FreeScheduler</a></p>
 <p>扩展资料：<a href="https://www.cnblogs.com/FreeSql/p/16623030.html" target="_blank" rel="noopener noreferrer">《.NET 定时任务 -- FreeScheduler 支持 cron、持久化、可变定时设置》</a></p>
-<h2 id="quick-start" tabindex="-1"> Quick start</h2>
+<h2 id="快速开始" tabindex="-1"> 快速开始</h2>
 <blockquote>
 <p>dotnet add package FreeScheduler</p>
 </blockquote>
@@ -167,7 +167,7 @@
 </blockquote>
 <div><pre><code>static Lazy&lt;Scheduler&gt; _schedulerLazy = new Lazy(() =&gt; new Scheduler(new MyTaskHandler()));
 static Scheduler scheduler =&gt; _schedulerLazy.Value;
-</code></pre><div aria-hidden="true"><div></div><div></div></div></div><p>0、临时任务(不可持久化)</p>
+</code></pre><div aria-hidden="true"><div></div><div></div></div></div><h2 id="临时任务-不可持久化" tabindex="-1"> 临时任务(不可持久化)</h2>
 <div><pre><code>void Callback()
 {
     Console.WriteLine(&quot;时间到了&quot;);
@@ -201,7 +201,7 @@ scheduler.AddTempTask(TimeSpan.FromSeconds(10), Callback);
 </tr>
 </tbody>
 </table>
-<p>1、普通任务</p>
+<h2 id="普通任务" tabindex="-1"> 普通任务</h2>
 <div><pre><code>class MyTaskHandler : FreeScheduler.TaskHandlers.TestHandler
 {
     public override void OnExecuting(Scheduler scheduler, TaskInfo task)
@@ -209,7 +209,7 @@ scheduler.AddTempTask(TimeSpan.FromSeconds(10), Callback);
         //todo..
     }
 }
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><p>2、持久化任务</p>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><h2 id="持久化任务" tabindex="-1"> 持久化任务</h2>
 <div><pre><code>// 使用 FreeSql 持久化任务
 class MyTaskHandler : FreeScheduler.TaskHandlers.FreeSqlHandler
 {
@@ -230,7 +230,7 @@ class MyTaskHandler : FreeScheduler.TaskHandlers.FreeSqlHandler
 <blockquote>
 <p>Install-Package FreeScheduler.TaskHandlers.FreeRedis</p>
 </blockquote>
-<p>3、管理任务</p>
+<h2 id="管理任务" tabindex="-1"> 管理任务</h2>
 <div><pre><code>// 使用 FreeSql 或者 SQL 查询 TaskInfo、TaskLog 两个表进行分页显示
 fsql.Select&lt;TaskInfo&gt;().Count(out var total).Page(pageNumber, 30).ToList();
 fsql.Select&lt;TaskLog&gt;().Count(out var total).Page(pageNumber, 30).ToList();
@@ -242,7 +242,33 @@ scheduler.ResumeTask(id);
 //删除任务
 scheduler.RemoveTask(id);
 </code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><h2 id="api-循环任务-可持久化" tabindex="-1"> API (循环任务/可持久化)</h2>
-<table>
+<div><pre><code>//每5秒触发，执行N次
+var id = scheduler.AddTask(&quot;topic1&quot;, &quot;body1&quot;, round: -1, 5);
+
+//每次 不同的间隔秒数触发，执行6次
+var id = scheduler.AddTask(&quot;topic1&quot;, &quot;body1&quot;, new [] { 5, 5, 10, 10, 60, 60 });
+
+//每天 20:00:00 触发，指定utc时间，执行N次
+var id = scheduler.AddTaskRunOnDay(&quot;topic1&quot;, &quot;body1&quot;, round: -1, &quot;20:00:00&quot;);
+
+//每周一 20:00:00 触发，指定utc时间，执行1次
+var id = scheduler.AddTaskRunOnWeek(&quot;topic1&quot;, &quot;body1&quot;, round: 1, &quot;1:20:00:00&quot;);
+
+//每月1日 20:00:00 触发，指定utc时间，执行12次
+var id = scheduler.AddTaskRunOnMonth(&quot;topic1&quot;, &quot;body1&quot;, round: 12, &quot;1:20:00:00&quot;);
+
+//自定义间隔
+var id = scheduler.AddTaskCustom(&quot;topic1&quot;, &quot;body1&quot;, &quot;0/1 * * * * ? &quot;);
+class MyCustomTaskHandler : FreeScheduler.ITaskIntervalCustomHandler
+{
+    public TimeSpan? NextDelay(TaskInfo task)
+    {
+        //利用 cron 功能库解析 task.IntervalArgument 得到下一次执行时间
+        //与当前时间相减，得到 TimeSpan，若返回 null 则任务完成
+        return TimeSpan.FromSeconds(5);
+    }
+}
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><table>
 <thead>
 <tr>
 <th>Method</th>
@@ -304,33 +330,7 @@ scheduler.RemoveTask(id);
 </tr>
 </tbody>
 </table>
-<div><pre><code>//每5秒触发，执行N次
-var id = scheduler.AddTask(&quot;topic1&quot;, &quot;body1&quot;, round: -1, 5);
-
-//每次 不同的间隔秒数触发，执行6次
-var id = scheduler.AddTask(&quot;topic1&quot;, &quot;body1&quot;, new [] { 5, 5, 10, 10, 60, 60 });
-
-//每天 20:00:00 触发，指定utc时间，执行N次
-var id = scheduler.AddTaskRunOnDay(&quot;topic1&quot;, &quot;body1&quot;, round: -1, &quot;20:00:00&quot;);
-
-//每周一 20:00:00 触发，指定utc时间，执行1次
-var id = scheduler.AddTaskRunOnWeek(&quot;topic1&quot;, &quot;body1&quot;, round: 1, &quot;1:20:00:00&quot;);
-
-//每月1日 20:00:00 触发，指定utc时间，执行12次
-var id = scheduler.AddTaskRunOnMonth(&quot;topic1&quot;, &quot;body1&quot;, round: 12, &quot;1:20:00:00&quot;);
-
-//自定义间隔
-var id = scheduler.AddTaskCustom(&quot;topic1&quot;, &quot;body1&quot;, &quot;0/1 * * * * ? &quot;);
-class MyCustomTaskHandler : FreeScheduler.ITaskIntervalCustomHandler
-{
-    public TimeSpan? NextDelay(TaskInfo task)
-    {
-        //利用 cron 功能库解析 task.IntervalArgument 得到下一次执行时间
-        //与当前时间相减，得到 TimeSpan，若返回 null 则任务完成
-        return TimeSpan.FromSeconds(5);
-    }
-}
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div>]]></content>
+]]></content>
     <published>2022-08-30T05:41:38.000Z</published>
   </entry>
   <entry>
