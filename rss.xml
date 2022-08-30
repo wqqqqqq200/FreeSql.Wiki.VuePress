@@ -6,8 +6,8 @@
     <link>https://freesql.net/</link>
     <description>FreeSql Documents</description>
     <language>zh-CN</language>
-    <pubDate>Tue, 30 Aug 2022 23:12:59 GMT</pubDate>
-    <lastBuildDate>Tue, 30 Aug 2022 23:12:59 GMT</lastBuildDate>
+    <pubDate>Tue, 30 Aug 2022 23:15:24 GMT</pubDate>
+    <lastBuildDate>Tue, 30 Aug 2022 23:15:24 GMT</lastBuildDate>
     <generator>vuepress-plugin-feed2</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
     <item>
@@ -2355,12 +2355,12 @@ fsql<span>.</span><span>Insert</span><span>(</span>departments<span>)</span>
 ]]></content:encoded>
     </item>
     <item>
-      <title>多个 IFreeSql实例，如何注入使用</title>
+      <title>多个 IFreeSql 注入使用</title>
       <link>https://freesql.net/extra/idlebus-freesql.html</link>
       <guid>https://freesql.net/extra/idlebus-freesql.html</guid>
-      <source url="https://freesql.net/rss.xml">多个 IFreeSql实例，如何注入使用</source>
+      <source url="https://freesql.net/rss.xml">多个 IFreeSql 注入使用</source>
       <pubDate>Thu, 23 Jun 2022 16:16:24 GMT</pubDate>
-      <content:encoded><![CDATA[<h1 id="多个-ifreesql实例-如何注入使用" tabindex="-1"> 多个 IFreeSql实例，如何注入使用</h1>
+      <content:encoded><![CDATA[<h1 id="多个-ifreesql-注入使用" tabindex="-1"> 多个 IFreeSql 注入使用</h1>
 <p>多库切换，动态切库，动态注册数据库</p>
 <h2 id="一、定义多个-ifreesql" tabindex="-1"> 一、定义多个 IFreeSql</h2>
 <p>该方法适用于固定数据库，固定配置项</p>

@@ -3,7 +3,7 @@
   <id>https://freesql.net/</id>
   <title>FreeSql 官方文档</title>
   <subtitle>FreeSql Documents</subtitle>
-  <updated>2022-08-30T23:12:59.843Z</updated>
+  <updated>2022-08-30T23:15:24.819Z</updated>
   <generator>vuepress-plugin-feed2</generator>
   <link rel="self" href="https://freesql.net/atom.xml"/>
   <link rel="alternate" href="https://freesql.net/"/>
@@ -2351,11 +2351,11 @@ fsql<span>.</span><span>Insert</span><span>(</span>departments<span>)</span>
     <published>2022-06-23T16:16:24.000Z</published>
   </entry>
   <entry>
-    <title type="html">多个 IFreeSql实例，如何注入使用</title>
+    <title type="html">多个 IFreeSql 注入使用</title>
     <id>https://freesql.net/extra/idlebus-freesql.html</id>
     <link href="https://freesql.net/extra/idlebus-freesql.html"/>
-    <updated>2022-08-11T15:34:05.000Z</updated>
-    <content type="html"><![CDATA[<h1 id="多个-ifreesql实例-如何注入使用" tabindex="-1"> 多个 IFreeSql实例，如何注入使用</h1>
+    <updated>2022-08-30T23:13:28.000Z</updated>
+    <content type="html"><![CDATA[<h1 id="多个-ifreesql-注入使用" tabindex="-1"> 多个 IFreeSql 注入使用</h1>
 <p>多库切换，动态切库，动态注册数据库</p>
 <h2 id="一、定义多个-ifreesql" tabindex="-1"> 一、定义多个 IFreeSql</h2>
 <p>该方法适用于固定数据库，固定配置项</p>
