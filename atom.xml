@@ -3,18 +3,175 @@
   <id>https://freesql.net/</id>
   <title>FreeSql 官方文档</title>
   <subtitle>FreeSql Documents</subtitle>
-  <updated>2022-08-30T05:43:35.896Z</updated>
+  <updated>2022-08-30T05:45:18.375Z</updated>
   <generator>vuepress-plugin-feed2</generator>
   <link rel="self" href="https://freesql.net/atom.xml"/>
   <link rel="alternate" href="https://freesql.net/"/>
   <entry>
+    <title type="html">FreeIM</title>
+    <id>https://freesql.net/guide/freeim.html</id>
+    <link href="https://freesql.net/guide/freeim.html"/>
+    <updated>2022-08-30T05:43:50.000Z</updated>
+    <content type="html"><![CDATA[<h1 id="freeim" tabindex="-1"> FreeIM</h1>
+<p>FreeIM 使用 websocket 协议实现简易、高性能（单机支持5万+连接）、集群即时通讯组件，支持点对点通讯、群聊通讯、上线下线事件消息等众多实用性功能。 <code>ImCore</code> 已正式改名为 <code>FreeIM</code>。<a href="https://github.com/2881099/FightLandlord" target="_blank" rel="noopener noreferrer">【网络版斗地主示例】</a></p>
+<p>使用场景：好友聊天、群聊天、直播间、实时评论区、游戏。</p>
+<p>开源地址：<a href="https://github.com/2881099/FreeIM" target="_blank" rel="noopener noreferrer">https://github.com/2881099/FreeIM</a></p>
+<p>扩展资料：<a href="https://www.cnblogs.com/FreeSql/p/16632727.html" target="_blank" rel="noopener noreferrer">《C#.NET im 聊天通讯架构设计 -- FreeIM 支持集群、职责分明、高性能》</a></p>
+<blockquote>
+<p>dotnet add package FreeIM</p>
+</blockquote>
+<h2 id="imserver-服务端" tabindex="-1"> ImServer 服务端</h2>
+<div><pre><code><span>public</span> <span><span>void</span></span> <span>Configure</span><span>(</span><span>IApplicationBuilder</span> app<span>)</span>
+<span>{</span>
+    app<span>.</span><span>UseFreeImServer</span><span>(</span><span>new</span> <span>ImServerOptions</span>
+    <span>{</span>
+        Redis <span>=</span> <span>new</span> <span>FreeRedis<span>.</span>RedisClient</span><span>(</span><span>"127.0.0.1:6379,poolsize=5"</span><span>)</span><span>,</span>
+        Servers <span>=</span> <span>new</span><span>[</span><span>]</span> <span>{</span> <span>"127.0.0.1:6001"</span> <span>}</span><span>,</span> <span>//集群配置</span>
+        Server <span>=</span> <span>"127.0.0.1:6001"</span>
+    <span>}</span><span>)</span><span>;</span>
+<span>}</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><blockquote>
+<p>一套永远不需要迭代更新的 <code>ImServer</code> 服务端，支持 .NET6.0、.NETCore2.1+、NETStandard2.0</p>
+</blockquote>
+<h2 id="webapi-业务端" tabindex="-1"> WebApi 业务端</h2>
+<div><pre><code><span>public</span> <span><span>void</span></span> <span>Configure</span><span>(</span><span>IApplicationBuilder</span> app<span>)</span>
+<span>{</span>
+    <span>//...</span>
+
+    ImHelper<span>.</span><span>Initialization</span><span>(</span><span>new</span> <span>ImClientOptions</span>
+    <span>{</span>
+        Redis <span>=</span> <span>new</span> <span>FreeRedis<span>.</span>RedisClient</span><span>(</span><span>"127.0.0.1:6379,poolsize=5"</span><span>)</span><span>,</span>
+        Servers <span>=</span> <span>new</span><span>[</span><span>]</span> <span>{</span> <span>"127.0.0.1:6001"</span> <span>}</span>
+    <span>}</span><span>)</span><span>;</span>
+
+    ImHelper<span>.</span><span>EventBus</span><span>(</span>
+        t <span>=></span> Console<span>.</span><span>WriteLine</span><span>(</span>t<span>.</span>clientId <span>+</span> <span>"上线了"</span><span>)</span><span>,</span> 
+        t <span>=></span> Console<span>.</span><span>WriteLine</span><span>(</span>t<span>.</span>clientId <span>+</span> <span>"下线了"</span><span>)</span><span>)</span><span>;</span>
+<span>}</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><table>
+<thead>
+<tr>
+<th>ImHelper方法</th>
+<th>参数</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>PrevConnectServer</td>
+<td>(clientId, string)</td>
+<td>在终端准备连接 websocket 前调用</td>
+</tr>
+<tr>
+<td>SendMessage</td>
+<td>(发送者, 接收者, 消息内容, 是否回执)</td>
+<td>发送消息</td>
+</tr>
+<tr>
+<td>GetClientListByOnline</td>
+<td>-</td>
+<td>返回所有在线clientId</td>
+</tr>
+<tr>
+<td>HasOnline</td>
+<td>clientId</td>
+<td>判断客户端是否在线</td>
+</tr>
+<tr>
+<td>EventBus</td>
+<td>(上线委托, 离线委托)</td>
+<td>socket上线与下线事件</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>频道</th>
+<th>参数</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>JoinChan</td>
+<td>(clientId, 频道名)</td>
+<td>加入</td>
+</tr>
+<tr>
+<td>LeaveChan</td>
+<td>(clientId, 频道名)</td>
+<td>离开</td>
+</tr>
+<tr>
+<td>GetChanClientList</td>
+<td>(频道名)</td>
+<td>获取频道所有clientId</td>
+</tr>
+<tr>
+<td>GetChanList</td>
+<td>-</td>
+<td>获取所有频道和在线人数</td>
+</tr>
+<tr>
+<td>GetChanListByClientId</td>
+<td>(clientId)</td>
+<td>获取用户参与的所有频道</td>
+</tr>
+<tr>
+<td>GetChanOnline</td>
+<td>(频道名)</td>
+<td>获取频道的在线人数</td>
+</tr>
+<tr>
+<td>SendChanMessage</td>
+<td>(clientId, 频道名, 消息内容)</td>
+<td>发送消息，所有在线的用户将收到消息</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>clientId 应该与用户id相同，或者关联；</li>
+<li>频道适用临时的群聊需求，如聊天室、讨论区；</li>
+</ul>
+<blockquote>
+<p>ImHelper 支持 .NetFramework 4.5+、.NetStandard 2.0</p>
+</blockquote>
+<h2 id="html5-终端" tabindex="-1"> Html5 终端</h2>
+<p>终端连接 websocket 前，应该先请求 <code>WebApi</code> 获得授权过的地址(ImHelper.PrevConnectServer)，伪代码：</p>
+<div><pre><code><span>ajax</span><span>(</span><span>'/prev-connect-imserver'</span><span>,</span> <span>function</span><span>(</span><span>data</span><span>)</span> <span>{</span>
+    <span>var</span> url <span>=</span> data<span>;</span> <span>//此时的值：ws://127.0.0.1:6001/ws?token=xxxxx</span>
+    <span>var</span> sock <span>=</span> <span>new</span> <span>WebSocket</span><span>(</span>url<span>)</span><span>;</span>
+    sock<span>.</span><span>onmessage</span> <span>=</span> <span>function</span> <span>(</span><span>e</span><span>)</span> <span>{</span>
+        <span>//...</span>
+    <span>}</span><span>;</span>
+<span>}</span><span>)</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><h2 id="💕-donation-捐赠" tabindex="-1"> 💕 Donation (捐赠)</h2>
+<blockquote>
+<p>感谢你的打赏</p>
+</blockquote>
+<ul>
+<li>
+<p><a href="https://www.cnblogs.com/FreeSql/gallery/image/338860.html" target="_blank" rel="noopener noreferrer">Alipay</a></p>
+</li>
+<li>
+<p><a href="https://www.cnblogs.com/FreeSql/gallery/image/338859.html" target="_blank" rel="noopener noreferrer">WeChat</a></p>
+</li>
+</ul>
+<h2 id="🗄-license-许可证" tabindex="-1"> 🗄 License (许可证)</h2>
+<p><a href="LICENSE">MIT</a></p>
+]]></content>
+    <published>2022-08-30T05:43:50.000Z</published>
+  </entry>
+  <entry>
     <title type="html">FreeRedis</title>
     <id>https://freesql.net/guide/freeredis.html</id>
     <link href="https://freesql.net/guide/freeredis.html"/>
-    <updated>2022-08-30T05:39:40.000Z</updated>
+    <updated>2022-08-30T05:41:59.000Z</updated>
     <content type="html"><![CDATA[<h1 id="freeredis" tabindex="-1"> FreeRedis</h1>
 <p><code>CSRedisCore</code> 是 .NETFramework 4.0 及以上 访问 redis-server 的客户端组件，也是 FreeSql 作者早年发布的 nuget 版本。</p>
 <p>后来重构了更简易的 <code>FreeRedis</code>，目前推荐大家使用 <code>FreeRedis</code>。</p>
+<p>开源地址：<a href="https://github.com/2881099/FreeRedis" target="_blank" rel="noopener noreferrer">https://github.com/2881099/FreeRedis</a></p>
 <ul>
 <li>🌈 所有方法名与 redis-cli 保持一致</li>
 <li>🌌 支持 Redis 集群（服务端要求 3.2 及以上版本）</li>
