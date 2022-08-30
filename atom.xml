@@ -3,7 +3,7 @@
   <id>https://freesql.net/</id>
   <title>FreeSql 官方文档</title>
   <subtitle>FreeSql Documents</subtitle>
-  <updated>2022-08-30T05:53:21.257Z</updated>
+  <updated>2022-08-30T05:55:20.961Z</updated>
   <generator>vuepress-plugin-feed2</generator>
   <link rel="self" href="https://freesql.net/atom.xml"/>
   <link rel="alternate" href="https://freesql.net/"/>
@@ -593,9 +593,9 @@ cli<span>.</span><span>Eval</span><span>(</span><span>"return redis.call('set',K
     <title type="html">其他作品</title>
     <id>https://freesql.net/guide/otherworks.html</id>
     <link href="https://freesql.net/guide/otherworks.html"/>
-    <updated>2022-08-30T05:35:49.000Z</updated>
+    <updated>2022-08-30T05:53:28.000Z</updated>
     <content type="html"><![CDATA[<h1 id="其他作品" tabindex="-1"> 其他作品</h1>
-<p>FreeSql 作者是一个入行 18年的老批，<a href="http://xn--8mq20eop327icpa.net" target="_blank" rel="noopener noreferrer">他目前写的.net</a> 开源项目有：</p>
+<p>FreeSql 作者是一个入行 18年的老批，他目前写的开源项目还有：</p>
 <table>
 <thead>
 <tr>

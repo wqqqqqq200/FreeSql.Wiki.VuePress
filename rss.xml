@@ -6,8 +6,8 @@
     <link>https://freesql.net/</link>
     <description>FreeSql Documents</description>
     <language>zh-CN</language>
-    <pubDate>Tue, 30 Aug 2022 05:53:21 GMT</pubDate>
-    <lastBuildDate>Tue, 30 Aug 2022 05:53:21 GMT</lastBuildDate>
+    <pubDate>Tue, 30 Aug 2022 05:55:20 GMT</pubDate>
+    <lastBuildDate>Tue, 30 Aug 2022 05:55:20 GMT</lastBuildDate>
     <generator>vuepress-plugin-feed2</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
     <item>
@@ -599,7 +599,7 @@ cli<span>.</span><span>Eval</span><span>(</span><span>"return redis.call('set',K
       <source url="https://freesql.net/rss.xml">其他作品</source>
       <pubDate>Tue, 30 Aug 2022 05:35:49 GMT</pubDate>
       <content:encoded><![CDATA[<h1 id="其他作品" tabindex="-1"> 其他作品</h1>
-<p>FreeSql 作者是一个入行 18年的老批，<a href="http://xn--8mq20eop327icpa.net" target="_blank" rel="noopener noreferrer">他目前写的.net</a> 开源项目有：</p>
+<p>FreeSql 作者是一个入行 18年的老批，他目前写的开源项目还有：</p>
 <table>
 <thead>
 <tr>
