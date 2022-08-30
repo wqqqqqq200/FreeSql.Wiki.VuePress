@@ -3,7 +3,7 @@
   <id>https://freesql.net/</id>
   <title>FreeSql 官方文档</title>
   <subtitle>FreeSql Documents</subtitle>
-  <updated>2022-08-30T05:56:53.833Z</updated>
+  <updated>2022-08-30T05:57:02.143Z</updated>
   <generator>vuepress-plugin-feed2</generator>
   <link rel="self" href="https://freesql.net/atom.xml"/>
   <link rel="alternate" href="https://freesql.net/"/>
@@ -153,7 +153,7 @@
     <title type="html">FreeScheduler</title>
     <id>https://freesql.net/guide/freescheduler.html</id>
     <link href="https://freesql.net/guide/freescheduler.html"/>
-    <updated>2022-08-30T05:51:53.000Z</updated>
+    <updated>2022-08-30T05:55:32.000Z</updated>
     <content type="html"><![CDATA[<h1 id="freescheduler" tabindex="-1"> FreeScheduler</h1>
 <p>FreeScheduler 是利用 IdleBus 实现的轻量化定时任务调度，支持临时的延时任务和重复循环任务(可持久化)，可按秒，每天/每周/每月固定时间，自定义间隔执行，支持 .NET Core 2.1+、.NET Framework 4.0+ 运行环境。</p>
 <p>开源地址：<a href="https://github.com/2881099/FreeScheduler" target="_blank" rel="noopener noreferrer">https://github.com/2881099/FreeScheduler</a></p>
@@ -330,28 +330,14 @@ class MyCustomTaskHandler : FreeScheduler.ITaskIntervalCustomHandler
         return TimeSpan.FromSeconds(5);
     }
 }
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><h2 id="💕-donation-捐赠" tabindex="-1"> 💕 Donation (捐赠)</h2>
-<blockquote>
-<p>感谢你的打赏</p>
-</blockquote>
-<ul>
-<li>
-<p><a href="https://www.cnblogs.com/FreeSql/gallery/image/338860.html" target="_blank" rel="noopener noreferrer">Alipay</a></p>
-</li>
-<li>
-<p><a href="https://www.cnblogs.com/FreeSql/gallery/image/338859.html" target="_blank" rel="noopener noreferrer">WeChat</a></p>
-</li>
-</ul>
-<h2 id="🗄-license-许可证" tabindex="-1"> 🗄 License (许可证)</h2>
-<p><a href="LICENSE">MIT</a></p>
-]]></content>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div>]]></content>
     <published>2022-08-30T05:41:38.000Z</published>
   </entry>
   <entry>
     <title type="html">FreeRedis</title>
     <id>https://freesql.net/guide/freeredis.html</id>
     <link href="https://freesql.net/guide/freeredis.html"/>
-    <updated>2022-08-30T05:41:59.000Z</updated>
+    <updated>2022-08-30T05:55:17.000Z</updated>
     <content type="html"><![CDATA[<h1 id="freeredis" tabindex="-1"> FreeRedis</h1>
 <p><code>CSRedisCore</code> 是 .NETFramework 4.0 及以上 访问 redis-server 的客户端组件，也是 FreeSql 作者早年发布的 nuget 版本。</p>
 <p>后来重构了更简易的 <code>FreeRedis</code>，目前推荐大家使用 <code>FreeRedis</code>。</p>
@@ -558,21 +544,7 @@ cli<span>.</span><span>Eval</span><span>(</span><span>"return redis.call('set',K
 <span>{</span>
     Console<span>.</span><span>WriteLine</span><span>(</span><span>string</span><span>.</span><span>Join</span><span>(</span><span>", "</span><span>,</span> keys<span>)</span><span>)</span><span>;</span>
 <span>}</span>
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div></div></div><h2 id="💕-donation-捐赠" tabindex="-1"> 💕 Donation (捐赠)</h2>
-<blockquote>
-<p>感谢你的打赏</p>
-</blockquote>
-<ul>
-<li>
-<p><a href="https://www.cnblogs.com/FreeSql/gallery/image/338860.html" target="_blank" rel="noopener noreferrer">Alipay</a></p>
-</li>
-<li>
-<p><a href="https://www.cnblogs.com/FreeSql/gallery/image/338859.html" target="_blank" rel="noopener noreferrer">WeChat</a></p>
-</li>
-</ul>
-<h2 id="🗄-license-许可证" tabindex="-1"> 🗄 License (许可证)</h2>
-<p><a href="LICENSE">MIT</a></p>
-]]></content>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div></div></div>]]></content>
     <published>2022-08-30T05:39:40.000Z</published>
   </entry>
   <entry>
