@@ -6,8 +6,8 @@
     <link>https://freesql.net/</link>
     <description>FreeSql Documents</description>
     <language>zh-CN</language>
-    <pubDate>Tue, 30 Aug 2022 14:51:58 GMT</pubDate>
-    <lastBuildDate>Tue, 30 Aug 2022 14:51:58 GMT</lastBuildDate>
+    <pubDate>Tue, 30 Aug 2022 22:51:17 GMT</pubDate>
+    <lastBuildDate>Tue, 30 Aug 2022 22:51:17 GMT</lastBuildDate>
     <generator>vuepress-plugin-feed2</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
     <item>
@@ -8915,7 +8915,7 @@ fsql<span>.</span>Aop<span>.</span>ConfigEntityProperty <span>+=</span> <span>(<
 <blockquote>
 <p>v3.2.666 可设置 e.ObjectAuditBreak = true 中断对象审计，变相实现每个对象只触发一次 AuditValue 事件</p>
 </blockquote>
-<h2 id="_18、ado-net-扩展方法" tabindex="-1"> 18、<a href="http://Ado.Net" target="_blank" rel="noopener noreferrer">Ado.Net</a> 扩展方法</h2>
+<h2 id="_18、ado-net-扩展方法" tabindex="-1"> 18、Ado .Net 扩展方法</h2>
 <p>提供了类似 Dapper 的使用方法，FreeSql 增加了 IDbConnection/IDbTransaction 对象的扩展方法 Select/Insert/Update/Delete 实现 CRUD。</p>
 <div><pre><code><span>using</span> <span>FreeSql</span><span>;</span>
 
