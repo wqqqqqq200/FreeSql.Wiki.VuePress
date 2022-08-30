@@ -6,8 +6,8 @@
     <link>https://freesql.net/</link>
     <description>FreeSql Documents</description>
     <language>zh-CN</language>
-    <pubDate>Tue, 30 Aug 2022 23:04:34 GMT</pubDate>
-    <lastBuildDate>Tue, 30 Aug 2022 23:04:34 GMT</lastBuildDate>
+    <pubDate>Tue, 30 Aug 2022 23:06:37 GMT</pubDate>
+    <lastBuildDate>Tue, 30 Aug 2022 23:06:37 GMT</lastBuildDate>
     <generator>vuepress-plugin-feed2</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
     <item>
@@ -3955,7 +3955,7 @@ item<span>.</span><span>Restore</span><span>(</span><span>)</span><span>;</span>
 <blockquote>
 <p>说明：SnowflakeAttribute 是使用者您来定义，new Snowflake().GetId() 也是由使用者您来实现</p>
 </blockquote>
-<p>如果命名规范，可以在 aop 里判断，if (<a href="http://e.Property.Name" target="_blank" rel="noopener noreferrer">e.Property.Name</a> == &quot;createtime&quot;) e.Value = DateTime.Now;</p>
+<p>如果命名规范，可以在 aop 里判断，<code>if (e.Property.Name == &quot;createtime&quot;) e.Value = DateTime.Now;</code></p>
 <blockquote>
 <p>v3.2.666 可设置 e.ObjectAuditBreak = true 中断对象审计，变相实现每个对象只触发一次 AuditValue 事件</p>
 </blockquote>
@@ -4054,7 +4054,7 @@ fsql<span>.</span>Aop<span>.</span>ConfigEntityProperty <span>+=</span> <span>(<
       <span>this</span><span>.</span>Name <span>=</span> name<span>;</span>
     <span>}</span>
 <span>}</span>
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><h2 id="ado-net-读取拦截" tabindex="-1"> <a href="http://Ado.net" target="_blank" rel="noopener noreferrer">Ado.net</a> 读取拦截</h2>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><h2 id="ado-net-读取拦截" tabindex="-1"> Ado .net 读取拦截</h2>
 <div><pre><code>fsql<span>.</span>Aop<span>.</span>AuditDataReader <span>+=</span> <span>(</span>_<span>,</span> e<span>)</span> <span>=></span>
 <span>{</span>
     <span>if</span> <span>(</span>e<span>.</span>DataReader<span>.</span><span>GetFieldType</span><span>(</span>e<span>.</span>Index<span>)</span> <span>==</span> <span>typeof</span><span>(</span><span><span>string</span></span><span>)</span> <span>&amp;&amp;</span>
