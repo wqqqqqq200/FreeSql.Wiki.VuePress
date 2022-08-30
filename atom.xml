@@ -3,7 +3,7 @@
   <id>https://freesql.net/</id>
   <title>FreeSql 官方文档</title>
   <subtitle>FreeSql Documents</subtitle>
-  <updated>2022-08-30T23:18:11.049Z</updated>
+  <updated>2022-08-30T23:18:38.561Z</updated>
   <generator>vuepress-plugin-feed2</generator>
   <link rel="self" href="https://freesql.net/atom.xml"/>
   <link rel="alternate" href="https://freesql.net/"/>
@@ -2065,11 +2065,11 @@ RUN sed -i 's/MinProtocol = TLSv1.2/MinProtocol = TLSv1/g' /usr/lib/ssl/openssl.
     <published>2022-06-24T16:45:08.000Z</published>
   </entry>
   <entry>
-    <title type="html">技巧：自定义解析表达式树，实现动态聚合列 sum(case when ...)</title>
+    <title type="html">动态聚合列 sum(case when ...)</title>
     <id>https://freesql.net/extra/issues-expression-groupbysum.html</id>
     <link href="https://freesql.net/extra/issues-expression-groupbysum.html"/>
-    <updated>2022-08-11T08:57:16.000Z</updated>
-    <content type="html"><![CDATA[<h1 id="技巧-自定义解析表达式树-实现动态聚合列-sum-case-when" tabindex="-1"> 技巧：自定义解析表达式树，实现动态聚合列 sum(case when ...)</h1>
+    <updated>2022-08-30T23:17:10.000Z</updated>
+    <content type="html"><![CDATA[<h1 id="动态聚合列-sum-case-when" tabindex="-1"> 动态聚合列 sum(case when ...)</h1>
 <div><pre><code><span>SELECT</span>
 a<span>.</span><span>"Time"</span><span>,</span>
 v1 <span>=</span> <span>sum</span><span>(</span><span>case</span> <span>when</span> a<span>.</span><span>"Id"</span> <span>=</span><span>=</span> <span>1</span> <span>then</span> <span>1</span> <span>else</span> <span>0</span> <span>end</span><span>)</span><span>,</span>

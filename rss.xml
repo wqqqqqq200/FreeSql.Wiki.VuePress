@@ -6,8 +6,8 @@
     <link>https://freesql.net/</link>
     <description>FreeSql Documents</description>
     <language>zh-CN</language>
-    <pubDate>Tue, 30 Aug 2022 23:18:11 GMT</pubDate>
-    <lastBuildDate>Tue, 30 Aug 2022 23:18:11 GMT</lastBuildDate>
+    <pubDate>Tue, 30 Aug 2022 23:18:38 GMT</pubDate>
+    <lastBuildDate>Tue, 30 Aug 2022 23:18:38 GMT</lastBuildDate>
     <generator>vuepress-plugin-feed2</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
     <item>
@@ -2069,12 +2069,12 @@ RUN sed -i 's/MinProtocol = TLSv1.2/MinProtocol = TLSv1/g' /usr/lib/ssl/openssl.
 ]]></content:encoded>
     </item>
     <item>
-      <title>技巧：自定义解析表达式树，实现动态聚合列 sum(case when ...)</title>
+      <title>动态聚合列 sum(case when ...)</title>
       <link>https://freesql.net/extra/issues-expression-groupbysum.html</link>
       <guid>https://freesql.net/extra/issues-expression-groupbysum.html</guid>
-      <source url="https://freesql.net/rss.xml">技巧：自定义解析表达式树，实现动态聚合列 sum(case when ...)</source>
+      <source url="https://freesql.net/rss.xml">动态聚合列 sum(case when ...)</source>
       <pubDate>Fri, 24 Jun 2022 16:45:08 GMT</pubDate>
-      <content:encoded><![CDATA[<h1 id="技巧-自定义解析表达式树-实现动态聚合列-sum-case-when" tabindex="-1"> 技巧：自定义解析表达式树，实现动态聚合列 sum(case when ...)</h1>
+      <content:encoded><![CDATA[<h1 id="动态聚合列-sum-case-when" tabindex="-1"> 动态聚合列 sum(case when ...)</h1>
 <div><pre><code><span>SELECT</span>
 a<span>.</span><span>"Time"</span><span>,</span>
 v1 <span>=</span> <span>sum</span><span>(</span><span>case</span> <span>when</span> a<span>.</span><span>"Id"</span> <span>=</span><span>=</span> <span>1</span> <span>then</span> <span>1</span> <span>else</span> <span>0</span> <span>end</span><span>)</span><span>,</span>
