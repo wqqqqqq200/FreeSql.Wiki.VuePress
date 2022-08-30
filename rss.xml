@@ -6,8 +6,8 @@
     <link>https://freesql.net/</link>
     <description>FreeSql Documents</description>
     <language>zh-CN</language>
-    <pubDate>Tue, 30 Aug 2022 11:02:37 GMT</pubDate>
-    <lastBuildDate>Tue, 30 Aug 2022 11:02:37 GMT</lastBuildDate>
+    <pubDate>Tue, 30 Aug 2022 13:02:59 GMT</pubDate>
+    <lastBuildDate>Tue, 30 Aug 2022 13:02:59 GMT</lastBuildDate>
     <generator>vuepress-plugin-feed2</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
     <item>
@@ -8881,7 +8881,7 @@ fsql<span>.</span>Aop<span>.</span>ConfigEntityProperty <span>+=</span> <span>(<
   <span>}</span>
 <span>}</span>
 </code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><hr>
-<h2 id="_16-curd" tabindex="-1"> 16 CURD</h2>
+<h2 id="_16、审计-curd" tabindex="-1"> 16、审计 CURD</h2>
 <p>如果因为某个 sql 骚操作耗时很高，没有一个相关的审计功能，排查起来可以说无从下手。</p>
 <p>FreeSql 支持简单的类似功能：</p>
 <div><pre><code>fsql<span>.</span>Aop<span>.</span>CurdAfter <span>+=</span> <span>(</span>s<span>,</span> e<span>)</span> <span>=></span> <span>{</span>

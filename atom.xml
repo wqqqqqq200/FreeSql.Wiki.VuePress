@@ -3,7 +3,7 @@
   <id>https://freesql.net/</id>
   <title>FreeSql 官方文档</title>
   <subtitle>FreeSql Documents</subtitle>
-  <updated>2022-08-30T11:02:37.587Z</updated>
+  <updated>2022-08-30T13:02:59.531Z</updated>
   <generator>vuepress-plugin-feed2</generator>
   <link rel="self" href="https://freesql.net/atom.xml"/>
   <link rel="alternate" href="https://freesql.net/"/>
@@ -8492,7 +8492,7 @@ dotnet <span>add</span> package FreeSql.Provider.Sqlite
     <title type="html">你不知道的功能 ✨</title>
     <id>https://freesql.net/guide/more.html</id>
     <link href="https://freesql.net/guide/more.html"/>
-    <updated>2022-08-26T09:43:33.000Z</updated>
+    <updated>2022-08-30T13:01:28.000Z</updated>
     <content type="html"><![CDATA[<h1 id="你不知道的功能-✨" tabindex="-1"> 你不知道的功能 ✨</h1>
 <h2 id="_1、备注-迁移到数据库" tabindex="-1"> 1、备注 -&gt; 迁移到数据库</h2>
 <p>FreeSql CodeFirst 支持将 c# 代码内的注释，迁移至数据库的备注。先决条件：</p>
@@ -8872,7 +8872,7 @@ fsql<span>.</span>Aop<span>.</span>ConfigEntityProperty <span>+=</span> <span>(<
   <span>}</span>
 <span>}</span>
 </code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><hr>
-<h2 id="_16-curd" tabindex="-1"> 16 CURD</h2>
+<h2 id="_16、审计-curd" tabindex="-1"> 16、审计 CURD</h2>
 <p>如果因为某个 sql 骚操作耗时很高，没有一个相关的审计功能，排查起来可以说无从下手。</p>
 <p>FreeSql 支持简单的类似功能：</p>
 <div><pre><code>fsql<span>.</span>Aop<span>.</span>CurdAfter <span>+=</span> <span>(</span>s<span>,</span> e<span>)</span> <span>=></span> <span>{</span>
