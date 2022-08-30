@@ -6,8 +6,8 @@
     <link>https://freesql.net/</link>
     <description>FreeSql Documents</description>
     <language>zh-CN</language>
-    <pubDate>Tue, 30 Aug 2022 05:43:29 GMT</pubDate>
-    <lastBuildDate>Tue, 30 Aug 2022 05:43:29 GMT</lastBuildDate>
+    <pubDate>Tue, 30 Aug 2022 05:43:35 GMT</pubDate>
+    <lastBuildDate>Tue, 30 Aug 2022 05:43:35 GMT</lastBuildDate>
     <generator>vuepress-plugin-feed2</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
     <item>
@@ -19,7 +19,6 @@
       <content:encoded><![CDATA[<h1 id="freeredis" tabindex="-1"> FreeRedis</h1>
 <p><code>CSRedisCore</code> 是 .NETFramework 4.0 及以上 访问 redis-server 的客户端组件，也是 FreeSql 作者早年发布的 nuget 版本。</p>
 <p>后来重构了更简易的 <code>FreeRedis</code>，目前推荐大家使用 <code>FreeRedis</code>。</p>
-<p>开源地址：<a href="https://github.com/2881099/FreeRedis" target="_blank" rel="noopener noreferrer">https://github.com/2881099/FreeRedis</a></p>
 <ul>
 <li>🌈 所有方法名与 redis-cli 保持一致</li>
 <li>🌌 支持 Redis 集群（服务端要求 3.2 及以上版本）</li>
