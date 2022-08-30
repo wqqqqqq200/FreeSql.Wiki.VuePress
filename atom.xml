@@ -3,7 +3,7 @@
   <id>https://freesql.net/</id>
   <title>FreeSql 官方文档</title>
   <subtitle>FreeSql Documents</subtitle>
-  <updated>2022-08-30T23:06:37.489Z</updated>
+  <updated>2022-08-30T23:12:59.843Z</updated>
   <generator>vuepress-plugin-feed2</generator>
   <link rel="self" href="https://freesql.net/atom.xml"/>
   <link rel="alternate" href="https://freesql.net/"/>
@@ -2024,11 +2024,11 @@ RUN sed -i 's/MinProtocol = TLSv1.2/MinProtocol = TLSv1/g' /usr/lib/ssl/openssl.
     <published>2022-06-24T16:45:08.000Z</published>
   </entry>
   <entry>
-    <title type="html">技巧：ISelect 如何拷贝(copy)复用，克隆(clone)</title>
+    <title type="html">ISelect 拷贝(copy)克隆(clone)</title>
     <id>https://freesql.net/extra/iselect-depcopy.html</id>
     <link href="https://freesql.net/extra/iselect-depcopy.html"/>
-    <updated>2022-06-24T16:45:08.000Z</updated>
-    <content type="html"><![CDATA[<h1 id="技巧-iselect-如何拷贝-copy-复用-克隆-clone" tabindex="-1"> 技巧：ISelect 如何拷贝(copy)复用，克隆(clone)</h1>
+    <updated>2022-08-30T23:11:22.000Z</updated>
+    <content type="html"><![CDATA[<h1 id="iselect-拷贝-copy-克隆-clone" tabindex="-1"> ISelect 拷贝(copy)克隆(clone)</h1>
 <p>当一个 ISelect 构造到一定复杂程序之后，比如：</p>
 <div><pre><code><span>public</span> <span><span>void</span></span> <span>Test</span><span>(</span><span>)</span>
 <span>{</span>
