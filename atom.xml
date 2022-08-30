@@ -3,7 +3,7 @@
   <id>https://freesql.net/</id>
   <title>FreeSql 官方文档</title>
   <subtitle>FreeSql Documents</subtitle>
-  <updated>2022-08-30T13:02:59.531Z</updated>
+  <updated>2022-08-30T14:04:31.955Z</updated>
   <generator>vuepress-plugin-feed2</generator>
   <link rel="self" href="https://freesql.net/atom.xml"/>
   <link rel="alternate" href="https://freesql.net/"/>
@@ -5363,7 +5363,7 @@ fsql<span>.</span><span>Insert</span><span>(</span><span>new</span> <span>Type</
     <title type="html">表达式函数</title>
     <id>https://freesql.net/guide/expression-function.html</id>
     <link href="https://freesql.net/guide/expression-function.html"/>
-    <updated>2022-08-17T04:15:06.000Z</updated>
+    <updated>2022-08-30T14:02:47.000Z</updated>
     <content type="html"><![CDATA[<h1 id="表达式函数" tabindex="-1"> 表达式函数</h1>
 <p>这是 <code>FreeSql</code> 非常特色的功能之一，深入细化函数解析，所支持的类型基本都可以使用对应的表达式函数，例如 日期、字符串、<code>IN</code>查询、数组（<code>PostgreSQL</code>的数组）、字典（PostgreSQL HStore)等等。</p>
 <h2 id="动态lambda表达式" tabindex="-1"> 动态Lambda表达式</h2>
@@ -5412,7 +5412,7 @@ lst<span>.</span><span>Add</span><span>(</span><span>(</span>Guid<span>.</span><
 <span>//WHERE (a."Id" = '685ee1f6-bdf6-4719-a291-c709b8a1378f' AND a."ct1" = '2019-12-07 23:55:27' OR </span>
 <span>//a."Id" = '5ecd838a-06a0-4c81-be43-1e77633b7404' AND a."ct1" = '2019-12-07 23:55:27')</span>
 </code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><blockquote>
-<p>v3.2.650 使用 .Where(a =&gt; list.Any(b =&gt; b.Item1 == <a href="http://a.Id" target="_blank" rel="noopener noreferrer">a.Id</a> &amp;&amp; b.Item2 == a.ct1))</p>
+<p>v3.2.650 使用 .Where(a =&gt; list.Any(b =&gt; b.Item1 == a. Id &amp;&amp; b.Item2 == a. ct1))</p>
 </blockquote>
 <blockquote>
 <p>实现代码：<a href="/extra/issues-in-valuetype.html">In多列查询，表达式自定义实现</a></p>
