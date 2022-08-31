@@ -6,8 +6,8 @@
     <link>https://freesql.net/</link>
     <description>FreeSql Documents</description>
     <language>zh-CN</language>
-    <pubDate>Tue, 30 Aug 2022 23:18:38 GMT</pubDate>
-    <lastBuildDate>Tue, 30 Aug 2022 23:18:38 GMT</lastBuildDate>
+    <pubDate>Wed, 31 Aug 2022 00:40:01 GMT</pubDate>
+    <lastBuildDate>Wed, 31 Aug 2022 00:40:01 GMT</lastBuildDate>
     <generator>vuepress-plugin-feed2</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
     <item>
@@ -2471,12 +2471,12 @@ fsql<span>.</span>EntitySteering <span>=</span> <span>(</span>_<span>,</span> e<
 ]]></content:encoded>
     </item>
     <item>
-      <title>服务支持</title>
+      <title>支持我们</title>
       <link>https://freesql.net/reference/service-support.html</link>
       <guid>https://freesql.net/reference/service-support.html</guid>
-      <source url="https://freesql.net/rss.xml">服务支持</source>
+      <source url="https://freesql.net/rss.xml">支持我们</source>
       <pubDate>Wed, 25 May 2022 15:18:32 GMT</pubDate>
-      <content:encoded><![CDATA[<h1 id="服务支持" tabindex="-1"> 服务支持</h1>
+      <content:encoded><![CDATA[<h1 id="支持我们" tabindex="-1"> 支持我们</h1>
 <p>FreeSql 采用 MIT 最宽松的开源协议，永久免费开源。任何公司或个人，都可以使用在任何商业项目中。</p>
 <p>QQ 技术群：4336577(满员)、8578575(满员)、52508226(满员)、反馈问题请前往 <a href="https://github.com/dotnetcore/FreeSql/issues" target="_blank" rel="noopener noreferrer">https://github.com/dotnetcore/FreeSql/issues</a></p>
 <h2 id="💕-自愿捐赠" tabindex="-1"> 💕 自愿捐赠</h2>
