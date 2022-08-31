@@ -3,10 +3,226 @@
   <id>https://freesql.net/</id>
   <title>FreeSql 官方文档</title>
   <subtitle>FreeSql Documents</subtitle>
-  <updated>2022-08-31T02:56:24.601Z</updated>
+  <updated>2022-08-31T14:40:15.640Z</updated>
   <generator>vuepress-plugin-feed2</generator>
   <link rel="self" href="https://freesql.net/atom.xml"/>
   <link rel="alternate" href="https://freesql.net/"/>
+  <entry>
+    <title type="html">FreeSql+CAP事务</title>
+    <id>https://freesql.net/extra/freesql-cap.html</id>
+    <link href="https://freesql.net/extra/freesql-cap.html"/>
+    <updated>2022-08-31T14:37:49.000Z</updated>
+    <content type="html"><![CDATA[<h1 id="freesql-cap事务" tabindex="-1"> FreeSql+CAP事务</h1>
+<h2 id="背景描述" tabindex="-1"> 背景描述</h2>
+<p>在CAP中，事务对象需要交给CAP进行提交从而在事务实现提交后对缓存消息到 Broker 的 Flush 动作，而目前的Orm大部分都有自己的事务管理对象进行事务的提交。CAP官方直接原生支持使用 <a href="http://ADO.NET" target="_blank" rel="noopener noreferrer">ADO.NET</a> 和 EntityFrameworkCore 进行事务集成，而对于第三方ORM本文提供了一种扩展用以集成的示例。</p>
+<p>接入有二种方式</p>
+<ul>
+<li>安装<code>FreeSql</code>包</li>
+</ul>
+<div><pre><code>dotnet <span>add</span> package FreeSql
+dotnet <span>add</span> package FreeSql.DbContext
+dotnet <span>add</span> package FreeSql.Provider.MySqlConnector
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div></div></div><ul>
+<li>安装<code>CAP</code>相关包</li>
+</ul>
+<div><pre><code>dotnet <span>add</span> package Savorboard.CAP.InMemoryMessageQueue
+dotnet <span>add</span> package DotNetCore.CAP.MySql
+dotnet <span>add</span> package DotNetCore.CAP.Dashboard
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div></div></div><h2 id="服务" tabindex="-1"> 服务</h2>
+<ul>
+<li>appsetttings.json</li>
+</ul>
+<div><pre><code><span>{</span>
+  <span>"ConnectionStrings"</span><span>:</span> <span>{</span>
+    <span>"MySql"</span><span>:</span> <span>"Data Source=localhost;Port=3306;User ID=root;Password=root;Initial Catalog=lincms;Charset=utf8mb4;SslMode=none;Max pool size=1;Connection LifeTime=20"</span>
+    <span>}</span>
+<span>}</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div></div></div><ul>
+<li>配置相关服务</li>
+</ul>
+<div><pre><code> <span>IConfigurationSection</span> mysqlSelection <span>=</span> configuration<span>.</span><span>GetSection</span><span>(</span><span><span>$"ConnectionStrings:MySql"</span></span><span>)</span><span>;</span>
+    <span>IFreeSql</span> fsql <span>=</span> <span>new</span> <span>FreeSqlBuilder</span><span>(</span><span>)</span>
+                <span>.</span><span>UseConnectionString</span><span>(</span>DataType<span>.</span>MySql<span>,</span>mysqlSelection<span>.</span>Value<span>)</span>
+                <span>.</span><span>UseNameConvert</span><span>(</span>NameConvertType<span>.</span>PascalCaseToUnderscoreWithLower<span>)</span>
+                <span>.</span><span>UseAutoSyncStructure</span><span>(</span><span>true</span><span>)</span>
+                <span>.</span><span>UseMonitorCommand</span><span>(</span>cmd <span>=></span> <span>{</span> Trace<span>.</span><span>WriteLine</span><span>(</span>cmd<span>.</span>CommandText <span>+</span> <span>";"</span><span>)</span><span>;</span> <span>}</span><span>)</span>
+                <span>.</span><span>Build</span><span>(</span><span>)</span>
+    services<span>.</span><span>AddSingleton</span><span>(</span>fsql<span>)</span><span>;</span>
+    services<span>.</span><span>AddFreeRepository</span><span>(</span><span>)</span><span>;</span>
+    services<span>.</span><span><span>AddScoped</span><span><span>&lt;</span>UnitOfWorkManager<span>></span></span></span><span>(</span><span>)</span><span>;</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><ul>
+<li>CAP相关服务
+<a href="https://cap.dotnetcore.xyz/user-guide/zh/storage/mysql/" target="_blank" rel="noopener noreferrer">https://cap.dotnetcore.xyz/user-guide/zh/storage/mysql/</a></li>
+</ul>
+<p>至少你要配置一个消息队列和一个事件存储（UseMySql）</p>
+<div><pre><code>  services<span>.</span><span>AddCap</span><span>(</span>x <span>=></span>
+    <span>{</span>   
+        x<span>.</span><span>UseInMemoryMessageQueue</span><span>(</span><span>)</span><span>;</span>
+        x<span>.</span><span>UseMySql</span><span>(</span>opt<span>=></span><span>{</span>
+            <span>//MySqlOptions</span>
+            opt<span>.</span>ConnectionString <span>=</span> mysqlSelection<span>.</span>Value
+        <span>}</span><span>)</span><span>;</span>
+        <span>// x.UseXXX ...</span>
+         x<span>.</span><span>UseDashboard</span><span>(</span><span>)</span><span>;</span>
+    <span>}</span><span>)</span><span>;</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><p>默认情况下，你可以访问 <a href="http://localhost:xxx/cap" target="_blank" rel="noopener noreferrer">http://localhost:xxx/cap</a> 这个地址打开Dashboard。</p>
+<h2 id="方式一" tabindex="-1"> 方式一</h2>
+<div><pre><code>    <span>public</span> <span>static</span> <span>class</span> <span>CapUnitOfWorkExtensions</span>
+    <span>{</span>
+        <span>public</span> <span>static</span> <span><span>void</span></span> <span>Flush</span><span>(</span><span>this</span> <span>ICapTransaction</span> capTransaction<span>)</span>
+        <span>{</span>
+            capTransaction<span>?.</span><span>GetType</span><span>(</span><span>)</span><span>.</span><span>GetMethod</span><span>(</span><span>"Flush"</span><span>,</span> BindingFlags<span>.</span>Instance <span>|</span> BindingFlags<span>.</span>NonPublic<span>)</span><span>?.</span><span>Invoke</span><span>(</span>capTransaction<span>,</span> <span>null</span><span>)</span><span>;</span>
+        <span>}</span>
+        <span>public</span> <span>static</span> <span>ICapTransaction</span> <span>BeginTransaction</span><span>(</span><span>this</span> <span>IUnitOfWork</span> unitOfWork<span>,</span> <span>ICapPublisher</span> publisher<span>,</span> <span><span>bool</span></span> autoCommit <span>=</span> <span>false</span><span>)</span>
+        <span>{</span>
+            <span>//看了源码，换了新的写法，换不同的数据库，就需要手动修改这段代码了（MySqlCapTransaction）</span>
+            <span>//publisher.Transaction.Value = (ICapTransaction)publisher.ServiceProvider.GetService(typeof(ICapTransaction));新版本只能得到null</span>
+            publisher<span>.</span>Transaction<span>.</span>Value <span>=</span> ActivatorUtilities<span>.</span><span><span>CreateInstance</span><span><span>&lt;</span>MySqlCapTransaction<span>></span></span></span><span>(</span>publisher<span>.</span>ServiceProvider<span>)</span><span>;</span>
+            <span>return</span> publisher<span>.</span>Transaction<span>.</span>Value<span>.</span><span>Begin</span><span>(</span>unitOfWork<span>.</span><span>GetOrBeginTransaction</span><span>(</span><span>)</span><span>,</span> autoCommit<span>)</span><span>;</span>
+        <span>}</span>
+
+        <span>public</span> <span>static</span> <span><span>void</span></span> <span>Commit</span><span>(</span><span>this</span> <span>ICapTransaction</span> capTransaction<span>,</span> <span>IUnitOfWork</span> unitOfWork<span>)</span>
+        <span>{</span>
+            unitOfWork<span>.</span><span>Commit</span><span>(</span><span>)</span><span>;</span>
+            capTransaction<span>.</span><span>Flush</span><span>(</span><span>)</span><span>;</span>
+        <span>}</span>
+ <span>}</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><ul>
+<li>使用方式</li>
+</ul>
+<div><pre><code><span>public</span> <span>class</span> <span>BookController</span> <span>:</span> <span><span>Controller</span></span>
+<span>{</span>
+    <span>[</span><span><span>HttpGet</span><span><span>(</span><span>"~/freesql/unitofwork"</span><span>)</span></span></span><span>]</span>
+    <span>public</span> <span>DateTime</span> <span>FreeSqlUnitOfWorkManagerTransaction</span><span>(</span><span>[</span><span><span>FromServices</span></span><span>]</span> <span>IBaseRepository<span>&lt;</span>Book<span>></span></span> repo<span>,</span>
+    <span>[</span><span><span>FromServices</span></span><span>]</span> <span>UnitOfWorkManager</span> unitOfWorkManager<span>,</span>
+    <span>[</span><span><span>FromServices</span></span><span>]</span> <span>ICapPublisher</span> capBus
+    <span>)</span>
+    <span>{</span>
+        <span>DateTime</span> now <span>=</span> DateTime<span>.</span>Now<span>;</span>
+        <span>using</span> <span>(</span><span>IUnitOfWork</span> uow <span>=</span> unitOfWorkManager<span>.</span><span>Begin</span><span>(</span><span>)</span><span>)</span>
+        <span>{</span>
+            <span>ICapTransaction</span> trans <span>=</span> uow<span>.</span><span>BeginTransaction</span><span>(</span>capBus<span>,</span> <span>false</span><span>)</span><span>;</span>
+
+            repo<span>.</span><span>Insert</span><span>(</span><span>new</span> <span>Book</span><span>(</span><span>)</span>
+            <span>{</span>
+                Author <span>=</span> <span>"叶老板"</span><span>,</span>
+                Title <span>=</span> <span>"FreeSql源码解析与实战"</span><span>,</span>
+                Summary <span>=</span> <span>"带你了解FreeSql源码细节，掌握FreeSql的实战操作，扩展FreeSql的功能，提升你的开发效率。"</span>
+            <span>}</span><span>)</span><span>;</span>
+
+            capBus<span>.</span><span>Publish</span><span>(</span><span>"freesql.time"</span><span>,</span> now<span>)</span><span>;</span>
+            trans<span>.</span><span>Commit</span><span>(</span>uow<span>)</span><span>;</span>
+        <span>}</span>
+        <span>return</span> now<span>;</span>
+    <span>}</span>
+    <span>[</span><span><span>NonAction</span></span><span>]</span>
+    <span>[</span><span><span>CapSubscribe</span><span><span>(</span><span>"freesql.time"</span><span>)</span></span></span><span>]</span>
+    <span>public</span> <span><span>void</span></span> <span>GetTime</span><span>(</span><span>DateTime</span> time<span>)</span>
+    <span>{</span>
+        Console<span>.</span><span>WriteLine</span><span>(</span><span><span>$"time:</span><span><span>{</span><span>time</span><span>}</span></span><span>"</span></span><span>)</span><span>;</span>
+    <span>}</span>
+<span>}</span>
+
+<span>[</span><span><span>Table</span><span><span>(</span>Name <span>=</span> <span>"book"</span><span>)</span></span></span><span>]</span>
+<span>public</span> <span>class</span> <span>Book</span> 
+<span>{</span>
+   <span>[</span><span><span>Column</span><span><span>(</span>IsIdentity <span>=</span> <span>true</span><span>,</span> IsPrimary <span>=</span> <span>true</span><span>)</span></span></span><span>]</span>
+    <span>public</span> <span><span>long</span></span> Id <span>{</span> <span>get</span><span>;</span> <span>set</span><span>;</span> <span>}</span> 
+   
+    <span>[</span><span><span>Column</span><span><span>(</span>StringLength <span>=</span> <span>30</span><span>)</span></span></span><span>]</span>
+    <span>public</span> <span><span>string</span></span> Author <span>{</span> <span>get</span><span>;</span> <span>set</span><span>;</span> <span>}</span> 
+
+    <span>[</span><span><span>Column</span><span><span>(</span>StringLength <span>=</span> <span>1000</span><span>)</span></span></span><span>]</span>
+    <span>public</span> <span><span>string</span></span> Summary <span>{</span> <span>get</span><span>;</span> <span>set</span><span>;</span> <span>}</span> 
+
+    <span>[</span><span><span>Column</span><span><span>(</span>StringLength <span>=</span> <span>50</span><span>)</span></span></span><span>]</span>
+    <span>public</span> <span><span>string</span></span> Title <span>{</span> <span>get</span><span>;</span> <span>set</span><span>;</span> <span>}</span> 
+
+<span>}</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><h2 id="方式二" tabindex="-1"> 方式二</h2>
+<div><pre><code><span>public</span> <span>class</span> <span>FreeSqlRepositoryPatternTransaction</span> <span>:</span> <span><span>CapTransactionBase</span></span>
+<span>{</span>
+    <span>public</span> <span>FreeSqlRepositoryPatternTransaction</span><span>(</span><span>IDispatcher</span> dispatcher<span>,</span> <span>IUnitOfWork</span> uow<span>)</span> <span>:</span> <span>base</span><span>(</span>dispatcher<span>)</span>
+    <span>{</span>
+        Uow <span>=</span> uow<span>;</span>
+    <span>}</span>
+
+    <span>public</span> <span>IUnitOfWork</span> Uow <span>{</span> <span>get</span><span>;</span> <span>}</span>
+
+    <span>public</span> <span>override</span> <span><span>object</span><span>?</span></span> DbTransaction <span>=></span> Uow<span>.</span><span>GetOrBeginTransaction</span><span>(</span><span>)</span><span>;</span>
+
+    <span>public</span> <span>override</span> <span><span>void</span></span> <span>Commit</span><span>(</span><span>)</span>
+    <span>{</span>
+        Uow<span>.</span><span>Commit</span><span>(</span><span>)</span><span>;</span>
+        <span>Flush</span><span>(</span><span>)</span><span>;</span>
+    <span>}</span>
+
+    <span>public</span> <span>override</span> <span>Task</span> <span>CommitAsync</span><span>(</span><span>CancellationToken</span> cancellationToken <span>=</span> <span>default</span><span>)</span>
+    <span>{</span>
+        <span>throw</span> <span>new</span> <span>NotImplementedException</span><span>(</span><span>)</span><span>;</span>
+    <span>}</span>
+
+    <span>public</span> <span>override</span> <span><span>void</span></span> <span>Rollback</span><span>(</span><span>)</span>
+    <span>{</span>
+        Uow<span>.</span><span>Rollback</span><span>(</span><span>)</span><span>;</span>
+    <span>}</span>
+
+    <span>public</span> <span>override</span> <span>Task</span> <span>RollbackAsync</span><span>(</span><span>CancellationToken</span> cancellationToken <span>=</span> <span>default</span><span>)</span>
+    <span>{</span>
+        <span>throw</span> <span>new</span> <span>NotImplementedException</span><span>(</span><span>)</span><span>;</span>
+    <span>}</span>
+
+    <span>public</span> <span>override</span> <span><span>void</span></span> <span>Dispose</span><span>(</span><span>)</span>
+    <span>{</span>
+        Uow<span>.</span><span>Dispose</span><span>(</span><span>)</span><span>;</span>
+    <span>}</span>
+<span>}</span>
+
+<span>public</span> <span>static</span> <span>class</span> <span>Extensions</span>
+<span>{</span>
+      <span>// 注意：你可以酌情修改此扩展以支持你的使用习惯，参考下方讨论内容</span>
+      <span>public</span> <span>static</span> <span>ICapTransaction</span> <span>BeginTransaction</span><span>(</span><span>this</span> <span>IUnitOfWork</span> unitOfWork<span>,</span> <span>ICapPublisher</span> publisher<span>,</span> <span><span>bool</span></span> autoCommit <span>=</span> <span>false</span><span>)</span>
+      <span>{</span>
+            <span><span>var</span></span> dispatcher <span>=</span> publisher<span>.</span>ServiceProvider<span>.</span><span><span>GetRequiredService</span><span><span>&lt;</span>IDispatcher<span>></span></span></span><span>(</span><span>)</span><span>;</span>
+            <span><span>var</span></span> transaction <span>=</span> <span>new</span> <span>FreeSqlRepositoryPatternTransaction</span><span>(</span>dispatcher<span>,</span> unitOfWork<span>)</span>
+            <span>{</span>
+                AutoCommit <span>=</span> autoCommit
+            <span>}</span><span>;</span>
+            <span>return</span> publisher<span>.</span>Transaction<span>.</span>Value <span>=</span> transaction<span>;</span>
+      <span>}</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><p>使用方式：</p>
+<div><pre><code><span>[</span><span><span>HttpGet</span><span><span>(</span><span>"~/freesql/Withtransaction"</span><span>)</span></span></span><span>]</span>
+<span>public</span> <span>DateTime</span> <span>WithTransaction</span><span>(</span><span>[</span><span><span>FromServices</span></span><span>]</span> <span>IBaseRepository<span>&lt;</span>Book<span>></span></span> repo<span>,</span>
+<span>[</span><span><span>FromServices</span></span><span>]</span> <span>UnitOfWorkManager</span> unitOfWorkManager<span>,</span>
+<span>[</span><span><span>FromServices</span></span><span>]</span> <span>ICapPublisher</span> capBus
+<span>)</span>
+<span>{</span>
+    <span>DateTime</span> now <span>=</span> DateTime<span>.</span>Now<span>;</span>
+    <span>using</span> <span>(</span><span>IUnitOfWork</span> uow <span>=</span> unitOfWorkManager<span>.</span><span>Begin</span><span>(</span><span>)</span><span>)</span>
+    <span>{</span>
+        <span>ICapTransaction</span> trans <span>=</span> uow<span>.</span><span>BeginTransaction</span><span>(</span>capBus<span>,</span> <span>false</span><span>)</span><span>;</span>
+
+        repo<span>.</span><span>Insert</span><span>(</span><span>new</span> <span>Book</span><span>(</span><span>)</span>
+        <span>{</span>
+            Author <span>=</span> <span>"叶老板"</span><span>,</span>
+            Title <span>=</span> <span>"FreeSql源码解析与实战"</span><span>,</span>
+            Summary <span>=</span> <span>"带你了解FreeSql源码细节，掌握FreeSql的实战操作，扩展FreeSql的功能，提升你的开发效率。"</span>
+        <span>}</span><span>)</span><span>;</span>
+
+        capBus<span>.</span><span>Publish</span><span>(</span><span>"freesql.time"</span><span>,</span> now<span>)</span><span>;</span>
+        trans<span>.</span><span>Commit</span><span>(</span><span>)</span><span>;</span>
+    <span>}</span>
+    <span>return</span> now<span>;</span>
+<span>}</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><p>二者区别在于后者，<code>trans.Commit()</code>不需要传递``IUnitOfWork`参数</p>
+<h2 id="原文参考" tabindex="-1"> 原文参考</h2>
+<ul>
+<li><a href="https://www.cnblogs.com/igeekfan/p/cap_freesql_flush.html" target="_blank" rel="noopener noreferrer">FreeSql 接入 CAP 的实践</a></li>
+<li><a href="https://github.com/dotnetcore/FreeSql/discussions/1202" target="_blank" rel="noopener noreferrer">如何使 FreeSql 和 CAP 进行集成</a></li>
+</ul>
+]]></content>
+    <published>2022-08-31T14:37:49.000Z</published>
+  </entry>
   <entry>
     <title type="html">FreeSql.AdminLTE</title>
     <id>https://freesql.net/guide/freesqladminlte.html</id>
@@ -2341,12 +2557,16 @@ fsql<span>.</span><span>Insert</span><span>(</span>departments<span>)</span>
     <published>2022-06-24T16:45:08.000Z</published>
   </entry>
   <entry>
-    <title type="html">基于FreeSql扩展</title>
+    <title type="html">基于FreeSql扩展文档</title>
     <id>https://freesql.net/extra/</id>
     <link href="https://freesql.net/extra/"/>
-    <updated>2022-06-23T16:16:24.000Z</updated>
-    <content type="html"><![CDATA[<h1 id="基于freesql扩展" tabindex="-1"> 基于FreeSql扩展</h1>
-<h2 id="该文档是基于freesql扩展的实现文档" tabindex="-1"> 该文档是基于FreeSql扩展的实现文档</h2>
+    <updated>2022-08-31T14:37:49.000Z</updated>
+    <content type="html"><![CDATA[<h1 id="基于freesql扩展文档" tabindex="-1"> 基于FreeSql扩展文档</h1>
+<h2 id="更多文档" tabindex="-1"> 更多文档</h2>
+<ul>
+<li><a href="https://github.com/dotnetcore/FreeSql/issues/601" target="_blank" rel="noopener noreferrer">CentOS8 ARM 下连接 SQL Server 2008 R2（Hypervisor）</a></li>
+<li><a href="https://github.com/dotnetcore/FreeSql/issues/430" target="_blank" rel="noopener noreferrer">一对多关系，分表只取关联的第一条记录，如何获取</a></li>
+</ul>
 ]]></content>
     <published>2022-06-23T16:16:24.000Z</published>
   </entry>
@@ -3296,35 +3516,8 @@ fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>Topic<span>></
     <title type="html">Awesome FreeSql</title>
     <id>https://freesql.net/reference/awesome-freesql.html</id>
     <link href="https://freesql.net/reference/awesome-freesql.html"/>
-    <updated>2022-08-31T02:54:32.000Z</updated>
+    <updated>2022-08-31T14:37:49.000Z</updated>
     <content type="html"><![CDATA[<h1 id="awesome-freesql" tabindex="-1"> Awesome FreeSql</h1>
-<h2 id="freesql-官方博客" tabindex="-1"> FreeSql 官方博客</h2>
-<ul>
-<li><a href="https://www.cnblogs.com/kellynic/" target="_blank" rel="noopener noreferrer">https://www.cnblogs.com/kellynic/</a></li>
-<li><a href="https://www.cnblogs.com/freesql/" target="_blank" rel="noopener noreferrer">https://www.cnblogs.com/freesql/</a></li>
-</ul>
-<h2 id="官方文档" tabindex="-1"> 官方文档</h2>
-<ul>
-<li><a href="https://freesql.net" target="_blank" rel="noopener noreferrer">https://freesql.net</a></li>
-<li><a href="https://github.com/dotnetcore/FreeSql/wiki" target="_blank" rel="noopener noreferrer">https://github.com/dotnetcore/FreeSql/wiki</a></li>
-<li><a href="http://124.70.130.97:8082/api/index.html" target="_blank" rel="noopener noreferrer">API 参考(国内镜像)</a></li>
-<li><a href="https://docs.dotnet-china.com/FreeSql/index.html" target="_blank" rel="noopener noreferrer">API 参考</a></li>
-</ul>
-<h2 id="源码" tabindex="-1"> 源码</h2>
-<ul>
-<li>GitHub <a href="https://github.com/dotnetcore/FreeSql" target="_blank" rel="noopener noreferrer">https://github.com/dotnetcore/FreeSql</a></li>
-<li>Gitee <a href="https://gitee.com/FreeSql/FreeSql-ORM" target="_blank" rel="noopener noreferrer">https://gitee.com/FreeSql/FreeSql-ORM</a></li>
-</ul>
-<h2 id="相关博客指南" tabindex="-1"> 相关博客指南</h2>
-<ul>
-<li><a href="https://www.cnblogs.com/igeekfan/p/cap_freesql_flush.html" target="_blank" rel="noopener noreferrer">FreeSql 接入 CAP 的实践</a></li>
-<li><a href="https://www.cnblogs.com/igeekfan/p/freesql-generator.html" target="_blank" rel="noopener noreferrer">FreeSql.Generator 命令行代码生成器是如何实现的</a></li>
-</ul>
-<h2 id="以下可从github-issues-docs找到" tabindex="-1"> 以下可从<a href="https://github.com/dotnetcore/FreeSql/issues?q=label%3Adocs" target="_blank" rel="noopener noreferrer">GitHub Issues Docs</a>找到</h2>
-<ul>
-<li><a href="https://github.com/dotnetcore/FreeSql/issues/601" target="_blank" rel="noopener noreferrer">CentOS8 ARM 下连接 SQL Server 2008 R2（Hypervisor）</a></li>
-<li><a href="https://github.com/dotnetcore/FreeSql/issues/430" target="_blank" rel="noopener noreferrer">一对多关系，分表只取关联的第一条记录，如何获取</a></li>
-</ul>
 <h2 id="基于-freesql-的开源项目" tabindex="-1"> 基于 FreeSql 的开源项目</h2>
 <table>
 <thead>
@@ -3372,6 +3565,23 @@ fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>Topic<span>></
 <p>基于<code>.Net 5</code>平台的快速开发框架。
 目前系统包含功能有登录，用户管理，应用菜单管理，权限管理，字典管理，退出登录，也方便扩展多租户使用。
 通过这些基础功能的实现，分享自己对系统框架设计的理解，对<code>ddd</code>设计的理解，希望对大家学习使用<code>.net core</code>有帮助，少踩一些坑，当然也会存在不足之处，还望指出。</p>
+<h2 id="freesql-官方博客" tabindex="-1"> FreeSql 官方博客</h2>
+<ul>
+<li><a href="https://www.cnblogs.com/kellynic/" target="_blank" rel="noopener noreferrer">https://www.cnblogs.com/kellynic/</a></li>
+<li><a href="https://www.cnblogs.com/freesql/" target="_blank" rel="noopener noreferrer">https://www.cnblogs.com/freesql/</a></li>
+</ul>
+<h2 id="官方文档" tabindex="-1"> 官方文档</h2>
+<ul>
+<li><a href="https://freesql.net" target="_blank" rel="noopener noreferrer">https://freesql.net</a></li>
+<li><a href="https://github.com/dotnetcore/FreeSql/wiki" target="_blank" rel="noopener noreferrer">https://github.com/dotnetcore/FreeSql/wiki</a></li>
+<li><a href="http://124.70.130.97:8082/api/index.html" target="_blank" rel="noopener noreferrer">API 参考(国内镜像)</a></li>
+<li><a href="https://docs.dotnet-china.com/FreeSql/index.html" target="_blank" rel="noopener noreferrer">API 参考</a></li>
+</ul>
+<h2 id="源码" tabindex="-1"> 源码</h2>
+<ul>
+<li>GitHub <a href="https://github.com/dotnetcore/FreeSql" target="_blank" rel="noopener noreferrer">https://github.com/dotnetcore/FreeSql</a></li>
+<li>Gitee <a href="https://gitee.com/FreeSql/FreeSql-ORM" target="_blank" rel="noopener noreferrer">https://gitee.com/FreeSql/FreeSql-ORM</a></li>
+</ul>
 ]]></content>
     <published>2021-02-09T12:13:50.000Z</published>
   </entry>
@@ -13110,7 +13320,7 @@ fsql<span>.</span><span>UpdateDict</span><span>(</span>dic<span>)</span><span>.<
     <title type="html">API 文档</title>
     <id>https://freesql.net/reference/api.html</id>
     <link href="https://freesql.net/reference/api.html"/>
-    <updated>2022-06-29T02:23:44.000Z</updated>
+    <updated>2022-08-31T14:37:49.000Z</updated>
     <content type="html"><![CDATA[<h1 id="api-文档" tabindex="-1"> API 文档</h1>
 <ul>
 <li><a href="http://124.70.130.97:8082/api/FreeSql.html" target="_blank" rel="noopener noreferrer">http://124.70.130.97:8082/api/FreeSql.html</a></li>
@@ -13831,8 +14041,8 @@ fsql<span>.</span><span>UpdateDict</span><span>(</span>dic<span>)</span><span>.<
 <td>GroupBy</td>
 <td>&lt;this&gt;</td>
 <td>Lambda</td>
-<td>按选择的列分组，GroupBy(a =&gt; <a href="http://a.Name" target="_blank" rel="noopener noreferrer">a.Name</a>)</td>
-<td>GroupBy(a =&gt; new{<a href="http://a.Name" target="_blank" rel="noopener noreferrer">a.Name</a>,a.Time})</td>
+<td>按选择的列分组，GroupBy(a =&gt; <a href="http://a.Name" target="_blank" rel="noopener noreferrer">a.Name</a>)、GroupBy(a =&gt; new{<a href="http://a.Name" target="_blank" rel="noopener noreferrer">a.Name</a>,a.Time})</td>
+<td></td>
 </tr>
 <tr>
 <td>GroupBy</td>
