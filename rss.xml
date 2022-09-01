@@ -6,8 +6,8 @@
     <link>https://freesql.net/</link>
     <description>FreeSql Documents</description>
     <language>zh-CN</language>
-    <pubDate>Wed, 31 Aug 2022 16:26:42 GMT</pubDate>
-    <lastBuildDate>Wed, 31 Aug 2022 16:26:42 GMT</lastBuildDate>
+    <pubDate>Thu, 01 Sep 2022 06:46:08 GMT</pubDate>
+    <lastBuildDate>Thu, 01 Sep 2022 06:46:08 GMT</lastBuildDate>
     <generator>vuepress-plugin-feed2</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
     <item>
@@ -9635,7 +9635,17 @@ fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>T<span>></span
     <span>.</span><span>Where</span><span>(</span>a <span>=></span> a<span>.</span>Id <span>></span> <span>10</span><span>)</span><span>;</span>
 <span><span>var</span></span> total <span>=</span> <span>await</span> <span>select</span><span>.</span><span>CountAsync</span><span>(</span><span>)</span><span>;</span>
 <span><span>var</span></span> list <span>=</span> <span>await</span> <span>select</span><span>.</span><span>Page</span><span>(</span><span>1</span><span>,</span> <span>20</span><span>)</span><span>.</span><span>ToListAsync</span><span>(</span><span>)</span><span>;</span>
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div></div></div><h2 id="优化" tabindex="-1"> 优化</h2>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div></div></div><p><code>BasePagingInfo</code>是提供的分页类,<code>PageNumber</code>,<code>PageSize</code>,<code>Count</code>，如下内容，<code>.Page(page)</code>后，<code>page.Count</code>就有统计值了</p>
+<div><pre><code><span>public</span> <span>class</span> <span>TopicGetListInput</span><span>:</span> <span><span>BasePagingInfo</span></span>
+<span>{</span>
+    <span>public</span> <span><span>string</span></span> Name <span>{</span> <span>get</span><span>;</span> <span>set</span><span>;</span> <span>}</span>
+<span>}</span>
+<span><span>var</span></span> list <span>=</span> <span>await</span> fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>Topic<span>></span></span></span><span>(</span><span>)</span>
+    <span>.</span><span>WhereIf</span><span>(</span><span>!</span><span>string</span><span>.</span><span>IsNullOrEmpty</span><span>(</span>page<span>.</span>Name<span>)</span><span>,</span>r <span>=></span> r<span>.</span>Name<span>.</span><span>Contains</span><span>(</span>page<span>.</span>Name<span>)</span><span>)</span>
+    <span>.</span><span>OrderByDescending</span><span>(</span>c <span>=></span> c<span>.</span>CreateTime<span>)</span>
+    <span>.</span><span>Page</span><span>(</span>page<span>)</span>
+    <span>.</span><span>ToListAsync</span><span>(</span><span>)</span><span>;</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><h2 id="优化" tabindex="-1"> 优化</h2>
 <p>SqlServer 2012 以前的版本，使用 row_number 分页；</p>
 <p>SqlServer 2012+ 版本，使用最新的 fetch next rows 分页；</p>
 <h2 id="api" tabindex="-1"> API</h2>
@@ -9720,6 +9730,12 @@ fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>T<span>></span
 <td>&lt;this&gt;</td>
 <td>int pageIndex, int pageSize</td>
 <td>分页</td>
+</tr>
+<tr>
+<td>Page</td>
+<td>&lt;this&gt;</td>
+<td>BasePagingInfo(int PageNumber,int PageSize,long Count )</td>
+<td>分页,并且求Count和</td>
 </tr>
 </tbody>
 </table>
