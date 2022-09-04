@@ -6,8 +6,8 @@
     <link>https://freesql.net/</link>
     <description>FreeSql Documents</description>
     <language>zh-CN</language>
-    <pubDate>Sun, 04 Sep 2022 06:01:38 GMT</pubDate>
-    <lastBuildDate>Sun, 04 Sep 2022 06:01:38 GMT</lastBuildDate>
+    <pubDate>Sun, 04 Sep 2022 06:07:51 GMT</pubDate>
+    <lastBuildDate>Sun, 04 Sep 2022 06:07:51 GMT</lastBuildDate>
     <generator>vuepress-plugin-feed2</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
     <item>
@@ -4532,10 +4532,10 @@ repo<span>.</span><span>Insert</span><span>(</span>type<span>)</span><span>;</sp
 </code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div>]]></content:encoded>
     </item>
     <item>
-      <title>Code First</title>
+      <title>CodeFirst</title>
       <link>https://freesql.net/guide/code-first.html</link>
       <guid>https://freesql.net/guide/code-first.html</guid>
-      <source url="https://freesql.net/rss.xml">Code First</source>
+      <source url="https://freesql.net/rss.xml">CodeFirst</source>
       <pubDate>Thu, 04 Feb 2021 16:03:18 GMT</pubDate>
       <content:encoded><![CDATA[<p><code>FreeSql</code> 支持 <code>CodeFirst</code> 迁移结构至数据库，这应该是(<code>O/RM</code>)必须标配的一个功能。</p>
 <p>与其他(<code>O/RM</code>)不同的是：<code>FreeSql</code>支持更多的数据库特性，而不只是支持基础的数据类型，这既是优点也是缺点，优点是充分利用数据库特性辅助开发，缺点是切换数据库变得困难。不同程序员的理念可能不太一致，<code>FreeSql</code>尽量把功能支持到极致，至于是否使用是项目组技术衡量的另一个问题。</p>

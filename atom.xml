@@ -3,7 +3,7 @@
   <id>https://freesql.net/</id>
   <title>FreeSql 官方文档</title>
   <subtitle>FreeSql Documents</subtitle>
-  <updated>2022-09-04T06:01:38.347Z</updated>
+  <updated>2022-09-04T06:07:51.598Z</updated>
   <generator>vuepress-plugin-feed2</generator>
   <link rel="self" href="https://freesql.net/atom.xml"/>
   <link rel="alternate" href="https://freesql.net/"/>
@@ -4526,10 +4526,10 @@ repo<span>.</span><span>Insert</span><span>(</span>type<span>)</span><span>;</sp
     <published>2021-02-04T16:03:18.000Z</published>
   </entry>
   <entry>
-    <title type="html">Code First</title>
+    <title type="html">CodeFirst</title>
     <id>https://freesql.net/guide/code-first.html</id>
     <link href="https://freesql.net/guide/code-first.html"/>
-    <updated>2022-08-11T15:34:05.000Z</updated>
+    <updated>2022-09-04T06:05:54.000Z</updated>
     <content type="html"><![CDATA[<p><code>FreeSql</code> 支持 <code>CodeFirst</code> 迁移结构至数据库，这应该是(<code>O/RM</code>)必须标配的一个功能。</p>
 <p>与其他(<code>O/RM</code>)不同的是：<code>FreeSql</code>支持更多的数据库特性，而不只是支持基础的数据类型，这既是优点也是缺点，优点是充分利用数据库特性辅助开发，缺点是切换数据库变得困难。不同程序员的理念可能不太一致，<code>FreeSql</code>尽量把功能支持到极致，至于是否使用是项目组技术衡量的另一个问题。</p>
 <p>尽管多种数据库适配逻辑非常复杂，<code>FreeSql</code>始终秉承优化程序开发习惯的原则尽量去实现，中间碰到了一些非技术无法攻克的难题，比如数据库的自定义类型，和实体类本身就是一种冲突，为了减少使用成本，诸如此类的数据库功能没有得到支持。</p>
