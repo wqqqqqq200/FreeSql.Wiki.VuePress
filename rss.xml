@@ -6,8 +6,8 @@
     <link>https://freesql.net/</link>
     <description>FreeSql Documents</description>
     <language>zh-CN</language>
-    <pubDate>Thu, 01 Sep 2022 06:46:08 GMT</pubDate>
-    <lastBuildDate>Thu, 01 Sep 2022 06:46:08 GMT</lastBuildDate>
+    <pubDate>Sun, 04 Sep 2022 05:58:34 GMT</pubDate>
+    <lastBuildDate>Sun, 04 Sep 2022 05:58:34 GMT</lastBuildDate>
     <generator>vuepress-plugin-feed2</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
     <item>
@@ -9516,26 +9516,27 @@ fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>T<span>></span
 </code></pre><div aria-hidden="true"><div></div><div></div><div></div></div></div><p>GetTableRef(string propertyName, bool isThrow);</p>
 <h1 id="约定命名-无须指明-navigate" tabindex="-1"> 约定命名（无须指明 Navigate）</h1>
 <h3 id="onetoone-一对一" tabindex="-1"> OneToOne 一对一</h3>
-<div><pre><code><span>class</span> <span>User</span> <span>{</span>
-    <span>public</span> <span><span>int</span></span> Id <span>{</span> <span>get</span><span>;</span> <span>set</span><span>;</span> <span>}</span> <span>//Id、UserId、User_id</span>
-
-    <span>public</span> <span>UserExt</span> UserExt <span>{</span> <span>get</span><span>;</span> <span>set</span><span>;</span> <span>}</span>
+<div><pre><code><span>class</span> <span>User</span>
+<span>{</span>
+    <span>public</span> <span><span>int</span></span> Id <span>{</span> <span>get</span><span>;</span> <span>set</span><span>;</span> <span>}</span>
+    <span>public</span> <span>UserExt</span> Ext <span>{</span> <span>get</span><span>;</span> <span>set</span><span>;</span> <span>}</span>
 <span>}</span>
 
-<span>class</span> <span>UserExt</span> <span>{</span>
-    <span>public</span> <span><span>int</span></span> id <span>{</span> <span>get</span><span>;</span> <span>set</span><span>;</span> <span>}</span> <span>//Id、UserId、User_id、UserExtId、UserExt_id</span>
-
+<span>class</span> <span>UserExt</span>
+<span>{</span>
+    <span>public</span> <span><span>int</span></span> id <span>{</span> <span>get</span><span>;</span> <span>set</span><span>;</span> <span>}</span>
     <span>public</span> <span>User</span> User <span>{</span> <span>get</span><span>;</span> <span>set</span><span>;</span> <span>}</span>
 <span>}</span>
 </code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><p><a href="https://github.com/dotnetcore/FreeSql/issues/45" target="_blank" rel="noopener noreferrer">《OneToOne 一对一，怎么添加数据？》</a></p>
 <h3 id="manytoone-多对一" tabindex="-1"> ManyToOne 多对一</h3>
-<div><pre><code><span>class</span> <span>Group</span> <span>{</span>
+<div><pre><code><span>class</span> <span>Group</span>
+<span>{</span>
     <span>public</span> <span><span>int</span></span> Id <span>{</span> <span>get</span><span>;</span> <span>set</span><span>;</span> <span>}</span> <span>//Id、GroupId、Group_id</span>
 <span>}</span>
 
-<span>class</span> <span>User</span> <span>{</span>
+<span>class</span> <span>User</span>
+<span>{</span>
     <span>public</span> <span><span>int</span></span> Id <span>{</span> <span>get</span><span>;</span> <span>set</span><span>;</span> <span>}</span> <span>//Id、UserId、User_id</span>
-
 
     <span>public</span> <span><span>int</span></span> AGroupId <span>{</span> <span>get</span><span>;</span> <span>set</span><span>;</span> <span>}</span>
     <span>public</span> <span>Group</span> AGroup <span>{</span> <span>get</span><span>;</span> <span>set</span><span>;</span> <span>}</span>
@@ -9543,17 +9544,18 @@ fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>T<span>></span
     <span>public</span> <span><span>int</span></span> BGroupId <span>{</span> <span>get</span><span>;</span> <span>set</span><span>;</span> <span>}</span>
     <span>public</span> <span>Group</span> BGroup <span>{</span> <span>get</span><span>;</span> <span>set</span><span>;</span> <span>}</span>
 <span>}</span>
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><h3 id="onetomany-一对多" tabindex="-1"> OneToMany 一对多</h3>
-<div><pre><code><span>class</span> <span>Group</span> <span>{</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><h3 id="onetomany-一对多" tabindex="-1"> OneToMany 一对多</h3>
+<div><pre><code><span>class</span> <span>Group</span>
+<span>{</span>
     <span>public</span> <span><span>int</span></span> Id <span>{</span> <span>get</span><span>;</span> <span>set</span><span>;</span> <span>}</span> <span>//Id、GroupId、Group_id</span>
 
     <span>public</span> <span>ICollection<span>&lt;</span>User<span>></span></span> AUsers <span>{</span> <span>get</span><span>;</span> <span>set</span><span>;</span> <span>}</span>
     <span>public</span> <span>ICollection<span>&lt;</span>User<span>></span></span> BUsers <span>{</span> <span>get</span><span>;</span> <span>set</span><span>;</span> <span>}</span>
 <span>}</span>
 
-<span>class</span> <span>User</span> <span>{</span>
+<span>class</span> <span>User</span>
+<span>{</span>
     <span>public</span> <span><span>int</span></span> Id <span>{</span> <span>get</span><span>;</span> <span>set</span><span>;</span> <span>}</span> <span>//Id、UserId、User_id</span>
-
 
     <span>public</span> <span><span>int</span></span> AGroupId <span>{</span> <span>get</span><span>;</span> <span>set</span><span>;</span> <span>}</span>
     <span>public</span> <span>Group</span> AGroup <span>{</span> <span>get</span><span>;</span> <span>set</span><span>;</span> <span>}</span>
@@ -9561,9 +9563,10 @@ fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>T<span>></span
     <span>public</span> <span><span>int</span></span> BGroupId <span>{</span> <span>get</span><span>;</span> <span>set</span><span>;</span> <span>}</span>
     <span>public</span> <span>Group</span> BGroup <span>{</span> <span>get</span><span>;</span> <span>set</span><span>;</span> <span>}</span>
 <span>}</span>
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><p><a href="https://github.com/dotnetcore/FreeSql/issues/46" target="_blank" rel="noopener noreferrer">《OneToMany 一对多，怎么添加数据？》</a></p>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><p><a href="https://github.com/dotnetcore/FreeSql/issues/46" target="_blank" rel="noopener noreferrer">《OneToMany 一对多，怎么添加数据？》</a></p>
 <h3 id="parent-父子" tabindex="-1"> Parent 父子</h3>
-<div><pre><code><span>class</span> <span>Group</span> <span>{</span>
+<div><pre><code><span>class</span> <span>Group</span>
+<span>{</span>
     <span>public</span> <span><span>int</span></span> Id <span>{</span> <span>get</span><span>;</span> <span>set</span><span>;</span> <span>}</span> <span>//Id、GroupId、Group_id</span>
 
     <span>public</span> <span><span>int</span></span> ParentId <span>{</span> <span>get</span><span>;</span> <span>set</span><span>;</span> <span>}</span> <span>//ParentId、Parent_id</span>
@@ -9571,23 +9574,26 @@ fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>T<span>></span
 
     <span>public</span> <span>ICollection<span>&lt;</span>Group<span>></span></span> Childs <span>{</span> <span>get</span><span>;</span> <span>set</span><span>;</span> <span>}</span>
 <span>}</span>
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><p>父子关系，与一对多其实差不多，添加数据参数上面的连接；</p>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><p>父子关系，与一对多其实差不多，添加数据参数上面的连接；</p>
 <h3 id="manytomany-多对多" tabindex="-1"> ManyToMany 多对多</h3>
-<div><pre><code><span>class</span> <span>Song</span> <span>{</span>
+<div><pre><code><span>class</span> <span>Song</span>
+<span>{</span>
     <span>[</span><span><span>Column</span><span><span>(</span>IsIdentity <span>=</span> <span>true</span><span>)</span></span></span><span>]</span>
     <span>public</span> <span><span>int</span></span> Id <span>{</span> <span>get</span><span>;</span> <span>set</span><span>;</span> <span>}</span>
     <span>public</span> <span><span>string</span></span> Title <span>{</span> <span>get</span><span>;</span> <span>set</span><span>;</span> <span>}</span>
 
     <span>public</span> <span>virtual</span> <span>ICollection<span>&lt;</span>Tag<span>></span></span> Tags <span>{</span> <span>get</span><span>;</span> <span>set</span><span>;</span> <span>}</span>
 <span>}</span>
-<span>class</span> <span>Song_tag</span> <span>{</span>
+<span>class</span> <span>Song_tag</span>
+<span>{</span>
     <span>public</span> <span><span>int</span></span> Song_id <span>{</span> <span>get</span><span>;</span> <span>set</span><span>;</span> <span>}</span>
     <span>public</span> <span>virtual</span> <span>Song</span> Song <span>{</span> <span>get</span><span>;</span> <span>set</span><span>;</span> <span>}</span>
 
     <span>public</span> <span><span>int</span></span> Tag_id <span>{</span> <span>get</span><span>;</span> <span>set</span><span>;</span> <span>}</span>
     <span>public</span> <span>virtual</span> <span>Tag</span> Tag <span>{</span> <span>get</span><span>;</span> <span>set</span><span>;</span> <span>}</span>
 <span>}</span>
-<span>class</span> <span>Tag</span> <span>{</span>
+<span>class</span> <span>Tag</span>
+<span>{</span>
     <span>[</span><span><span>Column</span><span><span>(</span>IsIdentity <span>=</span> <span>true</span><span>)</span></span></span><span>]</span>
     <span>public</span> <span><span>int</span></span> Id <span>{</span> <span>get</span><span>;</span> <span>set</span><span>;</span> <span>}</span>
     <span>public</span> <span><span>string</span></span> Name <span>{</span> <span>get</span><span>;</span> <span>set</span><span>;</span> <span>}</span>
@@ -9598,7 +9604,7 @@ fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>T<span>></span
     <span>public</span> <span>virtual</span> <span>ICollection<span>&lt;</span>Song<span>></span></span> Songs <span>{</span> <span>get</span><span>;</span> <span>set</span><span>;</span> <span>}</span>
     <span>public</span> <span>virtual</span> <span>ICollection<span>&lt;</span>Tag<span>></span></span> Tags <span>{</span> <span>get</span><span>;</span> <span>set</span><span>;</span> <span>}</span>
 <span>}</span>
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><p>Song、Tag、Song_tag，这三个实体使用了 OneToMany、ManyToOne、Parent、ManyToMany 4 种关系。</p>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><p>Song、Tag、Song_tag，这三个实体使用了 OneToMany、ManyToOne、Parent、ManyToMany 4 种关系。</p>
 ]]></content:encoded>
     </item>
     <item>
