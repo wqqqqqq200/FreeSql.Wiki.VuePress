@@ -6,8 +6,8 @@
     <link>https://freesql.net/</link>
     <description>FreeSql Documents</description>
     <language>zh-CN</language>
-    <pubDate>Sun, 04 Sep 2022 08:54:51 GMT</pubDate>
-    <lastBuildDate>Sun, 04 Sep 2022 08:54:51 GMT</lastBuildDate>
+    <pubDate>Sun, 04 Sep 2022 09:21:58 GMT</pubDate>
+    <lastBuildDate>Sun, 04 Sep 2022 09:21:58 GMT</lastBuildDate>
     <generator>vuepress-plugin-feed2</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
     <item>
@@ -305,7 +305,7 @@ repository<span>.</span><span>Update</span><span>(</span>order<span>)</span><spa
 </ul>
 <h2 id="使用建议" tabindex="-1"> 使用建议</h2>
 <p>1、<strong>分开定义</strong>，按业务需求分开定义聚合根、及相关实体类。</p>
-<p>传统单体项目表很多，在每个实体类设置导航属性会很累，即便定义了也只是一套庞大的实体关系模型，很难划分清除谁才是聚合根（例如 A-B-C-A 这种导航关系）。</p>
+<p>传统单体项目表很多，共同使用用一套导航属性，很难划分清除谁才是聚合根（例如 A-B-C-A 这种导航关系）。</p>
 <p>应以业务为单位，为每个业务单独设计实体类，单一职责，隔离开发，这样才能更清淅的定义出聚合根实体。</p>
 <p>如果觉得配置 [Navigate] 繁琐，可以使用 FreeSql 提供的默认约定命名方法，间化定义。</p>
 <p>2、<strong>理解边界</strong>，理解本文提出的边界规则。</p>

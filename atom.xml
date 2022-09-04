@@ -3,7 +3,7 @@
   <id>https://freesql.net/</id>
   <title>FreeSql 官方文档</title>
   <subtitle>FreeSql Documents</subtitle>
-  <updated>2022-09-04T08:54:51.127Z</updated>
+  <updated>2022-09-04T09:21:58.377Z</updated>
   <generator>vuepress-plugin-feed2</generator>
   <link rel="self" href="https://freesql.net/atom.xml"/>
   <link rel="alternate" href="https://freesql.net/"/>
@@ -11,7 +11,7 @@
     <title type="html">聚合根（实验室）</title>
     <id>https://freesql.net/guide/aggregateroot.html</id>
     <link href="https://freesql.net/guide/aggregateroot.html"/>
-    <updated>2022-09-04T08:52:32.000Z</updated>
+    <updated>2022-09-04T09:20:28.000Z</updated>
     <content type="html"><![CDATA[<h1 id="聚合根-实验室" tabindex="-1"> 聚合根（实验室）</h1>
 <p>FreeSql.Repository 定义了 IBaseRepository&lt;T&gt; 仓储接口，实现了单表的通用仓储对象，支持了级联保存、级联删除功能，使用时需要人工自己判断何时开启、何时使用。</p>
 <p><strong>AggregateRootRepository</strong> 是 IBaseRepository&lt;T&gt; 一种新的尝试实现，它将自动处理 OneToOne/OneToMany 导航属性，以及 ManyToMany 中间表的级联添加、级联更新、级联删除、级联查询（查询时自动 Include/IncludeMany 它们）。</p>
@@ -301,7 +301,7 @@ repository<span>.</span><span>Update</span><span>(</span>order<span>)</span><spa
 </ul>
 <h2 id="使用建议" tabindex="-1"> 使用建议</h2>
 <p>1、<strong>分开定义</strong>，按业务需求分开定义聚合根、及相关实体类。</p>
-<p>传统单体项目表很多，在每个实体类设置导航属性会很累，即便定义了也只是一套庞大的实体关系模型，很难划分清除谁才是聚合根（例如 A-B-C-A 这种导航关系）。</p>
+<p>传统单体项目表很多，共同使用用一套导航属性，很难划分清除谁才是聚合根（例如 A-B-C-A 这种导航关系）。</p>
 <p>应以业务为单位，为每个业务单独设计实体类，单一职责，隔离开发，这样才能更清淅的定义出聚合根实体。</p>
 <p>如果觉得配置 [Navigate] 繁琐，可以使用 FreeSql 提供的默认约定命名方法，间化定义。</p>
 <p>2、<strong>理解边界</strong>，理解本文提出的边界规则。</p>
