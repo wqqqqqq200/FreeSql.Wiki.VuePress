@@ -3,10 +3,324 @@
   <id>https://freesql.net/</id>
   <title>FreeSql 官方文档</title>
   <subtitle>FreeSql Documents</subtitle>
-  <updated>2022-09-04T08:42:20.068Z</updated>
+  <updated>2022-09-04T08:43:12.650Z</updated>
   <generator>vuepress-plugin-feed2</generator>
   <link rel="self" href="https://freesql.net/atom.xml"/>
   <link rel="alternate" href="https://freesql.net/"/>
+  <entry>
+    <title type="html">聚合根（专用）</title>
+    <id>https://freesql.net/guide/aggregateroot.html</id>
+    <link href="https://freesql.net/guide/aggregateroot.html"/>
+    <updated>2022-09-04T08:41:40.000Z</updated>
+    <content type="html"><![CDATA[<h1 id="聚合根-专用" tabindex="-1"> 聚合根（专用）</h1>
+<p>FreeSql.Repository 定义了 IBaseRepository&lt;T&gt; 仓储接口，实现了单表的通用仓储对象，支持了级联保存、级联删除功能，使用时需要人工自己判断何时开启、何时使用。</p>
+<p><strong>AggregateRootRepository</strong> 是 IBaseRepository&lt;T&gt; 一种新的尝试实现，它将自动处理 OneToOne/OneToMany 导航属性，以及 ManyToMany 中间表的级联添加、级联更新、级联删除、级联查询（查询时自动 Include/IncludeMany 它们）。</p>
+<div><pre><code><span><span>var</span></span> repository <span>=</span> fsql<span>.</span><span><span>GetAggregateRootRepository</span><span><span>&lt;</span>Order<span>></span></span></span><span>(</span><span>)</span><span>;</span>
+</code></pre><div aria-hidden="true"><div></div></div></div><p>功能未发布，意见征集、讨论区：<a href="https://github.com/dotnetcore/FreeSql/discussions/1235" target="_blank" rel="noopener noreferrer">https://github.com/dotnetcore/FreeSql/discussions/1235</a></p>
+<h2 id="设定边界" tabindex="-1"> 设定边界</h2>
+<p>将一个主要的实体类认定为聚合根，设定好安全的管辖范围（边界），CRUD 时会把边界之内的所有内容看作一个整体。</p>
+<p>1、ManyToOne 不属于边界范围之内，向下递归时会忽略；</p>
+<p>2、在聚合根内递归向下的所有 OneToOne/OneToMany 导航属性，如下：</p>
+<ul>
+<li>OneToOne: Order &lt;-&gt; OrderExt</li>
+<li>OneToMany: Order &lt;== OrderDetail</li>
+<li>OneToOne: OrderDetail &lt;-&gt; OrderDetailExt</li>
+<li>聚合根 Order 的管辖范围：Extdata、Details、Details[?].Extdata</li>
+</ul>
+<div><pre><code><span>class</span> <span>Order</span>
+<span>{</span>
+    <span>[</span><span><span>Column</span><span><span>(</span>IsIdentity <span>=</span> <span>true</span><span>)</span></span></span><span>]</span>
+    <span>public</span> <span><span>int</span></span> Id <span>{</span> <span>get</span><span>;</span> <span>set</span><span>;</span> <span>}</span>
+    <span>public</span> <span><span>string</span></span> Field2 <span>{</span> <span>get</span><span>;</span> <span>set</span><span>;</span> <span>}</span>
+
+    <span>[</span><span><span>Navigate</span><span><span>(</span><span>nameof</span><span>(</span>Id<span>)</span><span>)</span></span></span><span>]</span>
+    <span>public</span> <span>OrderExt</span> Extdata <span>{</span> <span>get</span><span>;</span> <span>set</span><span>;</span> <span>}</span>
+    <span>[</span><span><span>Navigate</span><span><span>(</span><span>nameof</span><span>(</span>OrderDetail<span>.</span>OrderId<span>)</span><span>)</span></span></span><span>]</span>
+    <span>public</span> <span>List<span>&lt;</span>OrderDetail<span>></span></span> Details <span>{</span> <span>get</span><span>;</span> <span>set</span><span>;</span> <span>}</span>
+<span>}</span>
+<span>class</span> <span>OrderExt</span>
+<span>{</span>
+    <span>[</span><span><span>Key</span></span><span>]</span>
+    <span>public</span> <span><span>int</span></span> OrderId <span>{</span> <span>get</span><span>;</span> <span>set</span><span>;</span> <span>}</span>
+    <span>public</span> <span><span>string</span></span> Field3 <span>{</span> <span>get</span><span>;</span> <span>set</span><span>;</span> <span>}</span>
+
+    <span>[</span><span><span>Navigate</span><span><span>(</span><span>nameof</span><span>(</span>OrderId<span>)</span><span>)</span></span></span><span>]</span>
+    <span>public</span> <span>Order</span> Order <span>{</span> <span>get</span><span>;</span> <span>set</span><span>;</span> <span>}</span>
+<span>}</span>
+<span>class</span> <span>OrderDetail</span>
+<span>{</span>
+    <span>[</span><span><span>Column</span><span><span>(</span>IsIdentity <span>=</span> <span>true</span><span>)</span></span></span><span>]</span>
+    <span>public</span> <span><span>int</span></span> Id <span>{</span> <span>get</span><span>;</span> <span>set</span><span>;</span> <span>}</span>
+    <span>public</span> <span><span>int</span></span> OrderId <span>{</span> <span>get</span><span>;</span> <span>set</span><span>;</span> <span>}</span>
+    <span>public</span> <span><span>string</span></span> Field4 <span>{</span> <span>get</span><span>;</span> <span>set</span><span>;</span> <span>}</span>
+
+    <span>[</span><span><span>Navigate</span><span><span>(</span><span>nameof</span><span>(</span>Id<span>)</span><span>)</span></span></span><span>]</span>
+    <span>public</span> <span>OrderDetailExt</span> Extdata <span>{</span> <span>get</span><span>;</span> <span>set</span><span>;</span> <span>}</span>
+<span>}</span>
+<span>class</span> <span>OrderDetailExt</span>
+<span>{</span>
+    <span>[</span><span><span>Key</span></span><span>]</span>
+    <span>public</span> <span><span>int</span></span> OrderDetailId <span>{</span> <span>get</span><span>;</span> <span>set</span><span>;</span> <span>}</span>
+    <span>public</span> <span><span>string</span></span> Field5 <span>{</span> <span>get</span><span>;</span> <span>set</span><span>;</span> <span>}</span>
+
+    <span>[</span><span><span>Navigate</span><span><span>(</span><span>nameof</span><span>(</span>OrderDetailId<span>)</span><span>)</span></span></span><span>]</span>
+    <span>public</span> <span>OrderDetail</span> OrderDetail <span>{</span> <span>get</span><span>;</span> <span>set</span><span>;</span> <span>}</span>
+<span>}</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><p>3、在聚合根内递归向下的所有 ManyToMany 导航属性，对应的中间表，如下：</p>
+<ul>
+<li>ManyToMany: Order &lt;=&gt; Tag</li>
+<li>聚合根 Order 会根据 Tags 生成 OrderTag 中间表数据，进行管理</li>
+<li>聚合根 Order 不会管理 Tag 实体类，以及 Tag 向下延申的导航属性（外部表不属于管辖范围）</li>
+</ul>
+<div><pre><code><span>class</span> <span>Order</span>
+<span>{</span>
+    <span>// ..</span>
+    <span>[</span><span><span>Navigate</span><span><span>(</span>ManyToMany <span>=</span> <span>typeof</span><span>(</span><span>OrderTag</span><span>)</span><span>)</span></span></span><span>]</span>
+    <span>public</span> <span>List<span>&lt;</span>Tag<span>></span></span> Tags <span>{</span> <span>get</span><span>;</span> <span>set</span><span>;</span> <span>}</span>
+<span>}</span>
+<span>class</span> <span>OrderTag</span>
+<span>{</span>
+    <span>[</span><span><span>Key</span></span><span>]</span>
+    <span>public</span> <span><span>int</span></span> OrderId <span>{</span> <span>get</span><span>;</span> <span>set</span><span>;</span> <span>}</span>
+    <span>[</span><span><span>Key</span></span><span>]</span>
+    <span>public</span> <span><span>int</span></span> TagId <span>{</span> <span>get</span><span>;</span> <span>set</span><span>;</span> <span>}</span>
+
+    <span>[</span><span><span>Navigate</span><span><span>(</span><span>nameof</span><span>(</span>OrderId<span>)</span><span>)</span></span></span><span>]</span>
+    <span>public</span> <span>Order</span> Order <span>{</span> <span>get</span><span>;</span> <span>set</span><span>;</span> <span>}</span>
+    <span>[</span><span><span>Navigate</span><span><span>(</span><span>nameof</span><span>(</span>TagId<span>)</span><span>)</span></span></span><span>]</span>
+    <span>public</span> <span>Tag</span> Tag <span>{</span> <span>get</span><span>;</span> <span>set</span><span>;</span> <span>}</span>
+<span>}</span>
+<span>class</span> <span>Tag</span>
+<span>{</span>
+    <span>[</span><span><span>Column</span><span><span>(</span>IsIdentity <span>=</span> <span>true</span><span>)</span></span></span><span>]</span>
+    <span>public</span> <span><span>int</span></span> Id <span>{</span> <span>get</span><span>;</span> <span>set</span><span>;</span> <span>}</span>
+    <span>public</span> <span><span>string</span></span> Name <span>{</span> <span>get</span><span>;</span> <span>set</span><span>;</span> <span>}</span>
+
+    <span>[</span><span><span>Navigate</span><span><span>(</span>ManyToMany <span>=</span> <span>typeof</span><span>(</span><span>OrderTag</span><span>)</span><span>)</span></span></span><span>]</span>
+    <span>public</span> <span>List<span>&lt;</span>Order<span>></span></span> Orders <span>{</span> <span>get</span><span>;</span> <span>set</span><span>;</span> <span>}</span>
+<span>}</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><h2 id="插入数据" tabindex="-1"> 插入数据</h2>
+<p>根据上面设定的边界，插入时会自动 <code>级联插入</code> 边界以内的内容。</p>
+<div><pre><code><span><span>var</span></span> order <span>=</span> <span>new</span> <span>Order</span>
+<span>{</span>
+    Field2 <span>=</span> <span>"field2"</span><span>,</span>
+    Extdata <span>=</span> <span>new</span> <span>OrderExt</span> <span>{</span> Field3 <span>=</span> <span>"field3"</span> <span>}</span><span>,</span>
+    Details <span>=</span> <span>new</span> <span>List<span>&lt;</span>OrderDetail<span>></span></span>
+    <span>{</span>
+        <span>new</span> <span>OrderDetail</span> <span>{</span> Field4 <span>=</span> <span>"field4_01"</span><span>,</span> Extdata <span>=</span> <span>new</span> <span>OrderDetailExt</span> <span>{</span> Field5 <span>=</span> <span>"field5_01"</span> <span>}</span> <span>}</span><span>,</span>
+        <span>new</span> <span>OrderDetail</span> <span>{</span> Field4 <span>=</span> <span>"field4_02"</span><span>,</span> Extdata <span>=</span> <span>new</span> <span>OrderDetailExt</span> <span>{</span> Field5 <span>=</span> <span>"field5_02"</span> <span>}</span> <span>}</span><span>,</span>
+        <span>new</span> <span>OrderDetail</span> <span>{</span> Field4 <span>=</span> <span>"field4_03"</span><span>,</span> Extdata <span>=</span> <span>new</span> <span>OrderDetailExt</span> <span>{</span> Field5 <span>=</span> <span>"field5_03"</span> <span>}</span> <span>}</span><span>,</span>
+    <span>}</span><span>,</span>
+    Tags <span>=</span> fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>Tag<span>></span></span></span><span>(</span><span>)</span><span>.</span><span>Where</span><span>(</span>a <span>=></span> <span>new</span> <span>[</span><span>]</span> <span>{</span> <span>1</span><span>,</span><span>2</span><span>,</span><span>3</span> <span>}</span><span>.</span><span>Contains</span><span>(</span>a<span>.</span>Id<span>)</span><span>)</span><span>.</span><span>ToList</span><span>(</span><span>)</span>
+<span>}</span><span>;</span>
+repository<span>.</span><span>Insert</span><span>(</span>order<span>)</span><span>;</span> <span>//级联插入</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><ul>
+<li>插入 Order 表记录；</li>
+<li>插入 OrderExt 表记录；</li>
+<li>插入 OrderDetail 表记录；</li>
+<li>插入 OrderDetailExt 表记录；</li>
+<li>插入 OrderTag 表记录；（不会插入 Tag 表记录）</li>
+</ul>
+<blockquote>
+<p>注意：即使 order.Tags 在数据库不存在，也不会插入 Tag 表记录</p>
+</blockquote>
+<h2 id="查询数据" tabindex="-1"> 查询数据</h2>
+<p>根据上面设定的边界，查询时会自动 <code>Include/IncludeMany</code> 边界以内的内容。</p>
+<div><pre><code><span><span>var</span></span> list <span>=</span> repository<span>.</span>Select
+    <span>.</span><span>Where</span><span>(</span>a <span>=></span> a<span>.</span>Id <span>&lt;</span> <span>10</span><span>)</span>
+    <span>.</span><span>ToList</span><span>(</span><span>)</span><span>;</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div></div></div><p>效果等同于：</p>
+<div><pre><code><span><span>var</span></span> list <span>=</span> fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>Order<span>></span></span></span><span>(</span><span>)</span>
+    <span>.</span><span>Include</span><span>(</span>a <span>=></span> a<span>.</span>Extdata<span>)</span>
+    <span>.</span><span>IncludeMany</span><span>(</span>a <span>=></span> a<span>.</span>Details<span>,</span> 
+        then <span>=></span> then<span>.</span><span>Include</span><span>(</span>b <span>=></span> b<span>.</span>Extdata<span>)</span><span>)</span>
+    <span>.</span><span>IncludeMany</span><span>(</span>a <span>=></span> a<span>.</span>Tags<span>)</span> 
+    <span>.</span><span>Where</span><span>(</span>a <span>=></span> a<span>.</span>Id <span>&lt;</span> <span>10</span><span>)</span>
+    <span>.</span><span>ToList</span><span>(</span><span>)</span><span>;</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><p>扩展查询边界：</p>
+<div><pre><code><span>class</span> <span>OrderRepository</span> <span>:</span> <span><span>AggregateRootRepository<span>&lt;</span>Order<span>></span></span></span>
+<span>{</span>
+    <span>public</span> <span>OrderRepository</span><span>(</span><span>IFreeSql</span> fsql<span>,</span> <span>UnitOfWorkManager</span> uowManager<span>)</span> <span>:</span> <span>base</span><span>(</span>uowManager<span>?.</span>Orm <span>??</span> fsql<span>)</span>
+    <span>{</span>
+        Console<span>.</span><span>WriteLine</span><span>(</span>AggregateRootUtils<span>.</span><span>GetAutoIncludeQueryStaicCode</span><span>(</span>fsql<span>,</span> <span>typeof</span><span>(</span><span>Order</span><span>)</span><span>)</span><span>)</span><span>;</span> <span>//debugger</span>
+        <span>//聚合根内关系较复杂时，控制台输出一块 Include/IncludeMany 字符串，方便二次开发</span>
+    <span>}</span>
+
+    <span>public</span> <span>override</span> <span>ISelect<span>&lt;</span>IFreeSql<span>></span></span> Select <span>=></span> <span>this</span><span>.</span>SelectDiy
+        <span>//.TrackToList(this.SelectAggregateRootTracking) 状态跟踪</span>
+        <span>.</span><span>Include</span><span>(</span>a <span>=></span> a<span>.</span>Extdata<span>)</span>
+        <span>.</span><span>IncludeMany</span><span>(</span>a <span>=></span> a<span>.</span>Details<span>,</span> 
+            then <span>=></span> then<span>.</span><span>Include</span><span>(</span>b <span>=></span> b<span>.</span>Extdata<span>)</span><span>)</span>
+        <span>.</span><span>IncludeMany</span><span>(</span>a <span>=></span> a<span>.</span>Tags<span>)</span><span>;</span>
+<span>}</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><p>重写 Select 可以把边界以外的数据一起查询出来（例如 ManyToOne 导航属性），但是 <code>添加/修改/删除</code> 仍然采用默认边界规则</p>
+<p>手工使用 SelectDiy Include/IncludeMany 包含内容，如果小于默认边界规则，则建议不要开启 <code>状态跟踪</code> （保存数据可能造成不一致），反之则应该开启。（详细请往后看 <code>更新数据</code>）</p>
+<h2 id="删除数据" tabindex="-1"> 删除数据</h2>
+<p>根据上面设定的边界，删除时会自动 <code>级联删除</code> 边界以内的内容。</p>
+<div><pre><code>repository<span>.</span><span>Delete</span><span>(</span>order<span>)</span><span>;</span>
+</code></pre><div aria-hidden="true"><div></div></div></div><ul>
+<li>删除 OrderExt 表对应的记录；</li>
+<li>删除 OrderDetailExt 表对应的记录；</li>
+<li>删除 OrderDetail 表对应的记录；</li>
+<li>删除 OrderTag 表对应的记录；（不会删除 Tag 表记录）</li>
+<li>删除 Order 表对应的记录；</li>
+</ul>
+<p>删除数据是在内存递归 order 实例进行的，因此需要使用 repository 提前查询，内容庞大时有性能缺陷。</p>
+<p>如果使用了数据库外键的级联删除功能，则只需删除 Order 表对应的记录，并且不需要提前查询。</p>
+<h2 id="更新数据" tabindex="-1"> 更新数据</h2>
+<p>根据上面设定的边界，更新时会自动 <code>级联保存</code> 边界以内的内容。</p>
+<p>repository.Attach 存储更新前的数据快照（查询会自动快照），称为副本，repository.Update 的时候和副本进行级联对比保存。</p>
+<div><pre><code><span><span>var</span></span> order <span>=</span> repository<span>.</span>Select<span>.</span><span>Where</span><span>(</span>a <span>=></span> a<span>.</span>Id <span>==</span> <span>1</span><span>)</span><span>.</span><span>First</span><span>(</span><span>)</span><span>;</span> <span>//此时已自动 Attach</span>
+order<span>.</span>Tags<span>.</span><span>Add</span><span>(</span><span>new</span> <span>Tag</span> <span>{</span> Id <span>=</span> <span>4</span> <span>}</span><span>)</span><span>;</span>
+order<span>.</span>Details<span>.</span><span>RemoveAt</span><span>(</span><span>1</span><span>)</span><span>;</span>
+order<span>.</span>Details<span>[</span><span>0</span><span>]</span><span>.</span>Extdata<span>.</span>Field5 <span>=</span> <span>"field5_01_01"</span><span>;</span>
+order<span>.</span>Field2 <span>=</span> <span>"field2_02"</span><span>;</span>
+repository<span>.</span><span>Update</span><span>(</span>order<span>)</span><span>;</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div></div></div><ul>
+<li>添加 OrderTag 表记录；（不会管理 Tag 表记录）</li>
+<li>删除 OrderDetail 表记录；</li>
+<li>删除 OrderDetailExt 表记录；</li>
+<li>更新 OrderDetailExt 表记录；</li>
+<li>更新 Order 表记录；</li>
+</ul>
+<p><code>完整保存</code> 先查询再更新，机制容易理解，数据一致性也更有保障。但是如果聚合根下内容较庞大，将会造成性能问题。</p>
+<p>例如 Order 下面的评论数据大约有 1000 条，每天还不断有新的记录，每次 Load 内存再保存代价就太大了。</p>
+<p>利用对比保存的特点，可以变向实现 <code>追加记录</code>：</p>
+<div><pre><code><span>class</span> <span>Order</span>
+<span>{</span>
+    <span>// ..</span>
+    <span>[</span><span><span>Navigate</span><span><span>(</span><span>nameof</span><span>(</span>OrderComment<span>.</span>OrderId<span>)</span><span>)</span></span></span><span>]</span>
+    <span>public</span> <span>List<span>&lt;</span>OrderComment<span>></span></span> Comments <span>{</span> <span>get</span><span>;</span> <span>set</span><span>;</span> <span>}</span>
+<span>}</span>
+<span>class</span> <span>OrderComment</span>
+<span>{</span>
+    <span>[</span><span><span>Column</span><span><span>(</span>IsIdentity <span>=</span> <span>true</span><span>)</span></span></span><span>]</span>
+    <span>public</span> <span><span>int</span></span> Id <span>{</span> <span>get</span><span>;</span> <span>set</span><span>;</span> <span>}</span>
+    <span>public</span> <span><span>int</span></span> OrderId <span>{</span> <span>get</span><span>;</span> <span>set</span><span>;</span> <span>}</span>
+    <span>public</span> <span><span>string</span></span> Field6 <span>{</span> <span>get</span><span>;</span> <span>set</span><span>;</span> <span>}</span>
+<span>}</span>
+
+<span><span>var</span></span> order <span>=</span> fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>Order<span>></span></span></span><span>(</span><span>)</span>
+    <span>.</span><span>Where</span><span>(</span>a <span>=></span> a<span>.</span>Id <span>==</span> <span>1</span><span>)</span>
+    <span>.</span><span>First</span><span>(</span><span>)</span><span>;</span> <span>//单表数据</span>
+repository<span>.</span><span>Attach</span><span>(</span>order<span>)</span><span>;</span> <span>//快照时 Comments 是 NULL/EMPTY</span>
+order<span>.</span>Comments <span>=</span> <span>new</span> <span>List<span>&lt;</span>OrderComment<span>></span></span><span>(</span><span>)</span><span>;</span>
+order<span>.</span>Comments<span>.</span><span>Add</span><span>(</span><span>new</span> <span>OrderComment</span> <span>{</span> Field6 <span>=</span> <span>"field6_01"</span> <span>}</span><span>)</span><span>;</span>
+order<span>.</span>Comments<span>.</span><span>Add</span><span>(</span><span>new</span> <span>OrderComment</span> <span>{</span> Field6 <span>=</span> <span>"field6_02"</span> <span>}</span><span>)</span><span>;</span>
+repository<span>.</span><span>Update</span><span>(</span>order<span>)</span><span>;</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><ul>
+<li>使用 fsql 只查询了单表数据；</li>
+<li>order 本身没发生变化，所以不更新 Order 表记录；</li>
+<li>添加 OrderComment 表记录2条；</li>
+</ul>
+<blockquote>
+<p>我为什么不直接对 OrderComment 进行单表操作啊？？？</p>
+</blockquote>
+<blockquote>
+<p>答案你们回答！！！</p>
+</blockquote>
+<p><code>对比保存</code> 规则说明：</p>
+<table>
+<thead>
+<tr>
+<th>导航属性</th>
+<th>副本</th>
+<th>最新</th>
+<th>结果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>OneToOne</td>
+<td>NULL</td>
+<td>Object</td>
+<td><code>添加</code> 最新 记录</td>
+</tr>
+<tr>
+<td>OneToOne</td>
+<td>Object</td>
+<td>NULL</td>
+<td><code>删除</code> 副本 记录</td>
+</tr>
+<tr>
+<td>OneToOne</td>
+<td>Object</td>
+<td>Object</td>
+<td>内容发生变化则 <code>更新</code> 最新 记录，否则 <code>忽略</code></td>
+</tr>
+<tr>
+<td>OneToMany</td>
+<td>NULL/Empty</td>
+<td>List</td>
+<td><code>添加</code> 最新 List 记录</td>
+</tr>
+<tr>
+<td>OneToMany</td>
+<td>List</td>
+<td>NULL</td>
+<td><code>忽略</code></td>
+</tr>
+<tr>
+<td>OneToMany</td>
+<td>List</td>
+<td>Empty</td>
+<td><code>删除</code> 副本 List 记录</td>
+</tr>
+<tr>
+<td>OneToMany</td>
+<td>List</td>
+<td>List</td>
+<td><code>对比保存</code> 计算出 <code>添加</code>、<code>更新</code>、<code>删除</code> 三种行为</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>ManyToMany 只会操作 <code>中间表</code>（外部表不属于管辖范围），对比保存的机制与 OneToMany 一致</p>
+</blockquote>
+<h2 id="插入或更新数据" tabindex="-1"> 插入或更新数据</h2>
+<p>InsertOrUpdate 执行逻辑依托聚合根对象的 <code>主键</code> 和 <code>状态管理</code>，状态管理存储的是副本。</p>
+<p>1、如果主键是 <code>自增</code>：</p>
+<ul>
+<li>无值，则 <code>插入数据</code>；</li>
+<li>有值，则判断 状态管理;
+<ul>
+<li>存在，则与副本对比 <code>更新数据</code>；</li>
+<li>不存在，则查询 数据库；（内容庞大时有性能问题）
+<ul>
+<li>存在，则与查询的内容对比 <code>更新数据</code>；</li>
+<li>不存在，则 <code>插入数据</code>；</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>2、如果主键不是 自增：</p>
+<ul>
+<li>无值，则 <code>抛出异常</code>；</li>
+<li>有值，逻辑同上；</li>
+</ul>
+<h2 id="使用建议" tabindex="-1"> 使用建议</h2>
+<p>1、<strong>分开定义</strong>，按业务需求分开定义聚合根、及相关实体类。</p>
+<p>传统单体项目表很多，在每个实体类设置导航属性会很累，即便定义了也只是一套庞大的实体关系模型，很难划分清除谁才是聚合根（例如 A-B-C-A 这种导航关系）。</p>
+<p>应以业务为单位，为每个业务单独设计实体类，单一职责，隔离开发，这样才能更清淅的定义出聚合根实体。</p>
+<p>如果觉得配置 [Navigate] 繁琐，可以使用 FreeSql 提供的默认约定命名方法，间化定义。</p>
+<p>2、<strong>理解边界</strong>，理解本文提出的边界规则。</p>
+<ul>
+<li>ManyToOne 导航属性，是 <code>边界之外</code>；</li>
+<li>ManyToMany 导航属性，<code>中间表</code>（OrderTag） 是边界之内，<code>外部表</code>（Tag） 是 <code>边界之外</code>；</li>
+<li>OneToOne 导航属性，是边界之内；</li>
+<li>OneToMany 导航属性，是边界之内；</li>
+</ul>
+<p>AggregateRootRepository 只对边界之内的数据进行递归 CRUD 操作，把聚合根看本一个整体。</p>
+<p>特殊情况可以继承后重写 Select 属性扩大、或缩小查询内容：</p>
+<ul>
+<li>Insert/Delete/Update <code>扩大</code> 后的查询内容，不会对 <code>扩大</code> 后的数据进行增删改；</li>
+<li>Update <code>缩小</code> 后的查询内容，由于导航属性值为 NULL，不会删除未查询的内容；</li>
+</ul>
+<p>3、<strong>善用事务</strong>，使用事务解决一致操作问题。</p>
+]]></content>
+    <published>2022-09-04T08:40:48.000Z</published>
+  </entry>
   <entry>
     <title type="html">FreeSql+CAP事务</title>
     <id>https://freesql.net/extra/freesql-cap.html</id>
