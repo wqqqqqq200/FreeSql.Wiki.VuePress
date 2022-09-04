@@ -3,16 +3,16 @@
   <id>https://freesql.net/</id>
   <title>FreeSql 官方文档</title>
   <subtitle>FreeSql Documents</subtitle>
-  <updated>2022-09-04T08:52:57.873Z</updated>
+  <updated>2022-09-04T08:54:09.486Z</updated>
   <generator>vuepress-plugin-feed2</generator>
   <link rel="self" href="https://freesql.net/atom.xml"/>
   <link rel="alternate" href="https://freesql.net/"/>
   <entry>
-    <title type="html">聚合根（专用）</title>
+    <title type="html">聚合根（实验室）</title>
     <id>https://freesql.net/guide/aggregateroot.html</id>
     <link href="https://freesql.net/guide/aggregateroot.html"/>
-    <updated>2022-09-04T08:41:40.000Z</updated>
-    <content type="html"><![CDATA[<h1 id="聚合根-专用" tabindex="-1"> 聚合根（专用）</h1>
+    <updated>2022-09-04T08:52:32.000Z</updated>
+    <content type="html"><![CDATA[<h1 id="聚合根-实验室" tabindex="-1"> 聚合根（实验室）</h1>
 <p>FreeSql.Repository 定义了 IBaseRepository&lt;T&gt; 仓储接口，实现了单表的通用仓储对象，支持了级联保存、级联删除功能，使用时需要人工自己判断何时开启、何时使用。</p>
 <p><strong>AggregateRootRepository</strong> 是 IBaseRepository&lt;T&gt; 一种新的尝试实现，它将自动处理 OneToOne/OneToMany 导航属性，以及 ManyToMany 中间表的级联添加、级联更新、级联删除、级联查询（查询时自动 Include/IncludeMany 它们）。</p>
 <div><pre><code><span><span>var</span></span> repository <span>=</span> fsql<span>.</span><span><span>GetAggregateRootRepository</span><span><span>&lt;</span>Order<span>></span></span></span><span>(</span><span>)</span><span>;</span>
