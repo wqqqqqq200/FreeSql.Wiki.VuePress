@@ -3,7 +3,7 @@
   <id>https://freesql.net/</id>
   <title>FreeSql 官方文档</title>
   <subtitle>FreeSql Documents</subtitle>
-  <updated>2022-09-04T08:54:09.486Z</updated>
+  <updated>2022-09-04T08:54:51.127Z</updated>
   <generator>vuepress-plugin-feed2</generator>
   <link rel="self" href="https://freesql.net/atom.xml"/>
   <link rel="alternate" href="https://freesql.net/"/>
@@ -3246,11 +3246,11 @@ Install-Package FreeSql.Provider.SqliteCore
     <published>2022-03-25T06:41:57.000Z</published>
   </entry>
   <entry>
-    <title type="html">UnitOfWorkManager 事务</title>
+    <title type="html">UnitOfWorkManager 事务 ✨</title>
     <id>https://freesql.net/guide/unitofwork-manager.html</id>
     <link href="https://freesql.net/guide/unitofwork-manager.html"/>
-    <updated>2022-08-25T02:14:26.000Z</updated>
-    <content type="html"><![CDATA[<h1 id="unitofworkmanager-事务" tabindex="-1"> UnitOfWorkManager 事务</h1>
+    <updated>2022-09-04T08:53:21.000Z</updated>
+    <content type="html"><![CDATA[<h1 id="unitofworkmanager-事务-✨" tabindex="-1"> UnitOfWorkManager 事务 ✨</h1>
 <p>本篇文章内容引导，如何在 <a href="http://asp.net" target="_blank" rel="noopener noreferrer">asp.net</a> core 项目中使用特性(注解) 的方式管理事务。</p>
 <blockquote>
 <p>UnitOfWorkManager 只可以管理 Repository 仓储对象的事务，直接 fsql.Insert&lt;T&gt;() 是不行的！！但是可以用 repository.Orm.Insert&lt;T&gt;！！repository.Orm 是特殊实现的 IFreeSql，与 当前事务保持一致。</p>
