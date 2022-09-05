@@ -6,8 +6,8 @@
     <link>https://freesql.net/</link>
     <description>FreeSql Documents</description>
     <language>zh-CN</language>
-    <pubDate>Mon, 05 Sep 2022 06:22:16 GMT</pubDate>
-    <lastBuildDate>Mon, 05 Sep 2022 06:22:16 GMT</lastBuildDate>
+    <pubDate>Mon, 05 Sep 2022 06:27:20 GMT</pubDate>
+    <lastBuildDate>Mon, 05 Sep 2022 06:27:20 GMT</lastBuildDate>
     <generator>vuepress-plugin-feed2</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
     <item>
@@ -42,9 +42,6 @@
 <li>OneToOne: OrderDetail &lt;-&gt; OrderDetailExt</li>
 <li>聚合根 Order 的管辖范围：Extdata、Details、Details[?].Extdata</li>
 </ul>
-<blockquote>
-<p>提示：[AggregateRootBoundary(&quot;name01&quot;, Break = true)] 可以设置导航属性的边界范围，请往后面看。。</p>
-</blockquote>
 <div><pre><code><span>class</span> <span>Order</span>
 <span>{</span>
     <span>[</span><span><span>Column</span><span><span>(</span>IsIdentity <span>=</span> <span>true</span><span>)</span></span></span><span>]</span>
@@ -87,9 +84,6 @@
 <li>聚合根 Order 会根据 Tags 生成 OrderTag 中间表数据，进行管理</li>
 <li>聚合根 Order 不会管理 Tag 实体类，以及 Tag 向下延申的导航属性（外部表不属于管辖范围）</li>
 </ul>
-<blockquote>
-<p>提示：[AggregateRootBoundary(&quot;name01&quot;, Break = true)] 可以设置导航属性的边界范围，请往后面看。。</p>
-</blockquote>
 <div><pre><code><span>class</span> <span>Order</span>
 <span>{</span>
     <span>// ..</span>
@@ -132,10 +126,7 @@
     Tags <span>=</span> fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>Tag<span>></span></span></span><span>(</span><span>)</span><span>.</span><span>Where</span><span>(</span>a <span>=></span> <span>new</span> <span>[</span><span>]</span> <span>{</span> <span>1</span><span>,</span><span>2</span><span>,</span><span>3</span> <span>}</span><span>.</span><span>Contains</span><span>(</span>a<span>.</span>Id<span>)</span><span>)</span><span>.</span><span>ToList</span><span>(</span><span>)</span>
 <span>}</span><span>;</span>
 repository<span>.</span><span>Insert</span><span>(</span>order<span>)</span><span>;</span> <span>//级联插入</span>
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><blockquote>
-<p>提示：[AggregateRootBoundary(&quot;name01&quot;, Break = true)] 可以设置导航属性的边界范围，请往后面看。。</p>
-</blockquote>
-<ul>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><ul>
 <li>插入 Order 表记录；</li>
 <li>插入 OrderExt 表记录；</li>
 <li>插入 OrderDetail 表记录；</li>
@@ -160,7 +151,7 @@ repository<span>.</span><span>Insert</span><span>(</span>order<span>)</span><spa
     <span>.</span><span>ToList</span><span>(</span><span>)</span><span>;</span>
 </code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><p>扩展查询边界：</p>
 <blockquote>
-<p>提示：[AggregateRootBoundary(&quot;name01&quot;, Break = true)] 可以设置导航属性的边界范围，请往后面看。。</p>
+<p>提示：[AggregateRootBoundary(&quot;name&quot;, Break = true)] 设置边界范围，请往后面看。。</p>
 </blockquote>
 <div><pre><code><span>class</span> <span>OrderRepository</span> <span>:</span> <span><span>AggregateRootRepository<span>&lt;</span>Order<span>></span></span></span>
 <span>{</span>
@@ -182,10 +173,7 @@ repository<span>.</span><span>Insert</span><span>(</span>order<span>)</span><spa
 <h2 id="删除数据" tabindex="-1"> 删除数据</h2>
 <p>根据上面设定的边界，删除时会自动 <code>级联删除</code> 边界以内的内容。</p>
 <div><pre><code>repository<span>.</span><span>Delete</span><span>(</span>order<span>)</span><span>;</span>
-</code></pre><div aria-hidden="true"><div></div></div></div><blockquote>
-<p>提示：[AggregateRootBoundary(&quot;name01&quot;, Break = true)] 可以设置导航属性的边界范围，请往后面看。。</p>
-</blockquote>
-<ul>
+</code></pre><div aria-hidden="true"><div></div></div></div><ul>
 <li>删除 OrderExt 表对应的记录；</li>
 <li>删除 OrderDetailExt 表对应的记录；</li>
 <li>删除 OrderDetail 表对应的记录；</li>
@@ -203,10 +191,7 @@ order<span>.</span>Details<span>.</span><span>RemoveAt</span><span>(</span><span
 order<span>.</span>Details<span>[</span><span>0</span><span>]</span><span>.</span>Extdata<span>.</span>Field5 <span>=</span> <span>"field5_01_01"</span><span>;</span>
 order<span>.</span>Field2 <span>=</span> <span>"field2_02"</span><span>;</span>
 repository<span>.</span><span>Update</span><span>(</span>order<span>)</span><span>;</span>
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div></div></div><blockquote>
-<p>提示：[AggregateRootBoundary(&quot;name01&quot;, Break = true)] 可以设置导航属性的边界范围，请往后面看。。</p>
-</blockquote>
-<ul>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div></div></div><ul>
 <li>添加 OrderTag 表记录；（不会管理 Tag 表记录）</li>
 <li>删除 OrderDetail 表记录；</li>
 <li>删除 OrderDetailExt 表记录；</li>
