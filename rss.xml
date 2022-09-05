@@ -6,8 +6,8 @@
     <link>https://freesql.net/</link>
     <description>FreeSql Documents</description>
     <language>zh-CN</language>
-    <pubDate>Mon, 05 Sep 2022 06:13:59 GMT</pubDate>
-    <lastBuildDate>Mon, 05 Sep 2022 06:13:59 GMT</lastBuildDate>
+    <pubDate>Mon, 05 Sep 2022 06:17:52 GMT</pubDate>
+    <lastBuildDate>Mon, 05 Sep 2022 06:17:52 GMT</lastBuildDate>
     <generator>vuepress-plugin-feed2</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
     <item>
@@ -342,9 +342,10 @@ repository<span>.</span><span>Update</span><span>(</span>order<span>)</span><spa
 repository<span>.</span><span>ChangeBoundary</span><span>(</span><span>"solution_1"</span><span>)</span><span>;</span>
 </code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><ul>
 <li>Break 递归时，终止当前导航属性</li>
-<li>BreakThen 递归时，终止下控</li>
+<li>BreakThen 递归时，终止下探</li>
 </ul>
-<p>AggregateRootBoundary 可设置 ManyToOne/ManyToMany/PgArrayToMany 非边界之内的导航属性，但是仅对查询有效，<code>增删改</code> 时依然会忽略它们。</p>
+<p>AggregateRootBoundary 可以设置边界之内的导航属性，缩小边界范围。</p>
+<p>也可设置 ManyToOne/ManyToMany/PgArrayToMany 非边界之内的导航属性，但是仅对查询有效，<code>增删改</code> 时依然会忽略它们。</p>
 <h2 id="总结" tabindex="-1"> 总结</h2>
 <p>1、<strong>理解边界</strong>，理解本文提出的边界规则。</p>
 <ul>
