@@ -6,8 +6,8 @@
     <link>https://freesql.net/</link>
     <description>FreeSql Documents</description>
     <language>zh-CN</language>
-    <pubDate>Mon, 05 Sep 2022 06:53:37 GMT</pubDate>
-    <lastBuildDate>Mon, 05 Sep 2022 06:53:37 GMT</lastBuildDate>
+    <pubDate>Mon, 05 Sep 2022 11:29:40 GMT</pubDate>
+    <lastBuildDate>Mon, 05 Sep 2022 11:29:40 GMT</lastBuildDate>
     <generator>vuepress-plugin-feed2</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
     <item>
@@ -11098,7 +11098,7 @@ FROM &quot;Topic&quot; a</p>
 <h3 id="toaggregate-sqlext-distinctcount" tabindex="-1"> ToAggregate + SqlExt.DistinctCount</h3>
 <div><pre><code><span><span>var</span></span> distinctAggregate <span>=</span> fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>Topic<span>></span></span></span><span>(</span><span>)</span><span>.</span><span>ToAggregate</span><span>(</span>a <span>=></span> <span>new</span>
     <span>{</span>
-        TitleCount<span>=</span>SqlExt<span>.</span><span>DistinctCount</span><span>(</span>a<span>.</span>Key<span>.</span>Title<span>)</span><span>,</span>
+        TitleCount <span>=</span> SqlExt<span>.</span><span>DistinctCount</span><span>(</span>a<span>.</span>Key<span>.</span>Title<span>)</span><span>,</span>
         ClicksCount<span>=</span> SqlExt<span>.</span><span>DistinctCount</span><span>(</span>a<span>.</span>Key<span>.</span>Clicks<span>)</span><span>,</span>
     <span>}</span>
 <span>)</span><span>;</span>
