@@ -6,8 +6,8 @@
     <link>https://freesql.net/</link>
     <description>FreeSql Documents</description>
     <language>zh-CN</language>
-    <pubDate>Mon, 05 Sep 2022 14:18:42 GMT</pubDate>
-    <lastBuildDate>Mon, 05 Sep 2022 14:18:42 GMT</lastBuildDate>
+    <pubDate>Mon, 05 Sep 2022 14:20:33 GMT</pubDate>
+    <lastBuildDate>Mon, 05 Sep 2022 14:20:33 GMT</lastBuildDate>
     <generator>vuepress-plugin-feed2</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
     <item>
@@ -36,7 +36,7 @@
 <li>OneToMany</li>
 <li>ManyToMany(中间表)</li>
 </ul>
-<p>示例1：在聚合根内递归向下的所有 OneToOne/OneToMany 导航属性</p>
+<p>示例1：在聚合根内递归所有 OneToOne/OneToMany 导航属性</p>
 <ul>
 <li>OneToOne: Order &lt;-&gt; OrderExt</li>
 <li>OneToMany: Order &lt;== OrderDetail</li>
@@ -79,7 +79,7 @@
 
     <span>public</span> <span>OrderDetail</span> OrderDetail <span>{</span> <span>get</span><span>;</span> <span>set</span><span>;</span> <span>}</span>
 <span>}</span>
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><p>示例2：在聚合根内递归向下的所有 ManyToMany 导航属性对应的中间表</p>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><p>示例2：在聚合根内递归所有 ManyToMany 导航属性对应的中间表</p>
 <ul>
 <li>ManyToMany: Order &lt;=&gt; Tag</li>
 <li>聚合根 Order 会根据 Tags 生成 OrderTag 中间表数据，进行管理</li>

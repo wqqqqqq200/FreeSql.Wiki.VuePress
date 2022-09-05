@@ -3,7 +3,7 @@
   <id>https://freesql.net/</id>
   <title>FreeSql 官方文档</title>
   <subtitle>FreeSql Documents</subtitle>
-  <updated>2022-09-05T14:18:42.640Z</updated>
+  <updated>2022-09-05T14:20:33.272Z</updated>
   <generator>vuepress-plugin-feed2</generator>
   <link rel="self" href="https://freesql.net/atom.xml"/>
   <link rel="alternate" href="https://freesql.net/"/>
@@ -11,7 +11,7 @@
     <title type="html">聚合根（实验室）</title>
     <id>https://freesql.net/guide/aggregateroot.html</id>
     <link href="https://freesql.net/guide/aggregateroot.html"/>
-    <updated>2022-09-05T14:16:51.000Z</updated>
+    <updated>2022-09-05T14:18:37.000Z</updated>
     <content type="html"><![CDATA[<h1 id="聚合根-实验室" tabindex="-1"> 聚合根（实验室）</h1>
 <p>FreeSql.Repository 定义了 IBaseRepository&lt;T&gt; 仓储接口，实现了单表的通用仓储对象，支持了级联保存、级联删除功能，（但是）使用时需要人工自己判断何时开启、何时使用。</p>
 <p>本文看上去像 EF，实则有区别，主要区别在级联边界的规则设定，例如我们允许 OneToMany 从下层向上递归级联，但是仅限查询，不能增删改。研究目的希望从机制上杜绝痛点，让操作变得更可控。</p>
@@ -32,7 +32,7 @@
 <li>OneToMany</li>
 <li>ManyToMany(中间表)</li>
 </ul>
-<p>示例1：在聚合根内递归向下的所有 OneToOne/OneToMany 导航属性</p>
+<p>示例1：在聚合根内递归所有 OneToOne/OneToMany 导航属性</p>
 <ul>
 <li>OneToOne: Order &lt;-&gt; OrderExt</li>
 <li>OneToMany: Order &lt;== OrderDetail</li>
@@ -75,7 +75,7 @@
 
     <span>public</span> <span>OrderDetail</span> OrderDetail <span>{</span> <span>get</span><span>;</span> <span>set</span><span>;</span> <span>}</span>
 <span>}</span>
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><p>示例2：在聚合根内递归向下的所有 ManyToMany 导航属性对应的中间表</p>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><p>示例2：在聚合根内递归所有 ManyToMany 导航属性对应的中间表</p>
 <ul>
 <li>ManyToMany: Order &lt;=&gt; Tag</li>
 <li>聚合根 Order 会根据 Tags 生成 OrderTag 中间表数据，进行管理</li>
