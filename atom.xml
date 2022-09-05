@@ -3,7 +3,7 @@
   <id>https://freesql.net/</id>
   <title>FreeSql 官方文档</title>
   <subtitle>FreeSql Documents</subtitle>
-  <updated>2022-09-05T06:35:46.809Z</updated>
+  <updated>2022-09-05T06:53:37.008Z</updated>
   <generator>vuepress-plugin-feed2</generator>
   <link rel="self" href="https://freesql.net/atom.xml"/>
   <link rel="alternate" href="https://freesql.net/"/>
@@ -11,7 +11,7 @@
     <title type="html">聚合根（实验室）</title>
     <id>https://freesql.net/guide/aggregateroot.html</id>
     <link href="https://freesql.net/guide/aggregateroot.html"/>
-    <updated>2022-09-05T06:33:32.000Z</updated>
+    <updated>2022-09-05T06:51:57.000Z</updated>
     <content type="html"><![CDATA[<h1 id="聚合根-实验室" tabindex="-1"> 聚合根（实验室）</h1>
 <p>FreeSql.Repository 定义了 IBaseRepository&lt;T&gt; 仓储接口，实现了单表的通用仓储对象，支持了级联保存、级联删除功能，（但是）使用时需要人工自己判断何时开启、何时使用。</p>
 <p><strong>AggregateRootRepository 是 IBaseRepository&lt;T&gt; 一种新的尝试实现</strong>，它将自动处理 OneToOne/OneToMany 导航属性，以及 ManyToMany(中间表) 的级联添加、级联更新、级联删除、级联查询（查询时自动 Include/IncludeMany 它们）。</p>
@@ -3854,9 +3854,10 @@ fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>Topic<span>></
     <title type="html">Awesome FreeSql</title>
     <id>https://freesql.net/reference/awesome-freesql.html</id>
     <link href="https://freesql.net/reference/awesome-freesql.html"/>
-    <updated>2022-08-31T14:37:49.000Z</updated>
+    <updated>2022-09-05T06:51:57.000Z</updated>
     <content type="html"><![CDATA[<h1 id="awesome-freesql" tabindex="-1"> Awesome FreeSql</h1>
 <h2 id="基于-freesql-的开源项目" tabindex="-1"> 基于 FreeSql 的开源项目</h2>
+<div>
 <table>
 <thead>
 <tr>
@@ -3891,6 +3892,7 @@ fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>Topic<span>></
 </tr>
 </tbody>
 </table>
+</div>
 
 
 <h3 id="easycms" tabindex="-1"> <a href="https://github.com/aprilyush/EasyCMS" target="_blank" rel="noopener noreferrer">EasyCMS</a></h3>
@@ -13680,7 +13682,7 @@ fsql<span>.</span><span>UpdateDict</span><span>(</span>dic<span>)</span><span>.<
     <title type="html">API 文档</title>
     <id>https://freesql.net/reference/api.html</id>
     <link href="https://freesql.net/reference/api.html"/>
-    <updated>2022-08-31T14:37:49.000Z</updated>
+    <updated>2022-09-05T06:51:57.000Z</updated>
     <content type="html"><![CDATA[<h1 id="api-文档" tabindex="-1"> API 文档</h1>
 <ul>
 <li><a href="http://124.70.130.97:8082/api/FreeSql.html" target="_blank" rel="noopener noreferrer">http://124.70.130.97:8082/api/FreeSql.html</a></li>

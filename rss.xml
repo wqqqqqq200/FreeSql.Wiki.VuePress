@@ -6,8 +6,8 @@
     <link>https://freesql.net/</link>
     <description>FreeSql Documents</description>
     <language>zh-CN</language>
-    <pubDate>Mon, 05 Sep 2022 06:35:46 GMT</pubDate>
-    <lastBuildDate>Mon, 05 Sep 2022 06:35:46 GMT</lastBuildDate>
+    <pubDate>Mon, 05 Sep 2022 06:53:37 GMT</pubDate>
+    <lastBuildDate>Mon, 05 Sep 2022 06:53:37 GMT</lastBuildDate>
     <generator>vuepress-plugin-feed2</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
     <item>
@@ -3862,6 +3862,7 @@ fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>Topic<span>></
       <pubDate>Tue, 09 Feb 2021 12:13:50 GMT</pubDate>
       <content:encoded><![CDATA[<h1 id="awesome-freesql" tabindex="-1"> Awesome FreeSql</h1>
 <h2 id="基于-freesql-的开源项目" tabindex="-1"> 基于 FreeSql 的开源项目</h2>
+<div>
 <table>
 <thead>
 <tr>
@@ -3896,6 +3897,7 @@ fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>Topic<span>></
 </tr>
 </tbody>
 </table>
+</div>
 
 
 <h3 id="easycms" tabindex="-1"> <a href="https://github.com/aprilyush/EasyCMS" target="_blank" rel="noopener noreferrer">EasyCMS</a></h3>
