@@ -6,8 +6,8 @@
     <link>https://freesql.net/</link>
     <description>FreeSql Documents</description>
     <language>zh-CN</language>
-    <pubDate>Mon, 05 Sep 2022 06:17:52 GMT</pubDate>
-    <lastBuildDate>Mon, 05 Sep 2022 06:17:52 GMT</lastBuildDate>
+    <pubDate>Mon, 05 Sep 2022 06:18:19 GMT</pubDate>
+    <lastBuildDate>Mon, 05 Sep 2022 06:18:19 GMT</lastBuildDate>
     <generator>vuepress-plugin-feed2</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
     <item>
@@ -18,7 +18,7 @@
       <pubDate>Sun, 04 Sep 2022 08:40:48 GMT</pubDate>
       <content:encoded><![CDATA[<h1 id="聚合根-实验室" tabindex="-1"> 聚合根（实验室）</h1>
 <p>FreeSql.Repository 定义了 IBaseRepository&lt;T&gt; 仓储接口，实现了单表的通用仓储对象，支持了级联保存、级联删除功能，（但是）使用时需要人工自己判断何时开启、何时使用。</p>
-<p><strong>AggregateRootRepository</strong> 是 IBaseRepository&lt;T&gt; 一种新的尝试实现，它将自动处理 OneToOne/OneToMany 导航属性，以及 ManyToMany(中间表) 的级联添加、级联更新、级联删除、级联查询（查询时自动 Include/IncludeMany 它们）。</p>
+<p><strong>AggregateRootRepository 是 IBaseRepository&lt;T&gt; 一种新的尝试实现</strong>，它将自动处理 OneToOne/OneToMany 导航属性，以及 ManyToMany(中间表) 的级联添加、级联更新、级联删除、级联查询（查询时自动 Include/IncludeMany 它们）。</p>
 <div><pre><code><span><span>var</span></span> repository <span>=</span> fsql<span>.</span><span><span>GetAggregateRootRepository</span><span><span>&lt;</span>Order<span>></span></span></span><span>(</span><span>)</span><span>;</span>
 </code></pre><div aria-hidden="true"><div></div></div></div><p>意见征集、讨论区：<a href="https://github.com/dotnetcore/FreeSql/discussions/1235" target="_blank" rel="noopener noreferrer">https://github.com/dotnetcore/FreeSql/discussions/1235</a></p>
 <h2 id="设定边界" tabindex="-1"> 设定边界</h2>
