@@ -6,8 +6,8 @@
     <link>https://freesql.net/</link>
     <description>FreeSql Documents</description>
     <language>zh-CN</language>
-    <pubDate>Mon, 05 Sep 2022 14:20:33 GMT</pubDate>
-    <lastBuildDate>Mon, 05 Sep 2022 14:20:33 GMT</lastBuildDate>
+    <pubDate>Tue, 06 Sep 2022 09:21:33 GMT</pubDate>
+    <lastBuildDate>Tue, 06 Sep 2022 09:21:33 GMT</lastBuildDate>
     <generator>vuepress-plugin-feed2</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
     <item>
@@ -20,6 +20,9 @@
 <p>FreeSql.Repository 定义了 IBaseRepository&lt;T&gt; 仓储接口，实现了单表的通用仓储对象，支持了级联保存、级联删除功能，（但是）使用时需要人工自己判断何时开启、何时使用。</p>
 <p>本文看上去像 EF，实则有区别，主要区别在级联边界的规则设定，例如我们允许 OneToMany 从下层向上递归级联，但是仅限查询，不能增删改。研究目的希望从机制上杜绝痛点，让操作变得更可控。</p>
 <p><strong>AggregateRootRepository 是 IBaseRepository&lt;T&gt; 一种新的尝试实现</strong>，它将自动处理 OneToOne/OneToMany 导航属性，以及 ManyToMany(中间表) 的级联添加、级联更新、级联删除、级联查询（查询时自动 Include/IncludeMany 它们）。</p>
+<blockquote>
+<p>dotnet add package FreeSql.Extensions.AggregateRoot</p>
+</blockquote>
 <div><pre><code><span><span>var</span></span> repository <span>=</span> fsql<span>.</span><span><span>GetAggregateRootRepository</span><span><span>&lt;</span>Order<span>></span></span></span><span>(</span><span>)</span><span>;</span>
 </code></pre><div aria-hidden="true"><div></div></div></div><p>意见征集、讨论区：<a href="https://github.com/dotnetcore/FreeSql/discussions/1235" target="_blank" rel="noopener noreferrer">https://github.com/dotnetcore/FreeSql/discussions/1235</a></p>
 <h2 id="设定边界" tabindex="-1"> 设定边界</h2>
