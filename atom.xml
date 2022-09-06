@@ -3,7 +3,7 @@
   <id>https://freesql.net/</id>
   <title>FreeSql 官方文档</title>
   <subtitle>FreeSql Documents</subtitle>
-  <updated>2022-09-06T09:21:33.825Z</updated>
+  <updated>2022-09-06T09:21:58.226Z</updated>
   <generator>vuepress-plugin-feed2</generator>
   <link rel="self" href="https://freesql.net/atom.xml"/>
   <link rel="alternate" href="https://freesql.net/"/>
@@ -11,16 +11,16 @@
     <title type="html">聚合根（实验室）</title>
     <id>https://freesql.net/guide/aggregateroot.html</id>
     <link href="https://freesql.net/guide/aggregateroot.html"/>
-    <updated>2022-09-06T09:19:32.000Z</updated>
+    <updated>2022-09-06T09:20:21.000Z</updated>
     <content type="html"><![CDATA[<h1 id="聚合根-实验室" tabindex="-1"> 聚合根（实验室）</h1>
 <p>FreeSql.Repository 定义了 IBaseRepository&lt;T&gt; 仓储接口，实现了单表的通用仓储对象，支持了级联保存、级联删除功能，（但是）使用时需要人工自己判断何时开启、何时使用。</p>
 <p>本文看上去像 EF，实则有区别，主要区别在级联边界的规则设定，例如我们允许 OneToMany 从下层向上递归级联，但是仅限查询，不能增删改。研究目的希望从机制上杜绝痛点，让操作变得更可控。</p>
 <p><strong>AggregateRootRepository 是 IBaseRepository&lt;T&gt; 一种新的尝试实现</strong>，它将自动处理 OneToOne/OneToMany 导航属性，以及 ManyToMany(中间表) 的级联添加、级联更新、级联删除、级联查询（查询时自动 Include/IncludeMany 它们）。</p>
-<blockquote>
+<div><pre><code><span><span>var</span></span> repository <span>=</span> fsql<span>.</span><span><span>GetAggregateRootRepository</span><span><span>&lt;</span>Order<span>></span></span></span><span>(</span><span>)</span><span>;</span>
+</code></pre><div aria-hidden="true"><div></div></div></div><blockquote>
 <p>dotnet add package FreeSql.Extensions.AggregateRoot</p>
 </blockquote>
-<div><pre><code><span><span>var</span></span> repository <span>=</span> fsql<span>.</span><span><span>GetAggregateRootRepository</span><span><span>&lt;</span>Order<span>></span></span></span><span>(</span><span>)</span><span>;</span>
-</code></pre><div aria-hidden="true"><div></div></div></div><p>意见征集、讨论区：<a href="https://github.com/dotnetcore/FreeSql/discussions/1235" target="_blank" rel="noopener noreferrer">https://github.com/dotnetcore/FreeSql/discussions/1235</a></p>
+<p>意见征集、讨论区：<a href="https://github.com/dotnetcore/FreeSql/discussions/1235" target="_blank" rel="noopener noreferrer">https://github.com/dotnetcore/FreeSql/discussions/1235</a></p>
 <h2 id="设定边界" tabindex="-1"> 设定边界</h2>
 <p>将一个主要的实体类认定为聚合根，设定好安全的管辖范围（边界），CRUD 时会把边界之内的所有内容看作一个整体。</p>
 <p><code>增删改</code> 边界之外的导航属性，递归时会忽略：</p>
