@@ -3,7 +3,7 @@
   <id>https://freesql.net/</id>
   <title>FreeSql 官方文档</title>
   <subtitle>FreeSql Documents</subtitle>
-  <updated>2022-09-07T04:19:29.993Z</updated>
+  <updated>2022-09-07T04:20:24.901Z</updated>
   <generator>vuepress-plugin-feed2</generator>
   <link rel="self" href="https://freesql.net/atom.xml"/>
   <link rel="alternate" href="https://freesql.net/"/>
@@ -3933,7 +3933,7 @@ fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>Topic<span>></
     <title type="html">特别鸣谢</title>
     <id>https://freesql.net/reference/donation.html</id>
     <link href="https://freesql.net/reference/donation.html"/>
-    <updated>2022-09-07T04:17:58.000Z</updated>
+    <updated>2022-09-07T04:18:28.000Z</updated>
     <content type="html"><![CDATA[<h1 id="特别鸣谢" tabindex="-1"> 特别鸣谢</h1>
 <table>
 <thead>
@@ -4196,7 +4196,7 @@ fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>Topic<span>></
 </tr>
 <tr>
 <td>平凡</td>
-<td>100元 元</td>
+<td>100 元</td>
 <td></td>
 </tr>
 <tr>
