@@ -6,8 +6,8 @@
     <link>https://freesql.net/</link>
     <description>FreeSql Documents</description>
     <language>zh-CN</language>
-    <pubDate>Thu, 08 Sep 2022 18:29:39 GMT</pubDate>
-    <lastBuildDate>Thu, 08 Sep 2022 18:29:39 GMT</lastBuildDate>
+    <pubDate>Thu, 08 Sep 2022 18:34:01 GMT</pubDate>
+    <lastBuildDate>Thu, 08 Sep 2022 18:34:01 GMT</lastBuildDate>
     <generator>vuepress-plugin-feed2</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
     <item>
@@ -2425,7 +2425,7 @@ fsql<span>.</span><span>SetDbProviderFactory</span><span>(</span>MySqlConnectorF
 </ul>
 <p>提示：对方 DLL 一般都会提供这两个现实类</p>
 <h1 id="自定义适配" tabindex="-1"> 自定义适配</h1>
-<p>为了让用户自己适配更多的数据库，比如连接 mssql 2000、db2 等数据库，牺牲了一些功能：</p>
+<p>除了上面，还提供了自定义适配更多的数据库，比如连接 mssql 2000、db2 等数据库，自定义适配将牺牲一些功能：</p>
 <ul>
 <li>不支持 CodeFirst 自动迁移</li>
 <li>不支持 DbFirst 接口方法的实现</li>
