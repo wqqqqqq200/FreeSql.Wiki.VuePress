@@ -3,7 +3,7 @@
   <id>https://freesql.net/</id>
   <title>FreeSql 官方文档</title>
   <subtitle>FreeSql Documents</subtitle>
-  <updated>2022-09-08T18:46:42.686Z</updated>
+  <updated>2022-09-08T18:53:55.727Z</updated>
   <generator>vuepress-plugin-feed2</generator>
   <link rel="self" href="https://freesql.net/atom.xml"/>
   <link rel="alternate" href="https://freesql.net/"/>
@@ -11,7 +11,7 @@
     <title type="html">聚合根（实验室）</title>
     <id>https://freesql.net/guide/aggregateroot.html</id>
     <link href="https://freesql.net/guide/aggregateroot.html"/>
-    <updated>2022-09-08T18:45:02.000Z</updated>
+    <updated>2022-09-08T18:52:16.000Z</updated>
     <content type="html"><![CDATA[<h1 id="聚合根-实验室" tabindex="-1"> 聚合根（实验室）</h1>
 <p>FreeSql.Repository 定义了 IBaseRepository&lt;T&gt; 仓储接口，实现了单表的通用仓储对象，支持了级联保存、级联删除功能，（但是）使用时需要人工自己判断何时开启、何时使用。</p>
 <p>本文看上去像 EF，实则有区别，主要区别在级联边界的规则设定，例如我们允许 OneToMany 从下层向上递归级联，但是仅限查询，不能增删改。研究目的希望从机制上杜绝痛点，让操作变得更可控。</p>
@@ -181,7 +181,7 @@ repository<span>.</span><span>Insert</span><span>(</span>order<span>)</span><spa
 <li>删除 Order 表对应的记录；</li>
 </ul>
 <p>删除数据是在内存递归 order 实例进行的，因此需要使用 repository 提前查询，内容庞大时有性能缺陷。</p>
-<p>如果使用了数据库外键的级联删除功能，则只需删除 Order 表对应的记录，并且不需要提前查询。</p>
+<p>如果设置了数据库表外键的级联删除功能，则只需删除 Order 表对应的记录，并且不需要提前查询。</p>
 <h2 id="更新数据" tabindex="-1"> 更新数据</h2>
 <p>根据上面设定的边界，更新时会自动 <code>级联保存</code> 边界以内的内容。</p>
 <p>repository.Attach 存储更新前的数据快照（查询会自动快照），称为副本，repository.Update 的时候和副本进行级联对比保存。</p>

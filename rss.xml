@@ -6,8 +6,8 @@
     <link>https://freesql.net/</link>
     <description>FreeSql Documents</description>
     <language>zh-CN</language>
-    <pubDate>Thu, 08 Sep 2022 18:46:42 GMT</pubDate>
-    <lastBuildDate>Thu, 08 Sep 2022 18:46:42 GMT</lastBuildDate>
+    <pubDate>Thu, 08 Sep 2022 18:53:55 GMT</pubDate>
+    <lastBuildDate>Thu, 08 Sep 2022 18:53:55 GMT</lastBuildDate>
     <generator>vuepress-plugin-feed2</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
     <item>
@@ -185,7 +185,7 @@ repository<span>.</span><span>Insert</span><span>(</span>order<span>)</span><spa
 <li>删除 Order 表对应的记录；</li>
 </ul>
 <p>删除数据是在内存递归 order 实例进行的，因此需要使用 repository 提前查询，内容庞大时有性能缺陷。</p>
-<p>如果使用了数据库外键的级联删除功能，则只需删除 Order 表对应的记录，并且不需要提前查询。</p>
+<p>如果设置了数据库表外键的级联删除功能，则只需删除 Order 表对应的记录，并且不需要提前查询。</p>
 <h2 id="更新数据" tabindex="-1"> 更新数据</h2>
 <p>根据上面设定的边界，更新时会自动 <code>级联保存</code> 边界以内的内容。</p>
 <p>repository.Attach 存储更新前的数据快照（查询会自动快照），称为副本，repository.Update 的时候和副本进行级联对比保存。</p>
