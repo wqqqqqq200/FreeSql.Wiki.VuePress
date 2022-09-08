@@ -3,7 +3,7 @@
   <id>https://freesql.net/</id>
   <title>FreeSql 官方文档</title>
   <subtitle>FreeSql Documents</subtitle>
-  <updated>2022-09-07T04:20:24.901Z</updated>
+  <updated>2022-09-08T06:01:58.101Z</updated>
   <generator>vuepress-plugin-feed2</generator>
   <link rel="self" href="https://freesql.net/atom.xml"/>
   <link rel="alternate" href="https://freesql.net/"/>
@@ -7807,7 +7807,7 @@ fsql<span>.</span>CodeFirst<span>.</span><span><span>Entity</span><span><span>&l
     <title type="html">入门</title>
     <id>https://freesql.net/guide/getting-started.html</id>
     <link href="https://freesql.net/guide/getting-started.html"/>
-    <updated>2022-08-18T09:17:43.000Z</updated>
+    <updated>2022-09-08T05:59:57.000Z</updated>
     <content type="html"><![CDATA[<h1 id="入门" tabindex="-1"> 入门</h1>
 <h2 id="模型" tabindex="-1"> 模型</h2>
 <p><code>FreeSql</code> 使用模型执行数据访问，模型由实体类表示数据库表或视图，用于查询和保存数据。</p>
@@ -8053,6 +8053,10 @@ blog<span>.</span>BlogId <span>=</span> <span>(</span><span>int</span><span>)</s
 <tr>
 <td>DataType.Sqlite</td>
 <td>Data Source=|DataDirectory|\document.db; Attachs=xxxtb.db; Pooling=true;Min Pool Size=1</td>
+</tr>
+<tr>
+<td>DataType.ClickHouse</td>
+<td>DataCompress=False;BufferSize=32768;SocketTimeout=10000;CheckCompressedHash=False;Encrypt=False;Compressor=lz4;Host=192.168.0.121;Port=8125;Database=PersonnelLocation;Username=root;Password=123</td>
 </tr>
 <tr>
 <td>DataType.Firebird</td>

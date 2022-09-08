@@ -6,8 +6,8 @@
     <link>https://freesql.net/</link>
     <description>FreeSql Documents</description>
     <language>zh-CN</language>
-    <pubDate>Wed, 07 Sep 2022 04:20:24 GMT</pubDate>
-    <lastBuildDate>Wed, 07 Sep 2022 04:20:24 GMT</lastBuildDate>
+    <pubDate>Thu, 08 Sep 2022 06:01:58 GMT</pubDate>
+    <lastBuildDate>Thu, 08 Sep 2022 06:01:58 GMT</lastBuildDate>
     <generator>vuepress-plugin-feed2</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
     <item>
@@ -8062,6 +8062,10 @@ blog<span>.</span>BlogId <span>=</span> <span>(</span><span>int</span><span>)</s
 <tr>
 <td>DataType.Sqlite</td>
 <td>Data Source=|DataDirectory|\document.db; Attachs=xxxtb.db; Pooling=true;Min Pool Size=1</td>
+</tr>
+<tr>
+<td>DataType.ClickHouse</td>
+<td>DataCompress=False;BufferSize=32768;SocketTimeout=10000;CheckCompressedHash=False;Encrypt=False;Compressor=lz4;Host=192.168.0.121;Port=8125;Database=PersonnelLocation;Username=root;Password=123</td>
 </tr>
 <tr>
 <td>DataType.Firebird</td>
