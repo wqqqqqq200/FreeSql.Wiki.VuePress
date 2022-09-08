@@ -6,8 +6,8 @@
     <link>https://freesql.net/</link>
     <description>FreeSql Documents</description>
     <language>zh-CN</language>
-    <pubDate>Thu, 08 Sep 2022 17:21:52 GMT</pubDate>
-    <lastBuildDate>Thu, 08 Sep 2022 17:21:52 GMT</lastBuildDate>
+    <pubDate>Thu, 08 Sep 2022 17:37:09 GMT</pubDate>
+    <lastBuildDate>Thu, 08 Sep 2022 17:37:09 GMT</lastBuildDate>
     <generator>vuepress-plugin-feed2</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
     <item>
@@ -2413,7 +2413,7 @@ dotnet <span>add</span> package Castle.Core.AsyncInterceptor
 <div><pre><code><span><span>var</span></span> fsql <span>=</span> <span>new</span> <span>FreeSqlBuilder</span><span>(</span><span>)</span>
     <span>.</span><span>UseConnectionFactory</span><span>(</span>DataType<span>.</span>CustomMySql<span>,</span> <span>(</span><span>)</span> <span>=></span> 
         <span>new</span> <span>MySqlConnection</span><span>(</span><span>"Data Source=..."</span><span>)</span><span>)</span>
-    <span>.</span><span>UseAutoSyncStructure</span><span>(</span><span>true</span><span>)</span>
+    <span>.</span><span>UseNoneParameter</span><span>(</span><span>true</span><span>)</span>
     <span>.</span><span>UseMonitorCommand</span><span>(</span>Console<span>.</span><span>WriteLine</span><span>(</span>cmd<span>.</span>CommandText<span>)</span><span>)</span>
     <span>.</span><span>Build</span><span>(</span><span>)</span><span>;</span>
 fsql<span>.</span><span>SetDbProviderFactory</span><span>(</span>MySqlConnectorFactory<span>.</span>Instance<span>)</span><span>;</span>

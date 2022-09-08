@@ -3,7 +3,7 @@
   <id>https://freesql.net/</id>
   <title>FreeSql 官方文档</title>
   <subtitle>FreeSql Documents</subtitle>
-  <updated>2022-09-08T17:21:52.091Z</updated>
+  <updated>2022-09-08T17:37:09.243Z</updated>
   <generator>vuepress-plugin-feed2</generator>
   <link rel="self" href="https://freesql.net/atom.xml"/>
   <link rel="alternate" href="https://freesql.net/"/>
@@ -2364,7 +2364,7 @@ dotnet <span>add</span> package Castle.Core.AsyncInterceptor
     <title type="html">国产数据库</title>
     <id>https://freesql.net/guide/freesql-provider-custom.html</id>
     <link href="https://freesql.net/guide/freesql-provider-custom.html"/>
-    <updated>2022-09-08T17:19:47.000Z</updated>
+    <updated>2022-09-08T17:35:34.000Z</updated>
     <content type="html"><![CDATA[<h1 id="国产数据库" tabindex="-1"> 国产数据库</h1>
 <table>
 <thead>
@@ -2408,7 +2408,7 @@ dotnet <span>add</span> package Castle.Core.AsyncInterceptor
 <div><pre><code><span><span>var</span></span> fsql <span>=</span> <span>new</span> <span>FreeSqlBuilder</span><span>(</span><span>)</span>
     <span>.</span><span>UseConnectionFactory</span><span>(</span>DataType<span>.</span>CustomMySql<span>,</span> <span>(</span><span>)</span> <span>=></span> 
         <span>new</span> <span>MySqlConnection</span><span>(</span><span>"Data Source=..."</span><span>)</span><span>)</span>
-    <span>.</span><span>UseAutoSyncStructure</span><span>(</span><span>true</span><span>)</span>
+    <span>.</span><span>UseNoneParameter</span><span>(</span><span>true</span><span>)</span>
     <span>.</span><span>UseMonitorCommand</span><span>(</span>Console<span>.</span><span>WriteLine</span><span>(</span>cmd<span>.</span>CommandText<span>)</span><span>)</span>
     <span>.</span><span>Build</span><span>(</span><span>)</span><span>;</span>
 fsql<span>.</span><span>SetDbProviderFactory</span><span>(</span>MySqlConnectorFactory<span>.</span>Instance<span>)</span><span>;</span>
