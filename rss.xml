@@ -6,8 +6,8 @@
     <link>https://freesql.net/</link>
     <description>FreeSql Documents</description>
     <language>zh-CN</language>
-    <pubDate>Thu, 08 Sep 2022 16:11:27 GMT</pubDate>
-    <lastBuildDate>Thu, 08 Sep 2022 16:11:27 GMT</lastBuildDate>
+    <pubDate>Thu, 08 Sep 2022 17:21:52 GMT</pubDate>
+    <lastBuildDate>Thu, 08 Sep 2022 17:21:52 GMT</lastBuildDate>
     <generator>vuepress-plugin-feed2</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
     <item>
@@ -2416,11 +2416,11 @@ dotnet <span>add</span> package Castle.Core.AsyncInterceptor
     <span>.</span><span>UseAutoSyncStructure</span><span>(</span><span>true</span><span>)</span>
     <span>.</span><span>UseMonitorCommand</span><span>(</span>Console<span>.</span><span>WriteLine</span><span>(</span>cmd<span>.</span>CommandText<span>)</span><span>)</span>
     <span>.</span><span>Build</span><span>(</span><span>)</span><span>;</span>
-fsql<span>.</span><span>SetDbProviderFactory</span><span>(</span><span>new</span> <span>MySqlClientFactory</span><span>(</span><span>)</span><span>)</span><span>;</span>
+fsql<span>.</span><span>SetDbProviderFactory</span><span>(</span>MySqlConnectorFactory<span>.</span>Instance<span>)</span><span>;</span>
 </code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><p>若某国产数据库兼容 MySql SQL，先引用对方提供的 DLL，然后：</p>
 <ul>
 <li>将上面 new MySqlConnection 替换成 new XxxConnection</li>
-<li>将上面 new MySqlClientFactory 替换成 new XxxClientFactory</li>
+<li>将上面 MySqlConnectorFactory.Instance 替换成对应的 DbProviderFactory</li>
 </ul>
 <p>提示：对方 DLL 一般都会提供这两个现实类</p>
 <h1 id="自定义适配" tabindex="-1"> 自定义适配</h1>
