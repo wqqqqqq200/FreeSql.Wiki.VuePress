@@ -6,8 +6,8 @@
     <link>https://freesql.net/</link>
     <description>FreeSql Documents</description>
     <language>zh-CN</language>
-    <pubDate>Thu, 08 Sep 2022 15:52:49 GMT</pubDate>
-    <lastBuildDate>Thu, 08 Sep 2022 15:52:49 GMT</lastBuildDate>
+    <pubDate>Thu, 08 Sep 2022 15:53:50 GMT</pubDate>
+    <lastBuildDate>Thu, 08 Sep 2022 15:53:50 GMT</lastBuildDate>
     <generator>vuepress-plugin-feed2</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
     <item>
@@ -2371,7 +2371,7 @@ dotnet <span>add</span> package Castle.Core.AsyncInterceptor
       <source url="https://freesql.net/rss.xml">国产数据库</source>
       <pubDate>Sat, 09 Jul 2022 09:12:12 GMT</pubDate>
       <content:encoded><![CDATA[<h1 id="国产数据库" tabindex="-1"> 国产数据库</h1>
-<p>不依赖任何具体 <a href="http://ado.net/odbc/oledb" target="_blank" rel="noopener noreferrer">ado.net/odbc/oledb</a> 驱动，使用者在外部设置具体引用哪个 dll。</p>
+<p>FreeSql.Provider.Custom 不依赖任何具体 <a href="http://ado.net/odbc/oledb" target="_blank" rel="noopener noreferrer">ado.net/odbc/oledb</a> 驱动，使用者在外部设置具体引用哪个 dll。</p>
 <p>默认提供 MySql、Oracle、SqlServer、PostgreSQL 四种常用数据库的适配，支持 CodeFirst/DbFirst 以及完整的 FreeSql 功能。</p>
 <p>国产数据库大多数都兼容这四种数据库，所以它们也可以用来访问国产数据库。</p>
 <p>访问 MySql 数据库为例：</p>

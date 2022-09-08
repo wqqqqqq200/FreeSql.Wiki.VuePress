@@ -3,7 +3,7 @@
   <id>https://freesql.net/</id>
   <title>FreeSql 官方文档</title>
   <subtitle>FreeSql Documents</subtitle>
-  <updated>2022-09-08T15:52:49.905Z</updated>
+  <updated>2022-09-08T15:53:50.409Z</updated>
   <generator>vuepress-plugin-feed2</generator>
   <link rel="self" href="https://freesql.net/atom.xml"/>
   <link rel="alternate" href="https://freesql.net/"/>
@@ -2364,9 +2364,9 @@ dotnet <span>add</span> package Castle.Core.AsyncInterceptor
     <title type="html">国产数据库</title>
     <id>https://freesql.net/guide/freesql-provider-custom.html</id>
     <link href="https://freesql.net/guide/freesql-provider-custom.html"/>
-    <updated>2022-09-08T15:49:44.000Z</updated>
+    <updated>2022-09-08T15:51:34.000Z</updated>
     <content type="html"><![CDATA[<h1 id="国产数据库" tabindex="-1"> 国产数据库</h1>
-<p>不依赖任何具体 <a href="http://ado.net/odbc/oledb" target="_blank" rel="noopener noreferrer">ado.net/odbc/oledb</a> 驱动，使用者在外部设置具体引用哪个 dll。</p>
+<p>FreeSql.Provider.Custom 不依赖任何具体 <a href="http://ado.net/odbc/oledb" target="_blank" rel="noopener noreferrer">ado.net/odbc/oledb</a> 驱动，使用者在外部设置具体引用哪个 dll。</p>
 <p>默认提供 MySql、Oracle、SqlServer、PostgreSQL 四种常用数据库的适配，支持 CodeFirst/DbFirst 以及完整的 FreeSql 功能。</p>
 <p>国产数据库大多数都兼容这四种数据库，所以它们也可以用来访问国产数据库。</p>
 <p>访问 MySql 数据库为例：</p>
