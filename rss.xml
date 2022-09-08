@@ -6,8 +6,8 @@
     <link>https://freesql.net/</link>
     <description>FreeSql Documents</description>
     <language>zh-CN</language>
-    <pubDate>Thu, 08 Sep 2022 15:45:12 GMT</pubDate>
-    <lastBuildDate>Thu, 08 Sep 2022 15:45:12 GMT</lastBuildDate>
+    <pubDate>Thu, 08 Sep 2022 15:46:21 GMT</pubDate>
+    <lastBuildDate>Thu, 08 Sep 2022 15:46:21 GMT</lastBuildDate>
     <generator>vuepress-plugin-feed2</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
     <item>
@@ -2386,7 +2386,7 @@ fsql<span>.</span><span>SetDbProviderFactory</span><span>(</span><span>new</span
 <li>将上面 new MySqlConnection 替换成 new XxxConnection</li>
 <li>将上面 new MySqlClientFactory 替换成 new XxxClientFactory</li>
 </ul>
-<p>提示：对方 DLL 一定会提供这两个现实</p>
+<p>提示：对方 DLL 一般都会提供这两个现实类</p>
 <h1 id="自定义适配" tabindex="-1"> 自定义适配</h1>
 <p>通用实现为了让用户自己适配更多的数据库，比如连接 mssql 2000、db2 等数据库，牺牲了一些功能：</p>
 <ul>

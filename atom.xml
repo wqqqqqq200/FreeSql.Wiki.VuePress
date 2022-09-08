@@ -3,7 +3,7 @@
   <id>https://freesql.net/</id>
   <title>FreeSql 官方文档</title>
   <subtitle>FreeSql Documents</subtitle>
-  <updated>2022-09-08T15:45:12.618Z</updated>
+  <updated>2022-09-08T15:46:21.997Z</updated>
   <generator>vuepress-plugin-feed2</generator>
   <link rel="self" href="https://freesql.net/atom.xml"/>
   <link rel="alternate" href="https://freesql.net/"/>
@@ -2364,7 +2364,7 @@ dotnet <span>add</span> package Castle.Core.AsyncInterceptor
     <title type="html">国产数据库</title>
     <id>https://freesql.net/guide/freesql-provider-custom.html</id>
     <link href="https://freesql.net/guide/freesql-provider-custom.html"/>
-    <updated>2022-09-08T15:43:05.000Z</updated>
+    <updated>2022-09-08T15:44:18.000Z</updated>
     <content type="html"><![CDATA[<h1 id="国产数据库" tabindex="-1"> 国产数据库</h1>
 <p>不依赖任何具体 <a href="http://ado.net/odbc/oledb" target="_blank" rel="noopener noreferrer">ado.net/odbc/oledb</a> 驱动，使用者在外部设置具体引用哪个 dll。</p>
 <p>默认提供 MySql、Oracle、SqlServer、PostgreSQL 四种常用数据库的适配，支持 CodeFirst/DbFirst 以及完整的 FreeSql 功能。</p>
@@ -2381,7 +2381,7 @@ fsql<span>.</span><span>SetDbProviderFactory</span><span>(</span><span>new</span
 <li>将上面 new MySqlConnection 替换成 new XxxConnection</li>
 <li>将上面 new MySqlClientFactory 替换成 new XxxClientFactory</li>
 </ul>
-<p>提示：对方 DLL 一定会提供这两个现实</p>
+<p>提示：对方 DLL 一般都会提供这两个现实类</p>
 <h1 id="自定义适配" tabindex="-1"> 自定义适配</h1>
 <p>通用实现为了让用户自己适配更多的数据库，比如连接 mssql 2000、db2 等数据库，牺牲了一些功能：</p>
 <ul>
