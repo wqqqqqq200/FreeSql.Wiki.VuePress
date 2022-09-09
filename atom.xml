@@ -3,7 +3,7 @@
   <id>https://freesql.net/</id>
   <title>FreeSql 官方文档</title>
   <subtitle>FreeSql Documents</subtitle>
-  <updated>2022-09-09T15:06:38.687Z</updated>
+  <updated>2022-09-09T15:07:36.138Z</updated>
   <generator>vuepress-plugin-feed2</generator>
   <link rel="self" href="https://freesql.net/atom.xml"/>
   <link rel="alternate" href="https://freesql.net/"/>
@@ -9241,7 +9241,7 @@ dotnet <span>add</span> package FreeSql.Provider.Sqlite
     <title type="html">你不知道的功能 ✨</title>
     <id>https://freesql.net/guide/more.html</id>
     <link href="https://freesql.net/guide/more.html"/>
-    <updated>2022-08-30T22:49:37.000Z</updated>
+    <updated>2022-09-09T15:05:52.000Z</updated>
     <content type="html"><![CDATA[<h1 id="你不知道的功能-✨" tabindex="-1"> 你不知道的功能 ✨</h1>
 <h2 id="_1、备注-迁移到数据库" tabindex="-1"> 1、备注 -&gt; 迁移到数据库</h2>
 <p>FreeSql CodeFirst 支持将 c# 代码内的注释，迁移至数据库的备注。先决条件：</p>
@@ -9275,9 +9275,11 @@ fsql<span>.</span><span><span>Update</span><span><span>&lt;</span><span>object</
   <span>.</span><span>SetSource</span><span>(</span>data<span>)</span>
   <span>.</span><span>ExecuteAffrows</span><span>(</span><span>)</span><span>;</span>
 
-fsql<span>.</span><span><span>Select</span><span><span>&lt;</span><span>object</span><span>></span></span></span><span>(</span><span>)</span><span>.</span><span>AsType</span><span>(</span>实体类型<span>)</span>
+fsql<span>.</span><span><span>Delete</span><span><span>&lt;</span><span>object</span><span>></span></span></span><span>(</span><span>)</span><span>.</span><span>AsType</span><span>(</span>实体类型<span>)</span>
   <span>.</span><span>Where</span><span>(</span>a <span>=></span> <span>(</span>a <span>as</span> <span>BaseEntity</span><span>)</span><span>.</span>Id <span>==</span> <span>1</span><span>)</span>
   <span>.</span><span>ExecuteAffrows</span><span>(</span><span>)</span><span>;</span>
+
+<span>//fsql.Select&lt;object>()...</span>
 
 <span>//或者仓储</span>
 <span><span>var</span></span> repo <span>=</span> fsql<span>.</span><span><span>GetRepository</span><span><span>&lt;</span><span>object</span><span>></span></span></span><span>(</span><span>)</span><span>;</span>
@@ -9297,7 +9299,7 @@ fsql<span>.</span><span>InsertDict</span><span>(</span>dic<span>)</span><span>.<
 fsql<span>.</span><span>UpdateDict</span><span>(</span>dic<span>)</span><span>.</span><span>AsTable</span><span>(</span><span>"table1"</span><span>)</span><span>.</span><span>WherePrimary</span><span>(</span><span>"id"</span><span>)</span><span>.</span><span>ExecuteAffrows</span><span>(</span><span>)</span><span>;</span>
 fsql<span>.</span><span>DeleteDict</span><span>(</span>dic<span>)</span><span>.</span><span>AsTable</span><span>(</span><span>"table1"</span><span>)</span><span>.</span><span>ExecuteAffrows</span><span>(</span><span>)</span><span>;</span>
 fsql<span>.</span><span>InsertOrUpdateDict</span><span>(</span>dic<span>)</span><span>.</span><span>AsTable</span><span>(</span><span>"table1"</span><span>)</span><span>.</span><span>WherePrimary</span><span>(</span><span>"id"</span><span>)</span><span>.</span><span>ExecuteAffrows</span><span>(</span><span>)</span><span>;</span>
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><hr>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><hr>
 <h2 id="_5、withsql" tabindex="-1"> 5、WithSql</h2>
 <div><pre><code>fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>Topic<span>></span></span></span><span>(</span><span>)</span>
   <span>.</span><span>WithSql</span><span>(</span><span>"select * from Topic where clicks > @val"</span><span>,</span> <span>new</span> <span>{</span> val <span>=</span> <span>10</span> <span>}</span><span>)</span>
