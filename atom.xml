@@ -3,7 +3,7 @@
   <id>https://freesql.net/</id>
   <title>FreeSql 官方文档</title>
   <subtitle>FreeSql Documents</subtitle>
-  <updated>2022-09-08T18:53:55.727Z</updated>
+  <updated>2022-09-09T15:06:38.687Z</updated>
   <generator>vuepress-plugin-feed2</generator>
   <link rel="self" href="https://freesql.net/atom.xml"/>
   <link rel="alternate" href="https://freesql.net/"/>
@@ -1423,7 +1423,7 @@ cli<span>.</span><span>Eval</span><span>(</span><span>"return redis.call('set',K
     <title type="html">动态操作</title>
     <id>https://freesql.net/guide/dynamic.html</id>
     <link href="https://freesql.net/guide/dynamic.html"/>
-    <updated>2022-08-17T03:35:52.000Z</updated>
+    <updated>2022-09-09T15:05:01.000Z</updated>
     <content type="html"><![CDATA[<h1 id="动态操作" tabindex="-1"> 动态操作</h1>
 <h2 id="弱类型-crud" tabindex="-1"> 弱类型 CRUD</h2>
 <div><pre><code>fsql<span>.</span><span><span>Insert</span><span><span>&lt;</span><span>object</span><span>></span></span></span><span>(</span><span>)</span><span>.</span><span>AsType</span><span>(</span>实体类型<span>)</span>
@@ -1434,9 +1434,11 @@ fsql<span>.</span><span><span>Update</span><span><span>&lt;</span><span>object</
   <span>.</span><span>SetSource</span><span>(</span>data<span>)</span>
   <span>.</span><span>ExecuteAffrows</span><span>(</span><span>)</span><span>;</span>
 
-fsql<span>.</span><span><span>Select</span><span><span>&lt;</span><span>object</span><span>></span></span></span><span>(</span><span>)</span><span>.</span><span>AsType</span><span>(</span>实体类型<span>)</span>
+fsql<span>.</span><span><span>Delete</span><span><span>&lt;</span><span>object</span><span>></span></span></span><span>(</span><span>)</span><span>.</span><span>AsType</span><span>(</span>实体类型<span>)</span>
   <span>.</span><span>Where</span><span>(</span>a <span>=></span> <span>(</span>a <span>as</span> <span>BaseEntity</span><span>)</span><span>.</span>Id <span>==</span> <span>1</span><span>)</span>
   <span>.</span><span>ExecuteAffrows</span><span>(</span><span>)</span><span>;</span>
+
+<span>//fsql.Select&lt;object>()...</span>
 
 <span>//或者仓储</span>
 <span><span>var</span></span> repo <span>=</span> fsql<span>.</span><span><span>GetRepository</span><span><span>&lt;</span><span>object</span><span>></span></span></span><span>(</span><span>)</span><span>;</span>
@@ -1446,7 +1448,7 @@ repo<span>.</span><span>Insert</span><span>(</span><span>..</span><span>)</span>
 repo<span>.</span><span>Update</span><span>(</span><span>..</span><span>)</span><span>;</span>
 repo<span>.</span><span>Delete</span><span>(</span><span>..</span><span>)</span><span>;</span>
 repo<span>.</span><span>InsertOrUpdate</span><span>(</span><span>..</span><span>)</span><span>;</span>
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><blockquote>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><blockquote>
 <p>提示：动态编译技术 <a href="https://natasha.dotnetcore.xyz/zh-Hans/docs/get_started/string-complie" target="_blank" rel="noopener noreferrer">https://natasha.dotnetcore.xyz/zh-Hans/docs/get_started/string-complie</a></p>
 </blockquote>
 <h2 id="字典-cud" tabindex="-1"> 字典 CUD</h2>

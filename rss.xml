@@ -6,8 +6,8 @@
     <link>https://freesql.net/</link>
     <description>FreeSql Documents</description>
     <language>zh-CN</language>
-    <pubDate>Thu, 08 Sep 2022 18:53:55 GMT</pubDate>
-    <lastBuildDate>Thu, 08 Sep 2022 18:53:55 GMT</lastBuildDate>
+    <pubDate>Fri, 09 Sep 2022 15:06:38 GMT</pubDate>
+    <lastBuildDate>Fri, 09 Sep 2022 15:06:38 GMT</lastBuildDate>
     <generator>vuepress-plugin-feed2</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
     <item>
@@ -1439,9 +1439,11 @@ fsql<span>.</span><span><span>Update</span><span><span>&lt;</span><span>object</
   <span>.</span><span>SetSource</span><span>(</span>data<span>)</span>
   <span>.</span><span>ExecuteAffrows</span><span>(</span><span>)</span><span>;</span>
 
-fsql<span>.</span><span><span>Select</span><span><span>&lt;</span><span>object</span><span>></span></span></span><span>(</span><span>)</span><span>.</span><span>AsType</span><span>(</span>实体类型<span>)</span>
+fsql<span>.</span><span><span>Delete</span><span><span>&lt;</span><span>object</span><span>></span></span></span><span>(</span><span>)</span><span>.</span><span>AsType</span><span>(</span>实体类型<span>)</span>
   <span>.</span><span>Where</span><span>(</span>a <span>=></span> <span>(</span>a <span>as</span> <span>BaseEntity</span><span>)</span><span>.</span>Id <span>==</span> <span>1</span><span>)</span>
   <span>.</span><span>ExecuteAffrows</span><span>(</span><span>)</span><span>;</span>
+
+<span>//fsql.Select&lt;object>()...</span>
 
 <span>//或者仓储</span>
 <span><span>var</span></span> repo <span>=</span> fsql<span>.</span><span><span>GetRepository</span><span><span>&lt;</span><span>object</span><span>></span></span></span><span>(</span><span>)</span><span>;</span>
@@ -1451,7 +1453,7 @@ repo<span>.</span><span>Insert</span><span>(</span><span>..</span><span>)</span>
 repo<span>.</span><span>Update</span><span>(</span><span>..</span><span>)</span><span>;</span>
 repo<span>.</span><span>Delete</span><span>(</span><span>..</span><span>)</span><span>;</span>
 repo<span>.</span><span>InsertOrUpdate</span><span>(</span><span>..</span><span>)</span><span>;</span>
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><blockquote>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><blockquote>
 <p>提示：动态编译技术 <a href="https://natasha.dotnetcore.xyz/zh-Hans/docs/get_started/string-complie" target="_blank" rel="noopener noreferrer">https://natasha.dotnetcore.xyz/zh-Hans/docs/get_started/string-complie</a></p>
 </blockquote>
 <h2 id="字典-cud" tabindex="-1"> 字典 CUD</h2>
