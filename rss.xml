@@ -6,8 +6,8 @@
     <link>https://freesql.net/</link>
     <description>FreeSql Documents</description>
     <language>zh-CN</language>
-    <pubDate>Tue, 13 Sep 2022 10:41:07 GMT</pubDate>
-    <lastBuildDate>Tue, 13 Sep 2022 10:41:07 GMT</lastBuildDate>
+    <pubDate>Tue, 13 Sep 2022 10:46:06 GMT</pubDate>
+    <lastBuildDate>Tue, 13 Sep 2022 10:46:06 GMT</lastBuildDate>
     <generator>vuepress-plugin-feed2</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
     <item>
@@ -1938,7 +1938,34 @@ list<span>.</span><span>Add</span><span>(</span><span>new</span> <span>User1</sp
     <span>UNION</span> <span>ALL</span>
     <span>SELECT</span> <span>.</span><span>.</span><span>.</span>
 <span>)</span> b <span>ON</span> a<span>.</span><span>[</span>Id<span>]</span> <span>=</span> b<span>.</span><span>[</span>GroupId<span>]</span>
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><hr>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><h2 id="withparameters-参数化共享" tabindex="-1"> WithParameters 参数化共享</h2>
+<p>开启参数化查询功能后，使用 WithParameters 共享参数化，避免产生相同的参数名称：</p>
+<div><pre><code><span><span>var</span></span> dbpars <span>=</span> <span>new</span> <span>List<span>&lt;</span>DbParameter<span>></span></span><span>(</span><span>)</span><span>;</span>
+
+<span><span>var</span></span> id1 <span>=</span> <span>1</span><span>;</span>
+<span><span>var</span></span> id2 <span>=</span> <span>2</span><span>;</span>
+<span><span>var</span></span> sql <span>=</span> fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>User1<span>></span></span></span><span>(</span><span>)</span>
+    <span>.</span><span>WithParameters</span><span>(</span>dbpars<span>)</span>
+    <span>.</span><span>Where</span><span>(</span>a <span>=></span> a<span>.</span>Id <span>==</span> id1<span>)</span>
+
+    <span>.</span><span>FromQuery</span><span>(</span>
+        fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>User1<span>></span></span></span><span>(</span><span>)</span>
+            <span>.</span><span>WithParameters</span><span>(</span>dbpars<span>)</span>
+            <span>.</span><span>Where</span><span>(</span>a <span>=></span> a<span>.</span>Id <span>==</span> id2<span>)</span>
+    <span>)</span>
+    <span>.</span><span>InnerJoin</span><span>(</span><span>(</span>a<span>,</span>b<span>)</span> <span>=></span> a<span>.</span>Id <span>==</span> b<span>.</span>Id<span>)</span>
+    <span>.</span><span>ToSql</span><span>(</span><span>)</span><span>;</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><div><pre><code><span>SELECT</span> a<span>.</span><span>"Id"</span><span>,</span> a<span>.</span><span>"GroupId"</span><span>,</span> a<span>.</span><span>"Username"</span> 
+<span>FROM</span> <span>(</span>
+    <span>SELECT</span> a<span>.</span><span>"Id"</span><span>,</span> a<span>.</span><span>"GroupId"</span><span>,</span> a<span>.</span><span>"Username"</span> 
+    <span>FROM</span> <span>"User1"</span> a 
+    <span>WHERE</span> <span>(</span>a<span>.</span><span>"Id"</span> <span>=</span> <span>@exp_0</span><span>)</span> 
+<span>)</span> a
+<span>INNER</span> <span>JOIN</span> <span>(</span> 
+    <span>SELECT</span> a<span>.</span><span>"Id"</span><span>,</span> a<span>.</span><span>"GroupId"</span><span>,</span> a<span>.</span><span>"Username"</span> 
+    <span>FROM</span> <span>"User1"</span> a 
+    <span>WHERE</span> <span>(</span>a<span>.</span><span>"Id"</span> <span>=</span> <span>@exp_1</span><span>)</span> <span>)</span> b <span>ON</span> b<span>.</span><span>"Id"</span> <span>=</span> a<span>.</span><span>"Id"</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><hr>
 <h2 id="子表exists" tabindex="-1"> 子表Exists</h2>
 <div><pre><code>fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>Topic<span>></span></span></span><span>(</span><span>)</span>
   <span>.</span><span>Where</span><span>(</span>a <span>=></span> fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>Topic<span>></span></span></span><span>(</span><span>)</span><span>.</span><span>As</span><span>(</span><span>"b"</span><span>)</span><span>.</span><span>Where</span><span>(</span>b <span>=></span> b<span>.</span>Id <span>==</span> a<span>.</span>Id<span>)</span><span>.</span><span>Any</span><span>(</span><span>)</span><span>)</span>
