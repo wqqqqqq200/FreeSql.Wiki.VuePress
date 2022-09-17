@@ -6,8 +6,8 @@
     <link>https://freesql.net/</link>
     <description>FreeSql Documents</description>
     <language>zh-CN</language>
-    <pubDate>Sat, 17 Sep 2022 14:23:32 GMT</pubDate>
-    <lastBuildDate>Sat, 17 Sep 2022 14:23:32 GMT</lastBuildDate>
+    <pubDate>Sat, 17 Sep 2022 14:28:52 GMT</pubDate>
+    <lastBuildDate>Sat, 17 Sep 2022 14:28:52 GMT</lastBuildDate>
     <generator>vuepress-plugin-feed2</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
     <item>
@@ -11790,16 +11790,7 @@ fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>Topic<span>,</
 </blockquote>
 <h2 id="_6、忽略字段返回" tabindex="-1"> 6、忽略字段返回</h2>
 <p>参考实现：<a href="https://github.com/dotnetcore/FreeSql/issues/528" target="_blank" rel="noopener noreferrer">https://github.com/dotnetcore/FreeSql/issues/528</a></p>
-<h2 id="_7、tosql" tabindex="-1"> 7、ToSql</h2>
-<p>每个 ToList 都可以使用 ToSql 返回 SQL String，有两个选项：</p>
-<ul>
-<li>FieldAliasOptions.AsIndex(默认) 自动产生 as1, as2, as3 .... 字段别名，可以最大程度防止多表，存在相同字段的问题；</li>
-<li>FieldAliasOptions.AsProperty 使用属性名作为字段别名，合适使用二次构造 SQL 再次执行；</li>
-</ul>
-<blockquote>
-<p>v3.2.666 开启参数化查询功能后，使用 WithParameters 共享参数化，避免多个查询对象产生相同的参数名称，例如：<a href="%E8%81%94%E5%90%88%E6%9F%A5%E8%AF%A2">UnionAll 联合查询</a></p>
-</blockquote>
-<h2 id="_8、dto-映射返回" tabindex="-1"> 8、Dto 映射返回</h2>
+<h2 id="_7、dto-映射返回" tabindex="-1"> 7、Dto 映射返回</h2>
 <div><pre><code>fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>Song<span>></span></span></span><span>(</span><span>)</span><span>.</span><span><span>ToList</span><span><span>&lt;</span>Dto<span>></span></span></span><span>(</span><span>)</span><span>;</span>
 <span>//情况1：Dto 与 Song 属性名相同的字段被查询，返回 List&lt;Dto></span>
 
@@ -11839,7 +11830,7 @@ fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>Song<span>></s
 <blockquote>
 <p>多表对象：ToList((a, b) =&gt; new Dto { Catalog = b })</p>
 </blockquote>
-<h2 id="_9、tochunk-分段返回" tabindex="-1"> 9、ToChunk 分段返回</h2>
+<h2 id="_8、tochunk-分段返回" tabindex="-1"> 8、ToChunk 分段返回</h2>
 <p>执行查询，分块返回数据，可减少内存开销。比如读取 10 万条数据，每次返回 100 条处理。</p>
 <div><pre><code><span><span>var</span></span> testlist1 <span>=</span> fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>Song<span>></span></span></span><span>(</span><span>)</span><span>.</span><span>OrderBy</span><span>(</span>a <span>=></span> a<span>.</span>Id<span>)</span><span>.</span><span>ToList</span><span>(</span><span>)</span><span>;</span>
 <span><span>var</span></span> testlist2 <span>=</span> <span>new</span> <span>List<span>&lt;</span>Song<span>></span></span><span>(</span><span>)</span><span>;</span>
@@ -11848,7 +11839,16 @@ fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>Song<span>></s
     <span>//done.IsBreak = true; v1.7.0 停止读取</span>
 <span>}</span><span>)</span><span>;</span>
 <span>//这里示范，最终 testlist1 与 testlist2 返回的数据相同。</span>
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><h2 id="_10、执行-sql" tabindex="-1"> 10、执行 SQL</h2>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><h2 id="_9、tosql" tabindex="-1"> 9、ToSql</h2>
+<p>每个 ToList 都可以使用 ToSql 返回 SQL String，有两个选项：</p>
+<ul>
+<li>FieldAliasOptions.AsIndex(默认) 自动产生 as1, as2, as3 .... 字段别名，可以最大程度防止多表，存在相同字段的问题；</li>
+<li>FieldAliasOptions.AsProperty 使用属性名作为字段别名，合适使用二次构造 SQL 再次执行；</li>
+</ul>
+<blockquote>
+<p>v3.2.666 开启参数化查询功能后，使用 WithParameters 共享参数化，避免多个查询对象产生相同的参数名称，例如：<a href="%E8%81%94%E5%90%88%E6%9F%A5%E8%AF%A2">UnionAll 联合查询</a></p>
+</blockquote>
+<h2 id="_10、执行-sql" tabindex="-1"> 10、执行 SQL</h2>
 <div><pre><code><span>class</span> <span>xxx</span> <span>{</span>
     <span>public</span> <span><span>int</span></span> Id <span>{</span> <span>get</span><span>;</span> <span>set</span><span>;</span> <span>}</span>
     <span>public</span> <span><span>string</span></span> Path <span>{</span> <span>get</span><span>;</span> <span>set</span><span>;</span> <span>}</span>
