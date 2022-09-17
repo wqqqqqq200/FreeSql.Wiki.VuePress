@@ -6,8 +6,8 @@
     <link>https://freesql.net/</link>
     <description>FreeSql Documents</description>
     <language>zh-CN</language>
-    <pubDate>Sat, 17 Sep 2022 04:02:23 GMT</pubDate>
-    <lastBuildDate>Sat, 17 Sep 2022 04:02:23 GMT</lastBuildDate>
+    <pubDate>Sat, 17 Sep 2022 14:23:32 GMT</pubDate>
+    <lastBuildDate>Sat, 17 Sep 2022 14:23:32 GMT</lastBuildDate>
     <generator>vuepress-plugin-feed2</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
     <item>
@@ -11799,58 +11799,7 @@ fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>Topic<span>,</
 <blockquote>
 <p>v3.2.666 开启参数化查询功能后，使用 WithParameters 共享参数化，避免多个查询对象产生相同的参数名称，例如：<a href="%E8%81%94%E5%90%88%E6%9F%A5%E8%AF%A2">UnionAll 联合查询</a></p>
 </blockquote>
-<h2 id="_8、执行-sql" tabindex="-1"> 8、执行 SQL</h2>
-<div><pre><code><span>class</span> <span>xxx</span> <span>{</span>
-    <span>public</span> <span><span>int</span></span> Id <span>{</span> <span>get</span><span>;</span> <span>set</span><span>;</span> <span>}</span>
-    <span>public</span> <span><span>string</span></span> Path <span>{</span> <span>get</span><span>;</span> <span>set</span><span>;</span> <span>}</span>
-    <span>public</span> <span><span>string</span></span> Title2 <span>{</span> <span>get</span><span>;</span> <span>set</span><span>;</span> <span>}</span>
-<span>}</span>
-
-<span>List<span>&lt;</span>xxx<span>></span></span> t11 <span>=</span> fsql<span>.</span>Ado<span>.</span><span><span>Query</span><span><span>&lt;</span>xxx<span>></span></span></span><span>(</span><span>"select * from song"</span><span>)</span><span>;</span>
-<span>List<span>&lt;</span><span>(</span><span>int</span><span>,</span> <span>string</span> <span>,</span><span>string</span><span>)</span><span>></span></span> t12 <span>=</span> fsql<span>.</span>Ado<span>.</span><span><span>Query</span><span><span>&lt;</span><span>(</span><span>int</span><span>,</span> <span>string</span><span>,</span> <span>string</span><span>)</span><span>></span></span></span><span>(</span><span>"select * from song"</span><span>)</span><span>;</span>
-<span>List<span>&lt;</span><span>dynamic</span><span>></span></span> t13 <span>=</span> fsql<span>.</span>Ado<span>.</span><span><span>Query</span><span><span>&lt;</span><span>dynamic</span><span>></span></span></span><span>(</span><span>"select * from song"</span><span>)</span><span>;</span>
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><blockquote>
-<p>注意：Ado.Query 的实体特性是无效的，比如 [Column(Name = &quot;xxx&quot;)] 无效</p>
-</blockquote>
-<h2 id="_9、withsql" tabindex="-1"> 9、WithSql</h2>
-<div><pre><code>fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>Topic<span>></span></span></span><span>(</span><span>)</span>
-  <span>.</span><span>WithSql</span><span>(</span><span>"select * from Topic where clicks > @val"</span><span>,</span> <span>new</span> <span>{</span> val <span>=</span> <span>10</span> <span>}</span><span>)</span>
-  <span>.</span><span>Page</span><span>(</span><span>1</span><span>,</span> <span>10</span><span>)</span>
-  <span>.</span><span>ToList</span><span>(</span><span>)</span>
-<span>//SELECT a.`Id`, a.`Clicks`, a.`CategoryId`, a.`Title`, a.`CreateTime`</span>
-<span>//FROM (select * from Topic where clicks > @val) a</span>
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div></div></div><blockquote>
-<p>WithSql 使用多次为 UNION ALL 查询</p>
-</blockquote>
-<blockquote>
-<p>v3.2.666 <a href="/guide/unionall.html">UnionAll 联合查询</a>、<a href="/guide/withtempquery.html">WithTempQuery + FromQuery 嵌套查询</a></p>
-</blockquote>
-<blockquote>
-<p>v3.2.666 WithMemory 使用内存数据进行查询</p>
-</blockquote>
-<div><pre><code><span><span>var</span></span> list <span>=</span> <span>new</span> <span>List<span>&lt;</span>Topic<span>></span></span><span>(</span><span>)</span><span>;</span>
-list<span>.</span><span>Add</span><span>(</span><span>new</span> <span>Topic</span> <span>{</span> <span>..</span><span>.</span> <span>}</span><span>)</span><span>;</span>
-list<span>.</span><span>Add</span><span>(</span><span>new</span> <span>Topic</span> <span>{</span> <span>..</span><span>.</span> <span>}</span><span>)</span><span>;</span>
-
-fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>Topic<span>></span></span></span><span>(</span><span>)</span>
-  <span>.</span><span>WithMemory</span><span>(</span>list<span>)</span>
-  <span>.</span><span>ToList</span><span>(</span><span>)</span>
-<span>//SELECT a.`Id`, a.`Clicks`, a.`CategoryId`, a.`Title`, a.`CreateTime` </span>
-<span>//FROM (</span>
-<span>//  SELECT ...</span>
-<span>//  UNION ALL</span>
-<span>//  SELECT ...</span>
-<span>//) a </span>
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><h2 id="_10、tochunk" tabindex="-1"> 10、ToChunk</h2>
-<p>执行查询，分块返回数据，可减少内存开销。比如读取 10 万条数据，每次返回 100 条处理。</p>
-<div><pre><code><span><span>var</span></span> testlist1 <span>=</span> fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>Song<span>></span></span></span><span>(</span><span>)</span><span>.</span><span>OrderBy</span><span>(</span>a <span>=></span> a<span>.</span>Id<span>)</span><span>.</span><span>ToList</span><span>(</span><span>)</span><span>;</span>
-<span><span>var</span></span> testlist2 <span>=</span> <span>new</span> <span>List<span>&lt;</span>Song<span>></span></span><span>(</span><span>)</span><span>;</span>
-fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>Song<span>></span></span></span><span>(</span><span>)</span><span>.</span><span>OrderBy</span><span>(</span>a <span>=></span> a<span>.</span>Id<span>)</span><span>.</span><span>ToChunk</span><span>(</span><span>100</span><span>,</span> done <span>=></span> <span>{</span>
-    testlist2<span>.</span><span>AddRange</span><span>(</span>done<span>.</span>Object<span>)</span><span>;</span>
-    <span>//done.IsBreak = true; v1.7.0 停止读取</span>
-<span>}</span><span>)</span><span>;</span>
-<span>//这里示范，最终 testlist1 与 testlist2 返回的数据相同。</span>
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><h2 id="_11、dto-映射查询" tabindex="-1"> 11、Dto 映射查询</h2>
+<h2 id="_8、dto-映射返回" tabindex="-1"> 8、Dto 映射返回</h2>
 <div><pre><code>fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>Song<span>></span></span></span><span>(</span><span>)</span><span>.</span><span><span>ToList</span><span><span>&lt;</span>Dto<span>></span></span></span><span>(</span><span>)</span><span>;</span>
 <span>//情况1：Dto 与 Song 属性名相同的字段被查询，返回 List&lt;Dto></span>
 
@@ -11890,7 +11839,58 @@ fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>Song<span>></s
 <blockquote>
 <p>多表对象：ToList((a, b) =&gt; new Dto { Catalog = b })</p>
 </blockquote>
-<h2 id="_12、api" tabindex="-1"> 12、API</h2>
+<h2 id="_9、tochunk-分段返回" tabindex="-1"> 9、ToChunk 分段返回</h2>
+<p>执行查询，分块返回数据，可减少内存开销。比如读取 10 万条数据，每次返回 100 条处理。</p>
+<div><pre><code><span><span>var</span></span> testlist1 <span>=</span> fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>Song<span>></span></span></span><span>(</span><span>)</span><span>.</span><span>OrderBy</span><span>(</span>a <span>=></span> a<span>.</span>Id<span>)</span><span>.</span><span>ToList</span><span>(</span><span>)</span><span>;</span>
+<span><span>var</span></span> testlist2 <span>=</span> <span>new</span> <span>List<span>&lt;</span>Song<span>></span></span><span>(</span><span>)</span><span>;</span>
+fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>Song<span>></span></span></span><span>(</span><span>)</span><span>.</span><span>OrderBy</span><span>(</span>a <span>=></span> a<span>.</span>Id<span>)</span><span>.</span><span>ToChunk</span><span>(</span><span>100</span><span>,</span> done <span>=></span> <span>{</span>
+    testlist2<span>.</span><span>AddRange</span><span>(</span>done<span>.</span>Object<span>)</span><span>;</span>
+    <span>//done.IsBreak = true; v1.7.0 停止读取</span>
+<span>}</span><span>)</span><span>;</span>
+<span>//这里示范，最终 testlist1 与 testlist2 返回的数据相同。</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><h2 id="_10、执行-sql" tabindex="-1"> 10、执行 SQL</h2>
+<div><pre><code><span>class</span> <span>xxx</span> <span>{</span>
+    <span>public</span> <span><span>int</span></span> Id <span>{</span> <span>get</span><span>;</span> <span>set</span><span>;</span> <span>}</span>
+    <span>public</span> <span><span>string</span></span> Path <span>{</span> <span>get</span><span>;</span> <span>set</span><span>;</span> <span>}</span>
+    <span>public</span> <span><span>string</span></span> Title2 <span>{</span> <span>get</span><span>;</span> <span>set</span><span>;</span> <span>}</span>
+<span>}</span>
+
+<span>List<span>&lt;</span>xxx<span>></span></span> t11 <span>=</span> fsql<span>.</span>Ado<span>.</span><span><span>Query</span><span><span>&lt;</span>xxx<span>></span></span></span><span>(</span><span>"select * from song"</span><span>)</span><span>;</span>
+<span>List<span>&lt;</span><span>(</span><span>int</span><span>,</span> <span>string</span> <span>,</span><span>string</span><span>)</span><span>></span></span> t12 <span>=</span> fsql<span>.</span>Ado<span>.</span><span><span>Query</span><span><span>&lt;</span><span>(</span><span>int</span><span>,</span> <span>string</span><span>,</span> <span>string</span><span>)</span><span>></span></span></span><span>(</span><span>"select * from song"</span><span>)</span><span>;</span>
+<span>List<span>&lt;</span><span>dynamic</span><span>></span></span> t13 <span>=</span> fsql<span>.</span>Ado<span>.</span><span><span>Query</span><span><span>&lt;</span><span>dynamic</span><span>></span></span></span><span>(</span><span>"select * from song"</span><span>)</span><span>;</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><blockquote>
+<p>注意：Ado.Query 的实体特性是无效的，比如 [Column(Name = &quot;xxx&quot;)] 无效</p>
+</blockquote>
+<h2 id="_11、withsql" tabindex="-1"> 11、WithSql</h2>
+<div><pre><code>fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>Topic<span>></span></span></span><span>(</span><span>)</span>
+  <span>.</span><span>WithSql</span><span>(</span><span>"select * from Topic where clicks > @val"</span><span>,</span> <span>new</span> <span>{</span> val <span>=</span> <span>10</span> <span>}</span><span>)</span>
+  <span>.</span><span>Page</span><span>(</span><span>1</span><span>,</span> <span>10</span><span>)</span>
+  <span>.</span><span>ToList</span><span>(</span><span>)</span>
+<span>//SELECT a.`Id`, a.`Clicks`, a.`CategoryId`, a.`Title`, a.`CreateTime`</span>
+<span>//FROM (select * from Topic where clicks > @val) a</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div></div></div><blockquote>
+<p>WithSql 使用多次为 UNION ALL 查询</p>
+</blockquote>
+<blockquote>
+<p>v3.2.666 <a href="/guide/unionall.html">UnionAll 联合查询</a>、<a href="/guide/withtempquery.html">WithTempQuery + FromQuery 嵌套查询</a></p>
+</blockquote>
+<blockquote>
+<p>v3.2.666 WithMemory 使用内存数据进行查询</p>
+</blockquote>
+<div><pre><code><span><span>var</span></span> list <span>=</span> <span>new</span> <span>List<span>&lt;</span>Topic<span>></span></span><span>(</span><span>)</span><span>;</span>
+list<span>.</span><span>Add</span><span>(</span><span>new</span> <span>Topic</span> <span>{</span> <span>..</span><span>.</span> <span>}</span><span>)</span><span>;</span>
+list<span>.</span><span>Add</span><span>(</span><span>new</span> <span>Topic</span> <span>{</span> <span>..</span><span>.</span> <span>}</span><span>)</span><span>;</span>
+
+fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>Topic<span>></span></span></span><span>(</span><span>)</span>
+  <span>.</span><span>WithMemory</span><span>(</span>list<span>)</span>
+  <span>.</span><span>ToList</span><span>(</span><span>)</span>
+<span>//SELECT a.`Id`, a.`Clicks`, a.`CategoryId`, a.`Title`, a.`CreateTime` </span>
+<span>//FROM (</span>
+<span>//  SELECT ...</span>
+<span>//  UNION ALL</span>
+<span>//  SELECT ...</span>
+<span>//) a </span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><h2 id="_12、api" tabindex="-1"> 12、API</h2>
 <table>
 <thead>
 <tr>
