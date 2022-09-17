@@ -6,8 +6,8 @@
     <link>https://freesql.net/</link>
     <description>FreeSql Documents</description>
     <language>zh-CN</language>
-    <pubDate>Tue, 13 Sep 2022 10:46:06 GMT</pubDate>
-    <lastBuildDate>Tue, 13 Sep 2022 10:46:06 GMT</lastBuildDate>
+    <pubDate>Sat, 17 Sep 2022 02:51:35 GMT</pubDate>
+    <lastBuildDate>Sat, 17 Sep 2022 02:51:35 GMT</lastBuildDate>
     <generator>vuepress-plugin-feed2</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
     <item>
@@ -5583,7 +5583,7 @@ uow<span>.</span>OnEntityChange <span>=</span> report <span>=></span> <span>{</s
 <tbody>
 <tr>
 <td style="text-align:left">-Razor</td>
-<td style="text-align:left">选择模板：<code>实体类+特性</code> <code>-Razor 1</code> /<code>实体类+特性+导航属性</code> <code>-Razor 1</code>/<code>自定义模板文件</code> <code>-Razor &quot;d:\diy.cshtml&quot;</code></td>
+<td style="text-align:left">选择模板：实体类+特性 <code>-Razor 1</code> / 实体类+特性+导航属性 <code>-Razor 2</code>/ 自定义模板文件 <code>-Razor &quot;d:\diy.cshtml&quot;</code></td>
 </tr>
 <tr>
 <td style="text-align:left">-NameOptions</td>
