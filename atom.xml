@@ -3,7 +3,7 @@
   <id>https://freesql.net/</id>
   <title>FreeSql 官方文档</title>
   <subtitle>FreeSql Documents</subtitle>
-  <updated>2022-09-17T02:51:35.156Z</updated>
+  <updated>2022-09-17T04:02:23.659Z</updated>
   <generator>vuepress-plugin-feed2</generator>
   <link rel="self" href="https://freesql.net/atom.xml"/>
   <link rel="alternate" href="https://freesql.net/"/>
@@ -7890,7 +7890,7 @@ fsql<span>.</span>CodeFirst<span>.</span><span><span>Entity</span><span><span>&l
     <title type="html">入门</title>
     <id>https://freesql.net/guide/getting-started.html</id>
     <link href="https://freesql.net/guide/getting-started.html"/>
-    <updated>2022-09-08T05:59:57.000Z</updated>
+    <updated>2022-09-17T04:00:20.000Z</updated>
     <content type="html"><![CDATA[<h1 id="入门" tabindex="-1"> 入门</h1>
 <h2 id="模型" tabindex="-1"> 模型</h2>
 <p><code>FreeSql</code> 使用模型执行数据访问，模型由实体类表示数据库表或视图，用于查询和保存数据。</p>
@@ -7953,7 +7953,7 @@ Install-Package FreeSql.Provider.Sqlite
 </code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div></template>
 <template #tab1="{ title, value, isActive }">
 <div><pre><code><span><span>var</span></span> builder <span>=</span> WebApplication<span>.</span><span>CreateBuilder</span><span>(</span>args<span>)</span><span>;</span>
-<span>Func<span>&lt;</span>IServiceProvider<span>,</span> IFreeSql<span>></span></span> fsql <span>=</span> r <span>=></span>
+<span>Func<span>&lt;</span>IServiceProvider<span>,</span> IFreeSql<span>></span></span> fsqlFactory <span>=</span> r <span>=></span>
 <span>{</span>
     <span>IFreeSql</span> fsql <span>=</span> <span>new</span> <span>FreeSql<span>.</span>FreeSqlBuilder</span><span>(</span><span>)</span>
         <span>.</span><span>UseConnectionString</span><span>(</span>FreeSql<span>.</span>DataType<span>.</span>Sqlite<span>,</span> <span>@"Data Source=freedb.db"</span><span>)</span>
@@ -7962,7 +7962,7 @@ Install-Package FreeSql.Provider.Sqlite
         <span>.</span><span>Build</span><span>(</span><span>)</span><span>;</span>
     <span>return</span> fsql<span>;</span>
 <span>}</span><span>;</span>
-builder<span>.</span>Services<span>.</span><span><span>AddSingleton</span><span><span>&lt;</span>IFreeSql<span>></span></span></span><span>(</span>fsql<span>)</span><span>;</span>
+builder<span>.</span>Services<span>.</span><span><span>AddSingleton</span><span><span>&lt;</span>IFreeSql<span>></span></span></span><span>(</span>fsqlFactory<span>)</span><span>;</span>
 
 <span>WebApplication</span> app <span>=</span> builder<span>.</span><span>Build</span><span>(</span><span>)</span><span>;</span>
 <span>//在项目启动时，从容器中获取IFreeSql实例，并执行一些操作：同步表，种子数据,FluentAPI等</span>

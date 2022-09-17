@@ -6,8 +6,8 @@
     <link>https://freesql.net/</link>
     <description>FreeSql Documents</description>
     <language>zh-CN</language>
-    <pubDate>Sat, 17 Sep 2022 02:51:35 GMT</pubDate>
-    <lastBuildDate>Sat, 17 Sep 2022 02:51:35 GMT</lastBuildDate>
+    <pubDate>Sat, 17 Sep 2022 04:02:23 GMT</pubDate>
+    <lastBuildDate>Sat, 17 Sep 2022 04:02:23 GMT</lastBuildDate>
     <generator>vuepress-plugin-feed2</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
     <item>
@@ -7962,7 +7962,7 @@ Install-Package FreeSql.Provider.Sqlite
 </code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div></template>
 <template #tab1="{ title, value, isActive }">
 <div><pre><code><span><span>var</span></span> builder <span>=</span> WebApplication<span>.</span><span>CreateBuilder</span><span>(</span>args<span>)</span><span>;</span>
-<span>Func<span>&lt;</span>IServiceProvider<span>,</span> IFreeSql<span>></span></span> fsql <span>=</span> r <span>=></span>
+<span>Func<span>&lt;</span>IServiceProvider<span>,</span> IFreeSql<span>></span></span> fsqlFactory <span>=</span> r <span>=></span>
 <span>{</span>
     <span>IFreeSql</span> fsql <span>=</span> <span>new</span> <span>FreeSql<span>.</span>FreeSqlBuilder</span><span>(</span><span>)</span>
         <span>.</span><span>UseConnectionString</span><span>(</span>FreeSql<span>.</span>DataType<span>.</span>Sqlite<span>,</span> <span>@"Data Source=freedb.db"</span><span>)</span>
@@ -7971,7 +7971,7 @@ Install-Package FreeSql.Provider.Sqlite
         <span>.</span><span>Build</span><span>(</span><span>)</span><span>;</span>
     <span>return</span> fsql<span>;</span>
 <span>}</span><span>;</span>
-builder<span>.</span>Services<span>.</span><span><span>AddSingleton</span><span><span>&lt;</span>IFreeSql<span>></span></span></span><span>(</span>fsql<span>)</span><span>;</span>
+builder<span>.</span>Services<span>.</span><span><span>AddSingleton</span><span><span>&lt;</span>IFreeSql<span>></span></span></span><span>(</span>fsqlFactory<span>)</span><span>;</span>
 
 <span>WebApplication</span> app <span>=</span> builder<span>.</span><span>Build</span><span>(</span><span>)</span><span>;</span>
 <span>//在项目启动时，从容器中获取IFreeSql实例，并执行一些操作：同步表，种子数据,FluentAPI等</span>
