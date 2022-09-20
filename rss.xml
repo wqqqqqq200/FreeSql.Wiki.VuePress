@@ -6,8 +6,8 @@
     <link>https://freesql.net/</link>
     <description>FreeSql Documents</description>
     <language>zh-CN</language>
-    <pubDate>Tue, 20 Sep 2022 02:35:30 GMT</pubDate>
-    <lastBuildDate>Tue, 20 Sep 2022 02:35:30 GMT</lastBuildDate>
+    <pubDate>Tue, 20 Sep 2022 04:07:30 GMT</pubDate>
+    <lastBuildDate>Tue, 20 Sep 2022 04:07:30 GMT</lastBuildDate>
     <generator>vuepress-plugin-feed2</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
     <item>
@@ -10058,6 +10058,10 @@ fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>T<span>></span
     <span>public</span> <span>virtual</span> <span>ICollection<span>&lt;</span>Tag<span>></span></span> Tags <span>{</span> <span>get</span><span>;</span> <span>set</span><span>;</span> <span>}</span>
 <span>}</span>
 </code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><p>Song、Tag、Song_tag，这三个实体使用了 OneToMany、ManyToOne、Parent、ManyToMany 4 种关系。</p>
+<h1 id="其他参考" tabindex="-1"> 其他参考</h1>
+<ul>
+<li><a href="https://github.com/dotnetcore/FreeSql/issues/604" target="_blank" rel="noopener noreferrer">freesql如何建立非主键导航属性 OneToOne/ManyToOne</a></li>
+</ul>
 ]]></content:encoded>
     </item>
     <item>
