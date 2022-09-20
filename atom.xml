@@ -3,7 +3,7 @@
   <id>https://freesql.net/</id>
   <title>FreeSql 官方文档</title>
   <subtitle>FreeSql Documents</subtitle>
-  <updated>2022-09-20T04:07:30.219Z</updated>
+  <updated>2022-09-20T04:12:16.602Z</updated>
   <generator>vuepress-plugin-feed2</generator>
   <link rel="self" href="https://freesql.net/atom.xml"/>
   <link rel="alternate" href="https://freesql.net/"/>
@@ -9909,7 +9909,7 @@ fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>T<span>></span
     <title type="html">导航属性 ✨</title>
     <id>https://freesql.net/guide/navigate-attribute.html</id>
     <link href="https://freesql.net/guide/navigate-attribute.html"/>
-    <updated>2022-09-20T04:05:39.000Z</updated>
+    <updated>2022-09-20T04:10:03.000Z</updated>
     <content type="html"><![CDATA[<h1 id="导航属性-✨" tabindex="-1"> 导航属性 ✨</h1>
 <p>导航属性是 FreeSql 的特色功能之一，可通过约定配置、或自定义配置对象间的关系。</p>
 <p>导航属性有 OneToMany, ManyToOne, ManyToMany, OneToOne, Parent, <a href="https://www.cnblogs.com/FreeSql/p/16351417.html" target="_blank" rel="noopener noreferrer">PgArrayToMany</a> 六种配置关系。</p>
@@ -9950,6 +9950,12 @@ fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>T<span>></span
 </blockquote>
 <p>1、属性设置 Column(IsIgnore = true) 后，导航属性会失效</p>
 <p>2、Navigate 设置的字符串是 类属性名，不是表 字段名！！！</p>
+<blockquote>
+<p>扩展：</p>
+</blockquote>
+<ul>
+<li><a href="https://github.com/dotnetcore/FreeSql/issues/604" target="_blank" rel="noopener noreferrer">如何建立非主键导航属性 OneToOne/ManyToOne</a></li>
+</ul>
 <h1 id="检测导航属性" tabindex="-1"> 检测导航属性</h1>
 <p>如何检测一个导航属性是否配置生效：</p>
 <div><pre><code><span><span>var</span></span> tbref <span>=</span> fsql<span>.</span>CodeFirst
@@ -10047,10 +10053,6 @@ fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>T<span>></span
     <span>public</span> <span>virtual</span> <span>ICollection<span>&lt;</span>Tag<span>></span></span> Tags <span>{</span> <span>get</span><span>;</span> <span>set</span><span>;</span> <span>}</span>
 <span>}</span>
 </code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><p>Song、Tag、Song_tag，这三个实体使用了 OneToMany、ManyToOne、Parent、ManyToMany 4 种关系。</p>
-<h1 id="其他参考" tabindex="-1"> 其他参考</h1>
-<ul>
-<li><a href="https://github.com/dotnetcore/FreeSql/issues/604" target="_blank" rel="noopener noreferrer">freesql如何建立非主键导航属性 OneToOne/ManyToOne</a></li>
-</ul>
 ]]></content>
     <published>2021-02-04T16:03:18.000Z</published>
   </entry>
