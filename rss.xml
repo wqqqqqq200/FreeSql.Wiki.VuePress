@@ -6,8 +6,8 @@
     <link>https://freesql.net/</link>
     <description>FreeSql Documents</description>
     <language>zh-CN</language>
-    <pubDate>Tue, 20 Sep 2022 04:12:16 GMT</pubDate>
-    <lastBuildDate>Tue, 20 Sep 2022 04:12:16 GMT</lastBuildDate>
+    <pubDate>Wed, 21 Sep 2022 01:48:48 GMT</pubDate>
+    <lastBuildDate>Wed, 21 Sep 2022 01:48:48 GMT</lastBuildDate>
     <generator>vuepress-plugin-feed2</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
     <item>
@@ -3040,7 +3040,7 @@ fsql<span>.</span><span>Insert</span><span>(</span>departments<span>)</span>
     <span>{</span>
     <span>}</span>
 <span>}</span>
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><h2 id="二、使用-freesql-clound" tabindex="-1"> 二、使用 FreeSql.Clound</h2>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><h2 id="二、使用-freesql-cloud" tabindex="-1"> 二、使用 FreeSql.Cloud</h2>
 <p>为 FreeSql 提供跨数据库访问，分布式事务TCC、SAGA解决方案，支持 .NET Core 2.1+, .NET Framework 4.0+.</p>
 <p>开源地址：<a href="https://github.com/2881099/FreeSql.Cloud" target="_blank" rel="noopener noreferrer">https://github.com/2881099/FreeSql.Cloud</a></p>
 <blockquote>
