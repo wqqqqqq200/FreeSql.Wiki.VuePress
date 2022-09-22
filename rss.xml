@@ -6,8 +6,8 @@
     <link>https://freesql.net/</link>
     <description>FreeSql Documents</description>
     <language>zh-CN</language>
-    <pubDate>Thu, 22 Sep 2022 13:05:47 GMT</pubDate>
-    <lastBuildDate>Thu, 22 Sep 2022 13:05:47 GMT</lastBuildDate>
+    <pubDate>Thu, 22 Sep 2022 13:10:21 GMT</pubDate>
+    <lastBuildDate>Thu, 22 Sep 2022 13:10:21 GMT</lastBuildDate>
     <generator>vuepress-plugin-feed2</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
     <item>
@@ -2787,10 +2787,16 @@ lst<span>.</span><span>Add</span><span>(</span><span>(</span>Guid<span>.</span><
 <span><span>var</span></span> t2 <span>=</span> fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>T<span>></span></span></span><span>(</span><span>)</span>
   <span>.</span><span>Where</span><span>(</span>a <span>=></span> lst<span>.</span><span>Contains</span><span>(</span>a<span>.</span>Id<span>,</span> a<span>.</span>ct1<span>)</span><span>)</span>
   <span>.</span><span>ToList</span><span>(</span><span>)</span><span>;</span>
-<span>//SELECT .. FROM ..</span>
-<span>//WHERE (a."Id" = '685ee1f6-bdf6-4719-a291-c709b8a1378f' AND a."ct1" = '2019-12-07 23:55:27' OR </span>
-<span>//a."Id" = '5ecd838a-06a0-4c81-be43-1e77633b7404' AND a."ct1" = '2019-12-07 23:55:27')</span>
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><p>代码实现：</p>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><p>Oracle 产生如下SQL：</p>
+<div><pre><code><span>SELECT</span> <span>.</span><span>.</span> <span>FROM</span> <span>.</span><span>.</span>
+<span>WHERE</span> <span>(</span>a<span>.</span><span>"Id"</span><span>,</span> a<span>.</span><span>"ct1"</span><span>)</span> <span>in</span> <span>(</span>
+<span>(</span><span>'685ee1f6-bdf6-4719-a291-c709b8a1378f'</span><span>,</span><span>'2019-12-07 23:55:27'</span><span>)</span><span>,</span> 
+<span>(</span><span>'5ecd838a-06a0-4c81-be43-1e77633b7404'</span><span>,</span> <span>'2019-12-07 23:55:27'</span><span>)</span><span>)</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div></div></div><p>非 ORACLE 产生如下 SQL：</p>
+<div><pre><code><span>SELECT</span> <span>.</span><span>.</span> <span>FROM</span> <span>.</span><span>.</span>
+<span>WHERE</span> <span>(</span>a<span>.</span><span>"Id"</span> <span>=</span> <span>'685ee1f6-bdf6-4719-a291-c709b8a1378f'</span> <span>AND</span> a<span>.</span><span>"ct1"</span> <span>=</span> <span>'2019-12-07 23:55:27'</span> <span>OR</span> 
+a<span>.</span><span>"Id"</span> <span>=</span> <span>'5ecd838a-06a0-4c81-be43-1e77633b7404'</span> <span>AND</span> a<span>.</span><span>"ct1"</span> <span>=</span> <span>'2019-12-07 23:55:27'</span><span>)</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div></div></div><p>代码实现：</p>
 <div><pre><code><span>using</span> <span>FreeSql<span>.</span>DataAnnotations</span><span>;</span>
 <span>using</span> <span>System<span>.</span>Collections<span>.</span>Generic</span><span>;</span>
 <span>using</span> <span>System<span>.</span>Linq</span><span>;</span>
