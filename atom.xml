@@ -3,7 +3,7 @@
   <id>https://freesql.net/</id>
   <title>FreeSql 官方文档</title>
   <subtitle>FreeSql Documents</subtitle>
-  <updated>2022-09-22T13:10:21.264Z</updated>
+  <updated>2022-09-22T13:11:58.035Z</updated>
   <generator>vuepress-plugin-feed2</generator>
   <link rel="self" href="https://freesql.net/atom.xml"/>
   <link rel="alternate" href="https://freesql.net/"/>
@@ -6141,7 +6141,7 @@ fsql<span>.</span><span>Insert</span><span>(</span><span>new</span> <span>Type</
     <title type="html">表达式函数</title>
     <id>https://freesql.net/guide/expression-function.html</id>
     <link href="https://freesql.net/guide/expression-function.html"/>
-    <updated>2022-09-22T13:04:11.000Z</updated>
+    <updated>2022-09-22T13:10:15.000Z</updated>
     <content type="html"><![CDATA[<h1 id="表达式函数" tabindex="-1"> 表达式函数</h1>
 <p>这是 <code>FreeSql</code> 非常特色的功能之一，深入细化函数解析，所支持的类型基本都可以使用对应的表达式函数，例如 日期、字符串、<code>IN</code>查询、数组（<code>PostgreSQL</code>的数组）、字典（PostgreSQL HStore)等等。</p>
 <h2 id="动态lambda表达式" tabindex="-1"> 动态Lambda表达式</h2>
@@ -6193,8 +6193,7 @@ lst<span>.</span><span>Add</span><span>(</span><span>(</span>Guid<span>.</span><
 <p>v3.2.650 使用 .Where(a =&gt; list.Any(b =&gt; b.Item1 == a. Id &amp;&amp; b.Item2 == a. ct1))</p>
 </blockquote>
 <blockquote>
-<p>WHERE (id, code) in ((1,'code1'), (2,'code2))
-实现代码：<a href="/extra/issues-in-valuetype.html">In多列查询，表达式自定义实现</a></p>
+<p>WHERE (id, code) in ((1,'code1'), (2,'code2')) 实现代码：<a href="/extra/issues-in-valuetype.html">In多列查询，表达式自定义实现</a></p>
 </blockquote>
 <h2 id="in子表" tabindex="-1"> In子表</h2>
 <div><pre><code>fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>Topic<span>></span></span></span><span>(</span><span>)</span>

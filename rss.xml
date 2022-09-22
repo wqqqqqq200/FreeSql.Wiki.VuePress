@@ -6,8 +6,8 @@
     <link>https://freesql.net/</link>
     <description>FreeSql Documents</description>
     <language>zh-CN</language>
-    <pubDate>Thu, 22 Sep 2022 13:10:21 GMT</pubDate>
-    <lastBuildDate>Thu, 22 Sep 2022 13:10:21 GMT</lastBuildDate>
+    <pubDate>Thu, 22 Sep 2022 13:11:58 GMT</pubDate>
+    <lastBuildDate>Thu, 22 Sep 2022 13:11:58 GMT</lastBuildDate>
     <generator>vuepress-plugin-feed2</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
     <item>
@@ -6201,8 +6201,7 @@ lst<span>.</span><span>Add</span><span>(</span><span>(</span>Guid<span>.</span><
 <p>v3.2.650 使用 .Where(a =&gt; list.Any(b =&gt; b.Item1 == a. Id &amp;&amp; b.Item2 == a. ct1))</p>
 </blockquote>
 <blockquote>
-<p>WHERE (id, code) in ((1,'code1'), (2,'code2))
-实现代码：<a href="/extra/issues-in-valuetype.html">In多列查询，表达式自定义实现</a></p>
+<p>WHERE (id, code) in ((1,'code1'), (2,'code2')) 实现代码：<a href="/extra/issues-in-valuetype.html">In多列查询，表达式自定义实现</a></p>
 </blockquote>
 <h2 id="in子表" tabindex="-1"> In子表</h2>
 <div><pre><code>fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>Topic<span>></span></span></span><span>(</span><span>)</span>
