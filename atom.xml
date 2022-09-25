@@ -3,7 +3,7 @@
   <id>https://freesql.net/</id>
   <title>FreeSql 官方文档</title>
   <subtitle>FreeSql Documents</subtitle>
-  <updated>2022-09-22T13:11:58.035Z</updated>
+  <updated>2022-09-25T07:03:39.547Z</updated>
   <generator>vuepress-plugin-feed2</generator>
   <link rel="self" href="https://freesql.net/atom.xml"/>
   <link rel="alternate" href="https://freesql.net/"/>
@@ -15017,9 +15017,30 @@ fsql<span>.</span><span>UpdateDict</span><span>(</span>dic<span>)</span><span>.<
     <title type="html">更新日志</title>
     <id>https://freesql.net/reference/change-log.html</id>
     <link href="https://freesql.net/reference/change-log.html"/>
-    <updated>2022-08-30T11:01:06.000Z</updated>
+    <updated>2022-09-25T07:01:53.000Z</updated>
     <content type="html"><![CDATA[<h1 id="更新日志" tabindex="-1"> 更新日志</h1>
 <p>大约每三个月一次版本号，暂时以修复 bug 为主</p>
+<h2 id="v3-2-680" tabindex="-1"> v3.2.680</h2>
+<ul>
+<li><strong>优化 WithTempQuery 多对象选择同别名问题；</strong> #1192</li>
+<li>修复 WithTempQuery + Column + GroupBy + Key 指定列名的问题；</li>
+<li>修复 GlobalFilter.ApplyIf + Repository.DataFilter.DisableAll 可能不生效的问题；</li>
+<li>修复 UpdateDict 不支持 SET NULL 的更新；#1257</li>
+<li>修复 ClickHuse DBFrist ExistsTable；</li>
+<li>增加 ClickHouse LimitBy/Sample 查询方法；</li>
+<li><strong>增加 所有<a href="https://freesql.net/guide/freesql-provider-custom.html" target="_blank" rel="noopener noreferrer">国产数据库</a>支持 CustomMySql、CustomPostgreSQL、CustomOracle、CustomSqlServer 自定义适配；</strong></li>
+<li>优化 DbSet/Repository 防止 Aop.AuditValue 触发两次；</li>
+<li>优化 表达式树解析为 NULL 的提示；</li>
+<li>优化 UseMappingPriority 与实体元数据逻辑；#1247</li>
+<li>优化 ServerTime 与 IUpdate.Set 指定更新的重复问题；#1251</li>
+</ul>
+<h2 id="v3-2-669" tabindex="-1"> v3.2.669</h2>
+<ul>
+<li>修复 WithTempQuery + RereadSql 无别名的问题；</li>
+<li>修复 WithTempQuery + FromQuery + 子查询的 bug；</li>
+<li>修复 WithTempQuery + Column(Name 别名问题；</li>
+<li>优化 CheckAvailable retry 重试一次；</li>
+</ul>
 <h2 id="v3-2-666" tabindex="-1"> v3.2.666</h2>
 <ul>
 <li><strong>增加 WithTempQuery + FromQuery 嵌套查询功能；</strong> #1192</li>
