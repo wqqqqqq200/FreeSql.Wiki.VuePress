@@ -6,8 +6,8 @@
     <link>https://freesql.net/</link>
     <description>FreeSql Documents</description>
     <language>zh-CN</language>
-    <pubDate>Sun, 25 Sep 2022 07:03:39 GMT</pubDate>
-    <lastBuildDate>Sun, 25 Sep 2022 07:03:39 GMT</lastBuildDate>
+    <pubDate>Tue, 27 Sep 2022 04:23:34 GMT</pubDate>
+    <lastBuildDate>Tue, 27 Sep 2022 04:23:34 GMT</lastBuildDate>
     <generator>vuepress-plugin-feed2</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
     <item>
@@ -7995,7 +7995,7 @@ builder<span>.</span>Services<span>.</span><span><span>AddSingleton</span><span>
 <div><pre><code><span>public</span> <span>class</span> <span>DB</span>
 <span>{</span>
    <span>static</span> Lazy<span>&lt;</span>IFreeSql<span>></span>sqliteLazy <span>=</span> <span>new</span> <span>Lazy<span>&lt;</span>IFreeSql<span>></span></span><span>(</span><span>(</span><span>)</span> <span>=></span> <span>new</span> <span>FreeSql<span>.</span>FreeSqlBuilder</span><span>(</span><span>)</span>
-         <span>.</span><span>UseMonitorCommand</span><span>(</span>cmd <span>=></span> Trace<span>.</span><span>WriteLine</span><span>(</span><span><span>$"Sql：</span><span><span>{</span><span>cmd<span>.</span>CommandText</span><span>}</span></span><span>"</span></span><span>)</span><span>)</span><span>//监听SQL语句,Trace在输入选项卡中查看</span>
+         <span>.</span><span>UseMonitorCommand</span><span>(</span>cmd <span>=></span> Trace<span>.</span><span>WriteLine</span><span>(</span><span><span>$"Sql：</span><span><span>{</span><span>cmd<span>.</span>CommandText</span><span>}</span></span><span>"</span></span><span>)</span><span>)</span><span>//监听SQL语句,Trace在输出选项卡中查看</span>
          <span>.</span><span>UseConnectionString</span><span>(</span>FreeSql<span>.</span>DataType<span>.</span>Sqlite<span>,</span> <span>@"Data Source=freedb.db"</span><span>)</span>
          <span>.</span><span>UseAutoSyncStructure</span><span>(</span><span>true</span><span>)</span> <span>//自动同步实体结构到数据库，FreeSql不会扫描程序集，只有CRUD时才会生成表。</span>
          <span>.</span><span>Build</span><span>(</span><span>)</span><span>)</span><span>;</span>
