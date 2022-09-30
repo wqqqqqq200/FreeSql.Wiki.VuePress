@@ -6,8 +6,8 @@
     <link>https://freesql.net/</link>
     <description>FreeSql Documents</description>
     <language>zh-CN</language>
-    <pubDate>Tue, 27 Sep 2022 04:23:34 GMT</pubDate>
-    <lastBuildDate>Tue, 27 Sep 2022 04:23:34 GMT</lastBuildDate>
+    <pubDate>Fri, 30 Sep 2022 02:17:59 GMT</pubDate>
+    <lastBuildDate>Fri, 30 Sep 2022 02:17:59 GMT</lastBuildDate>
     <generator>vuepress-plugin-feed2</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
     <item>
@@ -11014,6 +11014,7 @@ Assert<span>.</span><span>Equal</span><span>(</span><span>"110100"</span><span>,
 Assert<span>.</span><span>Equal</span><span>(</span><span>"110101"</span><span>,</span> t1<span>[</span><span>0</span><span>]</span><span>.</span>Childs<span>[</span><span>0</span><span>]</span><span>.</span>Childs<span>[</span><span>1</span><span>]</span><span>.</span>Code<span>)</span><span>;</span>
 </code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><p>查询数据本来是平面的，ToTreeList 方法将返回的平面数据在内存中加工为树型 List 返回。</p>
 <h2 id="_2、astreecte-递归删除" tabindex="-1"> 2、AsTreeCte 递归删除</h2>
+<p>MySql连接字符串需要增加 <code>Allow User Variables=True</code>，否则会有<code>MySqlException Parameter '@cte ids' must be defined</code></p>
 <p>很常见的无限级分类表功能，删除树节点时，把子节点也处理一下。</p>
 <div><pre><code>fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>Area<span>></span></span></span><span>(</span><span>)</span>
   <span>.</span><span>Where</span><span>(</span>a <span>=></span> a<span>.</span>Name <span>==</span> <span>"中国"</span><span>)</span>

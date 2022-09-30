@@ -3,7 +3,7 @@
   <id>https://freesql.net/</id>
   <title>FreeSql 官方文档</title>
   <subtitle>FreeSql Documents</subtitle>
-  <updated>2022-09-27T04:23:34.220Z</updated>
+  <updated>2022-09-30T02:17:59.581Z</updated>
   <generator>vuepress-plugin-feed2</generator>
   <link rel="self" href="https://freesql.net/atom.xml"/>
   <link rel="alternate" href="https://freesql.net/"/>
@@ -10942,7 +10942,7 @@ repo<span>.</span><span>Update</span><span>(</span>item<span>)</span><span>;</sp
     <title type="html">树型查询 ✨</title>
     <id>https://freesql.net/guide/select-as-tree.html</id>
     <link href="https://freesql.net/guide/select-as-tree.html"/>
-    <updated>2022-05-16T12:50:28.000Z</updated>
+    <updated>2022-09-30T02:15:32.000Z</updated>
     <content type="html"><![CDATA[<h1 id="树型查询-✨" tabindex="-1"> 树型查询 ✨</h1>
 <p>无限级分类（父子）是一种比较常用的表设计，每种设计方式突出优势的同时也带来缺陷，如：</p>
 <ul>
@@ -11003,6 +11003,7 @@ Assert<span>.</span><span>Equal</span><span>(</span><span>"110100"</span><span>,
 Assert<span>.</span><span>Equal</span><span>(</span><span>"110101"</span><span>,</span> t1<span>[</span><span>0</span><span>]</span><span>.</span>Childs<span>[</span><span>0</span><span>]</span><span>.</span>Childs<span>[</span><span>1</span><span>]</span><span>.</span>Code<span>)</span><span>;</span>
 </code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><p>查询数据本来是平面的，ToTreeList 方法将返回的平面数据在内存中加工为树型 List 返回。</p>
 <h2 id="_2、astreecte-递归删除" tabindex="-1"> 2、AsTreeCte 递归删除</h2>
+<p>MySql连接字符串需要增加 <code>Allow User Variables=True</code>，否则会有<code>MySqlException Parameter '@cte ids' must be defined</code></p>
 <p>很常见的无限级分类表功能，删除树节点时，把子节点也处理一下。</p>
 <div><pre><code>fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>Area<span>></span></span></span><span>(</span><span>)</span>
   <span>.</span><span>Where</span><span>(</span>a <span>=></span> a<span>.</span>Name <span>==</span> <span>"中国"</span><span>)</span>
