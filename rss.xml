@@ -6,8 +6,8 @@
     <link>https://freesql.net/</link>
     <description>FreeSql Documents</description>
     <language>zh-CN</language>
-    <pubDate>Mon, 10 Oct 2022 01:28:45 GMT</pubDate>
-    <lastBuildDate>Mon, 10 Oct 2022 01:28:45 GMT</lastBuildDate>
+    <pubDate>Mon, 10 Oct 2022 10:34:31 GMT</pubDate>
+    <lastBuildDate>Mon, 10 Oct 2022 10:34:31 GMT</lastBuildDate>
     <generator>vuepress-plugin-feed2</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
     <item>
@@ -11167,13 +11167,23 @@ Assert<span>.</span><span>Equal</span><span>(</span><span>"中国[100000] -> 北
     <span>.</span><span>Having</span><span>(</span>a <span>=></span> a<span>.</span><span>Count</span><span>(</span><span>)</span> <span>&lt;</span> <span>300</span> <span>||</span> a<span>.</span><span>Avg</span><span>(</span>a<span>.</span>Key<span>.</span>mod4<span>)</span> <span>&lt;</span> <span>100</span><span>)</span>
     <span>.</span><span>OrderBy</span><span>(</span>a <span>=></span> a<span>.</span>Key<span>.</span>tt2<span>)</span>
     <span>.</span><span>OrderByDescending</span><span>(</span>a <span>=></span> a<span>.</span><span>Count</span><span>(</span><span>)</span><span>)</span>
-    <span>.</span><span>ToList</span><span>(</span>a <span>=></span> <span>new</span> <span>{</span> a<span>.</span>Key<span>,</span> cou1 <span>=</span> a<span>.</span><span>Count</span><span>(</span><span>)</span><span>,</span> arg1 <span>=</span> a<span>.</span><span>Avg</span><span>(</span>a<span>.</span>Value<span>.</span>Clicks<span>)</span> <span>}</span><span>)</span><span>;</span>
-<span>//SELECT substr(a.`Title`, 1, 2) as1, count(1) as2, avg(a.`Id`) as3 </span>
+    <span>.</span><span>ToList</span><span>(</span>a <span>=></span> <span>new</span> 
+    <span>{</span>
+        a<span>.</span>Key<span>,</span> 
+        cou1 <span>=</span> a<span>.</span><span>Count</span><span>(</span><span>)</span><span>,</span> 
+        arg1 <span>=</span> a<span>.</span><span>Avg</span><span>(</span>a<span>.</span>Value<span>.</span>Clicks<span>)</span><span>,</span> 
+        arg2 <span>=</span> a<span>.</span><span>Sum</span><span>(</span>a<span>.</span>Value<span>.</span>Clicks <span>></span> <span>100</span> <span>?</span> <span>1</span> <span>:</span> <span>0</span><span>)</span>
+    <span>}</span><span>)</span><span>;</span>
+<span>//SELECT </span>
+<span>//substr(a.`Title`, 1, 2) as1, </span>
+<span>//count(1) as2, </span>
+<span>//avg(a.`Clicks`) as3, </span>
+<span>//sum(case when a.`Clicks` > 100 then 1 else 0 end) as4 </span>
 <span>//FROM `Topic` a </span>
 <span>//GROUP BY substr(a.`Title`, 1, 2), (a.`Id` % 4) </span>
 <span>//HAVING (count(1) > 0 AND avg((a.`Id` % 4)) > 0 AND max((a.`Id` % 4)) > 0) AND (count(1) &lt; 300 OR avg((a.`Id` % 4)) &lt; 100)</span>
 <span>//ORDER BY substr(a.`Title`, 1, 2), count(1) DESC</span>
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><blockquote>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><blockquote>
 <p>不分组求聚合值，请使用 ToAggregate 替代 ToList</p>
 </blockquote>
 <h2 id="导航属性分组" tabindex="-1"> 导航属性分组</h2>
