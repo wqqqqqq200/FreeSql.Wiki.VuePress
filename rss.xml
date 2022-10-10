@@ -6,8 +6,8 @@
     <link>https://freesql.net/</link>
     <description>FreeSql Documents</description>
     <language>zh-CN</language>
-    <pubDate>Mon, 10 Oct 2022 01:28:38 GMT</pubDate>
-    <lastBuildDate>Mon, 10 Oct 2022 01:28:38 GMT</lastBuildDate>
+    <pubDate>Mon, 10 Oct 2022 01:28:45 GMT</pubDate>
+    <lastBuildDate>Mon, 10 Oct 2022 01:28:45 GMT</lastBuildDate>
     <generator>vuepress-plugin-feed2</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
     <item>
@@ -16755,11 +16755,13 @@ GetAsync await 为异步方法获取连接的排队数量
 在连接字符串里设置。每个数据库写法不一样, 可以在 <a href="https://www.connectionstrings.com/" target="_blank" rel="noopener noreferrer">https://www.connectionstrings.com/</a> 查找</p>
 <p>freesql声明中的build里<br>
 UseCommandMonitor(cmd =&gt; cmd.ConmandTimeout = 9999, null) 这样设置</p>
-<p><strong>单个设置</strong>
-FreeSqlHelper.Fsql.Insert(list).CommandTimeout(500).xxxxxx
-FreeSqlHelper.Fsql.Update&lt;Entities.SysAdmin&gt;().CommandTimeout(400).xxxxxx
-FreeSqlHelper.Fsql.Select&lt;Entities.SysAdmin&gt;().CommandTimeout(300).xxxxxx
-FreeSqlHelper.Fsql.Delete&lt;Entities.SysAdmin&gt;().CommandTimeout(400).xxxxxx</p>
+<p><strong>单个设置</strong></p>
+<ul>
+<li>FreeSqlHelper.Fsql.Insert(list).CommandTimeout(500).xxxxxx</li>
+<li>FreeSqlHelper.Fsql.Update&lt;Entities.SysAdmin&gt;().CommandTimeout(400).xxxxxx</li>
+<li>FreeSqlHelper.Fsql.Select&lt;Entities.SysAdmin&gt;().CommandTimeout(300).xxxxxx</li>
+<li>FreeSqlHelper.Fsql.Delete&lt;Entities.SysAdmin&gt;().CommandTimeout(400).xxxxxx</li>
+</ul>
 <hr>
 ]]></content:encoded>
     </item>
