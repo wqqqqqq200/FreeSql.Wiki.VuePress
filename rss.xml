@@ -6,8 +6,8 @@
     <link>https://freesql.net/</link>
     <description>FreeSql Documents</description>
     <language>zh-CN</language>
-    <pubDate>Mon, 10 Oct 2022 10:34:31 GMT</pubDate>
-    <lastBuildDate>Mon, 10 Oct 2022 10:34:31 GMT</lastBuildDate>
+    <pubDate>Mon, 10 Oct 2022 11:14:52 GMT</pubDate>
+    <lastBuildDate>Mon, 10 Oct 2022 11:14:52 GMT</lastBuildDate>
     <generator>vuepress-plugin-feed2</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
     <item>
@@ -4328,10 +4328,17 @@ fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>Topic<span>></
 <span>List<span>&lt;</span>T1<span>></span></span> list1 <span>=</span> result<span>.</span>Item1<span>;</span>
 <span>List<span>&lt;</span>T2<span>></span></span> list2 <span>=</span> result<span>.</span>Item2<span>;</span>
 
-<span>// like 查询</span>
+<span>//like 查询</span>
 <span><span>string</span></span> searchText <span>=</span> <span>"abc"</span><span>;</span>
 <span>List<span>&lt;</span>T<span>></span></span> users <span>=</span> _fsql<span>.</span>Ado<span>.</span><span><span>Query</span><span><span>&lt;</span>T<span>></span></span></span><span>(</span><span>"select * from t1 where name like @name"</span><span>,</span> <span>new</span> <span>{</span> name <span>=</span> <span>"%"</span> <span>+</span> searchText <span>+</span> <span>"%"</span> <span>}</span><span>)</span><span>;</span>
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><h2 id="参数化" tabindex="-1"> 参数化</h2>
+
+<span>//SELECT now(), utc_timestamp()</span>
+<span><span>var</span></span> result <span>=</span> fsql<span>.</span>Ado<span>.</span><span>QuerySingle</span><span>(</span><span>(</span><span>)</span> <span>=></span> <span>new</span>
+<span>{</span>
+    DateTime<span>.</span>Now<span>,</span>
+    DateTime<span>.</span>UtcNow
+<span>}</span><span>)</span><span>;</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><h2 id="参数化" tabindex="-1"> 参数化</h2>
 <p>Ado 下面所有参数 object parms 都可以接受匿名对象，或者字典：</p>
 <ul>
 <li id="">new</li>
