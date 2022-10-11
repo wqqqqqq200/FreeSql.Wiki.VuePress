@@ -3,7 +3,7 @@
   <id>https://freesql.net/</id>
   <title>FreeSql 官方文档</title>
   <subtitle>FreeSql Documents</subtitle>
-  <updated>2022-10-10T11:14:52.664Z</updated>
+  <updated>2022-10-11T16:42:11.345Z</updated>
   <generator>vuepress-plugin-feed2</generator>
   <link rel="self" href="https://freesql.net/atom.xml"/>
   <link rel="alternate" href="https://freesql.net/"/>
@@ -11,7 +11,7 @@
     <title type="html">聚合根（实验室）</title>
     <id>https://freesql.net/guide/aggregateroot.html</id>
     <link href="https://freesql.net/guide/aggregateroot.html"/>
-    <updated>2022-09-08T18:52:16.000Z</updated>
+    <updated>2022-10-11T16:40:14.000Z</updated>
     <content type="html"><![CDATA[<h1 id="聚合根-实验室" tabindex="-1"> 聚合根（实验室）</h1>
 <p>FreeSql.Repository 定义了 IBaseRepository&lt;T&gt; 仓储接口，实现了单表的通用仓储对象，支持了级联保存、级联删除功能，（但是）使用时需要人工自己判断何时开启、何时使用。</p>
 <p>本文看上去像 EF，实则有区别，主要区别在级联边界的规则设定，例如我们允许 OneToMany 从下层向上递归级联，但是仅限查询，不能增删改。研究目的希望从机制上杜绝痛点，让操作变得更可控。</p>
@@ -342,7 +342,7 @@ repository<span>.</span><span>ChangeBoundary</span><span>(</span><span>"solution
 <p>AggregateRootRepository 只对边界之内的数据进行递归 CRUD 操作，把聚合根看成一个整体。</p>
 <p>特殊情况可以继承后重写 Select 属性扩大、或缩小查询内容：</p>
 <ul>
-<li>Insert/Delete/Update <code>扩大</code> 后的查询内容，不会对 <code>扩大</code> 后的数据进行增删改；</li>
+<li>Insert/Delete/Update 不会对 <code>扩大</code> 边界之外的数据进行增删改；</li>
 <li>Update <code>缩小</code> 后的查询内容，由于导航属性值为 NULL，不会删除未查询的内容；</li>
 </ul>
 <p>2、<strong>善用事务</strong>，使用事务解决一致操作问题。</p>
