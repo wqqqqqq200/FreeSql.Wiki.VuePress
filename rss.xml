@@ -6,8 +6,8 @@
     <link>https://freesql.net/</link>
     <description>FreeSql Documents</description>
     <language>zh-CN</language>
-    <pubDate>Tue, 11 Oct 2022 16:42:11 GMT</pubDate>
-    <lastBuildDate>Tue, 11 Oct 2022 16:42:11 GMT</lastBuildDate>
+    <pubDate>Tue, 11 Oct 2022 16:45:13 GMT</pubDate>
+    <lastBuildDate>Tue, 11 Oct 2022 16:45:13 GMT</lastBuildDate>
     <generator>vuepress-plugin-feed2</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
     <item>
@@ -3367,12 +3367,12 @@ Install-Package FreeSql.Provider.SqliteCore
 ]]></content:encoded>
     </item>
     <item>
-      <title>UnitOfWorkManager 事务 ✨</title>
+      <title>UowManager 事务 ✨</title>
       <link>https://freesql.net/guide/unitofwork-manager.html</link>
       <guid>https://freesql.net/guide/unitofwork-manager.html</guid>
-      <source url="https://freesql.net/rss.xml">UnitOfWorkManager 事务 ✨</source>
+      <source url="https://freesql.net/rss.xml">UowManager 事务 ✨</source>
       <pubDate>Sat, 21 Aug 2021 05:59:59 GMT</pubDate>
-      <content:encoded><![CDATA[<h1 id="unitofworkmanager-事务-✨" tabindex="-1"> UnitOfWorkManager 事务 ✨</h1>
+      <content:encoded><![CDATA[<h1 id="uowmanager-事务-✨" tabindex="-1"> UowManager 事务 ✨</h1>
 <p>本篇文章内容引导，如何在 <a href="http://asp.net" target="_blank" rel="noopener noreferrer">asp.net</a> core 项目中使用特性(注解) 的方式管理事务。</p>
 <blockquote>
 <p>UnitOfWorkManager 只可以管理 Repository 仓储对象的事务，直接 fsql.Insert&lt;T&gt;() 是不行的！！但是可以用 repository.Orm.Insert&lt;T&gt;！！repository.Orm 是特殊实现的 IFreeSql，与 当前事务保持一致。</p>
