@@ -3,7 +3,7 @@
   <id>https://freesql.net/</id>
   <title>FreeSql 官方文档</title>
   <subtitle>FreeSql Documents</subtitle>
-  <updated>2022-10-11T16:45:13.460Z</updated>
+  <updated>2022-10-12T07:43:39.321Z</updated>
   <generator>vuepress-plugin-feed2</generator>
   <link rel="self" href="https://freesql.net/atom.xml"/>
   <link rel="alternate" href="https://freesql.net/"/>
@@ -15035,9 +15035,16 @@ fsql<span>.</span><span>UpdateDict</span><span>(</span>dic<span>)</span><span>.<
     <title type="html">更新日志</title>
     <id>https://freesql.net/reference/change-log.html</id>
     <link href="https://freesql.net/reference/change-log.html"/>
-    <updated>2022-09-25T07:01:53.000Z</updated>
+    <updated>2022-10-12T07:41:55.000Z</updated>
     <content type="html"><![CDATA[<h1 id="更新日志" tabindex="-1"> 更新日志</h1>
 <p>大约每三个月一次版本号，暂时以修复 bug 为主</p>
+<h2 id="v3-2-681" tabindex="-1"> v3.2.681</h2>
+<ul>
+<li><strong>修复 3.2.666-3.2.680 子查询的特殊 bug；</strong></li>
+<li>增加 fsql.Ado.QuerySingle(() =&gt; new {}) 扩展方法实现无表查询 SELECT now(), utc_timestamp()</li>
+<li>优化 min pool size 与 max pool size 连接串设置；</li>
+<li>优化 导航属性未配置关系先 Where 后 InnerJoin 的问题；</li>
+</ul>
 <h2 id="v3-2-680" tabindex="-1"> v3.2.680</h2>
 <ul>
 <li><strong>优化 WithTempQuery 多对象选择同别名问题；</strong> #1192</li>

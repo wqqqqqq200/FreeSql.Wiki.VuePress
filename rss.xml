@@ -6,8 +6,8 @@
     <link>https://freesql.net/</link>
     <description>FreeSql Documents</description>
     <language>zh-CN</language>
-    <pubDate>Tue, 11 Oct 2022 16:45:13 GMT</pubDate>
-    <lastBuildDate>Tue, 11 Oct 2022 16:45:13 GMT</lastBuildDate>
+    <pubDate>Wed, 12 Oct 2022 07:43:39 GMT</pubDate>
+    <lastBuildDate>Wed, 12 Oct 2022 07:43:39 GMT</lastBuildDate>
     <generator>vuepress-plugin-feed2</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
     <item>
@@ -15049,6 +15049,13 @@ fsql<span>.</span><span>UpdateDict</span><span>(</span>dic<span>)</span><span>.<
       <pubDate>Thu, 04 Feb 2021 16:03:18 GMT</pubDate>
       <content:encoded><![CDATA[<h1 id="更新日志" tabindex="-1"> 更新日志</h1>
 <p>大约每三个月一次版本号，暂时以修复 bug 为主</p>
+<h2 id="v3-2-681" tabindex="-1"> v3.2.681</h2>
+<ul>
+<li><strong>修复 3.2.666-3.2.680 子查询的特殊 bug；</strong></li>
+<li>增加 fsql.Ado.QuerySingle(() =&gt; new {}) 扩展方法实现无表查询 SELECT now(), utc_timestamp()</li>
+<li>优化 min pool size 与 max pool size 连接串设置；</li>
+<li>优化 导航属性未配置关系先 Where 后 InnerJoin 的问题；</li>
+</ul>
 <h2 id="v3-2-680" tabindex="-1"> v3.2.680</h2>
 <ul>
 <li><strong>优化 WithTempQuery 多对象选择同别名问题；</strong> #1192</li>
