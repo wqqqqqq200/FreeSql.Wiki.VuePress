@@ -6,8 +6,8 @@
     <link>https://freesql.net/</link>
     <description>FreeSql Documents</description>
     <language>zh-CN</language>
-    <pubDate>Fri, 21 Oct 2022 06:59:24 GMT</pubDate>
-    <lastBuildDate>Fri, 21 Oct 2022 06:59:24 GMT</lastBuildDate>
+    <pubDate>Fri, 21 Oct 2022 08:49:04 GMT</pubDate>
+    <lastBuildDate>Fri, 21 Oct 2022 08:49:04 GMT</lastBuildDate>
     <generator>vuepress-plugin-feed2</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
     <item>
@@ -15049,6 +15049,10 @@ fsql<span>.</span><span>UpdateDict</span><span>(</span>dic<span>)</span><span>.<
       <pubDate>Thu, 04 Feb 2021 16:03:18 GMT</pubDate>
       <content:encoded><![CDATA[<h1 id="更新日志" tabindex="-1"> 更新日志</h1>
 <p>大约每三个月一次版本号，暂时以修复 bug 为主</p>
+<h2 id="v3-2-682" tabindex="-1"> v3.2.682</h2>
+<ul>
+<li>优化 人大金仓 KingbaseES 兼容 V8R3/V8R6；#931 #325</li>
+</ul>
 <h2 id="v3-2-681" tabindex="-1"> v3.2.681</h2>
 <ul>
 <li><strong>修复 3.2.666-3.2.680 子查询的特殊 bug；</strong></li>

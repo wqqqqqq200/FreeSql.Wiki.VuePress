@@ -3,7 +3,7 @@
   <id>https://freesql.net/</id>
   <title>FreeSql 官方文档</title>
   <subtitle>FreeSql Documents</subtitle>
-  <updated>2022-10-21T06:59:24.865Z</updated>
+  <updated>2022-10-21T08:49:04.773Z</updated>
   <generator>vuepress-plugin-feed2</generator>
   <link rel="self" href="https://freesql.net/atom.xml"/>
   <link rel="alternate" href="https://freesql.net/"/>
@@ -15035,9 +15035,13 @@ fsql<span>.</span><span>UpdateDict</span><span>(</span>dic<span>)</span><span>.<
     <title type="html">更新日志</title>
     <id>https://freesql.net/reference/change-log.html</id>
     <link href="https://freesql.net/reference/change-log.html"/>
-    <updated>2022-10-12T07:41:55.000Z</updated>
+    <updated>2022-10-21T08:47:28.000Z</updated>
     <content type="html"><![CDATA[<h1 id="更新日志" tabindex="-1"> 更新日志</h1>
 <p>大约每三个月一次版本号，暂时以修复 bug 为主</p>
+<h2 id="v3-2-682" tabindex="-1"> v3.2.682</h2>
+<ul>
+<li>优化 人大金仓 KingbaseES 兼容 V8R3/V8R6；#931 #325</li>
+</ul>
 <h2 id="v3-2-681" tabindex="-1"> v3.2.681</h2>
 <ul>
 <li><strong>修复 3.2.666-3.2.680 子查询的特殊 bug；</strong></li>
