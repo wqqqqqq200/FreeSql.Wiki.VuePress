@@ -3,7 +3,7 @@
   <id>https://freesql.net/</id>
   <title>FreeSql 官方文档</title>
   <subtitle>FreeSql Documents</subtitle>
-  <updated>2022-10-12T07:43:39.321Z</updated>
+  <updated>2022-10-21T06:59:24.865Z</updated>
   <generator>vuepress-plugin-feed2</generator>
   <link rel="self" href="https://freesql.net/atom.xml"/>
   <link rel="alternate" href="https://freesql.net/"/>
@@ -2393,7 +2393,7 @@ dotnet <span>add</span> package Castle.Core.AsyncInterceptor
     <title type="html">国产数据库</title>
     <id>https://freesql.net/guide/freesql-provider-custom.html</id>
     <link href="https://freesql.net/guide/freesql-provider-custom.html"/>
-    <updated>2022-09-08T18:35:57.000Z</updated>
+    <updated>2022-10-21T06:57:29.000Z</updated>
     <content type="html"><![CDATA[<h1 id="国产数据库" tabindex="-1"> 国产数据库</h1>
 <table>
 <thead>
@@ -2438,8 +2438,8 @@ dotnet <span>add</span> package Castle.Core.AsyncInterceptor
 <div><pre><code><span><span>var</span></span> fsql <span>=</span> <span>new</span> <span>FreeSqlBuilder</span><span>(</span><span>)</span>
     <span>.</span><span>UseConnectionFactory</span><span>(</span>DataType<span>.</span>CustomMySql<span>,</span> <span>(</span><span>)</span> <span>=></span> 
         <span>new</span> <span>MySqlConnection</span><span>(</span><span>"Data Source=..."</span><span>)</span><span>)</span>
-    <span>.</span><span>UseNoneParameter</span><span>(</span><span>true</span><span>)</span>
-    <span>.</span><span>UseMonitorCommand</span><span>(</span>Console<span>.</span><span>WriteLine</span><span>(</span>cmd<span>.</span>CommandText<span>)</span><span>)</span>
+    <span>.</span><span>UseNoneCommandParameter</span><span>(</span><span>true</span><span>)</span>
+    <span>.</span><span>UseMonitorCommand</span><span>(</span>cmd <span>=></span> Console<span>.</span><span>WriteLine</span><span>(</span>cmd<span>.</span>CommandText<span>)</span><span>)</span>
     <span>.</span><span>Build</span><span>(</span><span>)</span><span>;</span>
 fsql<span>.</span><span>SetDbProviderFactory</span><span>(</span>MySqlConnectorFactory<span>.</span>Instance<span>)</span><span>;</span>
 </code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><p>若某国产数据库兼容 MySql SQL，先引用对方提供的 DLL，然后：</p>

@@ -6,8 +6,8 @@
     <link>https://freesql.net/</link>
     <description>FreeSql Documents</description>
     <language>zh-CN</language>
-    <pubDate>Wed, 12 Oct 2022 07:43:39 GMT</pubDate>
-    <lastBuildDate>Wed, 12 Oct 2022 07:43:39 GMT</lastBuildDate>
+    <pubDate>Fri, 21 Oct 2022 06:59:24 GMT</pubDate>
+    <lastBuildDate>Fri, 21 Oct 2022 06:59:24 GMT</lastBuildDate>
     <generator>vuepress-plugin-feed2</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
     <item>
@@ -2443,8 +2443,8 @@ dotnet <span>add</span> package Castle.Core.AsyncInterceptor
 <div><pre><code><span><span>var</span></span> fsql <span>=</span> <span>new</span> <span>FreeSqlBuilder</span><span>(</span><span>)</span>
     <span>.</span><span>UseConnectionFactory</span><span>(</span>DataType<span>.</span>CustomMySql<span>,</span> <span>(</span><span>)</span> <span>=></span> 
         <span>new</span> <span>MySqlConnection</span><span>(</span><span>"Data Source=..."</span><span>)</span><span>)</span>
-    <span>.</span><span>UseNoneParameter</span><span>(</span><span>true</span><span>)</span>
-    <span>.</span><span>UseMonitorCommand</span><span>(</span>Console<span>.</span><span>WriteLine</span><span>(</span>cmd<span>.</span>CommandText<span>)</span><span>)</span>
+    <span>.</span><span>UseNoneCommandParameter</span><span>(</span><span>true</span><span>)</span>
+    <span>.</span><span>UseMonitorCommand</span><span>(</span>cmd <span>=></span> Console<span>.</span><span>WriteLine</span><span>(</span>cmd<span>.</span>CommandText<span>)</span><span>)</span>
     <span>.</span><span>Build</span><span>(</span><span>)</span><span>;</span>
 fsql<span>.</span><span>SetDbProviderFactory</span><span>(</span>MySqlConnectorFactory<span>.</span>Instance<span>)</span><span>;</span>
 </code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><p>若某国产数据库兼容 MySql SQL，先引用对方提供的 DLL，然后：</p>
