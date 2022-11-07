@@ -6,8 +6,8 @@
     <link>https://freesql.net/</link>
     <description>FreeSql Documents</description>
     <language>zh-CN</language>
-    <pubDate>Mon, 07 Nov 2022 03:58:51 GMT</pubDate>
-    <lastBuildDate>Mon, 07 Nov 2022 03:58:51 GMT</lastBuildDate>
+    <pubDate>Mon, 07 Nov 2022 04:02:34 GMT</pubDate>
+    <lastBuildDate>Mon, 07 Nov 2022 04:02:34 GMT</lastBuildDate>
     <generator>vuepress-plugin-feed2</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
     <item>
@@ -12125,7 +12125,7 @@ fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>Topic<span>></
 </tr>
 </tbody>
 </table>
-<h2 id="sqlserver-withlock、withindex" tabindex="-1"> SqlServer WithLock、WithIndex</h2>
+<h2 id="sqlserver-withlock-withindex" tabindex="-1"> SqlServer WithLock/WithIndex</h2>
 <div><pre><code><span><span>var</span></span> list <span>=</span> fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>Region<span>></span></span></span><span>(</span><span>)</span>
     <span>.</span><span>WithLock</span><span>(</span><span>)</span>
     <span>.</span><span>Limit</span><span>(</span><span>1</span><span>)</span><span>.</span><span>ToList</span><span>(</span><span>)</span><span>;</span>
