@@ -6,8 +6,8 @@
     <link>https://freesql.net/</link>
     <description>FreeSql Documents</description>
     <language>zh-CN</language>
-    <pubDate>Mon, 07 Nov 2022 03:53:35 GMT</pubDate>
-    <lastBuildDate>Mon, 07 Nov 2022 03:53:35 GMT</lastBuildDate>
+    <pubDate>Mon, 07 Nov 2022 03:58:51 GMT</pubDate>
+    <lastBuildDate>Mon, 07 Nov 2022 03:58:51 GMT</lastBuildDate>
     <generator>vuepress-plugin-feed2</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
     <item>
@@ -12156,7 +12156,17 @@ fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>Topic<span>></
 <span>//SELECT TOP 1 ..</span>
 <span>//FROM [Region] a With(index=idx_01, NoLock) </span>
 <span>//INNER JOIN [T2] b With(index=idx_02) ON a.[x] = b.[xx]</span>
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><h2 id="特别介绍-wheredynamicfilter" tabindex="-1"> 特别介绍 WhereDynamicFilter</h2>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><p>全局设置 NoLock：</p>
+<div><pre><code><span>//所有实体类生效</span>
+fsql<span>.</span><span>SetGlobalSelectWithLock</span><span>(</span>SqlServerLock<span>.</span>NoLock<span>,</span> <span>null</span><span>)</span><span>;</span>
+
+<span>//【指定】实体类生效</span>
+fsql<span>.</span><span>SetGlobalSelectWithLock</span><span>(</span>SqlServerLock<span>.</span>NoLock<span>,</span> <span>new</span> <span>Dictionary<span>&lt;</span>Type<span>,</span> <span>bool</span><span>></span></span>
+<span>{</span>
+    <span>[</span><span>typeof</span><span>(</span><span>Region</span><span>)</span><span>]</span> <span>=</span> <span>true</span><span>,</span>
+    <span>[</span><span>typeof</span><span>(</span><span>T2</span><span>)</span><span>]</span> <span>=</span> <span>true</span>
+<span>}</span><span>)</span><span>;</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><h2 id="特别介绍-wheredynamicfilter" tabindex="-1"> 特别介绍 WhereDynamicFilter</h2>
 <p><a href="https://www.cnblogs.com/FreeSql/p/16485310.html" target="_blank" rel="noopener noreferrer">《高效理解 FreeSql WhereDynamicFilter，深入了解设计初衷》</a></p>
 <p>ISelect.WhereDynamicFilter 方法实现动态过滤条件（与前端交互），支持的操作符：</p>
 <ul>
