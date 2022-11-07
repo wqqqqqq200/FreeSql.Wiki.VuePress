@@ -6,8 +6,8 @@
     <link>https://freesql.net/</link>
     <description>FreeSql Documents</description>
     <language>zh-CN</language>
-    <pubDate>Fri, 21 Oct 2022 08:49:04 GMT</pubDate>
-    <lastBuildDate>Fri, 21 Oct 2022 08:49:04 GMT</lastBuildDate>
+    <pubDate>Mon, 07 Nov 2022 03:45:55 GMT</pubDate>
+    <lastBuildDate>Mon, 07 Nov 2022 03:45:55 GMT</lastBuildDate>
     <generator>vuepress-plugin-feed2</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
     <item>
@@ -12102,7 +12102,38 @@ fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>Topic<span>></
 <li><a href="/guide/sharding.html">分表分库</a></li>
 <li><a href="/guide/multi-tenancy.html">多租户</a></li>
 </ul>
-<h2 id="特别介绍-wheredynamicfilter" tabindex="-1"> 特别介绍 WhereDynamicFilter</h2>
+<h2 id="sqlserver-withlock、withindex" tabindex="-1"> SqlServer WithLock、WithIndex</h2>
+<div><pre><code><span><span>var</span></span> list <span>=</span> fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>Region<span>></span></span></span><span>(</span><span>)</span>
+    <span>.</span><span>WithLock</span><span>(</span><span>)</span>
+    <span>.</span><span>Limit</span><span>(</span><span>1</span><span>)</span><span>.</span><span>ToList</span><span>(</span><span>)</span><span>;</span>
+<span>//SELECT TOP 1 ... FROM [Region] a With(NoLock)</span>
+
+<span><span>var</span></span> list <span>=</span> fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>Region<span>></span></span></span><span>(</span><span>)</span>
+    <span>.</span><span>WithLock</span><span>(</span>SqlServerLock<span>.</span>NoLock <span>|</span> SqlServerLock<span>.</span>NoWait<span>)</span>
+    <span>.</span><span>Limit</span><span>(</span><span>1</span><span>)</span><span>.</span><span>ToList</span><span>(</span><span>)</span><span>;</span>
+<span>//SELECT TOP 1 ... FROM [Region] a With(NoLock, NoWait)</span>
+
+<span><span>var</span></span> list <span>=</span> fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>Region<span>></span></span></span><span>(</span><span>)</span>
+    <span>.</span><span>WithLock</span><span>(</span><span>)</span>
+    <span>.</span><span>WithIndex</span><span>(</span><span>"idx_01"</span><span>)</span>
+    <span>.</span><span>Limit</span><span>(</span><span>1</span><span>)</span><span>.</span><span>ToList</span><span>(</span><span>)</span><span>;</span>
+<span>//SELECT TOP 1 ... FROM [Region] a With(index=idx_01, NoLock)</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><p>多表：</p>
+<div><pre><code><span><span>var</span></span> list <span>=</span> <span><span>Select</span><span><span>&lt;</span>Region<span>,</span> T2<span>></span></span></span><span>(</span><span>)</span>
+    <span>.</span><span>InnerJoin</span><span>(</span><span>(</span>a<span>,</span> b<span>)</span> <span>=></span> a<span>.</span>x <span>==</span> b<span>.</span>xx<span>)</span>
+    <span>.</span><span>WithLock</span><span>(</span>SqlServerLock<span>.</span>NoLock<span>,</span> <span>new</span> <span>Dictionary<span>&lt;</span>Type<span>,</span> <span>bool</span><span>></span></span>
+    <span>{</span>
+        <span>[</span><span>typeof</span><span>(</span><span>T2</span><span>)</span><span>]</span> <span>=</span> <span>false</span>
+    <span>}</span><span>)</span>
+    <span>.</span><span>WithIndex</span><span>(</span><span>"idx_01"</span><span>,</span> <span>new</span> <span>Dictionary<span>&lt;</span>Type<span>,</span> <span>string</span><span>></span></span>
+    <span>{</span>
+        <span>[</span><span>typeof</span><span>(</span><span>T2</span><span>)</span><span>]</span> <span>=</span> <span>"idx_02"</span>
+    <span>}</span><span>)</span>
+    <span>.</span><span>Limit</span><span>(</span><span>1</span><span>)</span><span>.</span><span>ToList</span><span>(</span><span>)</span><span>;</span>
+<span>//SELECT TOP 1 ..</span>
+<span>//FROM [Region] a With(index=idx_01, NoLock) </span>
+<span>//INNER JOIN [T2] b With(index=idx_02) ON a.[x] = b.[xx]</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><h2 id="特别介绍-wheredynamicfilter" tabindex="-1"> 特别介绍 WhereDynamicFilter</h2>
 <p><a href="https://www.cnblogs.com/FreeSql/p/16485310.html" target="_blank" rel="noopener noreferrer">《高效理解 FreeSql WhereDynamicFilter，深入了解设计初衷》</a></p>
 <p>ISelect.WhereDynamicFilter 方法实现动态过滤条件（与前端交互），支持的操作符：</p>
 <ul>
