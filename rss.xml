@@ -6,8 +6,8 @@
     <link>https://freesql.net/</link>
     <description>FreeSql Documents</description>
     <language>zh-CN</language>
-    <pubDate>Mon, 07 Nov 2022 04:02:34 GMT</pubDate>
-    <lastBuildDate>Mon, 07 Nov 2022 04:02:34 GMT</lastBuildDate>
+    <pubDate>Tue, 08 Nov 2022 06:16:46 GMT</pubDate>
+    <lastBuildDate>Tue, 08 Nov 2022 06:16:46 GMT</lastBuildDate>
     <generator>vuepress-plugin-feed2</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
     <item>
@@ -15113,6 +15113,22 @@ fsql<span>.</span><span>UpdateDict</span><span>(</span>dic<span>)</span><span>.<
       <pubDate>Thu, 04 Feb 2021 16:03:18 GMT</pubDate>
       <content:encoded><![CDATA[<h1 id="更新日志" tabindex="-1"> 更新日志</h1>
 <p>大约每三个月一次版本号，暂时以修复 bug 为主</p>
+<h2 id="v3-2-683-即将发布" tabindex="-1"> v3.2.683（即将发布）</h2>
+<ul>
+<li><strong>修复 Repository/DbContext 同一实例执行报错后续无法再 CRUD；</strong></li>
+<li>修复 导航属性 PgArrayToMany 数组字段为空时的 bug；</li>
+<li>修复 导航属性 PgArrayToMany DTO 异步查询报错的 bug（同步方法正常）；</li>
+<li>修复 SqlExt count/avg 开窗函数参数；#1321</li>
+<li>修复 Sqlite TimeSpan 类型映射错误；</li>
+<li>修复 Sqlite Attachs 多库索引 {tablename} 问题；</li>
+<li>修复 EndEdit 未触发 OnEntityChange；</li>
+<li>修复 fsql.InsertOrUpdate CanInsert=false,CanUpdate=true (mysql/pgsql）不生效的 bug；</li>
+<li>修复 聚合根仓储（实验） InsertOrUpdate 重复插入的 bug；</li>
+<li>修复 聚合根仓储（实验） Update 未更新自增状态管理的 bug；</li>
+<li>扩展 UseMessagePackMap 示例；</li>
+<li>优化 UpdateDict 支持 .IsVersion 乐观锁设置；</li>
+<li>完善 SqlServer WithLock + WithIndex 扩展方法；</li>
+</ul>
 <h2 id="v3-2-682" tabindex="-1"> v3.2.682</h2>
 <ul>
 <li>优化 人大金仓 KingbaseES 兼容 V8R3/V8R6；#931 #325</li>
