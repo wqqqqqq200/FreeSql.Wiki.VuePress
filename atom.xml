@@ -3,7 +3,7 @@
   <id>https://freesql.net/</id>
   <title>FreeSql 官方文档</title>
   <subtitle>FreeSql Documents</subtitle>
-  <updated>2022-11-08T06:16:46.115Z</updated>
+  <updated>2022-11-08T06:57:55.351Z</updated>
   <generator>vuepress-plugin-feed2</generator>
   <link rel="self" href="https://freesql.net/atom.xml"/>
   <link rel="alternate" href="https://freesql.net/"/>
@@ -15099,12 +15099,13 @@ fsql<span>.</span><span>UpdateDict</span><span>(</span>dic<span>)</span><span>.<
     <title type="html">更新日志</title>
     <id>https://freesql.net/reference/change-log.html</id>
     <link href="https://freesql.net/reference/change-log.html"/>
-    <updated>2022-11-08T06:15:04.000Z</updated>
+    <updated>2022-11-08T06:55:42.000Z</updated>
     <content type="html"><![CDATA[<h1 id="更新日志" tabindex="-1"> 更新日志</h1>
 <p>大约每三个月一次版本号，暂时以修复 bug 为主</p>
 <h2 id="v3-2-683-即将发布" tabindex="-1"> v3.2.683（即将发布）</h2>
 <ul>
 <li><strong>修复 Repository/DbContext 同一实例执行报错后续无法再 CRUD；</strong></li>
+<li><strong>修复 UnitOfWorkManager + Repository.SaveMany 事务切换问题；</strong></li>
 <li>修复 导航属性 PgArrayToMany 数组字段为空时的 bug；</li>
 <li>修复 导航属性 PgArrayToMany DTO 异步查询报错的 bug（同步方法正常）；</li>
 <li>修复 SqlExt count/avg 开窗函数参数；#1321</li>
