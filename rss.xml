@@ -6,8 +6,8 @@
     <link>https://freesql.net/</link>
     <description>FreeSql Documents</description>
     <language>zh-CN</language>
-    <pubDate>Tue, 08 Nov 2022 06:57:55 GMT</pubDate>
-    <lastBuildDate>Tue, 08 Nov 2022 06:57:55 GMT</lastBuildDate>
+    <pubDate>Tue, 08 Nov 2022 09:02:23 GMT</pubDate>
+    <lastBuildDate>Tue, 08 Nov 2022 09:02:23 GMT</lastBuildDate>
     <generator>vuepress-plugin-feed2</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
     <item>
@@ -15126,6 +15126,7 @@ fsql<span>.</span><span>UpdateDict</span><span>(</span>dic<span>)</span><span>.<
 <li>修复 fsql.InsertOrUpdate CanInsert=false,CanUpdate=true (mysql/pgsql）不生效的 bug；</li>
 <li>修复 聚合根仓储（实验） InsertOrUpdate 重复插入的 bug；</li>
 <li>修复 聚合根仓储（实验） Update 未更新自增状态管理的 bug；</li>
+<li>修复 SqlServer WithSql + WithLock bug；</li>
 <li>扩展 UseMessagePackMap 示例；</li>
 <li>优化 UpdateDict 支持 .IsVersion 乐观锁设置；</li>
 <li>完善 SqlServer WithLock + WithIndex 扩展方法；</li>
