@@ -3,7 +3,7 @@
   <id>https://freesql.net/</id>
   <title>FreeSql 官方文档</title>
   <subtitle>FreeSql Documents</subtitle>
-  <updated>2022-11-08T11:38:39.275Z</updated>
+  <updated>2022-11-13T15:37:59.642Z</updated>
   <generator>vuepress-plugin-feed2</generator>
   <link rel="self" href="https://freesql.net/atom.xml"/>
   <link rel="alternate" href="https://freesql.net/"/>
@@ -15099,7 +15099,7 @@ fsql<span>.</span><span>UpdateDict</span><span>(</span>dic<span>)</span><span>.<
     <title type="html">更新日志</title>
     <id>https://freesql.net/reference/change-log.html</id>
     <link href="https://freesql.net/reference/change-log.html"/>
-    <updated>2022-11-08T11:36:33.000Z</updated>
+    <updated>2022-11-13T15:36:13.000Z</updated>
     <content type="html"><![CDATA[<h1 id="更新日志" tabindex="-1"> 更新日志</h1>
 <p>大约每三个月一次版本号，暂时以修复 bug 为主</p>
 <h2 id="v3-2-683-即将发布" tabindex="-1"> v3.2.683（即将发布）</h2>
@@ -15116,6 +15116,8 @@ fsql<span>.</span><span>UpdateDict</span><span>(</span>dic<span>)</span><span>.<
 <li>修复 聚合根仓储（实验） InsertOrUpdate 重复插入的 bug；</li>
 <li>修复 聚合根仓储（实验） Update 未更新自增状态管理的 bug；</li>
 <li>修复 SqlServer WithSql + WithLock bug；</li>
+<li>修复 Odbc 自定义 N'' 无效；#1332</li>
+<li>修复 DbContext DbSet 属性初始并发时未触发 OnModelCreating；#1333</li>
 <li>扩展 UseMessagePackMap 示例；</li>
 <li>优化 UpdateDict 支持 .IsVersion 乐观锁设置；</li>
 <li>优化 表达式树解析 w =&gt; (w as TBase).Id；</li>
