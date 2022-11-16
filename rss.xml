@@ -6,8 +6,8 @@
     <link>https://freesql.net/</link>
     <description>FreeSql Documents</description>
     <language>zh-CN</language>
-    <pubDate>Sun, 13 Nov 2022 15:37:59 GMT</pubDate>
-    <lastBuildDate>Sun, 13 Nov 2022 15:37:59 GMT</lastBuildDate>
+    <pubDate>Wed, 16 Nov 2022 08:57:57 GMT</pubDate>
+    <lastBuildDate>Wed, 16 Nov 2022 08:57:57 GMT</lastBuildDate>
     <generator>vuepress-plugin-feed2</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
     <item>
@@ -15129,10 +15129,13 @@ fsql<span>.</span><span>UpdateDict</span><span>(</span>dic<span>)</span><span>.<
 <li>修复 SqlServer WithSql + WithLock bug；</li>
 <li>修复 Odbc 自定义 N'' 无效；#1332</li>
 <li>修复 DbContext DbSet 属性初始并发时未触发 OnModelCreating；#1333</li>
+<li>修复 Utils.ReplaceSqlConstString bug；</li>
 <li>扩展 UseMessagePackMap 示例；</li>
 <li>优化 UpdateDict 支持 .IsVersion 乐观锁设置；</li>
+<li>优化 InsertDict DBNull.Value 值处理；#1336</li>
 <li>优化 表达式树解析 w =&gt; (w as TBase).Id；</li>
 <li>优化 导航属性集合 .Exists 效果与 .Any 相同；</li>
+<li>优化 MySql CodeFirst 判断表是否存在的查询语句性能；</li>
 <li>完善 SqlServer WithLock + WithIndex 扩展方法；</li>
 </ul>
 <h2 id="v3-2-682" tabindex="-1"> v3.2.682</h2>
