@@ -6,8 +6,8 @@
     <link>https://freesql.net/</link>
     <description>FreeSql Documents</description>
     <language>zh-CN</language>
-    <pubDate>Wed, 16 Nov 2022 08:57:57 GMT</pubDate>
-    <lastBuildDate>Wed, 16 Nov 2022 08:57:57 GMT</lastBuildDate>
+    <pubDate>Thu, 17 Nov 2022 17:05:20 GMT</pubDate>
+    <lastBuildDate>Thu, 17 Nov 2022 17:05:20 GMT</lastBuildDate>
     <generator>vuepress-plugin-feed2</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
     <item>
@@ -15127,6 +15127,7 @@ fsql<span>.</span><span>UpdateDict</span><span>(</span>dic<span>)</span><span>.<
 <li>修复 聚合根仓储（实验） InsertOrUpdate 重复插入的 bug；</li>
 <li>修复 聚合根仓储（实验） Update 未更新自增状态管理的 bug；</li>
 <li>修复 SqlServer WithSql + WithLock bug；</li>
+<li>修复 ClickHouse Ado 参数化无效的问题；#1340</li>
 <li>修复 Odbc 自定义 N'' 无效；#1332</li>
 <li>修复 DbContext DbSet 属性初始并发时未触发 OnModelCreating；#1333</li>
 <li>修复 Utils.ReplaceSqlConstString bug；</li>
@@ -15136,6 +15137,7 @@ fsql<span>.</span><span>UpdateDict</span><span>(</span>dic<span>)</span><span>.<
 <li>优化 表达式树解析 w =&gt; (w as TBase).Id；</li>
 <li>优化 导航属性集合 .Exists 效果与 .Any 相同；</li>
 <li>优化 MySql CodeFirst 判断表是否存在的查询语句性能；</li>
+<li>优化 SqlServer2005 TOP 1 查询；</li>
 <li>完善 SqlServer WithLock + WithIndex 扩展方法；</li>
 </ul>
 <h2 id="v3-2-682" tabindex="-1"> v3.2.682</h2>
