@@ -3,7 +3,7 @@
   <id>https://freesql.net/</id>
   <title>FreeSql 官方文档</title>
   <subtitle>FreeSql Documents</subtitle>
-  <updated>2022-11-20T10:20:30.010Z</updated>
+  <updated>2022-11-20T10:21:03.308Z</updated>
   <generator>vuepress-plugin-feed2</generator>
   <link rel="self" href="https://freesql.net/atom.xml"/>
   <link rel="alternate" href="https://freesql.net/"/>
@@ -7903,7 +7903,7 @@ fsql<span>.</span>CodeFirst<span>.</span><span><span>Entity</span><span><span>&l
     <title type="html">入门</title>
     <id>https://freesql.net/guide/getting-started.html</id>
     <link href="https://freesql.net/guide/getting-started.html"/>
-    <updated>2022-11-20T10:18:41.000Z</updated>
+    <updated>2022-11-20T10:19:18.000Z</updated>
     <content type="html"><![CDATA[<h1 id="入门" tabindex="-1"> 入门</h1>
 <h2 id="模型" tabindex="-1"> 模型</h2>
 <p><code>FreeSql</code> 使用模型执行数据访问，模型由实体类表示数据库表或视图，用于查询和保存数据。</p>
@@ -8167,7 +8167,7 @@ blog<span>.</span>BlogId <span>=</span> <span>(</span><span>int</span><span>)</s
 <td>Provider=Microsoft.ACE.OLEDB.12.0;Data Source=d:/accdb/2003.accdb;</td>
 </tr>
 <tr>
-<td>DataType.MsAccess(accdb加密)</td>
+<td>DataType.MsAccess(加密)</td>
 <td>Provider=Microsoft.ACE.OLEDB.12.0;Data Source=d:/accdb/2003.accdb;Jet OLEDB:Database Password=12341234</td>
 </tr>
 <tr>
