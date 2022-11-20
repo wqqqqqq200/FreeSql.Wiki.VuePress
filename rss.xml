@@ -6,8 +6,8 @@
     <link>https://freesql.net/</link>
     <description>FreeSql Documents</description>
     <language>zh-CN</language>
-    <pubDate>Thu, 17 Nov 2022 17:05:20 GMT</pubDate>
-    <lastBuildDate>Thu, 17 Nov 2022 17:05:20 GMT</lastBuildDate>
+    <pubDate>Sun, 20 Nov 2022 09:47:29 GMT</pubDate>
+    <lastBuildDate>Sun, 20 Nov 2022 09:47:29 GMT</lastBuildDate>
     <generator>vuepress-plugin-feed2</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
     <item>
@@ -15113,7 +15113,7 @@ fsql<span>.</span><span>UpdateDict</span><span>(</span>dic<span>)</span><span>.<
       <pubDate>Thu, 04 Feb 2021 16:03:18 GMT</pubDate>
       <content:encoded><![CDATA[<h1 id="更新日志" tabindex="-1"> 更新日志</h1>
 <p>大约每三个月一次版本号，暂时以修复 bug 为主</p>
-<h2 id="v3-2-683-即将发布" tabindex="-1"> v3.2.683（即将发布）</h2>
+<h2 id="v3-2-683" tabindex="-1"> v3.2.683</h2>
 <ul>
 <li><strong>修复 Repository/DbContext 同一实例执行报错后续无法再 CRUD；</strong></li>
 <li><strong>修复 UnitOfWorkManager + Repository.SaveMany 事务切换问题；</strong></li>
