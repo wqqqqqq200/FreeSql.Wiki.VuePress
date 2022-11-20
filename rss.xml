@@ -6,8 +6,8 @@
     <link>https://freesql.net/</link>
     <description>FreeSql Documents</description>
     <language>zh-CN</language>
-    <pubDate>Sun, 20 Nov 2022 09:47:29 GMT</pubDate>
-    <lastBuildDate>Sun, 20 Nov 2022 09:47:29 GMT</lastBuildDate>
+    <pubDate>Sun, 20 Nov 2022 10:20:30 GMT</pubDate>
+    <lastBuildDate>Sun, 20 Nov 2022 10:20:30 GMT</lastBuildDate>
     <generator>vuepress-plugin-feed2</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
     <item>
@@ -8170,6 +8170,14 @@ blog<span>.</span>BlogId <span>=</span> <span>(</span><span>int</span><span>)</s
 <tr>
 <td>DataType.MsAccess</td>
 <td>Provider=Microsoft.Jet.OleDb.4.0;Data Source=d:/accdb/2003.mdb</td>
+</tr>
+<tr>
+<td>DataType.MsAccess(accdb)</td>
+<td>Provider=Microsoft.ACE.OLEDB.12.0;Data Source=d:/accdb/2003.accdb;</td>
+</tr>
+<tr>
+<td>DataType.MsAccess(accdb加密)</td>
+<td>Provider=Microsoft.ACE.OLEDB.12.0;Data Source=d:/accdb/2003.accdb;Jet OLEDB:Database Password=12341234</td>
 </tr>
 <tr>
 <td>DataType.Dameng(达梦)</td>
