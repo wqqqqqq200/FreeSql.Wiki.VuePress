@@ -3,7 +3,7 @@
   <id>https://freesql.net/</id>
   <title>FreeSql 官方文档</title>
   <subtitle>FreeSql Documents</subtitle>
-  <updated>2022-12-06T05:40:23.965Z</updated>
+  <updated>2022-12-06T10:14:22.217Z</updated>
   <generator>vuepress-plugin-feed2</generator>
   <link rel="self" href="https://freesql.net/atom.xml"/>
   <link rel="alternate" href="https://freesql.net/"/>
@@ -4340,7 +4340,7 @@ fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>Topic<span>></
     <title type="html">ADO</title>
     <id>https://freesql.net/guide/ado.html</id>
     <link href="https://freesql.net/guide/ado.html"/>
-    <updated>2022-12-06T05:37:38.000Z</updated>
+    <updated>2022-12-06T05:38:19.000Z</updated>
     <summary type="html">Ado 是 IFreeSql 下重要的对象之一，它包括所有对 SQL 操作的封装，提供 ExecuteReader、ExecuteDataSet、ExecuteDataTable、ExecuteNonQuery、ExecuteScalar 等方法，使用起来和传统 SqlHelper 一样。 查询 SQL 返回实体 参数化 Ado 下面所有参数 obje...</summary>
     <content type="html"><![CDATA[<h1 id="ado" tabindex="-1"> ADO</h1>
 <p>Ado 是 IFreeSql 下重要的对象之一，它包括所有对 SQL 操作的封装，提供 ExecuteReader、ExecuteDataSet、ExecuteDataTable、ExecuteNonQuery、ExecuteScalar 等方法，使用起来和传统 SqlHelper 一样。</p>
@@ -4369,7 +4369,7 @@ fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>Topic<span>></
 </code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><h2 id="参数化" tabindex="-1"> 参数化</h2>
 <p>Ado 下面所有参数 object parms 都可以接受匿名对象，或者字典：</p>
 <div data-ext="cs"><pre><code> <span>new</span> <span>{</span> id <span>=</span> <span>1</span><span>,</span> name <span>=</span> <span>"xx"</span> <span>}</span>
- <span>new</span> Dictionary\<span>&lt;</span><span>string</span><span>,</span> <span>object</span>\<span>></span> <span>{</span> <span>[</span><span>"id"</span><span>]</span> <span>=</span> <span>1</span><span>,</span> <span>[</span><span>"name"</span><span>]</span> <span>=</span> <span>"xx"</span> <span>}</span>
+ <span>new</span> <span>Dictionary<span>&lt;</span><span>string</span><span>,</span> <span>object</span><span>></span></span> <span>{</span> <span>[</span><span>"id"</span><span>]</span> <span>=</span> <span>1</span><span>,</span> <span>[</span><span>"name"</span><span>]</span> <span>=</span> <span>"xx"</span> <span>}</span>
 </code></pre><div aria-hidden="true"><div></div><div></div></div></div><p>关于<strong>参数前缀</strong>：</p>
 <ul>
 <li>odbc 是 <strong>?</strong> 并且没有标识，所以 freesql 禁用了 odbc 参数化</li>
@@ -13672,7 +13672,7 @@ uow<span>.</span>OnEntityChange <span>=</span> report <span>=></span> <span>{</s
     <title type="html">修改</title>
     <id>https://freesql.net/guide/update.html</id>
     <link href="https://freesql.net/guide/update.html"/>
-    <updated>2022-05-16T12:50:28.000Z</updated>
+    <updated>2022-12-06T10:12:18.000Z</updated>
     <summary type="html">FreeSql 提供丰富的数据库更新功能，支持单条或批量更新，在特定的数据库执行还可以返回更新后的记录。 动态条件 dywhere 支持： 主键值; new[] { 主键值1, 主键值2 }; Topic 对象; new[] { Topic对象1, Topic对象2 }; new { id = 1 }; 1、更新指定列 支持 Set() 多次，相当于拼...</summary>
     <content type="html"><![CDATA[<h1 id="修改" tabindex="-1"> 修改</h1>
 <p><code>FreeSql</code> 提供丰富的数据库更新功能，支持单条或批量更新，在特定的数据库执行还可以返回更新后的记录。</p>
@@ -13875,7 +13875,13 @@ fsql<span>.</span><span>UpdateDict</span><span>(</span>dic<span>)</span><span>.<
 <li>更新前可预览测试数据，防止错误更新操作；</li>
 <li>支持复杂的更新操作，例如：<code>ISelect</code> 上使用 <code>Limit(10)</code> 更新附合条件的前 10 条记录；</li>
 </ul>
-<h1 id="api" tabindex="-1"> API</h1>
+<h2 id="_11、bulkcopy-批量更新" tabindex="-1"> 11、BulkCopy 批量更新</h2>
+<p>FreeSql.Provider.SqlServer、FreeSql.Provider.MySqlConnector、FreeSql.Provider.PostgreSQL</p>
+<p>分别实现了扩展方法 ExecuteSqlBulkCopy、ExecuteMySqlBulkCopy、ExecutePgCopy 实现批量更新（v3.2.685）</p>
+<p>原理：使用 BulkCopy 将数据插入到临时表，再使用 UPDATE FROM JOIN 联表更新。</p>
+<p>提示：当更新的字段数量超过 3000 时，收益较大。</p>
+<div data-ext="cs"><pre><code>fsql<span>.</span><span><span>Update</span><span><span>&lt;</span>T1<span>></span></span></span><span>(</span><span>)</span><span>.</span><span>SetSource</span><span>(</span>list<span>)</span><span>.</span><span>ExecuteSqlBulkCopy</span><span>(</span><span>)</span><span>;</span>
+</code></pre><div aria-hidden="true"><div></div></div></div><h1 id="api" tabindex="-1"> API</h1>
 <table>
 <thead>
 <tr>

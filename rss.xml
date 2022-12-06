@@ -6,8 +6,8 @@
     <link>https://freesql.net/</link>
     <description>FreeSql Documents</description>
     <language>zh-CN</language>
-    <pubDate>Tue, 06 Dec 2022 05:40:23 GMT</pubDate>
-    <lastBuildDate>Tue, 06 Dec 2022 05:40:23 GMT</lastBuildDate>
+    <pubDate>Tue, 06 Dec 2022 10:14:22 GMT</pubDate>
+    <lastBuildDate>Tue, 06 Dec 2022 10:14:22 GMT</lastBuildDate>
     <generator>vuepress-plugin-feed2</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
     <item>
@@ -4375,7 +4375,7 @@ fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>Topic<span>></
 </code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><h2 id="参数化" tabindex="-1"> 参数化</h2>
 <p>Ado 下面所有参数 object parms 都可以接受匿名对象，或者字典：</p>
 <div data-ext="cs"><pre><code> <span>new</span> <span>{</span> id <span>=</span> <span>1</span><span>,</span> name <span>=</span> <span>"xx"</span> <span>}</span>
- <span>new</span> Dictionary\<span>&lt;</span><span>string</span><span>,</span> <span>object</span>\<span>></span> <span>{</span> <span>[</span><span>"id"</span><span>]</span> <span>=</span> <span>1</span><span>,</span> <span>[</span><span>"name"</span><span>]</span> <span>=</span> <span>"xx"</span> <span>}</span>
+ <span>new</span> <span>Dictionary<span>&lt;</span><span>string</span><span>,</span> <span>object</span><span>></span></span> <span>{</span> <span>[</span><span>"id"</span><span>]</span> <span>=</span> <span>1</span><span>,</span> <span>[</span><span>"name"</span><span>]</span> <span>=</span> <span>"xx"</span> <span>}</span>
 </code></pre><div aria-hidden="true"><div></div><div></div></div></div><p>关于<strong>参数前缀</strong>：</p>
 <ul>
 <li>odbc 是 <strong>?</strong> 并且没有标识，所以 freesql 禁用了 odbc 参数化</li>
@@ -13886,7 +13886,13 @@ fsql<span>.</span><span>UpdateDict</span><span>(</span>dic<span>)</span><span>.<
 <li>更新前可预览测试数据，防止错误更新操作；</li>
 <li>支持复杂的更新操作，例如：<code>ISelect</code> 上使用 <code>Limit(10)</code> 更新附合条件的前 10 条记录；</li>
 </ul>
-<h1 id="api" tabindex="-1"> API</h1>
+<h2 id="_11、bulkcopy-批量更新" tabindex="-1"> 11、BulkCopy 批量更新</h2>
+<p>FreeSql.Provider.SqlServer、FreeSql.Provider.MySqlConnector、FreeSql.Provider.PostgreSQL</p>
+<p>分别实现了扩展方法 ExecuteSqlBulkCopy、ExecuteMySqlBulkCopy、ExecutePgCopy 实现批量更新（v3.2.685）</p>
+<p>原理：使用 BulkCopy 将数据插入到临时表，再使用 UPDATE FROM JOIN 联表更新。</p>
+<p>提示：当更新的字段数量超过 3000 时，收益较大。</p>
+<div data-ext="cs"><pre><code>fsql<span>.</span><span><span>Update</span><span><span>&lt;</span>T1<span>></span></span></span><span>(</span><span>)</span><span>.</span><span>SetSource</span><span>(</span>list<span>)</span><span>.</span><span>ExecuteSqlBulkCopy</span><span>(</span><span>)</span><span>;</span>
+</code></pre><div aria-hidden="true"><div></div></div></div><h1 id="api" tabindex="-1"> API</h1>
 <table>
 <thead>
 <tr>
