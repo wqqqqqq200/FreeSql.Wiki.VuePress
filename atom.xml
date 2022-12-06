@@ -3,7 +3,7 @@
   <id>https://freesql.net/</id>
   <title>FreeSql 官方文档</title>
   <subtitle>FreeSql Documents</subtitle>
-  <updated>2022-11-20T12:05:49.048Z</updated>
+  <updated>2022-12-06T05:40:09.567Z</updated>
   <generator>vuepress-plugin-feed2</generator>
   <link rel="self" href="https://freesql.net/atom.xml"/>
   <link rel="alternate" href="https://freesql.net/"/>
@@ -4340,7 +4340,7 @@ fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>Topic<span>></
     <title type="html">ADO</title>
     <id>https://freesql.net/guide/ado.html</id>
     <link href="https://freesql.net/guide/ado.html"/>
-    <updated>2022-10-10T11:13:14.000Z</updated>
+    <updated>2022-12-06T05:38:19.000Z</updated>
     <summary type="html">Ado 是 IFreeSql 下重要的对象之一，它包括所有对 SQL 操作的封装，提供 ExecuteReader、ExecuteDataSet、ExecuteDataTable、ExecuteNonQuery、ExecuteScalar 等方法，使用起来和传统 SqlHelper 一样。 查询 SQL 返回实体 参数化 Ado 下面所有参数 obje...</summary>
     <content type="html"><![CDATA[<h1 id="ado" tabindex="-1"> ADO</h1>
 <p>Ado 是 IFreeSql 下重要的对象之一，它包括所有对 SQL 操作的封装，提供 ExecuteReader、ExecuteDataSet、ExecuteDataTable、ExecuteNonQuery、ExecuteScalar 等方法，使用起来和传统 SqlHelper 一样。</p>
@@ -4368,17 +4368,15 @@ fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>Topic<span>></
 <span>}</span><span>)</span><span>;</span>
 </code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><h2 id="参数化" tabindex="-1"> 参数化</h2>
 <p>Ado 下面所有参数 object parms 都可以接受匿名对象，或者字典：</p>
+<div data-ext="cs"><pre><code> <span>new</span> <span>{</span> id <span>=</span> <span>1</span><span>,</span> name <span>=</span> <span>"xx"</span> <span>}</span>
+ <span>new</span> <span>Dictionary<span>&lt;</span><span>string</span><span>,</span> <span>object</span><span>></span></span> <span>{</span> <span>[</span><span>"id"</span><span>]</span> <span>=</span> <span>1</span><span>,</span> <span>[</span><span>"name"</span><span>]</span> <span>=</span> <span>"xx"</span> <span>}</span>
+</code></pre><div aria-hidden="true"><div></div><div></div></div></div><p>关于<strong>参数前缀</strong>：</p>
 <ul>
-<li id="">new</li>
-<li [id]=" 1, [name&quot;]">new Dictionary&lt;string, object&gt;</li>
-</ul>
-<p>关于参数前缀：</p>
-<ul>
-<li>odbc 是 ? 并且没有标识，所以 freesql 禁用了 odbc 参数化</li>
-<li>oracle 是 :</li>
-<li>mysql.data 是 ?</li>
-<li>mysqlconnector 是 @</li>
-<li>其他基本都是 @</li>
+<li>odbc 是 <strong>?</strong> 并且没有标识，所以 freesql 禁用了 odbc 参数化</li>
+<li>oracle 是 <strong>:</strong></li>
+<li>mysql.data 是 <strong>?</strong></li>
+<li>mysqlconnector 是 <strong>@</strong></li>
+<li>其他基本都是 <strong>@</strong></li>
 </ul>
 <p>IN 参数化查询：</p>
 <blockquote>

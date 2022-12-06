@@ -6,8 +6,8 @@
     <link>https://freesql.net/</link>
     <description>FreeSql Documents</description>
     <language>zh-CN</language>
-    <pubDate>Sun, 20 Nov 2022 12:05:49 GMT</pubDate>
-    <lastBuildDate>Sun, 20 Nov 2022 12:05:49 GMT</lastBuildDate>
+    <pubDate>Tue, 06 Dec 2022 05:40:09 GMT</pubDate>
+    <lastBuildDate>Tue, 06 Dec 2022 05:40:09 GMT</lastBuildDate>
     <generator>vuepress-plugin-feed2</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
     <item>
@@ -4374,17 +4374,15 @@ fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>Topic<span>></
 <span>}</span><span>)</span><span>;</span>
 </code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><h2 id="参数化" tabindex="-1"> 参数化</h2>
 <p>Ado 下面所有参数 object parms 都可以接受匿名对象，或者字典：</p>
+<div data-ext="cs"><pre><code> <span>new</span> <span>{</span> id <span>=</span> <span>1</span><span>,</span> name <span>=</span> <span>"xx"</span> <span>}</span>
+ <span>new</span> <span>Dictionary<span>&lt;</span><span>string</span><span>,</span> <span>object</span><span>></span></span> <span>{</span> <span>[</span><span>"id"</span><span>]</span> <span>=</span> <span>1</span><span>,</span> <span>[</span><span>"name"</span><span>]</span> <span>=</span> <span>"xx"</span> <span>}</span>
+</code></pre><div aria-hidden="true"><div></div><div></div></div></div><p>关于<strong>参数前缀</strong>：</p>
 <ul>
-<li id="">new</li>
-<li [id]=" 1, [name&quot;]">new Dictionary&lt;string, object&gt;</li>
-</ul>
-<p>关于参数前缀：</p>
-<ul>
-<li>odbc 是 ? 并且没有标识，所以 freesql 禁用了 odbc 参数化</li>
-<li>oracle 是 :</li>
-<li>mysql.data 是 ?</li>
-<li>mysqlconnector 是 @</li>
-<li>其他基本都是 @</li>
+<li>odbc 是 <strong>?</strong> 并且没有标识，所以 freesql 禁用了 odbc 参数化</li>
+<li>oracle 是 <strong>:</strong></li>
+<li>mysql.data 是 <strong>?</strong></li>
+<li>mysqlconnector 是 <strong>@</strong></li>
+<li>其他基本都是 <strong>@</strong></li>
 </ul>
 <p>IN 参数化查询：</p>
 <blockquote>
