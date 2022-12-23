@@ -3,7 +3,7 @@
   <id>https://freesql.net/</id>
   <title>FreeSql 官方文档</title>
   <subtitle>FreeSql Documents</subtitle>
-  <updated>2022-12-23T00:32:45.644Z</updated>
+  <updated>2022-12-23T00:42:57.217Z</updated>
   <generator>vuepress-plugin-feed2</generator>
   <link rel="self" href="https://freesql.net/atom.xml"/>
   <link rel="alternate" href="https://freesql.net/"/>
@@ -7966,7 +7966,7 @@ fsql<span>.</span>CodeFirst<span>.</span><span><span>Entity</span><span><span>&l
     <title type="html">入门</title>
     <id>https://freesql.net/guide/getting-started.html</id>
     <link href="https://freesql.net/guide/getting-started.html"/>
-    <updated>2022-12-23T00:30:31.000Z</updated>
+    <updated>2022-12-23T00:40:21.000Z</updated>
     <summary type="html">模型 FreeSql 使用模型执行数据访问，模型由实体类表示数据库表或视图，用于查询和保存数据。 可从现有数据库生成实体模型，FreeSql 提供 IDbFirst 接口实现生成实体模型 (db-first.md)。 或者手动创建模型，基于模型创建或修改数据库，提供 ICodeFirst 同步结构的 API（甚至可以做到开发阶段自动同步）。 安装包 F...</summary>
     <content type="html"><![CDATA[<h1 id="入门" tabindex="-1"> 入门</h1>
 <h2 id="模型" tabindex="-1"> 模型</h2>
@@ -8132,6 +8132,11 @@ blog<span>.</span>BlogId <span>=</span> <span>(</span><span>int</span><span>)</s
 <td>UseSlave</td>
 <td>this</td>
 <td>设置从数据库，支持多个</td>
+</tr>
+<tr>
+<td>UseSlaveWeight</td>
+<td>this</td>
+<td>设置从数据库权重</td>
 </tr>
 <tr>
 <td>UseConnectionFactory</td>
