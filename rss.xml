@@ -6,8 +6,8 @@
     <link>https://freesql.net/</link>
     <description>FreeSql Documents</description>
     <language>zh-CN</language>
-    <pubDate>Tue, 20 Dec 2022 14:13:49 GMT</pubDate>
-    <lastBuildDate>Tue, 20 Dec 2022 14:13:49 GMT</lastBuildDate>
+    <pubDate>Fri, 23 Dec 2022 00:32:45 GMT</pubDate>
+    <lastBuildDate>Fri, 23 Dec 2022 00:32:45 GMT</lastBuildDate>
     <generator>vuepress-plugin-feed2</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
     <item>
@@ -8181,6 +8181,11 @@ blog<span>.</span>BlogId <span>=</span> <span>(</span><span>int</span><span>)</s
 <td>UseNameConvert</td>
 <td>this</td>
 <td>自动转换名称 Entity -&gt; Db</td>
+</tr>
+<tr>
+<td>UseQuoteSqlName</td>
+<td>this</td>
+<td>SQL名称是否使用 [] `` &quot;&quot;</td>
 </tr>
 <tr>
 <td>UseExitAutoDisposePool</td>
