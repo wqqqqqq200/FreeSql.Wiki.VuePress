@@ -3,7 +3,7 @@
   <id>https://freesql.net/</id>
   <title>FreeSql 官方文档</title>
   <subtitle>FreeSql Documents</subtitle>
-  <updated>2022-12-23T00:42:57.217Z</updated>
+  <updated>2022-12-24T08:45:31.640Z</updated>
   <generator>vuepress-plugin-feed2</generator>
   <link rel="self" href="https://freesql.net/atom.xml"/>
   <link rel="alternate" href="https://freesql.net/"/>
@@ -4633,7 +4633,7 @@ item<span>.</span><span>Restore</span><span>(</span><span>)</span><span>;</span>
     <title type="html">AOP✨</title>
     <id>https://freesql.net/guide/aop.html</id>
     <link href="https://freesql.net/guide/aop.html"/>
-    <updated>2022-08-30T23:05:04.000Z</updated>
+    <updated>2022-12-24T08:43:26.000Z</updated>
     <summary type="html">FreeSql AOP 已有的功能介绍，未来为会根据用户需求不断增强。 审计 CRUD(如何监视 SQL？) 如果因为某个 sql 骚操作耗时很高，没有一个相关的审计功能，排查起来可以说无从下手。 FreeSql 支持简单的类似功能： 只需要一个事件，就可以对全局起到作用。 还有一个 CurdBefore 在执行 sql 之前触发，常用于记录日志或开发...</summary>
     <content type="html"><![CDATA[<h1 id="aop✨" tabindex="-1"> AOP✨</h1>
 <p>FreeSql AOP 已有的功能介绍，未来为会根据用户需求不断增强。</p>
@@ -4682,15 +4682,20 @@ item<span>.</span><span>Restore</span><span>(</span><span>)</span><span>;</span>
 <blockquote>
 <p>提示：new FreeSqlBuilder().UseMonitorCommand 也可以审计命令执行前后。</p>
 </blockquote>
-<div data-ext="cs"><pre><code>fsql1<span>.</span>Aop<span>.</span>CommandAfter <span>+=</span> <span>new</span> <span>EventHandler<span>&lt;</span>CommandAfterEventArgs<span>></span></span><span>(</span><span>(</span>s<span>,</span> e<span>)</span> <span>=></span>
+<div data-ext="cs"><pre><code>fsql<span>.</span>Aop<span>.</span>CommandBefore <span>+=</span> <span>(</span>s<span>,</span> e<span>)</span> <span>=></span> 
 <span>{</span>
-   <span>if</span> <span>(</span>e<span>.</span>Exception <span>!=</span> <span>null</span><span>)</span>
-   <span>{</span>
-     <span>//做一些日志记录的操作。以下为示例。</span>
-     Trace<span>.</span><span>WriteLine</span><span>(</span><span><span>$"Message:</span><span><span>{</span><span>e<span>.</span>Exception<span>.</span>Message </span><span>}</span></span><span>\r\nStackTrace:</span><span><span>{</span><span>e<span>.</span>Exception<span>.</span>StackTrace</span><span>}</span></span><span>\r\nCommandText:</span><span><span>{</span><span>e<span>.</span>Command<span>.</span>CommandText</span><span>}</span></span><span>"</span></span><span>)</span><span>;</span>
-   <span>}</span>
-<span>}</span><span>)</span><span>;</span>
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><h2 id="审计迁移脚本" tabindex="-1"> 审计迁移脚本</h2>
+    <span>//e.Command.CommandText = null; 可拦截命令</span>
+<span>}</span><span>;</span>
+
+fsql<span>.</span>Aop<span>.</span>CommandAfter <span>+=</span> <span>(</span>s<span>,</span> e<span>)</span> <span>=></span>
+<span>{</span>
+    <span>if</span> <span>(</span>e<span>.</span>Exception <span>!=</span> <span>null</span><span>)</span>
+    <span>{</span>
+        <span>//做一些日志记录的操作。以下为示例。</span>
+        Trace<span>.</span><span>WriteLine</span><span>(</span><span><span>$"Message:</span><span><span>{</span><span>e<span>.</span>Exception<span>.</span>Message </span><span>}</span></span><span>\r\nStackTrace:</span><span><span>{</span><span>e<span>.</span>Exception<span>.</span>StackTrace</span><span>}</span></span><span>\r\nCommandText:</span><span><span>{</span><span>e<span>.</span>Command<span>.</span>CommandText</span><span>}</span></span><span>"</span></span><span>)</span><span>;</span>
+    <span>}</span>
+<span>}</span><span>;</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><h2 id="审计迁移脚本" tabindex="-1"> 审计迁移脚本</h2>
 <p>FreeSql 自带迁移功能，那么迁移的 SQL 语句长啥样，你可能会好奇。</p>
 <ul>
 <li>

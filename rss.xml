@@ -6,8 +6,8 @@
     <link>https://freesql.net/</link>
     <description>FreeSql Documents</description>
     <language>zh-CN</language>
-    <pubDate>Fri, 23 Dec 2022 00:42:57 GMT</pubDate>
-    <lastBuildDate>Fri, 23 Dec 2022 00:42:57 GMT</lastBuildDate>
+    <pubDate>Sat, 24 Dec 2022 08:45:31 GMT</pubDate>
+    <lastBuildDate>Sat, 24 Dec 2022 08:45:31 GMT</lastBuildDate>
     <generator>vuepress-plugin-feed2</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
     <item>
@@ -4689,15 +4689,20 @@ item<span>.</span><span>Restore</span><span>(</span><span>)</span><span>;</span>
 <blockquote>
 <p>提示：new FreeSqlBuilder().UseMonitorCommand 也可以审计命令执行前后。</p>
 </blockquote>
-<div data-ext="cs"><pre><code>fsql1<span>.</span>Aop<span>.</span>CommandAfter <span>+=</span> <span>new</span> <span>EventHandler<span>&lt;</span>CommandAfterEventArgs<span>></span></span><span>(</span><span>(</span>s<span>,</span> e<span>)</span> <span>=></span>
+<div data-ext="cs"><pre><code>fsql<span>.</span>Aop<span>.</span>CommandBefore <span>+=</span> <span>(</span>s<span>,</span> e<span>)</span> <span>=></span> 
 <span>{</span>
-   <span>if</span> <span>(</span>e<span>.</span>Exception <span>!=</span> <span>null</span><span>)</span>
-   <span>{</span>
-     <span>//做一些日志记录的操作。以下为示例。</span>
-     Trace<span>.</span><span>WriteLine</span><span>(</span><span><span>$"Message:</span><span><span>{</span><span>e<span>.</span>Exception<span>.</span>Message </span><span>}</span></span><span>\r\nStackTrace:</span><span><span>{</span><span>e<span>.</span>Exception<span>.</span>StackTrace</span><span>}</span></span><span>\r\nCommandText:</span><span><span>{</span><span>e<span>.</span>Command<span>.</span>CommandText</span><span>}</span></span><span>"</span></span><span>)</span><span>;</span>
-   <span>}</span>
-<span>}</span><span>)</span><span>;</span>
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><h2 id="审计迁移脚本" tabindex="-1"> 审计迁移脚本</h2>
+    <span>//e.Command.CommandText = null; 可拦截命令</span>
+<span>}</span><span>;</span>
+
+fsql<span>.</span>Aop<span>.</span>CommandAfter <span>+=</span> <span>(</span>s<span>,</span> e<span>)</span> <span>=></span>
+<span>{</span>
+    <span>if</span> <span>(</span>e<span>.</span>Exception <span>!=</span> <span>null</span><span>)</span>
+    <span>{</span>
+        <span>//做一些日志记录的操作。以下为示例。</span>
+        Trace<span>.</span><span>WriteLine</span><span>(</span><span><span>$"Message:</span><span><span>{</span><span>e<span>.</span>Exception<span>.</span>Message </span><span>}</span></span><span>\r\nStackTrace:</span><span><span>{</span><span>e<span>.</span>Exception<span>.</span>StackTrace</span><span>}</span></span><span>\r\nCommandText:</span><span><span>{</span><span>e<span>.</span>Command<span>.</span>CommandText</span><span>}</span></span><span>"</span></span><span>)</span><span>;</span>
+    <span>}</span>
+<span>}</span><span>;</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><h2 id="审计迁移脚本" tabindex="-1"> 审计迁移脚本</h2>
 <p>FreeSql 自带迁移功能，那么迁移的 SQL 语句长啥样，你可能会好奇。</p>
 <ul>
 <li>
