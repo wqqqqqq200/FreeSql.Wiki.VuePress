@@ -3,7 +3,7 @@
   <id>https://freesql.net/</id>
   <title>FreeSql 官方文档</title>
   <subtitle>FreeSql Documents</subtitle>
-  <updated>2022-12-26T04:53:56.914Z</updated>
+  <updated>2022-12-29T08:21:27.069Z</updated>
   <generator>vuepress-plugin-feed2</generator>
   <link rel="self" href="https://freesql.net/atom.xml"/>
   <link rel="alternate" href="https://freesql.net/"/>
@@ -1708,8 +1708,8 @@ BaseEntity<span>.</span><span>Initialization</span><span>(</span>fsql<span>,</sp
     <title type="html">JsonMap</title>
     <id>https://freesql.net/guide/freesql-extensions-jsonmap.html</id>
     <link href="https://freesql.net/guide/freesql-extensions-jsonmap.html"/>
-    <updated>2022-08-11T15:34:05.000Z</updated>
-    <summary type="html">FreeSql 扩展包，将值对象映射成 typeof(string)，安装扩展包： ```csharp fsql.UseJsonMap(); //开启功能 class TestConfig { public int clicks { get; set; } public string title { get; set; } } [Table(Name ...</summary>
+    <updated>2022-12-29T03:49:07.000Z</updated>
+    <summary type="html">FreeSql 扩展包，将值对象映射成 typeof(string)，安装扩展包： 注意事项 [JsonMap]不能标记在 T 为string类型的实体上，否则会在特定情况下导致系统内所有标记了[Column(MapType=typeof(string)]的字段引发类型转换错误 `ExpressionTree 转换类型错误，值(Success)，类型(...</summary>
     <content type="html"><![CDATA[<h1 id="jsonmap" tabindex="-1"> JsonMap</h1>
 <p>FreeSql 扩展包，将值对象映射成 <code>typeof(string)</code>，安装扩展包：</p>
 <div data-ext="sh"><pre><code>dotnet <span>add</span> package FreeSql.Extensions.JsonMap
@@ -1730,7 +1730,10 @@ BaseEntity<span>.</span><span>Initialization</span><span>(</span>fsql<span>,</sp
     <span>[</span><span><span>JsonMap</span></span><span>]</span>
     <span>public</span> <span>T</span> Config <span>{</span> <span>get</span><span>;</span> <span>set</span><span>;</span> <span>}</span>
 <span>}</span>
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div>]]></content>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><h2 id="注意事项" tabindex="-1"> 注意事项</h2>
+<p>[JsonMap]不能标记在 <b>T</b> 为string类型的实体上，否则会在特定情况下导致系统内所有标记了[Column(MapType=typeof(string)]的字段引发类型转换错误</p>
+<div data-ext="text"><pre><code>ExpressionTree 转换类型错误，值(Success)，类型(TEnum)，目标类型(System.String)，Unable to cast object of type 'TEnum' to type 'System.String'.
+</code></pre><div aria-hidden="true"><div></div></div></div>]]></content>
     <published>2022-08-11T15:34:05.000Z</published>
   </entry>
   <entry>
