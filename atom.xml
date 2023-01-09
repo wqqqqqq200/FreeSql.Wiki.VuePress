@@ -3,7 +3,7 @@
   <id>https://freesql.net/</id>
   <title>FreeSql 官方文档</title>
   <subtitle>FreeSql Documents</subtitle>
-  <updated>2022-12-29T08:21:27.069Z</updated>
+  <updated>2023-01-09T01:48:55.398Z</updated>
   <generator>vuepress-plugin-feed2</generator>
   <link rel="self" href="https://freesql.net/atom.xml"/>
   <link rel="alternate" href="https://freesql.net/"/>
@@ -1335,10 +1335,10 @@ cli<span>.</span><span>Eval</span><span>(</span><span>"return redis.call('set',K
     <title type="html">联合查询</title>
     <id>https://freesql.net/guide/unionall.html</id>
     <link href="https://freesql.net/guide/unionall.html"/>
-    <updated>2022-09-13T10:39:09.000Z</updated>
-    <summary type="html">在之前都是推荐使用 ToSql + WithSql 完成联合查询操作，v3.2.666 最增功能直接使用 UnionAll 方法。 GroupBy + WithTempQuery(嵌套查询) + FromQuery + UnionAll 组合使用，会让查询功能更加强大、灵活。 单表 UNION ALL 多表 UNION ALL 注意：如上 SQL 会执...</summary>
+    <updated>2023-01-07T02:07:31.000Z</updated>
+    <summary type="html">在之前都是推荐使用 ToSql + WithSql 完成联合查询操作，v3.2.666 新增功能直接使用 UnionAll 方法。 GroupBy + WithTempQuery(嵌套查询) + FromQuery + UnionAll 组合使用，会让查询功能更加强大、灵活。 单表 UNION ALL 多表 UNION ALL 注意：如上 SQL 会执...</summary>
     <content type="html"><![CDATA[<h1 id="联合查询" tabindex="-1"> 联合查询</h1>
-<p>在之前都是推荐使用 ToSql + WithSql 完成联合查询操作，v3.2.666 最增功能直接使用 UnionAll 方法。</p>
+<p>在之前都是推荐使用 ToSql + WithSql 完成联合查询操作，v3.2.666 新增功能直接使用 UnionAll 方法。</p>
 <p>GroupBy + WithTempQuery(嵌套查询) + FromQuery + UnionAll 组合使用，会让查询功能更加强大、灵活。</p>
 <h2 id="单表-union-all" tabindex="-1"> 单表 UNION ALL</h2>
 <div data-ext="cs"><pre><code><span><span>var</span></span> sql <span>=</span> fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>User<span>></span></span></span><span>(</span><span>)</span><span>.</span><span>Where</span><span>(</span>a <span>=></span> a<span>.</span>Id <span>==</span> <span>1</span><span>)</span>
