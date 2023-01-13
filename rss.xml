@@ -6,8 +6,8 @@
     <link>https://freesql.net/</link>
     <description>FreeSql Documents</description>
     <language>zh-CN</language>
-    <pubDate>Tue, 10 Jan 2023 08:41:36 GMT</pubDate>
-    <lastBuildDate>Tue, 10 Jan 2023 08:41:36 GMT</lastBuildDate>
+    <pubDate>Fri, 13 Jan 2023 04:29:10 GMT</pubDate>
+    <lastBuildDate>Fri, 13 Jan 2023 04:29:10 GMT</lastBuildDate>
     <generator>vuepress-plugin-feed2</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
     <item>
@@ -1899,13 +1899,14 @@ repo<span>.</span><span>Delete</span><span>(</span>groups<span>)</span><span>;</
 </code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><div data-ext="sql"><pre><code><span>SELECT</span> <span>.</span><span>.</span><span>.</span> 
 <span>FROM</span> <span>(</span> 
     <span>SELECT</span> a<span>.</span><span>[</span>Id<span>]</span><span>,</span> a<span>.</span><span>[</span>Nickname<span>]</span><span>,</span> row_number<span>(</span><span>)</span> <span>over</span><span>(</span> <span>partition</span> <span>by</span> a<span>.</span><span>[</span>Nickname<span>]</span> <span>order</span> <span>by</span> a<span>.</span><span>[</span>Id<span>]</span><span>)</span> <span>[</span>rownum<span>]</span> 
-    <span>FROM</span> <span>[</span>User1<span>]</span> a <span>)</span> a 
+    <span>FROM</span> <span>[</span>User1<span>]</span> a 
+    <span>WHERE</span> a<span>.</span><span>[</span>Id<span>]</span> <span>&lt;</span> <span>1000</span> <span>)</span> a 
 <span>INNER</span> <span>JOIN</span> <span>(</span> 
     <span>SELECT</span> a<span>.</span><span>[</span>UserId<span>]</span><span>,</span> a<span>.</span><span>[</span>Remark<span>]</span> 
     <span>FROM</span> <span>[</span>TwoTablePartitionBy_UserExt<span>]</span> a 
     <span>WHERE</span> <span>(</span>a<span>.</span><span>[</span>UserId<span>]</span> <span>></span> <span>0</span><span>)</span> <span>)</span> b <span>ON</span> a<span>.</span><span>[</span>Id<span>]</span> <span>=</span> b<span>.</span><span>[</span>UserId<span>]</span> 
 <span>WHERE</span> <span>(</span>a<span>.</span><span>[</span>rownum<span>]</span> <span>=</span> <span>1</span><span>)</span>
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><h2 id="场景3-分组查询嵌套" tabindex="-1"> 场景3：分组查询嵌套</h2>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><h2 id="场景3-分组查询嵌套" tabindex="-1"> 场景3：分组查询嵌套</h2>
 <div data-ext="cs"><pre><code>fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>User1<span>></span></span></span><span>(</span><span>)</span>
     <span>.</span><span>WithTempQuery</span><span>(</span>a <span>=></span> <span>new</span>
     <span>{</span>
