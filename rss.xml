@@ -6,8 +6,8 @@
     <link>https://freesql.net/</link>
     <description>FreeSql Documents</description>
     <language>zh-CN</language>
-    <pubDate>Fri, 13 Jan 2023 04:29:10 GMT</pubDate>
-    <lastBuildDate>Fri, 13 Jan 2023 04:29:10 GMT</lastBuildDate>
+    <pubDate>Fri, 13 Jan 2023 07:47:38 GMT</pubDate>
+    <lastBuildDate>Fri, 13 Jan 2023 07:47:38 GMT</lastBuildDate>
     <generator>vuepress-plugin-feed2</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
     <item>
@@ -1955,7 +1955,55 @@ list<span>.</span><span>Add</span><span>(</span><span>new</span> <span>User1</sp
     <span>UNION</span> <span>ALL</span>
     <span>SELECT</span> <span>.</span><span>.</span><span>.</span>
 <span>)</span> b <span>ON</span> a<span>.</span><span>[</span>Id<span>]</span> <span>=</span> b<span>.</span><span>[</span>GroupId<span>]</span>
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><h2 id="withparameters-参数化共享" tabindex="-1"> WithParameters 参数化共享</h2>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><h2 id="场景5-自动分表后分页-分组聚合" tabindex="-1"> 场景5：自动分表后分页 分组聚合</h2>
+<p>自动分表后，如果有分页的需求 或者分组聚合的需求可以参考以下代码</p>
+<div data-ext="cs"><pre><code><span><span>var</span></span> result <span>=</span> fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>Statistics<span>></span></span></span><span>(</span><span>)</span>
+    <span>.</span><span>Where</span><span>(</span>v <span>=></span> v<span>.</span>createtime<span>.</span><span>BetweenEnd</span><span>(</span>startTime<span>.</span>Value<span>,</span> endTime<span>.</span>Value<span>)</span><span>)</span>   <span>//时间字段定位表</span>
+    <span>.</span><span>WithTempQuery</span><span>(</span>a <span>=></span> <span>new</span> <span>{</span> item <span>=</span> a <span>}</span><span>)</span>
+    <span>.</span><span>GroupBy</span><span>(</span>a <span>=></span> a<span>.</span>item<span>.</span>applyShareId<span>)</span>
+    <span>.</span><span>Count</span><span>(</span><span>out</span> <span><span>var</span></span> total<span>)</span>
+    <span>.</span><span>Page</span><span>(</span>dto<span>.</span>page<span>,</span> dto<span>.</span>limit<span>)</span>
+    <span>.</span><span>ToSql</span><span>(</span>r <span>=></span> <span>new</span> <span>{</span>
+            sharingCenterId <span>=</span> a<span>.</span>Key<span>,</span>
+            gpsMileage <span>=</span> a<span>.</span><span>Sum</span><span>(</span>a<span>.</span>Value<span>.</span>item<span>.</span>gpsMileage<span>)</span><span>,</span>
+            stonnage <span>=</span> a<span>.</span><span>Sum</span><span>(</span>a<span>.</span>Value<span>.</span>item<span>.</span>stonnage<span>)</span><span>,</span>
+    <span>}</span><span>)</span><span>;</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><div data-ext="sql"><pre><code><span>SELECT</span>
+	a<span>.</span><span><span>`</span>applyShareId<span>`</span></span> as1<span>,</span>
+	<span>sum</span><span>(</span> a<span>.</span><span><span>`</span>gpsMileage<span>`</span></span> <span>)</span> as3<span>,</span>
+	<span>sum</span><span>(</span> a<span>.</span><span><span>`</span>stonnage<span>`</span></span> <span>)</span> as5<span>,</span>
+<span>FROM</span>
+	<span>(</span>
+	<span>SELECT</span>
+		<span>*</span> 
+	<span>FROM</span>
+		<span>(</span>
+		<span>SELECT</span>
+			a<span>.</span><span><span>`</span>applyShareId<span>`</span></span> 
+			a<span>.</span><span><span>`</span>gpsMileage<span>`</span></span><span>,</span>
+			a<span>.</span><span><span>`</span>stonnage<span>`</span></span> 
+		<span>FROM</span>
+			<span><span>`</span>Statistics_2023<span>`</span></span> a 
+		<span>WHERE</span>
+		<span>(</span> a<span>.</span><span><span>`</span>createtime<span>`</span></span> <span>>=</span> <span>'2022-01-01 00:00:00'</span> <span>AND</span> a<span>.</span><span><span>`</span>createtime<span>`</span></span> <span>&lt;</span> <span>'2023-01-14 00:00:00'</span> <span>)</span><span>)</span> ftb 
+		<span>UNION</span> <span>ALL</span>
+	<span>SELECT</span>
+		<span>*</span> 
+	<span>FROM</span>
+		<span>(</span>
+		<span>SELECT</span>
+		  a<span>.</span><span><span>`</span>applyShareId<span>`</span></span> 
+			a<span>.</span><span><span>`</span>gpsMileage<span>`</span></span><span>,</span>
+			a<span>.</span><span><span>`</span>stonnage<span>`</span></span>
+		<span>FROM</span>
+			<span><span>`</span>Statistics_2022<span>`</span></span> a 
+		<span>WHERE</span>
+		<span>(</span> a<span>.</span><span><span>`</span>createtime<span>`</span></span> <span>>=</span> <span>'2022-01-01 00:00:00'</span> <span>AND</span> a<span>.</span><span><span>`</span>createtime<span>`</span></span> <span>&lt;</span> <span>'2023-01-14 00:00:00'</span> <span>)</span><span>)</span> ftb 
+	<span>)</span> a 
+	<span>GROUP</span> <span>BY</span>
+	a<span>.</span><span><span>`</span>applyShareId<span>`</span></span> 
+	<span>LIMIT</span> <span>0</span><span>,</span><span>30</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><h2 id="withparameters-参数化共享" tabindex="-1"> WithParameters 参数化共享</h2>
 <p>开启参数化查询功能后，使用 WithParameters 共享参数化，避免产生相同的参数名称：</p>
 <div data-ext="cs"><pre><code><span><span>var</span></span> dbpars <span>=</span> <span>new</span> <span>List<span>&lt;</span>DbParameter<span>></span></span><span>(</span><span>)</span><span>;</span>
 
