@@ -6,8 +6,8 @@
     <link>https://freesql.net/</link>
     <description>FreeSql Documents</description>
     <language>zh-CN</language>
-    <pubDate>Mon, 16 Jan 2023 11:43:17 GMT</pubDate>
-    <lastBuildDate>Mon, 16 Jan 2023 11:43:17 GMT</lastBuildDate>
+    <pubDate>Mon, 16 Jan 2023 12:43:06 GMT</pubDate>
+    <lastBuildDate>Mon, 16 Jan 2023 12:43:06 GMT</lastBuildDate>
     <generator>vuepress-plugin-feed2</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
     <item>
@@ -15369,14 +15369,14 @@ fsql<span>.</span><span>UpdateDict</span><span>(</span>dic<span>)</span><span>.<
       <link>https://freesql.net/reference/change-log.html</link>
       <guid>https://freesql.net/reference/change-log.html</guid>
       <source url="https://freesql.net/rss.xml">更新日志</source>
-      <description>大约每月一次版本号，暂时以修复 bug 为主 v3.2.686 增加 FreeSqlBuilder UseQuoteSqlName 设置不使用 [] "" 限定符号；; 增加 Aop.CommandBefore 设置 .CommandText = null 可拦截本次执行；; 增加 IAdo.ExecuteNonQuery 重载方法（虚谷数据库）；; ...</description>
+      <description>大约每月一次版本号，暂时以修复 bug 为主 v3.2.686 增加 FreeSqlBuilder UseQuoteSqlName 设置不使用 [] "" 限定符号；; 增加 Aop.CommandBefore 设置 .CommandText = null 可拦截某次执行；; 增加 IAdo.ExecuteNonQuery 重载方法（虚谷数据库）；; ...</description>
       <pubDate>Thu, 04 Feb 2021 16:03:18 GMT</pubDate>
       <content:encoded><![CDATA[<h1 id="更新日志" tabindex="-1"> 更新日志</h1>
 <p>大约每月一次版本号，暂时以修复 bug 为主</p>
 <h2 id="v3-2-686" tabindex="-1"> v3.2.686</h2>
 <ul>
 <li>增加 FreeSqlBuilder UseQuoteSqlName 设置不使用 [] `` &quot;&quot; 限定符号；</li>
-<li>增加 Aop.CommandBefore 设置 .CommandText = null 可拦截本次执行；</li>
+<li>增加 Aop.CommandBefore 设置 .CommandText = null 可拦截某次执行；</li>
 <li>增加 IAdo.ExecuteNonQuery 重载方法（虚谷数据库）；</li>
 <li><strong>修复 UseSlaveWeight 异步下可能无效的问题；#1382</strong></li>
 <li>修复 HzyTuple 嵌套解析问题；#1390</li>
