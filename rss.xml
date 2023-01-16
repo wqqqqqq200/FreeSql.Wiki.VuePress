@@ -6,8 +6,8 @@
     <link>https://freesql.net/</link>
     <description>FreeSql Documents</description>
     <language>zh-CN</language>
-    <pubDate>Mon, 16 Jan 2023 11:25:24 GMT</pubDate>
-    <lastBuildDate>Mon, 16 Jan 2023 11:25:24 GMT</lastBuildDate>
+    <pubDate>Mon, 16 Jan 2023 11:43:17 GMT</pubDate>
+    <lastBuildDate>Mon, 16 Jan 2023 11:43:17 GMT</lastBuildDate>
     <generator>vuepress-plugin-feed2</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
     <item>
@@ -15369,10 +15369,25 @@ fsql<span>.</span><span>UpdateDict</span><span>(</span>dic<span>)</span><span>.<
       <link>https://freesql.net/reference/change-log.html</link>
       <guid>https://freesql.net/reference/change-log.html</guid>
       <source url="https://freesql.net/rss.xml">更新日志</source>
-      <description>大约每三个月一次版本号，暂时以修复 bug 为主 v3.2.685 增加 IUpdate\ BulkCopy 批量更新扩展方法；（暂时支持 SqlServer/MySql/PostgreSQL）; 修复 ClickHouse CodeFirst 表结构同步问题；; 修复 ISelectGrouping ToSql AsProperty 别名无效问题；;...</description>
+      <description>大约每月一次版本号，暂时以修复 bug 为主 v3.2.686 增加 FreeSqlBuilder UseQuoteSqlName 设置不使用 [] "" 限定符号；; 增加 Aop.CommandBefore 设置 .CommandText = null 可拦截本次执行；; 增加 IAdo.ExecuteNonQuery 重载方法（虚谷数据库）；; ...</description>
       <pubDate>Thu, 04 Feb 2021 16:03:18 GMT</pubDate>
       <content:encoded><![CDATA[<h1 id="更新日志" tabindex="-1"> 更新日志</h1>
-<p>大约每三个月一次版本号，暂时以修复 bug 为主</p>
+<p>大约每月一次版本号，暂时以修复 bug 为主</p>
+<h2 id="v3-2-686" tabindex="-1"> v3.2.686</h2>
+<ul>
+<li>增加 FreeSqlBuilder UseQuoteSqlName 设置不使用 [] `` &quot;&quot; 限定符号；</li>
+<li>增加 Aop.CommandBefore 设置 .CommandText = null 可拦截本次执行；</li>
+<li>增加 IAdo.ExecuteNonQuery 重载方法（虚谷数据库）；</li>
+<li><strong>修复 UseSlaveWeight 异步下可能无效的问题；#1382</strong></li>
+<li>修复 HzyTuple 嵌套解析问题；#1390</li>
+<li>修复 AsType 表达式解析问题；#1389</li>
+<li>修复 pgsql OnConflictDoUpdate 临时主键问题；#1393</li>
+<li>修复 ClickHouse 联表查询 GLOBAL left join、Ado.Query * 问题；#1383</li>
+<li>优化 ClickHouse like 为 positionCaseInsensitive #1386</li>
+<li>优化 JsonMap 对基础类型的无效判断；#1385</li>
+<li>优化 IUpdate 批量 case when 同值的 SQL 生成；#1393</li>
+<li>优化 IAdo.ConnectionString 使用 UseConnectionFactory 时值为 NULL 的问题；</li>
+</ul>
 <h2 id="v3-2-685" tabindex="-1"> v3.2.685</h2>
 <ul>
 <li><strong>增加 IUpdate&lt;T&gt; BulkCopy 批量更新扩展方法；（暂时支持 SqlServer/MySql/PostgreSQL）</strong></li>
