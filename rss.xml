@@ -6,8 +6,8 @@
     <link>https://freesql.net/</link>
     <description>FreeSql Documents</description>
     <language>zh-CN</language>
-    <pubDate>Fri, 13 Jan 2023 08:32:04 GMT</pubDate>
-    <lastBuildDate>Fri, 13 Jan 2023 08:32:04 GMT</lastBuildDate>
+    <pubDate>Mon, 16 Jan 2023 04:23:23 GMT</pubDate>
+    <lastBuildDate>Mon, 16 Jan 2023 04:23:23 GMT</lastBuildDate>
     <generator>vuepress-plugin-feed2</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
     <item>
@@ -8264,7 +8264,7 @@ blog<span>.</span>BlogId <span>=</span> <span>(</span><span>int</span><span>)</s
 </tr>
 <tr>
 <td>DataType.PostgreSQL</td>
-<td>Host=192.168.164.10;Port=5432;Username=postgres;Password=123456; Database=tedb;Pooling=true;Minimum Pool Size=1</td>
+<td>Host=192.168.164.10;Port=5432;Username=postgres;Password=123456; Database=tedb;ArrayNullabilityMode=Always;Pooling=true;Minimum Pool Size=1</td>
 </tr>
 <tr>
 <td>DataType.SqlServer</td>
