@@ -3,7 +3,7 @@
   <id>https://freesql.net/</id>
   <title>FreeSql 官方文档</title>
   <subtitle>FreeSql Documents</subtitle>
-  <updated>2023-01-16T04:53:04.532Z</updated>
+  <updated>2023-01-16T04:53:29.461Z</updated>
   <generator>vuepress-plugin-feed2</generator>
   <link rel="self" href="https://freesql.net/atom.xml"/>
   <link rel="alternate" href="https://freesql.net/"/>
@@ -3041,7 +3041,7 @@ fsql<span>.</span><span>Insert</span><span>(</span>departments<span>)</span>
     <title type="html">PostgreSQL</title>
     <id>https://freesql.net/guide/freesql-provider-postgresql.html</id>
     <link href="https://freesql.net/guide/freesql-provider-postgresql.html"/>
-    <updated>2023-01-16T04:51:06.000Z</updated>
+    <updated>2023-01-16T04:51:29.000Z</updated>
     <summary type="html">nuget 安装：FreeSql.Provider.PostgreSQL 数组、字典 PostgreSQL 数据类型丰富，支持 int[]、string[] 数组类型，Dictionary 字典类型。 JSONB PostgreSQL JSON 类型的查询性能不输 mongodb，适合做动态结构的数据存储场景。 FreeSql.Provider.Pos...</summary>
     <content type="html"><![CDATA[
 <p>nuget 安装：FreeSql.Provider.PostgreSQL</p>
@@ -3135,8 +3135,8 @@ fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>model<span>></
 
 <span>class</span> <span>model</span>
 <span>{</span>
-		<span>public</span> <span><span>int</span></span> ogc_fid <span>{</span> <span>get</span><span>;</span> <span>set</span><span>;</span> <span>}</span>
-		<span>public</span> <span>PostgisPoint</span> geometry <span>{</span> <span>get</span><span>;</span> <span>set</span><span>;</span> <span>}</span>
+    <span>public</span> <span><span>int</span></span> ogc_fid <span>{</span> <span>get</span><span>;</span> <span>set</span><span>;</span> <span>}</span>
+    <span>public</span> <span>PostgisPoint</span> geometry <span>{</span> <span>get</span><span>;</span> <span>set</span><span>;</span> <span>}</span>
 <span>}</span>
 </code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><blockquote>
 <p>注意 NpgsqlConnection.GlobalTypeMapper.UseLegacyPostgis(); 与 FreeSqlBuilder 的顺序</p>

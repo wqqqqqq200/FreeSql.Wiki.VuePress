@@ -6,8 +6,8 @@
     <link>https://freesql.net/</link>
     <description>FreeSql Documents</description>
     <language>zh-CN</language>
-    <pubDate>Mon, 16 Jan 2023 04:53:04 GMT</pubDate>
-    <lastBuildDate>Mon, 16 Jan 2023 04:53:04 GMT</lastBuildDate>
+    <pubDate>Mon, 16 Jan 2023 04:53:29 GMT</pubDate>
+    <lastBuildDate>Mon, 16 Jan 2023 04:53:29 GMT</lastBuildDate>
     <generator>vuepress-plugin-feed2</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
     <item>
@@ -3140,8 +3140,8 @@ fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>model<span>></
 
 <span>class</span> <span>model</span>
 <span>{</span>
-		<span>public</span> <span><span>int</span></span> ogc_fid <span>{</span> <span>get</span><span>;</span> <span>set</span><span>;</span> <span>}</span>
-		<span>public</span> <span>PostgisPoint</span> geometry <span>{</span> <span>get</span><span>;</span> <span>set</span><span>;</span> <span>}</span>
+    <span>public</span> <span><span>int</span></span> ogc_fid <span>{</span> <span>get</span><span>;</span> <span>set</span><span>;</span> <span>}</span>
+    <span>public</span> <span>PostgisPoint</span> geometry <span>{</span> <span>get</span><span>;</span> <span>set</span><span>;</span> <span>}</span>
 <span>}</span>
 </code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><blockquote>
 <p>注意 NpgsqlConnection.GlobalTypeMapper.UseLegacyPostgis(); 与 FreeSqlBuilder 的顺序</p>
