@@ -6,8 +6,8 @@
     <link>https://freesql.net/</link>
     <description>FreeSql Documents</description>
     <language>zh-CN</language>
-    <pubDate>Mon, 16 Jan 2023 12:43:06 GMT</pubDate>
-    <lastBuildDate>Mon, 16 Jan 2023 12:43:06 GMT</lastBuildDate>
+    <pubDate>Wed, 18 Jan 2023 16:39:34 GMT</pubDate>
+    <lastBuildDate>Wed, 18 Jan 2023 16:39:34 GMT</lastBuildDate>
     <generator>vuepress-plugin-feed2</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
     <item>
@@ -3077,8 +3077,20 @@ fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>model<span>></
 
 <span>// 支持索引查询</span>
 fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>model<span>></span></span></span><span>(</span><span>)</span><span>.</span><span>Where</span><span>(</span>a <span>=></span> a<span>.</span>jsonb1<span>.</span><span>ContainsKey</span><span>(</span><span>"key1"</span><span>)</span><span>)</span><span>.</span><span>ToList</span><span>(</span><span>)</span><span>;</span>
+<span>//SQL: WHERE coalesce(a.jsonb1, '{}') ? 'key1'</span>
+
 fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>model<span>></span></span></span><span>(</span><span>)</span><span>.</span><span>Where</span><span>(</span>a <span>=></span> a<span>.</span>jsonb2<span>[</span><span>"key1"</span><span>]</span><span>.</span><span>ContainsKey</span><span>(</span><span>"key2"</span><span>)</span><span>)</span><span>.</span><span>ToList</span><span>(</span><span>)</span><span>;</span>
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><table>
+<span>//SQL: WHERE coalesce(a.jsonb2->key1, '{}') ? 'key2'</span>
+
+fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>model<span>></span></span></span><span>(</span><span>)</span><span>.</span><span>Where</span><span>(</span>a <span>=></span> a<span>.</span>jsonb2<span>.</span><span>Contains</span><span>(</span>JToken<span>.</span><span>Parse</span><span>(</span><span>"{key1:'xxx'}"</span><span>)</span><span>)</span><span>.</span><span>ToList</span><span>(</span><span>)</span><span>;</span>
+<span>//SQL: WHERE coalesce(a.jsonb2, '{}') @> '{"key1":'xxx'}'::jsonb</span>
+
+fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>model<span>></span></span></span><span>(</span><span>)</span><span>.</span><span>Where</span><span>(</span>a <span>=></span> a<span>.</span>jsonb2<span>[</span><span>"key1"</span><span>]</span><span>[</span><span>"key2"</span><span>]</span><span>.</span><span>ToString</span><span>(</span><span>)</span> <span>==</span> <span>"xxx"</span><span>)</span><span>.</span><span>ToList</span><span>(</span><span>)</span><span>;</span>
+<span>//SQL: WHERE (a.jsonb2->key1->key2)::text = 'xxx'</span>
+
+fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>model<span>></span></span></span><span>(</span><span>)</span><span>.</span><span>Where</span><span>(</span>a <span>=></span> <span>int</span><span>.</span><span>Parse</span><span>(</span>a<span>.</span>jsonb2<span>[</span><span>"key1"</span><span>]</span><span>[</span><span>"key2"</span><span>]</span><span>.</span><span>ToString</span><span>(</span><span>)</span><span>)</span> <span>></span> <span>100</span><span>)</span><span>.</span><span>ToList</span><span>(</span><span>)</span><span>;</span>
+<span>//SQL: WHERE (a.jsonb2->key1->key2)::text::int4 > 100</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><table>
 <thead>
 <tr>
 <th>lambda 表达式树函数</th>
@@ -3118,8 +3130,8 @@ fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>model<span>></
 <td>转化字符串为json类型</td>
 </tr>
 <tr>
-<td>a[&quot;x&quot;]</td>
-<td>a-&gt;x</td>
+<td>a[&quot;x&quot;][&quot;y&quot;]</td>
+<td>a-&gt;x-&gt;y</td>
 <td>json成员访问</td>
 </tr>
 </tbody>

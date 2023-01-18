@@ -3,7 +3,7 @@
   <id>https://freesql.net/</id>
   <title>FreeSql 官方文档</title>
   <subtitle>FreeSql Documents</subtitle>
-  <updated>2023-01-16T12:43:06.581Z</updated>
+  <updated>2023-01-18T16:39:34.144Z</updated>
   <generator>vuepress-plugin-feed2</generator>
   <link rel="self" href="https://freesql.net/atom.xml"/>
   <link rel="alternate" href="https://freesql.net/"/>
@@ -3041,7 +3041,7 @@ fsql<span>.</span><span>Insert</span><span>(</span>departments<span>)</span>
     <title type="html">PostgreSQL</title>
     <id>https://freesql.net/guide/freesql-provider-postgresql.html</id>
     <link href="https://freesql.net/guide/freesql-provider-postgresql.html"/>
-    <updated>2023-01-16T11:23:26.000Z</updated>
+    <updated>2023-01-18T16:36:52.000Z</updated>
     <summary type="html">nuget 安装：FreeSql.Provider.PostgreSQL 数组、字典 PostgreSQL 数据类型丰富，支持 int[]、string[] 数组类型，Dictionary 字典类型。 参考资料：《PostgreSQL Array 数组类型与 FreeSql 打出一套【组合拳】》 (https://www.cnblogs.com/Fre...</summary>
     <content type="html"><![CDATA[
 <p>nuget 安装：FreeSql.Provider.PostgreSQL</p>
@@ -3072,8 +3072,20 @@ fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>model<span>></
 
 <span>// 支持索引查询</span>
 fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>model<span>></span></span></span><span>(</span><span>)</span><span>.</span><span>Where</span><span>(</span>a <span>=></span> a<span>.</span>jsonb1<span>.</span><span>ContainsKey</span><span>(</span><span>"key1"</span><span>)</span><span>)</span><span>.</span><span>ToList</span><span>(</span><span>)</span><span>;</span>
+<span>//SQL: WHERE coalesce(a.jsonb1, '{}') ? 'key1'</span>
+
 fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>model<span>></span></span></span><span>(</span><span>)</span><span>.</span><span>Where</span><span>(</span>a <span>=></span> a<span>.</span>jsonb2<span>[</span><span>"key1"</span><span>]</span><span>.</span><span>ContainsKey</span><span>(</span><span>"key2"</span><span>)</span><span>)</span><span>.</span><span>ToList</span><span>(</span><span>)</span><span>;</span>
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><table>
+<span>//SQL: WHERE coalesce(a.jsonb2->key1, '{}') ? 'key2'</span>
+
+fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>model<span>></span></span></span><span>(</span><span>)</span><span>.</span><span>Where</span><span>(</span>a <span>=></span> a<span>.</span>jsonb2<span>.</span><span>Contains</span><span>(</span>JToken<span>.</span><span>Parse</span><span>(</span><span>"{key1:'xxx'}"</span><span>)</span><span>)</span><span>.</span><span>ToList</span><span>(</span><span>)</span><span>;</span>
+<span>//SQL: WHERE coalesce(a.jsonb2, '{}') @> '{"key1":'xxx'}'::jsonb</span>
+
+fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>model<span>></span></span></span><span>(</span><span>)</span><span>.</span><span>Where</span><span>(</span>a <span>=></span> a<span>.</span>jsonb2<span>[</span><span>"key1"</span><span>]</span><span>[</span><span>"key2"</span><span>]</span><span>.</span><span>ToString</span><span>(</span><span>)</span> <span>==</span> <span>"xxx"</span><span>)</span><span>.</span><span>ToList</span><span>(</span><span>)</span><span>;</span>
+<span>//SQL: WHERE (a.jsonb2->key1->key2)::text = 'xxx'</span>
+
+fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>model<span>></span></span></span><span>(</span><span>)</span><span>.</span><span>Where</span><span>(</span>a <span>=></span> <span>int</span><span>.</span><span>Parse</span><span>(</span>a<span>.</span>jsonb2<span>[</span><span>"key1"</span><span>]</span><span>[</span><span>"key2"</span><span>]</span><span>.</span><span>ToString</span><span>(</span><span>)</span><span>)</span> <span>></span> <span>100</span><span>)</span><span>.</span><span>ToList</span><span>(</span><span>)</span><span>;</span>
+<span>//SQL: WHERE (a.jsonb2->key1->key2)::text::int4 > 100</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><table>
 <thead>
 <tr>
 <th>lambda 表达式树函数</th>
@@ -3113,8 +3125,8 @@ fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>model<span>></
 <td>转化字符串为json类型</td>
 </tr>
 <tr>
-<td>a[&quot;x&quot;]</td>
-<td>a-&gt;x</td>
+<td>a[&quot;x&quot;][&quot;y&quot;]</td>
+<td>a-&gt;x-&gt;y</td>
 <td>json成员访问</td>
 </tr>
 </tbody>
