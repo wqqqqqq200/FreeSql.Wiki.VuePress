@@ -3,7 +3,7 @@
   <id>https://freesql.net/</id>
   <title>FreeSql 官方文档</title>
   <subtitle>FreeSql Documents</subtitle>
-  <updated>2023-02-09T04:11:12.467Z</updated>
+  <updated>2023-02-09T04:12:30.660Z</updated>
   <generator>vuepress-plugin-feed2</generator>
   <link rel="self" href="https://freesql.net/atom.xml"/>
   <link rel="alternate" href="https://freesql.net/"/>
@@ -1740,14 +1740,14 @@ BaseEntity<span>.</span><span>Initialization</span><span>(</span>fsql<span>,</sp
     <title type="html">级联删除</title>
     <id>https://freesql.net/guide/cascade-delete.html</id>
     <link href="https://freesql.net/guide/cascade-delete.html"/>
-    <updated>2022-07-30T09:07:52.000Z</updated>
+    <updated>2023-02-09T04:09:47.000Z</updated>
     <summary type="html">基于【对象】级联删除 比如 Include/IncludeMany 查询的对象，可以使用此方法级联删除它们。 基于【数据库】级联删除 根据设置的导航属性，递归删除 OneToOne/OneToMany/ManyToMany 对应数据，并返回已删除的数据。此功能不依赖数据库外键 ```cs var repo = fsql.GetRepository();...</summary>
     <content type="html"><![CDATA[<h1 id="级联删除" tabindex="-1"> 级联删除</h1>
 <h2 id="基于【对象】级联删除" tabindex="-1"> 基于【对象】级联删除</h2>
 <blockquote>
 <p>比如 Include/IncludeMany 查询的对象，可以使用此方法级联删除它们。</p>
 </blockquote>
-<div data-ext="cs"><pre><code><span><span>var</span></span> repo <span>=</span> fsql<span>.</span><span><span>GetRepository</span><span><span>&lt;</span>Group<span>></span></span></span><span>(</span><span>)</span><span>;</span>
+<div data-ext="cs"><pre><code><span><span>var</span></span> repo <span>=</span> fsql<span>.</span><span><span>GetRepository</span><span><span>&lt;</span>UserGroup<span>></span></span></span><span>(</span><span>)</span><span>;</span>
 repo<span>.</span>DbContextOptions<span>.</span>EnableCascadeSave <span>=</span> <span>true</span><span>;</span> <span>//关键设置</span>
 repo<span>.</span><span>Insert</span><span>(</span><span>new</span> <span>UserGroup</span>
 <span>{</span>
@@ -1775,7 +1775,7 @@ repo<span>.</span><span>Delete</span><span>(</span>groups<span>)</span><span>;</
 <blockquote>
 <p>根据设置的导航属性，递归删除 OneToOne/OneToMany/ManyToMany 对应数据，并返回已删除的数据。此功能不依赖数据库外键</p>
 </blockquote>
-<div data-ext="cs"><pre><code><span><span>var</span></span> repo <span>=</span> fsql<span>.</span><span><span>GetRepository</span><span><span>&lt;</span>Group<span>></span></span></span><span>(</span><span>)</span><span>;</span>
+<div data-ext="cs"><pre><code><span><span>var</span></span> repo <span>=</span> fsql<span>.</span><span><span>GetRepository</span><span><span>&lt;</span>UserGroup<span>></span></span></span><span>(</span><span>)</span><span>;</span>
 <span><span>var</span></span> ret <span>=</span> repo<span>.</span><span>DeleteCascadeByDatabase</span><span>(</span>a <span>=></span> a<span>.</span>Id <span>==</span> <span>1</span><span>)</span><span>;</span>
 <span>//SELECT a."id", a."username", a."password", a."groupid" FROM "user" a WHERE (a."groupid" = 1)</span>
 <span>//SELECT a."userid", a."remark" FROM "userext" a WHERE (a."userid" IN (3,4,5))</span>
@@ -1792,7 +1792,7 @@ repo<span>.</span><span>Delete</span><span>(</span>groups<span>)</span><span>;</
 <span>//  [5] {User}   object {User}</span>
 <span>//  [6] {UserGroup} object {UserGroup}</span>
 
-<span>public</span> <span>class</span> <span>Group</span>
+<span>public</span> <span>class</span> <span>UserGroup</span>
 <span>{</span>
     <span>[</span><span><span>Column</span><span><span>(</span>IsIdentity <span>=</span> <span>true</span><span>)</span></span></span><span>]</span>
     <span>public</span> <span><span>int</span></span> Id <span>{</span> <span>get</span><span>;</span> <span>set</span><span>;</span> <span>}</span>
