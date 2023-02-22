@@ -6,8 +6,8 @@
     <link>https://freesql.net/</link>
     <description>FreeSql Documents</description>
     <language>zh-CN</language>
-    <pubDate>Wed, 22 Feb 2023 18:03:14 GMT</pubDate>
-    <lastBuildDate>Wed, 22 Feb 2023 18:03:14 GMT</lastBuildDate>
+    <pubDate>Wed, 22 Feb 2023 18:09:46 GMT</pubDate>
+    <lastBuildDate>Wed, 22 Feb 2023 18:09:46 GMT</lastBuildDate>
     <generator>vuepress-plugin-feed2</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
     <item>
@@ -9473,13 +9473,19 @@ dotnet <span>add</span> package FreeSql.Provider.Sqlite
 <td><strong><a href="https://www.nuget.org/packages/FreeSql.Provider.ClickHouse" target="_blank" rel="noopener noreferrer"><img src="https://buildstats.info/nuget/FreeSql.Provider.ClickHouse" alt="NuGet" loading="lazy"></a></strong></td>
 </tr>
 <tr>
+<td><a href="/guide/freesql-provider-questdb.html">FreeSql.Provider.QuestDb</a></td>
+<td>NETStandard2.0</td>
+<td>基于 Npgsql 和 RestApi</td>
+<td><strong><a href="https://www.nuget.org/packages/FreeSql.Provider.QuestDb" target="_blank" rel="noopener noreferrer"><img src="https://buildstats.info/nuget/FreeSql.Provider.QuestDb" alt="NuGet" loading="lazy"></a></strong></td>
+</tr>
+<tr>
 <td>FreeSql.Provider.Oracle</td>
 <td>NETStandard2.0、net45、net40</td>
 <td></td>
 <td><strong><a href="https://www.nuget.org/packages/FreeSql.Provider.Oracle" target="_blank" rel="noopener noreferrer"><img src="https://buildstats.info/nuget/FreeSql.Provider.Oracle" alt="NuGet" loading="lazy"></a></strong></td>
 </tr>
 <tr>
-<td>FreeSql.Provider.OracleOledb</td>
+<td><a href="/guide/freesql-provider-oracle.html">FreeSql.Provider.OracleOledb</a></td>
 <td>NETStandard2.0、net45、net40</td>
 <td>基于 Oledb 解决 US7ASCII 中文乱码问题</td>
 <td><strong><a href="https://www.nuget.org/packages/FreeSql.Provider.OracleOledb" target="_blank" rel="noopener noreferrer"><img src="https://buildstats.info/nuget/FreeSql.Provider.OracleOledb" alt="NuGet" loading="lazy"></a></strong></td>
