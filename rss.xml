@@ -6,10 +6,183 @@
     <link>https://freesql.net/</link>
     <description>FreeSql Documents</description>
     <language>zh-CN</language>
-    <pubDate>Thu, 09 Feb 2023 04:12:30 GMT</pubDate>
-    <lastBuildDate>Thu, 09 Feb 2023 04:12:30 GMT</lastBuildDate>
+    <pubDate>Wed, 22 Feb 2023 05:34:23 GMT</pubDate>
+    <lastBuildDate>Wed, 22 Feb 2023 05:34:23 GMT</lastBuildDate>
     <generator>vuepress-plugin-feed2</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
+    <item>
+      <title>FreeSql.Provider.QuestDb</title>
+      <link>https://freesql.net/guide/freesql-provider-questdb.html</link>
+      <guid>https://freesql.net/guide/freesql-provider-questdb.html</guid>
+      <source url="https://freesql.net/rss.xml">FreeSql.Provider.QuestDb</source>
+      <description>介绍 QuestDB 是一款针对时序数据实时处理优化的关系型列存数据库， 支持 Rest API 方式访问，同时兼容 PostgreSQL 访问协议，以及 InfluxDB 写入的访问协议。自带 Web Console，方便数据库的基本访问 QuestDB | 官网 (https://questdb.io/) 安装包 FreeSql.Provider....</description>
+      <pubDate>Wed, 22 Feb 2023 05:25:18 GMT</pubDate>
+      <content:encoded><![CDATA[<h1 id="freesql-provider-questdb" tabindex="-1"> FreeSql.Provider.QuestDb</h1>
+<h2 id="介绍" tabindex="-1"> 介绍</h2>
+<p><code>QuestDB </code>是一款针对时序数据实时处理优化的关系型列存数据库， 支持 Rest API 方式访问，同时兼容 PostgreSQL 访问协议，以及 InfluxDB 写入的访问协议。自带 Web Console，方便数据库的基本访问</p>
+<p><a href="https://questdb.io/" target="_blank" rel="noopener noreferrer">QuestDB | 官网 </a></p>
+<h2 id="安装包" tabindex="-1"> 安装包</h2>
+<p>FreeSql.Provider.QuestDb</p>
+<p>.NET CLI</p>
+<div data-ext="sh"><pre><code>dotnet <span>add</span> package FreeSql.Provider.QuestDb
+</code></pre><div aria-hidden="true"><div></div></div></div><p>Package Manager</p>
+<div data-ext="sh"><pre><code>Install-Package FreeSql.Provider.QuestDb
+</code></pre><div aria-hidden="true"><div></div></div></div><h2 id="声明" tabindex="-1"> 声明</h2>
+<div data-ext="cs"><pre><code><span>static</span> <span>IFreeSql</span> fsql <span>=</span> <span>new</span> <span>FreeSql<span>.</span>FreeSqlBuilder</span><span>(</span><span>)</span>
+            <span>.</span><span>UseConnectionString</span><span>(</span>FreeSql<span>.</span>DataType<span>.</span>QuestDb<span>,</span>
+                <span>@"host=localhost;port=8812;username=admin;password=quest;database=qdb;ServerCompatibilityMode=NoTypeLoading;"</span><span>)</span>  <span>//连接字符串</span>
+            <span>.</span><span>UseMonitorCommand</span><span>(</span>cmd <span>=></span> Console<span>.</span><span>WriteLine</span><span>(</span><span><span>$"Sql：</span><span><span>{</span><span>cmd<span>.</span>CommandText</span><span>}</span></span><span>"</span></span><span>)</span><span>)</span> 
+            <span>.</span><span>UseQuestDbRestAPI</span><span>(</span><span>"localhost:9000"</span><span>,</span> <span>"username"</span><span>,</span> <span>"password"</span><span>)</span>  <span>//RestAPI，建议开启</span>
+            <span>.</span><span>Build</span><span>(</span><span>)</span><span>;</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div></div></div><h2 id="特有功能" tabindex="-1"> 特有功能</h2>
+<h4 id="sample-by" tabindex="-1"> Sample By</h4>
+<blockquote>
+<p>SAMPLE BY用于时间序列数据，将大型数据集汇总为同质时间块的聚合，作为SELECT语句的一部分</p>
+</blockquote>
+<p><a href="https://questdb.io/docs/reference/sql/sample-by/" target="_blank" rel="noopener noreferrer">SAMPLE BY keyword | QuestDB</a></p>
+<div data-ext="c#"><pre><code>fsql.Select&lt;Table&gt;()
+    .SampleBy(1, SampleUnits.d)
+    .WithTempQuery(q =&gt; new { q.Id, q.Activos, count = SqlExt.Count(q.Id).ToValue() })
+    .Where(q =&gt; q.Id != &quot;xxx&quot;)
+    .ToSql();
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div></div></div><blockquote>
+<p>生成SQL</p>
+</blockquote>
+<div data-ext="SQL"><pre><code>SELECT
+  *
+FROM
+  (
+    SELECT
+      a.&quot;Id&quot;,
+      a.&quot;Activos&quot;,
+      count(a.&quot;Id&quot;) &quot;count&quot;
+    FROM
+      &quot;Table&quot; a SAMPLE BY 1d
+  ) a
+WHERE
+  (a.&quot;Id&quot; &lt;&gt; '1')
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><h4 id="groupby" tabindex="-1"> GroupBy</h4>
+<blockquote>
+<p>需要注意的是QuestDb的GroupBy与其他关系型 数据库不同</p>
+</blockquote>
+<p><a href="https://questdb.io/docs/concept/sql-extensions/#group-by-is-optional" target="_blank" rel="noopener noreferrer">官网说明：SQL extensions | QuestDB</a></p>
+<div data-ext="C#"><pre><code>//这里通过WithTempQuery实现
+fsql.Select&lt;Table&gt;()
+    .WithTempQuery(q =&gt; new { q.Id, q.xxx, count = SqlExt.Count(q.Id).ToValue() })
+    .Where(q =&gt; q.Id != &quot;1&quot; &amp;&amp; q.count &gt; 1)
+    .ToSql();
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div></div></div><blockquote>
+<p>生成SQL</p>
+</blockquote>
+<div data-ext="SQL"><pre><code>SELECT
+  *
+FROM
+  (
+    SELECT
+      a.&quot;Id&quot;,
+      a.&quot;xxx&quot;,
+      count(a.&quot;Id&quot;) &quot;count&quot;
+    FROM
+      &quot;Table&quot; a
+  ) a
+WHERE
+  (
+    a.&quot;Id&quot; &lt;&gt; '1'
+    AND a.&quot;count&quot; &gt; 1
+  )
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><h4 id="latest-on" tabindex="-1"> Latest On</h4>
+<blockquote>
+<p>对于多个时间序列存储在同一个表中的场景，根据时间戳检索给定键或键组合的最新项</p>
+</blockquote>
+<p><a href="https://questdb.io/docs/reference/sql/latest-on/" target="_blank" rel="noopener noreferrer">LATEST ON keyword | QuestDB</a></p>
+<div data-ext="cs"><pre><code>fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>Table<span>></span></span></span><span>(</span><span>)</span>
+    <span>.</span><span>LatestOn</span><span>(</span>q <span>=></span> q<span>.</span>CreateTime<span>,</span> q <span>=></span> <span>new</span> <span>{</span> q<span>.</span>xxx<span>,</span> q<span>.</span>xxx <span>}</span><span>)</span>
+    <span>.</span><span>ToSql</span><span>(</span><span>)</span><span>;</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div></div></div><blockquote>
+<p>生成SQL</p>
+</blockquote>
+<div data-ext="SQL"><pre><code>SELECT  a.&quot;xxx&quot;, a.&quot;xxx&quot;, a.&quot;xxx&quot;, a.&quot;xxx&quot;, a.&quot;xxx&quot;, a.&quot;xxx&quot;, a.&quot;xxx&quot;, a.&quot;xxx&quot;, a.&quot;xxx&quot;
+FROM &quot;Table&quot; a
+LATEST ON a.xxxx  PARTITION BY a.xxxx 
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div></div></div><h4 id="bulkcopy" tabindex="-1"> BulkCopy</h4>
+<blockquote>
+<p>实测七列10W数据预热后只需1-2秒，100W数据15秒左右</p>
+</blockquote>
+<div data-ext="cs"><pre><code><span>//需要启用RestAPI</span>
+fsql<span>.</span><span>Insert</span><span>(</span>list<span>)</span><span>.</span><span>ExecuteBulkCopyAsync</span><span>(</span><span>)</span><span>;</span>
+</code></pre><div aria-hidden="true"><div></div><div></div></div></div><h4 id="自动分表、索引" tabindex="-1"> 自动分表、索引</h4>
+<blockquote>
+<p>QuestDb支持自动分表</p>
+</blockquote>
+<div data-ext="C#"><pre><code>[Index(&quot;Id_Index&quot;, nameof(Id), false)]
+class Table
+{
+    //索引类型必须是symbol
+    [Column(DbType = &quot;symbol&quot;)] 
+    public string Id { get; set; }
+    public string Name { get; set; }
+    public double? Activos { get; set; }
+    //按天分表 
+    [AutoSubtable(SubtableType.Day)] 
+    //特性标记类型必须是DateTime
+    public DateTime? CreateTime { get; set; }
+    public bool? IsCompra { get; set; }
+}
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><h2 id="常见问题" tabindex="-1"> 常见问题</h2>
+<h4 id="table-busy" tabindex="-1"> table busy</h4>
+<p><strong>多线程并发查询时会出现 table busy [reason=insert] 异常</strong></p>
+<p><a href="https://questdb.io/docs/troubleshooting/faq/#why-do-i-get-table-busy-error-messages-when-inserting-data-over-postgresql-wire-protocol" target="_blank" rel="noopener noreferrer">官网说明 | table busy  </a></p>
+<blockquote>
+<p>解决方案，启用RestAPI后 Insert/Update就会默认使用HTTP方式</p>
+</blockquote>
+<div data-ext="C#"><pre><code>//在FreeSqlBuilder增加UseQuestDbRestAPI()
+new FreeSql.FreeSqlBuilder()
+.UseQuestDbRestAPI(&quot;localhost:9000&quot;, &quot;username&quot;, &quot;password&quot;) 
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div></div></div><h4 id="restapi设置账号密码" tabindex="-1"> RestAPI设置账号密码</h4>
+<p>QuestDb WebConsole并不支持设置账号密码，但是官网给出解决方案 使用Nginx代理</p>
+<p><a href="https://questdb.io/blog/2022/08/05/setting-basic-auth-nginx/#introduction" target="_blank" rel="noopener noreferrer">Setting up Basic Authentication for QuestDB open source using Nginx | QuestDB</a></p>
+<h4 id="questdb不支持删除" tabindex="-1"> QuestDb不支持删除？</h4>
+<p><a href="https://questdb.io/docs/troubleshooting/faq/#how-do-i-delete-a-row" target="_blank" rel="noopener noreferrer">FAQ | How do I delete a row?</a></p>
+<h2 id="在线测试" tabindex="-1"> 在线测试</h2>
+<p><a href="https://demo.questdb.io/" target="_blank" rel="noopener noreferrer">QuestDB | 在线测试 </a> 提供了最新的QuestDB发行版和示例数据集:</p>
+<ul>
+<li>Trips: 10 years of NYC taxi trips with 1.6 billion rows</li>
+<li>Trades: live crytocurrency market data with 30M+ rows per month</li>
+<li>Pos: geolocations of 250k unique ships over time</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Query</th>
+<th>Execution time</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SELECT sum(double) FROM trips</td>
+<td>[0.15 secs](<a href="https://demo.questdb.io/?query=SELECT" target="_blank" rel="noopener noreferrer">https://demo.questdb.io/?query=SELECT</a> sum(trip_distance) FROM trips;&amp;executeQuery=true)</td>
+</tr>
+<tr>
+<td>SELECT sum(double), avg(double) FROM trips</td>
+<td>[0.5 secs](<a href="https://demo.questdb.io/?query=SELECT" target="_blank" rel="noopener noreferrer">https://demo.questdb.io/?query=SELECT</a> sum(fare_amount), avg(fare_amount) FROM trips;&amp;executeQuery=true)</td>
+</tr>
+<tr>
+<td>SELECT avg(double) FROM trips WHERE time in '2019'</td>
+<td>[0.02 secs](<a href="https://demo.questdb.io/?query=SELECT" target="_blank" rel="noopener noreferrer">https://demo.questdb.io/?query=SELECT</a> avg(trip_distance) FROM trips WHERE pickup_datetime IN '2019';&amp;executeQuery=true)</td>
+</tr>
+<tr>
+<td>SELECT time, avg(double) FROM trips WHERE time in '2019-01-01' SAMPLE BY 1h</td>
+<td>[0.01 secs](<a href="https://demo.questdb.io/?query=SELECT" target="_blank" rel="noopener noreferrer">https://demo.questdb.io/?query=SELECT</a> pickup_datetime, avg(trip_distance) FROM trips WHERE pickup_datetime IN '2019-01-01' SAMPLE BY 1h;&amp;executeQuery=true)</td>
+</tr>
+<tr>
+<td>SELECT * FROM trades LATEST ON time PARTITION BY symbol</td>
+<td>[0.00025 secs](<a href="https://demo.questdb.io/?query=SELECT" target="_blank" rel="noopener noreferrer">https://demo.questdb.io/?query=SELECT</a> * FROM trades LATEST ON timestamp PARTITION BY symbol;&amp;executeQuery=true)</td>
+</tr>
+</tbody>
+</table>
+<p>Our demo is running on <code>c5.metal</code> instance and using 24 cores out of</p>
+]]></content:encoded>
+    </item>
     <item>
       <title>聚合根（实验室）</title>
       <link>https://freesql.net/guide/aggregateroot.html</link>
