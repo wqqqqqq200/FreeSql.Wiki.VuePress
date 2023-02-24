@@ -3,7 +3,7 @@
   <id>https://freesql.net/</id>
   <title>FreeSql 官方文档</title>
   <subtitle>FreeSql Documents</subtitle>
-  <updated>2023-02-22T18:26:00.332Z</updated>
+  <updated>2023-02-24T07:43:06.672Z</updated>
   <generator>vuepress-plugin-feed2</generator>
   <link rel="self" href="https://freesql.net/atom.xml"/>
   <link rel="alternate" href="https://freesql.net/"/>
@@ -2250,7 +2250,7 @@ fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>User1<span>></
     <title type="html">Castle AOP + FreeSql 跨方法异步事务</title>
     <id>https://freesql.net/extra/aop-freesql-autofac.html</id>
     <link href="https://freesql.net/extra/aop-freesql-autofac.html"/>
-    <updated>2022-08-22T13:12:57.000Z</updated>
+    <updated>2023-02-24T07:41:07.000Z</updated>
     <summary type="html">使用Autofac基于特性标签，实现跨方法的异步事务处理 Autofac.Extensions.DependencyInjection; Autofac.Extras.DynamicProxy; Castle.Core.AsyncInterceptor(异步方法AOP拦截); FreeSql基础服务 安装FreeSql包 手动创建一个MySql/Mar...</summary>
     <content type="html"><![CDATA[<h1 id="castle-aop-freesql-跨方法异步事务" tabindex="-1"> Castle AOP + FreeSql 跨方法异步事务</h1>
 <p>使用Autofac基于特性标签，实现跨方法的异步事务处理</p>
@@ -2423,35 +2423,39 @@ dotnet <span>add</span> package Castle.Core.AsyncInterceptor
         <span>/// <span><span><span>&lt;</span>param</span> <span>name</span><span><span>=</span><span>"</span>invocation<span>"</span></span><span>></span></span><span><span><span>&lt;/</span>param</span><span>></span></span></span>
         <span>public</span> <span><span>void</span></span> <span>InterceptAsynchronous</span><span>(</span><span>IInvocation</span> invocation<span>)</span>
         <span>{</span>
-            <span>if</span> <span>(</span><span>TryBegin</span><span>(</span>invocation<span>)</span><span>)</span>
-            <span>{</span>
-                invocation<span>.</span>ReturnValue <span>=</span> <span>InternalInterceptAsynchronous</span><span>(</span>invocation<span>)</span><span>;</span>
-            <span>}</span>
-            <span>else</span>
-            <span>{</span>
-                invocation<span>.</span><span>Proceed</span><span>(</span><span>)</span><span>;</span>
-            <span>}</span>
+             invocation<span>.</span>ReturnValue <span>=</span> <span>InternalInterceptAsynchronous</span><span>(</span>invocation<span>)</span><span>;</span>
         <span>}</span>
 
         <span>private</span> <span>async</span> <span>Task</span> <span>InternalInterceptAsynchronous</span><span>(</span><span>IInvocation</span> invocation<span>)</span>
         <span>{</span>
-            <span>try</span>
+            <span>if</span> <span>(</span><span>TryBegin</span><span>(</span>invocation<span>)</span><span>)</span>
+            <span>{</span>
+                <span>try</span>
+                <span>{</span>
+                    invocation<span>.</span><span>Proceed</span><span>(</span><span>)</span><span>;</span>
+                    <span>if</span> <span>(</span>invocation<span>.</span>ReturnValue <span>!=</span> <span>null</span><span>)</span>
+                    <span>{</span>
+                        <span>await</span> <span>(</span>Task<span>)</span>invocation<span>.</span>ReturnValue<span>;</span>
+                    <span>}</span>
+                    _unitOfWork<span>.</span><span>Commit</span><span>(</span><span>)</span><span>;</span>
+                <span>}</span>
+                <span>catch</span> <span>(</span><span>Exception</span><span>)</span>
+                <span>{</span>
+                    _unitOfWork<span>.</span><span>Rollback</span><span>(</span><span>)</span><span>;</span>
+                    <span>throw</span><span>;</span>
+                <span>}</span>
+                <span>finally</span>
+                <span>{</span>
+                    _unitOfWork<span>.</span><span>Dispose</span><span>(</span><span>)</span><span>;</span>
+                <span>}</span>
+            <span>}</span>
+            <span>else</span>
             <span>{</span>
                 invocation<span>.</span><span>Proceed</span><span>(</span><span>)</span><span>;</span>
                 <span>if</span> <span>(</span>invocation<span>.</span>ReturnValue <span>!=</span> <span>null</span><span>)</span>
                 <span>{</span>
                     <span>await</span> <span>(</span>Task<span>)</span>invocation<span>.</span>ReturnValue<span>;</span>
                 <span>}</span>
-                _unitOfWork<span>.</span><span>Commit</span><span>(</span><span>)</span><span>;</span>
-            <span>}</span>
-            <span>catch</span> <span>(</span><span>System<span>.</span>Exception</span><span>)</span>
-            <span>{</span>
-                _unitOfWork<span>.</span><span>Rollback</span><span>(</span><span>)</span><span>;</span>
-                <span>throw</span><span>;</span>
-            <span>}</span>
-            <span>finally</span>
-            <span>{</span>
-                _unitOfWork<span>.</span><span>Dispose</span><span>(</span><span>)</span><span>;</span>
             <span>}</span>
         <span>}</span>
 
@@ -2495,7 +2499,7 @@ dotnet <span>add</span> package Castle.Core.AsyncInterceptor
             <span>return</span> result<span>;</span>
         <span>}</span>
     <span>}</span>
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><p>当Service层没有接口，则必须使用virtual虚方法。</p>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><p>当Service层没有接口，则必须使用virtual虚方法。</p>
 <div data-ext="cs"><pre><code>    <span>public</span> <span>class</span> <span>BlogService</span>
     <span>{</span>
         <span>/// <span><span><span>&lt;</span>summary</span><span>></span></span></span>

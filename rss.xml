@@ -6,8 +6,8 @@
     <link>https://freesql.net/</link>
     <description>FreeSql Documents</description>
     <language>zh-CN</language>
-    <pubDate>Wed, 22 Feb 2023 18:26:00 GMT</pubDate>
-    <lastBuildDate>Wed, 22 Feb 2023 18:26:00 GMT</lastBuildDate>
+    <pubDate>Fri, 24 Feb 2023 07:43:06 GMT</pubDate>
+    <lastBuildDate>Fri, 24 Feb 2023 07:43:06 GMT</lastBuildDate>
     <generator>vuepress-plugin-feed2</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
     <item>
@@ -2428,35 +2428,39 @@ dotnet <span>add</span> package Castle.Core.AsyncInterceptor
         <span>/// <span><span><span>&lt;</span>param</span> <span>name</span><span><span>=</span><span>"</span>invocation<span>"</span></span><span>></span></span><span><span><span>&lt;/</span>param</span><span>></span></span></span>
         <span>public</span> <span><span>void</span></span> <span>InterceptAsynchronous</span><span>(</span><span>IInvocation</span> invocation<span>)</span>
         <span>{</span>
-            <span>if</span> <span>(</span><span>TryBegin</span><span>(</span>invocation<span>)</span><span>)</span>
-            <span>{</span>
-                invocation<span>.</span>ReturnValue <span>=</span> <span>InternalInterceptAsynchronous</span><span>(</span>invocation<span>)</span><span>;</span>
-            <span>}</span>
-            <span>else</span>
-            <span>{</span>
-                invocation<span>.</span><span>Proceed</span><span>(</span><span>)</span><span>;</span>
-            <span>}</span>
+             invocation<span>.</span>ReturnValue <span>=</span> <span>InternalInterceptAsynchronous</span><span>(</span>invocation<span>)</span><span>;</span>
         <span>}</span>
 
         <span>private</span> <span>async</span> <span>Task</span> <span>InternalInterceptAsynchronous</span><span>(</span><span>IInvocation</span> invocation<span>)</span>
         <span>{</span>
-            <span>try</span>
+            <span>if</span> <span>(</span><span>TryBegin</span><span>(</span>invocation<span>)</span><span>)</span>
+            <span>{</span>
+                <span>try</span>
+                <span>{</span>
+                    invocation<span>.</span><span>Proceed</span><span>(</span><span>)</span><span>;</span>
+                    <span>if</span> <span>(</span>invocation<span>.</span>ReturnValue <span>!=</span> <span>null</span><span>)</span>
+                    <span>{</span>
+                        <span>await</span> <span>(</span>Task<span>)</span>invocation<span>.</span>ReturnValue<span>;</span>
+                    <span>}</span>
+                    _unitOfWork<span>.</span><span>Commit</span><span>(</span><span>)</span><span>;</span>
+                <span>}</span>
+                <span>catch</span> <span>(</span><span>Exception</span><span>)</span>
+                <span>{</span>
+                    _unitOfWork<span>.</span><span>Rollback</span><span>(</span><span>)</span><span>;</span>
+                    <span>throw</span><span>;</span>
+                <span>}</span>
+                <span>finally</span>
+                <span>{</span>
+                    _unitOfWork<span>.</span><span>Dispose</span><span>(</span><span>)</span><span>;</span>
+                <span>}</span>
+            <span>}</span>
+            <span>else</span>
             <span>{</span>
                 invocation<span>.</span><span>Proceed</span><span>(</span><span>)</span><span>;</span>
                 <span>if</span> <span>(</span>invocation<span>.</span>ReturnValue <span>!=</span> <span>null</span><span>)</span>
                 <span>{</span>
                     <span>await</span> <span>(</span>Task<span>)</span>invocation<span>.</span>ReturnValue<span>;</span>
                 <span>}</span>
-                _unitOfWork<span>.</span><span>Commit</span><span>(</span><span>)</span><span>;</span>
-            <span>}</span>
-            <span>catch</span> <span>(</span><span>System<span>.</span>Exception</span><span>)</span>
-            <span>{</span>
-                _unitOfWork<span>.</span><span>Rollback</span><span>(</span><span>)</span><span>;</span>
-                <span>throw</span><span>;</span>
-            <span>}</span>
-            <span>finally</span>
-            <span>{</span>
-                _unitOfWork<span>.</span><span>Dispose</span><span>(</span><span>)</span><span>;</span>
             <span>}</span>
         <span>}</span>
 
@@ -2500,7 +2504,7 @@ dotnet <span>add</span> package Castle.Core.AsyncInterceptor
             <span>return</span> result<span>;</span>
         <span>}</span>
     <span>}</span>
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><p>当Service层没有接口，则必须使用virtual虚方法。</p>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><p>当Service层没有接口，则必须使用virtual虚方法。</p>
 <div data-ext="cs"><pre><code>    <span>public</span> <span>class</span> <span>BlogService</span>
     <span>{</span>
         <span>/// <span><span><span>&lt;</span>summary</span><span>></span></span></span>
