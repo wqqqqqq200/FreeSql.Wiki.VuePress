@@ -6,8 +6,8 @@
     <link>https://freesql.net/</link>
     <description>FreeSql Documents</description>
     <language>zh-CN</language>
-    <pubDate>Tue, 28 Feb 2023 05:54:12 GMT</pubDate>
-    <lastBuildDate>Tue, 28 Feb 2023 05:54:12 GMT</lastBuildDate>
+    <pubDate>Tue, 28 Feb 2023 11:00:43 GMT</pubDate>
+    <lastBuildDate>Tue, 28 Feb 2023 11:00:43 GMT</lastBuildDate>
     <generator>vuepress-plugin-feed2</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
     <item>
@@ -15572,10 +15572,37 @@ fsql<span>.</span><span>UpdateDict</span><span>(</span>dic<span>)</span><span>.<
       <link>https://freesql.net/reference/change-log.html</link>
       <guid>https://freesql.net/reference/change-log.html</guid>
       <source url="https://freesql.net/rss.xml">更新日志</source>
-      <description>大约每月一次版本号，暂时以修复 bug 为主 v3.2.686 增加 FreeSqlBuilder UseQuoteSqlName 设置不使用 [] "" 限定符号；; 增加 Aop.CommandBefore 设置 .CommandText = null 可拦截某次执行；; 增加 IAdo.ExecuteNonQuery 重载方法（虚谷数据库）；; ...</description>
+      <description>大约每月一次版本号，暂时以修复 bug 为主 v3.2.689 增加 QuestDB 时序数据库支持；（感谢 Daily 贡献）; 修复 Array.Any OR 表达式树解析 bug；; 修复 GroupBy 之后 WithTempQuery 参数化时未传递的问题；; 修复 BulkUpdate 触发 Aop.AuditValue Insert 类型...</description>
       <pubDate>Thu, 04 Feb 2021 16:03:18 GMT</pubDate>
       <content:encoded><![CDATA[<h1 id="更新日志" tabindex="-1"> 更新日志</h1>
 <p>大约每月一次版本号，暂时以修复 bug 为主</p>
+<h2 id="v3-2-689" tabindex="-1"> v3.2.689</h2>
+<ul>
+<li><strong>增加 QuestDB 时序数据库支持；（感谢 Daily 贡献）</strong></li>
+<li>修复 Array.Any OR 表达式树解析 bug；</li>
+<li>修复 GroupBy 之后 WithTempQuery 参数化时未传递的问题；</li>
+<li>修复 BulkUpdate 触发 Aop.AuditValue Insert 类型的问题；</li>
+<li>修复 Ado.ExecuteNonQuery 超时参数未生效的问题；#1441</li>
+<li>修复 Firebird CodeFirst 索引 DESC 问题；#1413</li>
+<li>优化 Firebird CodeFirst 迁移代码；</li>
+<li>优化 Firebird 表达式树位运算的适配解析；#1413</li>
+<li>优化 SqlServer timestamp 行版本的支持；#1412</li>
+<li>优化 pgsql15.0 部分类型兼容；#1436</li>
+<li>完善 Sqlite DbFirst 获取索引信息；#1425</li>
+<li>优化 适配达梦最新驱动；</li>
+<li>优化 IUpdate 组合更新方式；</li>
+<li>优化 IUpdate.Set(xx, null) 的情况；</li>
+<li>优化 ISelect&lt;object&gt; AsType 的父子类转换时的情况；#1427</li>
+<li>优化 支持动态操作 IncludeByPropertyName then.WhereDynamicFilter 操作；</li>
+<li>优化 WithTempQuery 场景的 DTO 映射查询；</li>
+</ul>
+<h2 id="v3-2-687" tabindex="-1"> v3.2.687</h2>
+<ul>
+<li><strong>修复 3.2.686 JsonMap bug；</strong></li>
+<li>优化 参数化增加 ExpandoObject 支持；#1403</li>
+<li>优化 pgsql15.0 Version 版本号处理；</li>
+<li>优化 pgsql CodeFirst Syncsture CREATE INDEX code；</li>
+</ul>
 <h2 id="v3-2-686" tabindex="-1"> v3.2.686</h2>
 <ul>
 <li>增加 FreeSqlBuilder UseQuoteSqlName 设置不使用 [] `` &quot;&quot; 限定符号；</li>
