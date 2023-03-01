@@ -6,8 +6,8 @@
     <link>https://freesql.net/</link>
     <description>FreeSql Documents</description>
     <language>zh-CN</language>
-    <pubDate>Wed, 01 Mar 2023 04:24:38 GMT</pubDate>
-    <lastBuildDate>Wed, 01 Mar 2023 04:24:38 GMT</lastBuildDate>
+    <pubDate>Wed, 01 Mar 2023 04:24:41 GMT</pubDate>
+    <lastBuildDate>Wed, 01 Mar 2023 04:24:41 GMT</lastBuildDate>
     <generator>vuepress-plugin-feed2</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
     <item>
@@ -3477,11 +3477,11 @@ fsql<span>.</span>EntitySteering <span>=</span> <span>(</span>_<span>,</span> e<
       <link>https://freesql.net/reference/service-support.html</link>
       <guid>https://freesql.net/reference/service-support.html</guid>
       <source url="https://freesql.net/rss.xml">支持我们</source>
-      <description>FreeSql 采用 MIT 最宽松的开源协议，永久免费开源。任何公司或个人，都可以使用在任何商业项目中。 QQ 技术群：561616019(空闲)、4336577(满员)、8578575(满员)、52508226(满员) 反馈问题请前往 https://github.com/dotnetcore/FreeSql/issues (https://git...</description>
+      <description>FreeSql 采用 MIT 最宽松的开源协议，永久免费开源。任何公司或个人，都可以使用在任何商业项目中。 QQ 技术群：561616019（空闲）、4336577(满员)、8578575(满员)、52508226(满员) 反馈问题请前往 https://github.com/dotnetcore/FreeSql/issues (https://git...</description>
       <pubDate>Wed, 25 May 2022 15:18:32 GMT</pubDate>
       <content:encoded><![CDATA[<h1 id="支持我们" tabindex="-1"> 支持我们</h1>
 <p>FreeSql 采用 MIT 最宽松的开源协议，永久免费开源。任何公司或个人，都可以使用在任何商业项目中。</p>
-<p>QQ 技术群：561616019(空闲)、4336577(满员)、8578575(满员)、52508226(满员)</p>
+<p>QQ 技术群：561616019（空闲）、4336577(满员)、8578575(满员)、52508226(满员)</p>
 <p>反馈问题请前往 <a href="https://github.com/dotnetcore/FreeSql/issues" target="_blank" rel="noopener noreferrer">https://github.com/dotnetcore/FreeSql/issues</a></p>
 <h2 id="💕-自愿捐赠" tabindex="-1"> 💕 自愿捐赠</h2>
 <p>L*y 58 元、花花 88 元、麦兜很乖 50 元、网络来者 2000 元、John 99.99 元、alex 666 元、bacongao 36 元、无名 100 元、Eternity 188 元、无名 10 元、⌒.Helper~..oO 66 元、习惯与被习惯 100 元、无名 100 元、蔡易喋 88.88 元、中讯科技 1000 元、Good Good Work 24 元、炽焰 6.6 元、Nothing 100 元、兰州天擎赵 500 元、哈利路亚 300 元、
