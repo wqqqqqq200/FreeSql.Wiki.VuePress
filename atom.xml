@@ -3,7 +3,7 @@
   <id>https://freesql.net/</id>
   <title>FreeSql 官方文档</title>
   <subtitle>FreeSql Documents</subtitle>
-  <updated>2023-03-01T04:24:41.745Z</updated>
+  <updated>2023-03-01T04:28:12.734Z</updated>
   <generator>vuepress-plugin-feed2</generator>
   <link rel="self" href="https://freesql.net/atom.xml"/>
   <link rel="alternate" href="https://freesql.net/"/>
@@ -3472,11 +3472,11 @@ fsql<span>.</span>EntitySteering <span>=</span> <span>(</span>_<span>,</span> e<
     <title type="html">支持我们</title>
     <id>https://freesql.net/reference/service-support.html</id>
     <link href="https://freesql.net/reference/service-support.html"/>
-    <updated>2023-03-01T04:20:20.000Z</updated>
-    <summary type="html">FreeSql 采用 MIT 最宽松的开源协议，永久免费开源。任何公司或个人，都可以使用在任何商业项目中。 QQ 技术群：561616019（空闲）、4336577(满员)、8578575(满员)、52508226(满员) 反馈问题请前往 https://github.com/dotnetcore/FreeSql/issues (https://git...</summary>
+    <updated>2023-03-01T04:26:08.000Z</updated>
+    <summary type="html">FreeSql 采用 MIT 最宽松的开源协议，永久免费开源。任何公司或个人，都可以使用在任何商业项目中。 QQ 技术群：561616019(在线)、4336577(满员)、8578575(满员)、52508226(满员) 反馈问题请前往 https://github.com/dotnetcore/FreeSql/issues (https://git...</summary>
     <content type="html"><![CDATA[<h1 id="支持我们" tabindex="-1"> 支持我们</h1>
 <p>FreeSql 采用 MIT 最宽松的开源协议，永久免费开源。任何公司或个人，都可以使用在任何商业项目中。</p>
-<p>QQ 技术群：561616019（空闲）、4336577(满员)、8578575(满员)、52508226(满员)</p>
+<p>QQ 技术群：561616019(在线)、4336577(满员)、8578575(满员)、52508226(满员)</p>
 <p>反馈问题请前往 <a href="https://github.com/dotnetcore/FreeSql/issues" target="_blank" rel="noopener noreferrer">https://github.com/dotnetcore/FreeSql/issues</a></p>
 <h2 id="💕-自愿捐赠" tabindex="-1"> 💕 自愿捐赠</h2>
 <p>L*y 58 元、花花 88 元、麦兜很乖 50 元、网络来者 2000 元、John 99.99 元、alex 666 元、bacongao 36 元、无名 100 元、Eternity 188 元、无名 10 元、⌒.Helper~..oO 66 元、习惯与被习惯 100 元、无名 100 元、蔡易喋 88.88 元、中讯科技 1000 元、Good Good Work 24 元、炽焰 6.6 元、Nothing 100 元、兰州天擎赵 500 元、哈利路亚 300 元、
