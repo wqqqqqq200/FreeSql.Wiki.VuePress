@@ -6,8 +6,8 @@
     <link>https://freesql.net/</link>
     <description>FreeSql Documents</description>
     <language>zh-CN</language>
-    <pubDate>Thu, 02 Mar 2023 07:47:25 GMT</pubDate>
-    <lastBuildDate>Thu, 02 Mar 2023 07:47:25 GMT</lastBuildDate>
+    <pubDate>Thu, 02 Mar 2023 07:48:35 GMT</pubDate>
+    <lastBuildDate>Thu, 02 Mar 2023 07:48:35 GMT</lastBuildDate>
     <generator>vuepress-plugin-feed2</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
     <item>
@@ -10371,19 +10371,19 @@ fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>T<span>></span
       <link>https://freesql.net/guide/navigate-attribute.html</link>
       <guid>https://freesql.net/guide/navigate-attribute.html</guid>
       <source url="https://freesql.net/rss.xml">导航属性 ✨</source>
-      <description>FreeSql 提供 OneToMany, ManyToOne, ManyToMany, OneToOne, Parent, PgArrayToMany (https://www.cnblogs.com/FreeSql/p/16351417.html) 六种导航属性关系。 导航属性能干什么？ 《多表查询》 (select-multi-table) Wh...</description>
+      <description>FreeSql 提供 OneToMany, ManyToOne, ManyToMany, OneToOne, Parent, PgArrayToMany (https://www.cnblogs.com/FreeSql/p/16351417.html) 六种导航属性关系。 导航属性能干什么？ 《多表查询》 (select-multi-table.md)...</description>
       <pubDate>Thu, 04 Feb 2021 16:03:18 GMT</pubDate>
       <content:encoded><![CDATA[<h1 id="导航属性-✨" tabindex="-1"> 导航属性 ✨</h1>
 <p>FreeSql 提供 OneToMany, ManyToOne, ManyToMany, OneToOne, Parent, <a href="https://www.cnblogs.com/FreeSql/p/16351417.html" target="_blank" rel="noopener noreferrer">PgArrayToMany</a> 六种导航属性关系。</p>
 <p>导航属性能干什么？</p>
 <ul>
-<li><a href="select-multi-table">《多表查询》</a> Where(a =&gt; <a href="http://a.Parent.Parent.Name" target="_blank" rel="noopener noreferrer">a.Parent.Parent.Name</a> == &quot;xx&quot;)</li>
-<li><a href="select-include">《贪婪加载》</a> Include/IncludeMany</li>
-<li><a href="select-lazy-loading">《延时加载》</a></li>
-<li><a href="select-as-tree">《树表查询》</a></li>
-<li><a href="cascade-saving">《级联保存》</a></li>
-<li><a href="cascade-delete">《级联删除》</a></li>
-<li><a href="aggregateroot">《聚合根仓储》</a></li>
+<li><a href="/guide/select-multi-table.html">《多表查询》</a> Where(a =&gt; <a href="http://a.Parent.Parent.Name" target="_blank" rel="noopener noreferrer">a.Parent.Parent.Name</a> == &quot;xx&quot;)</li>
+<li><a href="/guide/select-include.html">《贪婪加载》</a> Include/IncludeMany</li>
+<li><a href="/guide/select-lazy-loading.html">《延时加载》</a></li>
+<li><a href="/guide/select-as-tree.html">《树表查询》</a></li>
+<li><a href="/guide/cascade-saving.html">《级联保存》</a></li>
+<li><a href="/guide/cascade-delete.html">《级联删除》</a></li>
+<li><a href="/guide/aggregateroot.html">《聚合根仓储》</a></li>
 </ul>
 <p>导航属性进行多表查询非常方便，lambda 表达式中直接使用导航对象点点点，舒服！！</p>
 <h1 id="自定义配置" tabindex="-1"> 自定义配置</h1>
