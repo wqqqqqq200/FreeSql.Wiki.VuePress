@@ -6,8 +6,8 @@
     <link>https://freesql.net/</link>
     <description>FreeSql Documents</description>
     <language>zh-CN</language>
-    <pubDate>Fri, 03 Mar 2023 02:46:33 GMT</pubDate>
-    <lastBuildDate>Fri, 03 Mar 2023 02:46:33 GMT</lastBuildDate>
+    <pubDate>Fri, 03 Mar 2023 03:26:01 GMT</pubDate>
+    <lastBuildDate>Fri, 03 Mar 2023 03:26:01 GMT</lastBuildDate>
     <generator>vuepress-plugin-feed2</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
     <item>
@@ -2159,7 +2159,7 @@ list<span>.</span><span>Add</span><span>(</span><span>new</span> <span>User1</sp
 <span>)</span> a 
 <span>GROUP</span> <span>BY</span> a<span>.</span><span><span>`</span>shareId<span>`</span></span> 
 <span>LIMIT</span> <span>0</span><span>,</span><span>30</span>
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><h4 id="场景6-fromquery-多个查询-最后映射查询" tabindex="-1"> 场景6：FromQuery 多个查询，最后映射查询</h4>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><h2 id="场景6-fromquery-多个查询-最后映射查询" tabindex="-1"> 场景6：FromQuery 多个查询，最后映射查询</h2>
 <div data-ext="cs"><pre><code><span><span>var</span></span> query2 <span>=</span> fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>UnitLog<span>,</span> LoadPlan<span>,</span> Instruction<span>></span></span></span><span>(</span><span>)</span>
     <span>.</span><span>InnerJoin</span><span>(</span><span>(</span>a<span>,</span> b<span>,</span> c<span>)</span> <span>=></span> a<span>.</span>LoadNo <span>==</span> b<span>.</span>LoadNo <span>&amp;&amp;</span> a<span>.</span>UnitTransactionType <span>==</span> <span>"TO"</span><span>)</span>
     <span>.</span><span>InnerJoin</span><span>(</span><span>(</span>a<span>,</span> b<span>,</span> c<span>)</span> <span>=></span> b<span>.</span>InstructionNo <span>==</span> c<span>.</span>InstructionNo<span>)</span>

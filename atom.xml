@@ -3,7 +3,7 @@
   <id>https://freesql.net/</id>
   <title>FreeSql 官方文档</title>
   <subtitle>FreeSql Documents</subtitle>
-  <updated>2023-03-03T02:46:33.407Z</updated>
+  <updated>2023-03-03T03:26:01.426Z</updated>
   <generator>vuepress-plugin-feed2</generator>
   <link rel="self" href="https://freesql.net/atom.xml"/>
   <link rel="alternate" href="https://freesql.net/"/>
@@ -2001,7 +2001,7 @@ repo<span>.</span><span>Delete</span><span>(</span>groups<span>)</span><span>;</
     <title type="html">嵌套查询 ✨</title>
     <id>https://freesql.net/guide/withtempquery.html</id>
     <link href="https://freesql.net/guide/withtempquery.html"/>
-    <updated>2023-03-03T02:44:30.000Z</updated>
+    <updated>2023-03-03T03:23:51.000Z</updated>
     <summary type="html">WithTempQuery 意见往集： 需求版本：v3.2.666+ GroupBy + WithTempQuery(嵌套查询) + FromQuery + UnionAll 组合使用，会让查询功能更加强大、灵活。 场景1：查询分组第一条记录 提示：支持多表嵌套查询，fsql.Select\() 如果数据库不支持开窗函数，可以使用分组嵌套查询解决： 场...</summary>
     <content type="html"><![CDATA[<h1 id="嵌套查询-✨" tabindex="-1"> 嵌套查询 ✨</h1>
 <h2 id="withtempquery" tabindex="-1"> WithTempQuery</h2>
@@ -2154,7 +2154,7 @@ list<span>.</span><span>Add</span><span>(</span><span>new</span> <span>User1</sp
 <span>)</span> a 
 <span>GROUP</span> <span>BY</span> a<span>.</span><span><span>`</span>shareId<span>`</span></span> 
 <span>LIMIT</span> <span>0</span><span>,</span><span>30</span>
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><h4 id="场景6-fromquery-多个查询-最后映射查询" tabindex="-1"> 场景6：FromQuery 多个查询，最后映射查询</h4>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><h2 id="场景6-fromquery-多个查询-最后映射查询" tabindex="-1"> 场景6：FromQuery 多个查询，最后映射查询</h2>
 <div data-ext="cs"><pre><code><span><span>var</span></span> query2 <span>=</span> fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>UnitLog<span>,</span> LoadPlan<span>,</span> Instruction<span>></span></span></span><span>(</span><span>)</span>
     <span>.</span><span>InnerJoin</span><span>(</span><span>(</span>a<span>,</span> b<span>,</span> c<span>)</span> <span>=></span> a<span>.</span>LoadNo <span>==</span> b<span>.</span>LoadNo <span>&amp;&amp;</span> a<span>.</span>UnitTransactionType <span>==</span> <span>"TO"</span><span>)</span>
     <span>.</span><span>InnerJoin</span><span>(</span><span>(</span>a<span>,</span> b<span>,</span> c<span>)</span> <span>=></span> b<span>.</span>InstructionNo <span>==</span> c<span>.</span>InstructionNo<span>)</span>
