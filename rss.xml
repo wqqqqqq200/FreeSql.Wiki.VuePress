@@ -6,8 +6,8 @@
     <link>https://freesql.net/</link>
     <description>FreeSql Documents</description>
     <language>zh-CN</language>
-    <pubDate>Fri, 03 Mar 2023 02:01:49 GMT</pubDate>
-    <lastBuildDate>Fri, 03 Mar 2023 02:01:49 GMT</lastBuildDate>
+    <pubDate>Fri, 03 Mar 2023 02:06:55 GMT</pubDate>
+    <lastBuildDate>Fri, 03 Mar 2023 02:06:55 GMT</lastBuildDate>
     <generator>vuepress-plugin-feed2</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
     <item>
@@ -2227,7 +2227,25 @@ list<span>.</span><span>Add</span><span>(</span><span>new</span> <span>User1</sp
   min <span>=</span> fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>Topic<span>></span></span></span><span>(</span><span>)</span><span>.</span><span>Where</span><span>(</span>b <span>=></span> b<span>.</span>CategoryId <span>==</span> a<span>.</span>Id<span>)</span><span>.</span><span>Min</span><span>(</span>b <span>=></span> b<span>.</span>Clicks<span>)</span><span>,</span>
   avg <span>=</span> fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>Topic<span>></span></span></span><span>(</span><span>)</span><span>.</span><span>Where</span><span>(</span>b <span>=></span> b<span>.</span>CategoryId <span>==</span> a<span>.</span>Id<span>)</span><span>.</span><span>Avg</span><span>(</span>b <span>=></span> b<span>.</span>Clicks<span>)</span>
 <span>}</span><span>)</span><span>;</span>
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><h2 id="tosql-withsql" tabindex="-1"> ToSql + WithSql</h2>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><h2 id="子表tolist" tabindex="-1"> 子表ToList</h2>
+<div data-ext="cs"><pre><code><span>//最多执行3次 SQL</span>
+fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>Topic<span>></span></span></span><span>(</span><span>)</span><span>.</span><span>ToList</span><span>(</span>a <span>=></span> <span>new</span>
+<span>{</span>
+  all <span>=</span> a<span>,</span>
+  list1 <span>=</span> fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>T2<span>></span></span></span><span>(</span><span>)</span><span>.</span><span>ToList</span><span>(</span><span>)</span><span>,</span>
+  list2 <span>=</span> fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>T2<span>></span></span></span><span>(</span><span>)</span><span>.</span><span>Where</span><span>(</span>b <span>=></span> b<span>.</span>TopicId <span>==</span> a<span>.</span>Id<span>)</span><span>.</span><span>ToList</span><span>(</span><span>)</span>
+<span>}</span><span>)</span><span>;</span>
+
+<span>//分组之后，最多执行3次 SQL</span>
+fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>Topic<span>></span></span></span><span>(</span><span>)</span>
+    <span>.</span><span>GroupBy</span><span>(</span>a <span>=></span> <span>new</span> <span>{</span> a<span>.</span>Author <span>}</span><span>)</span>
+    <span>.</span><span>WithTempQuery</span><span>(</span>a <span>=></span> <span>new</span> <span>{</span> Author <span>=</span> a<span>.</span>Key<span>.</span>Author<span>,</span> Count <span>=</span> a<span>.</span><span>Count</span><span>(</span><span>)</span> <span>}</span><span>)</span>
+    <span>.</span><span>ToList</span><span>(</span>a <span>=></span> <span>new</span> <span>{</span>
+        a<span>.</span>Author<span>,</span> a<span>.</span>Count<span>,</span>
+        list1 <span>=</span> fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>T2<span>></span></span></span><span>(</span><span>)</span><span>.</span><span>ToList</span><span>(</span><span>)</span><span>,</span>
+        list2 <span>=</span> fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>T2<span>></span></span></span><span>(</span><span>)</span><span>.</span><span>Where</span><span>(</span>b <span>=></span> b<span>.</span>Author <span>==</span> a<span>.</span>Author<span>)</span><span>.</span><span>ToList</span><span>(</span><span>)</span>
+    <span>}</span><span>)</span><span>;</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><h2 id="tosql-withsql" tabindex="-1"> ToSql + WithSql</h2>
 <p>这是早期提供的嵌套查询方法</p>
 <div data-ext="cs"><pre><code><span><span>var</span></span> sql <span>=</span> fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>User1<span>></span></span></span><span>(</span><span>)</span>
     <span>.</span><span>Where</span><span>(</span>a <span>=></span> a<span>.</span>Id <span>&lt;</span> <span>1000</span><span>)</span>
@@ -6702,7 +6720,16 @@ fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>T<span>></span
   list1 <span>=</span> fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>T2<span>></span></span></span><span>(</span><span>)</span><span>.</span><span>ToList</span><span>(</span><span>)</span><span>,</span>
   list2 <span>=</span> fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>T2<span>></span></span></span><span>(</span><span>)</span><span>.</span><span>Where</span><span>(</span>b <span>=></span> b<span>.</span>TopicId <span>==</span> a<span>.</span>Id<span>)</span><span>.</span><span>ToList</span><span>(</span><span>)</span>
 <span>}</span><span>)</span><span>;</span>
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div></div></div><h2 id="自定义解析" tabindex="-1"> 自定义解析</h2>
+
+fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>Topic<span>></span></span></span><span>(</span><span>)</span>
+    <span>.</span><span>GroupBy</span><span>(</span>a <span>=></span> <span>new</span> <span>{</span> a<span>.</span>Author <span>}</span><span>)</span>
+    <span>.</span><span>WithTempQuery</span><span>(</span>a <span>=></span> <span>new</span> <span>{</span> Author <span>=</span> a<span>.</span>Key<span>.</span>Author<span>,</span> Count <span>=</span> a<span>.</span><span>Count</span><span>(</span><span>)</span> <span>}</span><span>)</span>
+    <span>.</span><span>ToList</span><span>(</span>a <span>=></span> <span>new</span> <span>{</span>
+        a<span>.</span>Author<span>,</span> a<span>.</span>Count<span>,</span>
+        list1 <span>=</span> fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>T2<span>></span></span></span><span>(</span><span>)</span><span>.</span><span>ToList</span><span>(</span><span>)</span><span>,</span>
+        list2 <span>=</span> fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>T2<span>></span></span></span><span>(</span><span>)</span><span>.</span><span>Where</span><span>(</span>b <span>=></span> b<span>.</span>Author <span>==</span> a<span>.</span>Author<span>)</span><span>.</span><span>ToList</span><span>(</span><span>)</span>
+    <span>}</span><span>)</span><span>;</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><h2 id="自定义解析" tabindex="-1"> 自定义解析</h2>
 <div data-ext="cs"><pre><code><span>[</span><span><span>ExpressionCall</span></span><span>]</span>
 <span>public</span> <span>static</span> <span>class</span> <span>DbFunc</span> <span>{</span>
   <span>//必要定义 static + ThreadLocal</span>
