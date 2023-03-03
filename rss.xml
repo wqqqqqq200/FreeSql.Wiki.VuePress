@@ -6,8 +6,8 @@
     <link>https://freesql.net/</link>
     <description>FreeSql Documents</description>
     <language>zh-CN</language>
-    <pubDate>Fri, 03 Mar 2023 02:26:24 GMT</pubDate>
-    <lastBuildDate>Fri, 03 Mar 2023 02:26:24 GMT</lastBuildDate>
+    <pubDate>Fri, 03 Mar 2023 02:28:08 GMT</pubDate>
+    <lastBuildDate>Fri, 03 Mar 2023 02:28:08 GMT</lastBuildDate>
     <generator>vuepress-plugin-feed2</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
     <item>
@@ -12175,13 +12175,13 @@ fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>Topic<span>,</
 <span>}</span><span>)</span><span>;</span>
 
 fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>Topic<span>></span></span></span><span>(</span><span>)</span>
-    <span>.</span><span>GroupBy</span><span>(</span>a <span>=></span> <span>new</span> <span>{</span> a<span>.</span>Author <span>}</span><span>)</span>
-    <span>.</span><span>WithTempQuery</span><span>(</span>a <span>=></span> <span>new</span> <span>{</span> Author <span>=</span> a<span>.</span>Key<span>.</span>Author<span>,</span> Count <span>=</span> a<span>.</span><span>Count</span><span>(</span><span>)</span> <span>}</span><span>)</span>
-    <span>.</span><span>ToList</span><span>(</span>a <span>=></span> <span>new</span> <span>{</span>
-        a<span>.</span>Author<span>,</span> a<span>.</span>Count<span>,</span>
-        list1 <span>=</span> fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>T2<span>></span></span></span><span>(</span><span>)</span><span>.</span><span>ToList</span><span>(</span><span>)</span><span>,</span>
-        list2 <span>=</span> fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>T2<span>></span></span></span><span>(</span><span>)</span><span>.</span><span>Where</span><span>(</span>b <span>=></span> b<span>.</span>Author <span>==</span> a<span>.</span>Author<span>)</span><span>.</span><span>ToList</span><span>(</span><span>)</span>
-    <span>}</span><span>)</span><span>;</span>
+  <span>.</span><span>GroupBy</span><span>(</span>a <span>=></span> <span>new</span> <span>{</span> a<span>.</span>Author <span>}</span><span>)</span>
+  <span>.</span><span>WithTempQuery</span><span>(</span>a <span>=></span> <span>new</span> <span>{</span> Author <span>=</span> a<span>.</span>Key<span>.</span>Author<span>,</span> Count <span>=</span> a<span>.</span><span>Count</span><span>(</span><span>)</span> <span>}</span><span>)</span>
+  <span>.</span><span>ToList</span><span>(</span>a <span>=></span> <span>new</span> <span>{</span>
+    a<span>.</span>Author<span>,</span> a<span>.</span>Count<span>,</span>
+    list1 <span>=</span> fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>T2<span>></span></span></span><span>(</span><span>)</span><span>.</span><span>ToList</span><span>(</span><span>)</span><span>,</span>
+    list2 <span>=</span> fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>T2<span>></span></span></span><span>(</span><span>)</span><span>.</span><span>Where</span><span>(</span>b <span>=></span> b<span>.</span>Author <span>==</span> a<span>.</span>Author<span>)</span><span>.</span><span>ToList</span><span>(</span><span>)</span>
+  <span>}</span><span>)</span><span>;</span>
 </code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><h2 id="_10、集合属性" tabindex="-1"> 10、集合属性</h2>
 <div data-ext="cs"><pre><code>fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>Category<span>></span></span></span><span>(</span><span>)</span>
   <span>.</span><span>Where</span><span>(</span>a <span>=></span> a<span>.</span>Topics<span>.</span><span>Any</span><span>(</span>b <span>=></span> b<span>.</span>Title<span>.</span><span>Contains</span><span>(</span><span>"xx"</span><span>)</span><span>)</span><span>)</span> <span>//v3.2.600 以下使用 a.Topics.AsSelect()</span>
