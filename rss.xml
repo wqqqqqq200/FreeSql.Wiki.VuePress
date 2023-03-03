@@ -6,8 +6,8 @@
     <link>https://freesql.net/</link>
     <description>FreeSql Documents</description>
     <language>zh-CN</language>
-    <pubDate>Fri, 03 Mar 2023 02:38:52 GMT</pubDate>
-    <lastBuildDate>Fri, 03 Mar 2023 02:38:52 GMT</lastBuildDate>
+    <pubDate>Fri, 03 Mar 2023 02:39:27 GMT</pubDate>
+    <lastBuildDate>Fri, 03 Mar 2023 02:39:27 GMT</lastBuildDate>
     <generator>vuepress-plugin-feed2</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
     <item>
@@ -9940,8 +9940,8 @@ Assert<span>.</span><span>Equal</span><span>(</span><span>"中国[100000] -> 北
 </code></pre><div aria-hidden="true"><div></div></div></div><p>在 Dto 上做映射 IncludeMany：</p>
 <div data-ext="cs"><pre><code><span>//定义临时类，也可以是 Dto 类</span>
 <span>class</span> <span>Dto</span> <span>{</span>
-    <span>public</span> <span><span>int</span></span> TypeId <span>{</span> <span>get</span><span>;</span> <span>set</span><span>;</span> <span>}</span>
-    <span>public</span> <span>List<span>&lt;</span>Goods <span>></span></span> GoodsList <span>{</span> <span>get</span><span>;</span> <span>set</span><span>;</span> <span>}</span>
+  <span>public</span> <span><span>int</span></span> TypeId <span>{</span> <span>get</span><span>;</span> <span>set</span><span>;</span> <span>}</span>
+  <span>public</span> <span>List<span>&lt;</span>Goods <span>></span></span> GoodsList <span>{</span> <span>get</span><span>;</span> <span>set</span><span>;</span> <span>}</span>
 <span>}</span>
 
 <span>//查询 Goods 商品表，分类1、分类2、分类3 各10条数据</span>
@@ -9957,9 +9957,9 @@ dto<span>.</span><span>IncludeMany</span><span>(</span>d <span>=></span> d<span>
 <p>多表查询时，像 isdeleted 每个表都给条件，挺麻烦的。WhereCascade 使用后生成 sql 时，所有表都附上这个条件。</p>
 <p>如：</p>
 <div data-ext="cs"><pre><code>fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>t1<span>></span></span></span><span>(</span><span>)</span>
-    <span>.</span><span><span>LeftJoin</span><span><span>&lt;</span>t2<span>></span></span></span><span>(</span><span>..</span><span>.</span><span>)</span>
-    <span>.</span><span>WhereCascade</span><span>(</span>x <span>=></span> x<span>.</span>IsDeleted <span>==</span> <span>false</span><span>)</span>
-    <span>.</span><span>ToList</span><span>(</span><span>)</span><span>;</span>
+  <span>.</span><span><span>LeftJoin</span><span><span>&lt;</span>t2<span>></span></span></span><span>(</span><span>..</span><span>.</span><span>)</span>
+  <span>.</span><span>WhereCascade</span><span>(</span>x <span>=></span> x<span>.</span>IsDeleted <span>==</span> <span>false</span><span>)</span>
+  <span>.</span><span>ToList</span><span>(</span><span>)</span><span>;</span>
 </code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div></div></div><p>得到的 SQL：</p>
 <div data-ext="sql"><pre><code><span>SELECT</span> <span>.</span><span>.</span><span>.</span>
 <span>FROM</span> t1
@@ -9981,19 +9981,19 @@ dto<span>.</span><span>IncludeMany</span><span>(</span>d <span>=></span> d<span>
 </ul>
 <div data-ext="cs"><pre><code><span>DynamicFilterInfo</span> dyfilter <span>=</span> JsonConvert<span>.</span><span><span>DeserializeObject</span><span><span>&lt;</span>DynamicFilterInfo<span>></span></span></span><span>(</span><span>@"
 {
-    ""Logic"": ""And"",
-    ""Filters"":
-    [
-        { ""Field"": ""id"", ""Operator"": ""Equals"", ""Value"": 1 },
-        {
-            ""Logic"": ""Or"",
-            ""Filters"":
-            [
-                { ""Field"": ""id"", ""Operator"": ""Equals"", ""Value"": 2 },
-                { ""Field"": ""id"", ""Operator"": ""Equals"", ""Value"": 3 }
-            ]
-        }
-    ]
+  ""Logic"": ""And"",
+  ""Filters"":
+  [
+    { ""Field"": ""id"", ""Operator"": ""Equals"", ""Value"": 1 },
+    {
+      ""Logic"": ""Or"",
+      ""Filters"":
+      [
+        { ""Field"": ""id"", ""Operator"": ""Equals"", ""Value"": 2 },
+        { ""Field"": ""id"", ""Operator"": ""Equals"", ""Value"": 3 }
+      ]
+    }
+  ]
 }"</span><span>)</span><span>;</span>
 fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>Region<span>></span></span></span><span>(</span><span>)</span><span>.</span><span>WhereDynamicFilter</span><span>(</span>dyfilter<span>)</span><span>.</span><span>ToList</span><span>(</span><span>)</span><span>;</span>
 <span>//WHERE id = 1 AND (id = 2 OR id = 3)</span>
