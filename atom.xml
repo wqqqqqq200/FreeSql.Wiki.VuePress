@@ -3,7 +3,7 @@
   <id>https://freesql.net/</id>
   <title>FreeSql 官方文档</title>
   <subtitle>FreeSql Documents</subtitle>
-  <updated>2023-03-03T02:39:27.596Z</updated>
+  <updated>2023-03-03T02:46:33.407Z</updated>
   <generator>vuepress-plugin-feed2</generator>
   <link rel="self" href="https://freesql.net/atom.xml"/>
   <link rel="alternate" href="https://freesql.net/"/>
@@ -2001,7 +2001,7 @@ repo<span>.</span><span>Delete</span><span>(</span>groups<span>)</span><span>;</
     <title type="html">嵌套查询 ✨</title>
     <id>https://freesql.net/guide/withtempquery.html</id>
     <link href="https://freesql.net/guide/withtempquery.html"/>
-    <updated>2023-03-03T02:20:07.000Z</updated>
+    <updated>2023-03-03T02:44:30.000Z</updated>
     <summary type="html">WithTempQuery 意见往集： 需求版本：v3.2.666+ GroupBy + WithTempQuery(嵌套查询) + FromQuery + UnionAll 组合使用，会让查询功能更加强大、灵活。 场景1：查询分组第一条记录 提示：支持多表嵌套查询，fsql.Select\() 如果数据库不支持开窗函数，可以使用分组嵌套查询解决： 场...</summary>
     <content type="html"><![CDATA[<h1 id="嵌套查询-✨" tabindex="-1"> 嵌套查询 ✨</h1>
 <h2 id="withtempquery" tabindex="-1"> WithTempQuery</h2>
@@ -2154,7 +2154,42 @@ list<span>.</span><span>Add</span><span>(</span><span>new</span> <span>User1</sp
 <span>)</span> a 
 <span>GROUP</span> <span>BY</span> a<span>.</span><span><span>`</span>shareId<span>`</span></span> 
 <span>LIMIT</span> <span>0</span><span>,</span><span>30</span>
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><h2 id="withparameters-参数化共享" tabindex="-1"> WithParameters 参数化共享</h2>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><h4 id="场景6-fromquery-多个查询-最后映射查询" tabindex="-1"> 场景6：FromQuery 多个查询，最后映射查询</h4>
+<div data-ext="cs"><pre><code><span><span>var</span></span> query2 <span>=</span> fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>UnitLog<span>,</span> LoadPlan<span>,</span> Instruction<span>></span></span></span><span>(</span><span>)</span>
+    <span>.</span><span>InnerJoin</span><span>(</span><span>(</span>a<span>,</span> b<span>,</span> c<span>)</span> <span>=></span> a<span>.</span>LoadNo <span>==</span> b<span>.</span>LoadNo <span>&amp;&amp;</span> a<span>.</span>UnitTransactionType <span>==</span> <span>"TO"</span><span>)</span>
+    <span>.</span><span>InnerJoin</span><span>(</span><span>(</span>a<span>,</span> b<span>,</span> c<span>)</span> <span>=></span> b<span>.</span>InstructionNo <span>==</span> c<span>.</span>InstructionNo<span>)</span>
+    <span>.</span><span>WithTempQuery</span><span>(</span><span>(</span>a<span>,</span> b<span>,</span> c<span>)</span> <span>=></span> <span>new</span>
+    <span>{</span>
+        a<span>.</span>LoadNo<span>,</span>
+        a<span>.</span>SeqNoLog<span>,</span>
+        c<span>.</span>DeliveryInstractionStatus<span>,</span>
+        c<span>.</span>UpTime<span>,</span>
+        RN <span>=</span> SqlExt<span>.</span><span>RowNumber</span><span>(</span><span>)</span><span>.</span><span>Over</span><span>(</span><span>)</span><span>.</span><span>PartitionBy</span><span>(</span>a<span>.</span>UnitId<span>)</span><span>.</span><span>OrderByDescending</span><span>(</span>a<span>.</span>SeqNoLog<span>)</span><span>.</span><span>ToValue</span><span>(</span><span>)</span>
+    <span>}</span><span>)</span><span>;</span>
+<span><span>var</span></span> query3 <span>=</span> fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>Unit<span>></span></span></span><span>(</span><span>)</span><span>;</span>
+
+fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>UnitLog<span>></span></span></span><span>(</span><span>)</span>
+    <span>.</span><span>FromQuery</span><span>(</span>query2<span>,</span> query3<span>)</span>
+    <span>.</span><span>InnerJoin</span><span>(</span><span>(</span>a<span>,</span>b<span>,</span>c<span>)</span> <span>=></span> a<span>.</span>SeqNoLog <span>==</span> b<span>.</span>SeqNoLog<span>)</span>
+    <span>.</span><span>InnerJoin</span><span>(</span><span>(</span>a<span>,</span>b<span>,</span>c<span>)</span> <span>=></span> a<span>.</span>UnitId <span>==</span> c<span>.</span>UnitId<span>)</span>
+    <span>.</span><span>Where</span><span>(</span><span>(</span>a<span>,</span>b<span>,</span>c<span>)</span> <span>=></span> b<span>.</span>RN <span>&lt;</span> <span>2</span><span>)</span>
+    <span>.</span><span>ToSql</span><span>(</span><span>(</span>a<span>,</span>b<span>,</span>c<span>)</span> <span>=></span> <span>new</span> <span>MB51_View</span>
+    <span>{</span>
+        <span>//CkassIfCation = a.CkassIfCation,</span>
+        PGI <span>=</span> b<span>.</span>DeliveryInstractionStatus<span>,</span>
+        PGITime <span>=</span> b<span>.</span>UpTime<span>,</span>
+        IsDelayPGI <span>=</span> <span>true</span><span>,</span>
+        RunNo <span>=</span> c<span>.</span>RunNo
+    <span>}</span><span>)</span><span>;</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><div data-ext="sql"><pre><code><span>SELECT</span> a<span>.</span><span>[</span>CkassIfCation<span>]</span> as1<span>,</span> b<span>.</span><span>[</span>DeliveryInstractionStatus<span>]</span> as2<span>,</span> b<span>.</span><span>[</span>UpTime<span>]</span> as3<span>,</span> <span>1</span> as4<span>,</span> c<span>.</span><span>[</span>RunNo<span>]</span> as5 
+<span>FROM</span> <span>[</span>UnitLog<span>]</span> a 
+<span>INNER</span> <span>JOIN</span> <span>(</span><span>SELECT</span> a<span>.</span><span>[</span>LoadNo<span>]</span><span>,</span> a<span>.</span><span>[</span>SeqNoLog<span>]</span><span>,</span> c<span>.</span><span>[</span>DeliveryInstractionStatus<span>]</span><span>,</span> c<span>.</span><span>[</span>UpTime<span>]</span><span>,</span> row_number<span>(</span><span>)</span> <span>over</span><span>(</span> <span>partition</span> <span>by</span> a<span>.</span><span>[</span>UnitId<span>]</span> <span>order</span> <span>by</span> a<span>.</span><span>[</span>SeqNoLog<span>]</span> <span>desc</span><span>)</span> <span>[</span>RN<span>]</span> 
+    <span>FROM</span> <span>[</span>UnitLog<span>]</span> a 
+    <span>INNER</span> <span>JOIN</span> <span>[</span>LoadPlan<span>]</span> b <span>ON</span> a<span>.</span><span>[</span>LoadNo<span>]</span> <span>=</span> b<span>.</span><span>[</span>LoadNo<span>]</span> <span>AND</span> a<span>.</span><span>[</span>UnitTransactionType<span>]</span> <span>=</span> N<span>'TO'</span> 
+    <span>INNER</span> <span>JOIN</span> <span>[</span>Instruction<span>]</span> c <span>ON</span> b<span>.</span><span>[</span>InstructionNo<span>]</span> <span>=</span> c<span>.</span><span>[</span>InstructionNo<span>]</span> <span>)</span> b <span>ON</span> a<span>.</span><span>[</span>SeqNoLog<span>]</span> <span>=</span> b<span>.</span><span>[</span>SeqNoLog<span>]</span> 
+<span>INNER</span> <span>JOIN</span> <span>[</span>Unit<span>]</span> c <span>ON</span> a<span>.</span><span>[</span>UnitId<span>]</span> <span>=</span> c<span>.</span><span>[</span>UnitId<span>]</span> 
+<span>WHERE</span> <span>(</span>b<span>.</span><span>[</span>RN<span>]</span> <span>&lt;</span> <span>2</span><span>)</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><h2 id="withparameters-参数化共享" tabindex="-1"> WithParameters 参数化共享</h2>
 <p>开启参数化查询功能后，使用 WithParameters 共享参数化，避免产生相同的参数名称：</p>
 <div data-ext="cs"><pre><code><span><span>var</span></span> dbpars <span>=</span> <span>new</span> <span>List<span>&lt;</span>DbParameter<span>></span></span><span>(</span><span>)</span><span>;</span>
 
