@@ -6,8 +6,8 @@
     <link>https://freesql.net/</link>
     <description>FreeSql Documents</description>
     <language>zh-CN</language>
-    <pubDate>Fri, 03 Mar 2023 02:28:08 GMT</pubDate>
-    <lastBuildDate>Fri, 03 Mar 2023 02:28:08 GMT</lastBuildDate>
+    <pubDate>Fri, 03 Mar 2023 02:36:16 GMT</pubDate>
+    <lastBuildDate>Fri, 03 Mar 2023 02:36:16 GMT</lastBuildDate>
     <generator>vuepress-plugin-feed2</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
     <item>
@@ -12657,19 +12657,19 @@ fsql<span>.</span><span>SetGlobalSelectWithLock</span><span>(</span>SqlServerLoc
 </ul>
 <div data-ext="cs"><pre><code><span>DynamicFilterInfo</span> dyfilter <span>=</span> JsonConvert<span>.</span><span><span>DeserializeObject</span><span><span>&lt;</span>DynamicFilterInfo<span>></span></span></span><span>(</span><span>@"
 {
-    ""Logic"": ""And"",
-    ""Filters"":
-    [
-        { ""Field"": ""id"", ""Operator"": ""Equals"", ""Value"": 1 },
-        {
-            ""Logic"": ""Or"",
-            ""Filters"":
-            [
-                { ""Field"": ""id"", ""Operator"": ""Equals"", ""Value"": 2 },
-                { ""Field"": ""id"", ""Operator"": ""Equals"", ""Value"": 3 }
-            ]
-        }
-    ]
+  ""Logic"": ""And"",
+  ""Filters"":
+  [
+    { ""Field"": ""id"", ""Operator"": ""Equals"", ""Value"": 1 },
+    {
+      ""Logic"": ""Or"",
+      ""Filters"":
+      [
+        { ""Field"": ""id"", ""Operator"": ""Equals"", ""Value"": 2 },
+        { ""Field"": ""id"", ""Operator"": ""Equals"", ""Value"": 3 }
+      ]
+    }
+  ]
 }"</span><span>)</span><span>;</span>
 fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>Region<span>></span></span></span><span>(</span><span>)</span><span>.</span><span>WhereDynamicFilter</span><span>(</span>dyfilter<span>)</span><span>.</span><span>ToList</span><span>(</span><span>)</span><span>;</span>
 <span>//WHERE id = 1 AND (id = 2 OR id = 3)</span>
