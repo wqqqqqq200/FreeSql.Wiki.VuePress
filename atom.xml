@@ -3,7 +3,7 @@
   <id>https://freesql.net/</id>
   <title>FreeSql 官方文档</title>
   <subtitle>FreeSql Documents</subtitle>
-  <updated>2023-03-03T02:22:57.315Z</updated>
+  <updated>2023-03-03T02:23:12.860Z</updated>
   <generator>vuepress-plugin-feed2</generator>
   <link rel="self" href="https://freesql.net/atom.xml"/>
   <link rel="alternate" href="https://freesql.net/"/>
@@ -12212,7 +12212,7 @@ fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>Topic<span>></
     <title type="html">返回数据 ✨</title>
     <id>https://freesql.net/guide/select-return-data.html</id>
     <link href="https://freesql.net/guide/select-return-data.html"/>
-    <updated>2023-03-03T01:58:55.000Z</updated>
+    <updated>2023-03-03T02:21:08.000Z</updated>
     <summary type="html">FreeSql 采用 ExpressionTree 优化读取速度，如果懂技术的你一定知道 .NET Core 技术下除了原生代码，最快就是 Emit 和 ExpressionTree。项目在初期使用的反射 + 缓存，虽然 .NET Core 优化了反射性能，但经过与 Dapper 性能测试对比之后，发现仍然有一定差距，改成 ExpresstionTre...</summary>
     <content type="html"><![CDATA[<h1 id="返回数据-✨" tabindex="-1"> 返回数据 ✨</h1>
 <p>FreeSql 采用 ExpressionTree 优化读取速度，如果懂技术的你一定知道 .NET Core 技术下除了原生代码，最快就是 Emit 和 ExpressionTree。项目在初期使用的反射 + 缓存，虽然 .NET Core 优化了反射性能，但经过与 Dapper 性能测试对比之后，发现仍然有一定差距，改成 ExpresstionTree 后才与 Dapper 性能相当。FreeSql 支持的类型较多，实现 ExpressionTree 的复杂度较大，有兴趣的朋友可以翻阅源代码。</p>
@@ -12357,9 +12357,9 @@ fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>Song<span>></s
 </blockquote>
 <h2 id="_11、withsql" tabindex="-1"> 11、WithSql</h2>
 <div data-ext="cs"><pre><code>fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>Topic<span>></span></span></span><span>(</span><span>)</span>
-  <span>.</span><span>WithSql</span><span>(</span><span>"select * from Topic where clicks > @val"</span><span>,</span> <span>new</span> <span>{</span> val <span>=</span> <span>10</span> <span>}</span><span>)</span>
-  <span>.</span><span>Page</span><span>(</span><span>1</span><span>,</span> <span>10</span><span>)</span>
-  <span>.</span><span>ToList</span><span>(</span><span>)</span>
+    <span>.</span><span>WithSql</span><span>(</span><span>"select * from Topic where clicks > @val"</span><span>,</span> <span>new</span> <span>{</span> val <span>=</span> <span>10</span> <span>}</span><span>)</span>
+    <span>.</span><span>Page</span><span>(</span><span>1</span><span>,</span> <span>10</span><span>)</span>
+    <span>.</span><span>ToList</span><span>(</span><span>)</span>
 <span>//SELECT a.`Id`, a.`Clicks`, a.`CategoryId`, a.`Title`, a.`CreateTime`</span>
 <span>//FROM (select * from Topic where clicks > @val) a</span>
 </code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div></div></div><blockquote>
@@ -12376,8 +12376,8 @@ list<span>.</span><span>Add</span><span>(</span><span>new</span> <span>Topic</sp
 list<span>.</span><span>Add</span><span>(</span><span>new</span> <span>Topic</span> <span>{</span> <span>..</span><span>.</span> <span>}</span><span>)</span><span>;</span>
 
 fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>Topic<span>></span></span></span><span>(</span><span>)</span>
-  <span>.</span><span>WithMemory</span><span>(</span>list<span>)</span>
-  <span>.</span><span>ToList</span><span>(</span><span>)</span>
+    <span>.</span><span>WithMemory</span><span>(</span>list<span>)</span>
+    <span>.</span><span>ToList</span><span>(</span><span>)</span>
 <span>//SELECT a.`Id`, a.`Clicks`, a.`CategoryId`, a.`Title`, a.`CreateTime` </span>
 <span>//FROM (</span>
 <span>//  SELECT ...</span>

@@ -6,8 +6,8 @@
     <link>https://freesql.net/</link>
     <description>FreeSql Documents</description>
     <language>zh-CN</language>
-    <pubDate>Fri, 03 Mar 2023 02:22:57 GMT</pubDate>
-    <lastBuildDate>Fri, 03 Mar 2023 02:22:57 GMT</lastBuildDate>
+    <pubDate>Fri, 03 Mar 2023 02:23:12 GMT</pubDate>
+    <lastBuildDate>Fri, 03 Mar 2023 02:23:12 GMT</lastBuildDate>
     <generator>vuepress-plugin-feed2</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
     <item>
@@ -12368,9 +12368,9 @@ fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>Song<span>></s
 </blockquote>
 <h2 id="_11、withsql" tabindex="-1"> 11、WithSql</h2>
 <div data-ext="cs"><pre><code>fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>Topic<span>></span></span></span><span>(</span><span>)</span>
-  <span>.</span><span>WithSql</span><span>(</span><span>"select * from Topic where clicks > @val"</span><span>,</span> <span>new</span> <span>{</span> val <span>=</span> <span>10</span> <span>}</span><span>)</span>
-  <span>.</span><span>Page</span><span>(</span><span>1</span><span>,</span> <span>10</span><span>)</span>
-  <span>.</span><span>ToList</span><span>(</span><span>)</span>
+    <span>.</span><span>WithSql</span><span>(</span><span>"select * from Topic where clicks > @val"</span><span>,</span> <span>new</span> <span>{</span> val <span>=</span> <span>10</span> <span>}</span><span>)</span>
+    <span>.</span><span>Page</span><span>(</span><span>1</span><span>,</span> <span>10</span><span>)</span>
+    <span>.</span><span>ToList</span><span>(</span><span>)</span>
 <span>//SELECT a.`Id`, a.`Clicks`, a.`CategoryId`, a.`Title`, a.`CreateTime`</span>
 <span>//FROM (select * from Topic where clicks > @val) a</span>
 </code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div></div></div><blockquote>
@@ -12387,8 +12387,8 @@ list<span>.</span><span>Add</span><span>(</span><span>new</span> <span>Topic</sp
 list<span>.</span><span>Add</span><span>(</span><span>new</span> <span>Topic</span> <span>{</span> <span>..</span><span>.</span> <span>}</span><span>)</span><span>;</span>
 
 fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>Topic<span>></span></span></span><span>(</span><span>)</span>
-  <span>.</span><span>WithMemory</span><span>(</span>list<span>)</span>
-  <span>.</span><span>ToList</span><span>(</span><span>)</span>
+    <span>.</span><span>WithMemory</span><span>(</span>list<span>)</span>
+    <span>.</span><span>ToList</span><span>(</span><span>)</span>
 <span>//SELECT a.`Id`, a.`Clicks`, a.`CategoryId`, a.`Title`, a.`CreateTime` </span>
 <span>//FROM (</span>
 <span>//  SELECT ...</span>
