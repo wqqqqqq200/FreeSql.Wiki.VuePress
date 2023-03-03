@@ -6,8 +6,8 @@
     <link>https://freesql.net/</link>
     <description>FreeSql Documents</description>
     <language>zh-CN</language>
-    <pubDate>Fri, 03 Mar 2023 02:24:33 GMT</pubDate>
-    <lastBuildDate>Fri, 03 Mar 2023 02:24:33 GMT</lastBuildDate>
+    <pubDate>Fri, 03 Mar 2023 02:26:02 GMT</pubDate>
+    <lastBuildDate>Fri, 03 Mar 2023 02:26:02 GMT</lastBuildDate>
     <generator>vuepress-plugin-feed2</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
     <item>
@@ -6676,13 +6676,13 @@ fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>T<span>></span
 </blockquote>
 <h2 id="开窗函数" tabindex="-1"> 开窗函数</h2>
 <div data-ext="cs"><pre><code>fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>T1<span>,</span> T2<span>></span></span></span><span>(</span><span>)</span>
-<span>.</span><span>InnerJoin</span><span>(</span><span>(</span>a<span>,</span> b<span>)</span> <span>=></span> b<span>.</span>Id <span>==</span> a<span>.</span>Id<span>)</span>
-<span>.</span><span>ToList</span><span>(</span><span>(</span>a<span>,</span> b<span>)</span> <span>=></span> <span>new</span>
-<span>{</span>
+  <span>.</span><span>InnerJoin</span><span>(</span><span>(</span>a<span>,</span> b<span>)</span> <span>=></span> b<span>.</span>Id <span>==</span> a<span>.</span>Id<span>)</span>
+  <span>.</span><span>ToList</span><span>(</span><span>(</span>a<span>,</span> b<span>)</span> <span>=></span> <span>new</span>
+  <span>{</span>
     Id <span>=</span> a<span>.</span>Id<span>,</span>
     EdiId <span>=</span> b<span>.</span>Id<span>,</span>
     over1 <span>=</span> SqlExt<span>.</span><span>Rank</span><span>(</span><span>)</span><span>.</span><span>Over</span><span>(</span><span>)</span><span>.</span><span>OrderBy</span><span>(</span>a<span>.</span>Id<span>)</span><span>.</span><span>OrderByDescending</span><span>(</span>b<span>.</span>EdiId<span>)</span><span>.</span><span>ToValue</span><span>(</span><span>)</span>
-<span>}</span><span>)</span><span>;</span>
+  <span>}</span><span>)</span><span>;</span>
 </code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><blockquote>
 <p>v1.6.0 利用自定义解析功能，增加 SqlExt.Rank().Over().PartitionBy(...)、MySql group_concat 常用函数，欢迎 PR 补充</p>
 </blockquote>
@@ -6722,13 +6722,13 @@ fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>T<span>></span
 <span>}</span><span>)</span><span>;</span>
 
 fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>Topic<span>></span></span></span><span>(</span><span>)</span>
-  <span>.</span><span>GroupBy</span><span>(</span>a <span>=></span> <span>new</span> <span>{</span> a<span>.</span>Author <span>}</span><span>)</span>
-  <span>.</span><span>WithTempQuery</span><span>(</span>a <span>=></span> <span>new</span> <span>{</span> Author <span>=</span> a<span>.</span>Key<span>.</span>Author<span>,</span> Count <span>=</span> a<span>.</span><span>Count</span><span>(</span><span>)</span> <span>}</span><span>)</span>
-  <span>.</span><span>ToList</span><span>(</span>a <span>=></span> <span>new</span> <span>{</span>
-    a<span>.</span>Author<span>,</span> a<span>.</span>Count<span>,</span>
-    list1 <span>=</span> fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>T2<span>></span></span></span><span>(</span><span>)</span><span>.</span><span>ToList</span><span>(</span><span>)</span><span>,</span>
-    list2 <span>=</span> fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>T2<span>></span></span></span><span>(</span><span>)</span><span>.</span><span>Where</span><span>(</span>b <span>=></span> b<span>.</span>Author <span>==</span> a<span>.</span>Author<span>)</span><span>.</span><span>ToList</span><span>(</span><span>)</span>
-  <span>}</span><span>)</span><span>;</span>
+    <span>.</span><span>GroupBy</span><span>(</span>a <span>=></span> <span>new</span> <span>{</span> a<span>.</span>Author <span>}</span><span>)</span>
+    <span>.</span><span>WithTempQuery</span><span>(</span>a <span>=></span> <span>new</span> <span>{</span> Author <span>=</span> a<span>.</span>Key<span>.</span>Author<span>,</span> Count <span>=</span> a<span>.</span><span>Count</span><span>(</span><span>)</span> <span>}</span><span>)</span>
+    <span>.</span><span>ToList</span><span>(</span>a <span>=></span> <span>new</span> <span>{</span>
+        a<span>.</span>Author<span>,</span> a<span>.</span>Count<span>,</span>
+        list1 <span>=</span> fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>T2<span>></span></span></span><span>(</span><span>)</span><span>.</span><span>ToList</span><span>(</span><span>)</span><span>,</span>
+        list2 <span>=</span> fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>T2<span>></span></span></span><span>(</span><span>)</span><span>.</span><span>Where</span><span>(</span>b <span>=></span> b<span>.</span>Author <span>==</span> a<span>.</span>Author<span>)</span><span>.</span><span>ToList</span><span>(</span><span>)</span>
+    <span>}</span><span>)</span><span>;</span>
 </code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><h2 id="自定义解析" tabindex="-1"> 自定义解析</h2>
 <div data-ext="cs"><pre><code><span>[</span><span><span>ExpressionCall</span></span><span>]</span>
 <span>public</span> <span>static</span> <span>class</span> <span>DbFunc</span> <span>{</span>
