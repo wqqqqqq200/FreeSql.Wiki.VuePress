@@ -6,8 +6,8 @@
     <link>https://freesql.net/</link>
     <description>FreeSql Documents</description>
     <language>zh-CN</language>
-    <pubDate>Fri, 03 Mar 2023 03:30:26 GMT</pubDate>
-    <lastBuildDate>Fri, 03 Mar 2023 03:30:26 GMT</lastBuildDate>
+    <pubDate>Fri, 03 Mar 2023 08:09:32 GMT</pubDate>
+    <lastBuildDate>Fri, 03 Mar 2023 08:09:32 GMT</lastBuildDate>
     <generator>vuepress-plugin-feed2</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
     <item>
@@ -11893,17 +11893,25 @@ FROM &quot;Topic&quot; a</p>
         <span>select</span><span>:</span> <span>"id,name"</span>
     <span>)</span><span>;</span>
 <span>//v3.2.605+</span>
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><h2 id="_5、子查询-tolist" tabindex="-1"> 5、子查询 ToList</h2>
-<blockquote>
-<p>v3.2.650+ 以下最多执行3次 SQL</p>
-</blockquote>
-<div data-ext="cs"><pre><code>fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>Song<span>></span></span></span><span>(</span><span>)</span><span>.</span><span>ToList</span><span>(</span>a <span>=></span> <span>new</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><h2 id="_5、子表tolist" tabindex="-1"> 5、子表ToList</h2>
+<div data-ext="cs"><pre><code><span>//最多执行3次 SQL</span>
+fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>Topic<span>></span></span></span><span>(</span><span>)</span><span>.</span><span>ToList</span><span>(</span>a <span>=></span> <span>new</span>
 <span>{</span>
     all <span>=</span> a<span>,</span>
-    list1 <span>=</span> fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>Tag<span>></span></span></span><span>(</span><span>)</span><span>.</span><span>ToList</span><span>(</span><span>)</span><span>,</span>
-    list2 <span>=</span> fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>SongTag<span>></span></span></span><span>(</span><span>)</span><span>.</span><span>Where</span><span>(</span>b <span>=></span> b<span>.</span>SongId <span>==</span> a<span>.</span>Id<span>)</span><span>.</span><span>ToList</span><span>(</span><span>)</span>
+    list1 <span>=</span> fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>T2<span>></span></span></span><span>(</span><span>)</span><span>.</span><span>ToList</span><span>(</span><span>)</span><span>,</span>
+    list2 <span>=</span> fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>T2<span>></span></span></span><span>(</span><span>)</span><span>.</span><span>Where</span><span>(</span>b <span>=></span> b<span>.</span>TopicId <span>==</span> a<span>.</span>Id<span>)</span><span>.</span><span>ToList</span><span>(</span><span>)</span>
 <span>}</span><span>)</span><span>;</span>
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div></div></div><h2 id="_6、includemany-两种方式对比" tabindex="-1"> 6、IncludeMany 两种方式对比</h2>
+
+<span>//分组之后，最多执行3次 SQL</span>
+fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>Topic<span>></span></span></span><span>(</span><span>)</span>
+    <span>.</span><span>GroupBy</span><span>(</span>a <span>=></span> <span>new</span> <span>{</span> a<span>.</span>Author <span>}</span><span>)</span>
+    <span>.</span><span>WithTempQuery</span><span>(</span>a <span>=></span> <span>new</span> <span>{</span> Author <span>=</span> a<span>.</span>Key<span>.</span>Author<span>,</span> Count <span>=</span> a<span>.</span><span>Count</span><span>(</span><span>)</span> <span>}</span><span>)</span>
+    <span>.</span><span>ToList</span><span>(</span>a <span>=></span> <span>new</span> <span>{</span>
+        a<span>.</span>Author<span>,</span> a<span>.</span>Count<span>,</span>
+        list1 <span>=</span> fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>T2<span>></span></span></span><span>(</span><span>)</span><span>.</span><span>ToList</span><span>(</span><span>)</span><span>,</span>
+        list2 <span>=</span> fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>T2<span>></span></span></span><span>(</span><span>)</span><span>.</span><span>Where</span><span>(</span>b <span>=></span> b<span>.</span>Author <span>==</span> a<span>.</span>Author<span>)</span><span>.</span><span>ToList</span><span>(</span><span>)</span>
+    <span>}</span><span>)</span><span>;</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><h2 id="_6、includemany-两种方式对比" tabindex="-1"> 6、IncludeMany 两种方式对比</h2>
 <p>方式一（IncludeMany 扩展方法）：</p>
 <div data-ext="cs"><pre><code><span><span>var</span></span> list <span>=</span> fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>SysModule<span>></span></span></span><span>(</span><span>)</span>
     <span>.</span><span>Page</span><span>(</span><span>1</span><span>,</span> <span>10</span><span>)</span>
