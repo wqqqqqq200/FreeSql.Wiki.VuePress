@@ -3,7 +3,7 @@
   <id>https://freesql.net/</id>
   <title>FreeSql 官方文档</title>
   <subtitle>FreeSql Documents</subtitle>
-  <updated>2023-03-02T08:45:41.471Z</updated>
+  <updated>2023-03-03T02:00:29.377Z</updated>
   <generator>vuepress-plugin-feed2</generator>
   <link rel="self" href="https://freesql.net/atom.xml"/>
   <link rel="alternate" href="https://freesql.net/"/>
@@ -11980,7 +11980,7 @@ dto<span>.</span><span>IncludeMany</span><span>(</span>fsql<span>,</span> d <spa
     <title type="html">多表查询</title>
     <id>https://freesql.net/guide/select-multi-table.html</id>
     <link href="https://freesql.net/guide/select-multi-table.html"/>
-    <updated>2022-07-23T05:30:46.000Z</updated>
+    <updated>2023-03-03T01:58:23.000Z</updated>
     <summary type="html">1、导航属性联表 提示：正确配置 【导航关系】后，不需要手工调用 LeftJoin 2、复杂联表 经验：一对多，分表只取最后一条记录 (https://github.com/dotnetcore/FreeSql/issues/430) 3、WithSql 提示：ISelect.ToSql 可与 WithSql 配合使用 4、SQL联表 延伸问题：SQL...</summary>
     <content type="html"><![CDATA[<h1 id="多表查询" tabindex="-1"> 多表查询</h1>
 <div data-ext="cs"><pre><code><span>static</span> <span>IFreeSql</span> fsql <span>=</span> <span>new</span> <span>FreeSql<span>.</span>FreeSqlBuilder</span><span>(</span><span>)</span>
@@ -12135,7 +12135,16 @@ fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>Topic<span>,</
   list1 <span>=</span> fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>T2<span>></span></span></span><span>(</span><span>)</span><span>.</span><span>ToList</span><span>(</span><span>)</span><span>,</span>
   list2 <span>=</span> fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>T2<span>></span></span></span><span>(</span><span>)</span><span>.</span><span>Where</span><span>(</span>b <span>=></span> b<span>.</span>TopicId <span>==</span> a<span>.</span>Id<span>)</span><span>.</span><span>ToList</span><span>(</span><span>)</span>
 <span>}</span><span>)</span><span>;</span>
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div></div></div><h2 id="_10、集合属性" tabindex="-1"> 10、集合属性</h2>
+
+fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>Topic<span>></span></span></span><span>(</span><span>)</span>
+    <span>.</span><span>GroupBy</span><span>(</span>a <span>=></span> <span>new</span> <span>{</span> a<span>.</span>Author <span>}</span><span>)</span>
+    <span>.</span><span>WithTempQuery</span><span>(</span>a <span>=></span> <span>new</span> <span>{</span> Author <span>=</span> a<span>.</span>Key<span>.</span>Author<span>,</span> Count <span>=</span> a<span>.</span><span>Count</span><span>(</span><span>)</span> <span>}</span><span>)</span>
+    <span>.</span><span>ToList</span><span>(</span>a <span>=></span> <span>new</span> <span>{</span>
+        a<span>.</span>Author<span>,</span> a<span>.</span>Count<span>,</span>
+        list1 <span>=</span> fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>T2<span>></span></span></span><span>(</span><span>)</span><span>.</span><span>ToList</span><span>(</span><span>)</span><span>,</span>
+        list2 <span>=</span> fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>T2<span>></span></span></span><span>(</span><span>)</span><span>.</span><span>Where</span><span>(</span>b <span>=></span> b<span>.</span>Author <span>==</span> a<span>.</span>Author<span>)</span><span>.</span><span>ToList</span><span>(</span><span>)</span>
+    <span>}</span><span>)</span><span>;</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><h2 id="_10、集合属性" tabindex="-1"> 10、集合属性</h2>
 <div data-ext="cs"><pre><code>fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>Category<span>></span></span></span><span>(</span><span>)</span>
   <span>.</span><span>Where</span><span>(</span>a <span>=></span> a<span>.</span>Topics<span>.</span><span>Any</span><span>(</span>b <span>=></span> b<span>.</span>Title<span>.</span><span>Contains</span><span>(</span><span>"xx"</span><span>)</span><span>)</span><span>)</span> <span>//v3.2.600 以下使用 a.Topics.AsSelect()</span>
   <span>.</span><span>ToList</span><span>(</span><span>)</span><span>;</span>
