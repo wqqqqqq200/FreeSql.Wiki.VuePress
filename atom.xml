@@ -3,7 +3,7 @@
   <id>https://freesql.net/</id>
   <title>FreeSql 官方文档</title>
   <subtitle>FreeSql Documents</subtitle>
-  <updated>2023-03-03T02:06:55.334Z</updated>
+  <updated>2023-03-03T02:22:57.315Z</updated>
   <generator>vuepress-plugin-feed2</generator>
   <link rel="self" href="https://freesql.net/atom.xml"/>
   <link rel="alternate" href="https://freesql.net/"/>
@@ -2001,7 +2001,7 @@ repo<span>.</span><span>Delete</span><span>(</span>groups<span>)</span><span>;</
     <title type="html">嵌套查询 ✨</title>
     <id>https://freesql.net/guide/withtempquery.html</id>
     <link href="https://freesql.net/guide/withtempquery.html"/>
-    <updated>2023-03-03T02:04:15.000Z</updated>
+    <updated>2023-03-03T02:20:07.000Z</updated>
     <summary type="html">WithTempQuery 意见往集： 需求版本：v3.2.666+ GroupBy + WithTempQuery(嵌套查询) + FromQuery + UnionAll 组合使用，会让查询功能更加强大、灵活。 场景1：查询分组第一条记录 提示：支持多表嵌套查询，fsql.Select\() 如果数据库不支持开窗函数，可以使用分组嵌套查询解决： 场...</summary>
     <content type="html"><![CDATA[<h1 id="嵌套查询-✨" tabindex="-1"> 嵌套查询 ✨</h1>
 <h2 id="withtempquery" tabindex="-1"> WithTempQuery</h2>
@@ -2184,8 +2184,8 @@ list<span>.</span><span>Add</span><span>(</span><span>new</span> <span>User1</sp
 </code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><hr>
 <h2 id="子表exists" tabindex="-1"> 子表Exists</h2>
 <div data-ext="cs"><pre><code>fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>Topic<span>></span></span></span><span>(</span><span>)</span>
-  <span>.</span><span>Where</span><span>(</span>a <span>=></span> fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>Topic<span>></span></span></span><span>(</span><span>)</span><span>.</span><span>As</span><span>(</span><span>"b"</span><span>)</span><span>.</span><span>Where</span><span>(</span>b <span>=></span> b<span>.</span>Id <span>==</span> a<span>.</span>Id<span>)</span><span>.</span><span>Any</span><span>(</span><span>)</span><span>)</span>
-  <span>.</span><span>ToList</span><span>(</span><span>)</span><span>;</span>
+    <span>.</span><span>Where</span><span>(</span>a <span>=></span> fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>Topic<span>></span></span></span><span>(</span><span>)</span><span>.</span><span>As</span><span>(</span><span>"b"</span><span>)</span><span>.</span><span>Where</span><span>(</span>b <span>=></span> b<span>.</span>Id <span>==</span> a<span>.</span>Id<span>)</span><span>.</span><span>Any</span><span>(</span><span>)</span><span>)</span>
+    <span>.</span><span>ToList</span><span>(</span><span>)</span><span>;</span>
 <span>//SELECT a.[Id], a.[Title], a.[Clicks], a.[CreateTime], a.[CategoryId]</span>
 <span>//FROM [Topic] a</span>
 <span>//WHERE (exists(SELECT 1</span>
@@ -2197,8 +2197,8 @@ list<span>.</span><span>Add</span><span>(</span><span>new</span> <span>User1</sp
 </blockquote>
 <h2 id="子表in" tabindex="-1"> 子表In</h2>
 <div data-ext="cs"><pre><code>fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>Topic<span>></span></span></span><span>(</span><span>)</span>
-  <span>.</span><span>Where</span><span>(</span>a <span>=></span> fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>Topic<span>></span></span></span><span>(</span><span>)</span><span>.</span><span>As</span><span>(</span><span>"b"</span><span>)</span><span>.</span><span>ToList</span><span>(</span>b <span>=></span> b<span>.</span>Id<span>)</span><span>.</span><span>Contains</span><span>(</span>a<span>.</span>Id<span>)</span><span>)</span>
-  <span>.</span><span>ToList</span><span>(</span><span>)</span><span>;</span>
+    <span>.</span><span>Where</span><span>(</span>a <span>=></span> fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>Topic<span>></span></span></span><span>(</span><span>)</span><span>.</span><span>As</span><span>(</span><span>"b"</span><span>)</span><span>.</span><span>ToList</span><span>(</span>b <span>=></span> b<span>.</span>Id<span>)</span><span>.</span><span>Contains</span><span>(</span>a<span>.</span>Id<span>)</span><span>)</span>
+    <span>.</span><span>ToList</span><span>(</span><span>)</span><span>;</span>
 <span>//SELECT a.[Id], a.[Title], a.[Clicks], a.[CreateTime], a.[CategoryId]</span>
 <span>//FROM [Topic] a</span>
 <span>//WHERE (((a.[Id]) in (SELECT b.[Id]</span>
@@ -2206,29 +2206,29 @@ list<span>.</span><span>Add</span><span>(</span><span>new</span> <span>User1</sp
 </code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><h2 id="子表join" tabindex="-1"> 子表Join</h2>
 <p>v1.8.0+ string.Join + ToList 实现将子查询的多行结果，拼接为一个字符串，如：&quot;1,2,3,4&quot;</p>
 <div data-ext="cs"><pre><code>fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>Topic<span>></span></span></span><span>(</span><span>)</span><span>.</span><span>ToList</span><span>(</span>a <span>=></span> <span>new</span> <span>{</span>
-  id <span>=</span> a<span>.</span>Id<span>,</span>
-  concat <span>=</span> <span>string</span><span>.</span><span>Join</span><span>(</span><span>","</span><span>,</span> fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>StringJoin01<span>></span></span></span><span>(</span><span>)</span><span>.</span><span>ToList</span><span>(</span>b <span>=></span> b<span>.</span>Id<span>)</span><span>)</span>
+    id <span>=</span> a<span>.</span>Id<span>,</span>
+    concat <span>=</span> <span>string</span><span>.</span><span>Join</span><span>(</span><span>","</span><span>,</span> fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>StringJoin01<span>></span></span></span><span>(</span><span>)</span><span>.</span><span>ToList</span><span>(</span>b <span>=></span> b<span>.</span>Id<span>)</span><span>)</span>
 <span>}</span><span>)</span><span>;</span>
 <span>//SELECT a.[Id], (SELECT group_concat(b.[Id] separator ',') </span>
 <span>//    FROM [StringJoin01] b) </span>
 <span>//FROM [Topic] a</span>
 </code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><h2 id="子表first-count-sum-max-min-avg" tabindex="-1"> 子表First/Count/Sum/Max/Min/Avg</h2>
 <div data-ext="cs"><pre><code>fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>Category<span>></span></span></span><span>(</span><span>)</span><span>.</span><span>ToList</span><span>(</span>a <span>=></span> <span>new</span>  <span>{</span>
-  all <span>=</span> a<span>,</span>
-  first <span>=</span> fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>Topic<span>></span></span></span><span>(</span><span>)</span><span>.</span><span>Where</span><span>(</span>b <span>=></span> b<span>.</span>CategoryId <span>==</span> a<span>.</span>Id<span>)</span><span>.</span><span>First</span><span>(</span>b <span>=></span> b<span>.</span>Id<span>)</span><span>,</span>
-  count <span>=</span> fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>Topic<span>></span></span></span><span>(</span><span>)</span><span>.</span><span>Where</span><span>(</span>b <span>=></span> b<span>.</span>CategoryId <span>==</span> a<span>.</span>Id<span>)</span><span>.</span><span>Count</span><span>(</span><span>)</span><span>,</span>
-  sum <span>=</span> fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>Topic<span>></span></span></span><span>(</span><span>)</span><span>.</span><span>Where</span><span>(</span>b <span>=></span> b<span>.</span>CategoryId <span>==</span> a<span>.</span>Id<span>)</span><span>.</span><span>Sum</span><span>(</span>b <span>=></span> b<span>.</span>Clicks<span>)</span><span>,</span>
-  max <span>=</span> fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>Topic<span>></span></span></span><span>(</span><span>)</span><span>.</span><span>Where</span><span>(</span>b <span>=></span> b<span>.</span>CategoryId <span>==</span> a<span>.</span>Id<span>)</span><span>.</span><span>Max</span><span>(</span>b <span>=></span> b<span>.</span>Clicks<span>)</span><span>,</span>
-  min <span>=</span> fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>Topic<span>></span></span></span><span>(</span><span>)</span><span>.</span><span>Where</span><span>(</span>b <span>=></span> b<span>.</span>CategoryId <span>==</span> a<span>.</span>Id<span>)</span><span>.</span><span>Min</span><span>(</span>b <span>=></span> b<span>.</span>Clicks<span>)</span><span>,</span>
-  avg <span>=</span> fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>Topic<span>></span></span></span><span>(</span><span>)</span><span>.</span><span>Where</span><span>(</span>b <span>=></span> b<span>.</span>CategoryId <span>==</span> a<span>.</span>Id<span>)</span><span>.</span><span>Avg</span><span>(</span>b <span>=></span> b<span>.</span>Clicks<span>)</span>
+    all <span>=</span> a<span>,</span>
+    first <span>=</span> fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>Topic<span>></span></span></span><span>(</span><span>)</span><span>.</span><span>Where</span><span>(</span>b <span>=></span> b<span>.</span>CategoryId <span>==</span> a<span>.</span>Id<span>)</span><span>.</span><span>First</span><span>(</span>b <span>=></span> b<span>.</span>Id<span>)</span><span>,</span>
+    count <span>=</span> fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>Topic<span>></span></span></span><span>(</span><span>)</span><span>.</span><span>Where</span><span>(</span>b <span>=></span> b<span>.</span>CategoryId <span>==</span> a<span>.</span>Id<span>)</span><span>.</span><span>Count</span><span>(</span><span>)</span><span>,</span>
+    sum <span>=</span> fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>Topic<span>></span></span></span><span>(</span><span>)</span><span>.</span><span>Where</span><span>(</span>b <span>=></span> b<span>.</span>CategoryId <span>==</span> a<span>.</span>Id<span>)</span><span>.</span><span>Sum</span><span>(</span>b <span>=></span> b<span>.</span>Clicks<span>)</span><span>,</span>
+    max <span>=</span> fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>Topic<span>></span></span></span><span>(</span><span>)</span><span>.</span><span>Where</span><span>(</span>b <span>=></span> b<span>.</span>CategoryId <span>==</span> a<span>.</span>Id<span>)</span><span>.</span><span>Max</span><span>(</span>b <span>=></span> b<span>.</span>Clicks<span>)</span><span>,</span>
+    min <span>=</span> fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>Topic<span>></span></span></span><span>(</span><span>)</span><span>.</span><span>Where</span><span>(</span>b <span>=></span> b<span>.</span>CategoryId <span>==</span> a<span>.</span>Id<span>)</span><span>.</span><span>Min</span><span>(</span>b <span>=></span> b<span>.</span>Clicks<span>)</span><span>,</span>
+    avg <span>=</span> fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>Topic<span>></span></span></span><span>(</span><span>)</span><span>.</span><span>Where</span><span>(</span>b <span>=></span> b<span>.</span>CategoryId <span>==</span> a<span>.</span>Id<span>)</span><span>.</span><span>Avg</span><span>(</span>b <span>=></span> b<span>.</span>Clicks<span>)</span>
 <span>}</span><span>)</span><span>;</span>
 </code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><h2 id="子表tolist" tabindex="-1"> 子表ToList</h2>
 <div data-ext="cs"><pre><code><span>//最多执行3次 SQL</span>
 fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>Topic<span>></span></span></span><span>(</span><span>)</span><span>.</span><span>ToList</span><span>(</span>a <span>=></span> <span>new</span>
 <span>{</span>
-  all <span>=</span> a<span>,</span>
-  list1 <span>=</span> fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>T2<span>></span></span></span><span>(</span><span>)</span><span>.</span><span>ToList</span><span>(</span><span>)</span><span>,</span>
-  list2 <span>=</span> fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>T2<span>></span></span></span><span>(</span><span>)</span><span>.</span><span>Where</span><span>(</span>b <span>=></span> b<span>.</span>TopicId <span>==</span> a<span>.</span>Id<span>)</span><span>.</span><span>ToList</span><span>(</span><span>)</span>
+    all <span>=</span> a<span>,</span>
+    list1 <span>=</span> fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>T2<span>></span></span></span><span>(</span><span>)</span><span>.</span><span>ToList</span><span>(</span><span>)</span><span>,</span>
+    list2 <span>=</span> fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>T2<span>></span></span></span><span>(</span><span>)</span><span>.</span><span>Where</span><span>(</span>b <span>=></span> b<span>.</span>TopicId <span>==</span> a<span>.</span>Id<span>)</span><span>.</span><span>ToList</span><span>(</span><span>)</span>
 <span>}</span><span>)</span><span>;</span>
 
 <span>//分组之后，最多执行3次 SQL</span>
