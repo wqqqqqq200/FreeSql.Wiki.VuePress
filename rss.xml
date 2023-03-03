@@ -6,8 +6,8 @@
     <link>https://freesql.net/</link>
     <description>FreeSql Documents</description>
     <language>zh-CN</language>
-    <pubDate>Fri, 03 Mar 2023 03:26:01 GMT</pubDate>
-    <lastBuildDate>Fri, 03 Mar 2023 03:26:01 GMT</lastBuildDate>
+    <pubDate>Fri, 03 Mar 2023 03:30:26 GMT</pubDate>
+    <lastBuildDate>Fri, 03 Mar 2023 03:30:26 GMT</lastBuildDate>
     <generator>vuepress-plugin-feed2</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
     <item>
@@ -11682,7 +11682,14 @@ Assert<span>.</span><span>Equal</span><span>(</span><span>"中国[100000] -> 北
 </code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><blockquote>
 <p>不分组求聚合值，请使用 ToAggregate 替代 ToList</p>
 </blockquote>
-<h2 id="导航属性分组" tabindex="-1"> 导航属性分组</h2>
+<div data-ext="cs"><pre><code><span><span>var</span></span> list <span>=</span> fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>Topic<span>></span></span></span><span>(</span><span>)</span>
+    <span>.</span><span>ToAggregate</span><span>(</span>a <span>=></span> <span>new</span> 
+    <span>{</span>
+        cou1 <span>=</span> a<span>.</span><span>Count</span><span>(</span><span>)</span><span>,</span> 
+        arg1 <span>=</span> a<span>.</span><span>Avg</span><span>(</span>a<span>.</span>Value<span>.</span>Clicks<span>)</span><span>,</span> 
+        arg2 <span>=</span> a<span>.</span><span>Sum</span><span>(</span>a<span>.</span>Value<span>.</span>Clicks <span>></span> <span>100</span> <span>?</span> <span>1</span> <span>:</span> <span>0</span><span>)</span>
+    <span>}</span><span>)</span><span>;</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><h2 id="导航属性分组" tabindex="-1"> 导航属性分组</h2>
 <p>假如 Topic 有导航属性 Category，Category 又有导航属性 Area，导航属性分组代码如下：</p>
 <div data-ext="cs"><pre><code><span><span>var</span></span> list <span>=</span> fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>Topic<span>></span></span></span><span>(</span><span>)</span>
     <span>.</span><span>GroupBy</span><span>(</span>a <span>=></span> <span>new</span> <span>{</span> a<span>.</span>Clicks<span>,</span> a<span>.</span>Category <span>}</span><span>)</span>

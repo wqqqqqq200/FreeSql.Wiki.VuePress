@@ -3,7 +3,7 @@
   <id>https://freesql.net/</id>
   <title>FreeSql 官方文档</title>
   <subtitle>FreeSql Documents</subtitle>
-  <updated>2023-03-03T03:26:01.426Z</updated>
+  <updated>2023-03-03T03:30:26.965Z</updated>
   <generator>vuepress-plugin-feed2</generator>
   <link rel="self" href="https://freesql.net/atom.xml"/>
   <link rel="alternate" href="https://freesql.net/"/>
@@ -11630,7 +11630,7 @@ Assert<span>.</span><span>Equal</span><span>(</span><span>"中国[100000] -> 北
     <title type="html">分组聚合</title>
     <id>https://freesql.net/guide/select-group-by.html</id>
     <link href="https://freesql.net/guide/select-group-by.html"/>
-    <updated>2022-10-10T10:32:49.000Z</updated>
+    <updated>2023-03-03T03:27:15.000Z</updated>
     <summary type="html">GroupBy分组聚合 不分组求聚合值，请使用 ToAggregate 替代 ToList 导航属性分组 假如 Topic 有导航属性 Category，Category 又有导航属性 Area，导航属性分组代码如下： 注意：如上这样编写，会报错无法解析 a.Key.Category.Area.Name，解决办法使用 Include： 但是，你还可以这...</summary>
     <content type="html"><![CDATA[<h1 id="分组聚合" tabindex="-1"> 分组聚合</h1>
 <div data-ext="cs"><pre><code><span>static</span> <span>IFreeSql</span> fsql <span>=</span> <span>new</span> <span>FreeSql<span>.</span>FreeSqlBuilder</span><span>(</span><span>)</span>
@@ -11671,7 +11671,14 @@ Assert<span>.</span><span>Equal</span><span>(</span><span>"中国[100000] -> 北
 </code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><blockquote>
 <p>不分组求聚合值，请使用 ToAggregate 替代 ToList</p>
 </blockquote>
-<h2 id="导航属性分组" tabindex="-1"> 导航属性分组</h2>
+<div data-ext="cs"><pre><code><span><span>var</span></span> list <span>=</span> fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>Topic<span>></span></span></span><span>(</span><span>)</span>
+    <span>.</span><span>ToAggregate</span><span>(</span>a <span>=></span> <span>new</span> 
+    <span>{</span>
+        cou1 <span>=</span> a<span>.</span><span>Count</span><span>(</span><span>)</span><span>,</span> 
+        arg1 <span>=</span> a<span>.</span><span>Avg</span><span>(</span>a<span>.</span>Value<span>.</span>Clicks<span>)</span><span>,</span> 
+        arg2 <span>=</span> a<span>.</span><span>Sum</span><span>(</span>a<span>.</span>Value<span>.</span>Clicks <span>></span> <span>100</span> <span>?</span> <span>1</span> <span>:</span> <span>0</span><span>)</span>
+    <span>}</span><span>)</span><span>;</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><h2 id="导航属性分组" tabindex="-1"> 导航属性分组</h2>
 <p>假如 Topic 有导航属性 Category，Category 又有导航属性 Area，导航属性分组代码如下：</p>
 <div data-ext="cs"><pre><code><span><span>var</span></span> list <span>=</span> fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>Topic<span>></span></span></span><span>(</span><span>)</span>
     <span>.</span><span>GroupBy</span><span>(</span>a <span>=></span> <span>new</span> <span>{</span> a<span>.</span>Clicks<span>,</span> a<span>.</span>Category <span>}</span><span>)</span>
