@@ -6,8 +6,8 @@
     <link>https://freesql.net/</link>
     <description>FreeSql Documents</description>
     <language>zh-CN</language>
-    <pubDate>Fri, 03 Mar 2023 02:36:16 GMT</pubDate>
-    <lastBuildDate>Fri, 03 Mar 2023 02:36:16 GMT</lastBuildDate>
+    <pubDate>Fri, 03 Mar 2023 02:36:58 GMT</pubDate>
+    <lastBuildDate>Fri, 03 Mar 2023 02:36:58 GMT</lastBuildDate>
     <generator>vuepress-plugin-feed2</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
     <item>
@@ -12195,9 +12195,9 @@ fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>Topic<span>></
 <p>多表查询时，像isdeleted每个表都给条件，挺麻烦的。WhereCascade使用后生成sql时，所有表都附上这个条件。</p>
 <p>如：</p>
 <div data-ext="cs"><pre><code>fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>t1<span>></span></span></span><span>(</span><span>)</span>
-<span>.</span><span><span>LeftJoin</span><span><span>&lt;</span>t2<span>></span></span></span><span>(</span><span>..</span><span>.</span><span>)</span>
-<span>.</span><span>WhereCascade</span><span>(</span>x <span>=></span> x<span>.</span>IsDeleted <span>==</span> <span>false</span><span>)</span>
-<span>.</span><span>ToList</span><span>(</span><span>)</span><span>;</span>
+  <span>.</span><span><span>LeftJoin</span><span><span>&lt;</span>t2<span>></span></span></span><span>(</span><span>..</span><span>.</span><span>)</span>
+  <span>.</span><span>WhereCascade</span><span>(</span>x <span>=></span> x<span>.</span>IsDeleted <span>==</span> <span>false</span><span>)</span>
+  <span>.</span><span>ToList</span><span>(</span><span>)</span><span>;</span>
 </code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div></div></div><p>得到的 SQL：</p>
 <div data-ext="sql"><pre><code><span>SELECT</span> <span>.</span><span>.</span><span>.</span>
 <span>FROM</span> t1
