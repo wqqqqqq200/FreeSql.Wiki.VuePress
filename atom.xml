@@ -3,7 +3,7 @@
   <id>https://freesql.net/</id>
   <title>FreeSql 官方文档</title>
   <subtitle>FreeSql Documents</subtitle>
-  <updated>2023-03-10T03:00:21.305Z</updated>
+  <updated>2023-03-10T03:01:46.057Z</updated>
   <generator>vuepress-plugin-feed2</generator>
   <link rel="self" href="https://freesql.net/atom.xml"/>
   <link rel="alternate" href="https://freesql.net/"/>
@@ -17743,7 +17743,7 @@ Intel Core i7-8700K CPU <span>3</span>.70GHz <span>(</span>Coffee Lake<span>)</s
     <title type="html">与 EntityFramework 比较</title>
     <id>https://freesql.net/reference/vs-entity-framework.html</id>
     <link href="https://freesql.net/reference/vs-entity-framework.html"/>
-    <updated>2023-02-28T05:52:12.000Z</updated>
+    <updated>2023-03-10T02:59:47.000Z</updated>
     <summary type="html">为什么要写这篇文章？ 2020 年 写下这篇完整一点的 .NET ORM 比较，为准备使用 FreeSql 的朋友解惑。 基础信息比较 功能项 FreeSql EFCore ------------- ------------------------------------------------ ----------- 出生时间 2018 年 12 ...</summary>
     <content type="html"><![CDATA[<h1 id="与-entityframework-比较" tabindex="-1"> 与 EntityFramework 比较</h1>
 <p>为什么要写这篇文章？</p>
@@ -17810,7 +17810,7 @@ Intel Core i7-8700K CPU <span>3</span>.70GHz <span>(</span>Coffee Lake<span>)</s
 </tr>
 </tbody>
 </table>
-<p>FreeSql .NET ORM 支持 MySql/SqlServer/PostgreSQL/Oracle/Sqlite/Firebird/ClickHouse/QuestDB/达梦/人大金仓/神舟通用/Access。</p>
+<p>FreeSql .NET ORM 支持 MySql/SqlServer/PostgreSQL/Oracle/Sqlite/Firebird/达梦/人大金仓/神舟通用/南大通用/虚谷/翰高/Access/ClickHouse/QuestDB，以及自定义适配。</p>
 <p>.NET ORM 各有自已看家本领，本文主要按 FreeSql 提供的功能进行列举比较，如有冒犯请见谅，也欢迎向 FreeSql 提出功能建议。</p>
 <p>每个功能实现的深度层次不一样（比如 EFCore 支持 SqlServer 2012，FreeSql 支持 SqlServer 2005），很难彻底比较，提示：</p>
 <ul>

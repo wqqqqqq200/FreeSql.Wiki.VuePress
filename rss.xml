@@ -6,8 +6,8 @@
     <link>https://freesql.net/</link>
     <description>FreeSql Documents</description>
     <language>zh-CN</language>
-    <pubDate>Fri, 10 Mar 2023 03:00:21 GMT</pubDate>
-    <lastBuildDate>Fri, 10 Mar 2023 03:00:21 GMT</lastBuildDate>
+    <pubDate>Fri, 10 Mar 2023 03:01:46 GMT</pubDate>
+    <lastBuildDate>Fri, 10 Mar 2023 03:01:46 GMT</lastBuildDate>
     <generator>vuepress-plugin-feed2</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
     <item>
@@ -17821,7 +17821,7 @@ Intel Core i7-8700K CPU <span>3</span>.70GHz <span>(</span>Coffee Lake<span>)</s
 </tr>
 </tbody>
 </table>
-<p>FreeSql .NET ORM 支持 MySql/SqlServer/PostgreSQL/Oracle/Sqlite/Firebird/ClickHouse/QuestDB/达梦/人大金仓/神舟通用/Access。</p>
+<p>FreeSql .NET ORM 支持 MySql/SqlServer/PostgreSQL/Oracle/Sqlite/Firebird/达梦/人大金仓/神舟通用/南大通用/虚谷/翰高/Access/ClickHouse/QuestDB，以及自定义适配。</p>
 <p>.NET ORM 各有自已看家本领，本文主要按 FreeSql 提供的功能进行列举比较，如有冒犯请见谅，也欢迎向 FreeSql 提出功能建议。</p>
 <p>每个功能实现的深度层次不一样（比如 EFCore 支持 SqlServer 2012，FreeSql 支持 SqlServer 2005），很难彻底比较，提示：</p>
 <ul>
