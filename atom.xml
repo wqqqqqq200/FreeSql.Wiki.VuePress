@@ -3,7 +3,7 @@
   <id>https://freesql.net/</id>
   <title>FreeSql 官方文档</title>
   <subtitle>FreeSql Documents</subtitle>
-  <updated>2023-03-10T02:58:05.940Z</updated>
+  <updated>2023-03-10T03:00:21.305Z</updated>
   <generator>vuepress-plugin-feed2</generator>
   <link rel="self" href="https://freesql.net/atom.xml"/>
   <link rel="alternate" href="https://freesql.net/"/>
@@ -17510,7 +17510,7 @@ UseCommandMonitor(cmd =&gt; cmd.ConmandTimeout = 9999, null) 这样设置</p>
     <title type="html">与 Dapper 比较</title>
     <id>https://freesql.net/reference/vs-dapper.html</id>
     <link href="https://freesql.net/reference/vs-dapper.html"/>
-    <updated>2022-08-04T03:23:43.000Z</updated>
+    <updated>2023-03-10T02:58:17.000Z</updated>
     <summary type="html">众所周知 Dapper 是 .NET 下最轻最快的 ORM，它是喜欢写 SQL 码农的福音，相对于 SqlHelper 它更加方便，据统计 10 个 .NETer 有 9 个 用过 Dapper。 这篇文章为准备使用 FreeSql 的朋友解惑，对比 Dapper 有何优势，为什么要使用 FreeSql？希望本文内容对大家有所帮助。 关于性能（输了） ...</summary>
     <content type="html"><![CDATA[<h1 id="与-dapper-比较" tabindex="-1"> 与 Dapper 比较</h1>
 <p>众所周知 Dapper 是 .NET 下最轻最快的 ORM，它是喜欢写 SQL 码农的福音，相对于 SqlHelper 它更加方便，据统计 10 个 .NETer 有 9 个 用过 Dapper。</p>
@@ -17699,7 +17699,7 @@ Intel Core i7-8700K CPU <span>3</span>.70GHz <span>(</span>Coffee Lake<span>)</s
 <li>✒ 支持 丰富的表达式函数，以及灵活的自定义解析；</li>
 <li>🏁 支持 导航属性一对多、多对多贪婪加载，以及延时加载；</li>
 <li>📃 支持 读写分离、分表分库、过滤器、乐观锁、悲观锁；</li>
-<li>🌳 支持 MySql/SqlServer/PostgreSQL/Oracle/Sqlite/Firebird/达梦/人大金仓/神舟通用/南大通用/翰高/Access 等数据库；</li>
+<li>🌳 支持 MySql/SqlServer/PostgreSQL/Oracle/Sqlite/Firebird/达梦/人大金仓/神舟通用/南大通用/虚谷/翰高/Access/ClickHouse/QuestDB 等数据库；</li>
 </ul>
 <h4 id="基础" tabindex="-1"> 基础</h4>
 <ul>

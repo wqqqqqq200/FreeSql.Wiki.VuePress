@@ -6,8 +6,8 @@
     <link>https://freesql.net/</link>
     <description>FreeSql Documents</description>
     <language>zh-CN</language>
-    <pubDate>Fri, 10 Mar 2023 02:58:05 GMT</pubDate>
-    <lastBuildDate>Fri, 10 Mar 2023 02:58:05 GMT</lastBuildDate>
+    <pubDate>Fri, 10 Mar 2023 03:00:21 GMT</pubDate>
+    <lastBuildDate>Fri, 10 Mar 2023 03:00:21 GMT</lastBuildDate>
     <generator>vuepress-plugin-feed2</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
     <item>
@@ -17710,7 +17710,7 @@ Intel Core i7-8700K CPU <span>3</span>.70GHz <span>(</span>Coffee Lake<span>)</s
 <li>✒ 支持 丰富的表达式函数，以及灵活的自定义解析；</li>
 <li>🏁 支持 导航属性一对多、多对多贪婪加载，以及延时加载；</li>
 <li>📃 支持 读写分离、分表分库、过滤器、乐观锁、悲观锁；</li>
-<li>🌳 支持 MySql/SqlServer/PostgreSQL/Oracle/Sqlite/Firebird/达梦/人大金仓/神舟通用/南大通用/翰高/Access 等数据库；</li>
+<li>🌳 支持 MySql/SqlServer/PostgreSQL/Oracle/Sqlite/Firebird/达梦/人大金仓/神舟通用/南大通用/虚谷/翰高/Access/ClickHouse/QuestDB 等数据库；</li>
 </ul>
 <h4 id="基础" tabindex="-1"> 基础</h4>
 <ul>
