@@ -6,8 +6,8 @@
     <link>https://freesql.net/</link>
     <description>FreeSql Documents</description>
     <language>zh-CN</language>
-    <pubDate>Fri, 10 Mar 2023 12:30:55 GMT</pubDate>
-    <lastBuildDate>Fri, 10 Mar 2023 12:30:55 GMT</lastBuildDate>
+    <pubDate>Fri, 10 Mar 2023 12:33:11 GMT</pubDate>
+    <lastBuildDate>Fri, 10 Mar 2023 12:33:11 GMT</lastBuildDate>
     <generator>vuepress-plugin-feed2</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
     <item>
@@ -15610,6 +15610,12 @@ fsql<span>.</span><span><span>Update</span><span><span>&lt;</span>T1<span>></spa
 <td>List&lt;T1&gt;</td>
 <td></td>
 <td>执行 SQL 语句，返回更新后的记录</td>
+</tr>
+<tr>
+<td>Join</td>
+<td>IUpdateJoin</td>
+<td></td>
+<td>联表更新</td>
 </tr>
 </tbody>
 </table>
