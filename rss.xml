@@ -6,8 +6,8 @@
     <link>https://freesql.net/</link>
     <description>FreeSql Documents</description>
     <language>zh-CN</language>
-    <pubDate>Fri, 10 Mar 2023 02:51:58 GMT</pubDate>
-    <lastBuildDate>Fri, 10 Mar 2023 02:51:58 GMT</lastBuildDate>
+    <pubDate>Fri, 10 Mar 2023 02:55:54 GMT</pubDate>
+    <lastBuildDate>Fri, 10 Mar 2023 02:55:54 GMT</lastBuildDate>
     <generator>vuepress-plugin-feed2</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
     <item>
@@ -8673,6 +8673,10 @@ blog<span>.</span>BlogId <span>=</span> <span>(</span><span>int</span><span>)</s
 <tr>
 <td>DataType.Gbase(南大通用)</td>
 <td>Driver={GBase ODBC DRIVER (64-Bit)};Host=192.168.164.134;Service=9088;Server=gbase01;Database=testdb;Protocol=onsoctcp;Uid=gbasedbt;Pwd=GBase123;Db_locale=zh_CN.utf8;Client_locale=zh_CN.utf8</td>
+</tr>
+<tr>
+<td>DataType.Xugu(虚谷)</td>
+<td>IP=127.0.0.1;DB=SYSTEM;User=SYSDBA;PWD=SYSDBA;Port=5138;AUTO_COMMIT=on;CHAR_SET=UTF8</td>
 </tr>
 <tr>
 <td>DataType.OdbcMySql</td>
