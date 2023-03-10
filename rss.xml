@@ -6,8 +6,8 @@
     <link>https://freesql.net/</link>
     <description>FreeSql Documents</description>
     <language>zh-CN</language>
-    <pubDate>Fri, 10 Mar 2023 03:01:46 GMT</pubDate>
-    <lastBuildDate>Fri, 10 Mar 2023 03:01:46 GMT</lastBuildDate>
+    <pubDate>Fri, 10 Mar 2023 12:30:55 GMT</pubDate>
+    <lastBuildDate>Fri, 10 Mar 2023 12:30:55 GMT</lastBuildDate>
     <generator>vuepress-plugin-feed2</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
     <item>
@@ -14335,7 +14335,39 @@ fsql<span>.</span><span>UpdateDict</span><span>(</span>dic<span>)</span><span>.<
 <li>更新前可预览测试数据，防止错误更新操作；</li>
 <li>支持复杂的更新操作，例如：<code>ISelect</code> 上使用 <code>Limit(10)</code> 更新附合条件的前 10 条记录；</li>
 </ul>
-<h2 id="_11、bulkcopy-批量更新" tabindex="-1"> 11、BulkCopy 批量更新</h2>
+<h2 id="_11、联表更新-updatejoin" tabindex="-1"> 11、联表更新 UpdateJoin</h2>
+<p>v3.2.692+（高风险操作，高风险操作，高风险操作，请谨慎谨慎谨慎使用，测试并核对 ToSql 返回的内容）</p>
+<div data-ext="cs"><pre><code>fsql<span>.</span><span><span>Update</span><span><span>&lt;</span>T1<span>></span></span></span><span>(</span><span>)</span>
+  <span>.</span><span><span>Join</span><span><span>&lt;</span>T2<span>></span></span></span><span>(</span><span>(</span>a<span>,</span> b<span>)</span> <span>=></span> a<span>.</span>id <span>==</span> b<span>.</span>groupid<span>)</span>
+  <span>.</span><span>Set</span><span>(</span><span>(</span>a<span>,</span> b<span>)</span> <span>=></span> a<span>.</span>bname <span>==</span> b<span>.</span>name<span>)</span> <span>//其他表字段</span>
+  <span>.</span><span>Set</span><span>(</span><span>(</span>a<span>,</span> b<span>)</span> <span>=></span> a<span>.</span>bcode <span>==</span> b<span>.</span>id <span>+</span> a<span>.</span>code<span>)</span>
+  <span>.</span><span>Set</span><span>(</span>a <span>=></span> a<span>.</span>flag<span>,</span> <span>1</span><span>)</span> <span>//固定值</span>
+  <span>.</span><span>Where</span><span>(</span><span>(</span>a<span>,</span> b<span>)</span> <span>=></span> a<span>.</span>id <span>></span> <span>0</span> <span>&amp;&amp;</span> b<span>.</span>id <span>></span> <span>0</span><span>)</span>
+  <span>.</span><span>ExecuteAffrows</span><span>(</span><span>)</span><span>;</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><p>不同数据库产生的 SQL 不一样，以 MySql 为例：</p>
+<div data-ext="sql"><pre><code><span>UPDATE</span> <span><span>`</span>T1<span>`</span></span> a
+<span>INNER</span> <span>JOIN</span> <span><span>`</span>T2<span>`</span></span> b <span>ON</span> <span>(</span>a<span>.</span><span><span>`</span>id<span>`</span></span> <span>=</span> b<span>.</span><span><span>`</span>groupid<span>`</span></span><span>)</span>
+<span>SET</span> a<span>.</span><span><span>`</span>bname<span>`</span></span> <span>=</span> b<span>.</span><span><span>`</span>name<span>`</span></span><span>,</span> a<span>.</span><span><span>`</span>bcode<span>`</span></span> <span>=</span> concat<span>(</span>b<span>.</span><span><span>`</span>id<span>`</span></span><span>,</span> a<span>.</span><span><span>`</span>code<span>`</span></span><span>)</span><span>,</span> a<span>.</span><span><span>`</span>flag<span>`</span></span> <span>=</span> <span>1</span>
+<span>WHERE</span> a<span>.</span><span><span>`</span>id<span>`</span></span> <span>></span> <span>0</span> <span>AND</span> b<span>.</span><span><span>`</span>id<span>`</span></span> <span>></span> <span>0</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div></div></div><p>更复杂的联表更新：</p>
+<div data-ext="cs"><pre><code><span><span>var</span></span> query <span>=</span> fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>T2<span>,</span> T3<span>></span></span></span><span>(</span><span>)</span>
+  <span>.</span><span>InnerJoin</span><span>(</span><span>..</span><span>.</span><span>)</span>
+  <span>.</span><span>Where</span><span>(</span><span>..</span><span>.</span><span>)</span>
+  <span>.</span><span>WithTempQuery</span><span>(</span><span>(</span>a<span>,</span> b<span>)</span> <span>=></span> <span>new</span> <span>{</span> item1 <span>=</span> a<span>,</span> item2 <span>=</span> b <span>}</span><span>)</span><span>;</span>
+
+fsql<span>.</span><span><span>Update</span><span><span>&lt;</span>T1<span>></span></span></span><span>(</span><span>)</span>
+  <span>.</span><span>Join</span><span>(</span>query<span>,</span> <span>(</span>a<span>,</span> b<span>)</span> <span>=></span> a<span>.</span>id <span>==</span> b<span>.</span>item1<span>.</span>groupid<span>)</span>
+  <span>.</span><span>Set</span><span>(</span><span>(</span>a<span>,</span> b<span>)</span> <span>=></span> a<span>.</span>bcode <span>==</span> b<span>.</span>item2<span>.</span>xcode<span>)</span>
+  <span>.</span><span>ExecuteAffrows</span><span>(</span><span>)</span><span>;</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><div data-ext="sql"><pre><code><span>UPDATE</span> <span><span>`</span>T1<span>`</span></span> a
+<span>INNER</span> <span>JOIN</span> <span>(</span>
+  <span>SELECT</span> <span>.</span><span>.</span><span>.</span>
+  <span>FROM</span> <span><span>`</span>t2<span>`</span></span> a
+  <span>INNER</span> <span>JOIN</span> <span>.</span><span>.</span><span>.</span>
+  <span>Where</span> <span>.</span><span>.</span><span>.</span>
+<span>)</span> b <span>ON</span> <span>(</span>a<span>.</span><span><span>`</span>id<span>`</span></span> <span>=</span> b<span>.</span><span><span>`</span>groupid<span>`</span></span><span>)</span>
+<span>SET</span> a<span>.</span><span><span>`</span>bcode<span>`</span></span> <span>=</span> b<span>.</span><span><span>`</span>xcode<span>`</span></span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><h2 id="_12、bulkcopy-批量更新" tabindex="-1"> 12、BulkCopy 批量更新</h2>
 <p>FreeSql.Provider.SqlServer、FreeSql.Provider.MySqlConnector、FreeSql.Provider.PostgreSQL</p>
 <p>分别实现了扩展方法 ExecuteSqlBulkCopy、ExecuteMySqlBulkCopy、ExecutePgCopy 实现批量更新（v3.2.685）</p>
 <p>原理：使用 BulkCopy 将数据插入到临时表，再使用 UPDATE FROM JOIN 联表更新。</p>
