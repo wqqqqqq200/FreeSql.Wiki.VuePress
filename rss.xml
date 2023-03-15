@@ -6,8 +6,8 @@
     <link>https://freesql.net/</link>
     <description>FreeSql Documents</description>
     <language>zh-CN</language>
-    <pubDate>Fri, 10 Mar 2023 12:36:46 GMT</pubDate>
-    <lastBuildDate>Fri, 10 Mar 2023 12:36:46 GMT</lastBuildDate>
+    <pubDate>Wed, 15 Mar 2023 15:04:45 GMT</pubDate>
+    <lastBuildDate>Wed, 15 Mar 2023 15:04:45 GMT</lastBuildDate>
     <generator>vuepress-plugin-feed2</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
     <item>
@@ -15706,10 +15706,17 @@ fsql<span>.</span><span><span>Update</span><span><span>&lt;</span>T1<span>></spa
       <link>https://freesql.net/reference/change-log.html</link>
       <guid>https://freesql.net/reference/change-log.html</guid>
       <source url="https://freesql.net/rss.xml">更新日志</source>
-      <description>大约每月一次版本号，暂时以修复 bug 为主 v3.2.691 增加 ISelect\ FromQuery 重载多表嵌套；; 增加 实体备注从 Description/Display/DisplayName 等特性兼容读取；; 增加 ISelectGrouping First 方法；; 增加 IInsertOrUpdate SetSource 重载方法...</description>
+      <description>大约每月一次版本号，暂时以修复 bug 为主 v3.2.692 增加 IUpdate.Join 联表更新功能；(高风险操作，请谨慎使用); 修复 InsertOrUpdateDict Oracle byte[] 长度判断问题；#1462; 修复 InsertDict 等字典操作在 SqlServer 下的问题；; 修复 ISelect\ FromQue...</description>
       <pubDate>Thu, 04 Feb 2021 16:03:18 GMT</pubDate>
       <content:encoded><![CDATA[<h1 id="更新日志" tabindex="-1"> 更新日志</h1>
 <p>大约每月一次版本号，暂时以修复 bug 为主</p>
+<h2 id="v3-2-692" tabindex="-1"> v3.2.692</h2>
+<ul>
+<li>增加 IUpdate.Join 联表更新功能；(高风险操作，请谨慎使用)</li>
+<li>修复 InsertOrUpdateDict Oracle byte[] 长度判断问题；#1462</li>
+<li>修复 InsertDict 等字典操作在 SqlServer 下的问题；</li>
+<li>修复 ISelect&lt;T&gt; FromQuery 多表重载可能出现 null 报错；</li>
+</ul>
 <h2 id="v3-2-691" tabindex="-1"> v3.2.691</h2>
 <ul>
 <li>增加 ISelect&lt;T&gt; FromQuery 重载多表嵌套；</li>
