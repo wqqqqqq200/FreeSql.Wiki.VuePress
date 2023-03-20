@@ -6,8 +6,8 @@
     <link>https://freesql.net/</link>
     <description>FreeSql Documents</description>
     <language>zh-CN</language>
-    <pubDate>Wed, 15 Mar 2023 15:04:45 GMT</pubDate>
-    <lastBuildDate>Wed, 15 Mar 2023 15:04:45 GMT</lastBuildDate>
+    <pubDate>Mon, 20 Mar 2023 08:13:46 GMT</pubDate>
+    <lastBuildDate>Mon, 20 Mar 2023 08:13:46 GMT</lastBuildDate>
     <generator>vuepress-plugin-feed2</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
     <item>
@@ -8581,7 +8581,7 @@ blog<span>.</span>BlogId <span>=</span> <span>(</span><span>int</span><span>)</s
 <tr>
 <td>UseMappingPriority</td>
 <td>this</td>
-<td>指定映射优先级（默认 Aop &lt; FluentApi &lt; Attribute）</td>
+<td>指定映射优先级（默认 Aop &lt; FluentApi &lt; Attribute）按顺序覆盖的逻辑，所以最后的那个优先级最高</td>
 </tr>
 <tr>
 <td>UseNameConvert</td>
