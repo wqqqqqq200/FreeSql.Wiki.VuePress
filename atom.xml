@@ -3,7 +3,7 @@
   <id>https://freesql.net/</id>
   <title>FreeSql 官方文档</title>
   <subtitle>FreeSql Documents</subtitle>
-  <updated>2023-03-20T08:13:46.878Z</updated>
+  <updated>2023-03-24T14:25:46.526Z</updated>
   <generator>vuepress-plugin-feed2</generator>
   <link rel="self" href="https://freesql.net/atom.xml"/>
   <link rel="alternate" href="https://freesql.net/"/>
@@ -8710,7 +8710,7 @@ blog<span>.</span>BlogId <span>=</span> <span>(</span><span>int</span><span>)</s
     <title type="html">新增和修改</title>
     <id>https://freesql.net/guide/insert-or-update.html</id>
     <link href="https://freesql.net/guide/insert-or-update.html"/>
-    <updated>2023-02-22T18:23:40.000Z</updated>
+    <updated>2023-03-24T14:22:47.000Z</updated>
     <summary type="html">1、IFreeSql.InsertOrUpdate IFreeSql 定义了 InsertOrUpdate 方法实现添加或修改的功能，利用数据库特性：(v1.5.0+) Database Features Database Features ---------- ----------------------- --- -------- --------...</summary>
     <content type="html"><![CDATA[<h1 id="新增和修改" tabindex="-1"> 新增和修改</h1>
 <h2 id="_1、ifreesql-insertorupdate" tabindex="-1"> 1、IFreeSql.InsertOrUpdate</h2>
@@ -8809,7 +8809,13 @@ repo<span>.</span><span>InsertOrUpdate</span><span>(</span>实体<span>)</span><
 </blockquote>
 <p>缺点：不支持批量操作</p>
 <hr>
-<h2 id="_4、beginedit-批量编辑" tabindex="-1"> 4、BeginEdit 批量编辑</h2>
+<h2 id="_4、bulkcopy-批量插入或更新" tabindex="-1"> 4、BulkCopy 批量插入或更新</h2>
+<p>仅在 FreeSql.Provider.SqlServer 扩展方法 ExecuteSqlBulkCopy 实现了批量插入或更新（v3.2.693），其他数据库未来补充。</p>
+<p>原理：使用 BulkCopy 将数据插入到临时表，再使用 MERGE INTO 联表操作。</p>
+<p>提示：当更新的字段数量超过 3000 时，收益较大。</p>
+<div data-ext="cs"><pre><code>fsql<span>.</span><span><span>InsertOrUpdate</span><span><span>&lt;</span>T1<span>></span></span></span><span>(</span><span>)</span><span>.</span><span>SetSource</span><span>(</span>list<span>)</span><span>.</span><span>ExecuteSqlBulkCopy</span><span>(</span><span>)</span><span>;</span>
+</code></pre><div aria-hidden="true"><div></div></div></div><hr>
+<h2 id="_5、beginedit-批量编辑" tabindex="-1"> 5、BeginEdit 批量编辑</h2>
 <div data-ext="cs"><pre><code><span>[</span><span><span>Fact</span></span><span>]</span>
 <span>public</span> <span><span>void</span></span> <span>BeginEdit</span><span>(</span><span>)</span>
 <span>{</span>
@@ -8850,7 +8856,7 @@ repo<span>.</span><span>InsertOrUpdate</span><span>(</span>实体<span>)</span><
 <span>DELETE</span> <span>FROM</span> <span>"BeginEdit01"</span> <span>WHERE</span> <span>(</span><span>"Id"</span> <span>=</span> <span>'5f26bf00-6ac3-cbe8-00da-7dd11bcf54dc'</span><span>)</span>
 </code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><p>场景：winform 加载表数据后，一顿添加、修改、删除操作之后，点击【保存】</p>
 <p>提醒：该操作只对变量 cts 有效，不是针对全表对比更新。</p>
-<h2 id="_5、mysql-特有功能-on-duplicate-key-update" tabindex="-1"> 5、MySql 特有功能 On Duplicate Key Update</h2>
+<h2 id="_6、mysql-特有功能-on-duplicate-key-update" tabindex="-1"> 6、MySql 特有功能 On Duplicate Key Update</h2>
 <p>FreeSql.Provider.MySql 和 FreeSql.Provider.MySqlConnector 支持 MySql 特有的功能，On Duplicate Key Update。</p>
 <p>这个功能也可以实现插入或更新数据，并且支持批量操作。</p>
 <div data-ext="cs"><pre><code><span>class</span> <span>TestOnDuplicateKeyUpdateInfo</span> <span>{</span>
@@ -8917,7 +8923,7 @@ fsql<span>.</span><span>Insert</span><span>(</span>item<span>)</span>
 <p>当 insert 部分中存在的列，在 update 中将以 VALUES(`字段`) 的形式设置；</p>
 <p>当 insert 部分中不存在的列，在 update 中将为常量形式设置，当操作实体数组的时候，此常量为 case when ... end 执行（与 IUpdate 一样）；</p>
 <hr>
-<h2 id="_6、postgresql-特有功能-on-conflict-do-update" tabindex="-1"> 6、PostgreSQL 特有功能 On Conflict Do Update</h2>
+<h2 id="_7、postgresql-特有功能-on-conflict-do-update" tabindex="-1"> 7、PostgreSQL 特有功能 On Conflict Do Update</h2>
 <p>FreeSql.Provider.PostgreSQL 支持 PostgreSQL 9.5+ 特有的功能，On Conflict(id) Do Update。</p>
 <p>使用方法 MySql OnDuplicateKeyUpdate 大致相同。</p>
 <div data-ext="cs"><pre><code><span>class</span> <span>TestOnConflictDoUpdateInfo</span> <span>{</span>
