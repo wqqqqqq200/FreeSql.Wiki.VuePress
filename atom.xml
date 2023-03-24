@@ -3,7 +3,7 @@
   <id>https://freesql.net/</id>
   <title>FreeSql 官方文档</title>
   <subtitle>FreeSql Documents</subtitle>
-  <updated>2023-03-24T16:26:41.019Z</updated>
+  <updated>2023-03-24T16:38:58.627Z</updated>
   <generator>vuepress-plugin-feed2</generator>
   <link rel="self" href="https://freesql.net/atom.xml"/>
   <link rel="alternate" href="https://freesql.net/"/>
@@ -8710,7 +8710,7 @@ blog<span>.</span>BlogId <span>=</span> <span>(</span><span>int</span><span>)</s
     <title type="html">新增和修改</title>
     <id>https://freesql.net/guide/insert-or-update.html</id>
     <link href="https://freesql.net/guide/insert-or-update.html"/>
-    <updated>2023-03-24T16:24:40.000Z</updated>
+    <updated>2023-03-24T16:36:54.000Z</updated>
     <summary type="html">1、IFreeSql.InsertOrUpdate IFreeSql 定义了 InsertOrUpdate 方法实现添加或修改的功能，利用数据库特性：(v1.5.0+) Database Features Database Features ---------- ----------------------- --- -------- --------...</summary>
     <content type="html"><![CDATA[<h1 id="新增和修改" tabindex="-1"> 新增和修改</h1>
 <h2 id="_1、ifreesql-insertorupdate" tabindex="-1"> 1、IFreeSql.InsertOrUpdate</h2>
@@ -8836,7 +8836,7 @@ list<span>[</span><span>0</span><span>]</span><span>.</span>Name <span>=</span> 
 list<span>.</span><span>RemoveAt</span><span>(</span><span>1</span><span>)</span><span>;</span>
 
 repo<span>.</span><span>EndEdit</span><span>(</span><span>)</span><span>;</span> <span>//重载方法新旧对比 repo.EndEdit(newlist)</span>
-<span>}</span>
+
 <span>class</span> <span>T</span>
 <span>{</span>
     <span>public</span> <span>Guid</span> Id <span>{</span> <span>get</span><span>;</span> <span>set</span><span>;</span> <span>}</span>
