@@ -6,8 +6,8 @@
     <link>https://freesql.net/</link>
     <description>FreeSql Documents</description>
     <language>zh-CN</language>
-    <pubDate>Fri, 24 Mar 2023 14:25:46 GMT</pubDate>
-    <lastBuildDate>Fri, 24 Mar 2023 14:25:46 GMT</lastBuildDate>
+    <pubDate>Fri, 24 Mar 2023 14:33:02 GMT</pubDate>
+    <lastBuildDate>Fri, 24 Mar 2023 14:33:02 GMT</lastBuildDate>
     <generator>vuepress-plugin-feed2</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
     <item>
@@ -8823,7 +8823,17 @@ repo<span>.</span><span>InsertOrUpdate</span><span>(</span>实体<span>)</span><
 <p>原理：使用 BulkCopy 将数据插入到临时表，再使用 MERGE INTO 联表操作。</p>
 <p>提示：当更新的字段数量超过 3000 时，收益较大。</p>
 <div data-ext="cs"><pre><code>fsql<span>.</span><span><span>InsertOrUpdate</span><span><span>&lt;</span>T1<span>></span></span></span><span>(</span><span>)</span><span>.</span><span>SetSource</span><span>(</span>list<span>)</span><span>.</span><span>ExecuteSqlBulkCopy</span><span>(</span><span>)</span><span>;</span>
-</code></pre><div aria-hidden="true"><div></div></div></div><hr>
+</code></pre><div aria-hidden="true"><div></div></div></div><div data-ext="sql"><pre><code><span>SELECT</span> <span>.</span><span>.</span><span>.</span> <span>INTO</span> <span>#temp_T1 FROM [T1] WHERE 1=2</span>
+
+<span>MERGE</span> <span>INTO</span> <span>[</span>T1<span>]</span> t1 <span>USING</span> <span>(</span><span>select</span> <span>*</span> <span>from</span> <span>#temp_user1) t2 ON (t1.[id] = t2.[id])</span>
+<span>WHEN</span> <span>MATCHED</span> <span>THEN</span>
+  <span>update</span> <span>set</span> <span>.</span><span>.</span><span>.</span>
+<span>WHEN</span> <span>NOT</span> <span>MATCHED</span> <span>THEN</span>
+  <span>insert</span> <span>(</span><span>.</span><span>.</span><span>.</span><span>)</span>
+  <span>values</span> <span>(</span><span>.</span><span>.</span><span>.</span><span>)</span><span>;</span>
+
+<span>DROP</span> <span>TABLE</span> <span>#temp_user1</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><hr>
 <h2 id="_5、beginedit-批量编辑" tabindex="-1"> 5、BeginEdit 批量编辑</h2>
 <div data-ext="cs"><pre><code><span>[</span><span><span>Fact</span></span><span>]</span>
 <span>public</span> <span><span>void</span></span> <span>BeginEdit</span><span>(</span><span>)</span>
