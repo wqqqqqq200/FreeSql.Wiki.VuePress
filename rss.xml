@@ -6,8 +6,8 @@
     <link>https://freesql.net/</link>
     <description>FreeSql Documents</description>
     <language>zh-CN</language>
-    <pubDate>Fri, 24 Mar 2023 14:33:02 GMT</pubDate>
-    <lastBuildDate>Fri, 24 Mar 2023 14:33:02 GMT</lastBuildDate>
+    <pubDate>Fri, 24 Mar 2023 16:26:41 GMT</pubDate>
+    <lastBuildDate>Fri, 24 Mar 2023 16:26:41 GMT</lastBuildDate>
     <generator>vuepress-plugin-feed2</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
     <item>
@@ -8835,46 +8835,33 @@ repo<span>.</span><span>InsertOrUpdate</span><span>(</span>实体<span>)</span><
 <span>DROP</span> <span>TABLE</span> <span>#temp_user1</span>
 </code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><hr>
 <h2 id="_5、beginedit-批量编辑" tabindex="-1"> 5、BeginEdit 批量编辑</h2>
-<div data-ext="cs"><pre><code><span>[</span><span><span>Fact</span></span><span>]</span>
-<span>public</span> <span><span>void</span></span> <span>BeginEdit</span><span>(</span><span>)</span>
-<span>{</span>
-    fsql<span>.</span><span><span>Delete</span><span><span>&lt;</span>BeginEdit01<span>></span></span></span><span>(</span><span>)</span><span>.</span><span>Where</span><span>(</span><span>"1=1"</span><span>)</span><span>.</span><span>ExecuteAffrows</span><span>(</span><span>)</span><span>;</span>
-    <span><span>var</span></span> repo <span>=</span> fsql<span>.</span><span><span>GetRepository</span><span><span>&lt;</span>BeginEdit01<span>></span></span></span><span>(</span><span>)</span><span>;</span>
-    <span><span>var</span></span> cts <span>=</span> <span>new</span><span>[</span><span>]</span> <span>{</span>
-        <span>new</span> <span>BeginEdit01</span> <span>{</span> Name <span>=</span> <span>"分类1"</span> <span>}</span><span>,</span>
-        <span>new</span> <span>BeginEdit01</span> <span>{</span> Name <span>=</span> <span>"分类1_1"</span> <span>}</span><span>,</span>
-        <span>new</span> <span>BeginEdit01</span> <span>{</span> Name <span>=</span> <span>"分类1_2"</span> <span>}</span><span>,</span>
-        <span>new</span> <span>BeginEdit01</span> <span>{</span> Name <span>=</span> <span>"分类1_3"</span> <span>}</span><span>,</span>
-        <span>new</span> <span>BeginEdit01</span> <span>{</span> Name <span>=</span> <span>"分类2"</span> <span>}</span><span>,</span>
-        <span>new</span> <span>BeginEdit01</span> <span>{</span> Name <span>=</span> <span>"分类2_1"</span> <span>}</span><span>,</span>
-        <span>new</span> <span>BeginEdit01</span> <span>{</span> Name <span>=</span> <span>"分类2_2"</span> <span>}</span>
-    <span>}</span><span>.</span><span>ToList</span><span>(</span><span>)</span><span>;</span>
-    repo<span>.</span><span>Insert</span><span>(</span>cts<span>)</span><span>;</span>
+<div data-ext="cs"><pre><code><span><span>var</span></span> list <span>=</span> fsql<span>.</span><span><span>Select</span><span><span>&lt;</span>T<span>></span></span></span><span>(</span><span>)</span><span>.</span><span>Where</span><span>(</span><span>..</span><span>.</span><span>)</span><span>.</span><span>ToList</span><span>(</span><span>)</span><span>;</span>
 
-    repo<span>.</span><span>BeginEdit</span><span>(</span>cts<span>)</span><span>;</span> <span>//开始对 cts 进行编辑</span>
+<span><span>var</span></span> repo <span>=</span> fsql<span>.</span><span><span>GetRepository</span><span><span>&lt;</span>T<span>></span></span></span><span>(</span><span>)</span><span>;</span>
+repo<span>.</span><span>BeginEdit</span><span>(</span>list<span>)</span><span>;</span> <span>//开始对 list 进行编辑</span>
 
-    cts<span>.</span><span>Add</span><span>(</span><span>new</span> <span>BeginEdit01</span> <span>{</span> Name <span>=</span> <span>"分类2_3"</span> <span>}</span><span>)</span><span>;</span>
-    cts<span>[</span><span>0</span><span>]</span><span>.</span>Name <span>=</span> <span>"123123"</span><span>;</span>
-    cts<span>.</span><span>RemoveAt</span><span>(</span><span>1</span><span>)</span><span>;</span>
+list<span>.</span><span>Add</span><span>(</span><span>new</span> <span>T</span> <span>{</span> Name <span>=</span> <span>"分类2_3"</span> <span>}</span><span>)</span><span>;</span>
+list<span>[</span><span>0</span><span>]</span><span>.</span>Name <span>=</span> <span>"123123"</span><span>;</span>
+list<span>.</span><span>RemoveAt</span><span>(</span><span>1</span><span>)</span><span>;</span>
 
-    Assert<span>.</span><span>Equal</span><span>(</span><span>3</span><span>,</span> repo<span>.</span><span>EndEdit</span><span>(</span><span>)</span><span>)</span><span>;</span> <span>//重载方法新旧对比 repo.EndEdit(newlist)</span>
+repo<span>.</span><span>EndEdit</span><span>(</span><span>)</span><span>;</span> <span>//重载方法新旧对比 repo.EndEdit(newlist)</span>
 <span>}</span>
-<span>class</span> <span>BeginEdit01</span>
+<span>class</span> <span>T</span>
 <span>{</span>
     <span>public</span> <span>Guid</span> Id <span>{</span> <span>get</span><span>;</span> <span>set</span><span>;</span> <span>}</span>
     <span>public</span> <span><span>string</span></span> Name <span>{</span> <span>get</span><span>;</span> <span>set</span><span>;</span> <span>}</span>
 <span>}</span>
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><p>上面的代码 EndEdit 方法执行的时候产生 3 条 SQL 如下：</p>
-<div data-ext="sql"><pre><code><span>INSERT</span> <span>INTO</span> <span>"BeginEdit01"</span><span>(</span><span>"Id"</span><span>,</span> <span>"Name"</span><span>)</span> <span>VALUES</span><span>(</span><span>'5f26bf07-6ac3-cbe8-00da-7dd74818c3a6'</span><span>,</span> <span>'分类2_3'</span><span>)</span>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><p>上面的代码 EndEdit 方法执行的时候产生 3 条 SQL 如下：</p>
+<div data-ext="sql"><pre><code><span>INSERT</span> <span>INTO</span> <span>"T"</span><span>(</span><span>"Id"</span><span>,</span> <span>"Name"</span><span>)</span> <span>VALUES</span><span>(</span><span>'5f26bf07-6ac3-cbe8-00da-7dd74818c3a6'</span><span>,</span> <span>'分类2_3'</span><span>)</span>
 
 
-<span>UPDATE</span> <span>"BeginEdit01"</span> <span>SET</span> <span>"Name"</span> <span>=</span> <span>'123123'</span>
+<span>UPDATE</span> <span>"T"</span> <span>SET</span> <span>"Name"</span> <span>=</span> <span>'123123'</span>
 <span>WHERE</span> <span>(</span><span>"Id"</span> <span>=</span> <span>'5f26bf00-6ac3-cbe8-00da-7dd01be76e26'</span><span>)</span>
 
 
-<span>DELETE</span> <span>FROM</span> <span>"BeginEdit01"</span> <span>WHERE</span> <span>(</span><span>"Id"</span> <span>=</span> <span>'5f26bf00-6ac3-cbe8-00da-7dd11bcf54dc'</span><span>)</span>
+<span>DELETE</span> <span>FROM</span> <span>"T"</span> <span>WHERE</span> <span>(</span><span>"Id"</span> <span>=</span> <span>'5f26bf00-6ac3-cbe8-00da-7dd11bcf54dc'</span><span>)</span>
 </code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><p>场景：winform 加载表数据后，一顿添加、修改、删除操作之后，点击【保存】</p>
-<p>提醒：该操作只对变量 cts 有效，不是针对全表对比更新。</p>
+<p>提醒：该操作只对变量 list 有效，不是针对全表对比更新。</p>
 <h2 id="_6、mysql-特有功能-on-duplicate-key-update" tabindex="-1"> 6、MySql 特有功能 On Duplicate Key Update</h2>
 <p>FreeSql.Provider.MySql 和 FreeSql.Provider.MySqlConnector 支持 MySql 特有的功能，On Duplicate Key Update。</p>
 <p>这个功能也可以实现插入或更新数据，并且支持批量操作。</p>
