@@ -6,8 +6,8 @@
     <link>https://freesql.net/</link>
     <description>FreeSql Documents</description>
     <language>zh-CN</language>
-    <pubDate>Sat, 25 Mar 2023 08:00:59 GMT</pubDate>
-    <lastBuildDate>Sat, 25 Mar 2023 08:00:59 GMT</lastBuildDate>
+    <pubDate>Sat, 25 Mar 2023 08:05:35 GMT</pubDate>
+    <lastBuildDate>Sat, 25 Mar 2023 08:05:35 GMT</lastBuildDate>
     <generator>vuepress-plugin-feed2</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
     <item>
@@ -9063,13 +9063,47 @@ repo<span>.</span><span>Insert</span><span>(</span>items<span>[</span><span>0</s
 <p>分割执行后，当外部未提供事务时，内部自开事务，实现插入完整性。也可以通过 BatchOptions 设置合适的值。</p>
 <p>FreeSql 适配了每一种数据类型参数化，和不参数化的使用。批量插入建议关闭参数化功能，使用 .NoneParameter() 进行执行。</p>
 <h2 id="_3、bulkcopy" tabindex="-1"> 3、BulkCopy</h2>
-<p>| 程序包 | 扩展方法 | 说明 |
-| FreeSql.Provider.SqlServer | ExecuteSqlBulkCopy | |
-| FreeSql.Provider.MySqlConnector | ExecuteMySqlBulkCopy | |
-| FreeSql.Provider.Oracle | ExecuteOracleBulkCopy | |
-| FreeSql.Provider.Dameng | ExecuteDmBulkCopy | 达梦 |
-| FreeSql.Provider.PostgreSQL | ExecutePgCopy | |
-| FreeSql.Provider.KingbaseES | ExecuteKdbCopy | 人大金仓 |</p>
+<table>
+<thead>
+<tr>
+<th>程序包</th>
+<th>扩展方法</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>FreeSql.Provider.SqlServer</td>
+<td>ExecuteSqlBulkCopy</td>
+<td></td>
+</tr>
+<tr>
+<td>FreeSql.Provider.MySqlConnector</td>
+<td>ExecuteMySqlBulkCopy</td>
+<td></td>
+</tr>
+<tr>
+<td>FreeSql.Provider.Oracle</td>
+<td>ExecuteOracleBulkCopy</td>
+<td></td>
+</tr>
+<tr>
+<td>FreeSql.Provider.Dameng</td>
+<td>ExecuteDmBulkCopy</td>
+<td>达梦</td>
+</tr>
+<tr>
+<td>FreeSql.Provider.PostgreSQL</td>
+<td>ExecutePgCopy</td>
+<td></td>
+</tr>
+<tr>
+<td>FreeSql.Provider.KingbaseES</td>
+<td>ExecuteKdbCopy</td>
+<td>人大金仓</td>
+</tr>
+</tbody>
+</table>
 <h3 id="批量插入测试参考-52-个字段" tabindex="-1"> 批量插入测试参考(52 个字段)</h3>
 <table>
 <thead>
