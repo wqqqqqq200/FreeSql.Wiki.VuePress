@@ -3,7 +3,7 @@
   <id>https://freesql.net/</id>
   <title>FreeSql 官方文档</title>
   <subtitle>FreeSql Documents</subtitle>
-  <updated>2023-03-25T07:59:35.051Z</updated>
+  <updated>2023-03-25T08:00:17.376Z</updated>
   <generator>vuepress-plugin-feed2</generator>
   <link rel="self" href="https://freesql.net/atom.xml"/>
   <link rel="alternate" href="https://freesql.net/"/>
@@ -14125,7 +14125,7 @@ uow<span>.</span>OnEntityChange <span>=</span> report <span>=></span> <span>{</s
     <title type="html">修改</title>
     <id>https://freesql.net/guide/update.html</id>
     <link href="https://freesql.net/guide/update.html"/>
-    <updated>2023-03-10T12:34:38.000Z</updated>
+    <updated>2023-03-25T07:58:07.000Z</updated>
     <summary type="html">FreeSql 提供丰富的数据库更新功能，支持单条或批量更新，在特定的数据库执行还可以返回更新后的记录。 动态条件 dywhere 支持： 主键值; new[] { 主键值1, 主键值2 }; Topic 对象; new[] { Topic对象1, Topic对象2 }; new { id = 1 }; 1、更新指定列 支持 Set() 多次，相当于拼...</summary>
     <content type="html"><![CDATA[<h1 id="修改" tabindex="-1"> 修改</h1>
 <p><code>FreeSql</code> 提供丰富的数据库更新功能，支持单条或批量更新，在特定的数据库执行还可以返回更新后的记录。</p>
@@ -14364,8 +14364,13 @@ fsql<span>.</span><span><span>Update</span><span><span>&lt;</span>T1<span>></spa
 <span>)</span> b <span>ON</span> <span>(</span>a<span>.</span><span><span>`</span>id<span>`</span></span> <span>=</span> b<span>.</span><span><span>`</span>groupid<span>`</span></span><span>)</span>
 <span>SET</span> a<span>.</span><span><span>`</span>bcode<span>`</span></span> <span>=</span> b<span>.</span><span><span>`</span>xcode<span>`</span></span>
 </code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><h2 id="_12、bulkcopy-批量更新" tabindex="-1"> 12、BulkCopy 批量更新</h2>
-<p>FreeSql.Provider.SqlServer、FreeSql.Provider.MySqlConnector、FreeSql.Provider.PostgreSQL</p>
-<p>分别实现了扩展方法 ExecuteSqlBulkCopy、ExecuteMySqlBulkCopy、ExecutePgCopy 实现批量更新（v3.2.685）</p>
+<p>| v3.2.693 | 扩展方法 | 说明 |
+| FreeSql.Provider.SqlServer | ExecuteSqlBulkCopy | |
+| FreeSql.Provider.MySqlConnector | ExecuteMySqlBulkCopy | |
+| FreeSql.Provider.Oracle | ExecuteOracleBulkCopy | |
+| FreeSql.Provider.Dameng | ExecuteDmBulkCopy | 达梦 |
+| FreeSql.Provider.PostgreSQL | ExecutePgCopy | |
+| FreeSql.Provider.KingbaseES | ExecuteKdbCopy | 人大金仓 |</p>
 <p>原理：使用 BulkCopy 将数据插入到临时表，再使用 UPDATE FROM JOIN 联表更新。</p>
 <p>提示：当更新的字段数量超过 3000 时，收益较大。</p>
 <div data-ext="cs"><pre><code>fsql<span>.</span><span><span>Update</span><span><span>&lt;</span>T1<span>></span></span></span><span>(</span><span>)</span><span>.</span><span>SetSource</span><span>(</span>list<span>)</span><span>.</span><span>ExecuteSqlBulkCopy</span><span>(</span><span>)</span><span>;</span>

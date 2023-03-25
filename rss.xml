@@ -6,8 +6,8 @@
     <link>https://freesql.net/</link>
     <description>FreeSql Documents</description>
     <language>zh-CN</language>
-    <pubDate>Sat, 25 Mar 2023 07:59:35 GMT</pubDate>
-    <lastBuildDate>Sat, 25 Mar 2023 07:59:35 GMT</lastBuildDate>
+    <pubDate>Sat, 25 Mar 2023 08:00:17 GMT</pubDate>
+    <lastBuildDate>Sat, 25 Mar 2023 08:00:17 GMT</lastBuildDate>
     <generator>vuepress-plugin-feed2</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
     <item>
@@ -14375,8 +14375,13 @@ fsql<span>.</span><span><span>Update</span><span><span>&lt;</span>T1<span>></spa
 <span>)</span> b <span>ON</span> <span>(</span>a<span>.</span><span><span>`</span>id<span>`</span></span> <span>=</span> b<span>.</span><span><span>`</span>groupid<span>`</span></span><span>)</span>
 <span>SET</span> a<span>.</span><span><span>`</span>bcode<span>`</span></span> <span>=</span> b<span>.</span><span><span>`</span>xcode<span>`</span></span>
 </code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div><h2 id="_12、bulkcopy-批量更新" tabindex="-1"> 12、BulkCopy 批量更新</h2>
-<p>FreeSql.Provider.SqlServer、FreeSql.Provider.MySqlConnector、FreeSql.Provider.PostgreSQL</p>
-<p>分别实现了扩展方法 ExecuteSqlBulkCopy、ExecuteMySqlBulkCopy、ExecutePgCopy 实现批量更新（v3.2.685）</p>
+<p>| v3.2.693 | 扩展方法 | 说明 |
+| FreeSql.Provider.SqlServer | ExecuteSqlBulkCopy | |
+| FreeSql.Provider.MySqlConnector | ExecuteMySqlBulkCopy | |
+| FreeSql.Provider.Oracle | ExecuteOracleBulkCopy | |
+| FreeSql.Provider.Dameng | ExecuteDmBulkCopy | 达梦 |
+| FreeSql.Provider.PostgreSQL | ExecutePgCopy | |
+| FreeSql.Provider.KingbaseES | ExecuteKdbCopy | 人大金仓 |</p>
 <p>原理：使用 BulkCopy 将数据插入到临时表，再使用 UPDATE FROM JOIN 联表更新。</p>
 <p>提示：当更新的字段数量超过 3000 时，收益较大。</p>
 <div data-ext="cs"><pre><code>fsql<span>.</span><span><span>Update</span><span><span>&lt;</span>T1<span>></span></span></span><span>(</span><span>)</span><span>.</span><span>SetSource</span><span>(</span>list<span>)</span><span>.</span><span>ExecuteSqlBulkCopy</span><span>(</span><span>)</span><span>;</span>
