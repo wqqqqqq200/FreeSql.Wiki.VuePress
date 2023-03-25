@@ -6,8 +6,8 @@
     <link>https://freesql.net/</link>
     <description>FreeSql Documents</description>
     <language>zh-CN</language>
-    <pubDate>Sat, 25 Mar 2023 08:00:17 GMT</pubDate>
-    <lastBuildDate>Sat, 25 Mar 2023 08:00:17 GMT</lastBuildDate>
+    <pubDate>Sat, 25 Mar 2023 08:00:59 GMT</pubDate>
+    <lastBuildDate>Sat, 25 Mar 2023 08:00:59 GMT</lastBuildDate>
     <generator>vuepress-plugin-feed2</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
     <item>
@@ -9062,8 +9062,14 @@ repo<span>.</span><span>Insert</span><span>(</span>items<span>[</span><span>0</s
 </blockquote>
 <p>分割执行后，当外部未提供事务时，内部自开事务，实现插入完整性。也可以通过 BatchOptions 设置合适的值。</p>
 <p>FreeSql 适配了每一种数据类型参数化，和不参数化的使用。批量插入建议关闭参数化功能，使用 .NoneParameter() 进行执行。</p>
-<h2 id="_3、executesqlbulkcopy、executepgcopy、executemysqlbulkcopy" tabindex="-1"> 3、ExecuteSqlBulkCopy、ExecutePgCopy、ExecuteMySqlBulkCopy</h2>
-<p>Bulk Copy 操作以扩展方法的形式实现，针对 SqlServer/PostgreSQL/MySql 数据库，可用的包：FreeSql.Provider.SqlServer/FreeSql.Provider.PostgreSQL/FreeSql.Provider.MySqlConnector。</p>
+<h2 id="_3、bulkcopy" tabindex="-1"> 3、BulkCopy</h2>
+<p>| 程序包 | 扩展方法 | 说明 |
+| FreeSql.Provider.SqlServer | ExecuteSqlBulkCopy | |
+| FreeSql.Provider.MySqlConnector | ExecuteMySqlBulkCopy | |
+| FreeSql.Provider.Oracle | ExecuteOracleBulkCopy | |
+| FreeSql.Provider.Dameng | ExecuteDmBulkCopy | 达梦 |
+| FreeSql.Provider.PostgreSQL | ExecutePgCopy | |
+| FreeSql.Provider.KingbaseES | ExecuteKdbCopy | 人大金仓 |</p>
 <h3 id="批量插入测试参考-52-个字段" tabindex="-1"> 批量插入测试参考(52 个字段)</h3>
 <table>
 <thead>
