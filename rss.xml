@@ -6,8 +6,8 @@
     <link>https://freesql.net/</link>
     <description>FreeSql Documents</description>
     <language>zh-CN</language>
-    <pubDate>Sat, 25 Mar 2023 06:32:13 GMT</pubDate>
-    <lastBuildDate>Sat, 25 Mar 2023 06:32:13 GMT</lastBuildDate>
+    <pubDate>Sat, 25 Mar 2023 07:59:35 GMT</pubDate>
+    <lastBuildDate>Sat, 25 Mar 2023 07:59:35 GMT</lastBuildDate>
     <generator>vuepress-plugin-feed2</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
     <item>
@@ -8817,7 +8817,13 @@ repo<span>.</span><span>InsertOrUpdate</span><span>(</span>实体<span>)</span><
 <p>缺点：不支持批量操作</p>
 <hr>
 <h2 id="_4、bulkcopy-批量插入或更新" tabindex="-1"> 4、BulkCopy 批量插入或更新</h2>
-<p>FreeSql.Provider.SqlServer/FreeSql.Provider.Oracle 提供扩展方法 ExecuteSqlBulkCopy/ExecuteOracleBulkCopy 实现了批量插入或更新（v3.2.693），其他数据库未来补充。</p>
+<p>| v3.2.693 | 扩展方法 | 说明 |
+| FreeSql.Provider.SqlServer | ExecuteSqlBulkCopy | |
+| FreeSql.Provider.MySqlConnector | ExecuteMySqlBulkCopy | |
+| FreeSql.Provider.Oracle | ExecuteOracleBulkCopy | |
+| FreeSql.Provider.Dameng | ExecuteDmBulkCopy | 达梦 |
+| FreeSql.Provider.PostgreSQL | ExecutePgCopy | |
+| FreeSql.Provider.KingbaseES | ExecuteKdbCopy | 人大金仓 |</p>
 <p>原理：使用 BulkCopy 将数据插入到临时表，再使用 MERGE INTO 联表操作。</p>
 <p>提示：当更新的字段数量超过 3000 时，收益较大。</p>
 <div data-ext="cs"><pre><code>fsql<span>.</span><span><span>InsertOrUpdate</span><span><span>&lt;</span>T1<span>></span></span></span><span>(</span><span>)</span><span>.</span><span>SetSource</span><span>(</span>list<span>)</span><span>.</span><span>ExecuteSqlBulkCopy</span><span>(</span><span>)</span><span>;</span>
