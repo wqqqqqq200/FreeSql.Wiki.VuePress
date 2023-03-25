@@ -6,8 +6,8 @@
     <link>https://freesql.net/</link>
     <description>FreeSql Documents</description>
     <language>zh-CN</language>
-    <pubDate>Sat, 25 Mar 2023 08:06:20 GMT</pubDate>
-    <lastBuildDate>Sat, 25 Mar 2023 08:06:20 GMT</lastBuildDate>
+    <pubDate>Sat, 25 Mar 2023 08:08:23 GMT</pubDate>
+    <lastBuildDate>Sat, 25 Mar 2023 08:08:23 GMT</lastBuildDate>
     <generator>vuepress-plugin-feed2</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
     <item>
@@ -8817,13 +8817,47 @@ repo<span>.</span><span>InsertOrUpdate</span><span>(</span>实体<span>)</span><
 <p>缺点：不支持批量操作</p>
 <hr>
 <h2 id="_4、bulkcopy-批量插入或更新" tabindex="-1"> 4、BulkCopy 批量插入或更新</h2>
-<p>| v3.2.693 | 扩展方法 | 说明 |
-| FreeSql.Provider.SqlServer | ExecuteSqlBulkCopy | |
-| FreeSql.Provider.MySqlConnector | ExecuteMySqlBulkCopy | |
-| FreeSql.Provider.Oracle | ExecuteOracleBulkCopy | |
-| FreeSql.Provider.Dameng | ExecuteDmBulkCopy | 达梦 |
-| FreeSql.Provider.PostgreSQL | ExecutePgCopy | |
-| FreeSql.Provider.KingbaseES | ExecuteKdbCopy | 人大金仓 |</p>
+<table>
+<thead>
+<tr>
+<th>程序包</th>
+<th>扩展方法</th>
+<th>说明 (v3.2.693)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>FreeSql.Provider.SqlServer</td>
+<td>ExecuteSqlBulkCopy</td>
+<td></td>
+</tr>
+<tr>
+<td>FreeSql.Provider.MySqlConnector</td>
+<td>ExecuteMySqlBulkCopy</td>
+<td></td>
+</tr>
+<tr>
+<td>FreeSql.Provider.Oracle</td>
+<td>ExecuteOracleBulkCopy</td>
+<td></td>
+</tr>
+<tr>
+<td>FreeSql.Provider.Dameng</td>
+<td>ExecuteDmBulkCopy</td>
+<td>达梦</td>
+</tr>
+<tr>
+<td>FreeSql.Provider.PostgreSQL</td>
+<td>ExecutePgCopy</td>
+<td></td>
+</tr>
+<tr>
+<td>FreeSql.Provider.KingbaseES</td>
+<td>ExecuteKdbCopy</td>
+<td>人大金仓</td>
+</tr>
+</tbody>
+</table>
 <p>原理：使用 BulkCopy 将数据插入到临时表，再使用 MERGE INTO 联表操作。</p>
 <p>提示：当更新的字段数量超过 3000 时，收益较大。</p>
 <div data-ext="cs"><pre><code>fsql<span>.</span><span><span>InsertOrUpdate</span><span><span>&lt;</span>T1<span>></span></span></span><span>(</span><span>)</span><span>.</span><span>SetSource</span><span>(</span>list<span>)</span><span>.</span><span>ExecuteSqlBulkCopy</span><span>(</span><span>)</span><span>;</span>
@@ -9104,7 +9138,7 @@ repo<span>.</span><span>Insert</span><span>(</span>items<span>[</span><span>0</s
 </tr>
 </tbody>
 </table>
-<h3 id="批量插入测试参考-52-个字段" tabindex="-1"> 批量插入测试参考(52 个字段)</h3>
+<p>批量插入测试参考(52 个字段)</p>
 <table>
 <thead>
 <tr>
@@ -9191,7 +9225,7 @@ repo<span>.</span><span>Insert</span><span>(</span>items<span>[</span><span>0</s
 <blockquote>
 <p>18W 解释：插入 18 万行记录，表格中的数字是执行时间（单位 ms）</p>
 </blockquote>
-<h3 id="批量插入测试参考-10-个字段" tabindex="-1"> 批量插入测试参考(10 个字段)</h3>
+<p>批量插入测试参考(10 个字段)</p>
 <table>
 <thead>
 <tr>
