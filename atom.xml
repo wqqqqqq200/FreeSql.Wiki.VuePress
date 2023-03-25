@@ -3,7 +3,7 @@
   <id>https://freesql.net/</id>
   <title>FreeSql 官方文档</title>
   <subtitle>FreeSql Documents</subtitle>
-  <updated>2023-03-24T16:38:58.627Z</updated>
+  <updated>2023-03-25T05:59:18.321Z</updated>
   <generator>vuepress-plugin-feed2</generator>
   <link rel="self" href="https://freesql.net/atom.xml"/>
   <link rel="alternate" href="https://freesql.net/"/>
@@ -5946,15 +5946,13 @@ uow<span>.</span>OnEntityChange <span>=</span> report <span>=></span> <span>{</s
     <title type="html">DbFirst</title>
     <id>https://freesql.net/guide/db-first.html</id>
     <link href="https://freesql.net/guide/db-first.html"/>
-    <updated>2022-09-17T02:49:14.000Z</updated>
+    <updated>2023-03-25T05:57:16.000Z</updated>
     <summary type="html">获取所有数据库 获取指定数据库的表信息 .NET Core CLI(推荐使用) 代码生成器FreeSql.Generator,是 FreeSql 的代码生成器，可生成实体类，支持将数据库实体动态生成实体，默认有二个模板，基于 Razor，可指定自定义模板 dotnet-tool安装 FreeSql.Generator; 更新FreeSql.Genera...</summary>
     <content type="html"><![CDATA[<h1 id="dbfirst" tabindex="-1"> DbFirst</h1>
 <div data-ext="cs"><pre><code><span>static</span> <span>IFreeSql</span> fsql <span>=</span> <span>new</span> <span>FreeSql<span>.</span>FreeSqlBuilder</span><span>(</span><span>)</span>
-    <span>.</span><span>UseConnectionString</span><span>(</span>FreeSql<span>.</span>DataType<span>.</span>MySql<span>,</span>
-     <span>"Data Source=127.0.0.1;Port=3306;User ID=root;Password=root;Initial Catalog=cccddd;Charset=utf8;SslMode=none;Max pool size=10"</span>
-     <span>)</span>
+    <span>.</span><span>UseConnectionString</span><span>(</span>FreeSql<span>.</span>DataType<span>.</span>MySql<span>,</span> connectionString<span>)</span>
     <span>.</span><span>Build</span><span>(</span><span>)</span><span>;</span> <span>//请务必定义成 Singleton 单例模式</span>
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div></div></div><h2 id="获取所有数据库" tabindex="-1"> 获取所有数据库</h2>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div></div></div><h2 id="获取所有数据库" tabindex="-1"> 获取所有数据库</h2>
 <div data-ext="cs"><pre><code><span><span>var</span></span> t1 <span>=</span> fsql<span>.</span>DbFirst<span>.</span><span>GetDatabases</span><span>(</span><span>)</span><span>;</span>
 <span>//返回字符串数组, ["cccddd", "test"]</span>
 </code></pre><div aria-hidden="true"><div></div><div></div></div></div><h2 id="获取指定数据库的表信息" tabindex="-1"> 获取指定数据库的表信息</h2>

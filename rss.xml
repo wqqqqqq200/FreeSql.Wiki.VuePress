@@ -6,8 +6,8 @@
     <link>https://freesql.net/</link>
     <description>FreeSql Documents</description>
     <language>zh-CN</language>
-    <pubDate>Fri, 24 Mar 2023 16:38:58 GMT</pubDate>
-    <lastBuildDate>Fri, 24 Mar 2023 16:38:58 GMT</lastBuildDate>
+    <pubDate>Sat, 25 Mar 2023 05:59:18 GMT</pubDate>
+    <lastBuildDate>Sat, 25 Mar 2023 05:59:18 GMT</lastBuildDate>
     <generator>vuepress-plugin-feed2</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
     <item>
@@ -5957,11 +5957,9 @@ uow<span>.</span>OnEntityChange <span>=</span> report <span>=></span> <span>{</s
       <pubDate>Thu, 04 Feb 2021 16:03:18 GMT</pubDate>
       <content:encoded><![CDATA[<h1 id="dbfirst" tabindex="-1"> DbFirst</h1>
 <div data-ext="cs"><pre><code><span>static</span> <span>IFreeSql</span> fsql <span>=</span> <span>new</span> <span>FreeSql<span>.</span>FreeSqlBuilder</span><span>(</span><span>)</span>
-    <span>.</span><span>UseConnectionString</span><span>(</span>FreeSql<span>.</span>DataType<span>.</span>MySql<span>,</span>
-     <span>"Data Source=127.0.0.1;Port=3306;User ID=root;Password=root;Initial Catalog=cccddd;Charset=utf8;SslMode=none;Max pool size=10"</span>
-     <span>)</span>
+    <span>.</span><span>UseConnectionString</span><span>(</span>FreeSql<span>.</span>DataType<span>.</span>MySql<span>,</span> connectionString<span>)</span>
     <span>.</span><span>Build</span><span>(</span><span>)</span><span>;</span> <span>//请务必定义成 Singleton 单例模式</span>
-</code></pre><div aria-hidden="true"><div></div><div></div><div></div><div></div><div></div></div></div><h2 id="获取所有数据库" tabindex="-1"> 获取所有数据库</h2>
+</code></pre><div aria-hidden="true"><div></div><div></div><div></div></div></div><h2 id="获取所有数据库" tabindex="-1"> 获取所有数据库</h2>
 <div data-ext="cs"><pre><code><span><span>var</span></span> t1 <span>=</span> fsql<span>.</span>DbFirst<span>.</span><span>GetDatabases</span><span>(</span><span>)</span><span>;</span>
 <span>//返回字符串数组, ["cccddd", "test"]</span>
 </code></pre><div aria-hidden="true"><div></div><div></div></div></div><h2 id="获取指定数据库的表信息" tabindex="-1"> 获取指定数据库的表信息</h2>
