@@ -192,7 +192,7 @@ if (Device.RuntimePlatform == Device.iOS || Device.RuntimePlatform == Device.And
 在连接字符串里设置。每个数据库写法不一样, 可以在 https://www.connectionstrings.com/ 查找
 
 freesql声明中的build里  
-UseCommandMonitor(cmd => cmd.ConmandTimeout = 9999, null) 这样设置
+UseCommandMonitor(cmd => cmd.CommandTimeout = 9999, null) 这样设置
 
 
 **单个设置**
